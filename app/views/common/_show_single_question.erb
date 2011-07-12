@@ -1,0 +1,42 @@
+<div class="question">
+  小题描述：
+  <%= show_single_question.elements["description"].text if show_single_question.elements["description"] %>
+  [<%= show_single_question.attributes["score"] %>分]
+  <% attrs_str = show_single_question.elements["questionattrs"].text
+  attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
+  correct_type = show_single_question.attributes["correct_type"]
+  answer = show_single_question.elements["answer"]
+  answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
+  (0..attrs_array.length-1).each do |i|
+    is_answer = answers.include?(attrs_array[i])
+  %>
+    <div class="attr" <% if is_answer %>style="border: 1px green solid;"<% end %>>
+
+      <% if !correct_type.nil? %>
+        <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
+          <input type="checkbox" name="question_attr_<%= show_single_question.attributes["id"].to_i %>"
+                 id="question_attr_<%= i %>"  <% if is_answer %>checked="true"<% end %> />
+               <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
+          <input type="radio" name="question_attr_<%= show_single_question.attributes["id"].to_i %>"
+                 id="question_attr_<%= i %>" <% if is_answer %>checked="true"<% end %> />
+               <% end %>
+        <label><%= attrs_array[i] %></label>
+      <% end %>
+    </div>
+  <% end if attrs_array and attrs_array.any? %>
+  <%= if correct_type.to_i == Problem::QUESTION_TYPE[:JUDGE]
+    answers[0].to_i==0? "错" : "对"
+  elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] or correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER]
+    "答案：" + answers[0].to_s
+  end %>
+</div>
+
+<div class="title">解析：<br/>
+  <% analysis = show_single_question.elements["analysis"] %>
+  &nbsp;&nbsp;&nbsp;&nbsp;<%= if analysis and !analysis.nil?
+    analysis.text
+  end %>
+</div>
+<div class="tag">知识点标签：
+  <%= show_single_question.elements["tags"].text %>
+</div>

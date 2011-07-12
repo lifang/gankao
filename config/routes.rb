@@ -1,4 +1,17 @@
 Gankao::Application.routes.draw do
+    namespace :rater do
+    resources :exam_raters do
+      collection do
+        get "session","check_paper"
+      end
+      member do
+        post "edit_value"
+        get "rater_session","get_score"
+        post "rater_login","over_answer"
+        get "reader_papers","answer_paper"
+      end
+    end
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

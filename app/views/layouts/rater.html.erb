@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title><%= title %></title>
+    <%= javascript_include_tag :defaults %>
+    <%= javascript_include_tag 'pileadd' %>
+    <link href="/stylesheets/exam_biz_back.css" rel="stylesheet" />
+    <link href="/stylesheets/login.css" rel="stylesheet" />
+
+  </head>
+  <body>
+    <div id="container">
+      <div id="hd">
+        <a id="logo" href="/"><span>考试系统</span></a>
+        <div class="clear"></div>
+        <% if cookies[:rater_id] !=nil %>
+          <% rater=ExamRater.find(cookies[:rater_id]) %>
+          <p class="title_link">
+            <a href="/rater/exam_raters">批阅列表</a>
+          </p>
+          <p class="back_welcome">
+            <%= link_to "#{ rater.name }"+" 欢迎您","/rater/exam_raters/#{cookies[:rater_id]}"%>
+            <%= link_to "退出","/rater/exam_raters/#{cookies[:rater_id]}",:method=>:delete %>
+          </p>
+        <% end %>
+      </div>
+      <div id="bd">
+        <div class="main fr">
+          <%=  render :partial => "/common/display_flash" %>
+          <%= yield %>
+        </div>
+        <div  id="tishikuang" style="display:block"></div>
+      </div>
+      <div id="ft">
+        <p>Copyright &copy; 2009-2010 考试系统, All Rights Reserved&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+        <ul>
+          <li><a href="#" target="_blank">版权声明</a></li>
+          <li><a href="#" target="_blank">关于我们</a></li>
+          <li><a href="#" target="_blank">免责声明</a></li>
+          <li><a href="#" target="_blank">隐私声明</a></li>
+          <li><a href="#" target="_blank">征稿说明</a></li>
+          <li><a href="#" target="_blank">站长统计</a></li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

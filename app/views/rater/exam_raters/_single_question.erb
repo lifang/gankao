@@ -1,0 +1,27 @@
+<div class="products_list_style_box" id="question_info_<%= single_question.attributes["id"].to_i %>" style="display:none"  >
+  <div class="arrow" style="top:35px;"></div>
+  <div class="big_pic_box" style="top:0px;">
+    <div class="in">
+      <div class="title"><%= single_question.elements["title"].text %></div>
+      <% problem_ids="-1" %>
+      <% single_question.elements["questions"].each_element do |question| %>
+        <%= render :partial => "/common/show_single_question", :object => question %>
+        <div class="title">
+          <div>考生答案：<%= question.attributes["user_answer"] %></div>
+        </div>
+        <div class="title">
+          <input type="hidden" value="<%= question.attributes["score"] %>" id="fact_value_<%=  question.attributes['id'] %>" name="fact_value_<%=question.attributes['id'] %>"/>
+          <input value="<%= @exam_user.id %>" id="answer_id" name="answer_id" type="hidden" />
+          <input  type="hidden" value="0" id="if_submited_<%= question.attributes['id'] %>" name="if_submited_<%= question.attributes['id'] %>"/>
+          <input type="text" name="single_value_<%=question.attributes['id'] %>" id="single_value_<%=question.attributes['id'] %>" value=""
+                 onblur="javascript:compare_value('-1_<%= question.attributes['id'].to_s %>',1)" />
+        </div>
+        <% problem_ids = problem_ids+("_"+question.attributes["id"]) %>
+        <div id="flash_part_<%= question.attributes["id"].to_i %>"></div>
+      <% end %>
+      <input type="hidden" value="<%=problem_ids.to_s  %>"/>
+      <h2><a href="javascript:void(0)" onclick="javascript:compare_value('<%= problem_ids.to_s %>',1)">确定</a></h2>
+      <div id="flash_part_<%= single_question.attributes["id"].to_i %>"></div>
+    </div>
+  </div>
+</div>
