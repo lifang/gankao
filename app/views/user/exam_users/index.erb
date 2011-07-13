@@ -1,0 +1,15 @@
+<table>
+   <tr>
+    <th width="200">考试名称</th>
+    <th width="150">考试开始时间</th>
+    <th width="100">考试分数</th>
+  </tr>
+  <% @exam_users.each do |user| %>
+<% examination=Examination.find(user.examination_id) %>
+  <tr>
+    <td><%= examination.title %></td>
+     <td><%= examination.start_at_time.nil? ? "无限制" :examination.start_at_time.strftime("%Y-%m-%d %H:%M:%S") %></td>
+    <td><%= user.total_score.nil? ? "未公布":user.total_score %></td>
+  </tr>
+  <% end %>
+</table>

@@ -13,7 +13,7 @@ class ExamRater < ActiveRecord::Base
   #  validates :email,:presence=>true,:uniqueness=>true,:format=>{:with=>email_regex},:length=>{:maximum=>50}
   #打开xml文件
   def ExamRater.open_file(url)
-    file=File.open("#{Rails.root}/public"+url)
+    file=File.open("#{Constant::PUBLIC_PATH}"+url)
     return Document.new(file).root
   end
 
@@ -52,7 +52,6 @@ class ExamRater < ActiveRecord::Base
         ExamUser.find(id).update_attributes(:total_score=>score+auto_score.to_i)
       end
     end
-    puts doc
     return doc.to_s
   end
 

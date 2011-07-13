@@ -1,0 +1,50 @@
+<div class="login_show_img" id="login_back"></div>
+<div class="login_box">
+  <div class="top">    
+    <ul>
+      <li id="li_tab1" class="actived" onclick="javascript:tab('tab1', '2');">用户登录</li>
+    </ul>
+  </div>
+  <div id="div_tab1">
+    <div class="body">
+      <%= form_for(:session, :url => sessions_path ,:html => {:onsubmit => "return signin_page()", :class => "required-validate"} ) do |f| %>
+        <table>
+          <td>邮&nbsp;&nbsp;&nbsp;&nbsp; 箱：</td>
+          <td><%= f.text_field :email, :class => "required input_style" %></td>
+          <div id="email"></div>
+          <tr>
+            <td>密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
+            <td><%= f.password_field :password, :class => "required input_style" %></td>
+          <div id=""></div>
+          </tr>
+          <tr>
+            <td>验证码：</td>
+            <td><input class="required input_style check_w max-length-4 min-length-4" type="text" name="proof_code" id="proof_code" class="required min-length-4 max-length-4" />
+              <span  class="check_num" id="proofcode" title="看不清楚？可以点击此处换一张" onclick="<%= remote_function :update => :proofcode, :method => :get, :url => "/users/get_proof_code"  %>">
+                <%= session[:signin_code] %>
+              </span>          
+            </td>
+            
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <button type="submit" class="login_btn" ></button>
+              <a href="/sessions/get_code" >忘记密码？</a></td>
+          </tr>
+          <tr>
+            <td align="center" colspan="2">
+
+              <div id="error_msg"<font color="red"><span><%=flash[:error]%></span>&nbsp; <font color="red"> <%= flash[:error2] %></font></div>
+
+            </td>
+          </tr>
+        </table>
+      <%end%>
+    </div>
+    <div class="bottom">
+      <%= link_to "免费注册","/users/new" %>
+    </div>
+  </div>
+</div>
+<div class="clear"></div>

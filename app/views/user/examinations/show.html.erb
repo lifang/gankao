@@ -1,0 +1,76 @@
+<%= javascript_include_tag 'jeffrey' %>
+<%= javascript_include_tag 'cookie' %>
+<script language="javascript" type="text/javascript">
+  var papers = new Object();
+</script>
+<%= javascript_include_tag "#{@paper_url}" %>
+<%= javascript_include_tag "#{Constant::SERVER_PATH}/javascripts/answer_paper.js" %>
+<%= form_for :paper , :url => "/user/examinations/#{@examination.id}/save_result", 
+  :html => {:name => "paper_form", :id => "paper_form",
+  :onsubmit => "return generate_result_paper('#{@examination.paper_id}')"} do |f| %>
+  <div id="paper_show_info">
+    <ul class="tab_biz">
+      <li class="actived"><a href="javascript:void(0);" id="paper_title"></a></li>
+    </ul>
+    <div class="soso">
+      <input type="hidden" name="paper_id" id="paper_id" value=""/>
+      <input type="hidden" name="all_quesiton_ids" id="all_question_ids" value=""/>
+      <input type="hidden" name="problem_ids" id="problem_ids" value=""/>
+      <input type="hidden" name="examination_id" id="examination_id" value="<%= @examination.id %>"/>
+      <div>试卷分类：<span id="category_name"></span></div>
+      <div>题目数：共<span id="total_num"></span>题/已完成<span id="complete_num">0</span>题</div>
+      <div>卷面总分：<span id="total_score"></span></div>
+      <div>备注：<span id="description"></span></div>
+      <div>考试时间：
+        <% unless @exam_user
+          unless @examination.ended_at.nil? or @examination.ended_at == ""
+            end_time = (@examination.ended_at - Time.now)
+          end
+        else
+          unless @exam_user.ended_at.nil? or @exam_user.ended_at == ""
+            end_time = (@exam_user.ended_at - Time.now)
+          end
+        end %>
+        <span id="exam_time"><%= (end_time.nil? or end_time < 0) ? "不限制" :
+            ((end_time/3600).to_i.to_s + ":" + ((end_time%3600)/60).to_i.to_s + ":" + (end_time%3600%60).to_i.to_s) %></span>
+      </div>
+      <div><span id="local_time"></span></div>
+      <%= f.submit "交卷" , :class=>"submit_btn" %>
+    </div>
+  </div>
+  <div id="blocks"></div>
+  <div id="remote_div"></div>
+  <input type="hidden" name="answer_url" id="answer_url"
+         value="<%= Constant::ANSWER_CLIENT_PATH %>/<%= @examination.exam_user_id %>.xml"/>
+  <div class="clear"></div>
+<% end %>
+<script type="text/javascript" src="/javascripts/local_save/answer.js" charset="utf-8"></script>
+<script language="javascript" type="text/javascript">
+  //考试时间定时器所需变量
+  var timer = null;
+  var normalelapse = 100;
+  var nextelapse = normalelapse;
+  var start = "";
+  if ($("exam_time").innerHTML == "不限制") {
+    start = "00:00:00:00";
+  } else {
+    start = $("exam_time").innerHTML + ":00";
+  }
+  var finish = "00:00:00:00";
+
+  //本地存储所需变量finish
+  var local_timer = null;
+  var local_start_time = "05:00:00";
+  var local_finish_time = "00:00:00";
+  //$("local_time").innerHTML = local_start_time;
+
+  //用户保存本地存储的答案
+  var answer_hash = null;
+  //load已有的答案
+  load_answer('<%= @exam_user.paper_id %>', '<%= @examination.id %>');
+
+  //页面load成功之后加载试卷
+  window.onload(load_paper());
+  answer_hash = null;
+</script>
+

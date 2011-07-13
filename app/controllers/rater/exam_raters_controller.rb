@@ -66,7 +66,7 @@ class Rater::ExamRatersController < ApplicationController
     end
     doc.elements["paper"].elements["rate_score"].text=score
     @doc=ExamRater.rater(doc,params[:id])
-    self.write_xml("#{Rails.root}/public"+url, @doc)
+    self.write_xml("#{Constant::PUBLIC_PATH}"+url, @doc)
     redirect_to "/rater/exam_raters/#{ @exam_user.examination_id}/reader_papers"
   end
 
