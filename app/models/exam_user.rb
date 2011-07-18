@@ -66,6 +66,34 @@ class ExamUser < ActiveRecord::Base
     return sql
   end
 
+  #显示单场考试的所有的考生成绩
+  def ExamUser.return_exam_result(examination_id, pre_page, page)
+    sql = generate_sql(examination_id)
+    return ExamUser.paginate_by_sql(sql, :per_page =>pre_page, :page => page)
+  end
+
+  #显示单场考试成绩的等级
+  def ExamUser.score_level_result(examination, exam_user_array)
+    score_levels = examination.score_levels
+    score_level_hash = {}
+    exam_user_hash = {}
+    score_levels.each do |score_level|
+      scores = score_level.key.split("-")
+      score_level_hash[score_level.value] = scores
+      exam_user_hash[score_level.value] = 0
+    end
+    exam_user_array.each do |exam_user|
+      score_level_hash.each do |key, value|
+        if exam_user.total_score and ((exam_user.total_score >= value[0].to_i and exam_user.total_score <= value[1].to_i) or
+              (exam_user.total_score <= value[0].to_i and exam_user.total_score >= value[1].to_i))
+          exam_user_hash[exam_user.id] = key
+          exam_user_hash[key] += 1
+        end
+      end
+    end
+    return exam_user_hash
+  end
+
   def user_affiremed
     self.toggle!(:is_user_affiremed)
   end
@@ -218,10 +246,14 @@ class ExamUser < ActiveRecord::Base
               problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:COLLIGATIONR])
           block.delete_element(problem.xpath)
         else
+          score=0
           problem.elements["questions"].each_element do |question|
             doc.elements["paper"].elements["questions"].each_element do |element|
               if element.attributes["id"]==question.attributes["id"]
                 question.add_attribute("user_answer","#{element.elements["answer"].text}")
+                score += element.attributes["score"].to_i
+                question.add_attribute("score_reason","#{element.attributes["reason"]}")
+                question.add_attribute("user_score","#{element.attributes["score"]}")
               end
             end
             if question.attributes["correct_type"].to_i ==Problem::QUESTION_TYPE[:CHARACTER]
@@ -230,6 +262,7 @@ class ExamUser < ActiveRecord::Base
               problem.delete_element(question.xpath)
             end
           end
+          problem.add_attribute("user_score","#{score}")
         end
         block.delete_element(problem.xpath) if problem.elements["questions"].elements[1].nil?
       end

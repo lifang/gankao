@@ -16,6 +16,8 @@
           <input type="text" name="single_value_<%=question.attributes['id'] %>" id="single_value_<%=question.attributes['id'] %>" value=""
                  onblur="javascript:compare_value('-1_<%= question.attributes['id'].to_s %>',1)" />
         </div>
+      <div class="title"> <input type="text" name="reason_for_<%=question.attributes['id'] %>" id="reason_for_<%=question.attributes['id'] %>" value=""/>
+      </div>
         <% problem_ids = problem_ids+("_"+question.attributes["id"]) %>
         <div id="flash_part_<%= question.attributes["id"].to_i %>"></div>
       <% end %>

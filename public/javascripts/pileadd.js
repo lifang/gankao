@@ -13,10 +13,10 @@ function sltall(checkstatus){
 function create_exam(){
     var sles=document.getElementsByName("check_b");
     var checked_ids = new Array();
-    for (var i=0;i<sles.length;i++) {      
+    for (var i=0;i<sles.length;i++) {
         if (sles[i].checked) {
             checked_ids.push(sles[i].value);
-        }       
+        }
     }
     document.getElementById("exam_getvalue").value = checked_ids;
 }
@@ -84,13 +84,13 @@ function test_exam(table_rows,type_name){
     var n = $(type_name+"_infoname"+table_rows).value;
     var mobile = $(type_name+"_infomobile"+table_rows).value;
     var email = $(type_name+"_infoemail"+table_rows).value;
-    return test_exam_edit(n,mobile,email) 
+    return test_exam_edit(n,mobile,email)
 }
 function add_item(table_id, url, update_div, examination_id,type_name){
     var table_rows = $("" + table_id).rows.length ;
     var otr = document.getElementById("" + table_id).insertRow(table_rows-2);
     otr.id = table_rows;
-    var str = "<td colspan='4'><form accept-charset='UTF-8' action='"+ url +"' class='required-validate' ";
+    var str = "<td colspan='6'><form accept-charset='UTF-8' action='"+ url +"' class='required-validate' ";
     str += "method='get' onsubmit='if (test_exam("+ otr.id +", \""+ type_name +"\")) { button_fail(\"rater_button"+ otr.id +"\", \"spinner_rate"+ otr.id +"\");new Ajax.Updater(\""+ update_div +"\", \""+ url +"\", {asynchronous:true, evalScripts:true, method:\"get\", parameters:Form.serialize(this)});}; return false;'>";
     str += "<div style='margin:0;padding:0;display:inline'><input name='utf8' type='hidden' value='&#x2713;' />";
     str += "<input name='authenticity_token' type='hidden' value='UEvwUF56teT4A4h8yc2xE9kbGreWJEGaDJZgItFC3fw=' />";
@@ -130,7 +130,7 @@ function update_base_info(url) {
 }
 
 function edit_exam(div,controller,exam_id,action){
-   
+
     var n = $("name_"+exam_id).value;
     var mobile = $("miblephone_"+exam_id).value;
     var email = $("email_"+exam_id).value;
@@ -143,7 +143,7 @@ function edit_exam(div,controller,exam_id,action){
             parameters:'name='+ n +'&mobilephone='+mobile +'&email='+ email +'&authenticity_token=' + encodeURIComponent('5kqVHCOuTTCFFQkywU0UzTAENJi1jcPs0+QKEpVa4lQ=')
         });
         return false;
-    }   
+    }
 }
 
 function test_exam_edit(n,mobile,email){
@@ -168,7 +168,7 @@ function test_exam_edit(n,mobile,email){
                         return false;
                     } else {
                         if ( myReg.test(email)) {
-                            document.getElementById("nameErr").innerHTML=""; 
+                            document.getElementById("nameErr").innerHTML="";
                             return true;
                         } else{
                             document.getElementById("nameErr").innerHTML="<font color = 'red'>邮箱格式不对，请重新输入！</font>";
@@ -185,7 +185,7 @@ function test_exam_edit(n,mobile,email){
             document.getElementById("nameErr").innerHTML="<font color = 'red'>用户名不能包含非法字符</font>";
             return false;
         }
-    } 
+    }
 }
 function show_name(first,second) {
     $(first).style.display ="block";
@@ -236,31 +236,41 @@ function check_password() {
 }
 close_question_info_id=0
 function compare_value(id,compare_id){
-    
+    var check_mobile = new RegExp(/^[0-9]{1,2}$/);
     if (close_question_info_id != 0) {  //关闭查看框
         if (parseInt(compare_id)==0){
             document.getElementById("question_info_"+close_question_info_id).style.display="none";
             close_question_info_id = 0;
-        }else{ 
+        }else{
             var arry=id.split("_");
             var i;
             for(i=1;i<arry.length;i++){
                 var input_value=$("single_value_"+arry[i]).value;
                 var fact_value=$("fact_value_"+arry[i]).value;
+                var reason=$("reason_for_"+arry[i]).value;
                 if (parseInt(fact_value) < parseInt(input_value)||parseInt(input_value)<0||input_value==""){
                     $("if_submited_"+arry[i]).value =0;
                     $("flash_part_"+arry[i]).innerHTML="<font color = 'red'>您输入的数据与原数值不符</font>";
                     return false;
                 }
                 else{
-                    $("flash_part_"+arry[i]).innerHTML="";
-                    $("if_submited_"+arry[i]).value =1;
-                    if (i==arry.length-1){
-                        document.getElementById("question_info_"+close_question_info_id).style.display="none";
-                        close_question_info_id = 0;
-                        active_button();
-                    }
+                    if (check_mobile.test(input_value)){
+                        $("flash_part_"+arry[i]).innerHTML="";
+                        if(reason==""||reason.length==0){
+                            $("flash_part_"+arry[i]).innerHTML="<font color = 'red'>请输入评分理由</font>";
 
+                        }else{
+                            $("if_submited_"+arry[i]).value =1;
+                            if (i==arry.length-1){
+                                document.getElementById("question_info_"+close_question_info_id).style.display="none";
+                                close_question_info_id = 0;
+                                active_button();
+                            }
+                        }
+                    }
+                    else{
+                        $("flash_part_"+arry[i]).innerHTML="<font color = 'red'>您输入的只能是数值</font>";
+                    }
                 }
             }
         }
@@ -276,12 +286,21 @@ function active_button(){
     var n=str.split(",");
     for(i=1;i<n.length;i++){
         var value=$("single_value_"+n[i]).value;
+        var reason=$("reason_for_"+n[i]).value;
         flag=1;
         if(value ==""){
             $("if_submited_"+n[i]).value =0;
             flag=0;
             $("button_id").disabled=true;
             return false;
+        }else{
+            if(reason==""){
+                $("if_submited_"+n[i]).value =0;
+                flag=0;
+                $("button_id").disabled=true;
+                return false;
+            }
+
         }
     }
     if(flag==1){
@@ -293,7 +312,7 @@ function active_button(){
             $("flash_notice").innerHTML="<font color = 'red'>请检查批阅分数</font>";
             $("button_id").disabled=true;
         }
-    }else{ 
+    }else{
         $("button_id").disabled=true;
     }
 }
@@ -330,7 +349,7 @@ function give_me_value(in1,id){
     });
 
     return false;
-   
+
 }
 function edit_score(id, user_id, question_score){
     var score=$("edit_score_"+id).value;
@@ -350,7 +369,7 @@ function edit_score(id, user_id, question_score){
         });
         return false;
     }
-  
+
 }
 
 //将小题的分值变成可编辑状态
