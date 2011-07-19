@@ -1,0 +1,60 @@
+<div class="main_box_back">
+  <div class="in">
+    <table>
+      <thead>
+        <tr>
+          <th><input type="checkbox" onclick=pay_price(this.checked,"all_price") <% if @examination.blank? %> disabled="true"<% else%>checked="true"  <% end %>id="packed"  />打包</th>
+          <th>考试名称</th>
+          <th>出卷人</th>
+          <th>价格</th>
+          <th>优惠</th>
+          <th>数量</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%  price=0 %>
+        <% @examination.each do |examination| %>
+          <% price += examination.price.to_i %>
+          <tr>
+            <td><input type="checkbox" name="all_price"  <% if !examination.start_end_time.nil? %>
+                         <% if examination.start_end_time<Time.now  %> disabled="true" <% else %>checked="true"<%end%>
+                       <% else %>checked="true"<%end%> value="<%= examination.price.nil? ? 0 : examination.price %>"  onclick="javascript:cast_account()" /></td>
+            <td><%= examination.title %></td>
+            <td><%= User.find(examination.creater_id).name %></td>
+            <td>¥<%= examination.price.nil? ? 0 : examination.price %></td>
+            <td><%= 0 %></td>
+            <td><%= 1%></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= form_for :account,:url=>"/payments/search_account" ,:html=>{:onsubmit=>"javascript:return input_value() "} do %>
+      代理充值账户： <input type="text" value="账号/邮箱" size="30" onfocus="javascript:$(agency_account).value='';" name="agency_account" id="agency_account"/>
+      <input type="submit" value="充值"  />
+    <% end %>
+    <font color="red">
+      <div align="centre" id="notice" >
+        <% unless @user.blank? %>
+          <tr>账号：<%= @user.email %></tr><br/>
+          <tr>姓名：<%= @user.name %></tr>
+        <% end %>
+      </div>
+    </font>
+  </div>
+  <div align="right">
+    <input value="<%= Constant::FAVOURABLE %>" id="favourable" type="hidden"/>
+    <input value="<%= Constant::AGENCY_COST %>" id="agency_cost" type="hidden" />
+    <input value="<%= price %>" type="hidden" id="price" name="price" />
+    <input value="<%= @examination.size  %>" id="number" type="hidden"/>
+    <%  unless @examination.blank? %>
+    <span id="total_price">
+      金额总计：
+      <font color="red">¥<label  id="exam_getvalue" ></label><br/></font>
+      实际收费金额：<font color="red"><strong>¥</strong><label  id="fact_value" ></label></font><br/>
+    </span>
+    <% end %>
+    <input type="button" value="结算" id="over"/>
+  </div>
+  <script type="text/javascript">cast_account()</script>
+</div>
+
