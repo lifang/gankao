@@ -26,14 +26,8 @@
         <a id="logo" href="/"><span>考试系统</span></a>
         <div class="clear"></div>
         <p class="title_link">
-          <%  if (cookies[:user_id]!=nil) %>
-            <% if is_paper_creater? %>
-              <a href="/papers">试卷</a>
-              &nbsp;&nbsp;|
-              &nbsp;&nbsp;<a href="/examinations">考试</a>
-              &nbsp;&nbsp;|&nbsp;&nbsp;<a href="/results">成绩</a>
-            <% end  %>
-          </p>
+        </p>
+        <%  if (cookies[:user_id]!=nil) %>
           <p class="back_welcome">
             <%= current_user.email if current_user %> 欢迎您！
             <% if is_student? %>

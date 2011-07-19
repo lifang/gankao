@@ -46,7 +46,7 @@ class User::ExaminationsController < ApplicationController
       question_hash = {}
       question_ids = params[:all_quesiton_ids].split(",") if params[:all_quesiton_ids]
       question_ids.each do |question_id|
-        question_hash[question_id] = params["answer_" + question_id]
+        question_hash[question_id] = [params["answer_" + question_id], "1"]
       end if question_ids
       @exam_user.generate_answer_sheet_url(@exam_user.update_answer_url(@exam_user.open_xml, question_hash), "result")
       @exam_user.submited!
@@ -62,8 +62,8 @@ class User::ExaminationsController < ApplicationController
       @exam_user = ExamUser.find_by_examination_id_and_user_id(params[:id], cookies[:user_id])
       questions = params[:arr].split(",")
       question_hash = {}
-      0.step(questions.length-1, 2) do |i|
-        question_hash[questions[i]] = questions[i+1]
+      0.step(questions.length-1, 3) do |i|
+        question_hash[questions[i]] = [questions[i+1], questions[i+2]]
       end if questions.any?
       @exam_user.generate_answer_sheet_url(@exam_user.update_answer_url(@exam_user.open_xml, question_hash), "result")
     end
