@@ -370,28 +370,25 @@ function load_problem_color(problem_id) {
         if (is_answer_num != 0) {
             if (is_answer_num == (ids.length-1)) {
                 if ($("is_sure_"+problem_id).value == "1") {
-                    $("li_" + problem_id).style.background = "#A3C6C8";
-                    problem_div.style.background = "#A3C6C8";
-                    $("problem_nav_"+problem_id).style.background = "#A3C6C8";
-                    $("is_answer_" + problem_id).value = "1";
+                    change_color(problem_div, problem_id, "#A3C6C8", "1");
                 } else {
-                    $("li_" + problem_id).style.background = "#DDDD66";
-                    problem_div.style.background = "#DDDD66";
-                    $("problem_nav_"+problem_id).style.background = "#DDDD66";
-                    $("is_answer_" + problem_id).value = "1";
+                    change_color(problem_div, problem_id, "#DDDD66", "1");
                 }
             } else {
-                $("li_" + problem_id).style.background = "#fff2f2";
-                $("problem_nav_"+problem_id).style.background = "#fff2f2";
-                problem_div.style.background = "#fff2f2";
-                
+                change_color(problem_div, problem_id, "#fff2f2", "");
             }
         } else {
-            $("li_" + problem_id).style.background = "#fff";
-            $("problem_nav_"+problem_id).style.background = "#fff";
-            problem_div.style.background = "#fff";
+            change_color(problem_div, problem_id, "#fff", "");
         }
     }
+}
+
+//加载颜色时区域颜色变化
+function change_color(change_div, problem_id, color, value) {
+    $("li_" + problem_id).style.background = "" + color;
+    $("problem_nav_"+problem_id).style.background = "" + color;
+    change_div.style.background = "" + color;
+    $("is_answer_" + problem_id).value = "" + value;
 }
 
 //返回题目是不是不确定的题目
