@@ -13,6 +13,15 @@ Gankao::Application.routes.draw do
       end
     end
   end
+    resources :payments do
+    member do
+      get :payoff
+    end
+    collection do
+       get :packed_payoff,"agency_recharge"
+       post "search_account"
+    end
+  end
   resources :sessions do
     collection do
       get "get_code"

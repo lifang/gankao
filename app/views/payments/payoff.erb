@@ -1,0 +1,32 @@
+<div class="main_box_back">
+  <div class="in">
+    <table>
+      <thead>
+        <tr>
+          <th>考试名称</th>
+          <th>出卷人</th>
+          <th>价格</th>
+          <th>优惠</th>
+          <th>数量</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @examination.title %></td>
+          <td><%= User.find(@examination.creater_id).name %></td>
+          <td>¥<%= @examination.price %></td>
+          <td><%= 0 %></td>
+          <td><%= 1%></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div align="right">
+     <div>
+       金额总计：<label value="<%=@examination.price  %>" name="single_price">¥<%=@examination.price  %></label>
+  </div>
+  <%= link_to "打包购买更优惠" %>
+  <input type="button" value="结算"/>
+  </div>
+ 
+</div>
