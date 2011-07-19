@@ -38,7 +38,7 @@ class Rater::ExamRatersController < ApplicationController
       where eu.answer_sheet_url is not null and eu.examination_id = #{params[:examination_id].to_i}
       and r.exam_user_id is null order by rand() limit 1")
     unless @exam_user.blank?
-      RaterUserRelation.create(:exam_rater_id=>cookies[:rater_id],:exam_user_id=>@exam_user[0].id)
+      RaterUserRelation.create(:exam_rater_id=>cookies[:rater_id],:exam_user_id=>@exam_user[0].id,:started_at=>Time.now)
       redirect_to "/rater/exam_raters/#{@exam_user[0].id}/answer_paper"
     else
       flash[:notice] = "当场考试试卷已经全部阅完。"
@@ -56,6 +56,7 @@ class Rater::ExamRatersController < ApplicationController
   def over_answer #批阅完成，给答卷添加成绩
     @exam_relation=RaterUserRelation.find_by_exam_user_id(params[:id])
     @exam_relation.toggle!(:is_marked)
+    @exam_relation.update_attributes(:rate_time=>((Time.now-@exam_relation.started_at)/60+1).to_i)
     @exam_user=ExamUser.find(params[:id])
     url="/result/#{params[:id]}.xml"
     doc=ExamRater.open_file(url)
