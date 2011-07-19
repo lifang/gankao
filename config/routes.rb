@@ -1,4 +1,7 @@
 Gankao::Application.routes.draw do
+
+  get "qiantai/ming_e"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
