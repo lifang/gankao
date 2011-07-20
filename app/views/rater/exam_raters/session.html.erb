@@ -1,0 +1,20 @@
+<center>
+<% if cookies[:rater_id].to_i==@rater.id %>
+ 您已经登录，是否<%= link_to "批卷","/rater/exam_raters/#{@examination.id}/reader_papers" %>
+<% else %>
+
+  <p><%= flash[:success] %></p>
+<h1>尊敬的<font color="blue"> <%= @rater.name %> </font>老师，您好，请您在阅卷之前输入阅卷码，以便确认您的身份。</h1>
+<%= form_for :rater ,:url=>"/rater/exam_raters/#{@rater.id}/rater_login" do %>
+<p>
+ <span class="must_r ">*</span>阅&nbsp;&nbsp;&nbsp;卷&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：<input id="author_code " name="author_code" class = "required input_style" size="30" />
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</p>
+<p>
+  <input type="hidden" value="<%= @examination.id %>" id="examination_id" name="examination_id" />
+  <input type="submit" value="提交" />
+</p>
+<% end %>
+
+<% end %>
+</center>

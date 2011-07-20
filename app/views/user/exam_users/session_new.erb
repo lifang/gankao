@@ -1,0 +1,26 @@
+<div class="login_box">
+<%= form_for  :session, :url =>"/user/exam_users/exam_session" ,
+  :html => {:onsubmit => "return signin_page()", :class => "required-validate"} do |f| %>
+  <table>
+    <td>邮&nbsp;&nbsp;&nbsp;&nbsp; 箱：</td>
+    <td><%= f.text_field :email, :class => "required input_style" %></td>
+    <div id="email"></div>
+    <tr>
+      <td>密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
+      <td><%= f.password_field :password, :class => "required input_style" %></td>
+    <div id=""></div>
+  </tr>
+  <tr>
+    <td></td>
+    <td>
+      <button type="submit" class="login_btn" ></button>
+      <a href="javascript:void(0);" onclick="javascript:$('code').innerHTML='考生密码：123456'" id="code" name="code" >忘记密码？</a></td>
+  </tr>
+  <tr>
+    <td align="center" colspan="2">
+      <div id="error_msg"<font color="red"><span><%=flash[:error]%></span>&nbsp; <font color="red"> <%= flash[:error2] %></font></div>
+    </td>
+  </tr>
+  </table>
+<%end%>
+</div>

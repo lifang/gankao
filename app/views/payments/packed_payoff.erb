@@ -1,0 +1,45 @@
+<div class="main_box_back">
+  <div class="in">
+    <table>
+      <thead>
+        <tr>
+          <th><input type="checkbox" onclick=sltall_price(this.checked,"all_price") <% if @examination.blank? %> disabled="true" <% else%>checked="true"  <% end %> id="packed"  />打包</th>
+          <th>考试名称</th>
+          <th>出卷人</th>
+          <th>价格</th>
+          <th>优惠</th>
+          <th>数量</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%  price=0 %>
+        <% @examination.each do |examination| %>
+          <% price +=examination.price.to_i %>
+          <tr>
+            <td><input type="checkbox" name="all_price"  <% if !examination.start_end_time.nil? %>
+             <% if examination.start_end_time<Time.now  %> disabled="true" <% else %>checked="true"<%end%>
+           <% else %>checked="true"<%end%> value="<%= examination.price %>"  onclick="javascript:get_price('all_price')" /></td>
+            <td><%= examination.title %></td>
+            <td><%= User.find(examination.creater_id).name %></td>
+            <td>¥<%= examination.price %></td>
+            <td><%= 0 %></td>
+            <td><%= 1%></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div align="right">
+    <input value="<%= Constant::FAVOURABLE %>" id="favourable" type="hidden"/>
+    <input value="<%= price %>" type="hidden" id="price" name="price" />
+     <input value="<%= @examination.size  %>" id="number" type="hidden"/>
+    <%  unless @examination.blank? %>
+    <span id="total_price">
+      金额总计：
+      <font color="red"> ¥<label  id="exam_getvalue" ><%= price %></label></font>
+    </span>
+     <% end %>
+    <input type="button" value="结算" id="over"/>
+  </div>
+  <script type="text/javascript">get_price("all_price")</script>
+</div>

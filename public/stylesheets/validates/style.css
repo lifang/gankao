@@ -1,0 +1,170 @@
+body {
+    color: #333;
+    padding: 0 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 76%;
+}
+
+.panel {
+    clear: both;
+    display: none;
+    border: 3px solid #CCC;
+    padding: 1em;
+}
+.panel.active-tab-body {
+    display: block;
+}
+#tabs {
+    list-style: none;
+}
+
+#tabs li {
+    float: left;
+}
+
+#tabs a {
+    float: left;
+    padding: 5px 8px;
+    margin-left: 6px;
+    background-color: #F2F2F2;
+    text-decoration: none;
+    color: #999999;
+}
+
+#tabs a.active-tab {
+    background-color: #CCC;
+    border-top: 3px solid #999;
+    padding-top: 3px;
+    color: #000;
+}
+input.disabled {
+    border: 1px solid #F2F2F2;
+    background-color: #F2F2F2;
+}
+
+input.required, textarea.required {
+    border: 1px solid #00A8E6;
+}
+input.validation-failed, textarea.validation-failed {
+    border: 1px solid #FF3300;
+    color : #FF3300;
+}
+input.validation-passed, textarea.validation-passed {
+    border: 1px solid #00CC00;
+    color : #000;
+}
+
+.validation-advice {
+    margin: 5px 0;
+    padding: 5px;
+    background-color: #FF3300;
+    color : #FFF;
+    font-weight: bold;
+}
+
+.custom-advice {
+    margin: 5px 0;
+    padding: 5px;
+    background-color: #C8AA00;
+    color : #FFF;
+    font-weight: bold;
+}
+
+fieldset {
+    padding: 1em;
+    margin-bottom: 0.5em;
+}
+
+label {
+    font-weight: bold;
+}
+.form-row {
+    clear: both;
+    padding: 0.5em;
+}
+
+.field-label {
+
+}
+
+.field-widget {
+
+}
+.hidden{display:none;
+}
+.show{display:block;
+}
+.log_in_box{
+    float:left;
+    width:250px;
+}
+.log_in_box .top{
+    height:32px;
+    background-position:-530px -80px;
+    padding:9px 0 0 190px;
+    _padding:9px 0 0 180px;
+}
+.log_in_box .body{
+    background:url(/images/login_box_body_bg.gif) repeat-y;
+    padding:20px 0 10px 64px;
+}
+.log_in_box .bottom{
+    height:64px;
+    background-position:-530px -304px;
+    padding:12px 0 0 155px;
+}
+.log_in_box .top ul{
+    float:left;
+}
+.log_in_box .top ul li{
+    margin-left:10px;
+    font-size:14px;
+    font-weight:bold;
+    color:#8a8a8a;
+    padding:5px;
+    float:left;
+    cursor:pointer;
+}
+.log_in_box .top ul li.actived{
+    border:#bdbdbd 1px solid;
+    border-bottom:none;
+    background:#fcfcfc;
+    color:#333;
+
+}
+.log_in_box .check_num{
+    background:#e6e6e6;
+    color:#515151;
+    display:inline-block;
+    padding:3px;
+    font-size:14px;
+    margin-left:10px;
+    cursor:pointer;
+}
+.log_in_box .login_btn{
+    cursor:pointer;
+    border:medium none;
+    width:86px;
+    height:26px;
+    background-position:-140px 0px;
+}
+.log_in_box a{
+    color:#989898;
+    text-decoration:none;
+    margin-left:20px;
+}
+.log_in_box a:hover{
+    color:#666;
+    text-decoration:underline;
+}
+.log_in_box table td{
+    padding:5px;
+}
+.log_in_box .input_style{
+    width:180px;
+    padding:4px;
+    padding:8px 2px 0px 3px\9;
+}
+.log_in_box .check_w{
+    width:132px;
+}

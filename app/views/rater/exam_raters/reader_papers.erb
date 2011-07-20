@@ -1,0 +1,45 @@
+<input type="hidden" value="<%=@examination.id  %>" name="examination" id="examination"/>
+<%= @examination.title %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;&nbsp;
+<% if @examination.exam_time.nil? %>
+  <a>任何时间</a>
+<%  else %>
+  <%= @examination.exam_time %>分钟&nbsp;&nbsp;&nbsp;
+<% end %>
+<% if !@examination.start_at_time.nil? %>
+  考试开始时间：<%=@examination.start_at_time.strftime("%Y-%m-%d  %H:%M")  %>
+  &nbsp;&nbsp;&nbsp
+  入场时间：<%=@examination.start_at_time.strftime("%H:%M")%>&nbsp;到&nbsp;
+  <%=@examination.start_end_time.strftime("%H:%M") %>
+<% else %>
+  试卷更新时间: <%= @examination.updated_at.strftime("%Y-%m-%d  %H:%M") %>
+<% end %> &nbsp;&nbsp;)
+<p>
+  本次考试由&nbsp;&nbsp<%=@user.name  %>&nbsp;&nbsp;组织
+<div  align="center">
+  <table border="1" >
+    <tr>
+      <td>
+        <% if @exam_score_total >0  %>
+          <font color="blue" size="5"><%= link_to "开始批阅","/rater/exam_raters/check_paper?examination_id=#{@examination.id}" %></font>
+        <% else %>
+          <font color="red" size="5">所有试卷已批阅</font>
+        <% end %>
+      </td>
+    </tr>
+
+  </table>
+</div>
+</p>
+<p>
+<h1>阅卷情况：</h1>
+<table>
+  <tr>
+    <td width="60"><font color="red"><%= @exam_paper_total.size   %>&nbsp;&nbsp;份</font></td><td width="50" ><font color="red">
+        <%= @exam_paper_marked %>&nbsp;&nbsp;份</font></td><td width="50"><font color="red">
+        <%= @exam_score_total %>&nbsp;&nbsp;份</font></td>
+  </tr>
+  <tr>
+    <th width="60">试卷总数</th>&nbsp;&nbsp;&nbsp;<th width="50">已批阅</th>&nbsp;&nbsp;&nbsp;<th width="50">未批阅</th>
+  </tr>
+</table>
+</p>

@@ -1,0 +1,352 @@
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+fieldset, img {
+    border:0;
+}
+th{
+    text-align:left;
+    font-style:normal;
+    font-weight:normal;
+}
+li {
+    list-style:none;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-size:12px;
+    font-weight:normal;
+}
+q:before, q:after {
+    content:'';
+}
+input, textarea, select {
+    font-family:inherit;
+    font-size:inherit;
+    font-weight:inherit;
+}
+input, textarea, select {
+    font-size:100%;
+}
+.input_style, .textarea_style{
+    border:#a9a9a9 1px solid;
+    padding:2px;
+    padding:4px 2px 0px 3px\9;
+    color:#666;
+    line-height:1;
+    background:url(/images/input_select_bg.gif) no-repeat;
+}
+
+.login_page_logo, .login_box .top, .login_box .bottom, .login_box .login_btn{
+    background:url(/images/login_page_bg.gif) no-repeat;
+    overflow:hidden;
+}
+.login_page_logo{
+    display:block;
+    margin:10px 0 50px 0;
+    width:133px;
+    height:69px;
+    background-position:0px 0px;
+}
+.login_show_img{
+    float:left;
+    width:510px;
+    height:298px;
+    margin-right:20px;
+    background:url(/images/exam_bg.gif) no-repeat;
+}
+.login_box{
+    float:left;
+    width:390px;
+}
+.login_box .top{
+    height:32px;
+    background-position:-530px -80px;
+    padding:9px 0 0 190px;
+    _padding:9px 0 0 180px;
+}
+.login_box .body{
+    background:url(/images/login_box_body_bg.gif) repeat-y;
+    padding:20px 0 10px 64px;
+}
+.login_box .bottom{
+    height:64px;
+    background-position:-530px -304px;
+    padding:12px 0 0 155px;
+}
+.login_box .top ul{
+    float:left;
+}
+.login_box .top ul li{
+    margin-left:10px;
+    font-size:14px;
+    font-weight:bold;
+    color:#8a8a8a;
+    padding:5px;
+    float:left;
+    cursor:pointer;
+}
+.login_box .top ul li.actived{
+    border:#bdbdbd 1px solid;
+    border-bottom:none;
+    background:#fcfcfc;
+    color:#333;
+
+}
+.login_box .check_num{
+    background:#e6e6e6;
+    color:#515151;
+    display:inline-block;
+    padding:3px;
+    font-size:14px;
+    margin-left:10px;
+    cursor:pointer;
+}
+.login_box .login_btn{
+    cursor:pointer;
+    border:medium none;
+    width:86px;
+    height:26px;
+    background-position:-140px 0px;
+}
+.login_box a{
+    color:#989898;
+    text-decoration:none;
+    margin-left:20px;
+}
+.login_box a:hover{
+    color:#666;
+    text-decoration:underline;
+}
+.login_box table td{
+    padding:5px;
+}
+.login_box .input_style{
+    width:180px;
+    padding:4px;
+    padding:8px 2px 0px 3px\9;
+}
+.login_box .check_w{
+    width:132px;
+}
+.top_nav{
+    background:#f0f0f0;
+    float:left;
+    width:100%;
+    padding:3px 0 3px 0;
+    border-bottom:#CCC 1px solid;
+}
+.top_nav li{
+    float:left;
+    margin-left:8px;
+}
+.top_nav li a{
+    color:#333;
+    text-decoration:none;
+}
+.top_nav li a:hover{
+    text-decoration:underline;
+}
+.top_nav ul{
+    float:right;
+}
+.top_nav .in{
+    width:950px;
+    margin:0 auto;
+}
+.fgx{
+    margin-top:-2px\9;
+    +margin-top:-3px;
+    _margin-top:-3px;
+}
+
+.reg_content{
+    width:950px;
+    margin:0 auto;
+}
+
+.check_num{
+    background:#e6e6e6;
+    color:#515151;
+    display:inline-block;
+    padding:3px;
+    font-size:14px;
+    margin-left:10px;
+    cursor:pointer;
+    margin-right:10px;
+}
+.reg_content .input_style{
+    width:180px;
+    padding:4px;
+    padding:8px 2px 0px 3px\9;
+}
+.reg_content table{
+    margin-left:200px;
+}
+.reg_content table td{
+    padding:5px 5px 10px 5px;
+}
+.must_r{
+    color:#F00;
+    margin-right:5px;
+}
+.reg_content a{
+    color:#0f45b0;
+    text-decoration:none;
+}
+.reg_content a:hover{
+    text-decoration:underline;
+}
+.expForEmail{
+    margin-left:10px;
+}
+.reg_btn{
+    cursor:pointer;
+    border:medium none;
+    background:url(/images/reg_btn.gif) no-repeat;
+    width:86px;
+    height:26px;
+}
+.reg_btn_no{
+    cursor:pointer;
+    border:medium none;
+    background:url(/images/reg_btn_dark.gif) no-repeat;
+    width:86px;
+    height:26px;
+}
+.erro_email{
+    margin-top:5px;
+    padding:5px;
+    background:#fff2f2;
+    border:#ff8080 1px solid;
+}
+.erro_email span{
+    display:block;
+    padding-left:20px;
+    background:url(/images/mes_erro.gif) no-repeat;
+}
+.step_one{
+    background:url(/images/reg_setp.gif) no-repeat;
+    height:35px;
+    width:950px;
+    overflow:hidden;
+    margin-bottom:40px;
+}
+.step_one{
+    background-position:0px 0px;
+}
+.top_nav{
+    background:#f0f0f0;
+    float:left;
+    width:100%;
+    padding:3px 0 3px 0;
+    border-bottom:#CCC 1px solid;
+}
+
+.erpResend{
+    color:#666;
+    text-align:center;
+    margin-bottom:15px;
+}
+.erpResend a{
+    margin:0 3px 0 3px;
+    color:#03C;
+    text-decoration:none;
+}
+.erpResend a:hover{
+    text-decoration:underline;
+}
+.step_two{
+    background:url(/images/reg_setp.gif) no-repeat;
+    height:35px;
+    width:950px;
+    overflow:hidden;
+    margin-bottom:40px;
+}
+.step_two{
+    background-position:0px -46px;
+}
+.expForLoginEmail{
+    font-size:14px;
+    font-weight:bold;
+    color:#555;
+    text-align:center;
+    margin-bottom:15px;
+}
+.expForLoginEmail span{
+    color:#114cf5;
+    font-size:16px;
+}
+.email_link{
+    padding:0px 5px 0 5px;
+    color:#FFF;
+    height:24px;
+    line-height:24px;
+    display:inline-block;
+    background:url(/images/login_email_btn.gif) repeat-x;
+    border:#505adc 1px solid;
+    font-size:14px;
+    font-weight:bold;
+    text-decoration:none;
+}
+.resend_btn{
+    padding:0px 5px 0 5px;
+    color:#606060;
+    height:22px;
+    line-height:22px;
+    background:url(/images/resend_btn.gif) repeat-x;
+    border:#bcbcbc 1px solid;
+    cursor:pointer;
+}
+.resend_btn_wait, .resend_none{
+    padding:0px 5px 0 5px;
+    color:#c0c0c0;
+    height:22px;
+    line-height:22px;
+    background:url(/images/resend_btn_wait.gif) repeat-x;
+    border:#bcbcbc 1px solid;
+}
+.resend_btn_wait span{
+    color:#666;
+}
+
+.btn_box{
+    text-align:center;
+    margin-bottom:40px;
+}
+.btn_box a{
+    color:#03C;
+    text-decoration:none;
+}
+.btn_box a:hover{
+    text-decoration:underline;
+}
+
+.logo_box{
+    margin-top:100px;
+    margin-bottom:20px;
+}
+.jh_erro{
+    padding-top:10px;
+    width:400px;
+    border:#CCC 1px solid;
+    margin:0 auto;
+}
+.step_three{
+    background:url(/images/reg_setp.gif) no-repeat;
+    height:35px;
+    width:950px;
+    overflow:hidden;
+    margin-bottom:40px;
+}
+.step_three{
+    background-position:0px -96px;
+}
+.flash_warn,.flash_pic_warn, .flash_notice, .flash_error{margin:7px;padding:8px;-moz-border-radius:8px; -webkit-border-radius:8px; font-size:14px;width:810px;}
+.flash_warn{background:#FFF9D7 none repeat scroll 0 0;border:1px solid #f6edbb;color:#cbb014;}
+.flash_pic_warn{background:#FFF9D7 none repeat scroll 0 0;border:1px solid #E2C822;color:#cbb014;}
+.flash_notice{background:#e9f3aa none repeat scroll 0 0;border:1px solid #e0ec93;color:#718203;}
+.flash_error{background:#fcabb8 none repeat scroll 0 0;border:1px solid #f38f9f;color:#c80424;}
+.require{color:#F00;width:10px;margin-left:5px;}
+
+

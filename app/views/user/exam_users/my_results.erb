@@ -1,0 +1,65 @@
+<script type="text/javascript" src="/javascripts/plugin_assets/My97DatePicker/WdatePicker.js" ></script>
+<div class="main_box_back">
+  <h2><span>我的成绩</span></h2>
+  <div class="in">
+    <div class="paper_search">
+      <%= form_for :found,  :url => "/user/exam_users/search", :method => 'post' do %>
+        参与考试时间：
+        从&nbsp;<input class="input_style" name="start_at" id="start_at" type="text" onClick="WdatePicker();" readonly/>&nbsp;
+        到&nbsp;<input class="input_style" name="end_at" id="end_at" type="text" onClick="WdatePicker();" readonly/>
+        <div class="clear"></div>
+        考试标题：<input class="input_style" name="title" id="title" type="text" size="60" />&nbsp;&nbsp;
+        <button type="submit">查询</button>
+      <% end %>
+    </div>
+    <div class="clear"></div>
+    <table>
+      <colgroup>
+        <col width="210" />
+        <col width="100" />
+        <col width="150" />
+        <col width="150" />
+        <col width="120" />
+        <col width="120" />
+        <col width="80" />
+        <col width="" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th>试卷标题</th>
+          <th>考试分类</th>
+          <th>题目总数/试卷总分</th>
+          <th>参与考试时间</th>
+          <th>成绩</th>
+          <th>考卷状态</th>
+        </tr>
+      </thead>
+      <tbody id="result_list">
+        <% @results.each do |result| %>
+          <tr>
+            <td><%= result.e_title %></td>
+            <td><%= result.description %></td>
+            <td><%= result.total_question_num %>题/ <%= result.p_total_score %>分</td>
+            <td> <%= result.started_at.nil? ? "未参加考试":result.started_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+            <td><%= result.u_total_score==nil ? "暂无成绩" :result.u_total_score.to_s+"分" %></td>
+            <td>
+              <input type="hidden" value="<%= @exam_user.id %>" id="exam_user_id"/>
+              <% if result.u_total_score %>
+                <% if result.is_paper_open %>
+                  <%= link_to "查看", href="/user/exam_users/#{result.e_id}?user_id=#{cookies[:user_id]}" %>
+                <% else %>
+                  考卷不公开
+                <% end %>
+              <% elsif result.started_at %>
+                阅卷中...
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="pagination_box">
+      <%=  will_paginate @results ,:prev_label=>"«", :next_label=>"»", :inner_window => 1 %>
+    </div>
+  </div>
+</div>

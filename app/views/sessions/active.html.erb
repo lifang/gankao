@@ -1,0 +1,70 @@
+<script type="text/javascript">
+  var start_num = 10;
+  var sent_count = 0;
+  function GetRTime(){
+    var resend_btn = document.getElementById("resend_btn");
+    var resend_btn_wait = document.getElementById("resend_btn_wait");
+    var resend_none = document.getElementById("resend_none");
+    var time = document.getElementById("time");
+    time.innerHTML = start_num;
+    start_num = start_num - 1;
+    if(start_num>0 && sent_count <=5){
+      resend_btn.style.display = "none";
+      resend_btn_wait.style.display = "inline";
+      resend_none.style.display = "none";
+      time.style.display = "inline";
+      setTimeout("GetRTime()",1000);
+    }
+    if(start_num == 0 && sent_count <=5){
+      resend_btn.style.display = "inline";
+      resend_btn_wait.style.display = "none";
+      resend_none.style.display = "none";
+      time.style.display = "none";
+      start_num = 10;
+      sent_count = sent_count + 1;
+    }
+    if(sent_count >5){
+      resend_btn.style.display = "none";
+      resend_btn_wait.style.display = "none";
+      resend_none.style.display = "inline";
+      time.style.display = "none";
+    }
+  }
+
+  function re_active(){
+    var sid = document.getElementById("sid").value;
+    new Ajax.Updater('re_active', "/users/re_active",
+    {asynchronous:true, evalScripts:true, method:'get',
+      parameters:"user_id="+sid+"&authenticity_token=" + encodeURIComponent("b6cd59422f6fb0bd50869085b951a0607311a65d") }); return false;
+  }
+</script>
+<body onload="GetRTime()">
+<center>
+<div class="reg_content">
+  <div class="clear"></div>
+  <p class="expForLoginEmail">激活邮件已经发送到<span><%= @user.email %></span>，请登录邮箱激活账号</p>
+  <% emailname = @user.email.split('@')[1] if @user%>
+  <% name = emailname.split('.')[0] if emailname %>
+
+  <% Constant::EMAILS.each do |key,value| %>
+    <% if key.to_s == 'e'+name.to_s %>
+      <div class="btn_box">
+        <a href="<%= value[0].to_s %>" class="email_link" target="_blank">登录到<%= value[1].to_s %>邮箱激活账号</a>
+      </div>
+    <% end %>
+  <% end %>
+
+
+  <p class="erpResend">如果您没有收到激活邮件，请点击下面的重发按钮，重新发送激活邮件（最多只能重发5次）</p>
+  <div class="btn_box">
+    <span class="resend_btn" id="resend_btn" onclick="GetRTime();re_active();" style="display:none;">重新发送激活邮件</span>
+    <span class="resend_btn_wait"  id="resend_btn_wait" style="display:inline;">重新发送激活邮件<span id="time" style="display:inline;"></span></span>
+    <span class="resend_none"  id="resend_none" style="display:none;">您已经重发了5次</span>
+  </div>
+  <div id="re_active">
+    <%= render :partial => "/users/re_active" -%>
+  </div>
+  <input type="hidden" value="<%= @user.id %>" name="sid" id="sid"/>
+</div>
+</center>
+</body>

@@ -1,0 +1,27 @@
+<div class="main_box_back">
+  <%= form_for :session,:url=>"/sessions/#{@user.id}/update_user_code",:html =>{:onsubmit => 'return check_password()', :class => "required-validate"} do |f| %>
+     <table>
+        <tr>
+          <td valign="top" align="right">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
+
+          <td><%= f.password_field :password, :id => "user_password", :class => "required input_style",:size => "30" %><span class="expForEmail">密码长度在6到20位之间<span id="passwordErr"></span></span></td>
+        </tr>
+        <tr>
+          <td valign="top" align="right">确认密码：</td>
+          <td><%= f.password_field :password_confirmation, :id => "user_password_confirmation", :class => "required input_style",:size => "30" %><span class="expForEmail"><span id="confirmationErr"></span></span></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><%= f.submit"更新", :class =>"submit_btn" , :id=> "submit_button"%></td>
+        </tr>
+      </table>
+  <% end %>
+  <div>
+    &nbsp;&nbsp;&nbsp;
+  </div>
+  <div>
+    获取密码第二步，请更新密码！
+  </div>
+
+</div>
+  
