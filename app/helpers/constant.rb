@@ -38,5 +38,8 @@ module Constant
   UNAFFIRM_PATH = "/excels"
   #收藏文件路径
   COLLECTION_PATH = "/collections"
-  
+   #优惠价格
+  FAVOURABLE=50
+  #代理支付
+  AGENCY_COST=2
 end
