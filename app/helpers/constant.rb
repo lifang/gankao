@@ -24,6 +24,7 @@ module Constant
  
   #服务路径
   SERVER_PATH = "http://localhost:3000"
+  BACK_SERVER_PATH = "http://localhost:3001"
   #项目文件目录
   PUBLIC_PATH = "f:/exam_app/public"
   #试卷生成路径
@@ -31,7 +32,7 @@ module Constant
   #试卷服务器访问路径
   PAPER_URL_PATH = SERVER_PATH + "/papers"
   #客户端访问试卷
-  PAPER_CLIENT_PATH = SERVER_PATH + "/paperjs"
+  PAPER_CLIENT_PATH = BACK_SERVER_PATH + "/paperjs"
   #客户端访问答卷
   ANSWER_CLIENT_PATH = SERVER_PATH + "/result"
   #导出未确认名单路径
