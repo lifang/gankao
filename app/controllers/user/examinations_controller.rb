@@ -23,11 +23,13 @@ class User::ExaminationsController < ApplicationController
     if arr[0] == "" and arr[1].any?
       @examination = arr[1][0]
       @exam_user = ExamUser.find_by_examination_id_and_user_id(@examination.id, cookies[:user_id].to_i)
+      @exam_user = ExamUser.create(:user_id => cookies[:user_id],:examination_id => @examination.id,
+          :password => User::DEFAULT_PASSWORD, :is_user_affiremed => ExamUser::IS_USER_AFFIREMED[:YES]) if @exam_user.nil?
+      @exam_user.set_paper(@examination) if @exam_user.paper_id.nil?
       if @exam_user and @exam_user.paper_id
         @paper_url = "#{Constant::PAPER_CLIENT_PATH}/#{@exam_user.paper_id}.js"
-        if @examination.started_at.nil? or @examination.started_at == ""
-          @exam_user.update_info_for_join_exam(@examination.start_at_time, @examination.exam_time)
-        end
+        @exam_user.update_info_for_join_exam(@examination.start_at_time,
+          @examination.exam_time) if @examination.started_at.nil? or @examination.started_at == ""
         render :layout => "application"
       else
         flash[:warn] = "试卷加载错误，请您重新尝试。"
@@ -69,5 +71,29 @@ class User::ExaminationsController < ApplicationController
     end
     render :text => ""
   end
+
+  def enter_password
+    render :layout => "application"
+  end
+
+  def check_exam_pwd
+    can_show_paper = false
+    if params[:exam_password]
+      @examination = Examination.select("exam_password1, exam_password2").find(params[:id].to_i)
+      @exam_user = ExamUser.find_by_examination_id_and_user_id(params[:id].to_i, cookies[:user_id].to_i)
+      if @exam_user.nil? or
+          (@exam_user and (@exam_user.answer_sheet_url.nil? and params[:exam_password] == @examination.exam_password1) or
+            (@exam_user.answer_sheet_url and params[:exam_password] == @examination.exam_password2))
+        can_show_paper = true
+      end if @examination
+    end
+    if can_show_paper
+      redirect_to "/user/examinations/#{params[:id]}/do_exam"
+    else
+      flash[:warn] = "您输入的验证码不正确。"
+      redirect_to "/user/examinations/#{params[:id]}/enter_password"
+    end
+  end
+    
 
 end

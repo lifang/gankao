@@ -87,7 +87,7 @@ class Examination < ActiveRecord::Base
           left join exam_users eu on e.id = eu.examination_id
           where e.is_published = 1 and e.status != #{STATUS[:CLOSED]} "
     if user_id
-      sql += "and (e.status = #{STATUS[:GOING]} or eu.user_id = #{user_id}) "
+      sql += "and ((e.status = #{STATUS[:GOING]} and eu.id is null) or eu.user_id = #{user_id}) "
     else
       sql += "and (e.status = #{STATUS[:GOING]}) "
     end

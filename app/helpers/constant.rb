@@ -26,7 +26,7 @@ module Constant
   SERVER_PATH = "http://localhost:3000"
   BACK_SERVER_PATH = "http://localhost:3001"
   #项目文件目录
-  PUBLIC_PATH = "f:/exam_app/public"
+  PUBLIC_PATH = "#{Rails.root}/public"
   #试卷生成路径
   PAPER_PATH = "#{PUBLIC_PATH}/papers"
   #试卷服务器访问路径

@@ -250,14 +250,14 @@ function compare_value(id,compare_id){
                 var reason=$("reason_for_"+arry[i]).value;
                 if (parseInt(fact_value) < parseInt(input_value)||parseInt(input_value)<0||input_value==""){
                     $("if_submited_"+arry[i]).value =0;
-                    $("flash_part_"+arry[i]).innerHTML="<font color = 'red'>您输入的数据与原数值不符</font>";
+                    $("flash_part_"+arry[i]).innerHTML="<font color = 'red'>请您输入合理的分值。</font>";
                     return false;
                 }
                 else{
                     if (check_mobile.test(input_value)){
                         $("flash_part_"+arry[i]).innerHTML="";
                         if(reason==""||reason.length==0){
-                            $("flash_part_"+arry[i]).innerHTML="<font color = 'red'>请输入评分理由</font>";
+                            $("flash_part_"+arry[i]).innerHTML="<font color = 'red'>请输入评分理由。</font>";
 
                         }else{
                             $("if_submited_"+arry[i]).value =1;
@@ -269,7 +269,7 @@ function compare_value(id,compare_id){
                         }
                     }
                     else{
-                        $("flash_part_"+arry[i]).innerHTML="<font color = 'red'>您输入的只能是数值</font>";
+                        $("flash_part_"+arry[i]).innerHTML="<font color = 'red'>得分只能是数值。</font>";
                     }
                 }
             }
