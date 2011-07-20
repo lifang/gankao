@@ -39,6 +39,12 @@ module Constant
   UNAFFIRM_PATH = "/excels"
   #收藏文件路径
   COLLECTION_PATH = "/collections"
+
+  #代理权限
+   RIGHTS = {
+    "english_fourth_level" => ["英语四级",1],
+    "english_sixth_level" => ["英语六级",2]
+  }
    #优惠价格
   FAVOURABLE=50
   #代理支付
