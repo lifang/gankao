@@ -63,6 +63,11 @@
               <input type="submit" class="login_btn" value="登录" ></input>
               <a href="/sessions/get_code" >忘记密码？</a></td>
           </tr>
+                    <tr>
+            <td></td>
+            <td>还没有帐号？<%=  link_to "免费注册 ","/users/new"%></td>
+          </tr>
+
           <tr>
             <td align="center" colspan="2">
               <div id="error_msg"<font color="red"><span><%=flash[:error]%></span>&nbsp; <font color="red"> <%= flash[:error2] %></font></div>
