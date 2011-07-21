@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- manifest="test.manifest"-->
   <head>
@@ -33,10 +34,13 @@
             <% if is_student? %>
               <%= link_to "[考试列表]", "/user/examinations" %>
             <% end %>
+
+            <a href="/user/collections">[我的收藏]</a>
+
             <% if is_vicegerent? %>
               <%= link_to "[代理充值]","/payments/agency_recharge" %>
             <% end %>
-            <a href="/users/<%= cookies[:user_id] %>/edit">[个人设置]</a>
+            <a href="/users/<%= cookies[:user_id] %>">[个人信息]</a>
             <a href="/signout">[退出]</a>
           <%end%>        
         </p>

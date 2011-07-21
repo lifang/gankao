@@ -595,8 +595,6 @@ a:hover{
 }
 .commend_product{
     height:460px;
-    +height:456px;
-    _height:456px;
 }
 .commend_product .in ul li{
     width:90px;
