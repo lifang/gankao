@@ -39,15 +39,15 @@
               state_name = "已结束"
             end
           %>
-            <tr class="<%= class_name %>">
-              <td><%= examination.title %></td>
-              <td><%= examination.exam_users.find_by_user_id(@user.id).paper.total_question_num %></td>
-              <td><% if examination.start_at_time!=nil ; %><%= examination.start_at_time.strftime("%Y-%m-%d %H:%M:%S") %><% else %>任意时间<% end %></td>
-              <td><%= state_name%></td>
-              <td><% if examination.exam_time!=nil %><%= examination.exam_time %><% else %>开放<% end %></td>
-              <td><% total_score=examination.total_score%><% if examination.is_score_open==0  %>不公开<% else %> <%if total_score==nil %>-<%else%><%=  total_score %><% end ; end%></td>
-              <td><% if examination.is_paper_open==0%>不公开<%else%><%if total_score==nil %>-<%else%><a href="/user/exam_users/<%= examination.id %>?user_id=<%= cookies[:user_id] %>">查看</a><% end ; end%></td>
-            </tr>
+          <tr class="<%= class_name %>">
+            <td><%= examination.title %></td>
+            <td><%= examination.total_question_num %></td>
+            <td><% if examination.start_at_time!=nil ; %><%= examination.start_at_time.strftime("%Y-%m-%d %H:%M:%S") %><% else %>任意时间<% end %></td>
+            <td><%= state_name%></td>
+            <td><% if examination.exam_time!=nil %><%= examination.exam_time %><% else %>开放<% end %></td>
+            <td><% total_score=examination.total_score%><% if examination.is_score_open==0  %>不公开<% else %> <%if total_score==nil %>-<%else%><%=  total_score %><% end ; end%></td>
+            <td><% if examination.is_paper_open==0%>不公开<%else%><%if total_score==nil %>-<%else%><a href="/user/exam_users/<%= examination.id %>?user_id=<%= cookies[:user_id] %>">查看</a><%end;end%></td>
+          </tr>
           <% end %>
         <% end %>
         <% if !@examinations.nil? %>

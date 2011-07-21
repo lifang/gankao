@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
           else
             cookies[:user_id]=@user.id
             cookies[:user_name]=@user.name
-            redirect_to "/qiantai/ming_e"
+            redirect_to "/advertise"
           end
         end
       end
