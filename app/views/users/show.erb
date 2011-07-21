@@ -1,20 +1,18 @@
 <div class="main_box_back">
   <h2><span>个人信息&nbsp;&nbsp;<font color="#0cf">Information</font></span></h2>
   <div class="in">
-    <p>姓名：<%= @user.name %></p>
     <p>邮箱：<%=  @user.email %><a href="/users/<%= @user.id %>/edit" style="float:right;color:#00A8E6">修改个人信息&nbsp;&nbsp;&nbsp;</a></p>
-    <p>单位：<%= @user.address %></p>
     <br/><br/><br/>
     <table style="text-align:center">
       <thead>
         <tr>
           <th width="150" style="text-align:center">考试名称</th>
           <th width="70" style="text-align:center">题目总数</th>
-          <th width="125" style="text-align:center">开考时间</th>
-          <th width="100" style="text-align:center">考试状态</th>
-          <th width="80" style="text-align:center">考试时长</th>
+          <th width="120" style="text-align:center">本场开考时间</th>
+          <th width="80" style="text-align:center">考试状态</th>
+          <th width="110" style="text-align:center">参与考试时间</th>
           <th width="80" style="text-align:center">成绩</th>
-          <th width="125" style="text-align:center">考卷</th>
+          <th width="120" style="text-align:center">考卷</th>
         </tr>
       </thead>
       <tbody>
@@ -49,6 +47,7 @@
             <td><% if !examination.start_at_time.nil? && examination.start_at_time.to_time>Time.now.to_time%>等待考试开始...<%else%><%if (examination.start_at_time.nil?&&examination.is_submited!=1)||(!examination.start_at_time.nil?&&examination.start_at_time>Time.now.to_datetime&&examination.start_at_time+examination.exam_time.minutes<Time.now.to_datetime&&examination.is_submit!=1)%><%= link_to "开始考试","/user/examinations/#{examination.ex_id}/do_exam" %><%else%><%if total_score==nil %>考卷批改中...<%else%><a href="/user/exam_users/<%= examination.ex_id %>?user_id=<%= cookies[:user_id] %>">查看考卷</a><%end;end;end%></td>
             <td><%= examination.start_at_time.to_time%>.... ...<%= Time.now.to_time %></td>
           </tr>
+
           <% end %>
         <% end %>
         <% if !@examinations.nil? %>
