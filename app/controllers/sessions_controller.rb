@@ -1,13 +1,13 @@
 class SessionsController < ApplicationController
   def new
-    session[:signin_code] = proof_code(4)
+    #session[:signin_code] = proof_code(4)
   end
   
   def create
-    if params[:proof_code].downcase != session[:signin_code].to_s.downcase
-      flash[:error] = "请输入正确的验证码"
-      redirect_to '/sessions/new'
-    else
+    #if params[:proof_code].downcase != session[:signin_code].to_s.downcase
+    #  flash[:error] = "请输入正确的验证码"
+    #  redirect_to '/sessions/new'
+    #else
       @user = User.find_by_email(params[:session][:email])
       if @user.nil?
         flash[:error] = "邮箱不存在"
@@ -24,11 +24,11 @@ class SessionsController < ApplicationController
           else
             cookies[:user_id]=@user.id
             cookies[:user_name]=@user.name
-            redirect_to "/"
+            redirect_to "/advertise"
           end
         end
       end
-    end
+    #end
   end
 
   #退出登录

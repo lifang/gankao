@@ -6,12 +6,23 @@ class PaymentsController < ApplicationController
     @examination=Examination.all
   end
   def agency_recharge
-    @examination=Examination.all
+    @categories=Category.all
+    @examination_info={}
+    @user_info={}
+    @categories.each do |category|
+      @examination_info["#{category.id}"]=[category.examinations,category.id]
+    end
   end
   def search_account
-    @examination=Examination.all
-    @user=User.find_by_email(params[:agency_account])
+    @categories=Category.all
+    @examination_info={}
+    @categories.each do |category|
+      @examination_info["#{category.id}"]=[category.examinations,category.id]
+    end
+    @user=User.find_by_email(params["agency_account#{params[:id]}"])
     if @user
+      @user_info={}
+      @user_info["#{params[:id]}"]=@user
       render "agency_recharge"
     else
       flash[:error]="用户不存在，请核实"

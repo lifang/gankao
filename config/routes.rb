@@ -1,5 +1,18 @@
 Gankao::Application.routes.draw do
+
+
+
   match '/signout'=> 'sessions#destroy'
+  post "/sessions/create"
+
+  resources :advertise do
+    collection do
+      get "index"
+      post "lingqu"
+      post "kaoshi"
+    end
+  end
+  
   namespace :rater do
     resources :exam_raters do
       collection do
@@ -13,13 +26,14 @@ Gankao::Application.routes.draw do
       end
     end
   end
-    resources :payments do
+  resources :payments do
     member do
       get :payoff
+      post "search_account"
     end
     collection do
-       get :packed_payoff,"agency_recharge"
-       post "search_account"
+      get :packed_payoff,"agency_recharge"
+       
     end
   end
   resources :sessions do
@@ -41,11 +55,11 @@ Gankao::Application.routes.draw do
       post "update_info"
     end
   end
-   namespace :user do
+  namespace :user do
     resources :examinations do
       member do
-        post "save_result", "five_min_save"
-        get "do_exam"
+        post "save_result", "five_min_save", "check_exam_pwd"
+        get "do_exam", "enter_password"
       end
       collection do
         get "error_page"
@@ -59,11 +73,11 @@ Gankao::Application.routes.draw do
       end
       member do
         get "my_results"
-         get "exam_user_affiremed"
+        get "exam_user_affiremed"
         post "edit_score","edit_name"
       end
     end
-   end
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

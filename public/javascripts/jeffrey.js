@@ -614,5 +614,18 @@ function delete_attr_edit(attr_id,question_id){
     var attrs = document.getElementById("attr_"+attr_id+"_"+question_id);
     attrs.innerHTML="";
 }
-    
 
+
+
+//gankao_app 内的JS
+
+//显示名额领取成功的DIV
+function show_lingquminge(){
+    $("minge_notice").style.display="block";
+    return false;
+}
+
+//关闭名额领取成功的DIV
+function close_lingquminge(){
+    $("minge_notice").style.display="none";
+}

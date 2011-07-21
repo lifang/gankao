@@ -3,33 +3,26 @@
     <li class="actived"><a href="javascript:void(0);"><%= @xml.elements['base_info'].elements['title'].text %></a></li>
   </ul>
 </div>
-<% problem_size = 0 %>
-<% sum=["一","二","三","四","五","六","七","八","九","十"] %>
-<%  array_index=0 %>
 <%= form_for :over,:url=>"/rater/exam_raters/#{@exam_user.id}/over_answer"  do |f| %>
-<div class="biz_art_list_box">
+  <div class="biz_art_list_box">
     <center>
-              <input type="hidden" id="problem_id" name="problem_id" value="<%=@xml.attributes["ids"]  %>" />
+      <input type="hidden" id="problem_id" name="problem_id" value="<%=@xml.attributes["ids"]  %>" />
       <input type="hidden" name="examination_id" id="examination_id" value="<%=@exam_user.examination_id  %>" />
       <%=f.submit value="批阅完毕" ,:disabled=>"disabled",:id=>"button_id"  %>
       <div id="flash_notice"></div>
     </center>
-</div>
-  
+  </div>
   <% @xml.elements['blocks'].each_element do |block|%>
-    <h1 class="biz_art_title" id="block_show"><%= sum[array_index] %>、<%= block.elements['base_info'].elements['title'].text %> (共<%= block.attributes['total_num'] %>题，总分:<%= block.attributes['total_score'] %>分)
+    <h1 class="biz_art_title" id="block_show"><%= block.elements['base_info'].elements['title'].text %> (共<%= block.attributes['total_num'] %>题，总分:<%= block.attributes['total_score'] %>分)
     </h1>
-    <% array_index += 1 %>
     <div class="biz_art_list_box">
       <%= block.elements["base_info"].elements["description"].text %>
       <ul>
         <% if !block.elements['problems'].nil? %>
-          <% problem_size = block.elements['problems'].children.size %>
           <% block.elements['problems'].each_element do |problem| %>
             <% if !problem.elements['title'].nil? %>
               <li>
                 <%= render :partial=>"/rater/exam_raters/single_question",:object=>problem %>
-          <%#= render :partial=>"/papers/edit_problem",:object=>problem %>
                 <h2><a href="javascript:void(0)" onclick="javascript:compare_value(<%= problem.attributes["id"].to_i %>,0)"><%= problem.elements['title'].text %></a></h2>
               </li>
               <div class="links">
@@ -45,20 +38,4 @@
   <% end %>
 <% end %>
 <div class="clear"></div>
-  <script type="text/javascript">active_button()</script>
-<script type="text/javascript">
-<% (0..problem_size-1).each do |i|  %>
-    KE.show({
-      id : 'title_<%= i %>',
-      skinType: 'tinymce',
-      cssPath : './index.css',
-      items : [
-        'undo', 'redo','copy', 'paste',
-        'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent',
-        'specialchar', 'link', 'unlink', 'image', 'flash', 'media', '-',
-        'fontname', 'fontsize', 'textcolor', 'bold',
-        'italic', 'underline',  'table', 'hr'
-      ]
-    });
-<% end %>
-</script>
+<script type="text/javascript">active_button()</script>

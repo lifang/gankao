@@ -6,7 +6,8 @@ class UsersController < ApplicationController
       @user.update_attributes(:password=>params[:user][:password])
       @user.encrypt_password
       @user.save
-      redirect_to request.referer
+      flash[:notice]="密码修改成功"
+      redirect_to "/users/#{params[:id]}"
     else
       flash[:error]="您输入的密码不正确"
       render "edit"
@@ -16,7 +17,8 @@ class UsersController < ApplicationController
   def update_info #更新用户信息
     @user_info = User.find(params[:id])
     @user_info.update_attributes(params[:user_info])
-    redirect_to request.referer
+    flash[:notice]="用户信息修改成功"
+    redirect_to "/users/#{params[:id]}"
   end
   
   def new #新建用户页面
@@ -76,8 +78,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def show  #
+  def show  
     @user=User.find(params[:id])
+    @examinations = Examination.find_by_sql("select eu.is_submited,eu.total_score,p.total_question_num,ex.*,eu.id from exam_users eu inner join examinations ex on ex.id=eu.examination_id inner join papers p on p.id=eu.paper_id where user_id=#{@user.id} order by start_at_time desc").paginate(:page=>params[:page],:per_page=>10)
   end
 
 

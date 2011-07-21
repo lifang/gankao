@@ -1,23 +1,23 @@
 <div class="main_box_back">
   <h2><span>个人信息设置</span></h2>
   <ul>
-    <li ><a id="li_tab1" onclick="javascript:show_name('div_tab1','div_tab2');"> >修改基本信息</a></li>
-    <li>  <a id="li_tab2" onclick="javascript:show_name('div_tab2','div_tab1');"> >修改个人密码</a></li>
+    <li ><a id="li_tab1" onclick="javascript:show_name('div_tab1','div_tab2');"> 修改基本信息</a></li>
+    <li>  <a id="li_tab2" onclick="javascript:show_name('div_tab2','div_tab1');"> 修改个人密码</a></li>
   </ul>
   <div id="div_tab1">        
     <table>
       <%= form_for :user_info,:url=>"/users/#{@user.id}/update_info", :html =>{:onsubmit => 'return checkinfo()', :class => "required-validate"} do |f| %>
         <tr>
           <td valign="top" align="right"><span class="must_r">&nbsp;&nbsp;</span>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp名：</td>
-          <td><%= f.text_field :name ,:id => "user_name",:class => "required input_style",:size => "30" %>&nbsp;&nbsp;&nbsp;<span  id="nameErr"></span></td>
+          <td><%= f.text_field :name ,:id => "user_name",:value=>@user.name,:class => "required input_style",:size => "30" %>&nbsp;&nbsp;&nbsp;<span  id="nameErr"></span></td>
         </tr>
         <tr>
           <td valign="top" align="right"><span class="must_r">&nbsp;&nbsp;</span>工作单位：</td>
-          <td><%= f.text_field :address ,:id => "user_address",:class => "required input_style",:rows => "5",:cols => "80" %></td>
+          <td><%= f.text_field :address ,:id => "user_address",:value=>@user.address,:class => "required input_style",:rows => "5",:cols => "80" %></td>
         </tr>
         <tr>
           <td></td>
-          <td><%= f.submit"更新", :class =>"submit_btn" , :id=> "submit_button", :title => "编辑个人信息" %></td>
+          <td><%= f.submit"更新", :class =>"submit_btn" , :id=> "submit_button", :title => "编辑个人信息" %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="submit_btn" value="取消" onclick="javascript:window.location.href='/users/<%=  @user.id %>'"/></td>
         </tr>
       <% end  %>
     </table>
@@ -32,17 +32,17 @@
           <td><%= f.password_field :old_password, :id => "user_old_password", :class => "required input_style",:size => "30" %><span class="expForEmail"></span></td>
         </tr>
         <tr>
-          <td valign="top" align="right">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
+          <td valign="top" align="right">新&nbsp;&nbsp;密&nbsp;&nbsp;码：</td>
 
           <td><%= f.password_field :password, :id => "user_password", :class => "required input_style",:size => "30" %><span class="expForEmail">密码长度在6到20位之间<span id="passwordErr"></span></span></td>
         </tr>
         <tr>
-          <td valign="top" align="right">确认密码：</td>
+          <td valign="top" align="right">确认新密码：</td>
           <td><%= f.password_field :password_confirmation, :id => "user_password_confirmation", :class => "required input_style",:size => "30" %><span class="expForEmail"><span id="confirmationErr"></span></span></td>
         </tr>
         <tr>
           <td></td>
-          <td><%= f.submit"更新", :class =>"submit_btn" , :id=> "submit_button", :title => "编辑个人密码" %></td>
+          <td><%= f.submit"更新", :class =>"submit_btn" , :id=> "submit_button", :title => "编辑个人密码" %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="submit_btn" value="取消" onclick="javascript:window.location.href='/users/<%=  @user.id %>'"/></td>
         </tr>
       </table>
     <% end %>
