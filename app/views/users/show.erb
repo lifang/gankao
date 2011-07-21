@@ -14,7 +14,7 @@
           <th width="100" style="text-align:center">考试状态</th>
           <th width="80" style="text-align:center">考试时长</th>
           <th width="80" style="text-align:center">成绩</th>
-          <th width="125" style="text-align:center">答卷</th>
+          <th width="125" style="text-align:center">考卷</th>
         </tr>
       </thead>
       <tbody>
@@ -46,7 +46,7 @@
             <td><%= state_name%></td>
             <td><% if examination.exam_time!=nil %><%= examination.exam_time %><% else %>开放<% end %></td>
             <td><% total_score=examination.total_score%><% if examination.is_score_open==0  %>不公开<% else %> <%if total_score==nil %>-<%else%><%=  total_score %><% end ; end%></td>
-            <td><% if examination.is_paper_open==0%>不公开<%else%><%if total_score==nil %>-<%else%><a href="/user/exam_users/<%= examination.id %>?user_id=<%= cookies[:user_id] %>">查看</a><%end;end%></td>
+            <td><% if !examination.start_at_time.nil?&&examination.start_at_time<Time.now%>等待考试开始...<%else%><%if examination.is_submited!=1%><%= link_to "开始考试","/user/examinations/#{examination.ex_id}/do_exam" %><%else%><%if total_score==nil %>考卷批改中...<%else%><a href="/user/exam_users/<%= examination.ex_id %>?user_id=<%= cookies[:user_id] %>">查看考卷</a><%end;end;end%></td>
           </tr>
           <% end %>
         <% end %>

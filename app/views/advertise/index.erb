@@ -26,7 +26,7 @@
 <div style="border:1px #000 solid;width:260px;height:200px;margin-left:20px;margin-top:10px;padding:10px;float:left;">
   特色功能的文字描述。<br/><br/><br/><br/><br/>
 </div>
-<% if cookies[:user_id]!=nil %>
+<% if cookies[:user_id]!=nil&&@examination[0].get_free_end_at!=nil %>
 <div id="minge_notice" style="display:none;position:absolute;width:450px;height:260px;top:200px;left:400px;border:1px solid;background-color:white;padding:4px;font-size:16px;">
   <div style="height:200px;">
     <br/>
