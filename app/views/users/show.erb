@@ -1,20 +1,18 @@
 <div class="main_box_back">
   <h2><span>个人信息&nbsp;&nbsp;<font color="#0cf">Information</font></span></h2>
   <div class="in">
-    <p>姓名：<%= @user.name %></p>
     <p>邮箱：<%=  @user.email %><a href="/users/<%= @user.id %>/edit" style="float:right;color:#00A8E6">修改个人信息&nbsp;&nbsp;&nbsp;</a></p>
-    <p>单位：<%= @user.address %></p>
     <br/><br/><br/>
     <table style="text-align:center">
       <thead>
         <tr>
           <th width="150" style="text-align:center">考试名称</th>
           <th width="70" style="text-align:center">题目总数</th>
-          <th width="125" style="text-align:center">开考时间</th>
-          <th width="100" style="text-align:center">考试状态</th>
-          <th width="80" style="text-align:center">考试时长</th>
+          <th width="120" style="text-align:center">本场开考时间</th>
+          <th width="80" style="text-align:center">考试状态</th>
+          <th width="110" style="text-align:center">参与考试时间</th>
           <th width="80" style="text-align:center">成绩</th>
-          <th width="125" style="text-align:center">考卷</th>
+          <th width="120" style="text-align:center">考卷</th>
         </tr>
       </thead>
       <tbody>
@@ -23,31 +21,39 @@
             <%
             class_name = "now"
             state_name = "考试中"
-            if examination.start_at_time.nil?&&examination.is_submited==1
-              class_name = "now"
-              state_name = "已交卷"
-            elsif examination.start_at_time.nil?&&examination.is_submited==0
-              class_name = "now"
-              state_name = "未完成"
-            elsif examination.start_at_time > Time.now
-              class_name = "never"
-              state_name = "未开始"
-            elsif (examination.exam_time.nil? and examination.exam_time !=0 and
-                  (examination.start_at_time + (examination.exam_time.nil? ? 0 :examination.exam_time.minutes) < Time.now))or
-                examination.status == Examination::STATUS[:CLOSED]
-              class_name = "ever"
-              state_name = "已结束"
-            end
-          %>
-          <tr class="<%= class_name %>">
-            <td><%= examination.title %></td>
-            <td><%= examination.total_question_num %></td>
-            <td><% if examination.start_at_time!=nil ; %><%= examination.start_at_time.strftime("%Y-%m-%d %H:%M:%S") %><% else %>任意时间<% end %></td>
-            <td><%= state_name%></td>
-            <td><% if examination.exam_time!=nil %><%= examination.exam_time %><% else %>开放<% end %></td>
-            <td><% total_score=examination.total_score%><% if examination.is_score_open==0  %>不公开<% else %> <%if total_score==nil %>-<%else%><%=  total_score %><% end ; end%></td>
-            <td><% if !examination.start_at_time.nil?&&examination.start_at_time<Time.now%>等待考试开始...<%else%><%if examination.is_submited!=1%><%= link_to "开始考试","/user/examinations/#{examination.ex_id}/do_exam" %><%else%><%if total_score==nil %>考卷批改中...<%else%><a href="/user/exam_users/<%= examination.ex_id %>?user_id=<%= cookies[:user_id] %>">查看考卷</a><%end;end;end%></td>
-          </tr>
+            #if examination.start_at_time.nil?&&examination.is_submited==1
+            #class_name = "now"
+            #state_name = "已交卷"
+            #elsif examination.start_at_time.nil?&&examination.is_submited==0
+            #class_name = "now"
+            #state_name = "未完成"
+            #elsif examination.start_at_time > Time.now
+            #class_name = "never"
+            #state_name = "未开始"
+            #elsif (examination.exam_time.nil? and examination.exam_time !=0 and
+            #(examination.start_at_time + (examination.exam_time.nil? ? 0 :examination.exam_time.minutes) < Time.now))or
+            #examination.status == Examination::STATUS[:CLOSED]
+            #class_name = "ever"
+            #state_name = "已结束"
+            #end
+            %>
+            <tr class="<%= class_name %>">
+              <td><%= examination.title %></td>
+              <td><%= examination.total_question_num %></td>
+              <td>
+                <% unless examination.start_at_time.nil?  %><%= examination.start_at_time.strftime("%Y-%m-%d %H:%M:%S") %>
+                <% else %>任何时候
+                <% end %>
+              </td>
+              <td><%= state_name%></td>
+              <td>
+                <% unless examination.started_at.nil? %><%= examination.started_at.strftime("%Y-%m-%d %H:%M:%S") %>
+                <% else %>-
+                <% end %>
+              </td>
+              <td><% unless examination.u_total_score.nil? %>-<% else %><%= examination.u_total_score %><% end %></td>
+              <td><% if !examination.start_at_time.nil?&&examination.start_at_time<Time.now%>等待考试开始...<%else%><%if examination.is_submited!=1%><%= link_to "开始考试","/user/examinations/#{examination.ex_id}/do_exam" %><%else%><%if examination.u_total_score==nil %>考卷批改中...<%else%><a href="/user/exam_users/<%= examination.ex_id %>?user_id=<%= cookies[:user_id] %>">查看考卷</a><%end;end;end%></td>
+            </tr>
           <% end %>
         <% end %>
         <% if !@examinations.nil? %>
