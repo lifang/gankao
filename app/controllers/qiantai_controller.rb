@@ -5,7 +5,7 @@ class QiantaiController < ApplicationController
   end
 
   def lingqu
-    ExamUser.create(:user_id=>params[:user_id],:examination_id=>params[:examination_id],:paper_id=>params[:paper_id])
+    ExamUser.create(:user_id=>cookies[:user_id],:examination_id=>params[:lingqu][:examination_id],:paper_id=>params[:lingqu][:paper_id])
     flash[:notice]="考试名额领取成功"
     redirect_to request.referer
   end
