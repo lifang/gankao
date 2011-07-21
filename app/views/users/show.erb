@@ -46,7 +46,8 @@
             <td><%= state_name%></td>
             <td><% if examination.exam_time!=nil %><%= examination.exam_time %><% else %>开放<% end %></td>
             <td><% total_score=examination.total_score%><% if examination.is_score_open==0  %>不公开<% else %> <%if total_score==nil %>-<%else%><%=  total_score %><% end ; end%></td>
-            <td><% if !examination.start_at_time.nil?&&examination.start_at_time<Time.now%>等待考试开始...<%else%><%if examination.is_submited!=1%><%= link_to "开始考试","/user/examinations/#{examination.ex_id}/do_exam" %><%else%><%if total_score==nil %>考卷批改中...<%else%><a href="/user/exam_users/<%= examination.ex_id %>?user_id=<%= cookies[:user_id] %>">查看考卷</a><%end;end;end%></td>
+            <td><% if !examination.start_at_time.nil? && examination.start_at_time.to_time>Time.now.to_time%>等待考试开始...<%else%><%if (examination.start_at_time.nil?&&examination.is_submited!=1)||(!examination.start_at_time.nil?&&examination.start_at_time>Time.now.to_datetime&&examination.start_at_time+examination.exam_time.minutes<Time.now.to_datetime&&examination.is_submit!=1)%><%= link_to "开始考试","/user/examinations/#{examination.ex_id}/do_exam" %><%else%><%if total_score==nil %>考卷批改中...<%else%><a href="/user/exam_users/<%= examination.ex_id %>?user_id=<%= cookies[:user_id] %>">查看考卷</a><%end;end;end%></td>
+            <td><%= examination.start_at_time.to_time%>.... ...<%= Time.now.to_time %></td>
           </tr>
           <% end %>
         <% end %>
