@@ -24,19 +24,29 @@ module Constant
  
   #服务路径
   SERVER_PATH = "http://localhost:3000"
+  BACK_SERVER_PATH = "http://localhost:3001"
   #项目文件目录
-  PUBLIC_PATH = "f:/exam_app/public"
+  PUBLIC_PATH = "#{Rails.root}/public"
   #试卷生成路径
   PAPER_PATH = "#{PUBLIC_PATH}/papers"
   #试卷服务器访问路径
   PAPER_URL_PATH = SERVER_PATH + "/papers"
   #客户端访问试卷
-  PAPER_CLIENT_PATH = SERVER_PATH + "/paperjs"
+  PAPER_CLIENT_PATH = BACK_SERVER_PATH + "/paperjs"
   #客户端访问答卷
   ANSWER_CLIENT_PATH = SERVER_PATH + "/result"
   #导出未确认名单路径
   UNAFFIRM_PATH = "/excels"
   #收藏文件路径
   COLLECTION_PATH = "/collections"
-  
+
+  #代理权限
+   RIGHTS = {
+    "english_fourth_level" => ["英语四级",1],
+    "english_sixth_level" => ["英语六级",2]
+  }
+   #优惠价格
+  FAVOURABLE=50
+  #代理支付
+  AGENCY_COST=2
 end

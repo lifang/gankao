@@ -21,10 +21,11 @@ Gankao::Application.routes.draw do
     resources :payments do
     member do
       get :payoff
+      post "search_account"
     end
     collection do
        get :packed_payoff,"agency_recharge"
-       post "search_account"
+       
     end
   end
   resources :sessions do
@@ -49,8 +50,8 @@ Gankao::Application.routes.draw do
    namespace :user do
     resources :examinations do
       member do
-        post "save_result", "five_min_save"
-        get "do_exam"
+        post "save_result", "five_min_save", "check_exam_pwd"
+        get "do_exam", "enter_password"
       end
       collection do
         get "error_page"

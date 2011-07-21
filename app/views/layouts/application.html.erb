@@ -27,24 +27,22 @@
         <a id="logo" href="/"><span>考试系统</span></a>
         <div class="clear"></div>
         <p class="title_link">
-          <%  if (cookies[:user_id]!=nil) %>
-            <% if is_paper_creater? %>
-              <a href="/papers">试卷</a>
-              &nbsp;&nbsp;|
-              &nbsp;&nbsp;<a href="/examinations">考试</a>
-              &nbsp;&nbsp;|&nbsp;&nbsp;<a href="/results">成绩</a>
-            <% end  %>
-          </p>
+        </p>
+        <%  if (cookies[:user_id]!=nil) %>
           <p class="back_welcome">
+          
             <%= current_user.email if current_user %> 欢迎您！
             <% if is_student? %>
               <%= link_to "[考试列表]", "/user/examinations" %>
-              <%= link_to "[成绩查询]", "/user/exam_users/#{cookies[:user_id]}/my_results" %>
             <% end %>
+
             <a href="/user/collections">[我的收藏]</a>
             <a href="/users/<%= cookies[:user_id] %>">[个人信息]</a>
             <a href="/signout">[退出]</a>
           <%end%>
+              <% if is_vicegerent? %>
+            <%= link_to "代理充值","/payments/agency_recharge" %>
+            <% end %>
         </p>
       </div>
       <div id="bd">

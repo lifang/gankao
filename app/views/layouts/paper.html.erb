@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" manifest="/javascripts/local_save/answer.manifest">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title><%= title %></title>
+    <%= javascript_include_tag :defaults %>
+    <%= use_validate_js_tooltip %>
+    <link href="/stylesheets/exam_biz_back.css" rel="stylesheet" />
+    <link href="/stylesheets/login.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="container">
+      <div id="hd">
+        <div class="right">
+          <% if cookies[:user_id].nil? %>
+            <a href="/">登录</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;<a href="/users/new">免费注册</a>
+            &nbsp;&nbsp;
+          <% end %>
+        </div>
+        <a id="logo" href="/"><span>考试系统</span></a>
+        <div class="clear"></div>
+        <p class="title_link">
+          <%  if (cookies[:user_id]!=nil) %>
+            <% if (is_paper_creater?) %>
+              <a href="/papers">试卷</a>
+              &nbsp;&nbsp;|
+              &nbsp;&nbsp;<a href="/examinations">考试</a>
+              &nbsp;&nbsp;|&nbsp;&nbsp;<a href="/results">成绩</a><% end  %>
+          </p>
+          <p class="back_welcome">
+            <% user=User.find(cookies[:user_id].to_i) %>
+            <%= user.email %> 欢迎您！
+            <% if is_student? %>
+              <%= link_to "[考试列表]", "/user/examinations" %>
+            <% end %>
+            <a href="#">[我的收藏]</a>
+            <a href="/users/<%=user.id%>/edit">[个人设置]</a>
+            <a href="/signout">[退出]</a>
+          <%end%>
+        </p>
+      </div>
+      <div id="bd">
+        <div class="main fr">
+          <%=  render :partial => "/common/display_flash" %>
+          <%= yield %>
+        </div>
+        <div  id="tishikuang" style="display:block"></div>
+      </div>
+      <div id="ft">
+        <p>Copyright &copy; 2009-2010 考试系统, All Rights Reserved&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+        <ul>
+          <li><a href="#" target="_blank">版权声明</a></li>
+          <li><a href="#" target="_blank">关于我们</a></li>
+          <li><a href="#" target="_blank">免责声明</a></li>
+          <li><a href="#" target="_blank">隐私声明</a></li>
+          <li><a href="#" target="_blank">征稿说明</a></li>
+          <li><a href="#" target="_blank">站长统计</a></li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
