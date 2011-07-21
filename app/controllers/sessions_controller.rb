@@ -70,5 +70,8 @@ class SessionsController < ApplicationController
   def active
     @user = User.find(params[:id].to_i)
   end
+  def index
+    
+  end
 end
 
