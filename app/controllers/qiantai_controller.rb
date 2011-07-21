@@ -1,7 +1,7 @@
 class QiantaiController < ApplicationController
 
   def ming_e
-    @examination=Examination.find_by_sql("select * from examinations order by start_at_time desc limit 1")
+    @examination=Examination.find_by_sql("select * from examinations order by exam_free_end_at desc limit 1")
   end
 
   def lingqu

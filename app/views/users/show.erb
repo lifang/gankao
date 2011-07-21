@@ -23,9 +23,12 @@
             <%
             class_name = "now"
             state_name = "考试中"
-            if examination.start_at_time.nil?
+            if examination.start_at_time.nil?&&examination.is_submited==1
               class_name = "now"
-              state_name = "进行中"
+              state_name = "已交卷"
+            elsif examination.start_at_time.nil?&&examination.is_submited==0
+              class_name = "now"
+              state_name = "未完成"
             elsif examination.start_at_time > Time.now
               class_name = "never"
               state_name = "未开始"

@@ -3,6 +3,7 @@ Gankao::Application.routes.draw do
   get "/qiantai/ming_e"
   post "/qiantai/lingqu"
   post "/qiantai/kaoshi"
+  post "/sessions/create"
 
   match '/signout'=> 'sessions#destroy'
   namespace :rater do
