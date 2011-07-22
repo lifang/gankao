@@ -10,7 +10,7 @@ gem 'mysql2', '0.2.6'
 gem 'gravatar_image_tag', '0.1.0'
 gem 'will_paginate', '3.0.pre2'
 gem 'faker', '0.3.1'
-gem 'spreadsheet'
+gem 'spreadsheet', '0.6.5.5'
 #gem 'prototype_legacy_helper', '0.0.0'
 
 group :development do

@@ -20,23 +20,21 @@
           <% @examinations.each do |examination| %>
             <%
             class_name = "now"
-            state_name = "考试中"
-            #if examination.start_at_time.nil?&&examination.is_submited==1
-            #class_name = "now"
-            #state_name = "已交卷"
-            #elsif examination.start_at_time.nil?&&examination.is_submited==0
-            #class_name = "now"
-            #state_name = "未完成"
-            #elsif examination.start_at_time > Time.now
-            #class_name = "never"
-            #state_name = "未开始"
-            #elsif (examination.exam_time.nil? and examination.exam_time !=0 and
-            #(examination.start_at_time + (examination.exam_time.nil? ? 0 :examination.exam_time.minutes) < Time.now))or
-            #examination.status == Examination::STATUS[:CLOSED]
-            #class_name = "ever"
-            #state_name = "已结束"
-            #end
-            %>
+            state_name = "考试进行中"
+            if examination.is_submited == 1 or examination.u_total_score
+              class_name = "ever"
+              state_name = "已参加"
+            elsif (examination.is_free and examination.exam_free_end_at < Time.now) or
+                (!examination.start_at_time.nil? and examination.exam_time.nil? and examination.exam_time !=0 and
+                  (examination.start_at_time + (examination.exam_time.nil? ? 0 :examination.exam_time.minutes) < Time.now))or
+                examination.status == Examination::STATUS[:CLOSED]
+              class_name = "never"
+              state_name = "已过期"
+            elsif !examination.start_at_time.nil? and examination.start_at_time > Time.now
+              class_name = "never"
+              state_name = "未开始"
+            end
+          %>
             <tr class="<%= class_name %>">
               <td><%= examination.title %></td>
               <td><%= examination.total_question_num %></td>
@@ -51,8 +49,32 @@
                 <% else %>-
                 <% end %>
               </td>
-              <td><% unless examination.u_total_score.nil? %>-<% else %><%= examination.u_total_score %><% end %></td>
-              <td><% if !examination.start_at_time.nil?&&examination.start_at_time<Time.now%>等待考试开始...<%else%><%if examination.is_submited!=1%><%= link_to "开始考试","/user/examinations/#{examination.ex_id}/do_exam" %><%else%><%if examination.u_total_score==nil %>考卷批改中...<%else%><a href="/user/exam_users/<%= examination.ex_id %>?user_id=<%= cookies[:user_id] %>">查看考卷</a><%end;end;end%></td>
+              <td><% unless examination.u_total_score.nil? %><%= examination.u_total_score %><% else %>-<% end %></td>
+              <td>
+                <% if examination.u_total_score %>
+                  <% if examination.is_paper_open %>
+                    <%= link_to "查看", "/user/exam_users/#{examination.ex_id}?user_id=#{cookies[:user_id]}" %>
+                  <% else %>
+                    考卷不公开
+                  <% end %>
+                <% elsif examination.is_submited == 1 %>
+                  批卷中...
+                <% elsif examination.is_free and examination.exam_free_end_at < Time.now %>
+                  免费考试结束
+                <% elsif !examination.start_at_time.nil? and examination.start_at_time > Time.now %>
+                  等待考试开始...
+                <% elsif (!examination.start_at_time.nil? and !examination.exam_time.nil? and examination.exam_time !=0 and
+                      (examination.start_at_time + examination.exam_time.minutes) < Time.now) or
+                    examination.status == Examination::STATUS[:CLOSED] %>
+                  考试结束
+                <% else %>
+                  <% if examination.exam_password1.nil? %>
+                    <a href="/user/examinations/<%= examination.id %>/do_exam" target="_blank">开始考试</a>
+                  <% else %>
+                    <a href="/user/examinations/<%= examination.id %>/enter_password" target="_blank">开始考试</a>
+                  <% end %>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         <% end %>
