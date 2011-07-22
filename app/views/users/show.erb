@@ -30,16 +30,16 @@
             elsif examination.start_at_time > Time.now
               class_name = "never"
               state_name = "未开始"
-            elsif (examination.exam_time.nil? and examination.exam_time !=0 and
-                  (examination.start_at_time + (examination.exam_time.nil? ? 0 :examination.exam_time.minutes) < Time.now))or
+            elsif (!examination.exam_time.nil? and examination.exam_time !=0 and
+                  (examination.start_at_time +  examination.exam_time.minutes < Time.now))or
                 examination.status == Examination::STATUS[:CLOSED]
               class_name = "ever"
               state_name = "已结束"
             end
           %>
             <tr class="<%= class_name %>">
-              <td><%= examination.title %></td>
-              <td><%= examination.total_question_num %></td>
+              <td><b><%= examination.title %></b></td>
+              <td><%= examination.total_question_num %>题</td>
               <td><% if examination.start_at_time!=nil ; %><%= examination.start_at_time.strftime("%Y-%m-%d %H:%M:%S") %><% else %>任意时间<% end %></td>
               <td><%= state_name%></td>
               <td><% if examination.exam_time!=nil %><%= examination.exam_time %><% else %>开放<% end %></td>
