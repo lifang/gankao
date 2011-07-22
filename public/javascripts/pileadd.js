@@ -483,7 +483,7 @@ function cast_account(id){
 
 function pay_price(checkstatus,id){
     var d=document.getElementsByName("all_price"+id);
-    var number=$("number").value;
+    var number=$("number"+id).value;
     var n=0;
     var checked_ids =0;
     var  favourable=$("favourable"+id).value;
