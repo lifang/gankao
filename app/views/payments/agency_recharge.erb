@@ -3,7 +3,7 @@
   <% if permission?(Category::TYPES["#{category.id}"]) %>
     <% str += "#{category.id}," %>
     <a onclick="javascript:show_category(<%= category.id %>)">
-      <%= Category::TYPES["#{category.id}"] unless Category::TYPES["#{category.id}"].nil? %>
+      <%= Constant::RIGHTS[Category::TYPES["#{category.id}"]][0] unless Category::TYPES["#{category.id}"].nil? %>
     </a>
     <div id="partial<%=  category.id %>" style="display:none">
       <%= render :partial=>"/payments/single_kind",:object=>@examination_info["#{category.id}"] %>
