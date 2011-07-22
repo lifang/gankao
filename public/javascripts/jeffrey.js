@@ -192,7 +192,7 @@ function question_validate(){
                 return false;
             }
             if($("problem_attr" + i + "_value")!=null){
-            answer_array.push($("problem_attr" + i + "_value").value);
+                answer_array.push($("problem_attr" + i + "_value").value);
             }
         }
         var answer_array_sort=answer_array.sort();
@@ -284,12 +284,12 @@ function generate_edit_questions(problem_id, problem_type) {
                             }
                         }
                         var attr_array_sort=attr_array.sort();
-//                        for(var q=0;q<attr_array.length;q++){
-//                            if (attr_array_sort[q]==attr_array_sort[q+1]){
-//                                alert("选项内容重复："+attr_array_sort[q]);
-//                                return false;
-//                            }
-//                        }
+                    //                        for(var q=0;q<attr_array.length;q++){
+                    //                            if (attr_array_sort[q]==attr_array_sort[q+1]){
+                    //                                alert("选项内容重复："+attr_array_sort[q]);
+                    //                                return false;
+                    //                            }
+                    //                        }
                     } else if (parseFloat(inputs[0].value) == 1) {
                         var attr_array = [];
                         var answer_sum = 0;
@@ -319,12 +319,12 @@ function generate_edit_questions(problem_id, problem_type) {
                             }
                         }
                         var attr_array_sort=attr_array.sort();
-//                        for(var q=0;q<attr_array.length;q++){
-//                            if (attr_array_sort[q]==attr_array_sort[q+1]){
-//                                alert("选项内容重复："+attr_array_sort[q]);
-//                                return false;
-//                            }
-//                        }
+                        //                        for(var q=0;q<attr_array.length;q++){
+                        //                            if (attr_array_sort[q]==attr_array_sort[q+1]){
+                        //                                alert("选项内容重复："+attr_array_sort[q]);
+                        //                                return false;
+                        //                            }
+                        //                        }
                         if(answer_sum==0){
                             alert("请设置正确答案。");
                             return false;
@@ -620,12 +620,29 @@ function delete_attr_edit(attr_id,question_id){
 //gankao_app 内的JS
 
 //显示名额领取成功的DIV
-function show_lingquminge(){
-    $("minge_notice").style.display="block";
+function show_login(){
+    $("login").style.display="block";
+}
+
+function ajax_notice(examination_id,paper_id){
+    new Ajax.Updater("ajax_notice", "/advertise/lingqu",
+    {
+        asynchronous:true,
+        evalScripts:true,
+        method:"post",
+        parameters:'examination_id='+examination_id+'&paper_id='+paper_id+'&authenticity_token='
+        + encodeURIComponent('Q3CnqJgIgZEqWnlCyD902sexHwkF7phBA8hPYM1Tqxc=')
+    });
+    $("lingqu_button").disabled=true;
+    $("lingqu_button").setAttribute("class","test_disabled")
     return false;
 }
 
+function close_ajax_notice(){
+     $("ajax_notice").innerHTML="<div id='ajax_notice'></div>";
+}
+
 //关闭名额领取成功的DIV
-function close_lingquminge(){
-    $("minge_notice").style.display="none";
+function close_login(){
+    $("login").style.display="none";
 }

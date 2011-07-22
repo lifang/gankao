@@ -6,7 +6,7 @@ class PaymentsController < ApplicationController
   end
   
   def packed_payoff
-    @examination=Examination.all
+    @examination=Examination.find_all_by_category_id(params[:id])
   end
 
   def agency_recharge

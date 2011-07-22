@@ -3,13 +3,15 @@ class AdvertiseController < ApplicationController
   def index  
     @exam_category = params[:category_id]
     @examination=Examination.find_by_sql("select * from examinations ex  where ex.category_id=#{@exam_category} and ex.exam_free_end_at>'#{Time.now}' order by exam_free_end_at asc limit 1")
+    if !@examination[0].nil?
     @free_num=ExamUser.find_by_sql("select * from exam_users where is_free=1 and examination_id=#{@examination[0].id}").size
+    end
   end
   
   def lingqu
-    ExamUser.create(:user_id=>cookies[:user_id],:examination_id=>params[:lingqu][:examination_id],:paper_id=>params[:lingqu][:paper_id],:is_free=>1)
-    flash[:notice]="考试名额领取成功"
-    redirect_to request.referer
+    ExamUser.create(:user_id=>cookies[:user_id],:examination_id=>params[:examination_id],:paper_id=>params[:paper_id],:is_free=>1)
+    @examination=Examination.find(params[:examination_id])
+    render :partial=>'notice'
   end
 
   def kaoshi
@@ -22,7 +24,7 @@ class AdvertiseController < ApplicationController
 
   def login
 
-    if User.find_by_email(params[:user][:email]).nil?
+    if User.find_by_email(params[:user][:email]).nil?&&params[:user][:email]!=nil?&&/^\w+([-+.])*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.match(params[:user][:email])
       @user=User.new(:password=>params[:user][:email],:name=>params[:user][:name],:email=>params[:user][:email],:school=>params[:user][:school])
       @user.encrypt_password
       @user.set_role(Role.find(1))
@@ -30,18 +32,18 @@ class AdvertiseController < ApplicationController
       if @user.save
         cookies[:user_id]=@user.id
         cookies[:user_name]=@user.name
-        ExamUser.create(:user_id=>@user.id,:examination_id=>params[:user][:examination_id],:paper_id=>params[:user][:paper_id],:is_free=>1)
-        flash[:notice]="您现在可以参加考试了。提示：您可以用您的注册邮箱登录赶考网，密码处也填注册邮箱。您可以随时修改。"
+        flash[:notice]="您现在可以使用赶考网了。当前帐号的密码已经发送到您的注册邮箱中，您可以随时使用该帐号和密码登录赶考网，请注意查收。"
         redirect_to request.referer
       else
         flash[:error]="SORRY,用户信息保存失败。"
         redirect_to request.referer
       end
     else
-      flash[:error]="SORRY,注册邮箱已存在"
+      flash[:error]="出错啦！注册邮箱已存在或者格式错误"
       redirect_to request.referer
     end
   end
+
 
 end
 
