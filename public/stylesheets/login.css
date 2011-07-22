@@ -74,6 +74,18 @@ input, textarea, select {
   border-collapse: collapse;
   border:1px solid #000000;
 }
+
+.test_disabled{
+  cursor: pointer;
+  border: medium none;
+  margin-left:40px;
+  padding:4px 25px 4px 25px;
+  background-color:#bdbdbd;
+  color:white;
+  font-size:125%;
+  font-weight:bold;
+}
+
 .test{
   cursor: pointer;
   border: medium none;
