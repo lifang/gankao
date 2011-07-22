@@ -2,11 +2,11 @@
 <% @categories.each do |category| %>
 <% if permission?(Category::TYPES["#{category.id}"]) %>
 <% str += "#{category.id}," %>
-<a onclick="javascript:show_category(<%= category.id %>)"><%= Category::TYPES["#{category.id}"] unless Category::TYPES["#{category.id}"].nil? %></a>
+<a onclick="javascript:show_category(<%= category.id %>)"><%= Category::TYPES["#{category.id}"]
+  unless Category::TYPES["#{category.id}"].nil? %></a>
 <div id="partial<%=  category.id %>" style="display:none">
   <%= render :partial=>"/payments/single_kind",:object=>@examination_info["#{category.id}"] %>
 </div>
-
 <% end unless Category::TYPES["#{category.id}"].nil? %>
 <% end %>
 <input type="hidden" value="<%= str %>" id="category_num"/>
