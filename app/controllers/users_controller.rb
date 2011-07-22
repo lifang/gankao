@@ -80,7 +80,11 @@ class UsersController < ApplicationController
 
   def show  
     @user=User.find(params[:id])
-    @examinations = Examination.find_by_sql("select eu.is_submited,eu.total_score,p.total_question_num,ex.*,eu.id from exam_users eu inner join examinations ex on ex.id=eu.examination_id inner join papers p on p.id=eu.paper_id where user_id=#{@user.id} order by start_at_time desc").paginate(:page=>params[:page],:per_page=>10)
+    @examinations = Examination.paginate_by_sql("select eu.is_submited, eu.total_score u_total_score,
+        p.total_question_num, ex.*, ex.id ex_id, eu.id eu_id, eu.is_free, eu.started_at
+        from exam_users eu inner join examinations ex on ex.id = eu.examination_id
+        inner join papers p on p.id=eu.paper_id where user_id = #{@user.id} order by start_at_time desc",
+      :per_page =>10, :page => params[:page])
   end
 
 

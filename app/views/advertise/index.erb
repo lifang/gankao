@@ -1,14 +1,18 @@
+
 <div class="main_box_back">
-  <h2><span>活动广告区</span></h2>
+  <h2><span>最新活动</span></h2>
   <div class="in">
     <div style="border:1px #000 solid;width:800px;height:65px;padding:3px;">
-      <% if @examination[0].exam_users.find_by_user_id(cookies[:user_id]).nil? %>
+      <% if @examination[0]!=nil %>
+      <% if @examination[0].exam_users==nil||@examination[0].exam_users.find_by_user_id(cookies[:user_id]).nil? %>
         "<%= @examination[0].title %>"考试名额免费发放中，有兴趣的同学速度来领取呀！机不可待，时不再来！<br/>
         <input onclick="javascript:show_lingquminge();"  style="position:inherit;float:right;top:40px;"type="button" value="我要领取"
                                                <% if @examination[0].get_free_end_at==nil||@examination[0].get_free_end_at<Time.now %>disabled="true"<% end %>> </input>
       <% else %><div style="height:38px;">您已经成功领取了"<%= @examination[0].title %>"的考试名额。请于<font color="red"><%= @examination[0].exam_free_end_at.strftime("%Y年%m月%d日") %></font>前完成考试。我们将在考试截止后3天内为您报告此次考试的成绩以及整体排名情况。</div>
         <input style="position:inherit;float:right;top:40px;"type="button" value="开始考试" onclick="javascript:window.location.href='/user/examinations/<%= @examination[0].id %>/do_exam'"<% if @examination[0].exam_free_end_at==nil||@examination[0].exam_free_end_at < Time.now %>disabled="true"<% end %>/><% end %>
-
+        <% else %>
+        <div style="height:38px;">当前没有名额发放。</div>
+        <%end%>
     </div>
     <div style="margin-top:15px;border:1px #000 solid;width:800px;height:65px;padding:3px;">
       <div style="height:38px;">优惠区。打一折的，有木有。</div><input style="position:static;float:right;margin-bottom:5px;" type="button" value="打包购买" />
@@ -20,13 +24,13 @@
 
 <div style="border:1px #000 solid;width:480px;height:200px;margin-top:10px;padding:10px;float:left;">
   模拟收费区的简介和描述。
-  <input style="float:right;margin-top:170px;" type="submit" value="我要参加" onclick="javascript:window.location.href='/payments/<%= @examination[0].id %>/payoff'"/>
+  <!--  <input style="float:right;margin-top:170px;" type="submit" value="我要参加" onclick="javascript:window.location.href='/payments/<%#= @examination[0].id %>/payoff'" />  -->
 </div>
 
 <div style="border:1px #000 solid;width:260px;height:200px;margin-left:20px;margin-top:10px;padding:10px;float:left;">
   特色功能的文字描述。<br/><br/><br/><br/><br/>
 </div>
-<% if cookies[:user_id]!=nil %>
+<% if cookies[:user_id]!=nil&&@examination[0]!=nil %>
 <div id="minge_notice" style="display:none;position:absolute;width:450px;height:260px;top:200px;left:400px;border:1px solid;background-color:white;padding:4px;font-size:16px;">
   <div style="height:200px;">
     <br/>
@@ -77,6 +81,5 @@
     <% end %>
 </div>
 <% end %>
-
 
 
