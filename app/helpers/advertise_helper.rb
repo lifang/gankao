@@ -1,2 +1,2 @@
-module QiantaiHelper
+module AdvertiseHelper
 end
