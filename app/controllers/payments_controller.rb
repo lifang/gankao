@@ -28,7 +28,7 @@ class PaymentsController < ApplicationController
       @user_info["#{params[:id]}"]=@user
       render "agency_recharge"
     else
-      flash[:error]="用户不存在，请核实"
+      flash[:error]="用户不存在，请重新输入查询条件。"
       redirect_to "/payments/agency_recharge"
     end
   end

@@ -351,7 +351,7 @@ class ExamUser < ActiveRecord::Base
         else
           if examination[0].start_at_time > Time.now
             str = "本场考试开始时间为#{examination[0].start_at_time.strftime("%Y-%m-%d %H:%M:%S")},请您做好准备。"
-          elsif (!examination[0].exam_time.nil? and examination[0].exam_time !=0 and
+          elsif (!examination[0].start_at_time.nil? and !examination[0].exam_time.nil? and examination[0].exam_time !=0 and
                 (examination[0].start_at_time + examination[0].exam_time.minutes) < Time.now) or
               examination[0].status == Examination::STATUS[:CLOSED]
             str = "本场考试已经结束。"

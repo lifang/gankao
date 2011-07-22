@@ -22,7 +22,7 @@
                        <% else %>checked="true"<%end%> value="<%= examination.price.nil? ? 0 : examination.price %>"
                        onclick="javascript:cast_account(<%=single_kind[1]%>)" /></td>
             <td><%= examination.title %></td>
-            <td><%= User.find(examination.creater_id).name %></td>
+            <td><%= examination.user.name %></td>
             <td>¥<%= examination.price.nil? ? 0 : examination.price %></td>
             <td><%= 0 %></td>
             <td><%= 1%></td>
