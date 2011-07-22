@@ -13,5 +13,8 @@ class AdvertiseController < ApplicationController
   def kaoshi
     redirect_to request.referer
   end
+  def page
+
+  end
 
 end
