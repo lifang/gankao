@@ -625,7 +625,7 @@ function show_login(){
 }
 
 function ajax_notice(examination_id,paper_id){
-    new Ajax.Updater("ajax_notice", "/advertise/lingqu",
+    new Ajax.Updater("ajax_notice", "/advertises/lingqu",
     {
         asynchronous:true,
         evalScripts:true,
