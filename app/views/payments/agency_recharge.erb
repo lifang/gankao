@@ -1,4 +1,5 @@
 <% str="" %>
+<%= flash[:user_info] %>
 <% @categories.each do |category| %>
   <% if permission?(Category::TYPES["#{category.id}"]) %>
     <% str += "#{category.id}," %>

@@ -30,20 +30,14 @@
         <% end %>
       </tbody>
     </table>
-    <%= form_for :account,:url=>"/payments/#{single_kind[1]}/search_account" ,:html=>{:onsubmit=>"javascript:return
-      input_value("+ "#{single_kind[1]}" +") "} do %>
+
       代理充值账户： <input type="text" value="账号/邮箱" size="30" onfocus="javascript:$('agency_account<%= single_kind[1] %>').value='';"
                      name="agency_account<%= single_kind[1] %>" id="agency_account<%= single_kind[1] %>"/>
-      <input type="submit" value="充值"  />
-    <% end %>
-    <font color="red">
-      <div align="centre" id="notice<%= single_kind[1] %>" >
-        <% unless @user_info["#{single_kind[1]}"].blank? %>
-          <tr>账号：<%= @user_info["#{single_kind[1]}"].email %></tr><br/>
-          <tr>姓名：<%= @user_info["#{single_kind[1]}"].name %></tr>
-        <% end %>
+      <input type="submit" value="充值"  onclick="javascript:get_user_info(<%=single_kind[1] %>)"/>
+       <font color="red">
+      <div align="centre" id="user_info<%= single_kind[1] %>" >
       </div>
-    </font>
+  </font>
   </div>
   <div align="right">
     <input value="<%= Constant::FAVOURABLE %>" id="favourable<%= single_kind[1] %>" type="hidden"/>
