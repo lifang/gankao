@@ -36,13 +36,9 @@
             end
           %>
             <tr class="<%= class_name %>">
-              <td><%= examination.title %></td>
-              <td><%= examination.total_question_num %></td>
-              <td>
-                <% unless examination.start_at_time.nil?  %><%= examination.start_at_time.strftime("%Y-%m-%d %H:%M:%S") %>
-                <% else %>任何时候
-                <% end %>
-              </td>
+              <td><b><%= examination.title %></b></td>
+              <td><%= examination.total_question_num %>题</td>
+              <td><% if examination.start_at_time!=nil ; %><%= examination.start_at_time.strftime("%Y-%m-%d %H:%M:%S") %><% else %>任意时间<% end %></td>
               <td><%= state_name%></td>
               <td>
                 <% unless examination.started_at.nil? %><%= examination.started_at.strftime("%Y-%m-%d %H:%M:%S") %>
@@ -76,6 +72,7 @@
                 <% end %>
               </td>
             </tr>
+
           <% end %>
         <% end %>
         <% if !@examinations.nil? %>

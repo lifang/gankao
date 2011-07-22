@@ -45,6 +45,11 @@ module Constant
     "english_fourth_level" => ["英语四级",1],
     "english_sixth_level" => ["英语六级",2]
   }
+
+  #免费名额数量
+  FREE_NUM=1000
+
+  
    #优惠价格
   FAVOURABLE=50
   #代理支付
