@@ -3,7 +3,8 @@
     <table>
       <thead>
         <tr>
-          <th><input type="checkbox" onclick=sltall_price(this.checked,"all_price") <% if @examination.blank? %> disabled="true" <% else%>checked="true"  <% end %> id="packed"  />打包</th>
+          <th><input type="checkbox" onclick=sltall_price(this.checked,"all_price") <% if @examination.blank? %>
+                     disabled="true" <% else%>checked="true"  <% end %> id="packed"  />打包</th>
           <th>考试名称</th>
           <th>出卷人</th>
           <th>价格</th>

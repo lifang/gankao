@@ -2,9 +2,11 @@ class PaymentsController < ApplicationController
   def payoff
     @examination=Examination.find(params[:id])
   end
+  
   def packed_payoff
-    @examination=Examination.all
+    @examination=Examination.find_all_by_category_id(params[:id])
   end
+
   def agency_recharge
     @categories=Category.all
     @examination_info={}
@@ -13,6 +15,7 @@ class PaymentsController < ApplicationController
       @examination_info["#{category.id}"]=[category.examinations,category.id]
     end
   end
+
   def search_account
     @categories=Category.all
     @examination_info={}
@@ -25,7 +28,7 @@ class PaymentsController < ApplicationController
       @user_info["#{params[:id]}"]=@user
       render "agency_recharge"
     else
-      flash[:error]="用户不存在，请核实"
+      flash[:error]="用户不存在，请重新输入查询条件。"
       redirect_to "/payments/agency_recharge"
     end
   end

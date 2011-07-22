@@ -19,7 +19,7 @@
               <input type="submit" value="登&nbsp;&nbsp;&nbsp;&nbsp;录" class="login_btn1" />
               <a href="/sessions/get_code" ><font color="#00A8E6">忘记密码？</font></a></td>
           </tr>
-          
+
           <tr>
             <td align="center" colspan="2">
               <div id="error_msg"<font color="red"><span><%=flash[:error]%></span>&nbsp; <font color="red"> <%= flash[:error2] %></font></div>
@@ -39,12 +39,11 @@
 <div class="clear"></div>
 <div class="Test">
   <p style="margin-top:15px;">&nbsp;&nbsp;&nbsp;&nbsp;四级模拟考试</p>
-
-      <input type="button" value="立即体验" class="test" onclick="javascript:window.location.href='/advertise?category_id=<%= Category::FAURTH %>'"/>
+      <input type="button" value="立即体验" class="test" onclick="javascript:window.location.href='/sessions'"/>
 </div>
-<div class="Test1">    
+<div class="Test1">
   <p style="margin-top:15px;">&nbsp;&nbsp;&nbsp;&nbsp;六级模拟考试</p>
-      <input type="button" value="立即体验" class="test1" onclick="javascript:window.location.href='/advertise?category_id=<%= Category::SIXTH %>'"/>
+      <input type="button" value="立即体验" class="test1" onclick="javascript:window.location.href='/seesions'"/>
 </div>
 <div class="problem">
   <p style="margin-top:10px;font-weight:bold;">&nbsp;&nbsp;&nbsp;&nbsp;常见问题：</p>
