@@ -2,9 +2,11 @@ class PaymentsController < ApplicationController
   def payoff
     @examination=Examination.find(params[:id])
   end
+  
   def packed_payoff
     @examination=Examination.all
   end
+
   def agency_recharge
     @categories=Category.all
     @examination_info={}
@@ -13,6 +15,7 @@ class PaymentsController < ApplicationController
       @examination_info["#{category.id}"]=[category.examinations,category.id]
     end
   end
+
   def search_account
     @categories=Category.all
     @examination_info={}
