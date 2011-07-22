@@ -4,18 +4,18 @@
   <div class="in">
     <div style="border:1px #000 solid;width:800px;height:65px;padding:3px;">
       <% if @examination[0]!=nil %>
-      <% if @examination[0].exam_users==nil||@examination[0].exam_users.find_by_user_id(cookies[:user_id]).nil? %>
-        "<%= @examination[0].title %>"考试名额免费发放中，有兴趣的同学速度来领取呀！机不可待，时不再来！<br/>
-        <input onclick="javascript:show_lingquminge();"  style="position:inherit;float:right;top:40px;"type="button" value="我要领取"
-                                               <% if @examination[0].get_free_end_at==nil||@examination[0].get_free_end_at<Time.now %>disabled="true"<% end %>> </input>
-      <% else %><div style="height:38px;">您已经成功领取了"<%= @examination[0].title %>"的考试名额。请于<font color="red"><%= @examination[0].exam_free_end_at.strftime("%Y年%m月%d日") %></font>前完成考试。我们将在考试截止后3天内为您报告此次考试的成绩以及整体排名情况。</div>
-        <input style="position:inherit;float:right;top:40px;"type="button" value="开始考试" onclick="javascript:window.location.href='/user/examinations/<%= @examination[0].id %>/do_exam'"<% if @examination[0].exam_free_end_at==nil||@examination[0].exam_free_end_at < Time.now %>disabled="true"<% end %>/><% end %>
-        <% else %>
+        <% if @examination[0].exam_users==nil||@examination[0].exam_users.find_by_user_id(cookies[:user_id]).nil? %>
+          "<%= @examination[0].title %>"考试名额免费发放中，有兴趣的同学速度来领取呀！赶考网每场考试提供<%= Constant::FREE_NUM %>个免费考试名额。<br/>目前还有<font color="red"><%= Constant::FREE_NUM-@free_num %></font>个名额。请广大考生在<font color="red"><%= @examination[0].get_free_end_at.strftime("%Y年%m月%d日") %></font>前领取。机不可待，时不再来！<br/>
+          <input onclick="javascript:show_lingquminge();"  style="position:inherit;float:right;top:40px;"type="button" value="我要领取" class="test"
+                 <% if @examination[0].get_free_end_at==nil||@examination[0].get_free_end_at<Time.now %>disabled="true"<% end %>> </input>
+        <% else %><div style="height:38px;">您已经成功领取了"<%= @examination[0].title %>"的考试名额。请于<font color="red"><%= @examination[0].exam_free_end_at.strftime("%Y年%m月%d日") %></font>前完成考试。我们将在考试截止后3天内为您报告此次考试的成绩以及整体排名情况。</div>
+          <input style="position:inherit;float:right;top:40px;"type="button" class="test" value="开始考试" onclick="javascript:window.location.href='/user/examinations/<%= @examination[0].id %>/do_exam'"<% if @examination[0].exam_free_end_at==nil||@examination[0].exam_free_end_at < Time.now %>disabled="true"<% end %>/><% end %>
+      <% else %>
         <div style="height:38px;">当前没有名额发放。</div>
-        <%end%>
+      <%end%>
     </div>
     <div style="margin-top:15px;border:1px #000 solid;width:800px;height:65px;padding:3px;">
-      <div style="height:38px;">优惠区。打一折的，有木有。</div><input style="position:static;float:right;margin-bottom:5px;" type="button" value="打包购买" />
+      <div style="height:38px;">优惠区。打一折的，有木有。</div><input style="position:static;float:right;margin-bottom:5px;" type="button" class="test" value="打包购买" onclick="window.location.href='/payments/packed_payoff'" />
     </div>
     <br/>
   </div>
@@ -24,62 +24,52 @@
 
 <div style="border:1px #000 solid;width:480px;height:200px;margin-top:10px;padding:10px;float:left;">
   模拟收费区的简介和描述。
-  <!--  <input style="float:right;margin-top:170px;" type="submit" value="我要参加" onclick="javascript:window.location.href='/payments/<%#= @examination[0].id %>/payoff'" />  -->
+<input style="float:right;margin-top:170px;" class="test" type="submit" value="我要参加" onclick="javascript:window.location.href='/payments/<%= @examination[0].id %>/payoff'" />
 </div>
 
 <div style="border:1px #000 solid;width:260px;height:200px;margin-left:20px;margin-top:10px;padding:10px;float:left;">
   特色功能的文字描述。<br/><br/><br/><br/><br/>
 </div>
 <% if cookies[:user_id]!=nil&&@examination[0]!=nil %>
-<div id="minge_notice" style="display:none;position:absolute;width:450px;height:260px;top:200px;left:400px;border:1px solid;background-color:white;padding:4px;font-size:16px;">
-  <div style="height:200px;">
-    <br/>
-    <p style="color:green">亲爱的<%= User.find(cookies[:user_id]).email %>,您好：</p>
-    <p style="margin-left:32px;">您即将领取本次考试的名额。</p>
-    <p style="margin-left:32px;">请您在<font color="red"><%= @examination[0].exam_free_end_at.strftime("%Y年%m月%d日") %></font>前参加这场考试，我们将于考试截止后的三天内报告您的成绩。</p>
-    <p style="margin-left:32px;">如您届时未能参加，此名额自动视为作废。</p>
-  </div>
-  <%= form_for :lingqu,:url=>"/advertise/lingqu" do |f|%>
-    <%= f.hidden_field :examination_id,:value=>@examination[0].id %>
-    <%= f.hidden_field :paper_id,:value=>@examination[0].papers.first.id %>
-    <center><input type="submit" value="知道了" style="position:static;padding:3px;" onclick="javascript:close_lingquminge();"/></center>
+  <div id="minge_notice" style="display:none;position:absolute;width:450px;height:260px;top:200px;left:400px;border:1px solid;background-color:white;padding:4px;font-size:16px;">
+    <div style="height:200px;">
+      <br/>
+      <p style="color:green">亲爱的<%= User.find(cookies[:user_id]).email %>,您好：</p>
+      <p style="margin-left:32px;">您即将领取本次考试的名额。</p>
+      <p style="margin-left:32px;">请您在<font color="red"><%= @examination[0].exam_free_end_at.strftime("%Y年%m月%d日") %></font>前参加这场考试，我们将于考试截止后的三天内报告您的成绩。</p>
+      <p style="margin-left:32px;">如您届时未能参加，此名额自动视为作废。</p>
+    </div>
+    <%= form_for :lingqu,:url=>"/advertise/lingqu" do |f|%>
+      <%= f.hidden_field :examination_id,:value=>@examination[0].id %>
+      <%= f.hidden_field :paper_id,:value=>@examination[0].papers.first.id %>
+      <center><input type="submit" value="知道了" style="position:static;padding:3px;" onclick="javascript:close_lingquminge();"/></center>
     <% end %>
-</div>
+  </div>
 <% else %>
-<div id="minge_notice" style="display:none;position:absolute;width:450px;height:260px;top:200px;left:400px;border:1px solid;background-color:white;padding:4px;font-size:16px;">
-  <div style="height:200px;">
-    <font color="#0df"> 亲爱的用户，您好：</font><br/>
-    <p>如果你已经有赶考网帐号，或者人人、QQ帐号，请先登陆。</p>
+  <div id="minge_notice" style="display:none;position:absolute;width:450px;height:260px;top:200px;left:400px;border:1px solid;background-color:white;padding:4px;font-size:12px;">
+    <div style="height:200px;">
+      <font color="#0df"> 亲爱的用户，您好：</font><br/>
+      <p>如果你已经有赶考网帐号，或者人人、QQ帐号，请先<a href="/sessions/new"><font color="blue">登陆</font></a>。</p>
+      <p>如果你还没有帐号，请您填写如下信息，系统将允许您临时登录。</p>
 
-  <%= form_for :session,:url=>"/sessions/create" do |f|%>
-         <table>
-          <td>邮&nbsp;&nbsp;&nbsp;&nbsp; 箱：</td>
-          <td><%= f.text_field :email, :class => "required input_style" %></td>
-          <div id="email"></div>
+      <%= form_for :user,:url=>"/advertise/login" do |f|%>
+      <%= f.hidden_field :examination_id,:value=>@examination[0].id %>
+      <%= f.hidden_field :paper_id,:value=>@examination[0].papers.first.id %>
+        <table style="margin-left:50px;">
+          <td><font color="red">*</font>注册邮箱：</td>
+          <td height="38"><%= f.text_field :email %></td>
           <tr>
-            <td>密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
-            <td><%= f.password_field :password, :class => "required input_style" %></td>
-          <div id=""></div>
+            <td><font color="red">*</font>姓&nbsp;&nbsp;&nbsp;&nbsp;名：</td>
+            <td height="38"><%= f.text_field :name %></td>
           </tr>
           <tr>
-            <td></td>
-            <td>
-              <input type="submit" class="login_btn" value="登录" ></input>
-              <a href="/sessions/get_code" >忘记密码？</a></td>
-          </tr>
-                    <tr>
-            <td></td>
-            <td>还没有帐号？<%=  link_to "免费注册 ","/users/new"%></td>
-          </tr>
-
-          <tr>
-            <td align="center" colspan="2">
-              <div id="error_msg"<font color="red"><span><%=flash[:error]%></span>&nbsp; <font color="red"> <%= flash[:error2] %></font></div>
-            </td>
+            <td><font color="red">*</font>学&nbsp;&nbsp;&nbsp;&nbsp;校：</td>
+            <td height="38"><%= f.text_field :school %></td>
           </tr>
         </table>
-    <% end %>
-</div>
-<% end %>
+               <input type="submit" class="test" value="确定" ></input>
+      <% end %>
+    </div>
+  <% end %>
 
 
