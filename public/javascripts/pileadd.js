@@ -436,13 +436,7 @@ function button_fail(button_id, pic_id) {
     $(""+pic_id).show();
     $(""+button_id).hide();
 }
-function input_value(id){
-    var value=$("agency_account"+id).value;
-    if (value=="账号/邮箱"){
-        $("notice"+id).innerHTML="请输入账户名称";
-        return false;
-    }
-}
+
 function cast_account(id){
     var sles=document.getElementsByName("all_price"+id);
     var checked_ids =0;
@@ -451,7 +445,8 @@ function cast_account(id){
     var agency_cost=$("agency_cost"+id).value;
     var number=$("number"+id).value;
     for (var i=0;i<sles.length;i++) {
-        if (sles[i].checked) { n +=1;
+        if (sles[i].checked) {
+            n +=1;
             checked_ids += parseInt(sles[i].value);
         }
         if (sles[i].disabled==true){
@@ -491,7 +486,8 @@ function pay_price(checkstatus,id){
     for(var i=0; i<d.length; i++){
         if (d[i].disabled ==false){
             d[i].checked=checkstatus;
-            if (d[i].checked == true) { n +=1;
+            if (d[i].checked == true) {
+                n +=1;
                 checked_ids += parseInt(d[i].value)
             }
         }
@@ -530,5 +526,28 @@ function show_category(id){
             }
         }
     }
+}
 
+function get_user_info(id){
+    if(input_value(id)==true){
+        new Ajax.Updater("user_info"+id, "/payments/"+ id +"/search_account",
+        {
+            asynchronous:true,
+            evalScripts:true,
+            method:'post',
+            parameters:'agency_account'+ id+'='+$("agency_account"+id).value +'&authenticity_token=' + encodeURIComponent('5kqVHCOuTTCFFQkywU0UzTAENJi1jcPs0+QKEpVa4lQ=')
+        });
+        return false;
+    }else{
+        return false;
+    }
+}
+function input_value(id){
+    var value=$("agency_account"+id).value;
+    if (value=="账号/邮箱"||value==""){
+        $("user_info"+id).innerHTML="请输入账户名称";
+        return false;
+    }else{
+        return true;
+    }
 }

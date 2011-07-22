@@ -17,19 +17,12 @@ class PaymentsController < ApplicationController
   end
 
   def search_account
-    @categories=Category.all
-    @examination_info={}
-    @categories.each do |category|
-      @examination_info["#{category.id}"]=[category.examinations,category.id]
-    end
     @user=User.find_by_email(params["agency_account#{params[:id]}"])
     if @user
-      @user_info={}
-      @user_info["#{params[:id]}"]=@user
-      render "agency_recharge"
+      render :partial=>"/payments/user_info",:object=>params[:id]
     else
-      flash[:error]="用户不存在，请重新输入查询条件。"
-      redirect_to "/payments/agency_recharge"
+      flash[:user_info]="用户不存在，请重新输入查询条件。"
+      redirect_to request.referer
     end
   end
 end
