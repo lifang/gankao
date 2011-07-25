@@ -29,10 +29,6 @@ class AdvertisesController < ApplicationController
     render :partial=>'notice'
   end
 
-  def kaoshi
-    redirect_to request.referer
-  end
-
   def login
     if User.find_by_email(params[:user][:email]).nil?
       if params[:user][:email] != nil? and /^\w+([-+.])*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.match(params[:user][:email])

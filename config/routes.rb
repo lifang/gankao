@@ -1,14 +1,12 @@
 Gankao::Application.routes.draw do
 
-
-
   match '/signout'=> 'sessions#destroy'
   post "/sessions/create"
   resources :pages
   resources :advertises do
     collection do
       get "index"
-      post "join", "kaoshi", 'login'
+      post "join", 'login'
     end
   end
   
