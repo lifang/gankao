@@ -1,4 +1,6 @@
 class PaymentsController < ApplicationController
+  before_filter :access?
+  
   def payoff
     @examination=Examination.find(params[:id])
   end

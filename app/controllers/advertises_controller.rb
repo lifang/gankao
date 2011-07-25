@@ -15,9 +15,12 @@ class AdvertisesController < ApplicationController
     end
   end
   
-  def lingqu
-    ExamUser.create(:user_id=>cookies[:user_id],:examination_id=>params[:examination_id],:paper_id=>params[:paper_id],:is_free=>1)
-    @examination=Examination.find(params[:examination_id])
+  def join
+    @examination = Examination.find(params[:examination_id])
+    exam_user = ExamUser.create(:user_id => cookies[:user_id].to_i,:examination_id => params[:examination_id].to_i,
+      :password => User::DEFAULT_PASSWORD, :is_user_affiremed => ExamUser::IS_USER_AFFIREMED[:YES],
+      :is_free => ExamUser::IS_FREE[:YES])
+    exam_user.set_paper(@examination)
     render :partial=>'notice'
   end
 

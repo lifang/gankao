@@ -8,9 +8,7 @@ Gankao::Application.routes.draw do
   resources :advertises do
     collection do
       get "index"
-      post "lingqu"
-      post "kaoshi"
-      post 'login'
+      post "join", "kaoshi", 'login'
     end
   end
   
