@@ -49,12 +49,12 @@ input, textarea, select {
     background-position:0px 0px;
 }
 .problem{
-  float:left;
-  border: #bdbdbd 1px solid;
-  margin-left: 60px;
-  margin-top: 30px;
-  width: 260px;
-  height: 90px;
+    float:left;
+    border: #bdbdbd 1px solid;
+    margin-left: 60px;
+    margin-top: 30px;
+    width: 260px;
+    height: 90px;
 }
 .login_show_img{
     float:left;
@@ -66,66 +66,86 @@ input, textarea, select {
     border:1px solid #000000;
 }
 .Test{
-  float:left;
-  margin-left:9px;
-  margin-top:30px;
-  height:72px;
-  width:200px;
-  border-collapse: collapse;
-  border:1px solid #000000;
+    float:left;
+    margin-left:9px;
+    margin-top:30px;
+    height:72px;
+    width:200px;
+    border-collapse: collapse;
+    border:1px solid #000000;
 }
+
+.test_disabled{
+    cursor: pointer;
+    border: medium none;
+    margin-left:40px;
+    padding:4px 25px 4px 25px;
+    background-color:#bdbdbd;
+    color:white;
+    font-size:125%;
+    font-weight:bold;
+}
+
 .test{
-  cursor: pointer;
-  border: medium none;
-  margin-left:40px;
-  padding:4px 25px 4px 25px;
-  background-color:chartreuse;
-  color:white;
-  font-size:125%;
-  font-weight:bold;
+    cursor: pointer;
+    border: medium none;
+    margin-left:40px;
+    padding:4px 25px 4px 25px;
+    background-color:chartreuse;
+    color:white;
+    font-size:125%;
+    font-weight:bold;
+}
+.infor{
+    float:left;
+    font-size: 150%;
+    height:220px;
+    width:260px;
+    border-collapse: collapse;
+    border:1px solid #000000;
 }
 .Test1{
-  float:left;
-  margin-left:80px;
-  margin-top:30px;
-  height:72px;
-  width:200px;
-  border-collapse: collapse;
-  border:1px solid #000000;
+    float:left;
+    margin-left:80px;
+    margin-top:30px;
+    height:72px;
+    width:200px;
+    border-collapse: collapse;
+    border:1px solid #000000;
 }
 .test1{
-  cursor: pointer;
-  border: medium none;
-  margin-left:40px;
-  padding:4px 25px 4px 25px;
-  background-color:chartreuse;
-  color:white;
-  font-size:125%;
-  font-weight:bold;
+    cursor: pointer;
+    border: medium none;
+    margin-left:40px;
+    padding:4px 25px 4px 25px;
+    background-color:chartreuse;
+    color:white;
+    font-size:125%;
+    font-weight:bold;
 }
 .top1{
-  float:left;
-  height:220px;
-  width:260px;
-  border:#bdbdbd 1px solid;
-  border-collapse: collapse;
-  border:1px solid #000000;
+    float:left;
+    height:260px;
+    width:260px;
+    border:#bdbdbd 1px solid;
+    border-collapse: collapse;
+    border:1px solid #000000;
 }
 .login1{
-  float:left;
-  margin-left: 30px;
-  margin-top: 30px;
+    float:left;
+    margin-left: 30px;
+    margin-top: 30px;
 }
 .login_btn1{
-  cursor: pointer;
-  border: medium none;
-  background:chartreuse;
-  color:white;
-  width:86px;
-  height:26px;
+    cursor: pointer;
+    border: medium none;
+    background:chartreuse;
+    color:white;
+    width:86px;
+    height:26px;
 }
 .link{
-  margin-left:25px;
+    margin-left:25px;
 }
 .login_box{
     float:left;
@@ -199,7 +219,7 @@ input, textarea, select {
     padding:8px 2px 0px 3px\9;
 }
 .login_box .check_w{
-    width:132px;
+    width:100px;
 }
 .top_nav{
     background:#f0f0f0;

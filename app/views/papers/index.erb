@@ -1,0 +1,29 @@
+<script type="text/javascript" src="/javascripts/plugin_assets/My97DatePicker/WdatePicker.js" ></script>
+<div class="main_box_back">
+  <h2><span>试卷列表</span>
+    <div class="right">
+      <div>
+        <%= link_to "新建卷子","/papers/new_step_one" %>|&nbsp;&nbsp;&nbsp;
+      </div>
+      <div>
+        <%= form_for :exam, :html=> {:id => :exam_form, :name => :exam_form}, :url => "/examinations" do |f|%>
+          <%= f.hidden_field :getvalue, :value =>""  %>
+          <%= link_to "创建考试","javascript:void(0);", :onclick => "javascript:document.getElementById('exam_form').submit();" %>
+        <% end %>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </h2>
+  <div class="in">
+    <div class="paper_search">
+      <%= form_for :found,  :url => "/papers/search", :method => 'post' do %>
+        <%= render :partial => "paper_search" %>
+      <% end %>
+    </div>
+    <div class="clear"></div>
+    <%= render :partial => "paper_list" %>
+    <div class="pagination_box">
+      <%=will_paginate @papers ,:previous_label=>"«", :next_label=>"»", :inner_window => 1 %>
+    </div>
+  </div>
+</div>

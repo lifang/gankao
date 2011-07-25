@@ -1,0 +1,7 @@
+<div class="in">
+  <div class="title"><%= show_questions.elements["title"].text %></div>
+  <% show_questions.elements["questions"].each do |question| %>
+  <%= render :partial => "/common/show_single_question", :object => question %>
+ 
+  <% end %>
+</div>

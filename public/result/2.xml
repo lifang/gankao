@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>      <exam id='2'>
-        <paper id='2' score='0'>
-          <questions><question id='28' is_sure='1' score='0'><answer>yukuilkui</answer></question><question id='29' is_sure='1' score='0'><answer>1</answer></question><question id='30' is_sure='1' score='0'><answer>wfewfwefwe</answer></question></questions>
-          <auto_score/>
-          <rate_score/>
+        <paper id='1' score='0'>
+          <questions></questions>
+          <auto_score></auto_score>
+          <rate_score></rate_score>
         </paper>
       </exam>

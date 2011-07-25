@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
           else
             cookies[:user_id]=@user.id
             cookies[:user_name]=@user.name
-            redirect_to "/users/#{@user.id}"
+            redirect_to root_path
           end
         end
       end
@@ -70,6 +70,7 @@ class SessionsController < ApplicationController
   def active
     @user = User.find(params[:id].to_i)
   end
+  
   def index
     
   end
