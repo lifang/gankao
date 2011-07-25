@@ -2,9 +2,9 @@
   <h2><span>最新活动</span></h2>
   <div class="in">
     <div style="border:1px #000 solid;width:800px;height:65px;padding:3px;">
-      <% if @examination[0]!=nil %>
-          "<%= @examination[0].title %>"考试名额免费发放中，有兴趣的同学速度来领取呀！赶考网每场考试提供<%= Constant::FREE_NUM %>个免费考试名额。<br/>目前还有<font color="red"><%= Constant::FREE_NUM-@free_num %></font>个名额。请广大考生在<font color="red"><%= @examination[0].get_free_end_at.strftime("%Y年%m月%d日") %></font>前领取。机不可待，时不再来！<br/>
-          <input id="lingqu_button" <% if cookies[:user_id]==nil %> onclick="javascript:show_login();" <%else%> onclick="javascript:ajax_notice(<%= @examination[0].id %>,<%=  @examination[0].papers.first.id %>);" <%end%>  style="position:inherit;float:right;top:40px;"type="button" value="我要领取" <% if Constant::FREE_NUM - @free_num > 0&&@examination[0].exam_users.find_by_user_id(cookies[:user_id])==nil  %> class="test" <%else%>  class="test_disabled" disabled="true" <% end %> />
+      <% if @examination!=nil %>
+          "<%= @examination.title %>"考试名额免费发放中，有兴趣的同学速度来领取呀！赶考网每场考试提供<%= Constant::FREE_NUM %>个免费考试名额。<br/>目前还有<font color="red"><%= Constant::FREE_NUM-@free_num %></font>个名额。请广大考生在<font color="red"><%= @examination.get_free_end_at.strftime("%Y年%m月%d日") %></font>前领取。机不可待，时不再来！<br/>
+          <input id="lingqu_button" <% if cookies[:user_id]==nil %> onclick="javascript:show_login();" <%else%> onclick="javascript:ajax_notice(<%= @examination.id %>,<%=  @examination.papers.first.id %>);" <%end%>  style="position:inherit;float:right;top:40px;"type="button" value="我要领取" <% if Constant::FREE_NUM - @free_num > 0&&@examination.exam_users.find_by_user_id(cookies[:user_id])==nil  %> class="test" <%else%>  class="test_disabled" disabled="true" <% end %> />
       <% else %>
         <div style="height:38px;">当前没有名额发放。</div>
       <%end%>
@@ -19,7 +19,7 @@
 
 <div style="border:1px #000 solid;width:480px;height:200px;margin-top:10px;padding:10px;float:left;">
   模拟收费区的简介和描述。
-  <input style="float:right;margin-top:170px;" class="test" type="submit" value="我要参加" <% if cookies[:user_id]==nil %> onclick="javascript:show_login();" <%else%> <% if @examination[0]!=nil %> onclick="javascript:window.location.href='/payments/<%= @examination[0].id %>/payoff'" <% end %> <% end %>/>
+  <input style="float:right;margin-top:170px;" class="test" type="submit" value="我要参加" <% if cookies[:user_id]==nil %> onclick="javascript:show_login();" <%else%> <% if @examination!=nil %> onclick="javascript:window.location.href='/payments/<%= @examination.id %>/payoff'" <% end %> <% end %>/>
 </div>
 
 <div style="border:1px #000 solid;width:260px;height:200px;margin-left:20px;margin-top:10px;padding:10px;float:left;">
@@ -31,9 +31,9 @@
   <div style="height:200px;">
     <font color="#0df"> 亲爱的用户，您好：</font><br/>
     <p>如果你已经有赶考网帐号，或者人人、QQ帐号，请先<a href="/sessions/new"><font color="blue">登陆</font></a>。</p>
-    <p>如果你还没有帐号，请您填写如下信息，系统将允许您临时登录。</p>
+    <p>如果你还没有帐号，请您填写如下信息，系统将为您创建一个新的账号。</p>
 
-    <%= form_for :user,:url=>"/advertise/login" do |f|%>
+    <%= form_for :user,:url=>"/advertises/login" do |f|%>
       <table style="margin-left:50px;">
         <td><font color="red">*</font>注册邮箱：</td>
         <td height="38"><%= f.text_field :email %></td>
