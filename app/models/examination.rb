@@ -96,6 +96,18 @@ class Examination < ActiveRecord::Base
     Examination.find_by_sql(sql)
   end
 
+  #判断是否能打包购买
+  def self.can_packge_by(category_id)
+    can_by = true
+    if category_id
+      examination = Examination.first(:conditions => "category_id = #{category_id.to_i}", :order => "exam_free_end_at asc")
+      can_by = false if !examination.exam_free_end_at.nil? and examination.exam_free_end_at < Time.now
+    end
+    puts "============================"
+    puts can_by
+    return can_by
+  end
+
 
 
 end

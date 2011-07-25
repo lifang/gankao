@@ -4,13 +4,16 @@
     <div style="border:1px #000 solid;width:800px;height:65px;padding:3px;">
       <% if @examination[0]!=nil %>
           "<%= @examination[0].title %>"考试名额免费发放中，有兴趣的同学速度来领取呀！赶考网每场考试提供<%= Constant::FREE_NUM %>个免费考试名额。<br/>目前还有<font color="red"><%= Constant::FREE_NUM-@free_num %></font>个名额。请广大考生在<font color="red"><%= @examination[0].get_free_end_at.strftime("%Y年%m月%d日") %></font>前领取。机不可待，时不再来！<br/>
-          <input id="lingqu_button" <% if cookies[:user_id]==nil %> onclick="javascript:show_login();" <%else%> onclick="javascript:ajax_notice(<%= @examination[0].id %>,<%=  @examination[0].papers.first.id %>);" <%end%>  style="position:inherit;float:right;top:40px;"type="button" value="我要领取" <% if Constant::FREE_NUM - @free_num > 0&&@examination[0].exam_users.find_by_user_id(cookies[:user_id])==nil  %> class="test" <%else%>  class="test_disabled" disabled="true" <% end %> />
+          <input id="lingqu_button" <% if cookies[:user_id]==nil %> onclick="javascript:show_login();" <%else%> onclick="javascript:ajax_notice(<%= @examination[0].id %>);" <%end%>  style="position:inherit;float:right;top:40px;"type="button" value="我要领取" <% if Constant::FREE_NUM - @free_num > 0&&@examination[0].exam_users.find_by_user_id(cookies[:user_id])==nil  %> class="test" <%else%>  class="test_disabled" disabled="true" <% end %> />
       <% else %>
         <div style="height:38px;">当前没有名额发放。</div>
       <%end%>
     </div>
     <div style="margin-top:15px;border:1px #000 solid;width:800px;height:65px;padding:3px;">
-      <div style="height:38px;">优惠区。打一折的，有木有。</div><input style="position:static;float:right;margin-bottom:5px;" type="button" class="test" value="打包购买" <% if cookies[:user_id]==nil %> onclick="javascript:show_login();" <%else%>  onclick="window.location.href='/payments/<%= @exam_category %>/packed_payoff'" <% end %>/>
+      <div style="height:38px;">优惠区。打一折的，有木有。</div>
+      <input style="position:static;float:right;margin-bottom:5px;" type="button" class="test" value="打包购买"
+        <% if cookies[:user_id]==nil %> onclick="javascript:show_login();" <%else%>  onclick="window.location.href='/payments/<%= @exam_category %>/packed_payoff'" <% end %>
+        <% unless Examination.can_packge_by(@exam_category) %>disabled="true"<% end %> />
     </div>
     <br/>
   </div>

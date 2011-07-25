@@ -6,7 +6,7 @@ class AdvertisesController < ApplicationController
     if !@examination[0].nil?
     @free_num=ExamUser.find_by_sql("select * from exam_users where is_free=1 and examination_id=#{@examination[0].id}").count
     else
-      flash[:error]="当前没有六级模拟考试"
+      flash[:error]="当前的模拟考试已经结束"
      redirect_to "/pages"
     end
   end

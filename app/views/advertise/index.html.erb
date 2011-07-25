@@ -14,7 +14,10 @@
       <%end%>
     </div>
     <div style="margin-top:15px;border:1px #000 solid;width:800px;height:65px;padding:3px;">
-      <div style="height:38px;">优惠区。打一折的，有木有。</div><input style="position:static;float:right;margin-bottom:5px;" type="button" class="test" value="打包购买" <% if cookies[:user_id]==nil %> onclick="javascript:show_login();" <%else%>  onclick="window.location.href='/payments/packed_payoff'" <% end %>/>
+      <div style="height:38px;">优惠区。打一折的，有木有。</div>
+      <input style="position:static;float:right;margin-bottom:5px;" type="button" class="test"
+             value="打包购买" <% if cookies[:user_id]==nil %> onclick="javascript:show_login();" <%else%>  onclick="window.location.href='/payments/packed_payoff'" <% end %>
+             <% if self.can_packge_by(params[:category_id]) %>disabled="true"<% end %>/>
     </div>
     <br/>
   </div>

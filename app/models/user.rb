@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
   def self.auto_add_user(name, username, email, mobilephone)
     user = User.new(:name => name, :username => username, :email => email,
       :mobilephone => mobilephone,:password => DEFAULT_PASSWORD,:password_confirmation => DEFAULT_PASSWORD)
-#    user.set_role(Role.find(Role::TYPES[:STUDENT]))
+    user.set_role(Role.find(Role::TYPES[:STUDENT]))
     user.status = User::STATUS[:NORMAL]
     user.encrypt_password
     user.save!
