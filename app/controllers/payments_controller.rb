@@ -1,12 +1,16 @@
 class PaymentsController < ApplicationController
+  before_filter :access?
+  #单场购买
   def payoff
     @examination=Examination.find(params[:id])
   end
-  
+
+  #打包购买
   def packed_payoff
     @examination=Examination.find_all_by_category_id(params[:id])
   end
 
+  #代理充值
   def agency_recharge
     @categories=Category.all
     @examination_info={}
@@ -16,20 +20,12 @@ class PaymentsController < ApplicationController
     end
   end
 
+  #账户查询
   def search_account
-    @categories=Category.all
-    @examination_info={}
-    @categories.each do |category|
-      @examination_info["#{category.id}"]=[category.examinations,category.id]
-    end
     @user=User.find_by_email(params["agency_account#{params[:id]}"])
-    if @user
-      @user_info={}
-      @user_info["#{params[:id]}"]=@user
-      render "agency_recharge"
-    else
-      flash[:error]="用户不存在，请重新输入查询条件。"
-      redirect_to "/payments/agency_recharge"
+    unless @user
+      flash[:user_info]="用户不存在，请重新输入查询条件。"
     end
+    render :partial=>"/payments/user_info",:object=>params[:id]
   end
 end

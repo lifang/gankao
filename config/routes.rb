@@ -1,16 +1,12 @@
 Gankao::Application.routes.draw do
 
-
-
   match '/signout'=> 'sessions#destroy'
   post "/sessions/create"
   resources :pages
-  resources :advertise do
+  resources :advertises do
     collection do
       get "index"
-      post "lingqu"
-      post "kaoshi"
-      post 'login'
+      post "join", 'login'
     end
   end
   
@@ -29,11 +25,11 @@ Gankao::Application.routes.draw do
   end
   resources :payments do
     member do
-      get :payoff
+      get :packed_payoff,:payoff
       post "search_account"
     end
     collection do
-      get :packed_payoff,"agency_recharge"
+      get "agency_recharge"
        
     end
   end

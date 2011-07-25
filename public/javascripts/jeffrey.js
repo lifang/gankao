@@ -624,13 +624,13 @@ function show_login(){
     $("login").style.display="block";
 }
 
-function ajax_notice(examination_id,paper_id){
-    new Ajax.Updater("ajax_notice", "/advertise/lingqu",
+function ajax_notice(examination_id){
+    new Ajax.Updater("ajax_notice", "/advertises/join",
     {
         asynchronous:true,
         evalScripts:true,
         method:"post",
-        parameters:'examination_id='+examination_id+'&paper_id='+paper_id+'&authenticity_token='
+        parameters:'examination_id='+examination_id+'&authenticity_token='
         + encodeURIComponent('Q3CnqJgIgZEqWnlCyD902sexHwkF7phBA8hPYM1Tqxc=')
     });
     $("lingqu_button").disabled=true;
