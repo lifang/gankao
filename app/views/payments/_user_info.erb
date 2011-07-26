@@ -1,2 +1,6 @@
- <tr>账号：<%= @user.email %></tr><br/>
-  <tr>姓名：<%= @user.name %></tr>
+<% if @user %>
+  <div>账号：<%= @user.email %></div>
+  <div>姓名：<%= @user.name %></div>
+<% else %>
+  <%= flash[:user_info] %>
+<% end %>

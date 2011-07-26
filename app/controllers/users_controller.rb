@@ -35,7 +35,7 @@ class UsersController < ApplicationController
       @user.username=params[:user][:name]
       @user.status = User::STATUS[:LOCK]
       @user.active_code = proof_code(6)
-      @user.set_role(Role.find(Role::TYPES[:TEACHER]))
+      @user.set_role(Role.find(Role::TYPES[:STUDENT]))
       @user.encrypt_password
       if @user.save!
         UserMailer.welcome_email(@user).deliver

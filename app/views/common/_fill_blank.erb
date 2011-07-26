@@ -1,0 +1,22 @@
+<% if @problem_type != @question_type %>
+  小题描述：
+  <textarea cols="45" rows="3" id="problem_description" name="problem[description]"></textarea>
+<% end %>
+<div class="answer">
+  <input type="hidden" name="problem[correct_type]" id="problem_correct_type" value="<%= @question_type %>" />
+  答案：<textarea cols="45" rows="3" id="problem_answer" name="problem[answer]"></textarea>
+</div>
+<div class="answer">
+  分值：<input type="text" name="problem[score]" id="problem_score" class="input_style" />
+</div>
+<div class="title">解析：</div>
+<textarea cols="45" rows="3" id="problem_analysis" name="problem[analysis]"></textarea>
+<div class="tag">知识点标签：
+  <span class="tag_input"><input type="text" name="tag" id="tag" class="input_style" value="" size="35"/></span>
+  <span class="tag_input">多个标签，以“<font color="red">空格</font>”隔开</span>
+</div>
+<% if @problem_type != @question_type %>
+  <input type="button" class="submit_btn" onclick="javascript:new_question(<%= @block_id %>)" value="添加小题"/>
+  <input type="button" class="submit_btn" onclick="javascript:cancel_question(<%= @block_id %>);" value="放弃"/>
+  <div class="clear"></div>
+<% end %>

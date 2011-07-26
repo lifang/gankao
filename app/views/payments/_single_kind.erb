@@ -1,57 +1,63 @@
 <div class="main_box_back">
   <div class="in">
-    <table>
-      <thead>
-        <tr>
-         <th><input type="checkbox"  <% if single_kind[0].blank? %> disabled="true"<% else%>checked="true"
-      <% end %>id="packed<%= single_kind[1] %>" onclick="javascript:pay_price(this.checked,<%=single_kind[1]%>)"  />打包</th>
-          <th>考试名称</th>
-          <th>出卷人</th>
-          <th>价格</th>
-          <th>优惠</th>
-          <th>数量</th>
-        </tr>
-      </thead>
-      <tbody>
-        <%  price=0 %>
-        <% single_kind[0].each do |examination| %>
-          <% price += examination.price.to_i %>
+    <% unless single_kind[0].blank? %>
+      <table>
+        <thead>
           <tr>
-            <td><input type="checkbox" name="all_price<%= single_kind[1] %>"  <% if !examination.start_end_time.nil? %>
-                         <% if examination.start_end_time<Time.now  %> disabled="true" <% else %>checked="true"<%end%>
-                       <% else %>checked="true"<%end%> value="<%= examination.price.nil? ? 0 : examination.price %>"
-                       onclick="javascript:cast_account(<%=single_kind[1]%>)" /></td>
-            <td><%= examination.title %></td>
-            <td><%= examination.user.name %></td>
-            <td>¥<%= examination.price.nil? ? 0 : examination.price %></td>
-            <td><%= 0 %></td>
-            <td><%= 1%></td>
+            <th>
+              <input type="checkbox"  <% if single_kind[0].blank? %> disabled="true"<% else%>checked="true"
+                       <% end %>id="packed<%= single_kind[1] %>" onclick="javascript:pay_price(this.checked,<%=single_kind[1]%>)"  />打包
+            </th>
+            <th>考试名称</th>
+            <th>出卷人</th>
+            <th>价格</th>
+            <th>优惠</th>
+            <th>数量</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-
+        </thead>
+        <tbody>
+          <%  price=0 %>
+          <% single_kind[0].each do |examination| %>
+            <% price += examination.price.to_i %>
+            <tr>
+              <td><input type="checkbox" name="all_price<%= single_kind[1] %>"  <% if !examination.start_end_time.nil? %>
+                           <% if examination.start_end_time<Time.now  %> disabled="true" <% else %>checked="true"<%end%>
+                         <% else %>checked="true"<%end%> value="<%= examination.price.nil? ? 0 : examination.price %>"
+                         onclick="javascript:cast_account(<%=single_kind[1]%>)" /></td>
+              <td><%= examination.title %></td>
+              <td><%= examination.user.name %></td>
+              <td>¥<%= examination.price.nil? ? 0 : examination.price %></td>
+              <td><%= 0 %></td>
+              <td><%= 1%></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
       代理充值账户： <input type="text" value="账号/邮箱" size="30" onfocus="javascript:$('agency_account<%= single_kind[1] %>').value='';"
                      name="agency_account<%= single_kind[1] %>" id="agency_account<%= single_kind[1] %>"/>
       <input type="submit" value="充值"  onclick="javascript:get_user_info(<%=single_kind[1] %>)"/>
-       <font color="red">
-      <div align="centre" id="user_info<%= single_kind[1] %>" >
+      <font color="red">
+        <div align="centre" id="user_info<%= single_kind[1] %>" >
+        </div>
+      </font>
+      <div align="right">
+        <input value="<%= Constant::FAVOURABLE %>" id="favourable<%= single_kind[1] %>" type="hidden"/>
+        <input value="<%= Constant::AGENCY_COST %>" id="agency_cost<%= single_kind[1] %>" type="hidden" />
+        <input value="<%= price %>" type="hidden" id="price<%= single_kind[1] %>" name="price" />
+        <input value="<%= single_kind[0].size  %>" id="number<%= single_kind[1] %>" type="hidden"/>
+        <%  unless single_kind[0].blank? %>
+          <span id="total_price">
+            金额总计：
+            <font color="red">¥<label  id="exam_getvalue<%= single_kind[1] %>" ></label><br/></font>
+            实际收费金额：<font color="red"><strong>¥</strong><label  id="fact_value<%= single_kind[1] %>" ></label></font><br/>
+          </span>
+        <% end %>
+        <input type="button" value="结算" id="over<%= single_kind[1] %>"/>
       </div>
-  </font>
-  </div>
-  <div align="right">
-    <input value="<%= Constant::FAVOURABLE %>" id="favourable<%= single_kind[1] %>" type="hidden"/>
-    <input value="<%= Constant::AGENCY_COST %>" id="agency_cost<%= single_kind[1] %>" type="hidden" />
-    <input value="<%= price %>" type="hidden" id="price<%= single_kind[1] %>" name="price" />
-    <input value="<%= single_kind[0].size  %>" id="number<%= single_kind[1] %>" type="hidden"/>
-    <%  unless single_kind[0].blank? %>
-    <span id="total_price">
-      金额总计：
-      <font color="red">¥<label  id="exam_getvalue<%= single_kind[1] %>" ></label><br/></font>
-      实际收费金额：<font color="red"><strong>¥</strong><label  id="fact_value<%= single_kind[1] %>" ></label></font><br/>
-    </span>
+    <% else %>
+      <div>暂无考试。</div>
     <% end %>
-    <input type="button" value="结算" id="over<%= single_kind[1] %>"/>
   </div>
   <script type="text/javascript">cast_account(<%= single_kind[1] %>)</script>
 </div>
+

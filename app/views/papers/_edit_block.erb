@@ -1,0 +1,18 @@
+<div class="title_list_style_box" style="display:none;" id="edit_block_<%= edit_block.attributes["id"] %>">
+  <div class="arrow" style="top:35px;"></div>
+  <div class="block_pic_box" style="top:0px;">
+    <div class="in">
+      <%= form_for :block ,:url=>"/papers/edit_block" ,:html=>{:onsubmit=>"return edit_block_info(#{edit_block.attributes["id"]})"} do |f|%>
+       <%= f.hidden_field :block_id,:value=>edit_block.attributes["id"] %>
+      <%= f.hidden_field :block_xpath,:value=>edit_block.xpath %>
+        <div class="paper_block">
+          试卷模块标题：<%= f.text_field :title ,:class=>"input_style",:size=>"39",:value=>edit_block.elements["base_info"].elements["title"].text,:id=>"edit_block_title_#{edit_block.attributes["id"]}" %>
+        </div>
+        <div class="paper_block">
+          试卷模块描述：<%= f.text_area :description ,:cols=>"37",:rows=>"3",:class=>"textarea_style" ,:value=>edit_block.elements["base_info"].elements["description"].text%>
+        </div>
+        <div><%= f.submit "更新" ,:class=>"submit_btn" %></div>
+        <% end %>
+    </div>
+  </div>
+</div>

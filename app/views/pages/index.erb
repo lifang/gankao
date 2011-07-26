@@ -1,6 +1,7 @@
 <div class="login_show_img" id="login_back"></div>
 <div class="login_box">
   <div id="div_tab1">
+    <% if cookies[:user_id].nil? %>
     <div class="top1">
       <p style="margin-top: 15px;font-size:140%;color:forestgreen;font-weight:bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户登录</p><br/>
       <%= form_for(:session, :url => sessions_path ,:html => {:onsubmit => "return signin_page()", :class => "required-validate"} ) do |f| %>
@@ -12,6 +13,14 @@
             <td>&nbsp;&nbsp;&nbsp;&nbsp;密码：</td>
             <td><%= f.password_field :password, :class => "required input_style" %></td>
           <div id=""></div>
+          </tr>
+          <tr>
+            <td>验证码：</td>
+            <td><input class="required input_style check_w max-length-4 min-length-4" type="text" name="proof_code" id="proof_code" class="required min-length-4 max-length-4" />
+              <span  class="check_num" id="proofcode" title="看不清楚？可以点击此处换一张" onclick="<%= remote_function :update => :proofcode, :method => :get, :url => "/users/get_proof_code"  %>">
+                <%= session[:signin_code] %>
+              </span>
+            </td>
           </tr>
           <tr>
             <td></td>
@@ -34,17 +43,28 @@
       <p style="margin-top:15px; margin-left: 30px;">还没有注册帐号?</p><br/>
       <input type="button" value="立即注册" class="test1" onclick="javascript:window.location.href='/users/new'"/>
     </div>
+    <%else%>
+    <div class ="infor">
+    <p>您的基本信息：</p>
+    <% user=User.find(cookies[:user_id].to_i) %>
+     邮箱：<%= user.email %><br/>
+     姓名：<%= user.name %><br/>
+     工作单位：<%= user.address %>
+     <a href="/users/<%= user.id %>/edit" style="float:right;color:#00A8E6;font-size:80%;">修改个人信息&nbsp;&nbsp;&nbsp;</a>
+    </div>
+      <%end%>
   </div>
+
 </div>
 <div class="clear"></div>
 <div class="Test">
   <p style="margin-top:15px;">&nbsp;&nbsp;&nbsp;&nbsp;四级模拟考试</p>
 
-      <input type="button" value="立即体验" class="test" onclick="javascript:window.location.href='/advertises?category_id=<%= Category::FAURTH %>'"/>
+      <input type="button" value="立即体验" class="test" onclick="javascript:window.location.href='/advertises/<%= Category::FAURTH %>'"/>
 </div>
 <div class="Test1">    
   <p style="margin-top:15px;">&nbsp;&nbsp;&nbsp;&nbsp;六级模拟考试</p>
-      <input type="button" value="立即体验" class="test1" onclick="javascript:window.location.href='/advertises?category_id=<%= Category::SIXTH %>'"/>
+      <input type="button" value="立即体验" class="test1" onclick="javascript:window.location.href='/advertises/<%= Category::SIXTH %>'"/>
 </div>
 <div class="problem">
   <p style="margin-top:10px;font-weight:bold;">&nbsp;&nbsp;&nbsp;&nbsp;常见问题：</p>

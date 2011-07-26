@@ -1,0 +1,28 @@
+<div id="new_module" style="display:none">
+  <h1 class="biz_art_title">添加新的模块</h1>
+
+  <div class="biz_art_list_box">
+    <%= form_for :module ,:url=>"/papers/create_step_two" ,
+      :html=>{:onsubmit=>"return new_module_validate()", :class => "required-validate",
+      :name => "module_form", :id => "module_form"} do |f|%>
+    <ul>
+    <%= f.hidden_field :paper_id,:value=>@xml.root.attributes["id"] %>
+        <li>
+          <div class="add_details">
+            模块标题：<%= f.text_field :title ,:class=>"required input_style",:size=>"70",:id=>"new_module_title" %>
+            <div style="padding-left:60px;">请输入模块的标题，长度为1~30个字</div>
+          </div>
+          <div class="add_details">
+            <div class="detail">描述：</div>
+            <div class="detail"><%= f.text_area :description ,:cols=>"70",:rows=>"4",:class=>"textarea_style" %></div>
+            <div class="detail" style="padding-left:60px;">请填写对试卷模块必要的一些文字描述</div>
+          </div>
+          <div class="clear"></div>
+          <%= f.submit "提交" ,:class=>"submit_btn" %>
+          <%= image_tag "ajax-loader.gif", :id => "spinner_new_module", :style => "display:none" %>
+          <input type="button" value="取消" class="submit_btn" onClick="javascript:close_new_module()"/>
+        </li>    
+      </ul>
+    <% end %>
+  </div>
+  </div>

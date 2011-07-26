@@ -10,6 +10,7 @@ class ExamUser < ActiveRecord::Base
   require 'spreadsheet'
 
   IS_USER_AFFIREMED = {:YES => 1, :NO => 0} #用户是否确认  1 已确认 0 未确认
+  IS_FREE = {:YES => 1, :NO => 0} #是否免费用户 1 是  0 否
   default_scope :order => "exam_users.total_score desc"
   #选择批阅试卷
   def self.get_paper(examination)

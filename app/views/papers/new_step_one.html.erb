@@ -1,0 +1,37 @@
+<ul class="new_biz">
+  <li>添加试卷</li>
+</ul>
+<div class="main_box_back">
+  <%= form_for :paper ,:url=>"/papers/create_step_one", :method => "post",
+    :html => {:name => "paper_form", :id => "paper_form", :class => "required-validate",
+    :onsubmit => "return sumbit_form('paper_form', 'paper_submit', 'spinner_for_submit')"} do |f|%>
+    <h2><span>添加试卷</span><div class="right"><%= link_to "返回试卷列表","/papers" %></div></h2>
+    <div class="in">
+      <div class="paper_base_info">试卷基本信息<span>（为您的试卷添加一些基本的信息）</span></div>
+      <div class="add_details">
+        <font color="red">*</font>
+        试卷标题： <%= f.text_field :title, :class => "required input_style", :value=>"2011 ruby examination", :size => "65" %>
+        <span>&nbsp;请输入试卷标题，长度为1~30个字</span>
+      </div>
+      <div class="add_details">
+        &nbsp;&nbsp;试卷分类：<%= render :partial => "/common/categories" %>
+      </div>
+      <div class="add_details">
+        <div class="detail">&nbsp;&nbsp;&nbsp;描述：</div>
+        <div class="detail">
+          <%= f.text_area :description , :class => "required textarea_style", :cols=>"69", :rows=>"4",
+            :value=>"第一部分为听力题，请大家把答题添在答题卡上，第二部分为选择题，第三部分为综合题，第四部分为......。"%>
+        </div>
+        <div class="detail">&nbsp;&nbsp;请填写对试卷必要的一些文字描述</div>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="in">
+      <div class="in">
+        <%= f.submit "下一步" ,:class=>"submit_btn" %>
+        <%= image_tag "ajax-loader.gif", :id => "spinner_for_submit", :style => "display:none" %>
+      </div>
+    <% end %>
+  </div>
+
+</div>

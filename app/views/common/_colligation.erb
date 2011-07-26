@@ -1,0 +1,43 @@
+<input type="hidden" name="single_question_<%= @block_id %>" id="single_question_<%= @block_id %>" value=""/>
+<div id="real_single_question_<%= @block_id %>"></div>
+<div id="remote_que_div_<%= @block_id %>"></div>
+<div id="choose_coll_que_<%= @block_id %>" style="display: none;">
+  <div class="title">请选择题目类型</div>
+  <div style="float: left;padding-right: 20px;">
+    <input type="radio" name="type_radio_<%= @block_id %>"
+           value="<%= Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>" id="radio1"
+           onclick="javascript:get_question_type(<%= @block_id %>, <%= @paper_id %>, 
+                    <%= Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>, 'remote_que_div_');"/>单选题
+  </div>
+  <div style="float: left;padding-right: 20px;">
+    <input type="radio" name="type_radio_<%= @block_id %>"
+           value="<%= Problem::QUESTION_TYPE[:MORE_CHOSE] %>" id="radio2"
+           onclick="javascript:get_question_type(<%= @block_id %>, <%= @paper_id %>, 
+                    <%= Problem::QUESTION_TYPE[:MORE_CHOSE] %>, 'remote_que_div_');"/>多选题
+  </div>
+  <div style="float: left;padding-right: 20px;">
+    <input type="radio" name="type_radio_<%= @block_id %>"
+           value="<%= Problem::QUESTION_TYPE[:JUDGE] %>" id="radio3"
+           onclick="javascript:get_question_type(<%= @block_id %>, <%= @paper_id %>, 
+                    <%= Problem::QUESTION_TYPE[:JUDGE] %>, 'remote_que_div_');"/>判断题
+  </div>
+  <div style="float: left;padding-right: 20px;">
+    <input type="radio" name="type_radio_<%= @block_id %>"
+           value="<%= Problem::QUESTION_TYPE[:SINGLE_CALK] %>" id="radio4"
+           onclick="javascript:get_question_type(<%= @block_id %>, <%= @paper_id %>, 
+                    <%= Problem::QUESTION_TYPE[:SINGLE_CALK] %>, 'remote_que_div_');"/>填空题
+  </div>
+  <div style="float: left;padding-right: 20px;">
+    <input type="radio" name="type_radio_<%= @block_id %>"
+           value="<%= Problem::QUESTION_TYPE[:CHARACTER] %>" id="radio6"
+           onclick="javascript:get_question_type(<%= @block_id %>, <%= @paper_id %>, 
+                    <%= Problem::QUESTION_TYPE[:CHARACTER] %>, 'remote_que_div_');"/>简答题
+  </div>
+</div>
+<div class="clear"></div>
+<div id="choose_coll_que_link_<%= @block_id %>">
+  <a href="javascript:void(0);" onclick="javascript:show_choose_coll_que(<%= @block_id %>);">+增加小题</a>
+</div>
+
+
+
