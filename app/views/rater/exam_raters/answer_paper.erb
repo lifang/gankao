@@ -22,8 +22,8 @@
           <% block.elements['problems'].each_element do |problem| %>
             <% if !problem.elements['title'].nil? %>
               <li>
-                <%= render :partial=>"/rater/exam_raters/single_question",:object=>problem %>
                 <h2><a href="javascript:void(0)" onclick="javascript:compare_value(<%= problem.attributes["id"].to_i %>,0)"><%= problem.elements['title'].text %></a></h2>
+               <%= render :partial=>"/rater/exam_raters/single_question",:object=>problem %>
               </li>
               <div class="links">
                 <%= form_for :delete,:html => {:name=>"delete_form_#{problem.attributes['id']}", :id =>"delete_form_#{problem.attributes['id']}"}, :url=>"/papers/problem_destroy" do |f|%>
