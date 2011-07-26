@@ -2,7 +2,12 @@ Gankao::Application.routes.draw do
 
   match '/signout'=> 'sessions#destroy'
   post "/sessions/create"
-  resources :pages
+  resources :pages do
+    collection do
+    get "sina_index"
+    get "renren_index"
+    end
+  end
   resources :advertises do
     collection do
       get "index"
@@ -37,6 +42,8 @@ Gankao::Application.routes.draw do
     collection do
       get "get_code"
       post "user_code"
+      get "sina_login"
+      get "renren_login"
     end
     member do
       get "new_code","active"

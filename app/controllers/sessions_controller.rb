@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  require 'oauth2'
+  require 'net/http'
   def new
     #session[:signin_code] = proof_code(4)
   end
@@ -8,27 +10,27 @@ class SessionsController < ApplicationController
     #  flash[:error] = "请输入正确的验证码"
     #  redirect_to '/sessions/new'
     #else
-      @user = User.find_by_email(params[:session][:email])
-      if @user.nil?
-        flash[:error] = "邮箱不存在"
+    @user = User.find_by_email(params[:session][:email])
+    if @user.nil?
+      flash[:error] = "邮箱不存在"
+      redirect_to '/sessions/new'
+    else
+      unless  @user.has_password?(params[:session][:password])
+        flash[:error] = "密码错误"
+          
         redirect_to '/sessions/new'
       else
-        unless  @user.has_password?(params[:session][:password])
-          flash[:error] = "密码错误"
-          
+
+        if @user.status == User::STATUS[:LOCK]
+          flash[:error] = "您的账号还未激活，请查找您注册邮箱的激活信进行激活"
           redirect_to '/sessions/new'
         else
-          if @user.status == User::STATUS[:LOCK]
-            flash[:error] = "您的账号还未激活，请查找您注册邮箱的激活信进行激活"
-            redirect_to '/sessions/new'
-          else
-            cookies[:user_id]=@user.id
-            cookies[:user_name]=@user.name
-            redirect_to root_path
-          end
+          cookies[:user_id]=@user.id
+          cookies[:user_name]=@user.name
+          redirect_to root_path
         end
       end
-    #end
+    end
   end
 
   #退出登录
@@ -74,5 +76,19 @@ class SessionsController < ApplicationController
   def index
     
   end
+
+  def sina_login
+    oauth = Weibo::OAuth.new(Weibo::Config.api_key, Weibo::Config.api_secret)
+    request_token = oauth.consumer.get_request_token
+    session[:rtoken], session[:rsecret] = request_token.token, request_token.secret
+    redirect_to "#{request_token.authorize_url}&oauth_callback=http://#{request.env["HTTP_HOST"]}/pages/sina_index"
+  end
+
+  def renren_login  
+    client = OAuth2::Client.new(Constant::RENREN_API_KEY,Constant::RENREN_API_SECRET,
+      :site => {:url=>'https://graph.renren.com',:response_type=>'code'})
+    redirect_to client.web_server.authorize_url(:redirect_uri => "http://localhost:3000/pages/renren_index",:response_type=>'code')
+  end
+
 end
 
