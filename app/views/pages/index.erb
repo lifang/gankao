@@ -1,3 +1,17 @@
+
+
+<script type="text/javascript">
+  function open_sina_login() {
+    window.open('/sessions/sina_login', '_blank', 'height=500,width=600,left=300,top=100');
+  }
+
+  function refresh() {
+    window.location.reload();
+  }
+
+</script>
+
+
 <div class="login_show_img" id="login_back"></div>
 <div class="login_box">
   <div id="div_tab1">
@@ -27,7 +41,10 @@
           </tr>
         </table>
       <%end%>
-       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用其他帐号登录
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp使用其他帐号登录&nbsp;&nbsp;
+      <a href="javascript:void(0);" onclick ="javascript:window.open('/sessions/sina_login', '_blank', 'height=500,width=800,left=200,top=100');"><%= image_tag("/images/sina.bmp")%></a>
+      &nbsp;<a href="javascript:void(0);" onclick ="javascript:window.open('/sessions/renren_login', '_blank', 'height=500,width=800,left=200,top=100');"><%= image_tag("/images/renren.bmp")%></a>
+      &nbsp;<a href="#"><%= image_tag("/images/qq.bmp")%></a>
 
     </div>
     <div class="login1">
@@ -55,3 +72,6 @@
   </div>
 </div>
 <div class="clear"></div>
+<%= @user %>
+
+

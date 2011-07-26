@@ -25,8 +25,12 @@ module Gankao
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
+
     config.time_zone ='Beijing'
     config.active_record.default_timezone = :local
+
+    Weibo::Config.api_key = "3987186573"
+    Weibo::Config.api_secret = "645c8b4c620d162d84450c9e93f79d4c"
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]

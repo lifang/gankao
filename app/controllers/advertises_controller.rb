@@ -29,7 +29,7 @@ class AdvertisesController < ApplicationController
   end
   
   def page
-
+    
   end
 
   def login

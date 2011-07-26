@@ -11,6 +11,14 @@ gem 'gravatar_image_tag', '0.1.0'
 gem 'will_paginate', '3.0.pre2'
 gem 'faker', '0.3.1'
 gem 'spreadsheet', '0.6.5.5'
+
+
+gem 'sinatra'     
+gem 'oauth'  #新浪微博使用oauth
+gem 'oauth2' #人人使用oauth2
+gem 'weibo'
+#
+#
 #gem 'prototype_legacy_helper', '0.0.0'
 
 group :development do
@@ -24,6 +32,7 @@ group :test do
   gem 'webrat', '0.7.1'
   gem 'factory_girl_rails', '1.0'
 end
+
 
 # Use unicorn as the web server
 # gem 'unicorn'
