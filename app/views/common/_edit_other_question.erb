@@ -1,0 +1,88 @@
+<!------------------------由于综合题js是按顺序读取标签，追加代码在下面追加------------------------------------>
+<input type="hidden" name="problem[correct_type]" id="problem_correct_type"
+       value="<%= edit_other_question.attributes["correct_type"].to_i %>" />
+       <% if edit_other_question.parent.parent.attributes["types"].to_i == Problem::QUESTION_TYPE[:COLLIGATION] %>
+  小题描述：
+  <textarea cols="45" rows="3" id="problem_description_<%= edit_other_question.attributes["id"] %>"
+            name="problem[description]"><%= edit_other_question.elements["description"].text if edit_other_question.elements["description"] %></textarea>
+          <% end %>
+<div class="clear"></div>
+<%  if edit_other_question.attributes["correct_type"].to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
+  <div class="title">选项：<div class="chose_add"><a href="javascript:void(0);" onClick="javascript:new_attr_edit('single_choose',<%=  edit_other_question.attributes["id"] %>);">增加选项</a></div></div>
+<% elsif edit_other_question.attributes["correct_type"].to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
+  <div class="title">选项：<div class="chose_add"><a href="javascript:void(0);" onClick="javascript:new_attr_edit('more_choose',<%=  edit_other_question.attributes["id"] %>);">增加选项</a></div></div>
+<% else %>
+  <div class="title">答案：</div>
+<% end %>
+<div class="question">
+  <div id="attrs_<%= edit_other_question.attributes["id"] %>">
+    <% attrs_str = edit_other_question.elements["questionattrs"].text %>
+    <% attrs_array = attrs_str.split(";-;") unless attrs_str.nil? %>
+    <% attrs_length = (attrs_array and attrs_array.any?) ? attrs_array.length : 0 %>
+    <input type="hidden" name="problem[attr_sum]" id="problem_attr_sum" value="<%= attrs_length %>" />
+    <% answer = edit_other_question.elements["answer"]
+    if attrs_array and attrs_array.any? %>
+      <% (1..attrs_array.length).each do |i|
+        if edit_other_question.attributes["correct_type"].to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE]
+          is_answer_flag = false
+          if !answer.nil?  and !answer.text.nil?
+            answers = answer.text.split(";|;")
+            answers.each do |a|
+              is_answer_flag = true if a == attrs_array[i-1]
+            end
+          end
+        %>
+          <div class="attr" id="attr_<%= i %>_<%= edit_other_question.attributes["id"] %>">
+            <input type="radio" name="attr_key<%= edit_other_question.attributes["id"] %>" id="problem_attr_key_<%= i %>"
+                   <% if is_answer_flag %>checked="true"<% end %> value="<%= i %>" />
+            <input type="text" name="attr<%= i %>_value<%= edit_other_question.attributes["id"] %>" id="problem_attr<%= i %>_value"
+                   class="input_style" size="15" value="<%= attrs_array[i-1] %>" />
+                   <%= link_to "删除","javascript:void(0);", :onclick=>"javascript:delete_attr_edit(#{i},#{edit_other_question.attributes["id"]})"%>
+          </div>
+        <% elsif edit_other_question.attributes["correct_type"].to_i == Problem::QUESTION_TYPE[:MORE_CHOSE]
+          is_answer_flag = false
+          if !answer.nil?  and !answer.text.nil?
+            answers = answer.text.split(";|;")
+            answers.each do |a|
+              is_answer_flag = true if a == attrs_array[i-1]
+            end
+          end
+        %>
+          <div class="attr" id="attr_<%= i %>_<%=  edit_other_question.attributes["id"] %>">
+            <input type="checkbox" name="attr<%= i %>_key<%= edit_other_question.attributes["id"] %>" id="problem_attr_key_<%= i %>"
+                   <% if is_answer_flag %>checked="true"<% end %> value="<%= i %>" />
+            <input type="text" name="attr<%= i %>_value<%= edit_other_question.attributes["id"] %>" id="problem_attr<%= i %>_value" class="input_style"
+                   size="15" value="<%= attrs_array[i-1] %>" />
+                   <%= link_to "删除","javascript:void(0);", :onclick=>"javascript:delete_attr_edit(#{i},#{edit_other_question.attributes["id"]})"%>
+          </div>
+        <% end
+      end
+    else %>
+      <% if edit_other_question.attributes["correct_type"].to_i == Problem::QUESTION_TYPE[:JUDGE] %>
+        <div class="attr">
+          <input type="radio" id="problem_attr_key" name="attr_key<%= edit_other_question.attributes["id"] %>" value="1"
+                 <% if answer and answer.text and answer.text.to_i == 1 %>checked="true"<% end %> /> 对&nbsp;&nbsp;
+          <input type="radio" id="problem_attr_key" name="attr_key<%= edit_other_question.attributes["id"] %>" value="0"
+                 <% if answer and answer.text and answer.text.to_i == 0 %>checked="true"<% end %> /> 错&nbsp;&nbsp;
+                 <%  puts "attr_key#{edit_other_question.attributes['id']}"   %>
+        </div>
+      <% else %>
+        <textarea cols="40" rows="3" id="problem_answer" name="problem[answer]"><%= answer.text %></textarea>
+      <% end
+    end %>
+  </div>
+</div>
+
+<div class="answer">
+  分值：<input type="text" class="input_style" name="problem[score]" id="problem_score"
+            value="<%= edit_other_question.attributes["score"] %>"/>
+</div>
+<div class="title">解析：<br/>
+  <% analysis = edit_other_question.elements["analysis"] %>
+  <textarea cols="45" rows="3" name="problem[analysis]" id="problem_analysis"><%= (analysis and !analysis.nil?) ? analysis.text : "" %></textarea>
+</div>
+<div class="tag">标签：<input type="text" name="tag" id="tag" class="input_style" value="<%= edit_other_question.elements["tags"].text %>" size="35"/><br/>
+  <span class="tag_input">多个标签，以“<font color="red">空格</font>”隔开</span>
+</div>
+<input type="hidden" name="problem[question_id]" id="problem_question_id"
+       value="<%= edit_other_question.attributes["id"] %>" />

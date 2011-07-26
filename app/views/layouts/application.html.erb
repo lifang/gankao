@@ -30,7 +30,7 @@
         </p>
         <%  if (cookies[:user_id]!=nil) %>
           <p class="back_welcome">
-            <%= current_user.email if current_user %> 欢迎您！
+            <%= cookies[:user_name].force_encoding('UTF-8')+"欢迎您！" if current_user %>
             <% if is_student? %>
               <%= link_to "[考试列表]", "/user/examinations" %>
             <% end %>

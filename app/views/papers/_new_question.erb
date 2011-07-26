@@ -1,0 +1,22 @@
+<div class="question_list_style_box">
+  <div class="arrow" style="top:35px;"></div>
+  <div class="question_pic_box" style="top:0px;">
+    <div class="in">
+      <%= form_for :problem ,:url => "/problems", :method => "post",
+        :html => {:onsubmit=>"return new_problem_validate(#{new_question.attributes['id']});", :class => "required-validate"} do |f| %>
+        <%= f.hidden_field :block_id ,:value=>new_question.attributes['id']  %>
+        <%= f.hidden_field :paper_id ,:value=>@xml.attributes['id']  %>
+        <input type="hidden" value="" name="real_type" id="real_type_<%= new_question.attributes['id'] %>"/>
+        <div class="title">题面：</div>
+        <input type="button" name="button" value="富文本" class="submit_btn"
+               onclick="javascript:add_area('problem_title_<%= new_question.attributes['id'] %>', this);" />
+        <%= f.text_area :title ,:cols=>"45",:rows=>"8",
+          :id=> "problem_title_#{new_question.attributes['id']}", :class=>"required textarea_style" %>
+        <div id="new_problem_<%= new_question.attributes['id'] %>">
+        </div>
+        <%= f.submit "提交" ,:class=>"submit_btn" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+

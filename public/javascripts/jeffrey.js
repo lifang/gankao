@@ -646,3 +646,9 @@ function close_ajax_notice(){
 function close_login(){
     $("login").style.display="none";
 }
+
+function   openNew()
+{
+    window.open(newWindowLocation, 'bulletin ', "scrollbars=yes,menubar=no,resizable=yes,height=400,width=400 ");
+//    return   false;
+}
