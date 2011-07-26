@@ -29,14 +29,6 @@
           <div id=""></div>
           </tr>
           <tr>
-            <td>验证码：</td>
-            <td><input class="required input_style check_w max-length-4 min-length-4" type="text" name="proof_code" id="proof_code" class="required min-length-4 max-length-4" />
-              <span  class="check_num" id="proofcode" title="看不清楚？可以点击此处换一张" onclick="<%= remote_function :update => :proofcode, :method => :get, :url => "/users/get_proof_code"  %>">
-                <%= session[:signin_code] %>
-              </span>
-            </td>
-          </tr>
-          <tr>
             <td></td>
             <td>
               <input type="submit" value="登&nbsp;&nbsp;&nbsp;&nbsp;录" class="login_btn1" />
