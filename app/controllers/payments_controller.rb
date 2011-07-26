@@ -19,7 +19,7 @@ class PaymentsController < ApplicationController
   def search_account
     @user=User.find_by_email(params["agency_account#{params[:id]}"])
     if @user
-      render :partial=>"/payments/user_info",:object=>params[:id]
+      render :partial=>"/payments/user_info"
     else
       flash[:user_info]="用户不存在，请重新输入查询条件。"
       redirect_to request.referer
