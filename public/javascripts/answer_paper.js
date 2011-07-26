@@ -32,7 +32,30 @@ function create_paper() {
         }
     }
     show_exam_time();
-    local_save_start(); 
+    local_save_start();
+    load_scroll();
+}
+
+function load_scroll() {
+    //试卷标题随页面滚动
+    var IO = document.getElementById('float_test'), Y = IO, H = 0;
+    var IE6 = window.ActiveXObject && !window.XMLHttpRequest;
+    while (Y) {
+        H += Y.offsetTop;
+        Y = Y.offsetParent;
+    }
+    if (IE6) {
+        IO.style.cssText="position:absolute;top:expression(this.fix?(document"+
+        ".documentElement.scrollTop-(this.javascript||"+H+")):0)";
+    }
+    window.onscroll = function(){
+        var d = document, s = Math.max(d.documentElement.scrollTop,document.body.scrollTop);
+        if ((s > H && IO.fix) || (s <= H && !IO.fix)) return;
+        if (!IE6) IO.style.position = IO.fix ? "" : "fixed";
+        IO.fix = !IO.fix;
+    };
+//try{ document.execCommand("BackgroundImageCache",false,true)}catch(e){};
+  
 }
 
 //添加试卷块
@@ -110,8 +133,6 @@ function create_problem(ul, problem) {
     var is_sure_input = create_element("input", "is_sure", "is_sure_" + problem.id, null, "hidden", "value");
     parent_div.appendChild(is_sure_input);
     add_save_button(parent_div, problem.id);
-    //parent_div.innerHTML += "<input type='button' name='problem_submit' class='submit_btn' id='problem_submit' onclick='javascript:generate_problem_answer(\""+ problem.id +"\", \"1\");' value='保存'/>";
-    //parent_div.innerHTML += "<input type='button' name='problem_button' class='submit_btn' id='problem_button' onclick='javascript:generate_unsure_answer(\""+ problem.id +"\", \"0\");' value='不确定？'/>";
     //追加problem的标题
     var problem_str = "<h2><a href='javascript:void(0)' onclick='javascript:question_info("+ problem.id +");'>"+ problem.title +"</a></h2>";
     problem_li.innerHTML += problem_str;
@@ -623,11 +644,13 @@ function loadxml(xmlFile) {
 function answer_xml() {
     var answer_url = $("answer_url").value;
     var xmlDom = loadxml(answer_url);
-    var questions = xmlDom.getElementsByTagName("question");
-    if (questions.length > 0) {
-        answer_hash = new Hash();
-        for(var i=0;i<questions.length;i++){
-            answer_hash[questions[i].getAttribute("id")] = [questions[i].firstChild.firstChild.nodeValue, questions[i].getAttribute("is_sure")];
+    if (xmlDom != null) {
+        var questions = xmlDom.getElementsByTagName("question");
+        if (questions.length > 0) {
+            answer_hash = new Hash();
+            for(var i=0;i<questions.length;i++){
+                answer_hash[questions[i].getAttribute("id")] = [questions[i].firstChild.firstChild.nodeValue, questions[i].getAttribute("is_sure")];
+            }
         }
     }
 }
