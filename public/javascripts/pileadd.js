@@ -1,15 +1,4 @@
-function sltall(checkstatus,checkbox){
-    var d=document.getElementsByName(checkbox);
-    var checked_ids = new Array();
-    for(var i=0; i<d.length; i++){
-        if (d[i].disabled == false) {
-            d[i].checked=checkstatus;
 
-        }
-        checked_ids.push(d[i].value);
-    }
-    document.getElementById("exam_getvalue").value = checked_ids;
-}
 function sltall_price(checkstatus,checkbox){
     var d=document.getElementsByName(checkbox);
     var number=$("number").value;
@@ -29,17 +18,6 @@ function sltall_price(checkstatus,checkbox){
     }else{
         $("exam_getvalue").innerHTML = checked_ids;
     }
-}
-function create_exam(checkbox){
-    var sles=document.getElementsByName(checkbox);
-    var checked_ids = new Array();
-    for (var i=0;i<sles.length;i++) {
-        if (sles[i].checked) {
-            checked_ids.push(sles[i].value);
-        }
-    }
-
-    document.getElementById("exam_getvalue").value = checked_ids;
 }
 function get_price(checkbox){
     var sles=document.getElementsByName(checkbox);
@@ -92,7 +70,7 @@ function check_password() {
     }
 }
 close_question_info_id=0
-function compare_value(id,compare_id){
+function compare_value(id,compare_id){alert(3);
     var check_mobile = new RegExp(/^[0-9]{1,2}$/);
     if (close_question_info_id != 0) {  //关闭查看框
         if (parseInt(compare_id)==0){
@@ -132,7 +110,9 @@ function compare_value(id,compare_id){
             }
         }
     }
+    alert(id);
     document.getElementById("question_info_"+id).style.display="block";
+    changeSize("question_info_"+id);
     close_question_info_id = id;
     active_button();
 }
@@ -362,3 +342,18 @@ function input_value(id){
         return true;
     }
 }
+
+function createDiv(){alert(1);
+   var div = document.createElement('div');
+   document.body.appendChild(div);
+   div.style.cssText = "border: 3 solid; width: 100; height: 0;overflow: hidden;";
+   changeSize(div);
+  }
+
+  function changeSize(qq){alert(1);
+   var node=$(qq);
+   node.style.pixelHeight += 1;   //这个1是每次增加的尺寸， 值越大变大的越快
+   if(node.style.pixelHeight < 100){
+    setTimeout(function(){changeSize(node);} , 5); //这个5是速度 值越大就变的越慢
+   }
+  }
