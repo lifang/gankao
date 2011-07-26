@@ -9,7 +9,7 @@ class Examination < ActiveRecord::Base
   STATUS = {:EXAMING => 0, :LOCK => 1, :GOING => 2,  :CLOSED => 3 } #考试的状态：0 考试中 1 未开始 2 进行中 3 已结束
   IS_PUBLISHED = {:NEVER => 0, :ALREADY => 1} #是否发布  0 没有 1 已经发布
 
-  default_scope :order => "examinations.created_at desc"
+  #default_scope :order => "examinations.created_at desc"
 
   #创建考试
   def update_examination(attr_hash)
@@ -96,6 +96,21 @@ class Examination < ActiveRecord::Base
     Examination.find_by_sql(sql)
   end
 
+  #判断是否能打包购买
+  def self.can_packge_by(category_id)
+    can_by = true
+    if category_id
+      examination = Examination.first(:conditions => "category_id = #{category_id.to_i}", :order => "exam_free_end_at asc")
+      can_by = false if !examination.exam_free_end_at.nil? and examination.exam_free_end_at < Time.now
+    end
+    return can_by
+  end
+
+  def is_user_in(user_id)
+    exam_user = ExamUser.where(["user_id = ? and examination_id = ?", user_id, self.id]).first
+    is_in = exam_user.nil? ? false : true
+    return is_in
+  end
 
 
 end

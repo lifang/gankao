@@ -1,7 +1,5 @@
 Gankao::Application.routes.draw do
 
-
-
   match '/signout'=> 'sessions#destroy'
   post "/sessions/create"
   resources :pages do
@@ -13,7 +11,7 @@ Gankao::Application.routes.draw do
   resources :advertises do
     collection do
       get "index"
-      post "join", "kaoshi", 'login'
+      post "join", 'login'
     end
   end
   
@@ -59,6 +57,17 @@ Gankao::Application.routes.draw do
     member do
       get "active", "user_active"
       post "update_info"
+    end
+  end
+   resources :papers do
+    collection do
+      get "new_step_one", "search_list"
+      post "create_step_one", "create_step_two", "search", "create_exam_one", "create_exam_two", "create_exam_three", "exam_list"
+      post "problem_destroy", "edit_block"
+    end
+    member do
+      get "new_step_two", "answer_paper", "create_all_paper"
+      post "change_info", "hand_in"
     end
   end
   namespace :user do

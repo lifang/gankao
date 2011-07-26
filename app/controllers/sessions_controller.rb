@@ -20,17 +20,17 @@ class SessionsController < ApplicationController
           
         redirect_to '/sessions/new'
       else
+
         if @user.status == User::STATUS[:LOCK]
           flash[:error] = "您的账号还未激活，请查找您注册邮箱的激活信进行激活"
           redirect_to '/sessions/new'
         else
           cookies[:user_id]=@user.id
           cookies[:user_name]=@user.name
-          redirect_to "/users/#{@user.id}"
+          redirect_to root_path
         end
       end
     end
-    #end
   end
 
   #退出登录

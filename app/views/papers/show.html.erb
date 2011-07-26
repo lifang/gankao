@@ -1,0 +1,44 @@
+<div id="paper_show_info">
+  <ul class="tab_biz">
+    <li class="actived"><a href="javascript:void(0);"><%= @xml.elements['base_info'].elements['title'].text %></a></li>
+  </ul>
+  <div class="soso">
+    <div>试卷编号：<%= @xml.attributes['id']%></div>
+    <div>出卷时间：<%= @xml.elements['base_info'].elements['created_at'].text%></div>
+    <div>最后修改时间：<%= @xml.elements['base_info'].elements['updated_at'].text%></div>
+    <div>总题数：<%= @xml.attributes["total_num"]%></div>
+    <div>卷面总分：<%= @xml.attributes["total_score"]%></div>
+    <div>备注：<%= @xml.elements['base_info'].elements['description'].text%></div>
+
+    <input type="submit" value="编辑试卷" class="submit_btn"
+           onclick="javascript:window.location.href='/papers/<%= @xml.root.attributes["id"] %>/new_step_two'"/>
+    <input type="submit" value="返回试卷列表" class="submit_btn" onclick="javascript:window.location.href='/papers'"/>
+  </div>
+</div>
+
+<% @xml.elements['blocks'].each_element do |block|%>
+  <h1 class="biz_art_title" id="block_show">
+    <%= block.elements['base_info'].elements['title'].text %> (共<%= block.attributes['total_num'] %>题，总分:<%= block.attributes['total_score'] %>分)
+  </h1>
+  <div class="biz_art_list_box">
+    <%= block.elements["base_info"].elements["description"].text %>
+    <ul>
+      <% if !block.elements['problems'].nil? %>
+        <% block.elements['problems'].each_element do |problem| %>
+          <% if !problem.elements['title'].nil? %>
+            <li>
+              <%= render :partial=>"/papers/question_info",:object=>problem %>
+              <h2>
+                <a href="javascript:void(0)"
+                   onclick="javascript:question_info(<%= problem.attributes["id"].to_i %>)">
+                     <%= problem.elements['title'].text.to_s.html_safe %>
+                </a>
+              </h2>
+            </li>
+          <% end %>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<div class="clear"></div>

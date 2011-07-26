@@ -1,9 +1,6 @@
 class PagesController < ApplicationController
-  #  require 'openssl'
-  #  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
-  require 'oauth2'
-  require 'net/http'
-  def index     
+
+  def index
     
   end
 

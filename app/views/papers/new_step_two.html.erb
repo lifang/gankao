@@ -1,0 +1,27 @@
+<!--<script type="text/javascript" charset="utf-8" src="/kindeditor/build/kindeditor.js"></script>-->
+<script type="text/javascript" charset="utf-8" src="/javascripts/nicEdit/nicEdit.js"></script>
+<%= javascript_include_tag 'jeff_paper_validate' %>
+<div id="paper_show_info">
+  <ul class="tab_biz">
+    <li class="actived"><a href="javascript:void(0);"><%= @xml.elements['base_info'].elements['title'].text %></a></li>
+  </ul>
+  <div class="soso">
+    <div>试卷编号：<%= @xml.attributes['id'] %></div>
+    <div>试卷类别：<%= Category.find(@xml.elements['base_info'].elements['category'].text).name %></div>
+    <div>出卷时间：<%= @xml.elements['base_info'].elements['created_at'].text %></div>
+    <div>最后修改时间：<%= @xml.elements['base_info'].elements['updated_at'].text %></div>
+    <div>总题数：<%= @xml.attributes["total_num"] %></div>
+    <div>卷面总分：<%= @xml.attributes["total_score"] %></div>
+    <div>备注：<%= @xml.elements['base_info'].elements['description'].text %></div>
+    <input type="button" value="修改基本信息" class="submit_btn" onclick="javascript:change_info()"/>
+    <input type="button" value="预览试卷" class="submit_btn" onclick="javascript:window.location.href='/papers/<%= @xml.attributes['id']%> '"/>
+    <input type="button" id="paper_js_button" value="保存试卷" class="submit_btn" onclick="javascript:save_paper_js('<%= @xml.attributes['id']%>');"/>
+    <%= image_tag "ajax-loader.gif", :id => "spinner_for_submit", :style => "display:none" %>
+  </div>
+</div>
+
+<div id="paper_edit_info" style="display:none;">
+  <%= render :partial=>"/papers/edit_paper_info" %>
+</div>
+<%= render :partial=>"/papers/paper_blocks" %>
+
