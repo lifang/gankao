@@ -13,23 +13,21 @@ class SessionsController < ApplicationController
     @user = User.find_by_email(params[:session][:email])
     if @user.nil?
       flash[:error] = "邮箱不存在"
-      redirect_to '/sessions/new'
+    elsif !@user.has_password?(params[:session][:password])
+      flash[:error] = "密码错误"
+    elsif @user.status == User::STATUS[:LOCK]
+      flash[:error] = "您的账号还未激活，请查找您注册邮箱的激活信进行激活"
     else
-      unless  @user.has_password?(params[:session][:password])
-        flash[:error] = "密码错误"
-          
-        redirect_to '/sessions/new'
-      else
-
-        if @user.status == User::STATUS[:LOCK]
-          flash[:error] = "您的账号还未激活，请查找您注册邮箱的激活信进行激活"
-          redirect_to '/sessions/new'
-        else
-          cookies[:user_id]=@user.id
-          cookies[:user_name]=@user.name
-          redirect_to root_path
-        end
-      end
+      cookies[:user_id]=@user.id
+      cookies[:user_name]=@user.name
+    end
+    if flash[:error]
+      redirect_to request.referer
+    else
+      puts request.referer
+      path = (request.referer and request.referer.to_s != "http://localhost:3000/sessions/new") ? request.referer : root_path
+      puts path
+      redirect_to path
     end
   end
 
