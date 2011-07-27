@@ -33,23 +33,24 @@ module RenrenHelper
     return res_json["renren_token"]["session_key"]
   end
 
+  #返回用户信息
   def return_user(session_key)
-    str="api_key=#{api_key}"
-    str<<"call_id=#{Time.now.to_i}"
-    str<<"format=JSON"
-    str<<"method=xiaonei.users.getInfo"
-    str<<"session_key=#{session_key}"
-    str<<"v=1.0"
-    str<<"#{api_secret}"
-    sig=Digest::MD5.hexdigest(str)
+    str = "api_key=#{api_key}"
+    str << "call_id=#{Time.now.to_i}"
+    str << "format=JSON"
+    str << "method=xiaonei.users.getInfo"
+    str << "session_key=#{session_key}"
+    str << "v=1.0"
+    str << "#{api_secret}"
+    sig = Digest::MD5.hexdigest(str)
 
-    query={:api_key=>api_key,
-      :call_id=>Time.now.to_i,
-      :format=>'JSON',
-      :method=>'xiaonei.users.getInfo',
-      :session_key=>session_key,
-      :v=>'1.0',
-      :sig=>sig
+    query = {:api_key => api_key,
+      :call_id => Time.now.to_i,
+      :format => 'JSON',
+      :method => 'xiaonei.users.getInfo',
+      :session_key => session_key,
+      :v => '1.0',
+      :sig => sig
     }
     return JSON Net::HTTP.post_form(URI.parse(URI.encode("http://api.renren.com/restserver.do")), query).body
   end
