@@ -34,7 +34,7 @@ Gankao::Application.routes.draw do
       post "search_account"
     end
     collection do
-      get "agency_recharge",:new_view
+      get "agency_recharge"
        
     end
   end
