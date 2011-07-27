@@ -35,9 +35,22 @@ class SessionsController < ApplicationController
 
   #退出登录
   def destroy
+#    cookies.each do |key,value|
+#      cookies.delete(key)
+#    end
+#    puts "================================================"
+#    session.each do |key,value|
+#     session.delete(key)
+#    end
     cookies.delete(:user_id)
     cookies.delete(:user_name)
     cookies.delete(:user_roles)
+    session.delete(:atoken)
+    session.delete(:asecret)
+    session.delete(:renren_access_token)
+    session.delete(:renren_session_key)
+    session.delete(:renren_session_secret)
+    session.delete(:renren_expires_in)
     redirect_to root_path
   end
 
@@ -84,10 +97,8 @@ class SessionsController < ApplicationController
     redirect_to "#{request_token.authorize_url}&oauth_callback=http://#{request.env["HTTP_HOST"]}/pages/sina_index"
   end
 
-  def renren_login  
-    client = OAuth2::Client.new(Constant::RENREN_API_KEY,Constant::RENREN_API_SECRET,
-      :site => {:url=>'https://graph.renren.com',:response_type=>'code'})
-    redirect_to client.web_server.authorize_url(:redirect_uri => "http://localhost:3000/pages/renren_index",:response_type=>'code')
+  def renren_login
+    rr_login "http://localhost:3000/pages/renren_index"
   end
 
 end
