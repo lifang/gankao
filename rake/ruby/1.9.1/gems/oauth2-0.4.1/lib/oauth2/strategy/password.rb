@@ -12,6 +12,7 @@ module OAuth2
       # endpoints.
       def get_access_token(username, password, options={})
         response = @client.request(:post, @client.access_token_url, access_token_params(username, password, options))
+        #response = @client.request(:get, "https://graph.renren.com/oauth/token", access_token_params(username, password, options))
 
         params   = MultiJson.decode(response) rescue nil
         # the ActiveSupport JSON parser won't cause an exception when

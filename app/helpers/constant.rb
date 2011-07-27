@@ -62,7 +62,7 @@ module Constant
 
   # 人人接口
   RENREN_API_KEY = "7f4d7bacf5b144d8940d5a8177b592b0"
-  RENREN_API_SECRET = "a1f075b9646b4354808f357623e8bac5"
+  RENREN_API_SECRET = "fe0430b144ff4cb48f1060933e1f68b0"
 
   
 end

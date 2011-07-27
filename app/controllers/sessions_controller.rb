@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
-  require 'oauth2'
-  require 'net/http'
+  
   def new
     #session[:signin_code] = proof_code(4)
   end
@@ -82,10 +81,8 @@ class SessionsController < ApplicationController
     redirect_to "#{request_token.authorize_url}&oauth_callback=http://#{request.env["HTTP_HOST"]}/pages/sina_index"
   end
 
-  def renren_login  
-    client = OAuth2::Client.new(Constant::RENREN_API_KEY,Constant::RENREN_API_SECRET,
-      :site => {:url=>'https://graph.renren.com',:response_type=>'code'})
-    redirect_to client.web_server.authorize_url(:redirect_uri => "http://localhost:3000/pages/renren_index",:response_type=>'code')
+  def renren_login
+    redirect_to client.web_server.authorize_url(:redirect_uri => RenrenHelper::CALL_BACK_URL, :response_type=>'code')
   end
 
 end

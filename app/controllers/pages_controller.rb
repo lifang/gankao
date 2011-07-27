@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-require 'uri/https'
+  
   def index
     
   end
@@ -21,28 +21,11 @@ require 'uri/https'
   end
   
   def renren_index
-    
-    client = OAuth2::Client.new(Constant::RENREN_API_KEY,Constant::RENREN_API_SECRET,
-      :site => {:url=>'https://graph.renren.com',:response_type=>'code'}, :access_token_url =>"https://graph.renren.com/oauth/token")
-    access_token = client.web_server.get_access_token(params[:code], {:redirect_uri => "http://localhost:3000/pages/renren_index"})
-    session[:renren_access_token]=access_token
-    #到了这里已经得到了access_token，我暂时把它存在session里面，方便以后使用
-   # puts URI::HTTPS.PA URI.encode("https://graph.renren.com/renren_api/session_key?oauth_token=#{session[:renren_access_token]}")
-    geturi=URI.parse(URI.encode("https://graph.renren.com/renren_api/session_key?oauth_token=#{session[:renren_access_token]}"))#获得Session Key,为调用renren api做准备
-    res=JSON Net::HTTP.get(geturi)#这里我们就得到了人人 api
-    session[:renren_session_key]= res["renren_token"]["session_key"]
-    session[:renren_expires_in]=res["renren_token"]["expires_in"]
-    session[:renren_refresh_token]=res["renren_token"]["refresh_token"]
+    access_token = return_access_token(params[:code])
+    session_key = return_session_key(access_token)
+    @user = return_user(session_key)
 
-    query={:api_key=>Constant::RENREN_API_KEY,
-      :format=>'JSON',
-      :method=>'users.getInfo',
-      :session_key=>session[:renren_session_key],
-      :v=>'1.0'
-    }#按照api组织参数
-    
-    @user=JSON Net::HTTP.post_form(URI.parse(URI.encode("http://api.renren.com/restserver.do")),query).body
-   # render :inline => "<script>window.opener.refresh();window.close();</script>"
+    puts @user
     render 'index'
   end
 

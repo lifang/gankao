@@ -1,128 +1,86 @@
-
 module RenrenHelper
-
   require 'oauth2'
   require 'net/http'
+  TOTAL_GRAPH_URL = "https://graph.renren.com"
+  GRAPH_RENREN_URL = "graph.renren.com"
+  CALL_BACK_URL = Constant::SERVER_PATH + "/pages/renren_index"
+  ACCESS_TOKEN_URL = "/oauth/token"
+  API_RENREN_URL = "http://api.renren.com/restserver.do"
+  SESSION_KEY_URL = "/renren_api/session_key"
 
   def client
-
-    OAuth2::Client.new(api_key,
-
-      api_secret,
-
-      :site => {
-
-        :url=>'https://graph.renren.com',
-
-        :response_type=>'code'})
-
-  end
-  #第一步：获取Authorization Code
-
-
-
-  def login
-
-    redirect_to client.web_server.authorize_url(
-
-      :redirect_uri => "http://localhost:3000/renren/loginnext",
-
-      :response_type=>'code'
-
-    )
-
-  end
-  #第二步：使用Authorization Code换取Access Token
-
-  def loginnext
-
-    access_token = client.web_server.get_access_token(params[:code], {:redirect_uri => "http://localhost:3000/renren/loginnext"})
-
-    session[:renren_access_token]=access_token
-
-    #到了这里已经得到了access_token，我暂时把它存在session里面，方便以后使用
-
-    geturi=URI.parse(URI.encode("http://graph.renren.com/renren_api/session_key?oauth_token=#{session[:renren_access_token]}"))#获得Session Key,为调用renren api做准备
-
-    res=JSON Net::HTTP.get(geturi)#这里我们就得到了人人 api
-
-    session[:renren_session_key]= res["renren_token"]["session_key"]
-
-    session[:renren_expires_in]=res["renren_token"]["expires_in"]
-
-    session[:renren_refresh_token]=res["renren_token"]["refresh_token"]
-
-    redirect_to "/pages"#定向到我们的应用页面
-
+    OAuth2::Client.new(api_key, api_secret,
+      :site => {:url => TOTAL_GRAPH_URL,:response_type => 'code'})
   end
 
+  #返回access_token
+  def return_access_token(code)
+    http = Net::HTTP.new(GRAPH_RENREN_URL, 443)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    res = http.get(access_token_url(code))
+    res_json = JSON res.body
+    return res_json["access_token"]
+  end
 
+  #返回session_key
+  def return_session_key(access_token)
+    http = Net::HTTP.new(GRAPH_RENREN_URL, 443)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    session_res = http.get(session_key_url(access_token))
+    res_json = JSON session_res.body
+    return res_json["renren_token"]["session_key"]
+  end
 
-  def user
-
-    session_key=session[:renren_session_key]
-
+  def return_user(session_key)
     str="api_key=#{api_key}"
-
     str<<"call_id=#{Time.now.to_i}"
-
     str<<"format=JSON"
-
     str<<"method=xiaonei.users.getInfo"
-
     str<<"session_key=#{session_key}"
-
     str<<"v=1.0"
-
-    str<<"#{api_secret}"#注意这里的str是有顺序的，具体的要求请参考［4］
-
-    sig=Digest::MD5.hexdigest(str)#生成参数sig（这是个什么东东呢，人人的解释是“ 它是由当前请求参数和secretKey的一个MD5值”）
+    str<<"#{api_secret}"
+    sig=Digest::MD5.hexdigest(str)
 
     query={:api_key=>api_key,
-
       :call_id=>Time.now.to_i,
-
       :format=>'JSON',
-
       :method=>'xiaonei.users.getInfo',
-
       :session_key=>session_key,
-
       :v=>'1.0',
-
       :sig=>sig
-
-    }#按照api组织参数
-
-    @user=JSON Net::HTTP.post_form(URI.parse(URI.encode("http://api.renren.com/restserver.do")),
-
-      query).body
-
-    #请求数据并且转换成json数据
-
+    }
+    return JSON Net::HTTP.post_form(URI.parse(URI.encode("http://api.renren.com/restserver.do")), query).body
   end
 
 
   def redirect_uri
-
     uri = URI.parse(request.url)
-
     uri.path = '/pages/renren_index'
-
     uri.query = nil
-
     uri.to_s
-
   end
 
   def api_key
-
     "7f4d7bacf5b144d8940d5a8177b592b0"
-
   end
 
   def api_secret
-    "a1f075b9646b4354808f357623e8bac5"
+    "fe0430b144ff4cb48f1060933e1f68b0"
+  end
+
+  def access_token_url(code)
+    grant_type = "grant_type=authorization_code"
+    access_code = "code=#{code}"
+    client_id = "client_id=" + api_key
+    client_secret = "client_secret=" + api_secret
+    redirect_uri = "redirect_uri=" + CALL_BACK_URL
+    return ACCESS_TOKEN_URL + "?" + grant_type + "&"+ access_code +"&" + client_id + "&"+ client_secret + "&" + redirect_uri
+  end
+
+  def session_key_url(access_token)
+    return SESSION_KEY_URL + "?oauth_token=" + access_token
   end
 
 
