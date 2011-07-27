@@ -58,7 +58,7 @@
     <% user=User.find(cookies[:user_id].to_i) %>
      邮箱：<%= user.email %><br/>
      姓名：<%= user.name %><br/>
-     工作单位：<%= user.address %>
+     工作单位：<%= user.address %><br/>
      <a href="/users/<%= user.id %>/edit" style="float:right;color:#00A8E6;font-size:80%;">修改个人信息&nbsp;&nbsp;&nbsp;</a>
     </div>
 
