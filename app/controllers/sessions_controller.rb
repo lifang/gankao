@@ -32,9 +32,22 @@ class SessionsController < ApplicationController
 
   #退出登录
   def destroy
+#    cookies.each do |key,value|
+#      cookies.delete(key)
+#    end
+#    puts "================================================"
+#    session.each do |key,value|
+#     session.delete(key)
+#    end
     cookies.delete(:user_id)
     cookies.delete(:user_name)
     cookies.delete(:user_roles)
+    session.delete(:atoken)
+    session.delete(:asecret)
+    session.delete(:renren_access_token)
+    session.delete(:renren_session_key)
+    session.delete(:renren_session_secret)
+    session.delete(:renren_expires_in)
     redirect_to root_path
   end
 

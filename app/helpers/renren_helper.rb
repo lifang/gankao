@@ -22,8 +22,8 @@ module RenrenHelper
     res_json = JSON res.body
     return res_json["access_token"]
   end
-
-  #返回session_key
+  
+  
   def return_session_key(access_token)
     http = Net::HTTP.new(GRAPH_RENREN_URL, 443)
     http.use_ssl = true
@@ -55,14 +55,6 @@ module RenrenHelper
     return JSON Net::HTTP.post_form(URI.parse(URI.encode("http://api.renren.com/restserver.do")), query).body
   end
 
-
-  def redirect_uri
-    uri = URI.parse(request.url)
-    uri.path = '/pages/renren_index'
-    uri.query = nil
-    uri.to_s
-  end
-
   def api_key
     "7f4d7bacf5b144d8940d5a8177b592b0"
   end
@@ -83,6 +75,5 @@ module RenrenHelper
   def session_key_url(access_token)
     return SESSION_KEY_URL + "?oauth_token=" + access_token
   end
-
 
 end

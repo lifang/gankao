@@ -1,5 +1,4 @@
 class PagesController < ApplicationController
-  
   def index
     
   end
@@ -19,15 +18,18 @@ class PagesController < ApplicationController
     render :inline => "<script>window.opener.refresh();window.close();</script>"
 
   end
+
   
   def renren_index
-    access_token = return_access_token(params[:code])
-    session_key = return_session_key(access_token)
-    @user = return_user(session_key)
+    user_info = return_user(return_session_key(return_access_token(params[:code])))[0]
+    @user=User.where("code_id=#{user_info["uid"].to_s} and code_type='renren'").first
+    if @user==nil
+      @user=User.create(:code_id=>user_info["uid"],:code_type=>'renren',:name=>user_info["name"],:username=>user_info["name"])
+    end
+    cookies[:user_name] = @user.name
+    cookies[:user_id]=@user.id
+    render :inline => "<script>window.opener.refresh();window.close();</script>"
 
-    puts @user
-    render 'index'
   end
-
 
 end
