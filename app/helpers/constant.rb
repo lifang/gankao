@@ -55,19 +55,4 @@ module Constant
   #代理支付
   AGENCY_COST=2
 
-
-#  # 新浪微博接口
-#  SINA_API_KEY = "3987186573"
-#  SINA_API_SECRET = "645c8b4c620d162d84450c9e93f79d4c"
-
-  # 人人接口
-  RENREN_API_KEY = "7f4d7bacf5b144d8940d5a8177b592b0"
-  RENREN_API_SECRET = "fe0430b144ff4cb48f1060933e1f68b0"
-
-
-#  # 人人接口
-#  RENREN_API_KEY = "84792db011c343bbb2ec2f431c054f12"
-#  RENREN_API_SECRET = "1ba540a351a846cdb52a3798605d2fbb"
-
-  
 end

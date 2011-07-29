@@ -1,9 +1,0 @@
-<select name="category" id="category" class="required">
-  <option value="">--请选择--</option>
-  <% Category.category_tree.each do |category| %>
-    <option value="<%= category.id %>">
-      <% (0..Category.level(category)).each do |level| %>&nbsp;<% end %><%= category.name %>   
-    </option>
-     
-  <% end if Category.category_tree.any? %>
-</select>

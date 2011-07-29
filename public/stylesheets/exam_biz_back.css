@@ -1621,6 +1621,8 @@ a:hover{
     height:29px;
     border-bottom:#8b0401 1px solid;
     margin-bottom:10px;
+/*    position:absolute;*/
+    top:0;
 }
 .tab_biz li {
     float:left;
