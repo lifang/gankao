@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   require 'oauth2'
   require 'net/http'
   def new
-    #session[:signin_code] = proof_code(4)
+    session[:signin_code] = proof_code(4)
   end
   
   def create
