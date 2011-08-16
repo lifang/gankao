@@ -7,7 +7,7 @@ class User::CollectionsController < ApplicationController
       begin
         @doc = @collection.open_xml
       rescue
-        flash[:warn] = "您的收藏数据已清空。"
+        flash[:warn] = "您暂无收藏数据。"
       end
   end
 

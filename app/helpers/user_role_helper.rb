@@ -19,6 +19,12 @@ module UserRoleHelper
     user_roles.include? Role::TYPES[:VICEGERENT].to_s
   end
 
+  def is_admin?
+    cookie_role cookies[:user_id] unless cookies[:user_roles]
+    user_roles = cookies[:user_roles].split(",")
+    user_roles.include? Role::TYPES[:SYSTEM].to_s
+  end
+
 
   #罗列当前用户的所有权限
   def cookie_role(user_id)

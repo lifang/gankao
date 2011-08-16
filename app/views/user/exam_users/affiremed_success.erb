@@ -1,19 +1,15 @@
-  
 <body onload="changepage()">
   <center>
-  
     <div class="reg_content">
-        <p class="expForLoginEmail" ><font color="red"><%= @user.name %></font>,您好<font color="blue"><%= flash[:title] %></font></p>
-        <div>
-         
+      <p class="expForLoginEmail" ><font color="red"><%= @user.name %></font>,您好<font color="blue"><%= flash[:title] %></font></p>
+      <div>
         <div  id="info" style="display:none" >
-
-         <%= form_for :user,:url=>"/user/exam_users/#{@user.id}/edit_name" do  %>
-           <input type="hidden" id="examination" name="examination" value="<%= @examination.id %>" />
-           <input type="hidden" id="exam_user" name="exam_user" value="<%= @exam_user.id %>" />
-       您的姓名：<input value="<%= @user.name %>" id="name" name="name"/>
-        </div>
-      <p class="expForLoginEmail"> <input type="submit" value="确认信息无误"  /></p>
+          <%= form_for :user,:url=>"/user/exam_users/#{@user.id}/edit_name" do  %>
+            <input type="hidden" id="examination" name="examination" value="<%= @examination.id %>" />
+            <input type="hidden" id="exam_user" name="exam_user" value="<%= @exam_user.id %>" />
+            您的姓名：<input value="<%= @user.name %>" id="name" name="name"/>
+          </div>
+          <p class="expForLoginEmail"> <input type="submit" value="确认信息无误"  /></p>
         <% end %>
       </div>
       <p class="expForLoginEmail" ><%= flash[:success] %></p>

@@ -62,7 +62,7 @@ class Examination < ActiveRecord::Base
     sql += "and e.created_at >= '#{start_at}' " unless start_at.nil?
     sql += "and e.created_at <= '#{end_at}' " unless end_at.nil?
     sql += "and e.title like '%#{title}%' " unless title.nil?
-    sql += "order by status asc, e.created_at desc "
+    sql += "order by e.status asc, e.created_at desc "
     puts sql
     return Examination.paginate_by_sql(sql, :per_page =>pre_page, :page => page)
   end
