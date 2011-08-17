@@ -8,9 +8,9 @@
 <%= form_for :paper , :url => "/user/examinations/#{@examination.id}/save_result", 
   :html => {:name => "paper_form", :id => "paper_form",
   :onsubmit => "return generate_result_paper('#{@examination.paper_id}')"} do |f| %>
-  <div id="paper_show_info">
-    <ul class="tab_biz">
-      <li class="actived"><a href="javascript:void(0);" id="paper_title"></a></li>
+  <div id="paper_show_info" style="position:relative;">
+    <ul class="tab_biz" id="float_test">
+        <li class="actived"><a href="javascript:void(0);" id="paper_title"></a></li>
     </ul>
     <div class="soso">
       <input type="hidden" name="paper_id" id="paper_id" value=""/>
@@ -47,6 +47,9 @@
          value="<%= Constant::ANSWER_CLIENT_PATH %>/<%= @examination.exam_user_id %>.xml"/>
   <div class="clear"></div>
 <% end %>
+  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <script type="text/javascript" src="/javascripts/local_save/answer.js" charset="utf-8"></script>
 <script language="javascript" type="text/javascript">
   //考试时间定时器所需变量
@@ -75,5 +78,7 @@
   //页面load成功之后加载试卷
   window.onload(load_paper());
   answer_hash = null;
+
+
 </script>
 

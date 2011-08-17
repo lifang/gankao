@@ -17,8 +17,6 @@ gem 'sinatra'
 gem 'oauth'  #新浪微博使用oauth
 gem 'oauth2' #人人使用oauth2
 gem 'weibo'
-#
-#
 #gem 'prototype_legacy_helper', '0.0.0'
 
 group :development do

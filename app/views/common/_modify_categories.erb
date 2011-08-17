@@ -1,9 +1,0 @@
-试卷分类：
-<select name="category" id="category" class="required">
-  <option value=""><%= Category.find(@xml.elements['base_info'].elements['category'].text).name %></option>
-  <% Category.category_tree.each do |category| %>
-    <option value="<%= category.id %>" <% if modify_categories.to_i == category.id %>selected="true"<% end %>>
-      <% (0..Category.level(category)).each do |level| %>&nbsp;<% end %><%= category.name %>
-    </option>
-  <% end if Category.category_tree.any? %>
-</select>
