@@ -36,7 +36,6 @@ class PagesController < ApplicationController
     cookies.each do |key,value|
       puts key.to_s+"   "+value.to_s
     end
-    puts "================================================"
     session.each do |key,value|
       puts key.to_s+"   "+value.to_s
     end

@@ -26,6 +26,11 @@ module RenrenHelper
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     res = http.get("/oauth/token?grant_type=authorization_code&code=#{params[:code]}&client_id=7f4d7bacf5b144d8940d5a8177b592b0&client_secret=fe0430b144ff4cb48f1060933e1f68b0&redirect_uri=http://localhost:3000/pages/renren_index")
     json_res=JSON res.body
+    puts "==============================================="
+    puts res.body
+    puts "==============================================="
+    puts json_res
+    puts "==============================================="
     session[:renren_access_token]=json_res["access_token"]
     #到了这里已经得到了access_token，我暂时把它存在session里面，方便以后使用
 
