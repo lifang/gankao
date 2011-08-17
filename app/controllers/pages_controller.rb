@@ -1,8 +1,4 @@
 class PagesController < ApplicationController
-  require 'oauth2'
-  require 'uri/http'
-  require 'uri/https'
-  require 'JSON'
   def index
     
   end
@@ -14,7 +10,7 @@ class PagesController < ApplicationController
     session[:atoken], session[:asecret] = oauth.access_token.token, oauth.access_token.secret
     user_info = Weibo::Base.new(oauth).verify_credentials
     @user=User.where("code_id=#{user_info[:id]} and code_type='sina'").first
-    if @user==nil
+    if @user.nil?
       @user=User.create(:code_id=>user_info[:id],:code_type=>'sina',:name=>user_info[:name],:username=>user_info[:name])
     end
     cookies[:user_name] = user_info[:name]
@@ -25,10 +21,9 @@ class PagesController < ApplicationController
 
   
   def renren_index
-    rr_connect
-    user_info = rr_user_info[0]    # rr_user_info 返回的是个只有一个元素的数组，故加上[0]
-    @user=User.where("code_id=#{user_info["uid"]} and code_type='renren'").first
-    if @user==nil
+    user_info = return_user(return_session_key(return_access_token(params[:code])))[0]
+    @user=User.where("code_id=#{user_info["uid"].to_s} and code_type='renren'").first
+    if @user.nil?
       @user=User.create(:code_id=>user_info["uid"],:code_type=>'renren',:name=>user_info["name"],:username=>user_info["name"])
     end
     cookies[:user_name] = @user.name
@@ -39,8 +34,8 @@ class PagesController < ApplicationController
     session.each do |key,value|
       puts key.to_s+"   "+value.to_s
     end
-
     render :inline => "<script>window.opener.refresh();window.close();</script>"
+
   end
 
 end

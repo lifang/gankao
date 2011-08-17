@@ -7,7 +7,7 @@ class PaymentsController < ApplicationController
 
   #打包购买
   def packed_payoff
-    @examination=Examination.find_all_by_category_id(params[:id])
+    @examination=Examination.where("category_id=#{params[:id]}")
   end
 
   #代理充值
@@ -28,6 +28,6 @@ class PaymentsController < ApplicationController
     else
       flash[:user_info]="用户不存在，请重新输入查询条件。"
     end
-    render :partial=>"/payments/user_info",:object=>params[:id]
+    render :partial=>"/payments/user_info"
   end
 end
