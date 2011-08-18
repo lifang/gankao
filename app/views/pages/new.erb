@@ -1,0 +1,6 @@
+<h1>模考列表</h1>
+<% user=User.find(cookies[:user_id].to_i) %>
+<% @examinations.each do |examination| %>
+<%= examination.name %>
+<%end%>
+<input type="button" value="开始考试" class="test" onclick="javascript:window.location.href='/pages/new '"/>

@@ -3,6 +3,9 @@ class PagesController < ApplicationController
     
   end
 
+  def new
+    @examinations=Examination.where("type=?",Examination::TYPES[:SIMULATION])
+  end
   def sina_index
     oauth = Weibo::OAuth.new(Weibo::Config.api_key, Weibo::Config.api_secret)
     oauth.authorize_from_request(session[:rtoken],session[:rsecret], params[:oauth_verifier])
