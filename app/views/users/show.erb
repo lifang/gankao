@@ -24,8 +24,8 @@
             if examination.is_submited == 1 or examination.u_total_score
               class_name = "ever"
               state_name = "已参加"
-            elsif (examination.is_free and examination.exam_free_end_at < Time.now) or
-                (!examination.start_at_time.nil? and examination.exam_time.nil? and examination.exam_time !=0 and
+            elsif (examination.is_free and examination.exam_free_end_at and examination.exam_free_end_at < Time.now) or
+                (!examination.start_at_time.nil? and !examination.exam_time.nil? and examination.exam_time !=0 and
                   (examination.start_at_time + (examination.exam_time.nil? ? 0 :examination.exam_time.minutes) < Time.now))or
                 examination.status == Examination::STATUS[:CLOSED]
               class_name = "never"
@@ -55,7 +55,7 @@
                   <% end %>
                 <% elsif examination.is_submited == 1 %>
                   批卷中...
-                <% elsif examination.is_free and examination.exam_free_end_at < Time.now %>
+                <% elsif examination.is_free and examination.exam_free_end_at and examination.exam_free_end_at < Time.now %>
                   免费考试结束
                 <% elsif !examination.start_at_time.nil? and examination.start_at_time > Time.now %>
                   等待考试开始...

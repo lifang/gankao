@@ -18,7 +18,7 @@ module RenrenHelper
     http = Net::HTTP.new(GRAPH_RENREN_URL, 443)
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    ttp.get(access_token_url(code))
+    res = http.get(access_token_url(code))
     res_json = JSON res.body
     return res_json["access_token"]
   end
