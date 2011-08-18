@@ -1,0 +1,71 @@
+<script type="text/javascript" src="/javascripts/plugin_assets/My97DatePicker/WdatePicker.js" ></script>
+<div class="main_box_back">
+  <div class="in">
+    <table>
+      <colgroup>
+        <col width="160" />
+        <col width="80" />
+        <col width="130" />
+        <col width="80" />
+        <col width="80" />
+        <col width="60" />
+        <col width="70" />
+        <col width="" />
+      </colgroup>
+      <% if @examination_lists.blank? %>
+        <tbody>
+          <tr>
+            <td align="center" colspan="8">您目前没有参加任何考试</td>
+          </tr>
+        </tbody>
+      <% else %>
+        <thead align="center">
+          <tr>
+            <th>模拟考试名称</th>
+            <th>题目总数</th>
+            <th>本场考试开始时间</th>
+            <th>考试状态</th>
+            <th>参与考试时间</th>
+            <th>成绩</th>
+            <th></th>
+          </tr>
+        </thead>
+        <% @examination_lists.each do |examination| %>
+          <tbody>
+            <tr>
+              <% exam_user=ExamUser.find_by_user_id_and_examination_id(cookies[:user_id],examination.id) %>
+              <td align="center"><%= examination.title %></td>
+              <td align="center"><%= examination.title %></td>
+              <td align="center"><%= examination.start_at_time.nil? ? "任何时候" : examination.start_at_time.strftime("%Y-%m-%d %H:%M:%S") %></td>
+              <td align="center"><%= exam_user.nil? ? "未参加":"已参加" %></td>
+              <td align="center"><%= examination.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+              <% unless exam_user.nil? %>
+                <td align="center"><%= exam_user.total_score.nil?? "批阅中":exam_user.total_score %></td>
+              <% else %>
+                <td align="center"><%= "-" %></td>
+              <% end %>
+              <td>
+                <%= examination.is_paper_open %>
+                <%if examination.is_paper_open== false%>
+                  <%= "考卷不公开" %>
+                <% else %>
+                  <% if examination.exam_password1.nil? %>
+                    <a href="/user/examinations/<%= examination.id %>/do_exam" target="_blank">开始考试</a>
+                  <% else %>
+                    <a href="/user/examinations/<%= examination.id %>/enter_password" target="_blank">开始考试</a>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          </tbody>
+        <% end %>
+      <% end %>
+    </table>
+  </div>
+</div>
+<script type="text/javascript">
+  function open_exam(examination_id) {
+    window.open("/user/examinations/" + examination_id, '赶考',
+    'fullscreen=1,menubar=0,toolbar=0,directories=0,location=0,status=0,scrollbars=1');
+  }
+</script>
