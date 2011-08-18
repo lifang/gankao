@@ -8,6 +8,14 @@ Gankao::Application.routes.draw do
     get "renren_index"
     end
   end
+   resources :exam_lists do
+     collection do
+        get :simulate_list
+     end
+     member do
+       
+     end
+   end
   resources :advertises do
     collection do
       get "index"
