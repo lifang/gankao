@@ -1,0 +1,47 @@
+<div id="item_pools_show" style="position:absolute;z-index:999;margin-left:150px;float:left;background-color:#fff;width:450px;border:#ccc solid 1px;">
+  <div class="title">
+    <div style="float:left;display: inline;width:75%;">
+      &nbsp;&nbsp;&nbsp;&nbsp;<%= question_info.elements["title"].text.to_s.html_safe %>
+    </div>
+    <% if params[:result].nil? and @exam and cookies[:user_id].to_i == @exam.user_id %>
+    <% end %>
+    <div class="clear"></div>
+  </div>
+  <% question_info.elements["questions"].each_element do |question| %>
+    <div class="question">
+      &nbsp;&nbsp;&nbsp;&nbsp;小题描述：
+      &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["description"].text if question.elements["description"] %>
+      <% attrs_str = question.elements["questionattrs"].text
+      attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
+      correct_type = question.attributes["correct_type"]
+      (0..attrs_array.length-1).each do |i|
+      %>
+        <div class="attr">
+          <% if !correct_type.nil? %>
+            <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
+              &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="question_attr_<%= question.attributes["id"].to_i %>"
+                                             id="question_attr_<%= i %>"   />
+                                           <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
+              &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>"
+                                             id="question_attr_<%= i %>" />
+                                           <% end %>
+            <label><%= attrs_array[i] %></label>
+          <% end %>
+        </div>
+      <% end if attrs_array and attrs_array.any? %>
+      <div class="attr" >
+        <% if correct_type.to_i == Problem::QUESTION_TYPE[:JUDGE] %>
+          <div >&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio"/><label>对</label></div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio"/><label>错</label></div>
+        <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] or correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER]
+        %>
+        <% end  %>
+      </div>
+    </div>
+  <div>
+    <input type="button" value="确定" />
+    <input type="button" value="跳过" />
+  </div>
+<% end %>
+</div>
+<%= draggable_element("item_pools_show", :revert => false) %>
