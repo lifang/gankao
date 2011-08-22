@@ -23,8 +23,8 @@ module Constant
   }
  
   #服务路径
-  SERVER_PATH = "http://localhost:3000"
-  BACK_SERVER_PATH = "http://localhost:3001"
+  SERVER_PATH = "http://localhost:3001"
+  BACK_SERVER_PATH = "http://localhost:3000"
   #项目文件目录
   PUBLIC_PATH = "#{Rails.root}/public"
   BACK_PUBLIC_PATH="f:/exam_app/public"

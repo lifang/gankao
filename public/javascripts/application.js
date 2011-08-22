@@ -12,3 +12,19 @@ function checkspace(checkstr){
         return false;
     }
 }
+
+function load_set_right(role_id){
+    new Ajax.Updater("set_right_div", "/users/load_set_right",
+    {
+        asynchronous:true,
+        evalScripts:true,
+        method:"post",
+        parameters:'role_id=' + role_id +'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+    });
+    return false;
+}
+
+function cancel_set_right(){
+    $("set_right_div").innerHTML="";
+    return false;
+}

@@ -1,8 +1,8 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <h4><%= @user.username %>,您好！</h4>
 欢迎使用赶考，请点击如下链接来激活您的账户：<br/>
-<a href="http://localhost:3000/users/<%= @user.id %>/user_active?active_code=<%= @user.active_code %>" target="_blank">
-  http://localhost:3000/users/<%= @user.id %>/user_active?active_code=<%= @user.active_code %>
+<a href="<%= Constant::SERVER_PATH %>/users/<%= @user.id %>/user_active?active_code=<%= @user.active_code %>" target="_blank">
+  <%= Constant::SERVER_PATH %>/users/<%= @user.id %>/user_active?active_code=<%= @user.active_code %>
 </a>
 <br/>
 如果以上链接无法点击，请将上面的地址复制到你的浏览器(如IE)的地址栏，来完成激活操作。

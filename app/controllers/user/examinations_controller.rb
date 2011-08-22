@@ -25,7 +25,10 @@ class User::ExaminationsController < ApplicationController
     arr = ExamUser.can_answer(cookies[:user_id].to_i, params[:id].to_i)
     if arr[0] == "" and arr[1].any?
       @examination = arr[1][0]
-      @exam_user = ExamUser.find_by_examination_id_and_user_id(params[:id].to_i, cookies[:user_id].to_i) 
+
+      @exam_user = ExamUser.find_by_examination_id_and_user_id(@examination.id, cookies[:user_id].to_i)
+      @exam_user = ExamUser.create(:user_id => cookies[:user_id],:examination_id => @examination.id,
+        :password => User::DEFAULT_PASSWORD, :is_user_affiremed => ExamUser::IS_USER_AFFIREMED[:YES]) if @exam_user.nil?
       @exam_user.set_paper(@examination) if @exam_user.paper_id.nil?
       if @exam_user and @exam_user.paper_id
         @paper_url = "#{Constant::PAPER_CLIENT_PATH}/#{@exam_user.paper_id}.js"
@@ -98,6 +101,30 @@ class User::ExaminationsController < ApplicationController
       flash[:warn] = "您输入的验证码不正确。"
       redirect_to "/user/examinations/#{params[:id]}/enter_password"
     end
+  end
+
+  def start_fixup_time
+    start_time = ""
+    block = PaperBlock.find(params[:id].to_i)
+    unless block.time.nil? or block.time == ""
+      if block.start_time.nil? or block.start_time == ""
+        block.start_time = Time.now
+        block.save
+        hr = block.time >= 60 ? (block.time/60).to_s + ":" + (block.time%60).to_s : "00:" + block.time.to_s
+        start_time = hr + ":00:00"
+      else
+        if (Time.now - block.start_time) > block.time * 60
+          start_time = "00:00:00:00"
+        else
+          leaving_time = (block.time - (Time.now - block.start_time)/60).round
+          hr = leaving_time >= 60 ? (leaving_time/60).to_s + ":" + (leaving_time%60).to_s : "00:" + leaving_time.to_s
+          start_time = hr + ":00:00"
+        end
+      end
+    end
+    puts "----------------------------------------"
+    puts start_time
+    render :text => start_time
   end
     
 

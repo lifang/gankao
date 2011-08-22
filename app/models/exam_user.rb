@@ -212,10 +212,11 @@ class ExamUser < ActiveRecord::Base
     end
     answer_doc.root.elements["paper"].elements["auto_score"].text = auto_score
     rate_score = answer_doc.root.elements["paper"].elements["rate_score"]
+    total_score = auto_score
     unless rate_score.text.nil? or rate_score.text == ""
-      total_score = auto_score + answer_doc.root.elements["paper"].elements["rate_score"].text.to_i
-      answer_doc.root.elements["paper"].add_attribute("score", "#{total_score}")
+      total_score += answer_doc.root.elements["paper"].elements["rate_score"].text.to_i
     end
+    answer_doc.root.elements["paper"].add_attribute("score", "#{total_score}")
     return answer_doc
   end
 

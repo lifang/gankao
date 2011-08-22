@@ -1,0 +1,21 @@
+<br/> <p><font color="blue"><b>设置代理权限</b></font>（<%= set_right.name %>）</p><hr/>
+<div>
+  <%= form_for :right ,:url=>"/users/set_right" do |f|%>
+    <%= f.hidden_field :role_id ,:value=>set_right.id %>
+    <%= f.hidden_field :right_num,:value=>@rights.size %>
+    <% num=0 %>
+    <% @rights.values.each do |right| %>
+      <% if num%5 == 0 %><div><% end %>
+        <div style="<% if set_right.model_role!=nil && (set_right.model_role.right_sum/(2**num))%2==1 %>background-color: #cff;<%end%> float: left;width:24%;">
+          <input type="checkbox" id="checkbox<%= right[1] %>"
+                 name="check_box<%= num %>" value="<%= right[1] %>" <% if set_right.model_role!=nil &&
+                     (set_right.model_role.right_sum/(2**num))%2==1 %>checked="true"<% end %>></input><%= right[0] %></div>
+        <% if num%5 == 4 %><div class="clear"></div></div><% end %>
+        <% num += 1 %>
+      <% end %>
+    <div class="clear"></div>
+    <div>
+      <%= f.submit "确认" %>&nbsp;&nbsp;&nbsp;<input type="button" value="取消" onclick="javascript:cancel_set_right();"/>
+    </div>
+  <% end %>
+</div>

@@ -38,7 +38,6 @@ class Rater::ExamRatersController < ApplicationController
       where eu.answer_sheet_url is not null and eu.examination_id = #{params[:examination_id].to_i}
       and r.exam_user_id is null order by rand() limit 1")
     unless @exam_user.blank?
-      RaterUserRelation.create(:exam_rater_id=>cookies[:rater_id],:exam_user_id=>@exam_user[0].id,:started_at=>Time.now)
       redirect_to "/rater/exam_raters/#{@exam_user[0].id}/answer_paper"
     else
       flash[:notice] = "当场考试试卷已经全部阅完。"
@@ -51,6 +50,13 @@ class Rater::ExamRatersController < ApplicationController
     doc=ExamRater.open_file(Constant::PUBLIC_PATH+@exam_user.answer_sheet_url)
     xml=ExamRater.open_file(Constant::BACK_PUBLIC_PATH+"/papers/#{doc.elements[1].attributes["id"]}.xml")
     @xml=ExamUser.answer_questions(xml,doc)
+    if @xml.attributes["ids"] == "-1"
+      flash[:notice] = "感谢您的参与，当前试卷没有需要批改的试卷。"
+      redirect_to request.referer
+    else
+      RaterUserRelation.create(:exam_rater_id => cookies[:rater_id],
+        :exam_user_id => @exam_user.id, :started_at => Time.now)
+    end
   end
 
   def over_answer #批阅完成，给答卷添加成绩
@@ -86,7 +92,7 @@ class Rater::ExamRatersController < ApplicationController
     end
     doc.elements["paper"].elements["rate_score"].text=score
     @xml=ExamRater.rater(doc,params[:id],score)
-    self.write_xml(url, @xml)
+    self.write_xml("#{Constant::PUBLIC_PATH}"+url, doc)
     redirect_to "/rater/exam_raters/#{ @exam_user.examination_id}/reader_papers"
   end
 

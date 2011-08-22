@@ -30,7 +30,7 @@
               <h2>
                 <a href="javascript:void(0)"
                    onclick="javascript:question_info(<%= problem.attributes["id"].to_i %>)">
-                     <%= problem.elements['title'].text.to_s.html_safe %>
+                     <%= truncate_u(problem.elements['title'].text.to_s.html_safe, 40) %>
                 </a>
               </h2>
             </li>
