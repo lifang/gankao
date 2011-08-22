@@ -48,8 +48,8 @@ class Rater::ExamRatersController < ApplicationController
   
   def answer_paper #批阅答卷
     @exam_user=ExamUser.find(params[:id])
-    doc=ExamRater.open_file(@exam_user.answer_sheet_url)
-    xml=ExamRater.open_file("/papers/#{doc.elements[1].attributes["id"]}.xml")
+    doc=ExamRater.open_file(Constant::PUBLIC_PATH+@exam_user.answer_sheet_url)
+    xml=ExamRater.open_file(Constant::BACK_PUBLIC_PATH+"/papers/#{doc.elements[1].attributes["id"]}.xml")
     @xml=ExamUser.answer_questions(xml,doc)
   end
 
@@ -58,16 +58,35 @@ class Rater::ExamRatersController < ApplicationController
     @exam_relation.toggle!(:is_marked)
     @exam_relation.update_attributes(:rate_time=>((Time.now-@exam_relation.started_at)/60+1).to_i)
     @exam_user=ExamUser.find(params[:id])
-    url="/result/#{params[:id]}.xml"
+    url="#{Rails.root}/public/result/#{params[:id]}.xml"
     doc=ExamRater.open_file(url)
+    xml=ExamRater.open_file(Constant::BACK_PUBLIC_PATH+"/papers/#{doc.elements[1].attributes["id"]}.xml")
     score=0
+    only_xml=ExamUser.answer_questions(xml,doc)
     doc.elements[1].elements[1].each_element do |element|
+      single_score=params["single_value_#{element.attributes["id"]}"]
+      only_xml.elements["blocks"].each_element do  |block|
+        block.elements["problems"].each_element do |problem|
+          num=0
+          problem.elements["questions"].each_element do |question|
+            if element.attributes["id"]==question.attributes["id"]
+              question.add_element("answer_agains").add_element("answer_again").add_text(element.elements["answer"].text)
+              if question.attributes["score"]!=single_score
+                num=1 
+              else
+                problem.delete_element(question.xpath)
+              end
+            end
+          end
+          @exam_user.add_collection(problem.to_s,@exam_user,problem.attributes["id"].to_i) unless problem.elements["questions"].elements[1].nil? if num==1
+        end
+      end
+      element.add_attribute("score","#{single_score}")
       score +=element.attributes["score"].to_i
-      element.add_attribute("score","#{params["single_value_#{element.attributes["id"]}"]}")
     end
     doc.elements["paper"].elements["rate_score"].text=score
-    @doc=ExamRater.rater(doc,params[:id])
-    self.write_xml("#{Constant::PUBLIC_PATH}"+url, @doc)
+    @xml=ExamRater.rater(doc,params[:id],score)
+    self.write_xml(url, @xml)
     redirect_to "/rater/exam_raters/#{ @exam_user.examination_id}/reader_papers"
   end
 

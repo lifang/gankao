@@ -43,6 +43,7 @@
   </div>
   <div id="blocks"></div>
   <div id="remote_div"></div>
+  <input type="hidden" name="types" value="<%= @examination.types %>"/>
   <input type="hidden" name="answer_url" id="answer_url"
          value="<%= Constant::ANSWER_CLIENT_PATH %>/<%= @examination.exam_user_id %>.xml"/>
   <div class="clear"></div>

@@ -1553,6 +1553,7 @@ a:hover{
 .main_box_back table tbody td{
     padding:5px;
     border:#ccc 1px solid;
+    text-align:center;
 }
 .main_box_back table a{
     color:#06F;

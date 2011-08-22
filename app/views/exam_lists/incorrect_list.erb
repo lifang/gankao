@@ -1,0 +1,16 @@
+<% @incorrect_list.elements['problems'].each_element do |problem|%>
+  <div class="biz_art_list_box">
+    <ul>
+      <li>
+        <%= render :partial=>"/exam_lists/question_with_answer",:object=>problem %>
+        <h2>
+          <a href="javascript:void(0)"
+             onclick="javascript:question_info(<%= problem.attributes["id"].to_i %>)">
+               <%= problem.elements['title'].text.to_s.html_safe %>
+          </a>
+        </h2>
+      </li>
+    </ul>
+  </div>
+<% end %>
+<div class="clear"></div>

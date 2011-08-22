@@ -1,0 +1,76 @@
+<div class="products_list_style_box" id="question_info_<%= question_with_answer.attributes["id"].to_i %>" style="display:none">
+  <div class="arrow" style="top:35px;"></div>
+  <div class="big_pic_box" style="top:0px;">
+    <div class="in">
+      <div class="title">
+        <div style="float:left;display: inline;width:75%;">
+          <%= question_with_answer.elements["title"].text.to_s.html_safe %>
+        </div>
+        <% if params[:result].nil? and @exam and cookies[:user_id].to_i == @exam.user_id %>
+        <% end %>
+        <div class="clear"></div>
+      </div>
+      <% question_with_answer.elements["questions"].each_element do |question| %>
+        <div class="question">
+          小题描述：
+          <%= question.elements["description"].text if question.elements["description"] %>
+          [<%= question.attributes["score"] %>分]
+          [<span id="user_score_<%= question.attributes["id"].to_i %>">
+            <font color="red">得<%= question.attributes["user_score"].to_i.to_s+"分" %></font>
+          </span>]
+          <% attrs_str = question.elements["questionattrs"].text
+          attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
+          correct_type = question.attributes["correct_type"]
+          answer = question.elements["answer"]
+          answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
+          question.elements["answer_agains"].each_element do |element|
+            user_answer=element.elements["user_answer"].text
+            user_answers=user_answer.nil? ? [] :  user_answer.split(";|;")
+            (0..attrs_array.length-1).each do |i|
+              is_answer = answers.include?(attrs_array[i])
+              is_user_answer=user_answers.include?(attrs_array[i])
+            %>
+              <div class="attr" <% if is_answer %>style="border: 1px green solid;"<% end %>>
+                <% if !correct_type.nil? %>
+                  <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
+                    <input type="checkbox" name="question_attr_<%= question.attributes["id"].to_i %>"
+                           id="question_attr_<%= i %>"  <% if is_user_answer %>checked="true"<% end %> />
+                         <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
+                    <input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>"
+                           id="question_attr_<%= i %>" <% if is_user_answer %>checked="true"<% end %> />
+                         <% end %>
+                  <label><%= attrs_array[i] %></label>
+                <% end %>
+              </div>
+            <% end if attrs_array and attrs_array.any? %>
+            <div class="attr" >
+              <% if correct_type.to_i == Problem::QUESTION_TYPE[:JUDGE] %>
+                <div <% if answers[0].to_i==1 %>style="border: 1px green solid;"<% end %>><input type="radio"<% if user_answer==1.to_s %>
+                                                                                                   checked="true"<% end %>  /><label>对</label></div>
+                <div <% if answers[0].to_i==0 %>style="border: 1px green solid;"<% end %>><input type="radio"  <% if user_answer==0.to_s %>
+                                                                                                   checked="true"<% end %>  /><label>错</label></div>
+                <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] or correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER]
+                %>
+                <div style="border: 1px green solid;"><%= "答案："+ answers[0].to_s %> </div>
+                <div ><font color="red"><%= "考生答案："+ user_answers[0].to_s %></font></div>
+              <% end  %>
+            </div>
+          </div>
+
+          <div class="title">解析：<br/>
+            <% analysis = question.elements["analysis"] %>
+            &nbsp;&nbsp;&nbsp;&nbsp;<%= if analysis and !analysis.nil?
+              analysis.text
+            end %>
+          </div>
+          <div class="title">知识点标签：
+            <%= question.elements["tags"].text %>
+          </div>
+          <div class="title">
+            <div id="last_score_<%=question.attributes["id"].to_i  %>"></div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

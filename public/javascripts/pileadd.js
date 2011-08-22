@@ -111,7 +111,6 @@ function compare_value(id,compare_id){
         }
     }
     document.getElementById("question_info_"+id).style.display="block";
-    changeSize("question_info_"+id);
     close_question_info_id = id;
     active_button();
 }
@@ -342,7 +341,7 @@ function input_value(id){
     }
 }
 
-function createDiv(){alert(1);
+function createDiv(){
    var div = document.createElement('div');
    document.body.appendChild(div);
    div.style.cssText = "border: 3 solid; width: 100; height: 0;overflow: hidden;";
