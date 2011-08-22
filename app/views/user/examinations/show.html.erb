@@ -42,14 +42,11 @@
     <div>试卷导航</div>
   </div>
   <div id="blocks"></div>
-  <div id="remote_div"></div>
+  <div id="remote_div" style="display:none;"></div>
   <input type="hidden" name="answer_url" id="answer_url"
          value="<%= Constant::ANSWER_CLIENT_PATH %>/<%= @examination.exam_user_id %>.xml"/>
   <div class="clear"></div>
 <% end %>
-  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <script type="text/javascript" src="/javascripts/local_save/answer.js" charset="utf-8"></script>
 <script language="javascript" type="text/javascript">
   //考试时间定时器所需变量
@@ -75,6 +72,9 @@
   //load已有的答案
   load_answer('<%= @exam_user.paper_id %>', '<%= @examination.id %>');
 
+  //定时模块完成定时器
+  var load_fix_time = null;
+  
   //页面load成功之后加载试卷
   window.onload(load_paper());
   answer_hash = null;

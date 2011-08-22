@@ -74,7 +74,7 @@ Gankao::Application.routes.draw do
   namespace :user do
     resources :examinations do
       member do
-        post "save_result", "five_min_save", "check_exam_pwd"
+        post "save_result", "five_min_save", "check_exam_pwd", "start_fixup_time"
         get "do_exam", "enter_password"
       end
       collection do
