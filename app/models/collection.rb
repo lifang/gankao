@@ -54,14 +54,6 @@ class Collection < ActiveRecord::Base
     return doc
   end
 
-  #删除试题
-  def delete_problem(problem_id, doc)
-    puts "==================="
-    puts doc.elements["/collection/problems/problem[@id='#{problem_id}']"].nil?
-    puts doc.elements["/collection/problems/problem[@id='#{problem_id}']"].to_s
-    doc.delete_element("/collection/problems/problem[@id='#{problem_id}']") if doc.elements["/collection/problems/problem[@id='#{problem_id}']"]
-    return doc
-  end
 
   #查询试题
   def search(doc, tag, category)
@@ -81,9 +73,9 @@ class Collection < ActiveRecord::Base
           end
           break if is_include
         end
-       if is_include == false
-         doc.delete_element(problem.xpath)
-       end
+        if is_include == false
+          doc.delete_element(problem.xpath)
+        end
       end
     end
     return doc

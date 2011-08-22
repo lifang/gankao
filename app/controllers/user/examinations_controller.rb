@@ -25,7 +25,6 @@ class User::ExaminationsController < ApplicationController
     arr = ExamUser.can_answer(cookies[:user_id].to_i, params[:id].to_i)
     if arr[0] == "" and arr[1].any?
       @examination = arr[1][0]
-
       @exam_user = ExamUser.find_by_examination_id_and_user_id(@examination.id, cookies[:user_id].to_i)
       @exam_user = ExamUser.create(:user_id => cookies[:user_id],:examination_id => @examination.id,
         :password => User::DEFAULT_PASSWORD, :is_user_affiremed => ExamUser::IS_USER_AFFIREMED[:YES]) if @exam_user.nil?
@@ -53,8 +52,6 @@ class User::ExaminationsController < ApplicationController
       question_ids.each do |question_id|
         question_hash[question_id] = [params["answer_" + question_id], "1"]
       end if question_ids
-      puts "==========ddd"
-      puts params[:types].to_i==Examination::TYPES[:OLD_EXAM]
       @exam_user.auto_add(@exam_user,question_hash) if params[:types].to_i==Examination::TYPES[:OLD_EXAM]
       @exam_user.generate_answer_sheet_url(@exam_user.update_answer_url(@exam_user.open_xml, question_hash), "result")
       @exam_user.submited!
