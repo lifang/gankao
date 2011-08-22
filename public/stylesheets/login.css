@@ -74,7 +74,16 @@ input, textarea, select {
     border-collapse: collapse;
     border:1px solid #000000;
 }
-
+.mokao{
+    float:left;
+    
+    margin-left:9px;
+    margin-top:30px;
+    height:300px;
+    width:130px;
+    border-collapse: collapse;
+    border:1px solid #000000;
+}
 .test_disabled{
     cursor: pointer;
     border: medium none;
@@ -95,6 +104,29 @@ input, textarea, select {
     color:white;
     font-size:125%;
     font-weight:bold;
+}
+.practice{
+    cursor: pointer;
+    border: medium none;
+    margin-left:27px;
+    padding:4px 25px 4px 25px;
+    background-color:chartreuse;
+    color:white;
+    font-size:80%;
+    font-weight:bold;
+}
+.shouye{
+    height:500px;
+    width:900px;
+    border-collapse: collapse;
+    border:1px solid #000000;
+}
+.shuzi{
+    border-collapse: collapse;
+    border:1px solid #000000;
+    margin-left:15px;
+    text-align:center;
+    width:100px;
 }
 .infor{
     float:left;

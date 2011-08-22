@@ -4,7 +4,9 @@ class PagesController < ApplicationController
   end
 
   def new
-    @examinations=Examination.where("type=?",Examination::TYPES[:SIMULATION])
+    @simulations=Examination.where("types=?",Examination::TYPES[:SIMULATION])
+    @old_exams=Examination.where("types=?",Examination::TYPES[:OLD_EXAM])
+    @practices=Examination.where("types=? or types=? or types=? or types=? or types=?",Examination::TYPES[:PRACTICE1],Examination::TYPES[:PRACTICE2],Examination::TYPES[:PRACTICE3],Examination::TYPES[:PRACTICE4],Examination::TYPES[:PRACTICE5])
   end
   def sina_index
     oauth = Weibo::OAuth.new(Weibo::Config.api_key, Weibo::Config.api_secret)
