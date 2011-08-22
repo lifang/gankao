@@ -105,5 +105,34 @@ class UsersController < ApplicationController
     render :inline => session[:register_proof_code]
   end
 
+  def roles_manage
+    @roles = Role.all
+  end
+
+  def load_set_right
+    @rights = Constant::RIGHTS
+    @role = Role.find(params[:role_id])
+    render :partial => "/users/set_right",:object =>@role
+  end
+
+  def set_right
+    @role_id=params[:right][:role_id].to_i
+    @rights_num=params[:right][:right_num].to_i
+    @right_sum=0
+    (0..@rights_num).each do |id|
+      puts params["check_box#{id}"]
+      if params["check_box#{id}"]!=nil && params["check_box#{id}"] != ""
+        @right_sum += params["check_box#{id}"].to_i
+      end
+    end
+    @model_role = ModelRole.find_by_role_id(@role_id)
+    if @model_role == nil
+      ModelRole.create(:role_id=>@role_id,:right_sum=>@right_sum)
+    else
+      @model_role.update_attributes(:right_sum=>@right_sum)
+    end
+    redirect_to request.referer
+  end
+
 end
 

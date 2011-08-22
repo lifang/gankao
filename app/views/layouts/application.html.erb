@@ -42,6 +42,9 @@
             <% if is_vicegerent? %>
               <%= link_to "[代理充值]","/payments/agency_recharge" %>
             <% end %>
+            <% if is_paper_creater? %>
+              <%= link_to "[代理权限设置]","/users/roles_manage" %>
+            <% end %>
             <a href="/combine_practices">[综合训练]</a>
             <a href="/users/<%= cookies[:user_id] %>">[个人信息]</a>
             <a href="/signout">[退出]</a>

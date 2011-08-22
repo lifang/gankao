@@ -4,8 +4,8 @@ class User::ExamUsersController < ApplicationController
   def show
     @exam=ExamUser.find_by_user_id_and_examination_id(params[:user_id],params[:id])
     begin
-    @doc=ExamRater.open_file("/result/#{@exam.id}.xml")
-    @xml=ExamUser.show_result(@exam.paper_id, @doc)
+      @doc=ExamRater.open_file("#{Constant::PUBLIC_PATH}/result/#{@exam.id}.xml")
+      @xml=ExamUser.show_result(@exam.paper_id, @doc)
     rescue
       flash[:error] = "当前考试试卷不能正常打开，请检查试卷是否正常。"
       redirect_to request.referer
@@ -39,8 +39,8 @@ class User::ExamUsersController < ApplicationController
     @exam_user=ExamUser.find_by_user_id(cookies[:user_id])
     sql = ExamUser.generate_result_sql
     sql += " and us.id=#{cookies[:user_id]}"
-    sql += " and e.start_at_time >= '#{session[:start_at]}'" unless session[:start_at].nil?
-    sql += " and e.start_at_time <= '#{session[:end_at]}'" unless session[:end_at].nil?
+    sql += " and u.started_at >= '#{session[:start_at]}'" unless session[:start_at].nil?
+    sql += " and u.started_at <= '#{session[:end_at]}'" unless session[:end_at].nil?
     sql += " and e.title like '%#{session[:title]}%'" unless session[:title].nil?
     @results = Examination.paginate_by_sql(sql, :pre_page => 10, :page => params[:page])
     render "my_results"
@@ -63,8 +63,10 @@ class User::ExamUsersController < ApplicationController
   end
   
   def index
-    @user=User.find(cookies[:exam_user_id])
-    @exam_users=ExamUser.find_by_sql("select * from exam_users e where e.user_id=#{@user.id}")
+    @exam_user=ExamUser.find_by_user_id(cookies[:exam_user_id])
+    sql = ExamUser.generate_result_sql
+    sql += " and us.id=#{cookies[:exam_user_id]} "
+    @results=Examination.paginate_by_sql(sql,:per_page =>10, :page => params[:page])
   end
   
   #考生确认
@@ -83,13 +85,12 @@ class User::ExamUsersController < ApplicationController
   end
 
   def edit_name #考生确认时修改考生姓名
-    @examination=Examination.find(params[:examination])
-    @exam_user=ExamUser.find(params[:exam_user])
+    @examination=Examination.find(params[:examination].to_i)
+    @exam_user=ExamUser.find(params[:exam_user].to_i)
     @user=User.find(params[:id])
     @exam_user.user_affiremed
-    @user.name=params[:name]
-    flash[:success]="恭喜您成功确认"
-    @exam_user.save
+    @user.name = params[:name]
+    flash[:success]="您已经成功确认。"
     @user.save
     render "/user/exam_users/affiremed_success"
   end

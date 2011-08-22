@@ -158,6 +158,19 @@ class ExamUser < ActiveRecord::Base
     return doc.to_s
   end
 
+
+  def add_collection(problem,exam_user,id)
+    if exam_user
+      collection = Collection.find_or_create_by_user_id(exam_user.user_id)
+      collection.set_collection_url
+      unless problem.nil? or problem == ""
+        puts id 
+        doc = collection.delete_problem(id, collection.open_xml)
+        doc = collection.add_problem(doc, problem)
+        collection.generate_collection_url(doc.to_s)
+      end
+    end
+  end
   def open_xml
     dir = "#{Rails.root}/public"
     url = File.open(dir + self.answer_sheet_url)
@@ -199,10 +212,11 @@ class ExamUser < ActiveRecord::Base
     end
     answer_doc.root.elements["paper"].elements["auto_score"].text = auto_score
     rate_score = answer_doc.root.elements["paper"].elements["rate_score"]
+    total_score = auto_score
     unless rate_score.text.nil? or rate_score.text == ""
-      total_score = auto_score + answer_doc.root.elements["paper"].elements["rate_score"].text.to_i
-      answer_doc.root.elements["paper"].add_attribute("score", "#{total_score}")
+      total_score += answer_doc.root.elements["paper"].elements["rate_score"].text.to_i
     end
+    answer_doc.root.elements["paper"].add_attribute("score", "#{total_score}")
     return answer_doc
   end
 
@@ -223,7 +237,7 @@ class ExamUser < ActiveRecord::Base
 
   #显示答卷
   def self.show_result(paper_id, doc)
-    @xml = ExamRater.open_file("/papers/#{paper_id}.xml")
+    @xml = ExamRater.open_file(Constant::BACK_PUBLIC_PATH+"/papers/#{paper_id}.xml")
     @xml.elements["blocks"].each_element do  |block|
       block.elements["problems"].each_element do |problem|
         problem.elements["questions"].each_element do |question|
@@ -367,4 +381,38 @@ class ExamUser < ActiveRecord::Base
     end
     return [str, examination]
   end
+
+  #计算正确率并把错误的试题加进错题集
+  def auto_add(exam_user,question_hash)
+    puts "ssssss"
+    xml=ExamRater.open_file("#{Constant::BACK_PUBLIC_PATH}/papers/#{exam_user.paper_id}.xml")
+    correct_num=0
+    question_hash.each do |key, value|
+      xml.elements["blocks"].each_element do |block|
+        block.elements["problems"].each_element do |problem|
+          num=0
+          puts num
+          problem.elements["questions"].each_element do |xml_question|
+            answer=xml_question.elements["answer"].text
+            puts key==xml_question.attributes["id"]
+            if key==xml_question.attributes["id"]
+              if answer !=value[0].strip
+                puts 'ffffffffff'
+                xml_question.add_element("answer_agains").add_element("answer_again").add_element("user_answer").add_text("#{value[0].strip}")
+               puts xml_question
+                num=1
+              else
+                puts 'ggggggggggg'
+                correct_num +=1
+              end
+            end
+          end
+          exam_user.add_collection(problem.to_s,exam_user,key) if num==1
+        end
+      end
+    end unless question_hash == {}
+    exam_user.update_attributes(:correct_percent=>correct_num)
+  end
+
+
 end

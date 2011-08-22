@@ -12,7 +12,7 @@ Gankao::Application.routes.draw do
   end
    resources :exam_lists do
      collection do
-        get :simulate_list
+        get :simulate_list,:old_exam_list,:incorrect_list
      end
      member do
        
@@ -62,7 +62,8 @@ Gankao::Application.routes.draw do
   end
   resources :users do
     collection do
-      get "get_proof_code", "get_register_code", "re_active", "active_success", "active_false"
+      get "get_proof_code", "get_register_code", "re_active", "active_success", "active_false", "roles_manage"
+      post "load_set_right","set_right"
     end
     member do
       get "active", "user_active"
@@ -83,7 +84,7 @@ Gankao::Application.routes.draw do
   namespace :user do
     resources :examinations do
       member do
-        post "save_result", "five_min_save", "check_exam_pwd"
+        post "save_result", "five_min_save", "check_exam_pwd", "start_fixup_time"
         get "do_exam", "enter_password"
       end
       collection do

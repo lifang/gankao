@@ -66,7 +66,7 @@ class Examination < ActiveRecord::Base
     sql += "and e.created_at >= '#{start_at}' " unless start_at.nil?
     sql += "and e.created_at <= '#{end_at}' " unless end_at.nil?
     sql += "and e.title like '%#{title}%' " unless title.nil?
-    sql += "order by status asc, e.created_at desc "
+    sql += "order by e.status asc, e.created_at desc "
     puts sql
     return Examination.paginate_by_sql(sql, :per_page =>pre_page, :page => page)
   end
@@ -90,12 +90,12 @@ class Examination < ActiveRecord::Base
     sql = "select e.*, eu.id exam_user_id, eu.paper_id, eu.started_at, eu.ended_at, eu.is_submited from examinations e
           left join exam_users eu on e.id = eu.examination_id
           where e.is_published = 1 and e.status != #{STATUS[:CLOSED]} "
+    sql += " and e.id = #{examination_id} " if !examination_id.nil? and examination_id != ""
     if user_id
       sql += "and ((e.status = #{STATUS[:GOING]} and eu.id is null) or eu.user_id = #{user_id}) "
     else
       sql += "and (e.status = #{STATUS[:GOING]}) "
     end
-    sql += " and e.id = #{examination_id} " if !examination_id.nil? and examination_id != ""
     sql += "order by e.created_at desc"
     Examination.find_by_sql(sql)
   end

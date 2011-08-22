@@ -13,7 +13,7 @@ class ExamRater < ActiveRecord::Base
   #  validates :email,:presence=>true,:uniqueness=>true,:format=>{:with=>email_regex},:length=>{:maximum=>50}
   #打开xml文件
   def ExamRater.open_file(url)
-    file=File.open("#{Constant::PUBLIC_PATH}"+url)
+    file=File.open(url)
     return Document.new(file).root
   end
 
@@ -44,7 +44,8 @@ class ExamRater < ActiveRecord::Base
       UserMailer.rater_affirm(exam_rater,examination).deliver
     end
   end
-  def self.rater(doc,id)
+
+  def self.rater(doc,id,score)
     unless doc.elements[1].elements["auto_score"].nil?
       auto_score=doc.elements[1].elements["auto_score"].text
       if auto_score.to_i !=0
