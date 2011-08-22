@@ -1,15 +1,13 @@
-<<<<<<< HEAD
-<?xml version='1.0' encoding='UTF-8'?>      <exam id='1'>
-        <paper id='2' score='0'>
-          <questions/>
-          <auto_score/>
-          <rate_score/>
-=======
-<?xml version='1.0' encoding='UTF-8'?>      <exam id='2'>
-        <paper id='2' score='0'>
-          <questions></questions>
-          <auto_score></auto_score>
-          <rate_score></rate_score>
->>>>>>> 4730d45588fb9b94afea6fc2514dd76e09a219fd
-        </paper>
-      </exam>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : 1.xml
+    Created on : 2011年8月22日, 上午10:21
+    Author     : admin
+    Description:
+        Purpose of the document follows.
+-->
+
+<root>
+
+</root>

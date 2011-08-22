@@ -1,15 +1,39 @@
-<table>
-   <tr>
-    <th width="200">考试名称</th>
-    <th width="150">考试开始时间</th>
-    <th width="100">考试分数</th>
-  </tr>
-  <% @exam_users.each do |user| %>
-<% examination=Examination.find(user.examination_id) %>
-  <tr>
-    <td><%= examination.title %></td>
-     <td><%= examination.start_at_time.nil? ? "无限制" :examination.start_at_time.strftime("%Y-%m-%d %H:%M:%S") %></td>
-    <td><%= user.total_score.nil? ? "未公布":user.total_score %></td>
-  </tr>
-  <% end %>
-</table>
+<div class="main_box_back">
+  <h2><span>我的成绩</span></h2>
+  <div class="in">
+    <table>
+      <colgroup>
+        <col width="230" />
+        <col width="110" />
+        <col width="160" />
+        <col width="160" />
+        <col width="130" />
+        <col width="120" />
+        <col width="" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th>试卷标题</th>
+          <th>考试分类</th>
+          <th>题目总数/试卷总分</th>
+          <th>参与考试时间</th>
+          <th>成绩</th>
+        </tr>
+      </thead>
+      <tbody id="result_list">
+        <% @results.each do |result| %>
+          <tr>
+            <td><%= result.e_title %></td>
+            <td><%= result.c_name %></td>
+            <td><%= result.total_question_num %>题/ <%= result.p_total_score %>分</td>
+            <td> <%= result.started_at.nil? ? "未参加考试":result.started_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+            <td><%= result.u_total_score==nil ? "暂无成绩" :result.u_total_score.to_s+"分" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="pagination_box">
+      <%=  will_paginate @results ,:prev_label=>"«", :next_label=>"»", :inner_window => 1 %>
+    </div>
+  </div>
+</div>

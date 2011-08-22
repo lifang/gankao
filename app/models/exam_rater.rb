@@ -44,6 +44,7 @@ class ExamRater < ActiveRecord::Base
       UserMailer.rater_affirm(exam_rater,examination).deliver
     end
   end
+  
   def self.rater(doc,id)
     unless doc.elements[1].elements["auto_score"].nil?
       auto_score=doc.elements[1].elements["auto_score"].text

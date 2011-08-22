@@ -1,0 +1,25 @@
+<div class="main_box_back">
+  <h2><span>代理权限管理</span></h2>
+  <div class="in">
+    <table>
+      <thead>
+        <tr>
+          <th>&nbsp;&nbsp;<font color="blue"><b>角色列表</b></font></th>
+          <th width="500"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @roles.find_all.each do |role| %>
+          <tr>
+            <td><%= role.name %></td>
+            <td>
+              <a href="javascript:void(0);" onclick="javascript:load_set_right(<%= role.id %>)">设置代理权限</a>
+            </td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+    <br/><br/>
+    <div id="set_right_div" name="set_right_div"></div>
+  </div>
+</div>
