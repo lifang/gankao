@@ -28,6 +28,12 @@ class PagesController < ApplicationController
     end
     cookies[:user_name] = @user.name
     cookies[:user_id]=@user.id
+    cookies.each do |key,value|
+      puts key.to_s+"   "+value.to_s
+    end
+    session.each do |key,value|
+      puts key.to_s+"   "+value.to_s
+    end
     render :inline => "<script>window.opener.refresh();window.close();</script>"
 
   end
