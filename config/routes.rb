@@ -1,5 +1,7 @@
 Gankao::Application.routes.draw do
 
+  resources :combine_practices
+
   match '/signout'=> 'sessions#destroy'
   post "/sessions/create"
   resources :pages do
