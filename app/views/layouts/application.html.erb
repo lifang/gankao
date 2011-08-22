@@ -12,6 +12,11 @@
     <%= javascript_include_tag 'jeffrey' %>
     <link href="/stylesheets/exam_biz_back.css" rel="stylesheet" />
     <link href="/stylesheets/login.css" rel="stylesheet" />
+
+    <%= javascript_include_tag 'progressbar/jquery.js' %>
+    <%= javascript_include_tag 'progressbar/jquery.progressbar.min.js' %>
+    <%= javascript_include_tag 'progressbar/jquery.progressbar.js' %>
+
   </head>
   <body>
     <div id="container">
@@ -37,9 +42,10 @@
             <% if is_vicegerent? %>
               <%= link_to "[代理充值]","/payments/agency_recharge" %>
             <% end %>
+            <a href="/combine_practices">[综合训练]</a>
             <a href="/users/<%= cookies[:user_id] %>">[个人信息]</a>
             <a href="/signout">[退出]</a>
-          <%end%>        
+          <%end%>
         </p>
       </div>
       <div id="bd">
