@@ -12,7 +12,7 @@
         <col width="70" />
         <col width="" />
       </colgroup>
-      <% if @examination_lists.blank? %>
+      <% if @old_lists.blank? %>
         <tbody>
           <tr>
             <td align="center" colspan="8">您目前没有参加任何考试</td>
@@ -23,44 +23,31 @@
           <tr>
             <th>模拟考试名称</th>
             <th>题目总数</th>
-            <th>本场考试开始时间</th>
-            <th>考试状态</th>
-            <th>参与考试时间</th>
-            <th>成绩</th>
-            <th></th>
+            <th>完成情况</th>
+            <th>练习时间</th>
+            <th>正确率</th>
+            <th>考卷</th>
           </tr>
         </thead>
-        <% @examination_lists.each do |examination| %>
+        <% @old_lists.each do |examination| %>
           <tbody>
             <tr>
               <% exam_user=ExamUser.find_by_user_id_and_examination_id(cookies[:user_id],examination.id) %>
               <td><%= examination.title %></td>
               <td><%= examination.papers[0].total_question_num.to_s+"题" %></td>
+              <td><%= exam_user.nil? ? "未完成":"已完成" %></td>
               <td><%= examination.start_at_time.nil? ? "任何时候" : examination.start_at_time.strftime("%Y-%m-%d %H:%M:%S") %></td>
-              <td><%= exam_user.nil? ? "未参加":"已参加" %></td>
-              <td><%= examination.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
               <% unless exam_user.nil? %>
-                <td><%= exam_user.total_score.nil? ? "批阅中":exam_user.total_score %></td>
+                <% percent=(100.0*(exam_user.correct_percent.to_f/examination.papers[0].total_question_num)+0.5).to_i %>
+                <td><%= percent.to_s+"%"%></td>
               <% else %>
                 <td><%= "-" %></td>
               <% end %>
               <td>
-                <%if examination.is_paper_open== false &&!exam_user.nil? %>
-                  <%= "考卷不公开" %>
+                <% unless exam_user.nil?%>
+                  <%= link_to "查看", "/user/exam_users/#{examination.id}?user_id=#{cookies[:user_id]}" %>
                 <% else %>
-                  <% unless exam_user.nil?%>
-                    <% if exam_user.total_score.nil? %>
-                      <%= "批卷中"  %>
-                    <% else %>
-                      <%= link_to "查看", "/user/exam_users/#{examination.id}?user_id=#{cookies[:user_id]}" %>
-                    <% end %>
-                  <% else %>
-                    <% if examination.exam_password1.nil? %>
-                      <a href="/user/examinations/<%= examination.id %>/do_exam" target="_blank">开始考试</a>
-                    <% else %>
-                      <a href="/user/examinations/<%= examination.id %>/enter_password" target="_blank">开始考试</a>
-                    <% end %>
-                  <% end %>
+                  <a href="/user/examinations/<%= examination.id %>/do_exam" target="_blank">开始练习</a>
                 <% end %>
               </td>
             </tr>
@@ -76,3 +63,4 @@
     'fullscreen=1,menubar=0,toolbar=0,directories=0,location=0,status=0,scrollbars=1');
   }
 </script>
+

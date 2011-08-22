@@ -1,0 +1,8 @@
+
+<?xml version='1.0' encoding='UTF-8'?>      <exam id='2'>
+        <paper id='1' score='0'>
+          <questions><question id='1' is_sure='1' score='0'><answer>C   hasn’t heard</answer></question><question id='2' is_sure='1' score='0'><answer>B   hasn’t been hearing</answer></question><question id='3' is_sure='0' score='0'><answer>A   didn’t hear;|;B   hasn’t been hearing</answer></question><question id='4' is_sure='1' score='0'><answer>what</answer></question><question id='5' is_sure='0' score='0'><answer>was</answer></question></questions>
+          <auto_score/>
+          <rate_score/>
+        </paper>
+      </exam>

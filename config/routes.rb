@@ -12,7 +12,7 @@ Gankao::Application.routes.draw do
   end
    resources :exam_lists do
      collection do
-        get :simulate_list
+        get :simulate_list,:old_exam_list,:incorrect_list
      end
      member do
        
