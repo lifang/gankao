@@ -122,8 +122,6 @@ function open_nav(block_id, block_time) {
         $("block_hidden_nav_" + block_id).style.display = "none";
         $("block_" + block_id).style.display = "block";
     }
-    
-    
 }
 
 //定时考试模块，记录模块的开始考试时间
