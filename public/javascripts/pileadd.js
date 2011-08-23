@@ -111,7 +111,6 @@ function compare_value(id,compare_id){
         }
     }
     document.getElementById("question_info_"+id).style.display="block";
-    changeSize("question_info_"+id);
     close_question_info_id = id;
     active_button();
 }
@@ -342,17 +341,14 @@ function input_value(id){
     }
 }
 
-function createDiv(){alert(1);
-   var div = document.createElement('div');
-   document.body.appendChild(div);
-   div.style.cssText = "border: 3 solid; width: 100; height: 0;overflow: hidden;";
-   changeSize(div);
-  }
+function ajax_problem_info(){
+    new Ajax.Updater("show_div" , "/exam_lists/show_problem",
+    {
+        asynchronous:true,
+        evalScripts:true,
+        method:"post",
+        parameters:'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs='        )
+    });
+    return false;
+}
 
-  function changeSize(qq){alert(1);
-   var node=$(qq);
-   node.style.pixelHeight += 1;   //这个1是每次增加的尺寸， 值越大变大的越快
-   if(node.style.pixelHeight < 100){
-    setTimeout(function(){changeSize(node);} , 5); //这个5是速度 值越大就变的越慢
-   }
-  }

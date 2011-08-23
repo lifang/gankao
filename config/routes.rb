@@ -12,7 +12,9 @@ Gankao::Application.routes.draw do
   end
    resources :exam_lists do
      collection do
-        get :simulate_list
+        get :simulate_list,:old_exam_list,:incorrect_list
+        post :feedback
+        post :show_problem
      end
      member do
        
@@ -66,7 +68,7 @@ Gankao::Application.routes.draw do
       post "load_set_right","set_right"
     end
     member do
-      get "active", "user_active"
+      get "active", "user_active","first_page"
       post "update_info"
     end
   end

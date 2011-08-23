@@ -17,6 +17,7 @@
     <%#= javascript_include_tag 'progressbar/jquery.progressbar.min.js' %>
     <%#= javascript_include_tag 'progressbar/jquery.progressbar.js' %>
 
+
   </head>
   <body>
     <div id="container">
@@ -45,6 +46,7 @@
             <% if is_paper_creater? %>
               <%= link_to "[代理权限设置]","/users/roles_manage" %>
             <% end %>
+            <a href="/users/<%= cookies[:user_id] %>/first_page">[个人首页]</a>
             <a href="/combine_practices">[综合训练]</a>
             <a href="/users/<%= cookies[:user_id] %>">[个人信息]</a>
             <a href="/signout">[退出]</a>

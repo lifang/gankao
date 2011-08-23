@@ -158,6 +158,32 @@ class ExamUser < ActiveRecord::Base
     return doc.to_s
   end
 
+
+  def add_collection(problem,exam_user,id)
+    if exam_user
+      collection = Collection.find_or_create_by_user_id(exam_user.user_id)
+      collection.set_collection_url
+      unless problem.to_s.nil? or problem.to_s == ""
+        doc=collection.open_xml
+        if doc.elements["/collection/problems/problem[@id='#{id}']"]
+          doc.elements["/collection/problems/problem[@id='#{id}']"].elements["questions"].each_element do |element|
+            problem.elements["questions"].each_element do |question_element|
+              element.elements["answer_agains"].each_element do |answer_again|
+                if element.attributes["id"]==question_element.attributes["id"]
+                  question_element.elements["answer_agains"].add_element(answer_again)
+                end
+              end
+              question_element.add_attributes("incorrect_num", question_element.elements["answer_agains"].elements.size)
+            end
+          end
+          doc.delete_element("/collection/problems/problem[@id='#{id}']")
+        end
+      end
+      doc = collection.add_problem(doc, problem.to_s)
+      collection.generate_collection_url(doc.to_s)
+    end
+  end
+
   def open_xml
     dir = "#{Rails.root}/public"
     url = File.open(dir + self.answer_sheet_url)
@@ -224,7 +250,7 @@ class ExamUser < ActiveRecord::Base
 
   #显示答卷
   def self.show_result(paper_id, doc)
-    @xml = ExamRater.open_file("#{Constant::PAPER_PATH}/papers/#{paper_id}.xml")
+    @xml = ExamRater.open_file(Constant::BACK_PUBLIC_PATH+"/papers/#{paper_id}.xml")
     @xml.elements["blocks"].each_element do  |block|
       block.elements["problems"].each_element do |problem|
         problem.elements["questions"].each_element do |question|
@@ -368,4 +394,32 @@ class ExamUser < ActiveRecord::Base
     end
     return [str, examination]
   end
+
+  #计算正确率并把错误的试题加进错题集
+  def auto_add(exam_user,question_hash)
+    xml=ExamRater.open_file("#{Constant::BACK_PUBLIC_PATH}/papers/#{exam_user.paper_id}.xml")
+    correct_num=0
+    question_hash.each do |key, value|
+      xml.elements["blocks"].each_element do |block|
+        block.elements["problems"].each_element do |problem|
+          num=0
+          problem.elements["questions"].each_element do |xml_question|
+            answer=xml_question.elements["answer"].text
+            if key==xml_question.attributes["id"]
+              if answer !=value[0].strip
+                xml_question.add_element("answer_agains").add_element("answer_again").add_element("user_answer").add_text("#{value[0].strip}")
+                num=1
+              else
+                correct_num +=1
+              end
+            end
+          end
+          exam_user.add_collection(problem,exam_user,problem.attributes["id"]) if num==1
+        end
+      end
+    end unless question_hash == {}
+    exam_user.update_attributes(:correct_percent=>correct_num)
+  end
+
+
 end

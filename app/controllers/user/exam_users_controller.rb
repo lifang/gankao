@@ -4,8 +4,8 @@ class User::ExamUsersController < ApplicationController
   def show
     @exam=ExamUser.find_by_user_id_and_examination_id(params[:user_id],params[:id])
     begin
-    @doc=ExamRater.open_file("#{Rails.root}/public/result/#{@exam.id}.xml")
-    @xml=ExamUser.show_result(@exam.paper_id, @doc)
+      @doc=ExamRater.open_file("#{Constant::PUBLIC_PATH}/result/#{@exam.id}.xml")
+      @xml=ExamUser.show_result(@exam.paper_id, @doc)
     rescue
       flash[:error] = "当前考试试卷不能正常打开，请检查试卷是否正常。"
       redirect_to request.referer
