@@ -89,10 +89,14 @@ input, textarea, select {
     margin-top:150px;
     width:128px;
 }
+.xian2{
+    border:1px solid #000000;
+    width:200px;
+}
 .cuoti{
     float:left;
     margin-left:10px;
-    
+
 }
 
 .test_disabled{
