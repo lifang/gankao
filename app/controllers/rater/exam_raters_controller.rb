@@ -47,8 +47,8 @@ class Rater::ExamRatersController < ApplicationController
   
   def answer_paper #批阅答卷
     @exam_user=ExamUser.find(params[:id])
-    doc=ExamRater.open_file(Constant::PUBLIC_PATH+@exam_user.answer_sheet_url)
-    xml=ExamRater.open_file(Constant::BACK_PUBLIC_PATH+"/papers/#{doc.elements[1].attributes["id"]}.xml")
+    doc=ExamRater.open_file(Constant::PUBLIC_PATH + @exam_user.answer_sheet_url)
+    xml=ExamRater.open_file(Constant::BACK_PUBLIC_PATH + "/papers/#{doc.elements[1].attributes["id"]}.xml")
     @xml=ExamUser.answer_questions(xml,doc)
     if @xml.attributes["ids"] == "-1"
       flash[:notice] = "感谢您的参与，当前试卷没有需要批改的试卷。"
@@ -66,7 +66,7 @@ class Rater::ExamRatersController < ApplicationController
     @exam_user=ExamUser.find(params[:id])
     url="#{Rails.root}/public/result/#{params[:id]}.xml"
     doc=ExamRater.open_file(url)
-    xml=ExamRater.open_file(Constant::BACK_PUBLIC_PATH+"/papers/#{doc.elements[1].attributes["id"]}.xml")
+    xml=ExamRater.open_file(Constant::BACK_PUBLIC_PATH + "/papers/#{doc.elements[1].attributes["id"]}.xml")
     score=0
     only_xml=ExamUser.answer_questions(xml,doc)
     doc.elements[1].elements[1].each_element do |element|
