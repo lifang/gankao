@@ -25,32 +25,32 @@
       <tbody>
         <tr>
           <td style="text-align:center">听力训练1</td>
-          <td style="text-align:center"><%= Examination.find_by_sql("select count(ex.id) count from examinations ex where types=2")[0].count %></td>
-          <td style="text-align:center"><span class="progressBar" id="spaceused1">78%</span></td>
-          <td style="text-align:center"><input type="button" style="padding:4px;" value="开始训练"/></td>
+          <td style="text-align:center"><%= count1=Examination.find_by_sql("select count(ex.id) count from examinations ex where types=2")[0].count %></td>
+          <td><span class="progressBar" id="spaceused1"><%= ((Examination.find_by_sql("select count(ex.id) count from examinations ex inner join exam_users eu on eu.examination_id=ex.id where ex.types=2 and eu.is_submited=1")[0].count*1.0/count1))*100 %> % </span></td>
+          <td style="text-align:center"><input type="button" style="padding:4px;" value="开始训练" onclick="window.location.href='/combine_practices/2/start'" /></td>
         </tr>
         <tr>
           <td  style="text-align:center">听力训练2</td>
-          <td style="text-align:center"><%= Examination.find_by_sql("select count(ex.id) count from examinations ex where types=3")[0].count %></td>
-          <td style="text-align:center"><span class="progressBar" id="spaceused2">75%</span></td>
-          <td style="text-align:center"><input type="button" style="padding:4px;" value="开始训练"/></td>
+          <td style="text-align:center"><%= count2=Examination.find_by_sql("select count(ex.id) count from examinations ex where types=3")[0].count %></td>
+          <td><span class="progressBar" id="spaceused2"><%= ((Examination.find_by_sql("select count(ex.id) count from examinations ex inner join exam_users eu on eu.examination_id=ex.id where ex.types=3 and eu.is_submited=1")[0].count*1.0/count2))*100 %> %</span></td>
+          <td style="text-align:center"><input type="button" style="padding:4px;" value="开始训练" onclick="window.location.href='/combine_practices/3/start'" /></td>
         </tr>
         <tr>
           <td  style="text-align:center">听力训练3</td>
-          <td style="text-align:center"><%= Examination.find_by_sql("select count(ex.id) count from examinations ex where types=4")[0].count %></td>
-          <td style="text-align:center"><span class="progressBar" id="spaceused3">15%</span></td>
-          <td style="text-align:center"><input type="button" style="padding:4px;" value="开始训练"/></td>
+          <td style="text-align:center"><%= count3=Examination.find_by_sql("select count(ex.id) count from examinations ex where types=4")[0].count %></td>
+          <td><span class="progressBar" id="spaceused3"><%= ((Examination.find_by_sql("select count(ex.id) count from examinations ex inner join exam_users eu on eu.examination_id=ex.id where ex.types=4 and eu.is_submited=1")[0].count*1.0/count3))*100 %> %</span></td>
+          <td style="text-align:center"><input type="button" style="padding:4px;" value="开始训练" onclick="window.location.href='/combine_practices/4/start'" /></td>
         </tr>
         <tr>
           <td style="text-align:center">听力训练4</td>
-          <td style="text-align:center"><%= Examination.find_by_sql("select count(ex.id) count from examinations ex where types=5")[0].count %></td>
-          <td style="text-align:center"><span class="progressBar" id="spaceused4">35%</span></td>
-          <td style="text-align:center"><input type="button" style="padding:4px;" value="开始训练"/></td>
+          <td style="text-align:center"><%= count4=Examination.find_by_sql("select count(ex.id) count from examinations ex where types=5")[0].count %></td>
+          <td><span class="progressBar" id="spaceused4"><%= ((Examination.find_by_sql("select count(ex.id) count from examinations ex inner join exam_users eu on eu.examination_id=ex.id where ex.types=5 and eu.is_submited=1")[0].count*1.0/count4))*100 %> %</span></td>
+          <td style="text-align:center"><input type="button" style="padding:4px;" value="开始训练" onclick="window.location.href='/combine_practices/5/start'" /></td>
         </tr>
         <tr>
           <td style="text-align:center">听力训练5</td>
-          <td style="text-align:center"><%= Examination.find_by_sql("select count(ex.id) count from examinations ex where types=6")[0].count %></td>
-          <td style="text-align:center"><span class="progressBar" id="spaceused5">95%</span></td>
+          <td style="text-align:center"><%= count5=Examination.find_by_sql("select count(ex.id) count from examinations ex where types=6")[0].count %></td>
+          <td><span class="progressBar" id="spaceused5"><%= ((Examination.find_by_sql("select count(ex.id) count from examinations ex inner join exam_users eu on eu.examination_id=ex.id where ex.types=6 and eu.is_submited=1")[0].count*1.0/count5))*100 %> %</span></td>
           <td style="text-align:center"><input type="button" style="padding:4px;" value="开始训练"/></td>
         </tr>
 
