@@ -7,6 +7,8 @@ class PagesController < ApplicationController
     @simulations=Examination.where("types=?",Examination::TYPES[:SIMULATION])
     @old_exams=Examination.where("types=?",Examination::TYPES[:OLD_EXAM])
     @practices=Examination.where("types=? or types=? or types=? or types=? or types=?",Examination::TYPES[:PRACTICE1],Examination::TYPES[:PRACTICE2],Examination::TYPES[:PRACTICE3],Examination::TYPES[:PRACTICE4],Examination::TYPES[:PRACTICE5])
+    collection_id=Collection.find_by_user_id(cookies[:user_id]).id
+    @incorrect_list=ExamRater.open_file("#{Rails.root}/public/collections/#{collection_id}.xml")
   end
   def sina_index
     oauth = Weibo::OAuth.new(Weibo::Config.api_key, Weibo::Config.api_secret)

@@ -76,14 +76,25 @@ input, textarea, select {
 }
 .mokao{
     float:left;
-    
-    margin-left:9px;
+    margin-left:70px;
     margin-top:30px;
-    height:300px;
+    height:330px;
     width:130px;
     border-collapse: collapse;
     border:1px solid #000000;
 }
+.xian{
+    border:1px solid #000000;
+    text-align:center;
+    margin-top:150px;
+    width:128px;
+}
+.cuoti{
+    float:left;
+    margin-left:10px;
+    
+}
+
 .test_disabled{
     cursor: pointer;
     border: medium none;
@@ -116,7 +127,7 @@ input, textarea, select {
     font-weight:bold;
 }
 .shouye{
-    height:500px;
+    height:400px;
     width:900px;
     border-collapse: collapse;
     border:1px solid #000000;

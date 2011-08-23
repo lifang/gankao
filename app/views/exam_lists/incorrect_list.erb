@@ -13,4 +13,32 @@
     </ul>
   </div>
 <% end %>
+&nbsp;&nbsp;&nbsp;&nbsp;请在以下输入框输入你遇到的问题：
+<div class="cuoti">
+  <%= form_for :feedback, :url=>"/exam_lists/feedback" do |f| %>
+    <div class="field">
+      <%= f.text_area :description, :size => "30" %>
+    </div>
+    <div class="actions">
+      <%= f.submit "提交问题" %>
+    </div>
+  <% end %>
+  问题列表：<br/>
+  <table>
+    <% index=0 %>
+    <% @feedbacks.each do |feedback| %>
+      <% index += 1 %>
+      <tr>
+        <td><%= index %>：<%= feedback.description %></td>
+      </tr>
+      <tr>
+        <%if feedback.answer==nil%>
+        <td><font color="red">等待回答中...</font></td>
+        <%else%>
+          <td><%= feedback.answer %></td>
+        <%end%>
+      </tr>
+    <%end%>
+  </table>
+</div>
 <div class="clear"></div>
