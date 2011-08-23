@@ -276,10 +276,11 @@ function create_problem(ul, problem, block_nav_div) {
     //add_save_button(parent_div, problem.id);
     //追加problem的标题
     var problem_str = "";
+    var clear_title = problem.title.replace(/<[^{><}]*>/gi, "");
     if (problem.title.length <= 80) {
-        problem_str = "<h2><a href='javascript:void(0)' onclick='javascript:question_info("+ problem.id +");'>"+ problem.title.substring(0, 80) +"</a></h2>";;
+        problem_str = "<h2><a href='javascript:void(0)' onclick='javascript:question_info("+ problem.id +");'>"+ clear_title.substring(0, 80) +"</a></h2>";;
     } else {
-        problem_str = "<h2><a href='javascript:void(0)' onclick='javascript:question_info("+ problem.id +");'>"+ problem.title.substring(0, 80) +"......</a></h2>";;
+        problem_str = "<h2><a href='javascript:void(0)' onclick='javascript:question_info("+ problem.id +");'>"+ clear_title.substring(0, 80) +"......</a></h2>";;
     }
     problem_li.innerHTML += problem_str;
     $("problem_ids").value += "" + problem.id + ",";

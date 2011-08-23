@@ -105,6 +105,9 @@ Gankao::Application.routes.draw do
         post "edit_score","edit_name"
       end
     end
+    resources :notes do
+      
+    end
   end
   # The priority is based upon order of creation:
   # first created -> highest priority.

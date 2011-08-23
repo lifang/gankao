@@ -352,3 +352,7 @@ function ajax_problem_info(){
     return false;
 }
 
+function start_note(question_id) {
+    
+}
+
