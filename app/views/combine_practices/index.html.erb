@@ -51,7 +51,7 @@
           <td style="text-align:center">听力训练5</td>
           <td style="text-align:center"><%= count5=Examination.find_by_sql("select count(ex.id) count from examinations ex where types=6")[0].count %></td>
           <td><span class="progressBar" id="spaceused5"><%= ((Examination.find_by_sql("select count(ex.id) count from examinations ex inner join exam_users eu on eu.examination_id=ex.id where ex.types=6 and eu.is_submited=1")[0].count*1.0/count5))*100 %> %</span></td>
-          <td style="text-align:center"><input type="button" style="padding:4px;" value="开始训练"/></td>
+          <td style="text-align:center"><input type="button" style="padding:4px;" value="开始训练" onclick="window.location.href='/combine_practices/6/start'"/></td>
         </tr>
 
       </tbody>

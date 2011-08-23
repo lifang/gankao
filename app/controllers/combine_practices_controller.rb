@@ -6,7 +6,7 @@ class CombinePracticesController < ApplicationController
 
   def start
 
-    if ExamUser.find_by_sql("select count(ex.id) count from examinations ex inner join exam_users eu on eu.examination_id=ex.id where ex.types in (2,3,4,5,6)")[0].count<5
+    if ExamUser.find_by_sql("select count(ex.id) count from examinations ex inner join exam_users eu on eu.examination_id=ex.id where ex.types in (2,3,4,5,6)")[0].count<=5
     user_examinations=Examination.find_by_sql("select ex.id,eu.is_submited from examinations ex left join exam_users eu on ex.id=eu.examination_id where ex.types=#{params[:id].to_i} and eu.user_id=#{cookies[:user_id]}")
     already_join=[]
     got=0
