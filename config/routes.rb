@@ -14,6 +14,7 @@ Gankao::Application.routes.draw do
      collection do
         get :simulate_list,:old_exam_list,:incorrect_list
         post :feedback
+        post :show_problem
      end
      member do
        
