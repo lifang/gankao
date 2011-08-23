@@ -28,7 +28,7 @@ module Constant
   #项目文件目录
   PUBLIC_PATH = "#{Rails.root}/public"
   #试卷生成路径
-  PAPER_PATH = "#{PUBLIC_PATH}/papers"
+  PAPER_PATH = "E:/exam_app/public"
   #试卷服务器访问路径
   PAPER_URL_PATH = SERVER_PATH + "/papers"
   #客户端访问试卷

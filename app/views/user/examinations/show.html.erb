@@ -10,7 +10,7 @@
   :onsubmit => "return generate_result_paper('#{@examination.paper_id}')"} do |f| %>
   <div id="paper_show_info" style="position:relative;">
     <ul class="tab_biz" id="float_test">
-        <li class="actived"><a href="javascript:void(0);" id="paper_title"></a></li>
+      <li class="actived"><a href="javascript:void(0);" id="paper_title"></a></li>
     </ul>
     <div class="soso">
       <input type="hidden" name="paper_id" id="paper_id" value=""/>
@@ -41,7 +41,9 @@
   <div class="soso" id="paper_navigation">
     <div>试卷导航</div>
   </div>
-  <div id="blocks"></div>
+  <div id="blocks">
+    <div id="block_ids" style="display:none;"></div>
+  </div>
   <div id="remote_div" style="display:none;"></div>
   <input type="hidden" name="answer_url" id="answer_url"
          value="<%= Constant::ANSWER_CLIENT_PATH %>/<%= @examination.exam_user_id %>.xml"/>

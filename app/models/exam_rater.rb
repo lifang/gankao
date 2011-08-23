@@ -13,7 +13,7 @@ class ExamRater < ActiveRecord::Base
   #  validates :email,:presence=>true,:uniqueness=>true,:format=>{:with=>email_regex},:length=>{:maximum=>50}
   #打开xml文件
   def ExamRater.open_file(url)
-    file=File.open("#{Constant::PUBLIC_PATH}"+url)
+    file=File.open(url)
     return Document.new(file).root
   end
 

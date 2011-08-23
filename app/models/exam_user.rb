@@ -224,7 +224,7 @@ class ExamUser < ActiveRecord::Base
 
   #显示答卷
   def self.show_result(paper_id, doc)
-    @xml = ExamRater.open_file("/papers/#{paper_id}.xml")
+    @xml = ExamRater.open_file("#{Constant::PAPER_PATH}/papers/#{paper_id}.xml")
     @xml.elements["blocks"].each_element do  |block|
       block.elements["problems"].each_element do |problem|
         problem.elements["questions"].each_element do |question|
@@ -312,7 +312,7 @@ class ExamUser < ActiveRecord::Base
 
   #编辑考分
   def self.edit_scores(user_id,id,score)
-    url="/result/#{user_id}.xml"
+    url="#{Constant::PUBLIC_PATH}/result/#{user_id}.xml"
     doc=ExamRater.open_file(url)
     doc.elements["paper"].elements["questions"].each_element do |question|
       if question.attributes["id"]==id
