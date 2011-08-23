@@ -338,7 +338,7 @@ class ExamUser < ActiveRecord::Base
 
   #编辑考分
   def self.edit_scores(user_id,id,score)
-    url="/result/#{user_id}.xml"
+    url="#{Constant::PUBLIC_PATH}/result/#{user_id}.xml"
     doc=ExamRater.open_file(url)
     doc.elements["paper"].elements["questions"].each_element do |question|
       if question.attributes["id"]==id
