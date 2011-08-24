@@ -1,22 +1,25 @@
 <div class="shouye">
   <div class="mokao" >
     模考列表<br/>
+    <% if @simulations.blank? %>
+      <p style="font-size:120%;color:red;font-weight: bold;margin-left: 20px;margin-top: 80px;">当前没有模考...</p>
+    <%else%>
+      <% index=0 %>
       <% @simulations.each do |simulation| %>
         <tr>
+          <%index += 1%>
           <% exam_user=ExamUser.find_by_user_id_and_examination_id(cookies[:user_id],simulation.id) %>
-          <td><%= simulation.title %></td>
+          <td>&nbsp;模考<%= index %>:<%= simulation.title %></td>
           <% if exam_user ==nil %>
             <td><input type="button" value="开始考试" class="practice" onclick="javascript:window.location.href='/user/examinations/<%= simulation.id %>/do_exam'"/></td>
+          <%elsif exam_user.total_score.nil?%>
+            <td><p style="font-size:70%;color:red;font-weight: bold;margin-left: 80px;">阅卷中...</p></td>
           <%else%>
-            <% unless exam_user.total_score.nil?%>
-              <td><%= exam_user.total_score %></td>
-            <%else%>
-              <td><input type="button" value="开始考试" class="practice" onclick="javascript:window.location.href='/user/examinations/<%= simulation.id %>/do_exam'"/></td>
-            <%end%>
+            <td><p style="font-size:80%;margin-left: 40px;">得分：<%= exam_user.total_score %></p>分</td>
           <%end%>
         </tr>
       <%end%>
-
+    <%end%>
   </div>
   <div class="mokao" >
     真题练习<br/>
@@ -36,7 +39,10 @@
     信心指数
     <div class="xian">
     </div>
-    错题训练：您当前有<%=  @incorrect_list.elements['problems'].elements.size %>题<br/>
-    <td><input type="button" value="开始训练" class="practice" onclick="javascript:window.location.href='/exam_lists/incorrect_list'"/></td>
+
+    错题训练：<br/>
+    <% if @incorrect_list==nil %><font color="red">您当前没有错题</font><%else%>您当前有<%= @incorrect_list.elements['problems'].elements.size %>题<br/>
+      <td><input type="button" value="开始训练" class="practice" onclick="javascript:window.location.href='/exam_lists/incorrect_list'"/></td>
+      <%end%>
   </div>
 </div>
