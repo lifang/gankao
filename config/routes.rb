@@ -106,7 +106,9 @@ Gankao::Application.routes.draw do
       end
     end
     resources :notes do
-      
+      member do
+        post "create_note", "load_note"
+      end
     end
   end
   # The priority is based upon order of creation:

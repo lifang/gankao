@@ -1,3 +1,57 @@
-<?xml version='1.0' encoding='UTF-8'?>      <note id='1'>
-        <problems></problems>
-      </note>
+<?xml version='1.0' encoding='UTF-8'?>
+<note id='1'>
+    <problems>
+        <problem id='4' score='10' types='4'>
+            <title>______ ______ your name? </title>
+            <category>3</category>
+            <complete_title>[[what|where;why;when||名称]] [[is|are;was;were||助词]] your name? [{常用搭配,|常用搭配}][(5,|5)]</complete_title>
+            <questions>
+                <question correct_type='0' id='4' score='5'>
+                    <answer>what</answer>
+                    <analysis>常用搭配</analysis>
+                    <questionattrs>what;-;where;-;why;-;when</questionattrs>
+                    <tags>名称</tags>
+                    <user_answer>what</user_answer>
+                    <note_text>111111</note_text>
+                </question><question correct_type='0' id='5' score='5'>
+                            <answer>is</answer>
+                            <analysis>常用搭配</analysis>
+                            <questionattrs>is;-;are;-;was;-;were</questionattrs>
+                            <tags>助词</tags>
+                        <user_answer>was</user_answer><note_text>222223333</note_text></question></questions>
+        </problem>
+    <problem id='3' score='5' types='1'>
+                    <title>Until then, his family ________ from him for six months.</title>
+                    <category>3</category>
+                    <questions>
+                        <question correct_type='1' id='3' score='5'>
+                            <answer>D   hadn’t heard</answer>
+                            <analysis>直到刚才，表明从“刚才”以后我有他的消息了，表示过去我没有他的消息，所以用 “hadn&apos;t heard”</analysis>
+                            <questionattrs>A   didn’t hear;-;B   hasn’t been hearing;-;C   hasn’t heard;-;D   hadn’t heard</questionattrs>
+                            <tags>过去时</tags>
+                        <user_answer>A   didn’t hear;|;B   hasn’t been hearing</user_answer><note_text>weweqqq</note_text></question>
+                    </questions>
+                </problem><problem id='1' score='5' types='0'>
+                    <title>Until then, his family ________ from him for six months.</title>
+                    <category>3</category>
+                    <questions>
+                        <question correct_type='0' id='1' score='5'>
+                            <answer>D   hadn’t heard</answer>
+                            <analysis>直到刚才，表明从“刚才”以后我有他的消息了，表示过去我没有他的消息，所以用 “hadn&apos;t heard”</analysis>
+                            <questionattrs>A   didn’t hear;-;B   hasn’t been hearing;-;C   hasn’t heard;-;D   hadn’t heard</questionattrs>
+                            <tags>过去时</tags>
+                        <user_answer>A   didn’t hear</user_answer><note_text>qwqwqw</note_text></question>
+                    </questions>
+                </problem><problem id='2' score='5' types='0'>
+                    <title>Until then, his family ________ from him for six months.</title>
+                    <category>3</category>
+                    <questions>
+                        <question correct_type='0' id='2' score='5'>
+                            <answer>D   hadn’t heard</answer>
+                            <analysis>直到刚才，表明从“刚才”以后我有他的消息了，表示过去我没有他的消息，所以用 “hadn&apos;t heard”</analysis>
+                            <questionattrs>A   didn’t hear;-;B   hasn’t been hearing;-;C   hasn’t heard;-;D   hadn’t heard</questionattrs>
+                            <tags>过去时</tags>
+                        <user_answer>C   hasn’t heard</user_answer><note_text>asdfafertret</note_text></question>
+                    </questions>
+                </problem></problems>
+</note>
