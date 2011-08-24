@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <collection id='1'>
     <problems>
-        <problem id='60' incorrect_num='3' score='20' types='0'>
+        <problem delete_status='0' id='60' incorrect_num='3' score='20' types='0'>
             <title>jjkkgfgff</title>
             <category>2</category>
             <questions>
@@ -21,7 +21,7 @@
                 </question>
             </questions>
         </problem>
-         <problem id='65' incorrect_num='3' score='20' types='0'>
+         <problem delete_status='0' id='65' incorrect_num='3' score='20' types='0'>
             <title>jjkkgfgff</title>
             <category>2</category>
             <questions>
@@ -41,7 +41,7 @@
                 </question>
             </questions>
         </problem>
-        <problem id='62' incorrect_num='3' score='15' types='1'>
+        <problem delete_status='0' id='62' incorrect_num='3' score='15' types='1'>
             <title>多的地方</title>
             <category>1</category>
             <questions>
