@@ -1,0 +1,5 @@
+<textarea id="note_text_<%= show_note_div[1] %>"
+          name="note_text_<%= show_note_div[1] %>" rows="4" cols="45" class="required"><%= show_note_div[0] %></textarea>
+<input type="submit" name="note" value="提交" class="submit_btn"/>
+<input type="button" name="reset" value="取消" class="submit_btn"
+       onclick="javascript:cancel_note(<%= show_note_div[1] %>);"/>

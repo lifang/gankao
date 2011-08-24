@@ -352,7 +352,22 @@ function ajax_problem_info(){
     return false;
 }
 
-function start_note(question_id) {
-    
+function start_note(question_id, problem_id, examination_id, paper_id) {
+    $("start_note_" + question_id).style.display = "block";
+    $("note_" + question_id).style.display = "none";
+    new Ajax.Updater("start_note_" + question_id , "/user/notes/"+question_id+"/load_note",
+    {
+        asynchronous:true,
+        evalScripts:true,
+        method:"post",
+        parameters:'problem_id='+problem_id+'&examination_id='+examination_id+'&paper_id='+paper_id+'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+    });
+    return false;
+}
+
+function cancel_note(question_id) {
+    $("start_note_" + question_id).style.display = "none";
+    $("note_" + question_id).style.display = "block";
+    $("note_text_" + question_id).value = "";
 }
 

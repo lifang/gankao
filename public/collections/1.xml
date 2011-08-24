@@ -1,3 +1,39 @@
-<?xml version='1.0' encoding='UTF-8'?>      <collection id='1'>
-        <problems><problem id='1' score='5' types='0'><title>sxdsdf</title><category>1</category><questions><question correct_type='0' id='1' score='5'><answer>asdasd</answer><analysis/><questionattrs>asdasd;-;fgfg;-;sdf;-;hghh</questionattrs><tags/><answer_agains><answer_again><user_answer>fgfg</user_answer></answer_again></answer_agains></question></questions></problem><problem id='2' score='4' types='0'><title>阿斯达岁的</title><category>1</category><questions><question correct_type='0' id='2' score='4'><answer>阿斯达斯</answer><analysis/><questionattrs>阿斯达斯;-;对方答复;-;高峰过后;-;会更好</questionattrs><tags/><answer_agains><answer_again><user_answer>高峰过后</user_answer></answer_again></answer_agains></question></questions></problem></problems>
-      </collection>
+<?xml version='1.0' encoding='UTF-8'?>
+<collection id='1'>
+    <problems>
+        <problem id='1' score='5' types='0'>
+            <title>sxdsdf</title>
+            <category>1</category>
+            <questions>
+                <question correct_type='0' id='1' score='5'>
+                    <answer>asdasd</answer>
+                    <analysis/>
+                    <questionattrs>asdasd;-;fgfg;-;sdf;-;hghh</questionattrs>
+                    <tags/>
+                    <answer_agains>
+                        <answer_again>
+                            <user_answer>fgfg</user_answer>
+                        </answer_again>
+                    </answer_agains>
+                </question>
+            </questions>
+        </problem>
+        <problem id='2' score='4' types='0'>
+            <title>阿斯达岁的</title>
+            <category>1</category>
+            <questions>
+                <question correct_type='0' id='2' score='4'>
+                    <answer>阿斯达斯</answer>
+                    <analysis/>
+                    <questionattrs>阿斯达斯;-;对方答复;-;高峰过后;-;会更好</questionattrs>
+                    <tags/>
+                    <answer_agains>
+                        <answer_again>
+                            <user_answer>高峰过后</user_answer>
+                        </answer_again>
+                    </answer_agains>
+                </question>
+            </questions>
+        </problem>
+    </problems>
+</collection>
