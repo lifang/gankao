@@ -347,8 +347,71 @@ function ajax_problem_info(){
         asynchronous:true,
         evalScripts:true,
         method:"post",
-        parameters:'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs='        )
+        parameters:'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
     });
     return false;
+}
+
+function next_problem_info(){
+    var num=$("num").value;
+    if (num==""||num.length==0){
+        alert("错题已完！");
+        return false;
+    }
+    else{
+        new Ajax.Updater("show_div" , "/exam_lists/next_problem",
+        {
+            asynchronous:true,
+            evalScripts:true,
+            method:"post",
+            parameters:'num='+ num +'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+        });
+        return false;
+    }
+}
+
+
+function problem_values(){
+    var num=$("num").value;
+    var question_ids=$("question_ids").value;
+    var problem_num=$("problem_id").value;
+    var ids=question_ids.split(",");
+    var  str=""
+    for(i=0;i<ids.length;i++){
+        question_values(ids[i]);
+        str +=('answer_'+ids[i]+'='+$("answer_" + ids[i]).value)+'&';
+    }
+    new Ajax.Updater("item_pools_show" , "/exam_lists/compare_answer",
+    {
+        asynchronous:true,
+        evalScripts:true,
+        method:"post",
+        parameters: str+'problem_id='+problem_num+'&question_ids='+question_ids +'&num='+num +'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+    });
+    return false;
+}
+
+function question_values(question_id) {
+    $("answer_" + question_id).value = "";
+    var correct_type = $("question_type_" + question_id).value;
+    if (correct_type == "0" || correct_type == "1" || correct_type == "2") {
+        var attr = document.getElementsByName("question_attr_" + question_id);
+        if (attr != null) {
+            for (var i=0; i<attr.length; i++) {
+                if (attr[i].checked == true) {
+                    if ($("answer_" + question_id).value == "") {
+                        $("answer_" + question_id).value = attr[i].value;
+                    } else {
+                        $("answer_" + question_id).value += ";|;" + attr[i].value;
+                    }
+                }
+            }
+        }
+    } else {
+        var answer = $("question_answer_" + question_id);
+        if (answer != null && !checkspace(answer.value)) {
+            $("answer_" + question_id).value = answer.value;
+        }
+    }
 }
 

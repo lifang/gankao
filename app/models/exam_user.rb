@@ -173,7 +173,7 @@ class ExamUser < ActiveRecord::Base
                   question_element.elements["answer_agains"].add_element(answer_again)
                 end
               end
-              question_element.add_attributes("incorrect_num", question_element.elements["answer_agains"].elements.size)
+              problem.add_attribute("incorrect_num", "#{question_element.elements["answer_agains"].elements.size}")
             end
           end
           doc.delete_element("/collection/problems/problem[@id='#{id}']")

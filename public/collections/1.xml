@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <collection id='1'>
     <problems>
-        <problem id='61' score='0' types='0'>
+        <problem id='61' incorrect_num='4' score='0' types='0'>
             <title>得得得</title>
             <category>1</category>
             <questions>
@@ -20,22 +20,65 @@
                         <answer_again>
                             <user_answer/>
                         </answer_again>
+                        <answer_again>
+                            <user_answer/>
+                        </answer_again>
                     </answer_agains>
                 </question>
             </questions>
         </problem>
-        <problem id='62' score='15' types='1'>
+        <problem id='60' incorrect_num='3' score='20' types='0'>
+            <title>jjkkgfgff</title>
+            <category>2</category>
+            <questions>
+                <question correct_type='0' id='73' score='20'>
+                    <answer>ee</answer>
+                    <analysis>sdsdd</analysis>
+                    <questionattrs>ee;-;eww;-;ddd;-;sss</questionattrs>
+                    <tags>12 13 45</tags>
+                    <answer_agains>
+                        <answer_again>
+                            <user_answer>sss</user_answer>
+                        </answer_again>
+                        <answer_again>
+                            <user_answer>sss</user_answer>
+                        </answer_again>
+                    <answer_again><user_answer>ddd</user_answer></answer_again></answer_agains>
+                </question>
+            </questions>
+        </problem>
+         <problem id='65' incorrect_num='3' score='20' types='0'>
+            <title>jjkkgfgff</title>
+            <category>2</category>
+            <questions>
+                <question correct_type='0' id='73' score='20'>
+                    <answer>ee</answer>
+                    <analysis>sdsdd</analysis>
+                    <questionattrs>ee;-;eww;-;ddd;-;sss</questionattrs>
+                    <tags>12 13 45</tags>
+                    <answer_agains>
+                        <answer_again>
+                            <user_answer>sss</user_answer>
+                        </answer_again>
+                        <answer_again>
+                            <user_answer>sss</user_answer>
+                        </answer_again>
+                    <answer_again><user_answer>ddd</user_answer></answer_again></answer_agains>
+                </question>
+            </questions>
+        </problem>
+        <problem id='62' incorrect_num='3' score='15' types='1'>
             <title>多的地方</title>
             <category>1</category>
             <questions>
-                <question correct_type='1' id='75' score='15'>
+                <question correct_percent='25%' correct_type='1' id='75' is_sure='25.0' score='15'>
                     <answer>的发v;|;吃饱饱</answer>
                     <analysis/>
                     <questionattrs>的发v;-;腹股沟;-;达到;-;吃饱饱</questionattrs>
                     <tags/>
                     <answer_agains>
                         <answer_again>
-                            <user_answer></user_answer>
+                            <user_answer/>
                         </answer_again>
                         <answer_again>
                             <user_answer/>
@@ -47,5 +90,6 @@
                 </question>
             </questions>
         </problem>
+        
     </problems>
 </collection>

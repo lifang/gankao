@@ -18,7 +18,7 @@
               <% end%>
             </span>
           </h1>
-            <%= render :partial=>"/exam_lists/question_with_answer",:object=>problem %>
+          <%= render :partial=>"/exam_lists/question_with_answer",:object=>problem %>
         </li>
       </ul>
       <% n +=1 %>
@@ -27,4 +27,5 @@
 </div>
 <div id="show_div"></div>
 <div class="clear"></div>
-<a onclick="javascript(0)" href="javascript:ajax_problem_info()">开始复习</a>
+<%= @num %>
+<input type="button" onclick="javascript:ajax_problem_info()" value="开始复习"  />
