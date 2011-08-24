@@ -1,4 +1,16 @@
 class ExamListsController < ApplicationController
+
+
+  def  list
+    lists=Collection.find_by_user_id(cookies[:user_id]).open_xml
+    lists.elements["/collection/problems"].each_element do |problem|
+      if problem.attributes["delete_status"].to_i==1
+        lists.elements["/collection/problems"].delete_element(problem.xpath)
+      end
+    end
+    return lists
+  end
+  
   def simulate_list
     @examination_lists=Examination.where("types=?",Examination::TYPES[:SIMULATION])
   end
@@ -6,7 +18,7 @@ class ExamListsController < ApplicationController
     @old_lists=Examination.where("types=?",Examination::TYPES[:OLD_EXAM])
   end
   def incorrect_list
-    @incorrect_list=Collection.find_by_user_id(cookies[:user_id]).open_xml
+    @lists=list
     @feedbacks=Feedback.find_by_sql("select * from feedbacks where user_id=#{cookies[:user_id]}")
   end
   def feedback
@@ -14,7 +26,7 @@ class ExamListsController < ApplicationController
     if @feedback.save
       redirect_to "/exam_lists/incorrect_list"
     end
-    @incorrect_list=Collection.find_by_user_id(cookies[:user_id]).open_xml
+    @lists=list
   end
 
   def show_problem
@@ -22,7 +34,9 @@ class ExamListsController < ApplicationController
     hash={}
     hash1={}
     doc.elements["/collection/problems"].each_element do |problem|
-      hash["#{problem.attributes["id"]}"]=problem.attributes["incorrect_num"]
+      if problem.attributes["delete_status"].to_i==0 
+        hash["#{problem.attributes["id"]}"]=problem.attributes["incorrect_num"]
+      end
     end
     hash.each do |key,value|
       if hash1["#{value}"].nil?
@@ -74,6 +88,21 @@ class ExamListsController < ApplicationController
     doc=collection.open_xml
     @xml=doc.elements["/collection/problems/problem[@id='#{problem_id}']"]
     render :partial=>"/exam_lists/question_answer",:object=>@xml
+  end
+  
+  def delete_problem
+    collection=Collection.find_by_user_id(cookies[:user_id])
+    doc=collection.open_xml
+    doc.elements["/collection/problems/problem[@id='#{params[:id]}']"].attributes["delete_status"]=1
+    self.write_xml("#{Constant::PUBLIC_PATH}#{collection.collection_url}", doc)
+    @lists=collection.open_xml
+    @lists.elements["/collection/problems"].each_element do |problem|
+      if problem.attributes["delete_status"].to_i==1
+        @lists.elements["/collection/problems"].delete_element(problem.xpath)
+      end
+    end
+    @feedbacks=Feedback.find_by_sql("select * from feedbacks where user_id=#{cookies[:user_id]}")
+    render "/exam_lists/incorrect_list"
   end
 
 end

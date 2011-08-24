@@ -8,7 +8,7 @@
     <div class="clear"></div>
   </div>
   <% attr="" %>
-    <% question_info.elements["questions"].each_element do |question| %>
+  <% question_info.elements["questions"].each_element do |question| %>
       <% attr +=question.attributes["id"]+"," %>
       <div id="show_problem">
         <div class="question">
@@ -51,7 +51,7 @@
           <input type="button" value="跳过" onclick="javascript:next_problem_info()" />
         </div>
       </div>
-    <% end %>
-    <input type="hidden" value="<%= attr.chop %>" id="question_ids" name="question_ids" />
+  <% end %>
+  <input type="hidden" value="<%= attr.chop %>" id="question_ids" name="question_ids" />
 </div>
 <%= draggable_element("item_pools_show", :revert => false) %>

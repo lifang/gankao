@@ -341,7 +341,8 @@ function input_value(id){
     }
 }
 
-function ajax_problem_info(){alert(1);
+function ajax_problem_info(){
+    alert(1);
     new Ajax.Updater("show_div" , "/exam_lists/show_problem",
     {
         asynchronous:true,
@@ -427,9 +428,21 @@ function question_values(question_id) {
         }
     }
 }
-    function cancel_note(question_id) {
-        $("start_note_" + question_id).style.display = "none";
-        $("note_" + question_id).style.display = "block";
-        $("note_text_" + question_id).value = "";
-    }
 
+function cancel_note(question_id) {
+    $("start_note_" + question_id).style.display = "none";
+    $("note_" + question_id).style.display = "block";
+    $("note_text_" + question_id).value = "";
+}
+
+function delete_problems(id){
+    alert(id);
+    new Ajax.Updater("problems" , "/exam_lists/delete_problem",
+    {
+        asynchronous:true,
+        evalScripts:true,
+        method:"post",
+        parameters:'id='+ id +'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+    });
+    return false;
+}
