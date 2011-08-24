@@ -171,8 +171,6 @@ class ExamUser < ActiveRecord::Base
               element.elements["answer_agains"].each_element do |answer_again|
                 if element.attributes["id"]==question_element.attributes["id"]
                   question_element.elements["answer_agains"].add_element(answer_again)
-                else
-                  problem.elements["questions"].add_element(element)
                 end
               end
               problem.add_attribute("incorrect_num", "#{question_element.elements["answer_agains"].elements.size}")
