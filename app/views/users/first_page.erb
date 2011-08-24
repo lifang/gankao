@@ -1,0 +1,48 @@
+<div class="shouye">
+  <div class="mokao" >
+    模考列表<br/>
+    <% if @simulations.blank? %>
+      <p style="font-size:120%;color:red;font-weight: bold;margin-left: 20px;margin-top: 80px;">当前没有模考...</p>
+    <%else%>
+      <% index=0 %>
+      <% @simulations.each do |simulation| %>
+        <tr>
+          <%index += 1%>
+          <% exam_user=ExamUser.find_by_user_id_and_examination_id(cookies[:user_id],simulation.id) %>
+          <td>&nbsp;模考<%= index %>:<%= simulation.title %></td>
+          <% if exam_user ==nil %>
+            <td><input type="button" value="开始考试" class="practice" onclick="javascript:window.location.href='/user/examinations/<%= simulation.id %>/do_exam'"/></td>
+          <%elsif exam_user.total_score.nil?%>
+            <td><p style="font-size:70%;color:red;font-weight: bold;margin-left: 80px;">阅卷中...</p></td>
+          <%else%>
+            <td><p style="font-size:80%;margin-left: 40px;">得分：<%= exam_user.total_score %></p>分</td>
+          <%end%>
+        </tr>
+      <%end%>
+    <%end%>
+  </div>
+  <div class="mokao" >
+    真题练习<br/>
+    <div class="shuzi">
+      <%= ExamUser.find_by_sql("select count(ex.id) sum from exam_users ex inner join examinations eu on ex.examination_id=eu.id where ex.is_submited=1 and eu.types=1 and ex.user_id='#{cookies[:user_id]}'" )[0].sum %>/<%=@old_exams.size %>
+    </div>
+    <td><input type="button" value="开始练习" class="practice" onclick="javascript:window.location.href='/pages/new'"/></td>
+  </div>
+  <div class="mokao" >
+    综合训练<br/>
+    <div class="shuzi">
+      <%= ExamUser.find_by_sql("select count(ex.id) sum from exam_users ex inner join examinations eu on ex.examination_id=eu.id where ex.is_submited=1 and (eu.types=2 or eu.types=3 or eu.types=4 or eu.types=5 or eu.types=6) and ex.user_id='#{cookies[:user_id]}'")[0].sum %>/<%=@practices.size %>
+    </div>
+    <td><input type="button" value="开始训练" class="practice" onclick="javascript:window.location.href='/pages/new'"/></td>
+  </div>
+  <div class="mokao" >
+    信心指数
+    <div class="xian">
+    </div>
+
+    错题训练：<br/>
+    <% if @incorrect_list==nil %><font color="red">您当前没有错题</font><%else%>您当前有<%= @incorrect_list.elements['problems'].elements.size %>题<br/>
+      <td><input type="button" value="开始训练" class="practice" onclick="javascript:window.location.href='/exam_lists/incorrect_list'"/></td>
+      <%end%>
+  </div>
+</div>

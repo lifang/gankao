@@ -338,7 +338,7 @@ class ExamUser < ActiveRecord::Base
 
   #编辑考分
   def self.edit_scores(user_id,id,score)
-    url="/result/#{user_id}.xml"
+    url="#{Constant::PUBLIC_PATH}/result/#{user_id}.xml"
     doc=ExamRater.open_file(url)
     doc.elements["paper"].elements["questions"].each_element do |question|
       if question.attributes["id"]==id
@@ -419,6 +419,12 @@ class ExamUser < ActiveRecord::Base
       end
     end unless question_hash == {}
     exam_user.update_attributes(:correct_percent=>correct_num)
+  end
+
+  #返回用户当前提点的答案
+  def return_question_answer(question_id)
+    doc = ExamRater.open_file("#{Constant::PUBLIC_PATH}#{self.answer_sheet_url}")
+    return doc.elements["/exam/paper/questions/question[@id='#{question_id}']/answer"]
   end
 
 

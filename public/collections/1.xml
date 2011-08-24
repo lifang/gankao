@@ -1,24 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <collection id='1'>
     <problems>
-        <problem id='61' incorrect_num='4' score='0' types='0'>
-            <title>得得得</title>
             <category>1</category>
             <questions>
-                <question correct_type='0' id='74' score='0'>
-                    <answer>草草草</answer>
+                <question correct_type='0' id='1' score='5'>
+                    <answer>asdasd</answer>
                     <analysis/>
-                    <questionattrs>凤飞飞;-;凤飞飞是;-;草草草;-;车次查询</questionattrs>
+                    <questionattrs>asdasd;-;fgfg;-;sdf;-;hghh</questionattrs>
                     <tags/>
                     <answer_agains>
                         <answer_again>
-                            <user_answer>凤飞飞</user_answer>
-                        </answer_again>
-                        <answer_again>
-                            <user_answer/>
-                        </answer_again>
-                        <answer_again>
-                            <user_answer/>
+                            <user_answer>fgfg</user_answer>
                         </answer_again>
                         <answer_again>
                             <user_answer/>
@@ -74,7 +66,7 @@
                 <question correct_percent='25%' correct_type='1' id='75' is_sure='25.0' score='15'>
                     <answer>的发v;|;吃饱饱</answer>
                     <analysis/>
-                    <questionattrs>的发v;-;腹股沟;-;达到;-;吃饱饱</questionattrs>
+                    <questionattrs>阿斯达斯;-;对方答复;-;高峰过后;-;会更好</questionattrs>
                     <tags/>
                     <answer_agains>
                         <answer_again>
@@ -85,6 +77,7 @@
                         </answer_again>
                         <answer_again>
                             <user_answer/>
+                            <user_answer>高峰过后</user_answer>
                         </answer_again>
                     </answer_agains>
                 </question>

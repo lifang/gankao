@@ -1,7 +1,9 @@
-<?xml version='1.0' encoding='UTF-8'?>      <exam id='54'>
-        <paper id='23' score='0'>
-          <questions><question id='74' is_sure='1' score='0'><answer>凤飞飞</answer></question><question id='75' is_sure='1' score='0'><answer></answer></question></questions>
-          <auto_score/>
-          <rate_score/>
-        </paper>
-      </exam>
+<?xml version='1.0' encoding='UTF-8'?>
+<exam id='2'>
+    <paper id='1' score='5'>
+        <questions>
+        <question id='1' is_sure='1' score='0'><answer>A   didn’t hear</answer></question><question id='2' is_sure='1' score='0'><answer>C   hasn’t heard</answer></question><question id='3' is_sure='1' score='0'><answer>A   didn’t hear;|;B   hasn’t been hearing</answer></question><question id='4' is_sure='1' score='5'><answer>what</answer></question><question id='5' is_sure='1' score='0'><answer>was</answer></question></questions>
+        <auto_score>5</auto_score>
+        <rate_score/>
+    </paper>
+</exam>

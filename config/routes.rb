@@ -14,6 +14,7 @@ Gankao::Application.routes.draw do
      collection do
         get :simulate_list,:old_exam_list,:incorrect_list
         post :show_problem,:next_problem,:compare_answer
+        post :feedback
      end
      member do
        
@@ -67,7 +68,7 @@ Gankao::Application.routes.draw do
       post "load_set_right","set_right"
     end
     member do
-      get "active", "user_active"
+      get "active", "user_active","first_page"
       post "update_info"
     end
   end
@@ -102,6 +103,11 @@ Gankao::Application.routes.draw do
         get "my_results"
         get "exam_user_affiremed"
         post "edit_score","edit_name"
+      end
+    end
+    resources :notes do
+      member do
+        post "create_note", "load_note"
       end
     end
   end

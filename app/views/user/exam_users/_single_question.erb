@@ -3,22 +3,29 @@
   <div class="big_pic_box" style="top:0px;">
     <div class="in">
       <div class="title">
-        <div style="float:left;display: inline;width:75%;">
+        <div>
           <%= single_question.elements["title"].text.to_s.html_safe %>
         </div>
         <% if params[:result].nil? and @exam and cookies[:user_id].to_i == @exam.user_id %>
-        <div style="float:left;display: inline;width:24%;">
-          <%= form_remote_tag :method => "post", :update => "collection_div",
-          :url => "/user/collections?paper_id=#{@doc.attributes["id"]}&examination_id=#{@doc.elements["paper"].attributes["id"]}&problem_id=#{single_question.attributes["id"]}" do -%>
-          <input type="hidden" name="problem_content_<%= single_question.attributes["id"] %>" value="<%= single_question.to_s %>" />
-          <input type="submit" name="collection" id="collection" value="收藏" class="submit_btn" />
-          <% end -%>
-        </div>
         <% end %>
         <div class="clear"></div>
       </div>
       <% single_question.elements["questions"].each_element do |question| %>
         <%= render :partial => "/user/exam_users/question_with_answer", :object => question %>
+        <div>
+          <%= form_remote_tag :method => "post",
+          :url => "/user/notes/#{question.attributes["id"]}/create_note?paper_id=#{@doc.attributes["id"]}&examination_id=#{@doc.elements["paper"].attributes["id"]}&problem_id=#{single_question.attributes["id"]}" do -%>
+          <input type="button" name="note_<%= question.attributes["id"] %>" id="note_<%= question.attributes["id"] %>"
+                 value="记笔记" class="submit_btn" 
+                 onclick="javascript:start_note(<%= question.attributes["id"] %>, <%= single_question.attributes["id"] %>, <%= @doc.elements["paper"].attributes["id"] %>, <%= @doc.attributes["id"] %>);" />
+          <input type="hidden" id="p_xpath_<%= question.attributes["id"] %>"
+                 name="p_xpath_<%= question.attributes["id"] %>" value="<%= single_question.xpath %>" />
+          <input type="hidden" id="q_xpath_<%= question.attributes["id"] %>"
+                 name="q_xpath_<%= question.attributes["id"] %>" value="<%= question.xpath %>"/>
+          <div id="start_note_<%= question.attributes["id"] %>" style="display:none;">
+          </div>
+          <% end -%>
+        </div>
       <% end %>
     </div>
   </div>

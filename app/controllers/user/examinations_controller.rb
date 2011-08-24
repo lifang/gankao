@@ -119,8 +119,6 @@ class User::ExaminationsController < ApplicationController
         end
       end
     end
-    puts "----------------------------------------"
-    puts start_time
     render :text => start_time
   end
     
