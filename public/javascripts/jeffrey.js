@@ -652,3 +652,28 @@ function   openNew()
     window.open(newWindowLocation, 'bulletin ', "scrollbars=yes,menubar=no,resizable=yes,height=400,width=400 ");
 //    return   false;
 }
+
+
+//默认每个音频可以播放3次
+function audio_play(id){
+    if(getCookie("audio_"+id)==null){
+        setCookie(("audio_"+id),0)
+    }
+
+    if(getCookie("audio_"+id)<3){
+        if($("audio_"+id).paused){
+            $("audio_"+id).play();
+            if(id!="x"){
+                setCookie(("audio_"+id),parseInt(getCookie("audio_"+id))+1)
+                $("audio_control_"+id).disabled=true
+            }
+        }
+        else{
+            $("audio_"+id).pause();
+        }
+    }
+    else{
+        $("audio_"+id).pause();
+        alert("该录音已经播放了3次！不能再播放！");
+    }
+}
