@@ -52,7 +52,15 @@
                     <% if exam_user.total_score.nil? %>
                       <%= "批卷中"  %>
                     <% else %>
-                      <%= link_to "查看", "/user/exam_users/#{examination.id}?user_id=#{cookies[:user_id]}" %>
+                      <% if exam_user.is_sumited==0 %>
+                        <% if examination.exam_password1.nil? %>
+                          <a href="/user/examinations/<%= examination.id %>/do_exam" target="_blank">开始考试</a>
+                        <% else %>
+                          <a href="/user/examinations/<%= examination.id %>/enter_password" target="_blank">开始考试</a>
+                        <% end %>
+                      <% else %>
+                        <%= link_to "查看", "/user/exam_users/#{examination.id}?user_id=#{cookies[:user_id]}" %>
+                      <% end %>
                     <% end %>
                   <% else %>
                     <% if examination.exam_password1.nil? %>
