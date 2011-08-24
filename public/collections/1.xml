@@ -1,24 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <collection id='1'>
     <problems>
-            <category>1</category>
-            <questions>
-                <question correct_type='0' id='1' score='5'>
-                    <answer>asdasd</answer>
-                    <analysis/>
-                    <questionattrs>asdasd;-;fgfg;-;sdf;-;hghh</questionattrs>
-                    <tags/>
-                    <answer_agains>
-                        <answer_again>
-                            <user_answer>fgfg</user_answer>
-                        </answer_again>
-                        <answer_again>
-                            <user_answer/>
-                        </answer_again>
-                    </answer_agains>
-                </question>
-            </questions>
-        </problem>
         <problem id='60' incorrect_num='3' score='20' types='0'>
             <title>jjkkgfgff</title>
             <category>2</category>

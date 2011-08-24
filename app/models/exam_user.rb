@@ -171,6 +171,8 @@ class ExamUser < ActiveRecord::Base
               element.elements["answer_agains"].each_element do |answer_again|
                 if element.attributes["id"]==question_element.attributes["id"]
                   question_element.elements["answer_agains"].add_element(answer_again)
+                else
+                  problem.elements["questions"].add_element(element)
                 end
               end
               problem.add_attribute("incorrect_num", "#{question_element.elements["answer_agains"].elements.size}")
@@ -410,6 +412,7 @@ class ExamUser < ActiveRecord::Base
                 xml_question.add_element("answer_agains").add_element("answer_again").add_element("user_answer").add_text("#{value[0].strip}")
                 num=1
               else
+                problem.delete_element(xml_question.xpath)
                 correct_num +=1
               end
             end

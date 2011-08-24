@@ -341,7 +341,7 @@ function input_value(id){
     }
 }
 
-function ajax_problem_info(){
+function ajax_problem_info(){alert(1);
     new Ajax.Updater("show_div" , "/exam_lists/show_problem",
     {
         asynchronous:true,
@@ -426,6 +426,7 @@ function question_values(question_id) {
             $("answer_" + question_id).value = answer.value;
         }
     }
+}
     function cancel_note(question_id) {
         $("start_note_" + question_id).style.display = "none";
         $("note_" + question_id).style.display = "block";

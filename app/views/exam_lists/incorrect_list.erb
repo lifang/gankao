@@ -1,11 +1,10 @@
-
-<% if @incorrect_list.elements['problems'].blank? %>
+<% if @incorrect_list.elements["/collection/problems"].blank? %>
   <%= "您目前没有错题"  %>
 <% else %>
   <div class="biz_art_list_box">
     <span><h1>错题</h1></span>
     <% n=1 %>
-    <% @incorrect_list.elements['problems'].each_element do |problem|%>
+    <% @incorrect_list.elements["/collection/problems"].each_element do |problem|%>
       <ul>
         <li>
           <h1>
@@ -25,12 +24,11 @@
       <% n +=1 %>
     <% end %>
   <% end %>
+  <div id="show_div"></div>
+  <div class="clear"></div>
+  <input type="hidden" value="<%= @num %>"/>
+  <input type="button" onclick="javascript:ajax_problem_info()" value="开始复习"  />
 </div>
-<div id="show_div"></div>
-<div class="clear"></div>
-<%= @num %>
-<input type="button" onclick="javascript:ajax_problem_info()" value="开始复习"  />
-
 <div class="cuoti">
   &nbsp;&nbsp;&nbsp;&nbsp;请在以下输入框输入你遇到的问题：
   <%= form_for :feedback, :url=>"/exam_lists/feedback" do |f| %>

@@ -6,16 +6,15 @@ class ExamListsController < ApplicationController
     @old_lists=Examination.where("types=?",Examination::TYPES[:OLD_EXAM])
   end
   def incorrect_list
-    collection_id=Collection.find_by_user_id(cookies[:user_id]).id
-    @incorrect_list=ExamRater.open_file("#{Rails.root}/public/collections/#{collection_id}.xml")
+    @incorrect_list=Collection.find_by_user_id(cookies[:user_id]).open_xml
     @feedbacks=Feedback.find_by_sql("select * from feedbacks where user_id=#{cookies[:user_id]}")
   end
   def feedback
-     @feedback=Feedback.new(:description=>params[:feedback][:description],:user_id=>"#{cookies[:user_id]}")
-     if @feedback.save
-     redirect_to "/exam_lists/incorrect_list"
-     end
-    @incorrect_list=Collection.find_by_user_id(cookies[:user_id]).open_xml.root
+    @feedback=Feedback.new(:description=>params[:feedback][:description],:user_id=>"#{cookies[:user_id]}")
+    if @feedback.save
+      redirect_to "/exam_lists/incorrect_list"
+    end
+    @incorrect_list=Collection.find_by_user_id(cookies[:user_id]).open_xml
   end
 
   def show_problem
