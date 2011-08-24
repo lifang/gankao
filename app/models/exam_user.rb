@@ -171,9 +171,11 @@ class ExamUser < ActiveRecord::Base
               element.elements["answer_agains"].each_element do |answer_again|
                 if element.attributes["id"]==question_element.attributes["id"]
                   question_element.elements["answer_agains"].add_element(answer_again)
+                else
+                  problem.elements["questions"].add_element(element)
                 end
               end
-              question_element.add_attributes("incorrect_num", question_element.elements["answer_agains"].elements.size)
+              problem.add_attribute("incorrect_num", "#{question_element.elements["answer_agains"].elements.size}")
             end
           end
           doc.delete_element("/collection/problems/problem[@id='#{id}']")
@@ -410,6 +412,7 @@ class ExamUser < ActiveRecord::Base
                 xml_question.add_element("answer_agains").add_element("answer_again").add_element("user_answer").add_text("#{value[0].strip}")
                 num=1
               else
+                problem.delete_element(xml_question.xpath)
                 correct_num +=1
               end
             end
@@ -419,6 +422,12 @@ class ExamUser < ActiveRecord::Base
       end
     end unless question_hash == {}
     exam_user.update_attributes(:correct_percent=>correct_num)
+  end
+
+  #返回用户当前提点的答案
+  def return_question_answer(question_id)
+    doc = ExamRater.open_file("#{Constant::PUBLIC_PATH}#{self.answer_sheet_url}")
+    return doc.elements["/exam/paper/questions/question[@id='#{question_id}']/answer"]
   end
 
 

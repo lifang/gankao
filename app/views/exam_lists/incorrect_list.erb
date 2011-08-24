@@ -1,6 +1,10 @@
+<% if @incorrect_list.elements["/collection/problems"].blank? %>
+  <%= "您目前没有错题"  %>
+<% else %>
+  <div class="biz_art_list_box">
     <span><h1>错题</h1></span>
     <% n=1 %>
-    <% @incorrect_list.elements['problems'].each_element do |problem|%>
+    <% @incorrect_list.elements["/collection/problems"].each_element do |problem|%>
       <ul>
         <li>
           <h1>
@@ -14,16 +18,17 @@
               <% end%>
             </span>
           </h1>
-            <%= render :partial=>"/exam_lists/question_with_answer",:object=>problem %>
+          <%= render :partial=>"/exam_lists/question_with_answer",:object=>problem %>
         </li>
       </ul>
       <% n +=1 %>
     <% end %>
-<div id="show_div"></div>
-<div class="clear"></div>
-<a onclick="javascript(0)" href="javascript:ajax_problem_info()">开始复习</a>
-<div class="clear"></div>
-
+  <% end %>
+  <div id="show_div"></div>
+  <div class="clear"></div>
+  <input type="hidden" value="<%= @num %>"/>
+  <input type="button" onclick="javascript:ajax_problem_info()" value="开始复习"  />
+</div>
 <div class="cuoti">
   &nbsp;&nbsp;&nbsp;&nbsp;请在以下输入框输入你遇到的问题：
   <%= form_for :feedback, :url=>"/exam_lists/feedback" do |f| %>
@@ -38,24 +43,17 @@
   <table>
     <% index=0 %>
     <% @feedbacks.each do |feedback| %>
- 
       <% index += 1 %>
-      
       <tr>
-          
         <td><div class="xian2"></div><%= index %>：<%= feedback.description %></td>
-          
       </tr>
-       
       <tr>
         <%if feedback.answer==nil%>
-        <td><font color="red">等待回答中...</font></td>
+          <td><font color="red">等待回答中...</font></td>
         <%else%>
           <td><%= feedback.answer %></td>
         <%end%>
       </tr>
-   
     <%end%>
-      
   </table>
 </div>

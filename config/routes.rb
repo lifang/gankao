@@ -17,8 +17,8 @@ Gankao::Application.routes.draw do
    resources :exam_lists do
      collection do
         get :simulate_list,:old_exam_list,:incorrect_list
+        post :show_problem,:next_problem,:compare_answer
         post :feedback
-        post :show_problem
      end
      member do
        
@@ -110,7 +110,9 @@ Gankao::Application.routes.draw do
       end
     end
     resources :notes do
-      
+      member do
+        post "create_note", "load_note"
+      end
     end
   end
   # The priority is based upon order of creation:
