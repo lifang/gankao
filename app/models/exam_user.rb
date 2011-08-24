@@ -171,13 +171,16 @@ class ExamUser < ActiveRecord::Base
               element.elements["answer_agains"].each_element do |answer_again|
                 if element.attributes["id"]==question_element.attributes["id"]
                   question_element.elements["answer_agains"].add_element(answer_again)
+                else
+                  problem.elements["questions"].add_element(element)
                 end
               end
-              question_element.add_attributes("incorrect_num", question_element.elements["answer_agains"].elements.size)
+              problem.add_attribute("incorrect_num", "#{question_element.elements["answer_agains"].elements.size}")
             end
           end
           doc.delete_element("/collection/problems/problem[@id='#{id}']")
         end
+        problem.add_attribute("delete_status","0")
       end
       doc = collection.add_problem(doc, problem.to_s)
       collection.generate_collection_url(doc.to_s)
@@ -402,19 +405,18 @@ class ExamUser < ActiveRecord::Base
     question_hash.each do |key, value|
       xml.elements["blocks"].each_element do |block|
         block.elements["problems"].each_element do |problem|
-          num=0
           problem.elements["questions"].each_element do |xml_question|
             answer=xml_question.elements["answer"].text
             if key==xml_question.attributes["id"]
               if answer !=value[0].strip
                 xml_question.add_element("answer_agains").add_element("answer_again").add_element("user_answer").add_text("#{value[0].strip}")
-                num=1
+                exam_user.add_collection(problem,exam_user,problem.attributes["id"])
               else
+                problem.delete_element(xml_question.xpath)
                 correct_num +=1
               end
             end
           end
-          exam_user.add_collection(problem,exam_user,problem.attributes["id"]) if num==1
         end
       end
     end unless question_hash == {}

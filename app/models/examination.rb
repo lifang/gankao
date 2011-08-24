@@ -115,6 +115,6 @@ class Examination < ActiveRecord::Base
     is_in = exam_user.nil? ? false : true
     return is_in
   end
-
+ 
 
 end

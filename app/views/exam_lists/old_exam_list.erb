@@ -45,7 +45,11 @@
               <% end %>
               <td>
                 <% unless exam_user.nil?%>
-                  <%= link_to "查看", "/user/exam_users/#{examination.id}?user_id=#{cookies[:user_id]}" %>
+                  <% if exam_user.is_submited.nil?||exam_user.is_submited==0%>
+                    <a href="/user/examinations/<%= examination.id %>/do_exam" target="_blank">开始练习</a>
+                  <% else %>
+                    <%= link_to "查看", "/user/exam_users/#{examination.id}?user_id=#{cookies[:user_id]}" %>
+                  <% end %>
                 <% else %>
                   <a href="/user/examinations/<%= examination.id %>/do_exam" target="_blank">开始练习</a>
                 <% end %>
