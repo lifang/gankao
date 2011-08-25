@@ -32,20 +32,19 @@
         <% @old_lists.each do |examination| %>
           <tbody>
             <tr>
-              <% exam_user=ExamUser.find_by_user_id_and_examination_id(cookies[:user_id],examination.id) %>
               <td><%= examination.title %></td>
               <td><%= examination.papers[0].total_question_num.to_s+"题" %></td>
-              <td><%= exam_user.nil? ? "未完成":"已完成" %></td>
+              <td><%= @hash["#{examination.id}"].nil? ? "未完成":"已完成" %></td>
               <td><%= examination.start_at_time.nil? ? "任何时候" : examination.start_at_time.strftime("%Y-%m-%d %H:%M:%S") %></td>
-              <% unless exam_user.nil? %>
-                <% percent=(100.0*(exam_user.correct_percent.to_f/examination.papers[0].total_question_num)+0.5).to_i %>
+              <% unless @hash["#{examination.id}"].nil? %>
+                <% percent=(100.0*(@hash["#{examination.id}"].correct_percent.to_f/examination.papers[0].total_question_num)+0.5).to_i %>
                 <td><%= percent.to_s+"%"%></td>
               <% else %>
                 <td><%= "-" %></td>
               <% end %>
               <td>
-                <% unless exam_user.nil?%>
-                  <% if exam_user.is_submited.nil?||exam_user.is_submited==0%>
+                <% unless @hash["#{examination.id}"].nil?%>
+                  <% if @hash["#{examination.id}"].is_submited.nil?||@hash["#{examination.id}"].is_submited==0%>
                     <a href="/user/examinations/<%= examination.id %>/do_exam" target="_blank">开始练习</a>
                   <% else %>
                     <%= link_to "查看", "/user/exam_users/#{examination.id}?user_id=#{cookies[:user_id]}" %>

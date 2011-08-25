@@ -33,26 +33,25 @@
         <% @examination_lists.each do |examination| %>
           <tbody>
             <tr>
-              <% exam_user=ExamUser.find_by_user_id_and_examination_id(cookies[:user_id],examination.id) %>
               <td><%= examination.title %></td>
               <td><%= examination.papers[0].total_question_num.to_s+"题" %></td>
               <td><%= examination.start_at_time.nil? ? "任何时候" : examination.start_at_time.strftime("%Y-%m-%d %H:%M:%S") %></td>
-              <td><%= exam_user.nil? ? "未参加":"已参加" %></td>
+              <td><%= @hash["#{examination.id}"].nil? ? "未参加":"已参加" %></td>
               <td><%= examination.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
-              <% unless exam_user.nil? %>
-                <td><%= exam_user.total_score.nil? ? "批阅中":exam_user.total_score %></td>
+              <% unless @hash["#{examination.id}"].nil? %>
+                <td><%= @hash["#{examination.id}"].total_score.nil? ? "批阅中":@hash["#{examination.id}"].total_score %></td>
               <% else %>
                 <td><%= "-" %></td>
               <% end %>
               <td>
-                <%if examination.is_paper_open== false &&!exam_user.nil? %>
+                <%if examination.is_paper_open== false &&!@hash["#{examination.id}"].nil? %>
                   <%= "考卷不公开" %>
                 <% else %>
-                  <% unless exam_user.nil?%>
-                    <% if exam_user.total_score.nil? %>
+                  <% unless @hash["#{examination.id}"].nil?%>
+                    <% if @hash["#{examination.id}"].total_score.nil? %>
                       <%= "批卷中"  %>
                     <% else %>
-                      <% if exam_user.is_sumited==0 %>
+                      <% if @hash["#{examination.id}"].is_submited==0 %>
                         <% if examination.exam_password1.nil? %>
                           <a href="/user/examinations/<%= examination.id %>/do_exam" target="_blank">开始考试</a>
                         <% else %>
