@@ -1,25 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <note id='1'>
     <problems>
-        <problem id='4' score='10' types='4'>
-            <title>______ ______ your name? </title>
-            <category>3</category>
-            <complete_title>[[what|where;why;when||名称]] [[is|are;was;were||助词]] your name? [{常用搭配,|常用搭配}][(5,|5)]</complete_title>
-            <questions>
-                <question correct_type='0' id='4' score='5'>
-                    <answer>what</answer>
-                    <analysis>常用搭配</analysis>
-                    <questionattrs>what;-;where;-;why;-;when</questionattrs>
-                    <tags>名称</tags>
-                    <user_answer>what</user_answer>
-                    <note_text/>
-                </question><question correct_type='0' id='5' score='5'>
-                            <answer>is</answer>
-                            <analysis>常用搭配</analysis>
-                            <questionattrs>is;-;are;-;was;-;were</questionattrs>
-                            <tags>助词</tags>
-                        <user_answer>was</user_answer><note_text>222223333</note_text></question></questions>
-        </problem>
     <problem id='3' score='5' types='1'>
                     <title>Until then, his family ________ from him for six months.</title>
                     <category>3</category>
@@ -53,5 +34,23 @@
                             <tags>过去时</tags>
                         <user_answer>C   hasn’t heard</user_answer><note_text>撒发生法</note_text></question>
                     </questions>
+                </problem><problem id='4' score='10' types='4'>
+                    <title>______ ______ your name? </title>
+                    <category>3</category>
+                    <complete_title>[[what|where;why;when||名称]] [[is|are;was;were||助词]] your name? [{常用搭配,|常用搭配}][(5,|5)]</complete_title>
+                    <questions>
+                        <question correct_type='0' id='4' score='5'>
+                            <answer>what</answer>
+                            <analysis>常用搭配</analysis>
+                            <questionattrs>what;-;where;-;why;-;when</questionattrs>
+                            <tags>名称</tags>
+                        <user_answer>when</user_answer><note_text>发是飞洒</note_text></question>
+                        
+                    <question correct_type='0' id='5' score='5'>
+                            <answer>is</answer>
+                            <analysis>常用搭配</analysis>
+                            <questionattrs>is;-;are;-;was;-;were</questionattrs>
+                            <tags>助词</tags>
+                        <user_answer>was</user_answer><note_text>手动阀</note_text></question></questions>
                 </problem></problems>
 </note>

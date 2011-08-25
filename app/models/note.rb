@@ -88,7 +88,8 @@ class Note < ActiveRecord::Base
     paper = ExamRater.open_file("#{Constant::BACK_PUBLIC_PATH}#{paper_url}")
     paper_question = paper.elements["#{question_path}"]
     questions = note_doc.elements["#{problem.xpath}/questions"]
-    paper_question.add_element("user_answer").add_text("#{question_answer.text}")
+    user_answer = (question_answer and question_answer.text) ? question_answer.text : ""
+    paper_question.add_element("user_answer").add_text("#{user_answer}")
     paper_question.add_element("note_text").add_text("#{note_text}")
     questions.elements.add(paper_question)
     self.save_xml(note_doc)
@@ -104,7 +105,8 @@ class Note < ActiveRecord::Base
       end
     end if paper_problem
     last_question = paper_problem.elements["questions"].elements["question[@id='#{question_id.to_i}']"]
-    last_question.add_element("user_answer").add_text("#{question_answer.text}")
+    user_answer = (question_answer and question_answer.text) ? question_answer.text : ""
+    last_question.add_element("user_answer").add_text("#{user_answer}")
     last_question.add_element("note_text").add_text("#{note_text}")
     note_doc.elements["/note/problems"].elements.add(paper_problem)
     self.save_xml(note_doc)

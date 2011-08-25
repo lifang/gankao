@@ -89,14 +89,9 @@ class Examination < ActiveRecord::Base
   def Examination.return_examinations(user_id, examination_id = nil)
     sql = "select e.*, eu.id exam_user_id, eu.paper_id, eu.started_at, eu.ended_at, eu.is_submited from examinations e
           left join exam_users eu on e.id = eu.examination_id
-          where e.is_published = 1 and e.status != #{STATUS[:CLOSED]} "
+          where e.is_published = 1 and e.status != #{STATUS[:CLOSE]} "
     sql += " and e.id = #{examination_id} " if !examination_id.nil? and examination_id != ""
-    if user_id
-      sql += "and ((e.status = #{STATUS[:GOING]} and eu.id is null) or eu.user_id = #{user_id}) "
-    else
-      sql += "and (e.status = #{STATUS[:GOING]}) "
-    end
-    sql += "order by e.created_at desc"
+    sql += " and eu.user_id = #{user_id} "    
     Examination.find_by_sql(sql)
   end
 
