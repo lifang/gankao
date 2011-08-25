@@ -1,6 +1,10 @@
 Gankao::Application.routes.draw do
 
-  resources :combine_practices
+  resources :combine_practices do
+    member do
+      get :start
+    end
+  end
 
   match '/signout'=> 'sessions#destroy'
   post "/sessions/create"
@@ -13,8 +17,8 @@ Gankao::Application.routes.draw do
    resources :exam_lists do
      collection do
         get :simulate_list,:old_exam_list,:incorrect_list
+        post :show_problem,:next_problem,:compare_answer,:delete_problem
         post :feedback
-        post :show_problem
      end
      member do
        

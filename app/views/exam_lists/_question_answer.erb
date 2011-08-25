@@ -1,9 +1,12 @@
 <div class="title">
+  <div style="float:left;display: inline;width:75%;">
+    &nbsp;&nbsp;&nbsp;&nbsp;<%= question_answer.elements["title"].text.to_s.html_safe %>
+  </div>
   <% if params[:result].nil? and @exam and cookies[:user_id].to_i == @exam.user_id %>
   <% end %>
   <div class="clear"></div>
-</div> 
-<% question_with_answer.elements["questions"].each_element do |question| %>
+</div>
+<% question_answer.elements["questions"].each_element do |question| %>
   <div class="question">
     &nbsp;&nbsp;&nbsp;&nbsp;小题描述：
     &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["description"].text if question.elements["description"] %>
@@ -48,15 +51,18 @@
       <% end  %>
     </div>
   </div>
-    <div class="title">&nbsp;&nbsp;&nbsp;&nbsp;解析：
-      &nbsp;&nbsp;&nbsp;&nbsp;<% analysis = question.elements["analysis"] %>
-      &nbsp;&nbsp;&nbsp;&nbsp;<%= if analysis and !analysis.nil?
-        analysis.text
-      end %>
-    </div>
-    <div class="title">&nbsp;&nbsp;&nbsp;&nbsp;知识点标签：
-      &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["tags"].text %>
-    </div>
-  <div class="clear"></div>
- 
+
+  <div class="title">&nbsp;&nbsp;&nbsp;&nbsp;解析：<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;<% analysis = question.elements["analysis"] %>
+    &nbsp;&nbsp;&nbsp;&nbsp;<%= if analysis and !analysis.nil?
+      analysis.text
+    end %>
+  </div>
+  <div class="title">&nbsp;&nbsp;&nbsp;&nbsp;知识点标签：
+    &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["tags"].text %>
+  </div>
+  <div>
+    <input type="hidden" value="<%= @str %>" id="num" />
+    <input type="button" value="下一题" onclick="javascript:next_problem_info()" />
+  </div>
 <% end %>

@@ -7,41 +7,51 @@
     <% end %>
     <div class="clear"></div>
   </div>
+  <% attr="" %>
   <% question_info.elements["questions"].each_element do |question| %>
-    <div class="question">
-      &nbsp;&nbsp;&nbsp;&nbsp;小题描述：
-      &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["description"].text if question.elements["description"] %>
-      <% attrs_str = question.elements["questionattrs"].text
-      attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
-      correct_type = question.attributes["correct_type"]
-      (0..attrs_array.length-1).each do |i|
-      %>
-        <div class="attr">
-          <% if !correct_type.nil? %>
-            <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
-              &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="question_attr_<%= question.attributes["id"].to_i %>"
-                                             id="question_attr_<%= i %>"   />
-                                           <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
-              &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>"
-                                             id="question_attr_<%= i %>" />
-                                           <% end %>
-            <label><%= attrs_array[i] %></label>
-          <% end %>
+      <% attr +=question.attributes["id"]+"," %>
+      <div id="show_problem">
+        <div class="question">
+          &nbsp;&nbsp;&nbsp;&nbsp;小题描述：
+          <%= question.elements["description"].text if question.elements["description"] %>
+          <% ""
+          attrs_str=question.elements["questionattrs"].text
+          attrs_array=attrs_str.split(";-;") unless attrs_str.nil?
+          correct_type = question.attributes["correct_type"]
+          (0..attrs_array.length-1).each do |i|
+          %>
+            <div class="attr">
+              <% if !correct_type.nil? %>
+                <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
+                  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="question_attr_<%= question.attributes["id"].to_i %>"
+                                                 id="question_attr_<%= i %>" value="<%=attrs_array[i]  %>"  />
+                                               <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
+                  &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>"
+                                                 id="question_attr_<%= i %>" value="<%=attrs_array[i]  %>" />
+                                               <% end %>
+                <label><%= attrs_array[i] %></label>
+              <% end %>
+            </div>
+          <% end if attrs_array and attrs_array.any? %>
+          <div class="attr" >
+            <% if correct_type.to_i == Problem::QUESTION_TYPE[:JUDGE] %>
+              <div >&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>" value="<%=attrs_array[i]  %>"/><label>对</label></div>
+              <div>&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>" value="<%=attrs_array[i]  %>"/><label>错</label></div>
+            <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] or correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER]
+            %>
+            <% end  %>
+          </div>
         </div>
-      <% end if attrs_array and attrs_array.any? %>
-      <div class="attr" >
-        <% if correct_type.to_i == Problem::QUESTION_TYPE[:JUDGE] %>
-          <div >&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio"/><label>对</label></div>
-          <div>&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio"/><label>错</label></div>
-        <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] or correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER]
-        %>
-        <% end  %>
+        <div>
+          <input type="hidden" value="<%= @num[0] %>" id="problem_id" />
+          <input type="hidden" value=" " id="answer_<%= question.attributes["id"] %>"  name="answer_<%= question.attributes["id"] %>"/>
+          <input type="hidden" value="<%=correct_type  %>" id="question_type_<%= question.attributes["id"] %>" />
+          <input type="hidden" value="<%= @str %>" id="num" />
+          <input type="submit" value="提交" onclick="javascript:problem_values()" />
+          <input type="button" value="跳过" onclick="javascript:next_problem_info()" />
+        </div>
       </div>
-    </div>
-  <div>
-    <input type="button" value="确定" />
-    <input type="button" value="跳过" />
-  </div>
-<% end %>
+  <% end %>
+  <input type="hidden" value="<%= attr.chop %>" id="question_ids" name="question_ids" />
 </div>
 <%= draggable_element("item_pools_show", :revert => false) %>

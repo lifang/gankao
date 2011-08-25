@@ -11,8 +11,8 @@ class Examination < ActiveRecord::Base
 
   TYPES = {:SIMULATION => 0, :OLD_EXAM => 1, :PRACTICE1 => 2, :PRACTICE2 => 3, :PRACTICE3 => 4, :PRACTICE4 => 5,
     :PRACTICE5 => 6} #考试的类型： 0 模拟考试  1 真题练习  2 综合训练1  3 综合训练2  4 综合训练3  5 综合训练4  6 综合训练5
-  TYPE_NAMETYPESS = {:SIMULATION => [0, "模拟考试"], :OLD_EXAM => [1, "真题练习"], :PRACTICE1 => [2, "综合训练1"],
-    :PRACTICE2 => [3, "综合训练2"], :PRACTICE3 => [4, "综合训练3"], :PRACTICE4 => [5, "综合训练4"], :PRACTICE5 => [6, "综合训练5"]}
+  #  TYPE_NAMETYPESS = {:SIMULATION => [0, "模拟考试"], :OLD_EXAM => [1, "真题练习"], :PRACTICE1 => [2, "综合训练1"],
+  #    :PRACTICE2 => [3, "综合训练2"], :PRACTICE3 => [4, "综合训练3"], :PRACTICE4 => [5, "综合训练4"], :PRACTICE5 => [6, "综合训练5"]}
   #default_scope :order => "examinations.created_at desc"
 
   #创建考试
@@ -115,6 +115,9 @@ class Examination < ActiveRecord::Base
     is_in = exam_user.nil? ? false : true
     return is_in
   end
+
+  
+
 
 
 end

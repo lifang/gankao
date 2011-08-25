@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+<?xml version='1.0' encoding='UTF-8'?>      <exam id='7'>
+=======
 <?xml version='1.0' encoding='UTF-8'?>      <exam id='1'>
+>>>>>>> 90a1ae98f7e851c655fd132392ebbb21774980bf
         <paper id='1' score='0'>
           <questions></questions>
           <auto_score></auto_score>

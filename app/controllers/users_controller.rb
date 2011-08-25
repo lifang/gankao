@@ -105,6 +105,7 @@ class UsersController < ApplicationController
     render :inline => session[:register_proof_code]
   end
   def first_page
+    @belief=User.calculation_confidence(cookies[:user_id])
     @simulations=Examination.where("types=?",Examination::TYPES[:SIMULATION])
     @old_exams=Examination.where("types=?",Examination::TYPES[:OLD_EXAM])
     @practices=Examination.where("types=? or types=? or types=? or types=? or types=?",Examination::TYPES[:PRACTICE1],Examination::TYPES[:PRACTICE2],Examination::TYPES[:PRACTICE3],Examination::TYPES[:PRACTICE4],Examination::TYPES[:PRACTICE5])
