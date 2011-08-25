@@ -56,4 +56,6 @@ module Constant
   #代理支付
   AGENCY_COST=2
 
+  
+  
 end
