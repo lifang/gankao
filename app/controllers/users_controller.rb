@@ -107,10 +107,25 @@ class UsersController < ApplicationController
   end
   
   def first_page
-    @belief=User.calculation_confidence(cookies[:user_id])
-    @simulations=Examination.where("types=?",Examination::TYPES[:SIMULATION])
-    @old_exams=Examination.where("types=?",Examination::TYPES[:OLD_EXAM])
-    @practices=Examination.where("types=? or types=? or types=? or types=? or types=?",Examination::TYPES[:PRACTICE1],Examination::TYPES[:PRACTICE2],Examination::TYPES[:PRACTICE3],Examination::TYPES[:PRACTICE4],Examination::TYPES[:PRACTICE5])
+    @simulations=Examination.find_by_sql("select * from examinations where types=#{Examination::TYPES[:SIMULATION]} order by created_at limit 3")
+    examnation_ids=@simulations.map(&:id).join(",")
+    @hash1=Examination.exam_users_hash(cookies[:user_id],examnation_ids)
+    @examinations=Examination.find_by_sql("select count(types) sums,types from examinations group by types")
+    @exams=Examination.find_by_sql("select count(types) sums,types from examinations e inner join exam_users  u on u.examination_id=e.id where u.user_id=#{cookies[:user_id]} and u.is_submited=1  group by types")
+    @hash={}
+    @examinations.each do |examination|
+      unless @exams.blank?
+        @exams.each do |exam|
+          if examination.types==exam.types
+            @hash["#{examination.types}"]=[examination.sums,exam.sums]
+          else
+            @hash["#{examination.types}"]=[examination.sums,0]
+          end
+        end
+      else
+        @hash["#{examination.types}"]=[examination.sums,0]
+      end
+    end
     if Collection.find_by_user_id(cookies[:user_id])==nil
       @incorrect_list==nil
     else
