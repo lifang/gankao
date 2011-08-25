@@ -1,3 +1,4 @@
+#encoding: utf-8
 class UsersController < ApplicationController
   before_filter :access?, :only => [:show, :update, :update_info]
   def update #更新密码
@@ -104,6 +105,7 @@ class UsersController < ApplicationController
     session[:register_proof_code] = proof_code(4)
     render :inline => session[:register_proof_code]
   end
+  
   def first_page
     @simulations=Examination.where("types=?",Examination::TYPES[:SIMULATION])
     

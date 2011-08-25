@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Paper < ActiveRecord::Base
 
   require 'rexml/document'
