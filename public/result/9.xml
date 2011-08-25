@@ -1,6 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>      <exam id='6'>
+<?xml version='1.0' encoding='UTF-8'?>      <exam id='9'>
         <paper id='6' score='0'>
-          <questions><question id='9' is_sure='1' score='0'><answer>水电费</answer></question><question id='10' is_sure='1' score='0'><answer>ass大</answer></question></questions>
+          <questions><question id='29' is_sure='1' score='0'><answer>&lt;span id=&quot;draggable_div2&quot;&gt;choice2&lt;/span&gt;</answer></question></questions>
           <auto_score/>
           <rate_score/>
         </paper>

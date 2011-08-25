@@ -1,0 +1,67 @@
+<%= javascript_include_tag 'jeffrey' %>
+<%= javascript_include_tag 'cookie' %>
+<script language="javascript" type="text/javascript">
+  var papers = new Object();
+</script>
+<%= javascript_include_tag "#{@paper_url}" %>
+<%= javascript_include_tag "#{Constant::SERVER_PATH}/javascripts/jeff_answer_paper.js" %>
+<%= form_for :paper , :url => "/user/examinations/#{@examination.id}/save_result",
+  :html => {:name => "paper_form", :id => "paper_form",
+  :onsubmit => "return generate_result_paper('#{@examination.paper_id}')"} do |f| %>
+  <div id="paper_show_info" style="position:relative;">
+    <span id="test3_div">qianjun</span>
+    <ul class="tab_biz" id="float_test">
+      <li class="actived"><a href="javascript:void(0);">综合训练三</a></li>
+    </ul>
+    <div class="soso">
+      <input type="hidden" name="paper_id" id="paper_id" value=""/>
+      <input type="hidden" name="all_quesiton_ids" id="all_question_ids" value=""/>
+      <input type="hidden" name="problem_ids" id="problem_ids" value=""/>
+      <input type="hidden" name="examination_id" id="examination_id" value="<%= @examination.id %>"/>
+      <div><span id="local_time"></span></div>
+      <%= f.submit "交卷" , :class=>"submit_btn" %>
+    </div>
+  </div>
+  <div class="soso" id="paper_navigation">
+    <div>试卷导航</div>
+  </div>
+  <div id="blocks">
+    <div id="block_ids" style="display:none;"></div>
+  </div>
+  <div id="remote_div" style="display:none;"></div>
+  <input type="hidden" name="types" value="<%= @examination.types %>"/>
+  <input type="hidden" name="answer_url" id="answer_url"
+         value="<%= Constant::ANSWER_CLIENT_PATH %>/<%= @examination.exam_user_id %>.xml"/>
+  <div class="clear"></div>
+<% end %>
+
+
+<span id="test_div2">jeffrey</span>
+<script type="text/javascript">new Draggable("test_div2", {revert:false});</script>
+<%#= draggable_element("drop_div1") %>
+<%#= drop_receiving_element("drop_div2") %>
+<%#= drop_receiving_element("drop_div3") %>
+<%#= draggable_element("draggable_div1", :revert => false) %>
+<%#= draggable_element("draggable_div2", :revert => false) %>
+<%#= draggable_element("draggable_div3", :revert => false) %>
+
+<%#= draggable_element("test_div", :revert => false) %>
+
+
+<script type="text/javascript" src="/javascripts/local_save/answer.js" charset="utf-8"></script>
+<script language="javascript" type="text/javascript">
+ 
+  //用户保存本地存储的答案
+  var answer_hash = null;
+  //load已有的答案
+  load_answer('<%= @exam_user.paper_id %>', '<%= @examination.id %>');
+
+  //定时模块完成定时器
+  var load_fix_time = null;
+
+  //页面load成功之后加载试卷
+  window.onload(load_paper(4));
+  answer_hash = null;
+
+</script>
+

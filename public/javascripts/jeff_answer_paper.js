@@ -1,8 +1,10 @@
-//加载试卷
-function load_paper() {
+
+
+//加载综合训练
+function load_paper(practice_type) {
     //    if(window.openDatabase){
     setTimeout(function(){
-        create_paper();
+        create_paper(practice_type);
     }, 500);
 //    } else {
 //        create_paper();
@@ -10,17 +12,9 @@ function load_paper() {
 }
 
 
-//创建试卷
-function create_paper() {
-    //显示基本信息部分
-    $("paper_title").innerHTML = papers.paper.base_info.title;
-    $("paper_id").value = papers.paper.id;
-    $("category_name").innerHTML = papers.paper.base_info.category_name;
-    $("total_num").innerHTML = papers.paper.total_num;
-    $("total_score").innerHTML = papers.paper.total_score;
-    if (papers.paper.base_info.description != undefined) {
-        $("description").innerHTML = papers.paper.base_info.description;
-    }
+//创建综合训练
+function create_paper(practice_type) {
+
     if (papers.paper.blocks != undefined && papers.paper.blocks.block != undefined) {
         var blocks = papers.paper.blocks.block;
         var bocks_div = $("blocks");
@@ -32,11 +26,9 @@ function create_paper() {
             create_block(bocks_div, blocks);
         }
     }
-    show_exam_time();
-    local_save_start();
+
 //load_scroll();
 }
-
 
 //添加试卷块
 var question_num = 1;   //根据提点显示导航
@@ -242,16 +234,16 @@ function create_problem(ul, problem, block_nav_div) {
     ul.appendChild(problem_li);
     var que_sup_parent_div = create_element("div", null, "question_info_" + problem.id, "products_list_style_box", null, "innerHTML");
     que_sup_parent_div.style.display = "none";
-    que_sup_parent_div.innerHTML = "<div class='arrow' style='top:35px;'></div>";
     problem_li.appendChild(que_sup_parent_div);
     var que_parent_div = create_element("div", null, null, "big_pic_box", null, "innerHTML");
     que_sup_parent_div.appendChild(que_parent_div);
+
     var parent_div = create_element("div", null, "full_problem_" + problem.id, "in", null, "innerHTML");
-    que_parent_div.appendChild(parent_div);
+    problem_li.appendChild(parent_div);
     var question_id_input = create_element("input", "question_ids", "question_ids_" + problem.id, null, "hidden", "value");
     parent_div.innerHTML = "<input type='hidden' name='problem_"+ problem.id +"' id='problem_"+ problem.id +"' value='"+ problem.id +"'/>";
-    parent_div.innerHTML += "<div class='title'>"+ problem.title + "[" + problem.score +"分]</div>";
-    //添加question所需div
+    parent_div.innerHTML += "<div class='title'><h2>"+ problem.title + "</h2>   [" + problem.score +"分]</div>";
+    
     if (problem.questions != undefined && problem.questions.question != undefined) {
         var questions = problem.questions.question;
         if (tof(questions) == "array") {
@@ -273,15 +265,6 @@ function create_problem(ul, problem, block_nav_div) {
     var is_sure_input = create_element("input", "is_sure", "is_sure_" + problem.id, null, "hidden", "value");
     parent_div.appendChild(is_sure_input);
     //add_save_button(parent_div, problem.id);
-    //追加problem的标题
-    var problem_str = "";
-    var clear_title = problem.title.replace(/<[^{><}]*>/gi, "");
-    if (problem.title.length <= 80) {
-        problem_str = "<h2><a href='javascript:void(0)' onclick='javascript:question_info("+ problem.id +");'>"+ clear_title.substring(0, 80) +"</a></h2>";;
-    } else {
-        problem_str = "<h2><a href='javascript:void(0)' onclick='javascript:question_info("+ problem.id +");'>"+ clear_title.substring(0, 80) +"......</a></h2>";;
-    }
-    problem_li.innerHTML += problem_str;
     $("problem_ids").value += "" + problem.id + ",";
     if (answer_hash != null) {
         load_un_sure_question(problem.id);
