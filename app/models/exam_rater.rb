@@ -1,3 +1,4 @@
+#encoding: utf-8
 class ExamRater < ActiveRecord::Base
   require 'rexml/document'
   include REXML

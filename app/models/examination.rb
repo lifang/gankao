@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Examination < ActiveRecord::Base
   has_many :examination_paper_relations,:dependent => :destroy
   has_many :papers,:through=>:examination_paper_relations, :source => :paper
@@ -116,7 +117,13 @@ class Examination < ActiveRecord::Base
     return is_in
   end
 
-  
+  def self.exam_users_hash(id,examnation_ids)
+    hash={}
+    ExamUser.find_by_sql("select eu.total_score,eu.is_submited,eu.examination_id,correct_percent from exam_users  eu where eu.user_id=#{id} and eu.examination_id in (#{examnation_ids})").each do |exam_user|
+      hash["#{exam_user.examination_id}"] =exam_user
+    end
+    return hash
+  end
 
 
 

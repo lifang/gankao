@@ -13,9 +13,13 @@ class ExamListsController < ApplicationController
   
   def simulate_list
     @examination_lists=Examination.where("types=?",Examination::TYPES[:SIMULATION])
+    examnation_ids=@examination_lists.map(&:id).join(",")
+    @hash=Examination.exam_users_hash(cookies[:user_id],examnation_ids)
   end
   def old_exam_list
     @old_lists=Examination.where("types=?",Examination::TYPES[:OLD_EXAM])
+    examnation_ids=@old_lists.map(&:id).join(",")
+    @hash=Examination.exam_users_hash(cookies[:user_id],examnation_ids)
   end
   def incorrect_list
     @lists=list
