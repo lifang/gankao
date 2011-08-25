@@ -1,4 +1,5 @@
-<% if @collection and @doc %>
+<%= javascript_include_tag "#{Constant::SERVER_PATH}/javascripts/answer_sheet.js" %>
+<% if @note and @doc %>
 <div id="paper_show_info">
   <ul class="new_biz"><li class="actived">我的笔记</li>
   </ul>

@@ -208,11 +208,13 @@ class ExamUser < ActiveRecord::Base
                   q_answers = q_answer.elements["answer"].text.split(";|;")
                   all_answer = answers | q_answers
                   if all_answer == answers
-                    score = question.attributes["score"].to_i
+                    if answers - q_answers == []
+                      score = question.attributes["score"].to_i
+                    elsif q_answers.length < answers.length
+                      score = ((question.attributes["score"].to_i.to_f)/2).round
+                    end
                   elsif all_answer.length > answers.length
                     score = 0
-                  elsif all_answer.length < answers.length
-                    score = ((question.attributes["score"].to_i)/2).round
                   end
                 end
               end

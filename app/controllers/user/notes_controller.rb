@@ -34,7 +34,7 @@ class User::NotesController < ApplicationController
       if problem
         question = note.question_in_note(problem, params[:id])
         if question
-          note.update_question(params["note_text_#{params[:id]}"].strip, question, note_doc)
+          note.update_question(params["note_text_#{params[:id]}"].strip, question.xpath, note_doc)
         else
           note.add_question(exam_user.paper_url, question_answer, params["note_text_#{params[:id]}"].strip,
             params["q_xpath_" + params[:id]], problem, note_doc)
@@ -46,9 +46,24 @@ class User::NotesController < ApplicationController
     end
     flash[:notice] = "笔记添加成功."
     render :update do |page|
-        page.replace_html "note_div" , :partial => "/common/display_flash"
-        page.replace_html "start_note_#{params[:id]}",  :inline => "<script>cancel_note('#{params[:id]}');</script>"
-      end
+      page.replace_html "note_div" , :partial => "/common/display_flash"
+      page.replace_html "start_note_#{params[:id]}",  :inline => "<script>cancel_note('#{params[:id]}');</script>"
+    end
   end
-  
+
+  def update_note
+    note = Note.find_by_user_id(cookies[:user_id].to_i)
+    note.update_question(params["note_text_#{params[:id]}"].strip, 
+      params["q_xpath_#{params[:id]}"], note.open_xml) if note
+    flash[:notice] = "笔记编辑成功。"
+    redirect_to "/user/notes"
+  end
+
+  def search
+    session[:tag] = params[:tag]
+    @note = Note.find_by_user_id(cookies[:user_id].to_i)
+    @doc = @note.search(@note.open_xml, params[:tag], params[:category])
+    render "index"
+  end
+
 end

@@ -73,8 +73,8 @@ class Note < ActiveRecord::Base
   end
 
   #如果题点已经做过笔记，则重新保存笔记
-  def update_question(note_text, question, note_doc)
-    que = note_doc.elements[question.xpath]
+  def update_question(note_text, question_xpath, note_doc)
+    que = note_doc.elements[question_xpath]
     if que.elements["note_text"]
       que.elements["note_text"].text = note_text
     else

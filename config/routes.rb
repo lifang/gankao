@@ -107,7 +107,10 @@ Gankao::Application.routes.draw do
     end
     resources :notes do
       member do
-        post "create_note", "load_note"
+        post "create_note", "load_note", "update_note"
+      end
+      collection do
+        post "search"
       end
     end
   end
