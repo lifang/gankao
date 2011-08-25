@@ -80,9 +80,9 @@ class User < ActiveRecord::Base
     puts incorrect_percent
     sum=simulation_belief*0.5*(old_percent*0.3+ collect_percent*0.5+incorrect_percent*0.2)
     puts sum
-    user.belief=(sum*100).to_i
+    user.belief=(sum*100).to_f
     user.save
-    return (sum*100).to_i
+    return (sum*100).to_f
 end
    def self.return_sum(types,user,id)
       sql="select count(e.id) sum from examinations  e left join exam_users u on u.examination_id=e.id where 1=1"

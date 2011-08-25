@@ -1,7 +1,9 @@
 <div class="shouye">
   <div class="mokao" >
     模考列表<br/>
-    <% if @simulations.blank? %>
+    <% @examinations.each do |examiantion| %>
+    <% if examiantion.types==0 %>
+    <% if examiantion.sums==0 %>
       <p style="font-size:120%;color:red;font-weight: bold;margin-left: 20px;margin-top: 80px;">当前没有模考...</p>
     <%else%>
       <% index=0 %>
@@ -24,22 +26,22 @@
   <div class="mokao" >
     真题练习<br/>
     <div class="shuzi">
-      <%= ExamUser.find_by_sql("select count(ex.id) sum from exam_users ex inner join examinations eu on ex.examination_id=eu.id where ex.is_submited=1 and eu.types=1 and ex.user_id='#{cookies[:user_id]}'" )[0].sum %>/<%=@old_exams.size %>
+      <%= ExamUser.find_by_sql("select count(ex.id) sum from exam_users ex inner join examinations eu on ex.examination_id=eu.id where ex.is_submited=1 and eu.types=1 and ex.user_id='#{cookies[:user_id]}'" )[0].sum %>/<%=@examinations %>
     </div>
     <td><input type="button" value="开始练习" class="practice" onclick="javascript:window.location.href='/exam_lists/old_exam_list'"/></td>
   </div>
   <div class="mokao" >
     综合训练<br/>
     <div class="shuzi">
-      <%= ExamUser.find_by_sql("select count(ex.id) sum from exam_users ex inner join examinations eu on ex.examination_id=eu.id where ex.is_submited=1 and (eu.types=2 or eu.types=3 or eu.types=4 or eu.types=5 or eu.types=6) and ex.user_id='#{cookies[:user_id]}'")[0].sum %>/<%=@practices.size %>
+      <%= ExamUser.find_by_sql("select count(ex.id) sum from exam_users ex inner join examinations eu on ex.examination_id=eu.id where ex.is_submited=1 and (eu.types=2 or eu.types=3 or eu.types=4 or eu.types=5 or eu.types=6) and ex.user_id='#{cookies[:user_id]}'")[0].sum %>/<%=@practices %>
     </div>
     <td><input type="button" value="开始训练" class="practice" onclick="javascript:window.location.href='/combine_practices'"/></td>
   </div>
   <div class="mokao" >
     <% if is_vip? %>
-    信心指数:<%=  @belief %>
+    信心指数: 
     <% else %>
-
+    你当前还不是<font color="red">VIP</font>哦，购买<font color="red">VIP</font>可以显示你自己当前的信心指数，无限制的综合训练次数以及模考试卷主观题的修改，心动不如行动，赶快来<a href="#"><font color="blue">购买</font></a>吧</font>！
     <% end %>
     <div class="xian">
     </div>
