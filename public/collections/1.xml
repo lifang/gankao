@@ -5,7 +5,7 @@
             <title>jjkkgfgff</title>
             <category>2</category>
             <questions>
-                <question correct_type='0' id='73' score='20'>
+                <question correct_percent='25%' correct_type='0' id='73' score='20'>
                     <answer>ee</answer>
                     <analysis>sdsdd</analysis>
                     <questionattrs>ee;-;eww;-;ddd;-;sss</questionattrs>
@@ -25,7 +25,7 @@
             <title>jjkkgfgff</title>
             <category>2</category>
             <questions>
-                <question correct_type='0' id='73' score='20'>
+                <question correct_percent='25%' correct_type='0' id='73' score='20'>
                     <answer>ee</answer>
                     <analysis>sdsdd</analysis>
                     <questionattrs>ee;-;eww;-;ddd;-;sss</questionattrs>
@@ -41,7 +41,7 @@
                 </question>
             </questions>
         </problem>
-        <problem delete_status='0' id='62' incorrect_num='3' score='15' types='1'>
+        <problem delete_status='0' id='62' incorrect_num='4' score='15' types='1'>
             <title>多的地方</title>
             <category>1</category>
             <questions>
@@ -61,7 +61,7 @@
                             <user_answer/>
                             <user_answer>高峰过后</user_answer>
                         </answer_again>
-                    </answer_agains>
+                    <answer_again><user_answer>阿斯达斯</user_answer></answer_again></answer_agains>
                 </question>
             </questions>
         </problem>

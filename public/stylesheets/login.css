@@ -143,6 +143,11 @@ input, textarea, select {
     text-align:center;
     width:100px;
 }
+.shu{
+    margin-top:80px;
+    text-align:center;
+    font-size:140%;
+}
 .infor{
     float:left;
     font-size: 150%;
