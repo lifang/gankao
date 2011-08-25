@@ -154,7 +154,7 @@ class Examination < ActiveRecord::Base
     puts sum
     user.belief=(sum*100).to_i
     user.save
-    puts (sum*100).to_i
+    return (sum*100).to_i
   end
 
 
