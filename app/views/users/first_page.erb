@@ -36,7 +36,11 @@
     <td><input type="button" value="开始训练" class="practice" onclick="javascript:window.location.href='/combine_practices'"/></td>
   </div>
   <div class="mokao" >
-    信心指数
+    <% if is_vip? %>
+    信心指数:<%=  @belief %>
+    <% else %>
+
+    <% end %>
     <div class="xian">
     </div>
 

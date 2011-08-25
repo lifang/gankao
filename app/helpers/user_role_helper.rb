@@ -3,7 +3,7 @@ module UserRoleHelper
 
 
   def is_vip?
-   return Oreder.find_by_user_id(cookies[:user_id])
+   return Order.find_by_user_id(cookies[:user_id])
   end
 
   def is_student?
