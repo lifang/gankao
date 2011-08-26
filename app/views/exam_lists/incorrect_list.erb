@@ -1,3 +1,11 @@
+<%= javascript_include_tag 'jquery' %>
+<script type="text/javascript">
+  function question_style(id){
+    $(document).ready(function(){
+        $("#"+id).slideToggle("slow");
+    });
+  }
+</script>
 <div id="problems">
   <% if @lists.elements["/collection/problems"].blank? %>
     <%= "您目前没有错题"  %>
@@ -9,7 +17,7 @@
         <ul>
           <li>
             <h1>
-              <%= "#{n}."+problem.elements['title'].text.to_s.html_safe %>
+              <a href="javascript:void(0)" onclick="javascript:question_style(<%= problem.attributes["id"].to_i %>)"><%= "#{n}."+problem.elements['title'].text.to_s.html_safe  %></a>
               <span style="float:right"><% if problem.attributes["types"].to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>单选题
                 <% elsif problem.attributes["types"].to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>多选题
                 <% elsif problem.attributes["types"].to_i == Problem::QUESTION_TYPE[:JUDGE] %>判断题
@@ -19,7 +27,10 @@
                 <% end%> <a href="javascript:delete_problems('<%= problem.attributes["id"] %>')">删除</a>
               </span>
             </h1>
-            <%= render :partial=>"/exam_lists/question_with_answer",:object=>problem %>
+            <div id="<%= problem.attributes["id"].to_i %>" style="display:none">
+              <%= render :partial=>"/exam_lists/question_with_answer",:object=>problem %>
+            </div>
+
           </li>
         </ul>
         <% n +=1 %>

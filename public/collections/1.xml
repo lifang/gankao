@@ -75,5 +75,5 @@
                 </question>
             </questions>
         </problem>
-    </problems>
+    <problem id='61' score='0' types='0'><title>得得得</title><category>1</category><questions><question correct_type='0' error_percent='0' id='74' repeat_num='1' score='0'><answer>草草草</answer><analysis/><questionattrs>凤飞飞;-;凤飞飞是;-;草草草;-;车次查询</questionattrs><tags/><user_answer>凤飞飞</user_answer></question></questions></problem><problem id='66' score='12' types='4'><title>呵呵呵分得的</title><category>1</category><questions><question correct_type='3' error_percent='0' id='80' repeat_num='1' score='0'><description>反反复复</description><answer>是飒飒</answer><analysis>发放给 </analysis><questionattrs/><tags/><user_answer>得得得</user_answer></question></questions></problem></problems>
 </collection>
