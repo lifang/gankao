@@ -10,23 +10,33 @@
         <% end %>
         <div class="clear"></div>
       </div>
+      <% question_ids = "" %>
       <% single_question.elements["questions"].each_element do |question| %>
+        <% question_ids += question.attributes["id"] + "," %>
         <%= render :partial => "/user/exam_users/question_with_answer", :object => question %>
         <div>
-          <%= form_remote_tag :method => "post",
-          :url => "/user/notes/#{question.attributes["id"]}/create_note?paper_id=#{@doc.attributes["id"]}&examination_id=#{@doc.elements["paper"].attributes["id"]}&problem_id=#{single_question.attributes["id"]}" do -%>
           <input type="button" name="note_<%= question.attributes["id"] %>" id="note_<%= question.attributes["id"] %>"
-                 value="记笔记" class="submit_btn" 
-                 onclick="javascript:start_note(<%= question.attributes["id"] %>, <%= single_question.attributes["id"] %>, <%= @doc.elements["paper"].attributes["id"] %>, <%= @doc.attributes["id"] %>);" />
-          <input type="hidden" id="p_xpath_<%= question.attributes["id"] %>"
-                 name="p_xpath_<%= question.attributes["id"] %>" value="<%= single_question.xpath %>" />
-          <input type="hidden" id="q_xpath_<%= question.attributes["id"] %>"
-                 name="q_xpath_<%= question.attributes["id"] %>" value="<%= question.xpath %>"/>
-          <div id="start_note_<%= question.attributes["id"] %>" style="display:none;">
-          </div>
+               value="记笔记" class="submit_btn"
+               onclick="javascript:start_note(<%= question.attributes["id"] %>, <%= single_question.attributes["id"] %>, <%= @doc.elements["paper"].attributes["id"] %>, <%= @doc.attributes["id"] %>);" />
+        <input type="button" name="collection_<%= question.attributes["id"] %>" id="collection_<%= question.attributes["id"] %>"
+               value="收藏" class="submit_btn"
+               onclick="javascript:start_collection(<%= question.attributes["id"] %>,
+                        <%= single_question.attributes["id"] %>, <%= @doc.elements["paper"].attributes["id"] %>,
+                        <%= @doc.attributes["id"] %>, '<%= single_question.xpath %>', '<%= question.xpath %>');" />
+          <%= form_remote_tag :method => "post", :html => {:class => "required-validate"},
+            :condition => "check_note_form('#{question.attributes["id"] }')",
+            :url => "/user/notes/#{question.attributes["id"]}/create_note?paper_id=#{@doc.attributes["id"]}&examination_id=#{@doc.elements["paper"].attributes["id"]}&problem_id=#{single_question.attributes["id"]}" do -%>
+            <input type="hidden" id="p_xpath_<%= question.attributes["id"] %>"
+                   name="p_xpath_<%= question.attributes["id"] %>" value="<%= single_question.xpath %>" />
+            <input type="hidden" id="q_xpath_<%= question.attributes["id"] %>"
+                   name="q_xpath_<%= question.attributes["id"] %>" value="<%= question.xpath %>"/>
+            <div id="start_note_<%= question.attributes["id"] %>" style="display:none;">
+            </div>
           <% end -%>
         </div>
       <% end %>
+      <input type="hidden" id="question_ids_<%= single_question.attributes["id"] %>"
+             name="question_ids_<%= single_question.attributes["id"] %>" value="<%= question_ids %>" />
     </div>
   </div>
 </div>

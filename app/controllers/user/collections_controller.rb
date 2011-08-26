@@ -33,5 +33,33 @@ class User::CollectionsController < ApplicationController
     @doc = @collection.search(@collection.open_xml, params[:tag], params[:category])
     render "index"
   end
+
+  def create_collection
+    exam_user = ExamUser.is_exam_user_in(params[:paper_id].to_i, params[:examination_id].to_i, cookies[:user_id].to_i)
+    if exam_user
+      collection = Collection.find_or_create_by_user_id(exam_user.user_id)
+      collection.set_collection_url
+      question_answer = exam_user.return_question_answer(params[:id])
+      puts "============="
+      puts question_answer.text
+      collection_doc = collection.open_xml
+      problem = collection.problem_in_collection(params[:problem_id], collection_doc)
+      if problem
+        question = collection.question_in_collection(problem, params[:id])
+        if question
+          flash[:warn] = "当前题目已经在错题库。"
+        else
+          collection.hand_add_question(exam_user.paper_url, question_answer,
+            params[:question_path], problem, collection_doc)
+          flash[:notice] = "收藏成功。"
+        end
+      else
+        collection.hand_add_problem(params[:id], exam_user.paper_url, question_answer, 
+          params[:problem_path], collection_doc)
+        flash[:notice] = "收藏成功。"
+      end
+    end
+    render :partial => "/common/display_flash"
+  end
   
 end

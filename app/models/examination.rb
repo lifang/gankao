@@ -92,12 +92,7 @@ class Examination < ActiveRecord::Base
           left join exam_users eu on e.id = eu.examination_id
           where e.is_published = 1 and e.status != #{STATUS[:CLOSED]} "
     sql += " and e.id = #{examination_id} " if !examination_id.nil? and examination_id != ""
-    if user_id
-      sql += "and ((e.status = #{STATUS[:GOING]} and eu.id is null) or eu.user_id = #{user_id}) "
-    else
-      sql += "and (e.status = #{STATUS[:GOING]}) "
-    end
-    sql += "order by e.created_at desc"
+    sql += " and eu.user_id = #{user_id} "    
     Examination.find_by_sql(sql)
   end
 
@@ -119,8 +114,10 @@ class Examination < ActiveRecord::Base
 
   def self.exam_users_hash(id,examnation_ids)
     hash={}
-    ExamUser.find_by_sql("select eu.total_score,eu.is_submited,eu.examination_id,correct_percent from exam_users  eu where eu.user_id=#{id} and eu.examination_id in (#{examnation_ids})").each do |exam_user|
-      hash["#{exam_user.examination_id}"] =exam_user
+    unless examnation_ids.nil?||examnation_ids==""
+      ExamUser.find_by_sql("select eu.total_score,eu.is_submited,eu.examination_id,correct_percent from exam_users  eu where eu.user_id=#{id} and eu.examination_id in (#{examnation_ids})").each do |exam_user|
+        hash["#{exam_user.examination_id}"] =exam_user
+      end
     end
     return hash
   end

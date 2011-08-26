@@ -74,8 +74,8 @@ class Note < ActiveRecord::Base
   end
 
   #如果题点已经做过笔记，则重新保存笔记
-  def update_question(note_text, question, note_doc)
-    que = note_doc.elements[question.xpath]
+  def update_question(note_text, question_xpath, note_doc)
+    que = note_doc.elements[question_xpath]
     if que.elements["note_text"]
       que.elements["note_text"].text = note_text
     else
@@ -89,7 +89,8 @@ class Note < ActiveRecord::Base
     paper = ExamRater.open_file("#{Constant::BACK_PUBLIC_PATH}#{paper_url}")
     paper_question = paper.elements["#{question_path}"]
     questions = note_doc.elements["#{problem.xpath}/questions"]
-    paper_question.add_element("user_answer").add_text("#{question_answer.text}")
+    user_answer = (question_answer and question_answer.text) ? question_answer.text : ""
+    paper_question.add_element("user_answer").add_text("#{user_answer}")
     paper_question.add_element("note_text").add_text("#{note_text}")
     questions.elements.add(paper_question)
     self.save_xml(note_doc)
@@ -100,12 +101,11 @@ class Note < ActiveRecord::Base
     paper = ExamRater.open_file("#{Constant::BACK_PUBLIC_PATH}#{paper_url}")
     paper_problem = paper.elements["#{problem_path}"]
     paper_problem.elements["questions"].each_element do |question|
-      if question.attributes["id"].to_i != question_id.to_i
-        paper.delete_element(question.xpath)
-      end
+      paper.delete_element(question.xpath) if question.attributes["id"].to_i != question_id.to_i
     end if paper_problem
     last_question = paper_problem.elements["questions"].elements["question[@id='#{question_id.to_i}']"]
-    last_question.add_element("user_answer").add_text("#{question_answer.text}")
+    user_answer = (question_answer and question_answer.text) ? question_answer.text : ""
+    last_question.add_element("user_answer").add_text("#{user_answer}")
     last_question.add_element("note_text").add_text("#{note_text}")
     note_doc.elements["/note/problems"].elements.add(paper_problem)
     self.save_xml(note_doc)
@@ -129,9 +129,7 @@ class Note < ActiveRecord::Base
           end
           break if is_include
         end
-        if is_include == false
-          doc.delete_element(problem.xpath)
-        end
+        doc.delete_element(problem.xpath) unless is_include
       end
     end
     return doc
