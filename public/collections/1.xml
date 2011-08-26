@@ -21,11 +21,17 @@
                 </question>
             </questions>
         </problem>
-         <problem delete_status='0' id='65' incorrect_num='3' score='20' types='0'>
-            <title>jjkkgfgff</title>
-            <category>2</category>
-            <questions>
-                <question correct_percent='25%' correct_type='0' id='73' score='20'>
+         
+        
+        
+    <problem delete_status='0' id='61' score='0' types='0'><title>得得得</title><category>1</category><questions><question correct_type='0' id='74' score='0'><answer>草草草</answer><analysis/><questionattrs>凤飞飞;-;凤飞飞是;-;草草草;-;车次查询</questionattrs><tags/><answer_agains><answer_again><user_answer>凤飞飞</user_answer></answer_again></answer_agains></question></questions></problem><problem delete_status='0' id='62' incorrect_num='5' score='15' types='1'><title>多的地方</title><category>1</category><questions><question correct_type='1' id='75' score='15'><answer>的发v;|;吃饱饱</answer><analysis/><questionattrs>的发v;-;腹股沟;-;达到;-;吃饱饱</questionattrs><tags/><answer_agains><answer_again><user_answer>腹股沟</user_answer></answer_again><answer_again>
+                            <user_answer/>
+                        </answer_again><answer_again>
+                            <user_answer/>
+                        </answer_again><answer_again>
+                            <user_answer/>
+                            <user_answer>高峰过后</user_answer>
+                        </answer_again><answer_again><user_answer>阿斯达斯</user_answer></answer_again></answer_agains></question></questions></problem><problem delete_status='0' id='65' incorrect_num='1' score='12' types='5'><title>相当大的</title><category>1</category><questions><question correct_type='5' id='78' score='12'><answer>真真正正</answer><analysis/><questionattrs/><tags/><answer_agains><answer_again><user_answer>得得得</user_answer></answer_again></answer_agains></question><question correct_percent='25%' correct_type='0' id='73' score='20'>
                     <answer>ee</answer>
                     <analysis>sdsdd</analysis>
                     <questionattrs>ee;-;eww;-;ddd;-;sss</questionattrs>
@@ -38,33 +44,31 @@
                             <user_answer>sss</user_answer>
                         </answer_again>
                     <answer_again><user_answer>ddd</user_answer></answer_again></answer_agains>
-                </question>
-            </questions>
-        </problem>
-        <problem delete_status='0' id='62' incorrect_num='4' score='15' types='1'>
-            <title>多的地方</title>
-            <category>1</category>
-            <questions>
-                <question correct_percent='25%' correct_type='1' id='75' is_sure='25.0' score='15'>
-                    <answer>的发v;|;吃饱饱</answer>
-                    <analysis/>
-                    <questionattrs>阿斯达斯;-;对方答复;-;高峰过后;-;会更好</questionattrs>
-                    <tags/>
+                </question><question correct_percent='25%' correct_type='0' id='73' score='20'>
+                    <answer>ee</answer>
+                    <analysis>sdsdd</analysis>
+                    <questionattrs>ee;-;eww;-;ddd;-;sss</questionattrs>
+                    <tags>12 13 45</tags>
                     <answer_agains>
                         <answer_again>
-                            <user_answer/>
+                            <user_answer>sss</user_answer>
                         </answer_again>
                         <answer_again>
-                            <user_answer/>
+                            <user_answer>sss</user_answer>
+                        </answer_again>
+                    <answer_again><user_answer>ddd</user_answer></answer_again></answer_agains>
+                </question><question correct_percent='25%' correct_type='0' id='73' score='20'>
+                    <answer>ee</answer>
+                    <analysis>sdsdd</analysis>
+                    <questionattrs>ee;-;eww;-;ddd;-;sss</questionattrs>
+                    <tags>12 13 45</tags>
+                    <answer_agains>
+                        <answer_again>
+                            <user_answer>sss</user_answer>
                         </answer_again>
                         <answer_again>
-                            <user_answer/>
-                            <user_answer>高峰过后</user_answer>
+                            <user_answer>sss</user_answer>
                         </answer_again>
-                    <answer_again><user_answer>阿斯达斯</user_answer></answer_again></answer_agains>
-                </question>
-            </questions>
-        </problem>
-        
-    </problems>
+                    <answer_again><user_answer>ddd</user_answer></answer_again></answer_agains>
+                </question></questions></problem><problem delete_status='0' id='66' score='12' types='4'><title>呵呵呵分得的</title><category>1</category><questions><question correct_type='5' id='79' score='12'><description>是飒飒</description><answer>多的地方</answer><analysis>喂喂喂</analysis><questionattrs/><tags/><answer_agains><answer_again><user_answer>是飒飒</user_answer></answer_again></answer_agains></question><question correct_type='3' id='80' score='0'><description>反反复复</description><answer>是飒飒</answer><analysis>发放给 </analysis><questionattrs/><tags/></question></questions></problem></problems>
 </collection>
