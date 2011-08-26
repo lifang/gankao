@@ -1,11 +1,3 @@
-<%= javascript_include_tag 'jquery' %>
-<script type="text/javascript">
-  function question_style(id){
-    $(document).ready(function(){
-        $("#"+id).slideToggle("slow");
-    });
-  }
-</script>
 <div id="problems">
   <% if @lists.elements["/collection/problems"].blank? %>
     <%= "您目前没有错题"  %>
@@ -17,19 +9,17 @@
         <ul>
           <li>
             <h1>
-              <a href="javascript:void(0)" onclick="javascript:question_style(<%= problem.attributes["id"].to_i %>)"><%= "#{n}."+problem.elements['title'].text.to_s.html_safe  %></a>
+              <%= "#{n}."+problem.elements['title'].text.to_s.html_safe  %>
               <span style="float:right"><% if problem.attributes["types"].to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>单选题
                 <% elsif problem.attributes["types"].to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>多选题
                 <% elsif problem.attributes["types"].to_i == Problem::QUESTION_TYPE[:JUDGE] %>判断题
                 <% elsif problem.attributes["types"].to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] %>填空题
                 <% elsif problem.attributes["types"].to_i == Problem::QUESTION_TYPE[:COLLIGATION] %>综合题
                 <% elsif problem.attributes["types"].to_i == Problem::QUESTION_TYPE[:CHARACTER] %>简答题
-                <% end%> <a href="javascript:delete_problems('<%= problem.attributes["id"] %>')">删除</a>
+                <% end%> 
               </span>
             </h1>
-            <div id="<%= problem.attributes["id"].to_i %>" style="display:none">
-              <%= render :partial=>"/exam_lists/question_with_answer",:object=>problem %>
-            </div>
+            <%= render :partial=>"/exam_lists/question_with_answer",:object=>problem %>
 
           </li>
         </ul>

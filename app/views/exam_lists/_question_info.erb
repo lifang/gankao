@@ -2,7 +2,7 @@
   <div class="title">
     <div style="float:left;display: inline;width:75%;">
       &nbsp;&nbsp;&nbsp;&nbsp;<%= question_info.elements["title"].text.to_s.html_safe %>
-    </div>
+    </div><span style="float:right"><a onclick="javascript:$('item_pools_show').style.display='none'">关闭</a></span>
     <% if params[:result].nil? and @exam and cookies[:user_id].to_i == @exam.user_id %>
     <% end %>
     <div class="clear"></div>
