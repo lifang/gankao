@@ -117,6 +117,11 @@ Gankao::Application.routes.draw do
         post "search"
       end
     end
+    resources :collections do
+      member do
+        post "create_collection"
+      end
+    end
   end
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Note < ActiveRecord::Base
   require 'rexml/document'
   include REXML
@@ -100,9 +101,7 @@ class Note < ActiveRecord::Base
     paper = ExamRater.open_file("#{Constant::BACK_PUBLIC_PATH}#{paper_url}")
     paper_problem = paper.elements["#{problem_path}"]
     paper_problem.elements["questions"].each_element do |question|
-      if question.attributes["id"].to_i != question_id.to_i
-        paper.delete_element(question.xpath)
-      end
+      paper.delete_element(question.xpath) if question.attributes["id"].to_i != question_id.to_i
     end if paper_problem
     last_question = paper_problem.elements["questions"].elements["question[@id='#{question_id.to_i}']"]
     user_answer = (question_answer and question_answer.text) ? question_answer.text : ""
@@ -130,9 +129,7 @@ class Note < ActiveRecord::Base
           end
           break if is_include
         end
-        if is_include == false
-          doc.delete_element(problem.xpath)
-        end
+        doc.delete_element(problem.xpath) unless is_include
       end
     end
     return doc

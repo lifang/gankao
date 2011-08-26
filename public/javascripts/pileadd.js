@@ -378,7 +378,7 @@ function problem_values(){
     var problem_num=$("problem_id").value;
     var ids=question_ids.split(",");
     var  str=""
-    for(i=0;i<ids.length;i++){
+    for(var i=0;i<ids.length;i++){
         question_values(ids[i]);
         str +=('answer_'+ids[i]+'='+$("answer_" + ids[i]).value)+'&';
     }
@@ -404,6 +404,20 @@ function start_note(question_id, problem_id, examination_id, paper_id) {
     });
     return false;
 }
+
+function start_collection(question_id, problem_id, examination_id, paper_id, problem_path, question_path) {
+    new Ajax.Updater("note_div" , "/user/collections/"+question_id+"/create_collection",
+    {
+        asynchronous:true,
+        evalScripts:true,
+        method:"post",
+        parameters:'problem_id='+problem_id+'&examination_id='+examination_id+'&paper_id='+paper_id+'&problem_path='+problem_path
+            +'&question_path='+question_path+'authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+    });
+    return false;
+}
+
+
 
 function question_values(question_id) {
     $("answer_" + question_id).value = "";

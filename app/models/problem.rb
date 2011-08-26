@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Problem < ActiveRecord::Base
   has_one:problem_tag
   belongs_to:category

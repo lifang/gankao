@@ -1,3 +1,4 @@
+#encoding: utf-8
 class ExamUser < ActiveRecord::Base
   belongs_to :user
   has_many :rater_user_relations,:dependent=>:destroy
@@ -156,35 +157,6 @@ class ExamUser < ActiveRecord::Base
       question.add_attribute("is_sure", "#{value[1].strip}")
     end unless question_ids_options == {}
     return doc.to_s
-  end
-
-
-  def add_collection(problem,exam_user,id)
-    if exam_user
-      collection = Collection.find_or_create_by_user_id(exam_user.user_id)
-      collection.set_collection_url
-      unless problem.to_s.nil? or problem.to_s == ""
-        doc=collection.open_xml
-        if doc.elements["/collection/problems/problem[@id='#{id}']"]
-          doc.elements["/collection/problems/problem[@id='#{id}']"].elements["questions"].each_element do |element|
-            problem.elements["questions"].each_element do |question_element|
-              element.elements["answer_agains"].each_element do |answer_again|
-                if element.attributes["id"]==question_element.attributes["id"]
-                  question_element.elements["answer_agains"].add_element(answer_again)
-                else
-                  problem.elements["questions"].add_element(element)
-                end
-              end
-              problem.add_attribute("incorrect_num", "#{question_element.elements["answer_agains"].elements.size}")
-            end
-          end
-          doc.delete_element("/collection/problems/problem[@id='#{id}']")
-        end
-        problem.add_attribute("delete_status","0")
-      end
-      doc = collection.add_problem(doc, problem.to_s)
-      collection.generate_collection_url(doc.to_s)
-    end
   end
 
   def open_xml
@@ -401,28 +373,49 @@ class ExamUser < ActiveRecord::Base
   end
 
   #计算正确率并把错误的试题加进错题集
-  def auto_add(exam_user,question_hash)
-    xml=ExamRater.open_file("#{Constant::BACK_PUBLIC_PATH}/papers/#{exam_user.paper_id}.xml")
-    correct_num=0
-    question_hash.each do |key, value|
-      xml.elements["blocks"].each_element do |block|
-        block.elements["problems"].each_element do |problem|
-          problem.elements["questions"].each_element do |xml_question|
-            answer=xml_question.elements["answer"].text
-            if key==xml_question.attributes["id"]
-              if answer !=value[0].strip
-                xml_question.add_element("answer_agains").add_element("answer_again").add_element("user_answer").add_text("#{value[0].strip}")
-                exam_user.add_collection(problem,exam_user,problem.attributes["id"])
-              else
+  def auto_add_collection(question_hash)
+    xml = ExamRater.open_file("#{Constant::BACK_PUBLIC_PATH}/papers/#{self.paper_id}.xml")
+    collection = Collection.find_or_create_by_user_id(self.user_id)
+    collection.set_collection_url
+    collection_xml = collection.open_xml
+    correct_num = 0
+    xml.elements["blocks"].each_element do |block|
+      block.elements["problems"].each_element do |problem|
+        problem.elements["questions"].each_element do |xml_question|
+          if xml_question.attributes["correct_type"].to_i != Problem::QUESTION_TYPE[:CHARACTER]
+            answer = xml_question.elements["answer"].text
+            answers = answer.split(";|;")
+            user_answer = question_hash[xml_question.attributes["id"]][0]
+            if user_answer
+              user_answers = user_answer.split(";|;")
+              all_answer = answers | user_answers
+              if all_answer == answers and (answers - user_answers == [])
                 problem.delete_element(xml_question.xpath)
                 correct_num +=1
+              else
+                self.add_collection(collection, xml, collection_xml, problem, xml_question, user_answer.strip)
               end
             end
           end
         end
       end
-    end unless question_hash == {}
-    exam_user.update_attributes(:correct_percent=>correct_num)
+    end unless question_hash.empty?
+    self.update_attributes(:correct_percent => correct_num)
+  end
+
+  #添加收藏
+  def add_collection(collection, paper_xml, collection_xml, problem, question, user_answer)
+    collection_problem = collection.problem_in_collection(problem.attributes["id"], collection_xml)
+    if collection_problem
+      collection_question = collection.question_in_collection(collection_problem, question.attributes["id"])
+      if collection_question
+        collection.update_question(user_answer, collection_question.xpath, collection_xml)
+      else
+        collection.add_question(question, user_answer, collection_problem, collection_xml)
+      end
+    else
+      collection.auto_add_problem(paper_xml, question.attributes["id"], problem.xpath, user_answer, collection_xml)
+    end
   end
 
   #返回用户当前提点的答案
