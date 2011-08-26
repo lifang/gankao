@@ -313,6 +313,7 @@ function show_que_save_button(question_id) {
 
 //添加question所需div
 function create_question(problem_id, question_id_input, parent_div, question) {
+
     $("all_question_ids").value += "" + question.id + ",";
     question_id_input.value += "" + question.id + ",";
     var que_div = create_element("div", null, "question_" + question.id, "question", null, "innerHTML");
@@ -523,36 +524,36 @@ function tof(val) {
 
 //用来返回题目中所有的提点是否已经回答
 function is_problem_answer(problem_id) {
-    var answer_flag = "";
-    var question_ids = $("question_ids_" + problem_id).value;
-    if (question_ids != "") {
-        var ids = question_ids.split(",");
-        var is_answer_num = 0;
-        for (var i=0; i<ids.length-1; i++) {
-            var question_div = $("question_" + ids[i]);
-            if (question_div != null) {
-                var is_answer = question_value(ids[i]);
-                if (is_answer) {
-                    is_answer_num++ ;
+        var answer_flag = "";
+        var question_ids = $("question_ids_" + problem_id).value;
+        if (question_ids != "") {
+            var ids = question_ids.split(",");
+            var is_answer_num = 0;
+            for (var i=0; i<ids.length-1; i++) {
+                var question_div = $("question_" + ids[i]);
+                if (question_div != null) {
+                    var is_answer = question_value(ids[i]);
+                    if (is_answer) {
+                        is_answer_num++ ;
+                    }
                 }
             }
-        }
-        if (is_answer_num != 0) {
-            if (is_answer_num == (ids.length-1)) {
-                answer_flag = "all";
+            if (is_answer_num != 0) {
+                if (is_answer_num == (ids.length-1)) {
+                    answer_flag = "all";
+                } else {
+                    answer_flag = "href";
+                }
             } else {
-                answer_flag = "href";
+                answer_flag = "none";
             }
-        } else {
-            answer_flag = "none";
         }
-    }
-    if (answer_flag == "all") {
-        $("is_answer_" + problem_id).value = "1";
-    } else {
-        $("is_answer_" + problem_id).value = "";
-    }
-    return answer_flag;
+        if (answer_flag == "all") {
+            $("is_answer_" + problem_id).value = "1";
+        } else {
+            $("is_answer_" + problem_id).value = "";
+        }
+        return answer_flag;
 }
 
 //用来返回提点是否已经回答
