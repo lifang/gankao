@@ -16,7 +16,7 @@
     correct_type = question.attributes["correct_type"]
     answer = question.elements["answer"]
     answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
-    user_answer=question.elements["answer_agains"].elements["answer_again"].elements["user_answer"].text
+    user_answer=question.elements["user_answer"].text
     user_answers=user_answer.nil? ? [] :  user_answer.split(";|;")
     (0..attrs_array.length-1).each do |i|
       is_answer = answers.include?(attrs_array[i])

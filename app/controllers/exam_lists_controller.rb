@@ -5,7 +5,7 @@ class ExamListsController < ApplicationController
     lists=Collection.find_by_user_id(cookies[:user_id]).open_xml
     lists.elements["/collection/problems"].each_element do |problem|
       if problem.attributes["delete_status"].to_i==1
-        lists.elements["/collection/problems"].delete_element(problem.xpath)
+        lists.delete_element(problem.xpath)
       end
     end
     return lists
@@ -16,11 +16,13 @@ class ExamListsController < ApplicationController
     examnation_ids=@examination_lists.map(&:id).join(",")
     @hash=Examination.exam_users_hash(cookies[:user_id],examnation_ids)
   end
+  
   def old_exam_list
     @old_lists=Examination.where("types=?",Examination::TYPES[:OLD_EXAM])
     examnation_ids=@old_lists.map(&:id).join(",")
     @hash=Examination.exam_users_hash(cookies[:user_id],examnation_ids)
   end
+
   def incorrect_list
     @lists=list
     @feedbacks=Feedback.find_by_sql("select * from feedbacks where user_id=#{cookies[:user_id]}")

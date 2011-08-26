@@ -86,7 +86,7 @@ input, textarea, select {
 .xian{
     border:1px solid #000000;
     text-align:center;
-    margin-top:150px;
+    margin-top:50px;
     width:128px;
 }
 .xian2{
@@ -142,6 +142,11 @@ input, textarea, select {
     margin-left:15px;
     text-align:center;
     width:100px;
+}
+.shu{
+    margin-top:80px;
+    text-align:center;
+    font-size:140%;
 }
 .infor{
     float:left;
