@@ -71,12 +71,13 @@ function check_password() {
 }
 close_question_info_id=0
 function compare_value(id){
+    jQuery.noConflict();
     var check_mobile = new RegExp(/^[0-9]{1,2}$/);
     var arry=id.split("_");
     var i;
     for(i=1;i<arry.length;i++){
-        var input_value=document.getElementById("single_value_"+arry[i]).value;
-        var fact_value=document.getElementById("fact_value_"+arry[i]).value;
+        var input_value=$("single_value_"+arry[i]).value;
+        var fact_value=$("fact_value_"+arry[i]).value;
         var reason=document.getElementById("reason_for_"+arry[i]).value;
         if (parseInt(fact_value) < parseInt(input_value)||parseInt(input_value)<0||input_value==""){
             document.getElementById("if_submited_"+arry[i]).value =0;
