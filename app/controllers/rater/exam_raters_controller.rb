@@ -50,13 +50,13 @@ class Rater::ExamRatersController < ApplicationController
     doc=ExamRater.open_file(Constant::PUBLIC_PATH + @exam_user.answer_sheet_url)
     xml=ExamRater.open_file(Constant::BACK_PUBLIC_PATH + "/papers/#{doc.elements[1].attributes["id"]}.xml")
     @xml=ExamUser.answer_questions(xml,doc)
-    if @xml.attributes["ids"] == "-1"
-      flash[:notice] = "感谢您的参与，当前试卷没有需要批改的试卷。"
-      redirect_to request.referer
-    else
+#    if @xml.attributes["ids"] == "-1"
+#      flash[:notice] = "感谢您的参与，当前试卷没有需要批改的试卷。"
+#      redirect_to request.referer
+#    else
       RaterUserRelation.create(:exam_rater_id => cookies[:rater_id],
         :exam_user_id => @exam_user.id, :started_at => Time.now)
-    end
+#    end
   end
 
   def over_answer #批阅完成，给答卷添加成绩

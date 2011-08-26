@@ -114,8 +114,10 @@ class Examination < ActiveRecord::Base
 
   def self.exam_users_hash(id,examnation_ids)
     hash={}
-    ExamUser.find_by_sql("select eu.total_score,eu.is_submited,eu.examination_id,correct_percent from exam_users  eu where eu.user_id=#{id} and eu.examination_id in (#{examnation_ids})").each do |exam_user|
-      hash["#{exam_user.examination_id}"] =exam_user
+    unless examnation_ids.nil?||examnation_ids==""
+      ExamUser.find_by_sql("select eu.total_score,eu.is_submited,eu.examination_id,correct_percent from exam_users  eu where eu.user_id=#{id} and eu.examination_id in (#{examnation_ids})").each do |exam_user|
+        hash["#{exam_user.examination_id}"] =exam_user
+      end
     end
     return hash
   end
