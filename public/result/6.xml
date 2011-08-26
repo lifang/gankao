@@ -1,6 +1,7 @@
-<?xml version='1.0' encoding='UTF-8'?>      <exam id='57'>
-        <paper id='24' score='0'>
-          <questions><question id='76' is_sure='1' score='0'><answer>ssd</answer></question></questions>
+
+<?xml version='1.0' encoding='UTF-8'?>      <exam id='10'>
+        <paper id='6' score='0'>
+          <questions/>
           <auto_score/>
           <rate_score/>
         </paper>

@@ -10,20 +10,20 @@ Gankao::Application.routes.draw do
   post "/sessions/create"
   resources :pages do
     collection do
-    get "sina_index"
-    get "renren_index"
+      get "sina_index"
+      get "renren_index"
     end
   end
-   resources :exam_lists do
-     collection do
-        get :simulate_list,:old_exam_list,:incorrect_list
-        post :show_problem,:next_problem,:compare_answer,:delete_problem
-        post :feedback
-     end
-     member do
+  resources :exam_lists do
+    collection do
+      get :simulate_list,:old_exam_list,:incorrect_list
+      post :show_problem,:next_problem,:compare_answer,:delete_problem
+      post :feedback
+    end
+    member do
        
-     end
-   end
+    end
+  end
   resources :advertises do
     collection do
       get "index"
@@ -76,7 +76,7 @@ Gankao::Application.routes.draw do
       post "update_info"
     end
   end
-   resources :papers do
+  resources :papers do
     collection do
       get "new_step_one", "search_list"
       post "create_step_one", "create_step_two", "search", "create_exam_one", "create_exam_two", "create_exam_three", "exam_list"
@@ -95,6 +95,11 @@ Gankao::Application.routes.draw do
       end
       collection do
         get "error_page"
+      end
+    end
+    resources :combine_practices do
+      member do
+        get "start","show2","show3","show4","show5","show6"
       end
     end
     resources :exam_users do
