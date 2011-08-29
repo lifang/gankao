@@ -27,7 +27,7 @@
                 </question>
             </questions>
         </problem>
-        <problem id='4' score='10' types='4'>
+        <problem id='4' incorrect_num='4' score='10' types='4'>
             <title>______ ______ your name? </title>
             <category>3</category>
             <complete_title>[[what|where;why;when||名称]] [[is|are;was;were||助词]] your name? [{常用搭配,|常用搭配}][(5,|5)]</complete_title>
@@ -38,7 +38,7 @@
                     <questionattrs>what;-;where;-;why;-;when</questionattrs>
                     <tags>名称</tags>
                     <user_answer>when</user_answer>
-                </question>
+                <user_answer/><user_answer/></question>
                         
                 <question correct_type='0' error_percent='0' id='5' repeat_num='1' score='5'>
                     <answer>is</answer>
@@ -46,7 +46,7 @@
                     <questionattrs>is;-;are;-;was;-;were</questionattrs>
                     <tags>助词</tags>
                     <user_answer>was</user_answer>
-                </question>
+                <user_answer/><user_answer/></question>
             </questions>
         </problem>
         <problem id='10' score='5' types='0'>
@@ -62,7 +62,7 @@
                 </question>
             </questions>
         </problem>
-        <problem id='9' score='5' types='0'>
+        <problem id='9' incorrect_num='3' score='5' types='0'>
             <title>我撒的飞洒</title>
             <category>3</category>
             <questions>
@@ -72,8 +72,8 @@
                     <questionattrs>sfs;-;sfss;-;sdds;-;sd</questionattrs>
                     <tags>wrwr</tags>
                     <user_answer>sfs</user_answer>
-                </question>
+                <user_answer>sdds</user_answer><user_answer>sdds</user_answer><user_answer>sdds</user_answer></question>
             </questions>
         </problem>
-    <problem id='61' score='0' types='0'><title>得得得</title><category>1</category><questions><question correct_type='0' error_percent='0' id='74' repeat_num='1' score='0'><answer>草草草</answer><analysis/><questionattrs>凤飞飞;-;凤飞飞是;-;草草草;-;车次查询</questionattrs><tags/><user_answer>凤飞飞</user_answer></question></questions></problem><problem id='66' score='12' types='4'><title>呵呵呵分得的</title><category>1</category><questions><question correct_type='3' error_percent='0' id='80' repeat_num='1' score='0'><description>反反复复</description><answer>是飒飒</answer><analysis>发放给 </analysis><questionattrs/><tags/><user_answer>得得得</user_answer></question></questions></problem><problem id='65' score='12' types='5' user_score='10'><title>相当大的</title><category>1</category><questions><question correct_type='5' error_percent='0' id='78' repeat_num='1' score='12' score_reason='' user_answer='呵呵呵' user_score='10'><answer>真真正正</answer><analysis/><questionattrs/><tags/><user_answer>呵呵呵</user_answer></question></questions></problem></problems>
+    <problem delete_status='1' id='61' score='0' types='0'><title>得得得</title><category>1</category><questions><question correct_percent='50%' correct_type='0' delete_status='1' error_percent='0' id='74' repeat_num='1' score='0'><answer>草草草</answer><analysis/><questionattrs>凤飞飞;-;凤飞飞是;-;草草草;-;车次查询</questionattrs><tags/><user_answer>凤飞飞</user_answer></question></questions></problem><problem id='66' incorrect_num='10' score='12' types='4'><title>呵呵呵分得的</title><category>1</category><questions><question correct_type='3' error_percent='0' id='80' repeat_num='1' score='0'><description>反反复复</description><answer>是飒飒</answer><analysis>发放给 </analysis><questionattrs/><tags/><user_answer>得得得</user_answer><user_answer/><user_answer/><user_answer/><user_answer/><user_answer/><user_answer/><user_answer/><user_answer/><user_answer/><user_answer></user_answer></question></questions></problem><problem delete_status='1' id='65' score='12' types='5' user_score='10'><title>相当大的</title><category>1</category><questions><question correct_type='5' delete_status='1' error_percent='0' id='78' repeat_num='1' score='12' score_reason='' user_answer='呵呵呵' user_score='10'><answer>真真正正</answer><analysis/><questionattrs/><tags/><user_answer>呵呵呵</user_answer></question></questions></problem></problems>
 </collection>

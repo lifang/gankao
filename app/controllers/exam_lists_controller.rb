@@ -62,17 +62,27 @@ class ExamListsController < ApplicationController
       str +=hash1[key]+","
     end
     @num=str.chop.split(",")
-    @str=(@num-[@num[0]]).join(",")
+    @str=@num.join(",")
     @xml=doc.elements["/collection/problems/problem[@id='#{@num[0]}']"]
-    render :partial=>"/exam_lists/question_info",:object=>@xml
+    redirect_to "/exam_lists/#{@num[0]}/question_info?num=#{@str}"
+  end
+
+  def question_info
+    @num=params[:num].chop.split(",")
+    @str=(@num-[@num[0]]).join(",")
+    doc=Collection.find_by_user_id(cookies[:user_id]).open_xml
+    @xml=doc.elements["/collection/problems/problem[@id='#{params[:id]}']"]
   end
 
   def next_problem
     @num=params[:num].split(",")
     @str=(@num-[@num[0]]).join(",")
+    puts "==========="
+    puts @num[0]
     doc=Collection.find_by_user_id(cookies[:user_id]).open_xml
     @xml=doc.elements["/collection/problems/problem[@id=#{@num[0]}]"]
-    render :partial=>"/exam_lists/question_info",:object=>@xml
+    puts @xml
+    render "/exam_lists/question_info"
   end
 
   def compare_answer
@@ -82,18 +92,14 @@ class ExamListsController < ApplicationController
     collection=Collection.find_by_user_id(cookies[:user_id])
     doc=collection.open_xml
     ids.each do |id|
-      doc.elements["/collection/problems"].each_element do |problem|
-        problem.elements["questions"].each_element do |question|
-          if question.attributes["id"]==id
-            if params["answer_#{id}"]==question.elements["answer"].text
-              correct_percent=1.0/(question.elements["answer_agains"].elements.size+1)*100
-              question.add_attribute("correct_percent","#{correct_percent.to_i}%")
-            else
-              question.elements["answer_agains"].add_element("answer_again").add_element("user_answer").add_text(params["answer_#{id}"])
-              problem.attributes["incorrect_num"] =problem.attributes["incorrect_num"].to_i+1
-            end
-          end
-        end
+      problem=doc.elements["/collection/problems/problem[@id='#{problem_id}']"]
+      question=problem.elements["questions/question[@id='#{id}']"]
+      if params["answer_#{id}"]==question.elements["answer"].text
+        correct_percent=1.0/(question.elements["user_answer"].size+1)*100
+        question.add_attribute("correct_percent","#{correct_percent.to_i}%")
+      else
+        question.add_element("user_answer").add_text(params["answer_#{id}"])
+        problem.attributes["incorrect_num"] =problem.attributes["incorrect_num"].to_i+1
       end
     end
     self.write_xml("#{Constant::PUBLIC_PATH}#{collection.collection_url}", doc)
@@ -113,7 +119,12 @@ class ExamListsController < ApplicationController
     end
     doc.elements["/collection/problems/problem[@id=#{params[:problem_id]}]"].add_attribute("delete_status",1) if n==0
     self.write_xml("#{Constant::PUBLIC_PATH}#{collection.collection_url}", doc)
+    @has_next_page = false
     @lists=list
+    @lists =Examination.get_start_element(params[:page], @lists)
+    current_element = Examination.return_page_element(@lists, @has_next_page)
+    @lists = current_element[0]
+    @has_next_page = current_element[1]
     @feedbacks=Feedback.find_by_sql("select * from feedbacks where user_id=#{cookies[:user_id]}")
     render "/exam_lists/incorrect_list"
   end

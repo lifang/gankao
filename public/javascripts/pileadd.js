@@ -332,16 +332,6 @@ function input_value(id){
     }
 }
 
-function ajax_problem_info(){
-    new Ajax.Updater("show_div" , "/exam_lists/show_problem",
-    {
-        asynchronous:true,
-        evalScripts:true,
-        method:"post",
-        parameters:'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
-    });
-    return false;
-}
 
 function next_problem_info(){
     var num=$("num").value;
@@ -371,8 +361,9 @@ function problem_values(){
     for(var i=0;i<ids.length;i++){
         question_values(ids[i]);
         str +=('answer_'+ids[i]+'='+$("answer_" + ids[i]).value)+'&';
+        alert(str);
     }
-    new Ajax.Updater("item_pools_show" , "/exam_lists/compare_answer",
+    new Ajax.Updater("show_div" , "/exam_lists/compare_answer",
     {
         asynchronous:true,
         evalScripts:true,

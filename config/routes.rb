@@ -21,7 +21,7 @@ Gankao::Application.routes.draw do
       post :feedback
     end
     member do
-       
+       get :question_info
     end
   end
   resources :advertises do
