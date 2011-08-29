@@ -639,7 +639,7 @@ function ajax_notice(examination_id){
 }
 
 function close_ajax_notice(){
-     $("ajax_notice").innerHTML="<div id='ajax_notice'></div>";
+    $("ajax_notice").innerHTML="<div id='ajax_notice'></div>";
 }
 
 //关闭名额领取成功的DIV
@@ -654,13 +654,12 @@ function   openNew()
 }
 
 
-//默认每个音频可以播放3次
 function audio_play(id){
     if(getCookie("audio_"+id)==null){
         setCookie(("audio_"+id),0)
     }
 
-    if(getCookie("audio_"+id)<3){
+    if(get_canplay_time()==0||getCookie("audio_"+id)<get_canplay_time()){  //设置播放次数
         if($("audio_"+id).paused){
             $("audio_"+id).play();
             if(id!="x"){
@@ -676,4 +675,25 @@ function audio_play(id){
         $("audio_"+id).pause();
         alert("该录音已经播放了3次！不能再播放！");
     }
+}
+
+//取得播放次数
+function get_canplay_time(){
+
+    if($("practice_type").value=="2"){
+        return 3;    //第一类综合训练播放3次
+    }
+    if($("practice_type").value=="3"){
+        return 1;    //第二类综合训练播放3次
+    }
+    if($("practice_type").value=="4"){
+        return 3;    //第三类综合训练播放3次
+    }
+    if($("practice_type").value=="5"){
+        return 3;    //第四类综合训练播放3次
+    }
+    if($("practice_type").value=="6"){
+        return 3;    //第四类综合训练播放3次
+    }
+    return 0;
 }
