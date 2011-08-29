@@ -4,9 +4,10 @@ class ExamListsController < ApplicationController
   def  list
     lists=Collection.find_by_user_id(cookies[:user_id]).open_xml
     lists.elements["/collection/problems"].each_element do |problem|
-      if problem.attributes["delete_status"].to_i==1
-        lists.delete_element(problem.xpath)
+      problem.elements["questions"].each_element do |question|
+        lists.elements["/collection/problems"].delete_element(question.xpath) unless question.attributes["delete_status"].nil?
       end
+      lists.elements["/collection/problems"].delete_element(problem.xpath) unless  problem.attributes["delete_status"].nil?
     end
     return lists
   end
@@ -99,14 +100,15 @@ class ExamListsController < ApplicationController
   def delete_problem
     collection=Collection.find_by_user_id(cookies[:user_id])
     doc=collection.open_xml
-    doc.elements["/collection/problems/problem[@id='#{params[:id]}']"].attributes["delete_status"]=1
-    self.write_xml("#{Constant::PUBLIC_PATH}#{collection.collection_url}", doc)
-    @lists=collection.open_xml
-    @lists.elements["/collection/problems"].each_element do |problem|
-      if problem.attributes["delete_status"].to_i==1
-        @lists.elements["/collection/problems"].delete_element(problem.xpath)
-      end
+    doc.elements["/collection/problems/problem[@id=#{params[:problem_id]}]/questions/question[@id=#{params[:question_id]}]"].
+      add_attribute("delete_status",1)
+    n=0
+    doc.elements["/collection/problems/problem[@id=#{params[:problem_id]}]/questions"].each_element do |question|
+      n=1 if question.attributes["delete_status"].nil?
     end
+    doc.elements["/collection/problems/problem[@id=#{params[:problem_id]}]"].add_attribute("delete_status",1) if n==0
+    self.write_xml("#{Constant::PUBLIC_PATH}#{collection.collection_url}", doc)
+    @lists=list
     @feedbacks=Feedback.find_by_sql("select * from feedbacks where user_id=#{cookies[:user_id]}")
     render "/exam_lists/incorrect_list"
   end

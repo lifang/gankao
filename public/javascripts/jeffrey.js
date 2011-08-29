@@ -665,7 +665,7 @@ function audio_play(id){
             $("audio_"+id).play();
             if(id!="x"){
                 setCookie(("audio_"+id),parseInt(getCookie("audio_"+id))+1)
-                $("audio_control_"+id).disabled=true
+                $("audio_control_"+id).disabled=true   // 记录，需要另写一个方法，当音频文件播放完毕，按钮可用
             }
         }
         else{

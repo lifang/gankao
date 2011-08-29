@@ -50,13 +50,13 @@ class Rater::ExamRatersController < ApplicationController
     doc=ExamRater.open_file(Constant::PUBLIC_PATH + @exam_user.answer_sheet_url)
     xml=ExamRater.open_file(Constant::BACK_PUBLIC_PATH + "/papers/#{doc.elements[1].attributes["id"]}.xml")
     @xml=ExamUser.answer_questions(xml,doc)
-#    if @xml.attributes["ids"] == "-1"
-#      flash[:notice] = "感谢您的参与，当前试卷没有需要批改的试卷。"
-#      redirect_to request.referer
-#    else
-      RaterUserRelation.create(:exam_rater_id => cookies[:rater_id],
-        :exam_user_id => @exam_user.id, :started_at => Time.now)
-#    end
+    #    if @xml.attributes["ids"] == "-1"
+    #      flash[:notice] = "感谢您的参与，当前试卷没有需要批改的试卷。"
+    #      redirect_to request.referer
+    #    else
+    RaterUserRelation.create(:exam_rater_id => cookies[:rater_id],
+      :exam_user_id => @exam_user.id, :started_at => Time.now)
+    #    end
   end
 
   def over_answer #批阅完成，给答卷添加成绩
@@ -66,33 +66,30 @@ class Rater::ExamRatersController < ApplicationController
     @exam_user=ExamUser.find(params[:id])
     url="#{Rails.root}/public/result/#{params[:id]}.xml"
     doc=ExamRater.open_file(url)
+    collection = Collection.find_or_create_by_user_id(@exam_user.user_id)
+    collection.set_collection_url
+    collection_xml = collection.open_xml
     xml=ExamRater.open_file(Constant::BACK_PUBLIC_PATH + "/papers/#{doc.elements[1].attributes["id"]}.xml")
     score=0
     only_xml=ExamUser.answer_questions(xml,doc)
-    doc.elements[1].elements[1].each_element do |element|
-      single_score=params["single_value_#{element.attributes["id"]}"]
-      only_xml.elements["blocks"].each_element do  |block|
-        block.elements["problems"].each_element do |problem|
-          num=0
-          problem.elements["questions"].each_element do |question|
-            if element.attributes["id"]==question.attributes["id"]
-              question.add_element("answer_agains").add_element("answer_again").add_text(element.elements["answer"].text)
-              if question.attributes["score"]!=single_score
-                num=1 
-              else
-                problem.delete_element(question.xpath)
-              end
-            end
+    only_xml.elements["blocks"].each_element do  |block|
+      block.elements["problems"].each_element do |problem|
+        problem.elements["questions"].each_element do |question|
+          single_score=params["single_value_#{question.attributes["id"]}"]
+          result_question= doc.elements["/exam/paper/questions/question[@id=#{question.attributes["id"]}]"]
+          if question.attributes["score"] ==single_score
+            problem.delete_element(question.xpath)
+          else
+            @exam_user.add_collection(collection, xml, collection_xml, problem, question, result_question.elements["answer"].text) unless problem.elements["questions"].elements[1].nil?
           end
-          @exam_user.add_collection(problem.to_s,@exam_user,problem.attributes["id"].to_i) unless problem.elements["questions"].elements[1].nil? if num==1
+          result_question.add_attribute("score","#{single_score}")
+          score += single_score.to_i
         end
       end
-      element.add_attribute("score","#{single_score}")
-      score +=element.attributes["score"].to_i
     end
     doc.elements["paper"].elements["rate_score"].text=score
     @xml=ExamRater.rater(doc,params[:id],score)
-    self.write_xml("#{Constant::PUBLIC_PATH}"+url, doc)
+    self.write_xml(url, doc)
     redirect_to "/rater/exam_raters/#{ @exam_user.examination_id}/reader_papers"
   end
 
