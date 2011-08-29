@@ -40,8 +40,6 @@ class User::CollectionsController < ApplicationController
       collection = Collection.find_or_create_by_user_id(exam_user.user_id)
       collection.set_collection_url
       question_answer = exam_user.return_question_answer(params[:id])
-      puts "============="
-      puts question_answer.text
       collection_doc = collection.open_xml
       problem = collection.problem_in_collection(params[:problem_id], collection_doc)
       if problem

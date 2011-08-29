@@ -61,12 +61,12 @@ function check_note_form(question_id) {
     return true;
 }
 
-close_question_info_id = 0;
+note_question_info_id = 0;
 //显示题目
 function note_question_info(id){
-    if(close_question_info_id != 0 && close_question_info_id != id){
-        document.getElementById("question_info_" + close_question_info_id).style.display = "none";
+    if(note_question_info_id != 0 && note_question_info_id != id){
+        document.getElementById("question_info_" + note_question_info_id).style.display = "none";
     }
     document.getElementById("question_info_" + id).style.display = "block";
-    close_question_info_id = id;
+    note_question_info_id = id;
 }
