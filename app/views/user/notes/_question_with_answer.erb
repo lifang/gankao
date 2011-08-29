@@ -55,7 +55,6 @@
   <div id="last_score_<%=question_with_answer.attributes["id"].to_i  %>"></div>
 </div>
 <div class="title">
-  我的笔记：<%= question_with_answer.elements["note_text"].text %>
   <div>
     <%= form_tag "/user/notes/#{question_with_answer.attributes["id"]}/update_note",
       :class => "required-validate", :method => "post" do -%>

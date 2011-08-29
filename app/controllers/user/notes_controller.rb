@@ -5,17 +5,12 @@ class User::NotesController < ApplicationController
     session[:tag] = nil
     @note = Note.find_by_user_id(cookies[:user_id])
     begin
-      current_num = 0
-      start_num = (params[:page].nil? or params[:page] == "" or params[:page] == "1") ? 0 : params[:page].to_i * 10
+      @has_next_page = false
       @doc = @note.open_xml
-      @doc.root.elements['problems'].each_element do |problem|
-        @doc.delete_element(problem.xpath) if start_num > 0
-        start_num -= 1
-      end if start_num > 0
-      @doc.root.elements['problems'].each_element do |problem|
-        @doc.delete_element(problem.xpath) if current_num >= 10
-        current_num += 1
-      end
+      @doc = @note.get_start_element(params[:page], @doc)
+      current_element = @note.return_page_element(@doc, @has_next_page)
+      @doc = current_element[0]
+      @has_next_page = current_element[1]
     rescue
       flash[:warn] = "您当前未做任何笔记。"
     end
@@ -70,10 +65,21 @@ class User::NotesController < ApplicationController
   end
 
   def search
-    session[:tag] = params[:tag]
+    session[:note_text] = params[:note_text]
+    redirect_to "/user/notes/search_list"
+  end
+
+  def search_list
     @note = Note.find_by_user_id(cookies[:user_id].to_i)
-    @doc = @note.search(@note.open_xml, params[:tag], params[:category])
+    @doc = @note.search(@note.open_xml, session[:note_text])
+    @has_next_page = false
+    @doc = @note.get_start_element(params[:page], @doc)
+    current_element = @note.return_page_element(@doc, @has_next_page)
+    @doc = current_element[0]
+    @has_next_page = current_element[1]
     render "index"
   end
+
+  
 
 end

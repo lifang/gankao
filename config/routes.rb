@@ -120,6 +120,7 @@ Gankao::Application.routes.draw do
       end
       collection do
         post "search"
+        get "search_list"
       end
     end
     resources :collections do
