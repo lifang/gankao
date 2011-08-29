@@ -3,9 +3,11 @@ module UserRoleHelper
 
 
   def is_vip?
-   return Order.find_by_user_id(cookies[:user_id])
+    cookies[:is_vip]=1 if Order.find_by_user_id(cookies[:user_id]) unless cookies[:is_vip]
+    return cookies[:is_vip]
   end
 
+  
   def is_student?
     cookie_role cookies[:user_id] unless cookies[:user_roles]
     user_roles = cookies[:user_roles].split(",")
