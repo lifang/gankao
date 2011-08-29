@@ -446,7 +446,6 @@ function question_values(question_id) {
 function cancel_note(question_id) {
     $("start_note_" + question_id).style.display = "none";
     $("note_" + question_id).style.display = "block";
-    $("note_text_" + question_id).value = "";
 }
 
 function update_note(question_id) {

@@ -112,26 +112,40 @@ class Note < ActiveRecord::Base
   end
 
   #查询试题
-  def search(doc, tag, category)
+  def search(doc, note_text)
     doc.root.elements["problems"].each_element do |problem|
-      if problem.elements["category"].text.to_i != category.to_i
-        doc.delete_element(problem.xpath)
+      problem.elements["questions"].each_element do |question|
+        doc.delete_element(question.xpath) unless question.elements["note_text"].text =~ /#{note_text}/
       end
-    end unless category.nil? or category == ""
-    unless tag.nil? or tag == ""
-      tags = tag.strip.split(" ")
-      doc.root.elements["problems"].each_element do |problem|
-        is_include = false
-        problem.elements["questions"].each_element do |question|
-          if !question.elements["tags"].nil? and !question.elements["tags"].text.nil? and question.elements["tags"].text != ""
-            question_tag = question.elements["tags"].text.split(" ")
-            tags.each { |t| is_include = true  if question_tag.include?(t) }
-          end
-          break if is_include
-        end
-        doc.delete_element(problem.xpath) unless is_include
-      end
-    end
+    end unless note_text.nil? or note_text == ""
     return doc
   end
+
+  #返回开始显示的节点
+  def get_start_element(page, doc)
+    start_num = (page.nil? or page == "" or page == "1") ? 0 : (page.to_i-1) * 1
+    doc.root.elements['problems'].each_element do |problem|
+      problem.elements["questions"].each_element do |question|
+        doc.delete_element(question.xpath) if start_num > 0
+        start_num -= 1
+      end
+    end if start_num > 0
+    return doc
+  end
+
+  #返回所有要显示的节点
+  def return_page_element(doc, has_next_page)
+    current_num = 0
+    doc.elements["note"].elements['problems'].each_element do |problem|
+      problem.elements["questions"].each_element do |question|
+        if current_num >= 1
+          doc.delete_element(question.xpath)
+          has_next_page = true unless has_next_page
+        end
+        current_num += 1
+      end
+    end
+    return [doc, has_next_page]
+  end
+
 end
