@@ -25,7 +25,12 @@ class ExamListsController < ApplicationController
   end
 
   def incorrect_list
+    @has_next_page = false
     @lists=list
+    @lists =Examination.get_start_element(params[:page], @lists)
+    current_element = Examination.return_page_element(@lists, @has_next_page)
+    @lists = current_element[0]
+    @has_next_page = current_element[1]
     @feedbacks=Feedback.find_by_sql("select * from feedbacks where user_id=#{cookies[:user_id]}")
   end
   def feedback

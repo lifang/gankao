@@ -122,6 +122,27 @@ class Examination < ActiveRecord::Base
     return hash
   end
 
+  def self.return_page_element(doc, has_next_page)
+    current_num = 0
+    doc.elements["/collection/problems"].each_element do |problem|
+        if current_num >= 1
+          doc.delete_element(problem.xpath)
+          has_next_page = true unless has_next_page
+        end
+        current_num += 1
+    end
+    return [doc, has_next_page]
+  end
 
+
+    #返回开始显示的节点
+  def self.get_start_element(page, doc)
+    start_num = (page.nil? or page == "" or page == "1") ? 0 : (page.to_i-1) * 1
+    doc.root.elements['problems'].each_element do |problem|
+        doc.delete_element(problem.xpath) if start_num > 0
+        start_num -= 1
+    end if start_num > 0
+    return doc
+  end
 
 end

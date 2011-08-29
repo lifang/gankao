@@ -4,12 +4,11 @@
   <% else %>
     <div class="biz_art_list_box" >
       <span><h1>错题</h1></span>
-      <% n=1 %>
-      <% @lists.elements["/collection/problems"].each_element do |problem|%>
         <ul>
+           <% @lists.elements["/collection/problems"].each_element do |problem|%>
           <li>
             <h1>
-              <%= "#{n}."+problem.elements['title'].text.to_s.html_safe  %>
+              <%=problem.elements['title'].text.to_s.html_safe  %>
               <span style="float:right"><% if problem.attributes["types"].to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>单选题
                 <% elsif problem.attributes["types"].to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>多选题
                 <% elsif problem.attributes["types"].to_i == Problem::QUESTION_TYPE[:JUDGE] %>判断题
@@ -20,12 +19,19 @@
               </span>
             </h1>
             <%= render :partial=>"/exam_lists/question_with_answer",:object=>problem %>
-
           </li>
+             <% end
+      end %>
         </ul>
-        <% n +=1 %>
+       <div>
+      <% if params[:page] and params[:page].to_i > 1 %>
+        <a href="<%= request.path %>?page=<%= params[:page].to_i - 1 %>">【上一页】</a>
+      <% end %>&nbsp;&nbsp;
+      <% if @has_next_page %>
+        <% current_page = (params[:page] and params[:page].to_i > 1) ? params[:page].to_i : 1 %>
+        <a href="<%= request.path %>?page=<%= current_page + 1 %>">【下一页】</a>
       <% end %>
-    <% end %>
+    </div>
     <div id="show_div"></div>
     <div class="clear"></div>
     <input type="hidden" value="<%= @num %>"/>
