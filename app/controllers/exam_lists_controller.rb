@@ -26,7 +26,7 @@ class ExamListsController < ApplicationController
     @feedbacks=Feedback.find_by_sql("select * from feedbacks where user_id=#{cookies[:user_id]}")
   end
   def feedback
-    @feedback=Feedback.new(:description=>params[:feedback][:description],:user_id=>"#{cookies[:user_id]}")
+    @feedback=Feedback.new(:description=>params[:feedback][:description],:user_id=>"#{cookies[:user_id]}",:question_id=>params[:question_id])
     if @feedback.save
       redirect_to "/exam_lists/incorrect_list"
     end
