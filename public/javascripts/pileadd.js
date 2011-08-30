@@ -332,52 +332,33 @@ function input_value(id){
     }
 }
 
-function ajax_problem_info(){
-    new Ajax.Updater("show_div" , "/exam_lists/show_problem",
-    {
-        asynchronous:true,
-        evalScripts:true,
-        method:"post",
-        parameters:'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
-    });
-    return false;
-}
 
-function next_problem_info(){
-    var num=$("num").value;
-    if (num==""||num.length==0){
-        alert("错题已完！");
-        return false;
-    }
-    else{
-        new Ajax.Updater("show_div" , "/exam_lists/next_problem",
+function feedback(id){
+        new Ajax.Updater("feedback" , "/exam_lists/feedback_list",
         {
             asynchronous:true,
             evalScripts:true,
             method:"post",
-            parameters:'num='+ num +'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+            parameters:'id='+ id+ '&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
         });
         return false;
     }
-}
 
-
-function problem_values(){
-    var num=$("num").value;
-    var question_ids=$("question_ids").value;
+function problem_values(id){
+    var page=$("page").value;
     var problem_num=$("problem_id").value;
-    var ids=question_ids.split(",");
+    var ids=id.split(",");
     var  str=""
     for(var i=0;i<ids.length;i++){
         question_values(ids[i]);
         str +=('answer_'+ids[i]+'='+$("answer_" + ids[i]).value)+'&';
     }
-    new Ajax.Updater("item_pools_show" , "/exam_lists/compare_answer",
+    new Ajax.Updater("show_div" , "/exam_lists/compare_answer",
     {
         asynchronous:true,
         evalScripts:true,
         method:"post",
-        parameters: str+'problem_id='+problem_num+'&question_ids='+question_ids +'&num='+num +'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+        parameters: str+'problem_id='+problem_num+'&page='+page+'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
     });
     return false;
 }
@@ -427,6 +408,7 @@ function question_values(question_id) {
         }
     } else {
         var answer = $("question_answer_" + question_id);
+        alert(answer);
         if (answer != null && !checkspace(answer.value)) {
             $("answer_" + question_id).value = answer.value;
         }
@@ -443,16 +425,6 @@ function update_note(question_id) {
     $("note_" + question_id).style.display = "none";
 }
 
-function delete_problems(question_id,problem_id){
-    new Ajax.Updater("problems" , "/exam_lists/delete_problem",
-    {
-        asynchronous:true,
-        evalScripts:true,
-        method:"post",
-        parameters:'question_id='+ question_id +'&problem_id='+ problem_id +'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
-    });
-    return false;
-}
 
 function question_style(id){
     $(document).ready(function(){

@@ -1,12 +1,10 @@
 <div class="title">
   <div style="float:left;display: inline;width:75%;">
-    &nbsp;&nbsp;&nbsp;&nbsp;<%= question_answer.elements["title"].text.to_s.html_safe %>
+    &nbsp;&nbsp;&nbsp;&nbsp;<%= @lists.elements["title"].text.to_s.html_safe %>
   </div>
-  <% if params[:result].nil? and @exam and cookies[:user_id].to_i == @exam.user_id %>
-  <% end %>
   <div class="clear"></div>
 </div>
-<% question_answer.elements["questions"].each_element do |question| %>
+<% @lists.elements["questions"].each_element do |question| %>
   <div class="question">
     &nbsp;&nbsp;&nbsp;&nbsp;小题描述：
     &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["description"].text if question.elements["description"] %>
@@ -19,7 +17,7 @@
     correct_type = question.attributes["correct_type"]
     answer = question.elements["answer"]
     answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
-    user_answer=question.elements["answer_agains"].elements["answer_again"].elements["user_answer"].text
+    user_answer=question.elements["user_answer"].text
     user_answers=user_answer.nil? ? [] :  user_answer.split(";|;")
     (0..attrs_array.length-1).each do |i|
       is_answer = answers.include?(attrs_array[i])
@@ -61,8 +59,10 @@
   <div class="title">&nbsp;&nbsp;&nbsp;&nbsp;知识点标签：
     &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["tags"].text %>
   </div>
-  <div>
-    <input type="hidden" value="<%= @str %>" id="num" />
-    <input type="button" value="下一题" onclick="javascript:next_problem_info()" />
-  </div>
 <% end %>
+  <div>
+   <% if @has_next_page %>
+      <% current_page = (params[:page] and params[:page].to_i > 1) ? params[:page].to_i : 1 %>
+      <a href="/exam_lists/question_info?page=<%= current_page + 1 %>">下一题</a>
+    <% end %>
+  </div>

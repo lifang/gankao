@@ -64,6 +64,10 @@ module Constant
     :practice_5=>3,
     :practice_6=>3,
   }
+
+   #vip价格
+   VIP=10
+
   
   
 end

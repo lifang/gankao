@@ -1,6 +1,6 @@
 #encoding: utf-8
 class UsersController < ApplicationController
-  before_filter :access?, :only => [:show, :update, :update_info]
+  before_filter :access?, :only => [:show, :update, :update_info,:first_page]
   def update #更新密码
     @user =User.find(params[:id])
     if @user.has_password?(params[:user][:old_password])
