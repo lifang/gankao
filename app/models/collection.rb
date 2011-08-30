@@ -81,4 +81,70 @@ class Collection < ActiveRecord::Base
     return doc
   end
 
+  #当前题目是否已经收藏到错题集
+  def problem_in_collection(problem_id, collection_doc)
+    problem = collection_doc.elements["collection"].elements["problems"].elements["problem[@id='#{problem_id}']"]
+    return problem
+  end
+
+  #当前题点是否已经收藏到错题集
+  def question_in_collection(problem, question_id)
+    question = problem.elements["questions"].elements["question[@id='#{question_id}']"]
+    return question
+  end
+
+  #更新当前提点的答案
+  def update_question(answer_text, question_path, collection_xml)
+    que = collection_xml.elements[question_path]
+    if que.elements["user_answer"]
+      true_num = (((que.attributes["error_percent"].to_i.to_f)/100) * (que.attributes["repeat_num"].to_i)).round
+      que.attributes["repeat_num"] = que.attributes["repeat_num"].to_i + 1
+      que.attributes["error_percent"] = ((true_num.to_f/(que.attributes["repeat_num"].to_i))*100).round
+    else
+      que.add_attribute("repeat_num", "1")
+      que.add_attribute("error_percent", "0")
+    end
+    que.add_element("user_answer").add_text("#{answer_text}")
+    self.generate_collection_url(collection_xml.to_s)
+  end
+
+  #如果当前题目有题点已经收藏过，就只收藏题点
+  def add_question(question, answer_text, collection_problem, collection_xml)
+    question.add_element("user_answer").add_text("#{answer_text}")
+    question.add_attribute("repeat_num", "1")
+    question.add_attribute("error_percent", "0")
+    questions = collection_xml.elements["#{collection_problem.xpath}/questions"]
+    questions.elements.add(question)
+    self.generate_collection_url(collection_xml.to_s)
+  end
+
+  #如果当前题目没有做过笔记，则将题目加入到笔记
+  def auto_add_problem(paper_xml, question_id, problem_path, answer_text, collection_xml)
+    paper_problem = paper_xml.elements["#{problem_path}"]
+    paper_problem.elements["questions"].each_element do |question|
+      if question.attributes["id"].to_i != question_id.to_i
+        paper_xml.delete_element(question.xpath)
+      end
+    end if paper_problem
+    last_question = paper_problem.elements["questions"].elements["question[@id='#{question_id.to_i}']"]
+    last_question.add_element("user_answer").add_text("#{answer_text}")
+    last_question.add_attribute("repeat_num", "1")
+    last_question.add_attribute("error_percent", "0")
+    collection_xml.elements["/collection/problems"].elements.add(paper_problem)
+    self.generate_collection_url(collection_xml.to_s)
+  end
+
+  #手动添加收藏提点
+  def hand_add_question(paper_url, question_answer, question_path, problem, collection_doc)
+    paper = ExamRater.open_file("#{Constant::BACK_PUBLIC_PATH}#{paper_url}")
+    paper_question = paper.elements["#{question_path}"]
+    add_question(paper_question, question_answer.text, problem, collection_doc)
+  end
+
+  #手动添加收藏提点
+  def hand_add_problem(question_id, paper_url, question_answer, problem_path, collection_doc)
+    paper_xml = ExamRater.open_file("#{Constant::BACK_PUBLIC_PATH}#{paper_url}")
+    auto_add_problem(paper_xml, question_id, problem_path, question_answer.text, collection_doc)
+  end
+
 end

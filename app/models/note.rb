@@ -74,8 +74,8 @@ class Note < ActiveRecord::Base
   end
 
   #如果题点已经做过笔记，则重新保存笔记
-  def update_question(note_text, question, note_doc)
-    que = note_doc.elements[question.xpath]
+  def update_question(note_text, question_xpath, note_doc)
+    que = note_doc.elements[question_xpath]
     if que.elements["note_text"]
       que.elements["note_text"].text = note_text
     else
@@ -89,7 +89,8 @@ class Note < ActiveRecord::Base
     paper = ExamRater.open_file("#{Constant::BACK_PUBLIC_PATH}#{paper_url}")
     paper_question = paper.elements["#{question_path}"]
     questions = note_doc.elements["#{problem.xpath}/questions"]
-    paper_question.add_element("user_answer").add_text("#{question_answer.text}")
+    user_answer = (question_answer and question_answer.text) ? question_answer.text : ""
+    paper_question.add_element("user_answer").add_text("#{user_answer}")
     paper_question.add_element("note_text").add_text("#{note_text}")
     questions.elements.add(paper_question)
     self.save_xml(note_doc)
@@ -100,40 +101,51 @@ class Note < ActiveRecord::Base
     paper = ExamRater.open_file("#{Constant::BACK_PUBLIC_PATH}#{paper_url}")
     paper_problem = paper.elements["#{problem_path}"]
     paper_problem.elements["questions"].each_element do |question|
-      if question.attributes["id"].to_i != question_id.to_i
-        paper.delete_element(question.xpath)
-      end
+      paper.delete_element(question.xpath) if question.attributes["id"].to_i != question_id.to_i
     end if paper_problem
     last_question = paper_problem.elements["questions"].elements["question[@id='#{question_id.to_i}']"]
-    last_question.add_element("user_answer").add_text("#{question_answer.text}")
+    user_answer = (question_answer and question_answer.text) ? question_answer.text : ""
+    last_question.add_element("user_answer").add_text("#{user_answer}")
     last_question.add_element("note_text").add_text("#{note_text}")
     note_doc.elements["/note/problems"].elements.add(paper_problem)
     self.save_xml(note_doc)
   end
 
   #查询试题
-  def search(doc, tag, category)
+  def search(doc, note_text)
     doc.root.elements["problems"].each_element do |problem|
-      if problem.elements["category"].text.to_i != category.to_i
-        doc.delete_element(problem.xpath)
+      problem.elements["questions"].each_element do |question|
+        doc.delete_element(question.xpath) unless question.elements["note_text"].text =~ /#{note_text}/
       end
-    end unless category.nil? or category == ""
-    unless tag.nil? or tag == ""
-      tags = tag.strip.split(" ")
-      doc.root.elements["problems"].each_element do |problem|
-        is_include = false
-        problem.elements["questions"].each_element do |question|
-          if !question.elements["tags"].nil? and !question.elements["tags"].text.nil? and question.elements["tags"].text != ""
-            question_tag = question.elements["tags"].text.split(" ")
-            tags.each { |t| is_include = true  if question_tag.include?(t) }
-          end
-          break if is_include
-        end
-        if is_include == false
-          doc.delete_element(problem.xpath)
-        end
-      end
-    end
+    end unless note_text.nil? or note_text == ""
     return doc
   end
+
+  #返回开始显示的节点
+  def get_start_element(page, doc)
+    start_num = (page.nil? or page == "" or page == "1") ? 0 : (page.to_i-1) * 1
+    doc.root.elements['problems'].each_element do |problem|
+      problem.elements["questions"].each_element do |question|
+        doc.delete_element(question.xpath) if start_num > 0
+        start_num -= 1
+      end
+    end if start_num > 0
+    return doc
+  end
+
+  #返回所有要显示的节点
+  def return_page_element(doc, has_next_page)
+    current_num = 0
+    doc.elements["note"].elements['problems'].each_element do |problem|
+      problem.elements["questions"].each_element do |question|
+        if current_num >= 1
+          doc.delete_element(question.xpath)
+          has_next_page = true unless has_next_page
+        end
+        current_num += 1
+      end
+    end
+    return [doc, has_next_page]
+  end
+
 end

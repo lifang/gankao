@@ -5,7 +5,16 @@ class User::NotesController < ApplicationController
     session[:tag] = nil
     @note = Note.find_by_user_id(cookies[:user_id])
     begin
+      @has_next_page = false
       @doc = @note.open_xml
+      puts  @doc
+      @doc = @note.get_start_element(params[:page], @doc)
+      puts @doc
+      current_element = @note.return_page_element(@doc, @has_next_page)
+      @doc = current_element[0]
+      puts "========="
+      puts @doc
+      @has_next_page = current_element[1]
     rescue
       flash[:warn] = "您当前未做任何笔记。"
     end
@@ -34,7 +43,7 @@ class User::NotesController < ApplicationController
       if problem
         question = note.question_in_note(problem, params[:id])
         if question
-          note.update_question(params["note_text_#{params[:id]}"].strip, question, note_doc)
+          note.update_question(params["note_text_#{params[:id]}"].strip, question.xpath, note_doc)
         else
           note.add_question(exam_user.paper_url, question_answer, params["note_text_#{params[:id]}"].strip,
             params["q_xpath_" + params[:id]], problem, note_doc)
@@ -46,9 +55,35 @@ class User::NotesController < ApplicationController
     end
     flash[:notice] = "笔记添加成功."
     render :update do |page|
-        page.replace_html "note_div" , :partial => "/common/display_flash"
-        page.replace_html "start_note_#{params[:id]}",  :inline => "<script>cancel_note('#{params[:id]}');</script>"
-      end
+      page.replace_html "note_div" , :partial => "/common/display_flash"
+      page.replace_html "start_note_#{params[:id]}",  :inline => "<script>cancel_note('#{params[:id]}');</script>"
+    end
   end
+
+  def update_note
+    note = Note.find_by_user_id(cookies[:user_id].to_i)
+    note.update_question(params["note_text_#{params[:id]}"].strip, 
+      params["q_xpath_#{params[:id]}"], note.open_xml) if note
+    flash[:notice] = "笔记编辑成功。"
+    redirect_to "/user/notes"
+  end
+
+  def search
+    session[:note_text] = params[:note_text]
+    redirect_to "/user/notes/search_list"
+  end
+
+  def search_list
+    @note = Note.find_by_user_id(cookies[:user_id].to_i)
+    @doc = @note.search(@note.open_xml, session[:note_text])
+    @has_next_page = false
+    @doc = @note.get_start_element(params[:page], @doc)
+    current_element = @note.return_page_element(@doc, @has_next_page)
+    @doc = current_element[0]
+    @has_next_page = current_element[1]
+    render "index"
+  end
+
   
+
 end

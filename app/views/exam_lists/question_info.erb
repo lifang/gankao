@@ -1,14 +1,10 @@
-<div id="item_pools_show" style="position:absolute;z-index:999;margin-left:150px;float:left;background-color:#fff;width:450px;border:#ccc solid 1px;">
-  <div class="title">
-    <div style="float:left;display: inline;width:75%;">
-      &nbsp;&nbsp;&nbsp;&nbsp;<%= question_info.elements["title"].text.to_s.html_safe %>
-    </div><span style="float:right"><a onclick="javascript:$('item_pools_show').style.display='none'">关闭</a></span>
-    <% if params[:result].nil? and @exam and cookies[:user_id].to_i == @exam.user_id %>
-    <% end %>
-    <div class="clear"></div>
-  </div>
-  <% attr="" %>
-  <% question_info.elements["questions"].each_element do |question| %>
+
+<div id="show_div">
+  <div class="biz_art_list_box" >
+    <% attr="" %>
+    <% problem=@lists.elements["/collection/problems"].elements["problem"]%>
+    &nbsp;&nbsp;&nbsp;&nbsp;<%= problem.elements["title"].text.to_s.html_safe %>
+    <% problem.elements["questions"].each_element do |question| %>
       <% attr +=question.attributes["id"]+"," %>
       <div id="show_problem">
         <div class="question">
@@ -38,20 +34,22 @@
               <div >&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>" value="<%=attrs_array[i]  %>"/><label>对</label></div>
               <div>&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>" value="<%=attrs_array[i]  %>"/><label>错</label></div>
             <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] or correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER]
-            %>
-            <% end  %>
+              %><div>&nbsp;&nbsp;&nbsp;&nbsp;<input type="textfield" id="question_answer_<%= question.attributes["id"].to_i %>" value=""/></div>
+              <% end  %>
           </div>
         </div>
         <div>
-          <input type="hidden" value="<%= @num[0] %>" id="problem_id" />
           <input type="hidden" value=" " id="answer_<%= question.attributes["id"] %>"  name="answer_<%= question.attributes["id"] %>"/>
           <input type="hidden" value="<%=correct_type  %>" id="question_type_<%= question.attributes["id"] %>" />
-          <input type="hidden" value="<%= @str %>" id="num" />
-          <input type="submit" value="提交" onclick="javascript:problem_values()" />
-          <input type="button" value="跳过" onclick="javascript:next_problem_info()" />
         </div>
       </div>
-  <% end %>
-  <input type="hidden" value="<%= attr.chop %>" id="question_ids" name="question_ids" />
+    <% end %>
+    <input type="hidden" value="<%= problem.attributes["id"] %>" id="problem_id" />
+    <input type="submit" value="提交" onclick="javascript:problem_values('<%= attr.chop %>')" />
+    <% if @has_next_page %>
+      <% current_page = (params[:page] and params[:page].to_i > 1) ? params[:page].to_i : 1 %>
+      <a href="<%= request.path %>?page=<%= current_page + 1 %>">跳过</a>
+    <% end %>
+  </div>
 </div>
-<%= draggable_element("item_pools_show", :revert => false) %>
+<%#= draggable_element("item_pools_show", :revert => false) %>

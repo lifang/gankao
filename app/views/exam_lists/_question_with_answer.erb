@@ -6,17 +6,17 @@
 <% question_with_answer.elements["questions"].each_element do |question| %>
   <div class="question">
     &nbsp;&nbsp;&nbsp;&nbsp;小题描述：
-    &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["description"].text if question.elements["description"] %>
+    &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["description"].text if question.elements["description"] %> 
     [<%= question.attributes["score"] %>分]
     [<span id="user_score_<%= question.attributes["id"].to_i %>">
       <font color="red">得<%= question.attributes["user_score"].to_i.to_s+"分" %></font>
-    </span>]
+    </span>]<span style="float:right"><a href="javascript:feedback('<%= question.attributes["id"] %>')">提问</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:delete_problems('<%= question.attributes["id"] %>','<%= question_with_answer.attributes["id"] %>')">删除</a></span>
     <% attrs_str = question.elements["questionattrs"].text
     attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
     correct_type = question.attributes["correct_type"]
     answer = question.elements["answer"]
     answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
-    user_answer=question.elements["answer_agains"].elements["answer_again"].elements["user_answer"].text
+    user_answer=question.elements["user_answer"].text
     user_answers=user_answer.nil? ? [] :  user_answer.split(";|;")
     (0..attrs_array.length-1).each do |i|
       is_answer = answers.include?(attrs_array[i])

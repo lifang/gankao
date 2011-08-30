@@ -70,69 +70,60 @@ function check_password() {
     }
 }
 close_question_info_id=0
-function compare_value(id,compare_id){
+function compare_value(id){
+    jQuery.noConflict();
     var check_mobile = new RegExp(/^[0-9]{1,2}$/);
-    if (close_question_info_id != 0) {  //关闭查看框
-        if (parseInt(compare_id)==0){
-            document.getElementById("question_info_"+close_question_info_id).style.display="none";
-            close_question_info_id = 0;
-        }else{
-            var arry=id.split("_");
-            var i;
-            for(i=1;i<arry.length;i++){
-                var input_value=$("single_value_"+arry[i]).value;
-                var fact_value=$("fact_value_"+arry[i]).value;
-                var reason=$("reason_for_"+arry[i]).value;
-                if (parseInt(fact_value) < parseInt(input_value)||parseInt(input_value)<0||input_value==""){
-                    $("if_submited_"+arry[i]).value =0;
-                    $("flash_part_"+arry[i]).innerHTML="<font color = 'red'>请您输入合理的分值。</font>";
-                    return false;
-                }
-                else{
-                    if (check_mobile.test(input_value)){
-                        $("flash_part_"+arry[i]).innerHTML="";
-                        if(reason==""||reason.length==0){
-                            $("flash_part_"+arry[i]).innerHTML="<font color = 'red'>请输入评分理由。</font>";
+    var arry=id.split("_");
+    var i;
+    for(i=1;i<arry.length;i++){
+        var input_value=$("single_value_"+arry[i]).value;
+        var fact_value=$("fact_value_"+arry[i]).value;
+        var reason=document.getElementById("reason_for_"+arry[i]).value;
+        if (parseInt(fact_value) < parseInt(input_value)||parseInt(input_value)<0||input_value==""){
+            document.getElementById("if_submited_"+arry[i]).value =0;
+            document.getElementById("flash_part_"+arry[i]).innerHTML="<font color = 'red'>请您输入合理的分值。</font>";
+            return false;
+        }
+        else{
+            if (check_mobile.test(input_value)){
+                document.getElementById("flash_part_"+arry[i]).innerHTML="";
+                if(reason==""||reason.length==0){
+                    document.getElementById("flash_part_"+arry[i]).innerHTML="<font color = 'red'>请输入评分理由。</font>";
 
-                        }else{
-                            $("if_submited_"+arry[i]).value =1;
-                            if (i==arry.length-1){
-                                document.getElementById("question_info_"+close_question_info_id).style.display="none";
-                                close_question_info_id = 0;
-                                active_button();
-                            }
-                        }
-                    }
-                    else{
-                        $("flash_part_"+arry[i]).innerHTML="<font color = 'red'>得分只能是数值。</font>";
+                }else{
+                    document.getElementById("if_submited_"+arry[i]).value =1;
+                    if (i==arry.length-1){
+                        active_button();
                     }
                 }
             }
+            else{
+                document.getElementById("flash_part_"+arry[i]).innerHTML="<font color = 'red'>得分只能是数值。</font>";
+            }
         }
     }
-    document.getElementById("question_info_"+id).style.display="block";
-    close_question_info_id = id;
     active_button();
+    
 }
 function active_button(){
-    $("flash_notice").innerHTML="";
+    document.getElementById("flash_notice").innerHTML="";
     var flag=0;
-    var str=$("problem_id").value;
+    var str=document.getElementById("problem_id").value;
     var n=str.split(",");
     for(i=1;i<n.length;i++){
-        var value=$("single_value_"+n[i]).value;
-        var reason=$("reason_for_"+n[i]).value;
+        var value=document.getElementById("single_value_"+n[i]).value;
+        var reason=document.getElementById("reason_for_"+n[i]).value;
         flag=1;
         if(value ==""){
-            $("if_submited_"+n[i]).value =0;
+            document.getElementById("if_submited_"+n[i]).value =0;
             flag=0;
-            $("button_id").disabled=true;
+            document.getElementById("button_id").disabled=true;
             return false;
         }else{
             if(reason==""){
-                $("if_submited_"+n[i]).value =0;
+                document.getElementById("if_submited_"+n[i]).value =0;
                 flag=0;
-                $("button_id").disabled=true;
+                document.getElementById("button_id").disabled=true;
                 return false;
             }
 
@@ -141,23 +132,23 @@ function active_button(){
     if(flag==1){
         button_status();
         if(button_status()){
-            $("button_id").disabled=false;
+            document.getElementById("button_id").disabled=false;
         }
         else{
-            $("flash_notice").innerHTML="<font color = 'red'>请检查批阅分数</font>";
-            $("button_id").disabled=true;
+            document.getElementById("flash_notice").innerHTML="<font color = 'red'>请检查批阅分数</font>";
+            document.getElementById("button_id").disabled=true;
         }
     }else{
-        $("button_id").disabled=true;
+        document.getElementById("button_id").disabled=true;
     }
 }
 function button_status(){
-    var str=$("problem_id").value;
+    var str=document.getElementById("problem_id").value;
     var  flag=0;
     var i;
     var n=str.split(",");
     for(i=0;i<n.length-1;i++){
-        var  value=$("if_submited_"+n[i+1]).value;
+        var  value=document.getElementById("if_submited_"+n[i+1]).value;
         flag=1;
         if(value==0){
             flag=0;
@@ -341,53 +332,32 @@ function input_value(id){
     }
 }
 
-function ajax_problem_info(){
-    alert(1);
-    new Ajax.Updater("show_div" , "/exam_lists/show_problem",
-    {
-        asynchronous:true,
-        evalScripts:true,
-        method:"post",
-        parameters:'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
-    });
-    return false;
-}
 
-function next_problem_info(){
-    var num=$("num").value;
-    if (num==""||num.length==0){
-        alert("错题已完！");
-        return false;
-    }
-    else{
-        new Ajax.Updater("show_div" , "/exam_lists/next_problem",
+function feedback(id){
+        new Ajax.Updater("feedback" , "/exam_lists/feedback_list",
         {
             asynchronous:true,
             evalScripts:true,
             method:"post",
-            parameters:'num='+ num +'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+            parameters:'id='+ id+ '&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
         });
         return false;
     }
-}
 
-
-function problem_values(){
-    var num=$("num").value;
-    var question_ids=$("question_ids").value;
+function problem_values(id){
     var problem_num=$("problem_id").value;
-    var ids=question_ids.split(",");
+    var ids=id.split(",");
     var  str=""
-    for(i=0;i<ids.length;i++){
+    for(var i=0;i<ids.length;i++){
         question_values(ids[i]);
         str +=('answer_'+ids[i]+'='+$("answer_" + ids[i]).value)+'&';
     }
-    new Ajax.Updater("item_pools_show" , "/exam_lists/compare_answer",
+    new Ajax.Updater("show_div" , "/exam_lists/compare_answer",
     {
         asynchronous:true,
         evalScripts:true,
         method:"post",
-        parameters: str+'problem_id='+problem_num+'&question_ids='+question_ids +'&num='+num +'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+        parameters: str+'problem_id='+problem_num+'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
     });
     return false;
 }
@@ -404,6 +374,20 @@ function start_note(question_id, problem_id, examination_id, paper_id) {
     });
     return false;
 }
+
+function start_collection(question_id, problem_id, examination_id, paper_id, problem_path, question_path) {
+    new Ajax.Updater("note_div" , "/user/collections/"+question_id+"/create_collection",
+    {
+        asynchronous:true,
+        evalScripts:true,
+        method:"post",
+        parameters:'problem_id='+problem_id+'&examination_id='+examination_id+'&paper_id='+paper_id+'&problem_path='+problem_path
+        +'&question_path='+question_path+'authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+    });
+    return false;
+}
+
+
 
 function question_values(question_id) {
     $("answer_" + question_id).value = "";
@@ -423,6 +407,7 @@ function question_values(question_id) {
         }
     } else {
         var answer = $("question_answer_" + question_id);
+        alert(answer);
         if (answer != null && !checkspace(answer.value)) {
             $("answer_" + question_id).value = answer.value;
         }
@@ -432,17 +417,26 @@ function question_values(question_id) {
 function cancel_note(question_id) {
     $("start_note_" + question_id).style.display = "none";
     $("note_" + question_id).style.display = "block";
-    $("note_text_" + question_id).value = "";
 }
 
-function delete_problems(id){
-    alert(id);
+function update_note(question_id) {
+    $("start_note_" + question_id).style.display = "block";
+    $("note_" + question_id).style.display = "none";
+}
+
+function delete_problems(question_id,problem_id){
     new Ajax.Updater("problems" , "/exam_lists/delete_problem",
     {
         asynchronous:true,
         evalScripts:true,
         method:"post",
-        parameters:'id='+ id +'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+        parameters:'question_id='+ question_id +'&problem_id='+ problem_id +'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
     });
     return false;
+}
+
+function question_style(id){
+    $(document).ready(function(){
+        $("#"+id).slideToggle("slow");
+    });
 }

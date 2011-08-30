@@ -1,7 +1,7 @@
-<?xml version='1.0' encoding='UTF-8'?>      <exam id='6'>
-        <paper id='6' score='0'>
-          <questions></questions>
-          <auto_score></auto_score>
-          <rate_score></rate_score>
+<?xml version='1.0' encoding='UTF-8'?>      <exam id='2'>
+        <paper id='3' score='0'>
+          <questions><question id='5' is_sure='1' score='0'><answer>ehrh</answer></question><question id='6' is_sure='1' score='0'><answer>87;|;43</answer></question><question id='7' is_sure='1' score='0'><answer>1</answer></question><question id='8' is_sure='1' score='0'><answer></answer></question><question id='9' is_sure='1' score='0'><answer>wefweewrw</answer></question><question id='10' is_sure='1' score='0'><answer></answer></question><question id='11' is_sure='1' score='0'><answer>fwege;|;rgerhrth</answer></question></questions>
+          <auto_score/>
+          <rate_score/>
         </paper>
       </exam>

@@ -1,13 +1,15 @@
-<div class="products_list_style_box" id="question_info_<%= show_problem.attributes["id"].to_i %>" style="display:none">
+<div class="products_list_style_box" id="question_info_<%= show_problem[1].to_i %>" style="display:none">
   <div class="arrow" style="top:35px;"></div>
   <div class="big_pic_box" style="top:0px;">
     <div class="in">
       <div class="title">
-          <%= show_problem.elements["title"].text.to_s.html_safe %>
+        <%= show_problem[0].elements["title"].text.to_s.html_safe %>
       </div>
-      <% show_problem.elements["questions"].each_element do |question| %>
-        <%= render :partial => "/user/exam_users/question_with_answer", :object => question %>
-      <% end %>
+      <% show_problem[0].elements["questions"].each_element do |question|
+      if question.attributes["id"].to_i == show_problem[1].to_i %>
+        <%= render :partial => "/user/notes/question_with_answer", :object => question %>
+      <% end
+      end %>
     </div>
   </div>
 </div>

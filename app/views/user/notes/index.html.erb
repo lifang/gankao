@@ -1,37 +1,43 @@
-<% if @collection and @doc %>
-<div id="paper_show_info">
-  <ul class="new_biz"><li class="actived">我的笔记</li>
-  </ul>
-  <div class="soso">
-    <div>
-      <%= form_tag "/user/notes/search", :method => "post" do -%>
-        <span>试题分类：<%= render :partial => "/common/categories" %>
-        </span>
-        <span>知识点：<input type="text" class="input_style" name="tag" id="tag"
-                         value="<%= session[:tag] if session[:tag] %>" /></span>
-        <span><input type="submit" name="button" id="button" value="查询" class="submit_btn" /></span>
-      <% end -%>
+<%= javascript_include_tag "#{Constant::SERVER_PATH}/javascripts/answer_sheet.js" %>
+<% if @note and @doc %>
+  <div id="paper_show_info">
+    <ul class="new_biz"><li class="actived">我的笔记</li>
+    </ul>
+    <div class="soso">
+      <div>
+        <%= form_tag "/user/notes/search", :method => "post" do -%>
+          <span>笔记关键字：<input type="text" class="input_style" name="note_text" id="note_text" size="40"
+                             value="<%= session[:note_text] if session[:note_text] %>" /></span>
+          <span><input type="submit" name="button" id="button" value="查询" class="submit_btn" /></span>
+        <% end -%>
+      </div>
     </div>
   </div>
-</div>
-<div class="biz_art_list_box">
-  <ul>
-    <% @doc.root.elements['problems'].each_element do |problem|
-      if !problem.elements['title'].nil? %>
-        <li>
-          <%= render :partial=>"/user/notes/show_problem",:object => problem %>
-          <h2>
-            <a href="javascript:void(0)"
-               onclick="javascript:question_info(<%= problem.attributes["id"].to_i %>)">
-                 <%= truncate_u(problem.elements['title'].text.to_s.html_safe, 40) %>
-            </a>
-          </h2>
-        </li>
-      <% end
-    end %>
-  </ul>
-</div>
+  <div class="biz_art_list_box">
+    <ul>
+      <% @doc.root.elements["problems"].each_element do |problem|
+        problem.elements["questions"].each_element do |question| %>
+          <li onclick="javascript:note_question_info(<%= question.attributes["id"].to_i %>)">
+            <%= render :partial=>"/user/notes/show_problem",:object => [problem, question.attributes["id"]] %>
+            <div>
+              <%= question.elements["note_text"].text %>
+            </div>
+          </li>
+        <% end
+      end %>
+    </ul>
+    <div>
+      <% if params[:page] and params[:page].to_i > 1 %>
+        <a href="<%= request.path %>?page=<%= params[:page].to_i - 1 %>">【上一页】</a>
+      <% end %>&nbsp;&nbsp;
+      <% if @has_next_page %>
+        <% current_page = (params[:page] and params[:page].to_i > 1) ? params[:page].to_i : 1 %>
+        <a href="<%= request.path %>?page=<%= current_page + 1 %>">【下一页】</a>
+      <% end %>
+    </div>
+  </div>
 <% else %>
-<div style="text-align: center;">您当前未做任何笔记。</div>
+  <div style="text-align: center;">您当前未做任何笔记。</div>
 <% end %>
+
 <div class="clear"></div>
