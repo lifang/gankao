@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <collection id='1'>
     <problems>
-        <problem delete_status='1' id='1' score='5' types='0'>
+        <problem id='1' score='5' types='0'>
             <title>Until then, his family ________ from him for six months.</title>
             <category>3</category>
             <questions>
-                <question correct_type='0' delete_status='1' error_percent='0' id='1' repeat_num='1' score='5'>
+                <question correct_type='0' error_percent='0' id='1' repeat_num='1' score='5'>
                     <answer>D   hadn’t heard</answer>
                     <analysis>直到刚才，表明从“刚才”以后我有他的消息了，表示过去我没有他的消息，所以用 “hadn&apos;t heard”</analysis>
                     <questionattrs>A   didn’t hear;-;B   hasn’t been hearing;-;C   hasn’t heard;-;D   hadn’t heard</questionattrs>
@@ -32,7 +32,7 @@
             <category>3</category>
             <complete_title>[[what|where;why;when||名称]] [[is|are;was;were||助词]] your name? [{常用搭配,|常用搭配}][(5,|5)]</complete_title>
             <questions>
-                <question correct_type='0' error_percent='0' id='4' repeat_num='1' score='5'>
+                <question correct_type='0' delete_status='1' error_percent='0' id='4' repeat_num='1' score='5'>
                     <answer>what</answer>
                     <analysis>常用搭配</analysis>
                     <questionattrs>what;-;where;-;why;-;when</questionattrs>
@@ -55,11 +55,11 @@
                 <user_answer>was</user_answer><user_answer>are</user_answer><user_answer>was</user_answer><user_answer>are</user_answer></question>
             </questions>
         </problem>
-        <problem id='10' incorrect_num='10' score='5' types='0'>
+        <problem delete_status='1' id='10' incorrect_num='10' score='5' types='0'>
             <title>fsdafafsfsaf</title>
             <category>3</category>
             <questions>
-                <question correct_percent='50%' correct_type='0' error_percent='0' id='15' repeat_num='1' score='5'>
+                <question correct_percent='50%' correct_type='0' delete_status='1' error_percent='0' id='15' repeat_num='1' score='5'>
                     <answer>789</answer>
                     <analysis>sdfsfasf</analysis>
                     <questionattrs>23;-;wer;-;65;-;789</questionattrs>
@@ -73,11 +73,11 @@
                 <user_answer>65</user_answer><user_answer>65</user_answer><user_answer>65</user_answer><user_answer>65</user_answer><user_answer>wer</user_answer></question>
             </questions>
         </problem>
-        <problem id='9' incorrect_num='4' score='5' types='0'>
+        <problem delete_status='1' id='9' incorrect_num='4' score='5' types='0'>
             <title>我撒的飞洒</title>
             <category>3</category>
             <questions>
-                <question correct_type='0' error_percent='0' id='14' repeat_num='1' score='5'>
+                <question correct_type='0' delete_status='1' error_percent='0' id='14' repeat_num='1' score='5'>
                     <answer>sfs</answer>
                     <analysis>sfafwerwr2r2</analysis>
                     <questionattrs>sfs;-;sfss;-;sdds;-;sd</questionattrs>
@@ -103,11 +103,11 @@
                 </question>
             </questions>
         </problem>
-        <problem id='66' incorrect_num='15' score='12' types='4'>
+        <problem delete_status='1' id='66' incorrect_num='15' score='12' types='4'>
             <title>呵呵呵分得的</title>
             <category>1</category>
             <questions>
-                <question correct_type='3' error_percent='0' id='80' repeat_num='1' score='0'>
+                <question correct_type='3' delete_status='1' error_percent='0' id='80' repeat_num='1' score='0'>
                     <description>反反复复</description>
                     <answer>是飒飒</answer>
                     <analysis>发放给 </analysis>
@@ -128,11 +128,11 @@
                 <user_answer/><user_answer/><user_answer/><user_answer>fffdddd</user_answer></question>
             </questions>
         </problem>
-        <problem delete_status='1' id='65' score='12' types='5' user_score='10'>
+        <problem id='65' score='12' types='5' user_score='10'>
             <title>相当大的</title>
             <category>1</category>
             <questions>
-                <question correct_type='5' delete_status='1' error_percent='0' id='78' repeat_num='1' score='12' score_reason='' user_answer='呵呵呵' user_score='10'>
+                <question correct_type='5' error_percent='0' id='78' repeat_num='1' score='12' score_reason='' user_answer='呵呵呵' user_score='10'>
                     <answer>真真正正</answer>
                     <analysis/>
                     <questionattrs/>

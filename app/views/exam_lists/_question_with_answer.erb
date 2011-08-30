@@ -1,16 +1,12 @@
-<div class="title">
-  <% if params[:result].nil? and @exam and cookies[:user_id].to_i == @exam.user_id %>
-  <% end %>
-  <div class="clear"></div>
-</div> 
 <% question_with_answer.elements["questions"].each_element do |question| %>
   <div class="question">
     &nbsp;&nbsp;&nbsp;&nbsp;小题描述：
-    &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["description"].text if question.elements["description"] %> 
+    &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["description"].text if question.elements["description"] %>
     [<%= question.attributes["score"] %>分]
     [<span id="user_score_<%= question.attributes["id"].to_i %>">
       <font color="red">得<%= question.attributes["user_score"].to_i.to_s+"分" %></font>
-    </span>]<span style="float:right"><a href="javascript:feedback('<%= question.attributes["id"] %>')">提问</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:delete_problems('<%= question.attributes["id"] %>','<%= question_with_answer.attributes["id"] %>')">删除</a></span>
+    </span>]<span style="float:right"><a href="javascript:feedback('<%= question.attributes["id"] %>')">提问</a> &nbsp;&nbsp;&nbsp;&nbsp;
+    <%= link_to "删除","javascript:void(0);", :onclick => "javascript:document.getElementById('status').submit();" %></span>
     <% attrs_str = question.elements["questionattrs"].text
     attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
     correct_type = question.attributes["correct_type"]
@@ -48,15 +44,19 @@
       <% end  %>
     </div>
   </div>
-    <div class="title">&nbsp;&nbsp;&nbsp;&nbsp;解析：
-      &nbsp;&nbsp;&nbsp;&nbsp;<% analysis = question.elements["analysis"] %>
-      &nbsp;&nbsp;&nbsp;&nbsp;<%= if analysis and !analysis.nil?
-        analysis.text
-      end %>
-    </div>
-    <div class="title">&nbsp;&nbsp;&nbsp;&nbsp;知识点标签：
-      &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["tags"].text %>
-    </div>
+  <div class="title">&nbsp;&nbsp;&nbsp;&nbsp;解析：
+    &nbsp;&nbsp;&nbsp;&nbsp;<% analysis = question.elements["analysis"] %>
+    &nbsp;&nbsp;&nbsp;&nbsp;<%= if analysis and !analysis.nil?
+      analysis.text
+    end %>
+  </div>
+  <div class="title">&nbsp;&nbsp;&nbsp;&nbsp;知识点标签：
+    &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["tags"].text %>
+  </div>
+  <%= form_for :exam, :html=> {:id => :status, :name => :exam_form}, :url => "/exam_lists/delete_problem" do |f|%>
+    <input type="hidden" value="<%= question_with_answer.attributes["id"] %>" id="problem_id" name="problem_id"/>
+    <input type="hidden" value="<%= question.attributes["id"] %>" name="question_id" />
+    <input type="hidden" value="<%= params[:page] %>" name="page" />
+  <% end %>
   <div class="clear"></div>
- 
 <% end %>

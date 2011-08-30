@@ -79,21 +79,20 @@ class ExamListsController < ApplicationController
   def delete_problem
     collection=Collection.find_by_user_id(cookies[:user_id])
     doc=collection.open_xml
-    doc.elements["/collection/problems/problem[@id=#{params[:problem_id]}]/questions/question[@id=#{params[:question_id]}]"].
+    problem=doc.elements["/collection/problems/problem[@id=#{params[:problem_id]}]"]
+    problem.elements["questions/question[@id=#{params[:question_id]}]"].
       add_attribute("delete_status",1)
     n=0
-    doc.elements["/collection/problems/problem[@id=#{params[:problem_id]}]/questions"].each_element do |question|
+    problem.elements["questions"].each_element do |question|
       n=1 if question.attributes["delete_status"].nil?
     end
-    doc.elements["/collection/problems/problem[@id=#{params[:problem_id]}]"].add_attribute("delete_status",1) if n==0
+    problem.add_attribute("delete_status",1) if n==0
     self.write_xml("#{Constant::PUBLIC_PATH}#{collection.collection_url}", doc)
-    @has_next_page = false
-    @lists=list
-    @lists =Examination.get_start_element(params[:page], @lists)
-    current_element = Examination.return_page_element(@lists, @has_next_page)
-    @lists = current_element[0]
-    @has_next_page = current_element[1]
-    render "/exam_lists/incorrect_list"
+    if params[:page].to_i>1
+      redirect_to  "/exam_lists/incorrect_list?page=#{params[:page].to_i-1}"
+    else
+      redirect_to  "/exam_lists/incorrect_list"
+    end
   end
 
 
