@@ -1,5 +1,5 @@
 class ExamListsController < ApplicationController
-
+  before_filter :access?
 
   def  list
     lists=Collection.find_by_user_id(cookies[:user_id]).open_xml
@@ -31,7 +31,6 @@ class ExamListsController < ApplicationController
     current_element = Examination.return_page_element(@lists, @has_next_page)
     @lists = current_element[0]
     @has_next_page = current_element[1]
-    
   end
 
   def feedback_list
@@ -72,12 +71,9 @@ class ExamListsController < ApplicationController
     end
     self.write_xml("#{Constant::PUBLIC_PATH}#{collection.collection_url}", doc)
     doc=collection.open_xml
-    @lists=doc.elements["/collection/problems/problem[@id='#{problem_id}']"]
-    @lists =Examination.get_start_element(params[:page], @lists)
-    current_element = Examination.return_page_element(@lists, @has_next_page)
-    @lists = current_element[0]
-    @has_next_page = current_element[1]
-    render :partial=>"/exam_lists/question_answer",:object=>@xml
+    @lists=problem
+    @has_next_page =true
+    render :partial=>"/exam_lists/question_answer"
   end
   
   def delete_problem
@@ -97,7 +93,6 @@ class ExamListsController < ApplicationController
     current_element = Examination.return_page_element(@lists, @has_next_page)
     @lists = current_element[0]
     @has_next_page = current_element[1]
-    @feedbacks=Feedback.find_by_sql("select * from feedbacks where user_id=#{cookies[:user_id]}")
     render "/exam_lists/incorrect_list"
   end
 

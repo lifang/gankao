@@ -345,6 +345,7 @@ function feedback(id){
     }
 
 function problem_values(id){
+    var page=$("page").value;
     var problem_num=$("problem_id").value;
     var ids=id.split(",");
     var  str=""
@@ -357,7 +358,7 @@ function problem_values(id){
         asynchronous:true,
         evalScripts:true,
         method:"post",
-        parameters: str+'problem_id='+problem_num+'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+        parameters: str+'problem_id='+problem_num+'&page='+page+'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
     });
     return false;
 }

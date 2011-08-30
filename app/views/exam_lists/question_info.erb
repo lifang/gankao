@@ -46,6 +46,7 @@
     <% end %>
     <input type="hidden" value="<%= problem.attributes["id"] %>" id="problem_id" />
     <input type="submit" value="提交" onclick="javascript:problem_values('<%= attr.chop %>')" />
+    <input type="hidden" value="<%= params[:page] %>" id="page" />
     <% if @has_next_page %>
       <% current_page = (params[:page] and params[:page].to_i > 1) ? params[:page].to_i : 1 %>
       <a href="<%= request.path %>?page=<%= current_page + 1 %>">跳过</a>
