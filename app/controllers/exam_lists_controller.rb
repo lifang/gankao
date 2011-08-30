@@ -31,69 +31,37 @@ class ExamListsController < ApplicationController
     current_element = Examination.return_page_element(@lists, @has_next_page)
     @lists = current_element[0]
     @has_next_page = current_element[1]
-    @feedbacks=Feedback.find_by_sql("select * from feedbacks where user_id=#{cookies[:user_id]}")
-  end
-  def feedback
-    @feedback=Feedback.new(:description=>params[:feedback][:description],:user_id=>"#{cookies[:user_id]}")
-    if @feedback.save
-      redirect_to "/exam_lists/incorrect_list"
-    end
-    @lists=list
+    
   end
 
-  def show_problem
-    doc=Collection.find_by_user_id(cookies[:user_id]).open_xml
-    hash={}
-    hash1={}
-    doc.elements["/collection/problems"].each_element do |problem|
-      if problem.attributes["delete_status"].to_i==0 
-        hash["#{problem.attributes["id"]}"]=problem.attributes["incorrect_num"]
-      end
-    end
-    hash.each do |key,value|
-      if hash1["#{value}"].nil?
-        hash1["#{value}"]=key
-      else
-        hash1["#{value}"] += ","+key
-      end
-    end
-    str=""
-    hash1.keys.sort.each do |key|
-      str +=hash1[key]+","
-    end
-    @num=str.chop.split(",")
-    @str=@num.join(",")
-    @xml=doc.elements["/collection/problems/problem[@id='#{@num[0]}']"]
-    redirect_to "/exam_lists/#{@num[0]}/question_info?num=#{@str}"
+  def feedback_list
+    @id=params[:id]
+    @feedbacks=Feedback.find_all_by_user_id_and_question_id(cookies[:user_id],params[:id])
+    render :partial=>"/exam_lists/feedback"
   end
+
+  def feedback
+    @feedback=Feedback.create(:description=>params[:feedback][:description],:user_id=>"#{cookies[:user_id]}",:question_id=>params[:id])
+    redirect_to "/exam_lists/incorrect_list"
+  end
+
 
   def question_info
-    @num=params[:num].chop.split(",")
-    @str=(@num-[@num[0]]).join(",")
-    doc=Collection.find_by_user_id(cookies[:user_id]).open_xml
-    @xml=doc.elements["/collection/problems/problem[@id='#{params[:id]}']"]
-  end
-
-  def next_problem
-    @num=params[:num].split(",")
-    @str=(@num-[@num[0]]).join(",")
-    puts "==========="
-    puts @num[0]
-    doc=Collection.find_by_user_id(cookies[:user_id]).open_xml
-    @xml=doc.elements["/collection/problems/problem[@id=#{@num[0]}]"]
-    puts @xml
-    render "/exam_lists/question_info"
+    @has_next_page = false
+    @lists=list
+    @lists =Examination.get_start_element(params[:page], @lists)
+    current_element = Examination.return_page_element(@lists, @has_next_page)
+    @lists = current_element[0]
+    @has_next_page = current_element[1]
   end
 
   def compare_answer
-    @str=params[:num]
     problem_id=params[:problem_id]
-    ids=params[:question_ids].split(",")
     collection=Collection.find_by_user_id(cookies[:user_id])
     doc=collection.open_xml
-    ids.each do |id|
-      problem=doc.elements["/collection/problems/problem[@id='#{problem_id}']"]
-      question=problem.elements["questions/question[@id='#{id}']"]
+    problem=doc.elements["/collection/problems/problem[@id='#{problem_id}']"]
+    problem.elements["questions"].each_element do |question|
+      id=question.attributes["id"]
       if params["answer_#{id}"]==question.elements["answer"].text
         correct_percent=1.0/(question.elements["user_answer"].size+1)*100
         question.add_attribute("correct_percent","#{correct_percent.to_i}%")
@@ -104,7 +72,11 @@ class ExamListsController < ApplicationController
     end
     self.write_xml("#{Constant::PUBLIC_PATH}#{collection.collection_url}", doc)
     doc=collection.open_xml
-    @xml=doc.elements["/collection/problems/problem[@id='#{problem_id}']"]
+    @lists=doc.elements["/collection/problems/problem[@id='#{problem_id}']"]
+    @lists =Examination.get_start_element(params[:page], @lists)
+    current_element = Examination.return_page_element(@lists, @has_next_page)
+    @lists = current_element[0]
+    @has_next_page = current_element[1]
     render :partial=>"/exam_lists/question_answer",:object=>@xml
   end
   

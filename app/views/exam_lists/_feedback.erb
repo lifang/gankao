@@ -3,9 +3,9 @@
 <table>
   <% index=0 %>
   <% @feedbacks.each do |feedback| %>
-    <% index += 1 %>
+    
     <tr>
-      <td><div class="xian2"></div><%= index %>：<%= feedback.description %></td>
+      <td><div class="xian2"></div><% index += 1 %>：<%= feedback.description %></td>
     </tr>
     <tr>
       <%if feedback.answer==nil%>
@@ -14,10 +14,11 @@
         <td><%= feedback.answer %></td>
       <%end%>
     </tr>
-  <%end%>
+  <%end unless @feedbacks.nil?%>
 </table>
 &nbsp;&nbsp;&nbsp;&nbsp;请在以下输入框输入你遇到的问题：
 <%= form_for :feedback, :url=>"/exam_lists/feedback" do |f| %>
+<input type="hidden" value="<%= @id %>" id="id" name="id"/>
   <div class="field">
     <%= f.text_area :description, :size => "30" %>
   </div>
