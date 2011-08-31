@@ -1,4 +1,3 @@
-<div id="problems">
   <% if @lists.elements["/collection/problems"].blank? %>
     <%= "您目前没有错题"  %>
   <% else %>
@@ -24,6 +23,7 @@
         <% end
       end %>
       <div>
+        <input type="hidden" value="<%= params[:page] %>" id="current_page" />
         <% if params[:page] and params[:page].to_i > 1 %>
           <a href="<%= request.path %>?page=<%= params[:page].to_i - 1 %>">【上一页】</a>
         <% end %>&nbsp;&nbsp;
@@ -39,4 +39,3 @@
 
   <div class="cuoti" id="feedback">
   </div>
-</div>

@@ -345,6 +345,7 @@ function feedback(id){
     }
 
 function problem_values(id){
+    var page=$("page").value;
     var problem_num=$("problem_id").value;
     var ids=id.split(",");
     var  str=""
@@ -357,7 +358,7 @@ function problem_values(id){
         asynchronous:true,
         evalScripts:true,
         method:"post",
-        parameters: str+'problem_id='+problem_num+'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+        parameters: str+'problem_id='+problem_num+'&page='+page+'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
     });
     return false;
 }
@@ -424,16 +425,6 @@ function update_note(question_id) {
     $("note_" + question_id).style.display = "none";
 }
 
-function delete_problems(question_id,problem_id){
-    new Ajax.Updater("problems" , "/exam_lists/delete_problem",
-    {
-        asynchronous:true,
-        evalScripts:true,
-        method:"post",
-        parameters:'question_id='+ question_id +'&problem_id='+ problem_id +'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
-    });
-    return false;
-}
 
 function question_style(id){
     $(document).ready(function(){

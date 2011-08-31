@@ -55,8 +55,19 @@ module Constant
   FAVOURABLE=50
   #代理支付
   AGENCY_COST=2
+
+  #综合训练音频文件播放次数
+  CANPLAYTIME={
+    :practice_2=>3,
+    :practice_3=>1,
+    :practice_4=>3,
+    :practice_5=>3,
+    :practice_6=>3,
+  }
+
    #vip价格
    VIP=10
+
   
   
 end

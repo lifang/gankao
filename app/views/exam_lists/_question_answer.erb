@@ -63,6 +63,6 @@
   <div>
    <% if @has_next_page %>
       <% current_page = (params[:page] and params[:page].to_i > 1) ? params[:page].to_i : 1 %>
-      <a href="/exam_lists/question_info?page=<%= current_page + 2 %>">下一题</a>
+      <a href="/exam_lists/question_info?page=<%= current_page + 1 %>">下一题</a>
     <% end %>
   </div>
