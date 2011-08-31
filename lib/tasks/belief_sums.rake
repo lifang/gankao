@@ -5,28 +5,38 @@ include REXML
 namespace :belief do
   desc "rate paper"
   task(:sums => :environment) do
+    @examinations=Examination.find_by_sql("select count(types) sums,types from examinations group by types")
     users=User.find_by_sql("select u.belief,u.id from users u inner join orders o where u.id=o.user_id ")
+    puts users.class
     users.each do |user|
+      @exams=Examination.find_by_sql("select count(e.types) sums,e.types from examinations e inner join exam_users  u on u.examination_id=e.id where u.user_id=#{user.id} and u.is_submited=1  group by types")
+      hash={}
+      @examinations.each do |examination|
+        hash["#{examination.types}"]=[examination.sums,0]
+        @exams.each do |exam|
+          if examination.types==exam.types
+            hash["#{examination.types}"]=[examination.sums,exam.sums]
+            break
+          end
+        end unless @exams.blank?
+      end unless @examinations.blank?
+      puts hash
       simulation_belief=1
-      num=ExamUser.find_by_sql("select count(e.id) sum from examinations  e left join exam_users u on u.examination_id=e.id where
-                                 e.types=#{Examination::TYPES[:SIMULATION]} and u.user_id=#{user.id} ")[0].sum*1.0
+      num=hash["#{Examination::TYPES[:SIMULATION]}"][1]*1.0
       simulation_belief=0.5 if num==1
       simulation_belief=0.8 if num==2
       puts simulation_belief
-      old_num=ExamUser.find_by_sql("select count(e.id) sum from examinations  e left join exam_users u on u.examination_id=e.id where
-                                  e.types=#{Examination::TYPES[:OLD_EXAM]} ")[0].sum*1.0
+      old_num=hash["#{Examination::TYPES[:OLD_EXAM]}"][0]*1.0
       unless old_num==0
-        old_percent=ExamUser.find_by_sql("select count(e.id) sum from examinations  e left join exam_users u on u.examination_id=e.id where
-                                  e.types=#{Examination::TYPES[:OLD_EXAM]} and u.user_id=#{user.id} ")[0].sum*1.0/old_num
+        old_percent=hash["#{Examination::TYPES[:OLD_EXAM]}"][1]*1.0/old_num
       else
         old_num=0
       end
       puts old_percent
-      collection_num=ExamUser.find_by_sql("select count(e.id) sum from examinations  e left join exam_users u on u.examination_id=e.id where
-                                  e.types in (2,3,4,5,6)")[0].sum*1.0
+      collection_num=(hash["#{Examination::TYPES[:PRACTICE1]}"][0]+hash["#{Examination::TYPES[:PRACTICE2]}"][0]+hash["#{Examination::TYPES[:PRACTICE3]}"][0]+hash["#{Examination::TYPES[:PRACTICE3]}"][0]+hash["#{Examination::TYPES[:PRACTICE4]}"][0])*1.0
+      user_collection_num=(hash["#{Examination::TYPES[:PRACTICE1]}"][1]+hash["#{Examination::TYPES[:PRACTICE2]}"][1]+hash["#{Examination::TYPES[:PRACTICE3]}"][1]+hash["#{Examination::TYPES[:PRACTICE3]}"][1]+hash["#{Examination::TYPES[:PRACTICE4]}"][1])*1.0
       unless collection_num==0
-        collect_percent=ExamUser.find_by_sql("select count(e.id) sum from examinations  e left join exam_users u on u.examination_id=e.id where
-                                  e.types in (2,3,4,5,6) and u.user_id=#{user.id}")[0].sum*1.0/collection_num
+        collect_percent=user_collection_num/collection_num
       else
         collect_percent=0
       end
