@@ -1,3 +1,59 @@
-<?xml version='1.0' encoding='UTF-8'?>      <collection id='1'>
-        <problems><problem delete_status='0' id='1' score='5' types='0'><title>阿斯达岁的</title><category>1</category><questions><question correct_percent='50%' correct_type='0' id='1' score='5'><answer>地方</answer><analysis/><questionattrs>地方;-;刚好;-;就;-;地方速度</questionattrs><tags/><answer_agains><answer_again><user_answer>刚好</user_answer></answer_again></answer_agains></question></questions></problem><problem delete_status='0' id='2' score='0' types='0'><title>山东大厦</title><category>1</category><questions><question correct_percent='50%' correct_type='0' id='2' score='0'><answer>阿萨德</answer><analysis/><questionattrs>阿萨德;-;发动;-; 地方;-;国服</questionattrs><tags/><answer_agains><answer_again><user_answer>地方</user_answer></answer_again></answer_agains></question></questions></problem><problem delete_status='0' id='3' score='5' types='0'><title>山东大厦</title><category>1</category><questions><question correct_percent='50%' correct_type='0' id='3' score='5'><answer>阿萨德</answer><analysis/><questionattrs>阿萨德;-;发动;-; 地方;-;国服</questionattrs><tags/><answer_agains><answer_again><user_answer>地方</user_answer></answer_again></answer_agains></question></questions></problem><problem delete_status='0' id='4' score='16' types='0'><title>阿斯顿sad</title><category>1</category><questions><question correct_type='0' id='4' score='16'><answer>df </answer><analysis/><questionattrs>df ;-;fgf ;-;h ;-;ghgh</questionattrs><tags/><answer_agains><answer_again><user_answer>ghgh</user_answer></answer_again></answer_agains></question></questions></problem></problems>
-      </collection>
+<?xml version='1.0' encoding='UTF-8'?>
+<collection id='1'>
+    <problems>
+        <problem id='1' incorrect_num='1' score='5' types='0'>
+            <title>阿斯达岁的</title>
+            <category>1</category>
+            <questions>
+                <question correct_percent='50%' correct_type='0' id='1' score='5'>
+                    <answer>地方</answer>
+                    <analysis/>
+                    <questionattrs>地方;-;刚好;-;就;-;地方速度</questionattrs>
+                    <tags/>
+ 
+                    <user_answer>刚好</user_answer>
+            
+                <user_answer>刚好</user_answer></question>
+            </questions>
+        </problem>
+        <problem id='2' score='0' types='0'>
+            <title>山东大厦</title>
+            <category>1</category>
+            <questions>
+                <question correct_percent='50%' correct_type='0' id='2' score='0'>
+                    <answer>阿萨德</answer>
+                    <analysis/>
+                    <questionattrs>阿萨德;-;发动;-; 地方;-;国服</questionattrs>
+                    <tags/>
+                    <user_answer>发动</user_answer>             
+                </question>
+            </questions>
+        </problem>
+        <problem id='3' score='5' types='0'>
+            <title>山东大厦</title>
+            <category>1</category>
+            <questions>
+                <question correct_percent='50%' correct_type='0' id='3' score='5'>
+                    <answer>阿萨德</answer>
+                    <analysis/>
+                    <questionattrs>阿萨德;-;发动;-; 地方;-;国服</questionattrs>
+                    <tags/>           
+                    <user_answer>地方</user_answer>                   
+                </question>
+            </questions>
+        </problem>
+        <problem id='4' incorrect_num='1' score='16' types='0'>
+            <title>阿斯顿sad</title>
+            <category>1</category>
+            <questions>
+                <question correct_percent='50%' correct_type='0' id='4' score='16'>
+                    <answer>df </answer>
+                    <analysis/>
+                    <questionattrs>df ;-;fgf ;-;h ;-;ghgh</questionattrs>
+                    <tags/>             
+                    <user_answer>ghgh</user_answer>
+                <user_answer/></question>
+            </questions>
+        </problem>
+    </problems>
+</collection>

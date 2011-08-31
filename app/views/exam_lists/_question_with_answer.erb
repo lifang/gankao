@@ -57,13 +57,4 @@
     <div class="title">&nbsp;&nbsp;&nbsp;&nbsp;知识点标签：
       &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["tags"].text %>
     </div>
-    &nbsp;&nbsp;&nbsp;&nbsp;请在以下输入框输入你遇到的问题：
-    <%= form_for :feedback, :url=>"/exam_lists/feedback" do |f| %>
-      <div class="field">
-        <%= f.text_area :description, :size => "30" %>
-      </div>
-      <div class="actions">
-        <%= f.submit "提交问题" %>
-      </div>
-    <% end %>
 <% end %>
