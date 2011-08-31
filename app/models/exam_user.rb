@@ -351,20 +351,16 @@ class ExamUser < ActiveRecord::Base
       if !examination[0].is_submited.nil? and examination[0].is_submited == 1
         str = "您已经交卷。"
       else
-        if examination[0].exam_user_id.nil? and examination[0].status == Examination::STATUS[:GOING]
-          examination[0].new_exam_user(User.find(user_id))
-        else
-          if examination[0].start_at_time > Time.now
+        if examination[0].paper_id.nil? and examination[0].start_at_time > Time.now
             str = "本场考试开始时间为#{examination[0].start_at_time.strftime("%Y-%m-%d %H:%M:%S")},请您做好准备。"
           elsif (!examination[0].start_at_time.nil? and !examination[0].exam_time.nil? and examination[0].exam_time !=0 and
                 (examination[0].start_at_time + examination[0].exam_time.minutes) < Time.now) or
               examination[0].status == Examination::STATUS[:CLOSED]
             str = "本场考试已经结束。"
-          elsif examination[0].start_end_time  < Time.now
+          elsif examination[0].paper_id.nil? and examination[0].start_end_time  < Time.now
             str = "您不能入场，本场考试入场时间为#{examination[0].start_at_time.strftime("%Y-%m-%d %H:%M:%S")}
               -#{examination[0].start_end_time.strftime("%Y-%m-%d %H:%M:%S")}。"
           end if examination[0].start_at_time
-        end
       end
     else
       str = "本场考试已经取消，或者您没有资格参加本场考试。"

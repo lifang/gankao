@@ -96,6 +96,7 @@ function create_block(bocks_div, block,practice_type) {
     }
 }
 
+//打开模块
 function open_nav(block_id, block_time) {
     var block_ids = $("block_ids");
     if (block_ids != null && block_ids.innerHTML != "") {
