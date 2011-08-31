@@ -12,9 +12,9 @@ class Examination < ActiveRecord::Base
 
   TYPES = {:SIMULATION => 0, :OLD_EXAM => 1, :PRACTICE1 => 2, :PRACTICE2 => 3, :PRACTICE3 => 4, :PRACTICE4 => 5,
     :PRACTICE5 => 6} #考试的类型： 0 模拟考试  1 真题练习  2 综合训练1  3 综合训练2  4 综合训练3  5 综合训练4  6 综合训练5
-  #  TYPE_NAMETYPESS = {:SIMULATION => [0, "模拟考试"], :OLD_EXAM => [1, "真题练习"], :PRACTICE1 => [2, "综合训练1"],
-  #    :PRACTICE2 => [3, "综合训练2"], :PRACTICE3 => [4, "综合训练3"], :PRACTICE4 => [5, "综合训练4"], :PRACTICE5 => [6, "综合训练5"]}
-  #default_scope :order => "examinations.created_at desc"
+  TYPE_NAMETYPESS = {:SIMULATION => [0, "模拟考试"], :OLD_EXAM => [1, "真题练习"], :PRACTICE1 => [2, "综合训练1"],
+    :PRACTICE2 => [3, "综合训练2"], :PRACTICE3 => [4, "综合训练3"], :PRACTICE4 => [5, "综合训练4"], :PRACTICE5 => [6, "综合训练5"]}
+  default_scope :order => "examinations.created_at desc"
 
   #创建考试
   def update_examination(attr_hash)
@@ -125,22 +125,22 @@ class Examination < ActiveRecord::Base
   def self.return_page_element(doc, has_next_page)
     current_num = 0
     doc.elements["/collection/problems"].each_element do |problem|
-        if current_num >= 1
-          doc.delete_element(problem.xpath)
-          has_next_page = true unless has_next_page
-        end
-        current_num += 1
+      if current_num >= 1
+        doc.delete_element(problem.xpath)
+        has_next_page = true unless has_next_page
+      end
+      current_num += 1
     end
     return [doc, has_next_page]
   end
 
 
-    #返回开始显示的节点
+  #返回开始显示的节点
   def self.get_start_element(page, doc)
     start_num = (page.nil? or page == "" or page == "1") ? 0 : (page.to_i-1) * 1
     doc.root.elements['problems'].each_element do |problem|
-        doc.delete_element(problem.xpath) if start_num > 0
-        start_num -= 1
+      doc.delete_element(problem.xpath) if start_num > 0
+      start_num -= 1
     end if start_num > 0
     return doc
   end
