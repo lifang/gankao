@@ -639,7 +639,7 @@ function ajax_notice(examination_id){
 }
 
 function close_ajax_notice(){
-     $("ajax_notice").innerHTML="<div id='ajax_notice'></div>";
+    $("ajax_notice").innerHTML="<div id='ajax_notice'></div>";
 }
 
 //关闭名额领取成功的DIV
@@ -654,26 +654,37 @@ function   openNew()
 }
 
 
-//默认每个音频可以播放3次
 function audio_play(id){
     if(getCookie("audio_"+id)==null){
         setCookie(("audio_"+id),0)
     }
-
-    if(getCookie("audio_"+id)<3){
+    if(get_canplay_time()==0||$("audio_control_"+id).value=="停止"||getCookie("audio_"+id)<get_canplay_time()){  //设置播放次数
         if($("audio_"+id).paused){
             $("audio_"+id).play();
             if(id!="x"){
-                setCookie(("audio_"+id),parseInt(getCookie("audio_"+id))+1)
-                $("audio_control_"+id).disabled=true   // 记录，需要另写一个方法，当音频文件播放完毕，按钮可用
+                setCookie(("audio_"+id),parseInt(getCookie("audio_"+id))+1);
+                $("audio_control_"+id).value="停止";   // 记录，需要另写一个方法，当音频文件播放完毕，按钮可用
             }
         }
         else{
             $("audio_"+id).pause();
+            $("audio_"+id).currentTime = 0;
+            $("audio_control_"+id).value="播放";
         }
     }
     else{
         $("audio_"+id).pause();
-        alert("该录音已经播放了3次！不能再播放！");
+        $("audio_"+id).currentTime = 0;
+        $("audio_control_"+id).value="播放";
+        alert("该录音已经播放了"+get_canplay_time()+"次！不能再播放！");
     }
+}
+
+//取得播放次数
+function get_canplay_time(){
+
+    if($("canplaytime")!=null){
+        return $("canplaytime").value;    //第一类综合训练播放3次
+    }
+    return 0;
 }

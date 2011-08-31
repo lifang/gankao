@@ -114,18 +114,17 @@ class UsersController < ApplicationController
     @exams=Examination.find_by_sql("select count(types) sums,types from examinations e inner join exam_users  u on u.examination_id=e.id where u.user_id=#{cookies[:user_id]} and u.is_submited=1  group by types")
     @hash={}
     @examinations.each do |examination|
+      @hash["#{examination.types}"]=[examination.sums,0]
       unless @exams.blank?
         @exams.each do |exam|
           if examination.types==exam.types
             @hash["#{examination.types}"]=[examination.sums,exam.sums]
-          else
-            @hash["#{examination.types}"]=[examination.sums,0]
+            break
           end
         end
-      else
-        @hash["#{examination.types}"]=[examination.sums,0]
       end
     end
+    puts @hash
     if Collection.find_by_user_id(cookies[:user_id])==nil
       @incorrect_list==nil
     else

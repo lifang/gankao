@@ -143,11 +143,10 @@ class User::CombinePracticesController < ApplicationController
       @exam_user.auto_add(@exam_user,question_hash) if params[:types].to_i==Examination::TYPES[:OLD_EXAM]
       @exam_user.generate_answer_sheet_url(@exam_user.update_answer_url(@exam_user.open_xml, question_hash), "result")
       @exam_user.submited!
-      flash[:notice] = "您的试卷已经成功提交。"
-    else
-      flash[:warn] = "您已经交卷。"
-      render "error_page"
+      flash[:notice] = "标准答案已给出，请检查。"
+      redirect_to "/user/exam_users/#{@exam_user.examination_id}?user_id=#{cookies[:user_id]}"
     end
+
   end
 
 
