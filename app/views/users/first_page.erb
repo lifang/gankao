@@ -43,13 +43,12 @@
       信心指数:<br/>
       <div class="shu">
       <%= User.find(cookies[:user_id]).belief %>%
+        </div>
     <% else %>
       你当前还不是<font color="red">VIP</font>哦，购买<font color="red">VIP</font>可以显示你自己当前的信心指数，无限制的综合训练次数以及模考试卷主观题的修改，心动不如行动，赶快来<a href="/users/goto_vip"><font color="blue">购买</font></a>吧</font>！
-    <% end %>
-      </div>
+    <% end %>     
     <div class="xian">
     </div>
-
     错题训练：<br/>
     <% if @incorrect_list==nil %><font color="red">您当前没有错题</font><%else%>您当前有<%= @incorrect_list.elements['problems'].elements.size %>题<br/>
       <td><input type="button" value="开始训练" class="practice" onclick="javascript:window.location.href='/exam_lists/incorrect_list'"/></td>

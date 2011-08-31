@@ -1,6 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>      <exam id='11'>
-        <paper id='2' score='0'>
-          <questions/>
+<?xml version='1.0' encoding='UTF-8'?>      <exam id='5'>
+        <paper id='5' score='0'>
+          <questions><question id='9' is_sure='1' score='0'><answer>adsad</answer></question><question id='10' is_sure='1' score='0'><answer>豆腐干</answer></question><question id='11' is_sure='1' score='0'><answer>共和国</answer></question></questions>
           <auto_score/>
           <rate_score/>
         </paper>

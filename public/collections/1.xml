@@ -1,5 +1,60 @@
-
-<?xml version='1.0' encoding='UTF-8'?>      <collection id='1'>
-        <problems><problem id='2' score='5' types='1'><title>&lt;input type=&quot;button&quot; value=&quot;播放&quot; id=&apos;audio_control_2&apos; onclick=&quot;javascript:audio_play(2);&quot;&gt;&amp;nbsp;听音乐，回答问题。&lt;audio src=&quot;/media/music.mp3&quot; id=&apos;audio_2&apos;&gt;&lt;/audio&gt;</title><category>2</category><questions><question correct_type='1' error_percent='0' id='2' repeat_num='4' score='5'><answer>ergeg;|;hrth;|;wgerg</answer><analysis/><questionattrs>ergeg;-;hrth;-;wgerg;-;rthtgw</questionattrs><tags/><user_answer>ergeg</user_answer><user_answer>ergeg</user_answer><user_answer>ergeg</user_answer><user_answer></user_answer></question></questions></problem><problem id='6' score='21' types='4'><title>&lt;input type=&quot;button&quot; value=&quot;播放&quot; id=&apos;audio_control_6&apos; onclick=&quot;javascript:audio_play(6);&quot;&gt;&amp;nbsp;听音乐，回答下列问题。&lt;audio src=&quot;/media/music.mp3&quot; id=&apos;audio_6&apos;&gt;&lt;/audio&gt;</title><category>2</category><questions><question correct_type='0' error_percent='0' id='6' repeat_num='4' score='5'><description>efwergergerger</description><answer>gerh</answer><questionattrs>htrhrf;-;gerh;-;gerhew;-;regerge</questionattrs><tags/><user_answer/><user_answer>htrhrf</user_answer><user_answer>htrhrf</user_answer><user_answer></user_answer></question><question correct_type='1' error_percent='0' id='7' repeat_num='4' score='5'><description>ergrethrthrthfwefw</description><answer>fwefwh;|;thrth</answer><questionattrs>gegrh;-;fwefwh;-;thrth;-;gregerh</questionattrs><tags/><user_answer/><user_answer>gegrh;|;fwefwh</user_answer><user_answer>gegrh;|;fwefwh</user_answer><user_answer></user_answer></question><question correct_type='2' error_percent='0' id='8' repeat_num='2' score='3'><description>eghrthtrwfefw</description><answer>1</answer><questionattrs/><tags/><user_answer/><user_answer></user_answer></question><question correct_type='3' error_percent='0' id='9' repeat_num='4' score='2'><description>geghtrhrthtfwefew</description><answer>grehrtfwefwe</answer><questionattrs/><tags/><user_answer/><user_answer>jeffrey</user_answer><user_answer>jeffrey</user_answer><user_answer></user_answer></question></questions></problem><problem id='1' score='5' types='0'><title>&lt;input type=&quot;button&quot; value=&quot;播放&quot; id=&apos;audio_control_1&apos; onclick=&quot;javascript:audio_play(1);&quot;&gt;&amp;nbsp;听音乐，回答问题。&lt;audio src=&quot;/media/music.mp3&quot; id=&apos;audio_1&apos;&gt;&lt;/audio&gt;</title><category>2</category><questions><question correct_type='0' error_percent='0' id='1' repeat_num='1' score='5'><answer>fwefg</answer><analysis/><questionattrs>fwefg;-;gerh;-;er3;-;ewge</questionattrs><tags/><user_answer></user_answer></question></questions></problem><problem id='3' score='5' types='2'><title>gerghrthtr</title><category>2</category><questions><question correct_type='2' error_percent='0' id='3' repeat_num='1' score='5'><answer>1</answer><analysis/><questionattrs/><tags/><user_answer></user_answer></question></questions></problem><problem id='4' score='4' types='3'><title>erhtgwgre</title><category>2</category><questions><question correct_type='3' error_percent='0' id='4' repeat_num='1' score='4'><answer>jeffrey</answer><analysis/><questionattrs/><tags/><user_answer></user_answer></question></questions></problem></problems>
-      </collection>
+<?xml version='1.0' encoding='UTF-8'?>
+<collection id='1'>
+    <problems>
+        <problem id='1' incorrect_num='1' score='5' types='0'>
+            <title>阿斯达岁的</title>
+            <category>1</category>
+            <questions>
+                <question correct_percent='50%' correct_type='0' id='1' score='5'>
+                    <answer>地方</answer>
+                    <analysis/>
+                    <questionattrs>地方;-;刚好;-;就;-;地方速度</questionattrs>
+                    <tags/>
+ 
+                    <user_answer>刚好</user_answer>
+            
+                <user_answer>刚好</user_answer></question>
+            </questions>
+        </problem>
+        <problem id='2' score='0' types='0'>
+            <title>山东大厦</title>
+            <category>1</category>
+            <questions>
+                <question correct_percent='50%' correct_type='0' id='2' score='0'>
+                    <answer>阿萨德</answer>
+                    <analysis/>
+                    <questionattrs>阿萨德;-;发动;-; 地方;-;国服</questionattrs>
+                    <tags/>
+                    <user_answer>发动</user_answer>             
+                </question>
+            </questions>
+        </problem>
+        <problem id='3' score='5' types='0'>
+            <title>山东大厦</title>
+            <category>1</category>
+            <questions>
+                <question correct_percent='50%' correct_type='0' id='3' score='5'>
+                    <answer>阿萨德</answer>
+                    <analysis/>
+                    <questionattrs>阿萨德;-;发动;-; 地方;-;国服</questionattrs>
+                    <tags/>           
+                    <user_answer>地方</user_answer>                   
+                </question>
+            </questions>
+        </problem>
+        <problem id='4' incorrect_num='1' score='16' types='0'>
+            <title>阿斯顿sad</title>
+            <category>1</category>
+            <questions>
+                <question correct_percent='50%' correct_type='0' id='4' score='16'>
+                    <answer>df </answer>
+                    <analysis/>
+                    <questionattrs>df ;-;fgf ;-;h ;-;ghgh</questionattrs>
+                    <tags/>             
+                    <user_answer>ghgh</user_answer>
+                <user_answer/></question>
+            </questions>
+        </problem>
+    </problems>
+</collection>
 
