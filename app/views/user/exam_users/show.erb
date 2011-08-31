@@ -2,7 +2,7 @@
 <div id="note_div"></div>
 <div id="paper_show_info">
   <ul class="tab_biz">
-    <li class="actived"><a href="javascript:void(0);"><%= @xml.elements['base_info'].elements['title'].text %></a></li>
+    <li class="actived"><a href="javascript:void(0);"><%= @xml.elements['base_info'].elements['title'].text if @xml!=nil %></a></li>
   </ul>
   <div class="soso">
     <div align="right"><font color="red" ><strong><%= @doc.elements["paper"].attributes["score"].nil? ? "分数暂未公布":" 总  分:"+ @doc.elements["paper"].attributes["score"] %>

@@ -684,9 +684,11 @@ function save_question(question_id, is_sure) {
     var paper_id = $("paper_id").value;
     var examination_id = $("examination_id").value;
     var answer = $("answer_" + question_id);
+
     if (answer != null && !checkspace(answer.value)) {
         remove_answer(question_id, getCookie('user_id'), paper_id, examination_id);
         add_answer(question_id, getCookie('user_id'), paper_id, examination_id, answer.value, is_sure);
+
     }
 }
 

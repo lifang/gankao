@@ -1,7 +1,7 @@
-<?xml version='1.0' encoding='UTF-8'?>      <exam id='11'>
-        <paper id='6' score='0'>
-          <questions></questions>
-          <auto_score></auto_score>
-          <rate_score></rate_score>
+<?xml version='1.0' encoding='UTF-8'?>      <exam id='9'>
+        <paper id='4' score='0'>
+          <questions><question id='6' is_sure='1' score='0'><answer>刚好</answer></question></questions>
+          <auto_score/>
+          <rate_score/>
         </paper>
       </exam>

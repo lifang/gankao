@@ -1,5 +1,5 @@
 class ExamListsController < ApplicationController
-
+  before_filter :access?
 
   def  list
     lists=Collection.find_by_user_id(cookies[:user_id]).open_xml
@@ -25,92 +25,74 @@ class ExamListsController < ApplicationController
   end
 
   def incorrect_list
+    @has_next_page = false
     @lists=list
-    @feedbacks=Feedback.find_by_sql("select * from feedbacks where user_id=#{cookies[:user_id]}")
+    @lists =Examination.get_start_element(params[:page], @lists)
+    current_element = Examination.return_page_element(@lists, @has_next_page)
+    @lists = current_element[0]
+    @has_next_page = current_element[1]
   end
+
+  def feedback_list
+    @id=params[:id]
+    @feedbacks=Feedback.find_all_by_user_id_and_question_id(cookies[:user_id],params[:id])
+    render :partial=>"/exam_lists/feedback"
+  end
+
   def feedback
-    @feedback=Feedback.new(:description=>params[:feedback][:description],:user_id=>"#{cookies[:user_id]}")
-    if @feedback.save
-      redirect_to "/exam_lists/incorrect_list"
-    end
+    @feedback=Feedback.create(:description=>params[:feedback][:description],:user_id=>"#{cookies[:user_id]}",:question_id=>params[:id])
+    redirect_to "/exam_lists/incorrect_list"
+  end
+
+
+  def question_info
+    @has_next_page = false
     @lists=list
-  end
-
-  def show_problem
-    doc=Collection.find_by_user_id(cookies[:user_id]).open_xml
-    hash={}
-    hash1={}
-    doc.elements["/collection/problems"].each_element do |problem|
-      if problem.attributes["delete_status"].to_i==0 
-        hash["#{problem.attributes["id"]}"]=problem.attributes["incorrect_num"]
-      end
-    end
-    hash.each do |key,value|
-      if hash1["#{value}"].nil?
-        hash1["#{value}"]=key
-      else
-        hash1["#{value}"] += ","+key
-      end
-    end
-    str=""
-    hash1.keys.sort.each do |key|
-      str +=hash1[key]+","
-    end
-    @num=str.chop.split(",")
-    @str=(@num-[@num[0]]).join(",")
-    @xml=doc.elements["/collection/problems/problem[@id='#{@num[0]}']"]
-    render :partial=>"/exam_lists/question_info",:object=>@xml
-  end
-
-  def next_problem
-    @num=params[:num].split(",")
-    @str=(@num-[@num[0]]).join(",")
-    doc=Collection.find_by_user_id(cookies[:user_id]).open_xml
-    @xml=doc.elements["/collection/problems/problem[@id=#{@num[0]}]"]
-    render :partial=>"/exam_lists/question_info",:object=>@xml
+    @lists =Examination.get_start_element(params[:page], @lists)
+    current_element = Examination.return_page_element(@lists, @has_next_page)
+    @lists = current_element[0]
+    @has_next_page = current_element[1]
   end
 
   def compare_answer
-    @str=params[:num]
     problem_id=params[:problem_id]
-    ids=params[:question_ids].split(",")
     collection=Collection.find_by_user_id(cookies[:user_id])
     doc=collection.open_xml
-    ids.each do |id|
-      doc.elements["/collection/problems"].each_element do |problem|
-        problem.elements["questions"].each_element do |question|
-          if question.attributes["id"]==id
-            if params["answer_#{id}"]==question.elements["answer"].text
-              correct_percent=1.0/(question.elements["answer_agains"].elements.size+1)*100
-              question.add_attribute("correct_percent","#{correct_percent.to_i}%")
-            else
-              question.elements["answer_agains"].add_element("answer_again").add_element("user_answer").add_text(params["answer_#{id}"])
-              problem.attributes["incorrect_num"] =problem.attributes["incorrect_num"].to_i+1
-            end
-          end
-        end
+    problem=doc.elements["/collection/problems/problem[@id='#{problem_id}']"]
+    problem.elements["questions"].each_element do |question|
+      id=question.attributes["id"]
+      if params["answer_#{id}"]==question.elements["answer"].text
+        correct_percent=1.0/(question.elements["user_answer"].size+1)*100
+        question.add_attribute("correct_percent","#{correct_percent.to_i}%")
+      else
+        question.add_element("user_answer").add_text(params["answer_#{id}"])
+        problem.attributes["incorrect_num"] =problem.attributes["incorrect_num"].to_i+1
       end
     end
     self.write_xml("#{Constant::PUBLIC_PATH}#{collection.collection_url}", doc)
     doc=collection.open_xml
-    @xml=doc.elements["/collection/problems/problem[@id='#{problem_id}']"]
-    render :partial=>"/exam_lists/question_answer",:object=>@xml
+    @lists=problem
+    @has_next_page =true
+    render :partial=>"/exam_lists/question_answer"
   end
   
   def delete_problem
     collection=Collection.find_by_user_id(cookies[:user_id])
     doc=collection.open_xml
-    doc.elements["/collection/problems/problem[@id=#{params[:problem_id]}]/questions/question[@id=#{params[:question_id]}]"].
+    problem=doc.elements["/collection/problems/problem[@id=#{params[:problem_id]}]"]
+    problem.elements["questions/question[@id=#{params[:question_id]}]"].
       add_attribute("delete_status",1)
     n=0
-    doc.elements["/collection/problems/problem[@id=#{params[:problem_id]}]/questions"].each_element do |question|
+    problem.elements["questions"].each_element do |question|
       n=1 if question.attributes["delete_status"].nil?
     end
-    doc.elements["/collection/problems/problem[@id=#{params[:problem_id]}]"].add_attribute("delete_status",1) if n==0
+    problem.add_attribute("delete_status",1) if n==0
     self.write_xml("#{Constant::PUBLIC_PATH}#{collection.collection_url}", doc)
-    @lists=list
-    @feedbacks=Feedback.find_by_sql("select * from feedbacks where user_id=#{cookies[:user_id]}")
-    render "/exam_lists/incorrect_list"
+    if params[:page].to_i>1
+      redirect_to  "/exam_lists/incorrect_list?page=#{params[:page].to_i-1}"
+    else
+      redirect_to  "/exam_lists/incorrect_list"
+    end
   end
 
 
