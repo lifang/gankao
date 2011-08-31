@@ -7,13 +7,9 @@ class User::NotesController < ApplicationController
     begin
       @has_next_page = false
       @doc = @note.open_xml
-      puts  @doc
       @doc = @note.get_start_element(params[:page], @doc)
-      puts @doc
       current_element = @note.return_page_element(@doc, @has_next_page)
       @doc = current_element[0]
-      puts "========="
-      puts @doc
       @has_next_page = current_element[1]
     rescue
       flash[:warn] = "您当前未做任何笔记。"
