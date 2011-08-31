@@ -29,6 +29,5 @@ class PaymentsController < ApplicationController
     else
       flash[:user_info]="用户不存在，请重新输入查询条件。"
     end
-    render :partial=>"/payments/user_info"
   end
 end

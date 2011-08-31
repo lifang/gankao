@@ -63,7 +63,7 @@ class ExamListsController < ApplicationController
       id=question.attributes["id"]
       if params["answer_#{id}"]==question.elements["answer"].text
         correct_percent=1.0/(question.elements["user_answer"].size+1)*100
-        question.add_attribute("error_percent","#{100-correct_percent.to_i}")
+        question.attributes["error_percent"]=(100-correct_percent).to_i
       else
         question.add_element("user_answer").add_text(params["answer_#{id}"])
         problem.attributes["repeat_num"] =problem.attributes["repeat_num"].to_i+1
