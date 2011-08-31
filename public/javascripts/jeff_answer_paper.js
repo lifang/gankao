@@ -1055,8 +1055,5 @@ function alreay_answer_num() {
         $("complete_num").innerHTML = total_num;
     }
 }
-<<<<<<< HEAD
 ***************************/
-=======
- ***************************/
->>>>>>> 34f41cf5f7d111bbc691b9e7660aea42d9a789a5
+
