@@ -5,11 +5,12 @@ include REXML
 namespace :belief do
   desc "rate paper"
   task(:sums => :environment) do
-    @examinations=Examination.find_by_sql("select count(types) sums,types from examinations group by types")
-    users=User.find_by_sql("select u.belief,u.id from users u inner join orders o where u.id=o.user_id ")
+    @examinations=Examination.find_by_sql("select count(types) sums,types from examinations where is_published = #{Examination::IS_PUBLISHED[:ALREADY]} group by types")
+    users = User.find_by_sql("select u.belief,u.id from users u inner join orders o where u.id=o.user_id ")
     puts users.class
     users.each do |user|
-      @exams=Examination.find_by_sql("select count(e.types) sums,e.types from examinations e inner join exam_users  u on u.examination_id=e.id where u.user_id=#{user.id} and u.is_submited=1  group by types")
+      @exams = Examination.find_by_sql("select count(e.types) sums,e.types from examinations e
+inner join exam_users  u on u.examination_id=e.id where u.user_id=#{user.id} and u.is_submited=1  group by types")
       hash={}
       @examinations.each do |examination|
         hash["#{examination.types}"]=[examination.sums,0]
