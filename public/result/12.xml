@@ -1,6 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>      <exam id='4'>
+<?xml version='1.0' encoding='UTF-8'?>      <exam id='16'>
         <paper id='5' score='0'>
-          <questions><question id='20' is_sure='1' score='0'><answer>选项1</answer></question><question id='21' is_sure='1' score='0'><answer>选项2</answer></question><question id='22' is_sure='1' score='0'><answer>1</answer></question><question id='23' is_sure='1' score='0'><answer>123</answer></question><question id='24' is_sure='1' score='0'><answer>选项2</answer></question><question id='25' is_sure='1' score='0'><answer></answer></question><question id='26' is_sure='1' score='0'><answer></answer></question><question id='27' is_sure='1' score='0'><answer></answer></question></questions>
+          <questions><question id='17' is_sure='1' score='0'><answer>abc;|;def;|;kkk</answer></question><question id='18' is_sure='1' score='0'><answer>jeffrey;|;boy;|;girl;|;hellokitty</answer></question><question id='19' is_sure='1' score='0'><answer>;|;;|;;|;</answer></question></questions>
           <auto_score/>
           <rate_score/>
         </paper>

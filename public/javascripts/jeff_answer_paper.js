@@ -1,16 +1,17 @@
 
-
+var load_switch=0;   //页面载入前，置0；页面载入后，置1。该变量目前只在综合训练5中控制流程。
+//
+//
 //加载综合训练
 function load_paper(practice_type) {
+
     //    if(window.openDatabase){
     setTimeout(function(){
         create_paper(practice_type);
+        load_switch=1;   //页面载入完成，设置load_switch=1 目前只有第五类综合训练使用到，控制程序流程有用。
     }, 500);
-//    } else {
-//        create_paper();
-//    }
-}
 
+}
 
 //创建综合训练
 function create_paper(practice_type) {
@@ -353,6 +354,7 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
                             }
                         }
                         $("answer_"+question.id).value=this_answer;
+                        $("is_answer_"+problem_id).value="1";
                     }
                 })
 
@@ -363,7 +365,7 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
             if(practice_type==6){
                 var num=1;
                 while(document.getElementById("problem_"+problem_id+"_writeplace_"+num)){
-                    document.getElementById("problem_"+problem_id+"_writeplace_"+num).onclick=function(){
+                    document.getElementById("problem_"+problem_id+"_writeplace_"+num).onfocus=function(){
                         show_que_save_button(question.id);
                     };
                     num++;
@@ -371,7 +373,6 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
                 
             }
             else{
-                alert("mark1");
                 for (var i=0; i<que_attrs.length; i++) {
                     if (que_attrs[i] != null && que_attrs[i] != "") {
                         var attr = create_element("div", null, null, "attr", null, "innerHTML");
@@ -596,10 +597,34 @@ function is_problem_answer(problem_id,practice_type) {
             }
         }else{
             if(practice_type==6){
-                alert("jeffrey_here");
-            }else{
+                var index=1;
+                var question_id=question_ids.split(",")[0];         
+                if(load_switch==0&&answer_hash&&answer_hash[question_id]!=null){
+                    var answer_array=answer_hash[question_id][0].split(";|;");
+                    while($("problem_"+problem_id+"_writeplace_"+index)){
+                        $("problem_"+problem_id+"_writeplace_"+index).value=answer_array[index-1];
+                        index++;       
+                    }
+                    $("answer_" + question_id).value = answer_hash[question_id][0];
+                }else{
+                    var this_answer="";
+                    while($("problem_"+problem_id+"_writeplace_"+index)){
+                        if(index>1){
+                            this_answer+=";|;"
+                        }
+                        this_answer+=$("problem_"+problem_id+"_writeplace_"+index).value;
+                        index++;
+                    }
+                    $("answer_" + question_id).value = this_answer;
+                }
                 $("is_answer_" + problem_id).value = "1";
+                answer_flag = "all";
+            }  
+            else{
+                //第三类综合题经过这里
+                if($("is_answer_" + problem_id).value = "1"){
                 return "all";
+                }
             }
         }
         if (answer_flag == "all") {
@@ -673,33 +698,29 @@ function load_un_sure_question(problem_id) {
 
 //用来返回每个提点是否已经回答
 function question_value(question_id,practice_type) {
-    if(practice_type==4){
-        var is_answer = true;
-    }else{
-        var is_answer = false;
-        $("answer_" + question_id).value = "";
-        var correct_type = $("question_type_" + question_id).value;
-
-        if (correct_type == "0" || correct_type == "1" || correct_type == "2") {
-            var attr = document.getElementsByName("question_attr_" + question_id);
-            if (attr != null) {
-                for (var i=0; i<attr.length; i++) {
-                    if (attr[i].checked == true) {
-                        if ($("answer_" + question_id).value == "") {
-                            $("answer_" + question_id).value = attr[i].value;
-                        } else {
-                            $("answer_" + question_id).value += ";|;" + attr[i].value;
-                        }
-                        is_answer = true;
+    //第三类综合题没有经过这个方法
+    var is_answer = false;
+    $("answer_" + question_id).value = "";
+    var correct_type = $("question_type_" + question_id).value;
+    if (correct_type == "0" || correct_type == "1" || correct_type == "2") {
+        var attr = document.getElementsByName("question_attr_" + question_id);
+        if (attr != null) {
+            for (var i=0; i<attr.length; i++) {
+                if (attr[i].checked == true) {
+                    if ($("answer_" + question_id).value == "") {
+                        $("answer_" + question_id).value = attr[i].value;
+                    } else {
+                        $("answer_" + question_id).value += ";|;" + attr[i].value;
                     }
+                    is_answer = true;
                 }
             }
-        }else {
-            var answer = $("question_answer_" + question_id);
-            if (answer != null && !checkspace(answer.value)) {
-                is_answer = true;
-                $("answer_" + question_id).value = answer.value;
-            }
+        }
+    }else {
+        var answer = $("question_answer_" + question_id);
+        if (answer != null && !checkspace(answer.value)) {
+            is_answer = true;
+            $("answer_" + question_id).value = answer.value;
         }
     }
     return is_answer;
@@ -743,11 +764,15 @@ function generate_result_paper(paper_id) {
                 if (is_answer.value == "1") {
                     answer_length++ ;
                 }
-            }            
+            }
         }
         if (answer_length < (problem_ids.length-1)) {
-            if(!confirm('您还有题尚未答完，确定要交卷么?')) {
-                flag = false;
+  //          alert($("practice_type")!=null&&$("practice_type").value=="3");
+            if(!($("practice_type")!=null&&$("practice_type").value=="3")){
+
+                if(!confirm('您还有题尚未答完，确定要交卷么?')) {
+                    flag = false;
+                }
             }
         }
     }
@@ -1030,4 +1055,5 @@ function alreay_answer_num() {
         $("complete_num").innerHTML = total_num;
     }
 }
- ***************************/
+***************************/
+

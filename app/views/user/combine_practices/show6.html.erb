@@ -13,6 +13,7 @@
       <li class="actived"><a href="javascript:void(0);">综合训练五</a></li>
     </ul>
     <div class="soso">
+            <input type="hidden" name="practice_type" id="practice_type" value="6"/>
       <input type="hidden" name="canplaytime" id="canplaytime" value="<%= Constant::CANPLAYTIME[:practice_6] %>"/>
       <input type="hidden" name="paper_id" id="paper_id" value=""/>
       <input type="hidden" name="all_quesiton_ids" id="all_question_ids" value=""/>
@@ -49,7 +50,6 @@
   //页面load成功之后加载试卷
   window.onload(load_paper(6));
   answer_hash = null;
-
 
 </script>
 
