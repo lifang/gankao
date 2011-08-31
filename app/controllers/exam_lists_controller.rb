@@ -13,13 +13,18 @@ class ExamListsController < ApplicationController
   end
   
   def simulate_list
-    @examination_lists=Examination.where("types=?",Examination::TYPES[:SIMULATION])
+    @examination_lists=Examination.where("types=? and is_published=1",Examination::TYPES[:SIMULATION])
+    examinations=Examination.find_by_sql("select e.id from examinations e inner join exam_users u on u.examination_id=e.id
+                  where u.user_id=#{cookies[:user_id]} and e.status=#{Examination::STATUS[:CLOSED ]} and e.is_published=1 ")
+    @examination_lists.each do |examination|
+      @examination_lists -=[examination] unless examinations.include?(examination.id)  if examination.status==Examination::STATUS[:CLOSED ]
+    end
     examnation_ids=@examination_lists.map(&:id).join(",")
     @hash=Examination.exam_users_hash(cookies[:user_id],examnation_ids)
   end
   
   def old_exam_list
-    @old_lists=Examination.where("types=?",Examination::TYPES[:OLD_EXAM])
+    @old_lists=Examination.where("types=? and is_published=1",Examination::TYPES[:OLD_EXAM])
     examnation_ids=@old_lists.map(&:id).join(",")
     @hash=Examination.exam_users_hash(cookies[:user_id],examnation_ids)
   end
