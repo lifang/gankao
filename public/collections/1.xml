@@ -29,7 +29,7 @@
                 </question>
             </questions>
         </problem>
-        <problem id='3' score='5' types='0'>
+        <problem id='3' incorrect_num='1' score='5' types='0'>
             <title>山东大厦</title>
             <category>1</category>
             <questions>
@@ -39,10 +39,10 @@
                     <questionattrs>阿萨德;-;发动;-; 地方;-;国服</questionattrs>
                     <tags/>           
                     <user_answer>地方</user_answer>                   
-                </question>
+                <user_answer>国服</user_answer></question>
             </questions>
         </problem>
-        <problem id='4' incorrect_num='1' score='16' types='0'>
+        <problem id='4' incorrect_num='2' score='16' types='0'>
             <title>阿斯顿sad</title>
             <category>1</category>
             <questions>
@@ -52,7 +52,7 @@
                     <questionattrs>df ;-;fgf ;-;h ;-;ghgh</questionattrs>
                     <tags/>             
                     <user_answer>ghgh</user_answer>
-                <user_answer/></question>
+                <user_answer/><user_answer>ghgh</user_answer></question>
             </questions>
         </problem>
     </problems>
