@@ -8,6 +8,7 @@
 <%= form_for :paper , :url => "/user/examinations/#{@examination.id}/save_result", 
   :html => {:name => "paper_form", :id => "paper_form",
   :onsubmit => "return generate_result_paper('#{@examination.paper_id}')"} do |f| %>
+  <div id="show_flash"></div>
   <div id="paper_show_info" style="position:relative;">
     <ul class="tab_biz" id="float_test">
       <li class="actived"><a href="javascript:void(0);" id="paper_title"></a></li>
@@ -31,8 +32,19 @@
             end_time = (@exam_user.ended_at - Time.now)
           end
         end %>
-        <span id="exam_time"><%= (end_time.nil? or end_time < 0) ? "不限制" :
-            ((end_time/3600).to_i.to_s + ":" + ((end_time%3600)/60).to_i.to_s + ":" + (end_time%3600%60).to_i.to_s) %></span>
+        <span id="exam_time">
+          <%
+          text = ""
+          if end_time.nil? or end_time == ""
+            text = "不限制"
+          elsif end_time > 0
+            text = (end_time/3600).to_i.to_s + ":" + ((end_time%3600)/60).to_i.to_s + ":" + (end_time%3600%60).to_i.to_s
+          else
+            text = "00:00:02"
+          end
+        %>
+          <%= text %>
+        </span>
       </div>
       <div><span id="local_time"></span></div>
       <%= f.submit "交卷" , :class=>"submit_btn" %>
@@ -57,10 +69,17 @@
   var normalelapse = 100;
   var nextelapse = normalelapse;
   var start = "";
+  //模块定时和考试定时
+  var is_fix_time = false;
+  var block_start_hash = null;
+  var block_end_hash = null;
   if ($("exam_time").innerHTML == "不限制") {
     start = "00:00:00:00";
   } else {
     start = $("exam_time").innerHTML + ":00";
+    is_fix_time = true;
+    block_start_hash = $H({});
+    block_end_hash = $H({});
   }
   var finish = "00:00:00:00";
 

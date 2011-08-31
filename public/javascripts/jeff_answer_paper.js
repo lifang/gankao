@@ -97,6 +97,7 @@ function create_block(bocks_div, block,practice_type) {
     }
 }
 
+//打开模块
 function open_nav(block_id, block_time) {
     var block_ids = $("block_ids");
     if (block_ids != null && block_ids.innerHTML != "") {
@@ -1054,4 +1055,8 @@ function alreay_answer_num() {
         $("complete_num").innerHTML = total_num;
     }
 }
+<<<<<<< HEAD
 ***************************/
+=======
+ ***************************/
+>>>>>>> 34f41cf5f7d111bbc691b9e7660aea42d9a789a5
