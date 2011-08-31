@@ -1,5 +1,5 @@
 class User::CombinePracticesController < ApplicationController
-  layout "paper", :only => [:do_exam, :save_result]
+  layout "paper", :only => [:save_result]
   before_filter :access?
   
 
@@ -143,7 +143,7 @@ class User::CombinePracticesController < ApplicationController
       @exam_user.auto_add(@exam_user,question_hash) if params[:types].to_i==Examination::TYPES[:OLD_EXAM]
       @exam_user.generate_answer_sheet_url(@exam_user.update_answer_url(@exam_user.open_xml, question_hash), "result")
       @exam_user.submited!
-      flash[:notice] = "标准答案已给出，请检查。错题已自动加入到错题集，您可以随时复习。"
+      flash[:notice] = "标准答案已给出，请检查。"
       redirect_to "/user/exam_users/#{@exam_user.examination_id}?user_id=#{cookies[:user_id]}"
     end
 

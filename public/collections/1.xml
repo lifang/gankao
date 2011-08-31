@@ -1,31 +1,29 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <collection id='1'>
     <problems>
-        <problem id='1' incorrect_num='1' score='5' types='0'>
-            <title>阿斯达岁的</title>
-            <category>1</category>
+        <problem id='1' score='5' types='0'>
+            <title>Until then, his family ________ from him for six months.</title>
+            <category>3</category>
             <questions>
-                <question correct_percent='50%' correct_type='0' id='1' score='5'>
-                    <answer>地方</answer>
-                    <analysis/>
-                    <questionattrs>地方;-;刚好;-;就;-;地方速度</questionattrs>
-                    <tags/>
- 
-                    <user_answer>刚好</user_answer>
-            
-                <user_answer>刚好</user_answer></question>
+                <question correct_type='0' error_percent='0' id='1' repeat_num='1' score='5'>
+                    <answer>D   hadn’t heard</answer>
+                    <analysis>直到刚才，表明从“刚才”以后我有他的消息了，表示过去我没有他的消息，所以用 “hadn&apos;t heard”</analysis>
+                    <questionattrs>A   didn’t hear;-;B   hasn’t been hearing;-;C   hasn’t heard;-;D   hadn’t heard</questionattrs>
+                    <tags>过去时</tags>
+                    <user_answer>A   didn’t hear</user_answer>
+                </question>
             </questions>
         </problem>
-        <problem id='2' score='0' types='0'>
-            <title>山东大厦</title>
-            <category>1</category>
+        <problem id='2' score='5' types='0'>
+            <title>Until then, his family ________ from him for six months.</title>
+            <category>3</category>
             <questions>
-                <question correct_percent='50%' correct_type='0' id='2' score='0'>
-                    <answer>阿萨德</answer>
-                    <analysis/>
-                    <questionattrs>阿萨德;-;发动;-; 地方;-;国服</questionattrs>
-                    <tags/>
-                    <user_answer>发动</user_answer>             
+                <question correct_type='0' error_percent='0' id='2' repeat_num='1' score='5'>
+                    <answer>D   hadn’t heard</answer>
+                    <analysis>直到刚才，表明从“刚才”以后我有他的消息了，表示过去我没有他的消息，所以用 “hadn&apos;t heard”</analysis>
+                    <questionattrs>A   didn’t hear;-;B   hasn’t been hearing;-;C   hasn’t heard;-;D   hadn’t heard</questionattrs>
+                    <tags>过去时</tags>
+                    <user_answer>C   hasn’t heard</user_answer>
                 </question>
             </questions>
         </problem>

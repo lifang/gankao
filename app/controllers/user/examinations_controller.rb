@@ -26,8 +26,6 @@ class User::ExaminationsController < ApplicationController
     if arr[0] == "" and arr[1].any?
       @examination = arr[1][0]
       @exam_user = ExamUser.find_by_examination_id_and_user_id(@examination.id, cookies[:user_id].to_i)
-      @exam_user = ExamUser.create(:user_id => cookies[:user_id],:examination_id => @examination.id,
-        :password => User::DEFAULT_PASSWORD, :is_user_affiremed => ExamUser::IS_USER_AFFIREMED[:YES]) if @exam_user.nil?
       @exam_user.set_paper(@examination) if @exam_user.paper_id.nil?
       if @exam_user and @exam_user.paper_id
         @paper_url = "#{Constant::PAPER_CLIENT_PATH}/#{@exam_user.paper_id}.js"

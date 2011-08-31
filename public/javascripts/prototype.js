@@ -1213,7 +1213,7 @@ Array.from = $A;
 })();
 function $H(object) {
   return new Hash(object);
-};
+}
 
 var Hash = Class.create(Enumerable, (function() {
   function initialize(object) {
