@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>      <exam id='5'>
-        <paper id='5' score='0'>
-          <questions><question id='9' is_sure='1' score='0'><answer>adsad</answer></question><question id='10' is_sure='1' score='0'><answer>豆腐干</answer></question><question id='11' is_sure='1' score='0'><answer>共和国</answer></question></questions>
-          <auto_score/>
-          <rate_score/>
+        <paper id='4' score='0'>
+          <questions></questions>
+          <auto_score></auto_score>
+          <rate_score></rate_score>
         </paper>
       </exam>
