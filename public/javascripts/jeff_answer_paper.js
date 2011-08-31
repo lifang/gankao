@@ -319,12 +319,12 @@ var sortRandom = function (){
 function create_single_question(problem_title,problem_id, que_div, question,practice_type) {
 
     if (question.questionattrs != undefined && question.questionattrs != null) {
-
+        var que_attrs = question.questionattrs.split(";-;");
+        var store_id = new String;
+        var attr = create_element("div", null, null, "attr", null, "innerHTML");
+        que_div.appendChild(attr);
         if(practice_type==4){
-            var que_attrs = question.questionattrs.split(";-;").sort(sortRandom);
-            var store_id = new String;
-            var attr = create_element("div", null, null, "attr", null, "innerHTML");
-            que_div.appendChild(attr);
+            que_attrs = que_attrs.sort(sortRandom);
             for (var i=0; i<que_attrs.length; i++) {
                 if (que_attrs[i] != null && que_attrs[i] != "") {
                     var attr = create_element("span", null, null, "attr", null, "innerHTML");
@@ -370,6 +370,7 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
                 
             }
             else{
+                alert("mark1");
                 for (var i=0; i<que_attrs.length; i++) {
                     if (que_attrs[i] != null && que_attrs[i] != "") {
                         var attr = create_element("div", null, null, "attr", null, "innerHTML");
