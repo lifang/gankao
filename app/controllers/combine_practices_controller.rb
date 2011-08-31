@@ -1,6 +1,6 @@
 #encoding: utf-8
 class CombinePracticesController < ApplicationController
-
+  before_filter :access?
   def index
     
   end

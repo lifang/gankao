@@ -1,5 +1,5 @@
 class User::CombinePracticesController < ApplicationController
-  layout "paper", :only => [:do_exam, :save_result]
+  layout "paper", :only => [:save_result]
   before_filter :access?
   
 
