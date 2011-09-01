@@ -1,10 +1,10 @@
 
+
 var load_switch=0;   //页面载入前，置0；页面载入后，置1。该变量目前只在综合训练5中控制流程。
 //
 //
 //加载综合训练
 function load_paper(practice_type) {
-
     //    if(window.openDatabase){
     setTimeout(function(){
         create_paper(practice_type);
@@ -319,18 +319,19 @@ var sortRandom = function (){
 }
 
 function create_single_question(problem_title,problem_id, que_div, question,practice_type) {
-
+    var que_div_conlist=create_element("div", null, null, "tb_con_list", null, "innerHTML");
+    que_div.appendChild(que_div_conlist);
     if (question.questionattrs != undefined && question.questionattrs != null) {
         var que_attrs = question.questionattrs.split(";-;");
         var store_id = new String;
         var attr = create_element("div", null, null, "attr", null, "innerHTML");
-        que_div.appendChild(attr);
+        que_div_conlist.appendChild(attr);
         if(practice_type==4){
             que_attrs = que_attrs.sort(sortRandom);
             for (var i=0; i<que_attrs.length; i++) {
                 if (que_attrs[i] != null && que_attrs[i] != "") {
                     var attr = create_element("span", null, null, "attr", null, "innerHTML");
-                    que_div.appendChild(attr);
+                    que_div_conlist.appendChild(attr);
                     store_id="question_"+question.id+"_draggable_"+(i+1)+"(_answer_)"+que_attrs[i];
                     attr.innerHTML += " <span id=\""+store_id+"\">"+ que_attrs[i] +"</span> ";
                     new Draggable(store_id,{
@@ -377,7 +378,7 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
                 for (var i=0; i<que_attrs.length; i++) {
                     if (que_attrs[i] != null && que_attrs[i] != "") {
                         var attr = create_element("div", null, null, "attr", null, "innerHTML");
-                        que_div.appendChild(attr);
+                        que_div_conlist.appendChild(attr);
                         if (question.correct_type == "0") {
                             if (answer_hash != null && answer_hash[question.id] != null && answer_hash[question.id][0] == que_attrs[i]) {
                                 attr.innerHTML += "<input type='radio' name='question_attr_"+ question.id +"' id='question_attr_"+ i +"' value='"+ que_attrs[i] +"' checked='true' onclick='javascript:show_que_save_button(\""+question.id+"\")' />";
@@ -418,13 +419,13 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
                 attr1.innerHTML += "<textarea cols='35' rows='3' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")'></textarea>";
             }
         }
-        que_div.appendChild(attr1);
+        que_div_conlist.appendChild(attr1);
     }
     
     if (question.tags != undefined && question.tags != null) {
         var tags = create_element("div", null, null, "tag", null, "innerHTML");
         tags.innerHTML = question.tags;
-        que_div.appendChild(tags);
+        que_div_conlist.appendChild(tags);
     }
     var answer_input = create_element("input", "answer_" + question.id, "answer_" + question.id, null, "hidden", "value");
     if (answer_hash != null && answer_hash[question.id] != null) {
@@ -436,7 +437,7 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
             }
         }
     }
-    que_div.appendChild(answer_input);
+    que_div_conlist.appendChild(answer_input);
 }
 
 //创建input

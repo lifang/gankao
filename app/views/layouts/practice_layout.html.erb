@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+    <title>综合训练</title>
+    <link href="/stylesheets/TrainingAll.css" rel="stylesheet" type="text/css"/>
+
+    <%= javascript_include_tag :defaults %>
+    <%= use_validate_js_tooltip %>
+    <%= javascript_include_tag 'jeffrey' %>
+
+  </head>
+
+  <body>
+    <div class="wrap">
+      <div class="training_box">
+        <div class="tb_top"></div>
+        <div class="tb_midd">
+          <div class="tb_loading">
+            <div class="tb_loading_t width_8"></div>
+          </div>
+          <%= yield %>
+          <div class="tb_prevNext">
+            <a href="#" class="tb_goleft"></a>
+            <a href="#" class="tb_check"></a>
+            <a href="#" class="tb_goright"></a>
+          </div>
+
+        </div>
+        <div class="tb_bott"></div>
+      </div>
+    </div>
+  </body>
+</html>
+
+

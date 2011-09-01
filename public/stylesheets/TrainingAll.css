@@ -21,7 +21,9 @@ ul { list-style: none;}
 
 .task_title_one { background: url(/images/paper/all_bg.png) no-repeat 0px -191px;}
 .task_title_two { background: url(/images/paper/all_bg.png) no-repeat 0px -230px;}
-
+.task_title_three { background: url(/images/paper/all_bg.png) no-repeat 0px -269px;}
+.task_title_four { background: url(/images/paper/all_bg.png) no-repeat 0px -308px;}
+.task_title_five { background: url(/images/paper/all_bg.png) no-repeat 0px -347px;}
 
 .play { height:24px; line-height: 24px;}
 .play_btn { float: left; margin: 0 10px;}
