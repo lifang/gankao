@@ -364,13 +364,14 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
         } else {
             if(practice_type==6){
                 var num=1;
-                while(document.getElementById("problem_"+problem_id+"_writeplace_"+num)){
-                    document.getElementById("problem_"+problem_id+"_writeplace_"+num).onfocus=function(){
+                while(document.getElementById("problem_"+problem_id+"_writefont_"+num)){
+                    var input_id = "problem_"+problem_id+"_writeplace_"+num
+                    document.getElementById("problem_"+problem_id+"_writefont_"+num).innerHTML="<input type='text' id='"+input_id+"' ></input>"
+                    document.getElementById(input_id).onfocus=function(){
                         show_que_save_button(question.id);
                     };
                     num++;
                 }
-                
             }
             else{
                 for (var i=0; i<que_attrs.length; i++) {
