@@ -27,94 +27,20 @@
                 <user_answer/></question>
             </questions>
         </problem>
-        <problem id='4' incorrect_num='14' repeat_num='2' score='10' types='4'>
-            <title>______ ______ your name? </title>
-            <category>3</category>
-            <complete_title>[[what|where;why;when||名称]] [[is|are;was;were||助词]] your name? [{常用搭配,|常用搭配}][(5,|5)]</complete_title>
-            <questions>
-                <question correct_type='0' delete_status='1' error_percent='0' id='4' repeat_num='2' score='5'>
-                    <answer>what</answer>
-                    <analysis>常用搭配</analysis>
-                    <questionattrs>what;-;where;-;why;-;when</questionattrs>
-                    <tags>名称</tags>
-                    <user_answer>when</user_answer>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer>why</user_answer>
-                <user_answer>why</user_answer><user_answer>where</user_answer><user_answer>why</user_answer><user_answer>why</user_answer><user_answer/></question>
-                <question correct_type='0' error_percent='0' id='5' repeat_num='1' score='5'>
-                    <answer>is</answer>
-                    <analysis>常用搭配</analysis>
-                    <questionattrs>is;-;are;-;was;-;were</questionattrs>
-                    <tags>助词</tags>
-                    <user_answer>was</user_answer>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer>were</user_answer>
-                <user_answer>was</user_answer><user_answer>are</user_answer><user_answer>was</user_answer><user_answer>are</user_answer><user_answer/></question>
-            </questions>
-        </problem>
-        <problem id='10' incorrect_num='10' repeat_num='1' score='5' types='0'>
-            <title>fsdafafsfsaf</title>
-            <category>3</category>
-            <questions>
-                <question correct_percent='50%' correct_type='0' error_percent='0' id='15' repeat_num='1' score='5'>
-                    <answer>789</answer>
-                    <analysis>sdfsfasf</analysis>
-                    <questionattrs>23;-;wer;-;65;-;789</questionattrs>
-                    <tags>ew</tags>
-                    <user_answer>65</user_answer>
-                    <user_answer>65</user_answer>
-                    <user_answer>65</user_answer>
-                    <user_answer>65</user_answer>
-                    <user_answer>65</user_answer>
-                    <user_answer/>
-                <user_answer>65</user_answer><user_answer>65</user_answer><user_answer>65</user_answer><user_answer>65</user_answer><user_answer>wer</user_answer><user_answer/></question>
-            </questions>
-        </problem>
-        <problem id='9' incorrect_num='4' repeat_num='1' score='5' types='0'>
-            <title>我撒的飞洒</title>
-            <category>3</category>
-            <questions>
-                <question correct_type='0' error_percent='0' id='14' repeat_num='1' score='5'>
-                    <answer>sfs</answer>
-                    <analysis>sfafwerwr2r2</analysis>
-                    <questionattrs>sfs;-;sfss;-;sdds;-;sd</questionattrs>
-                    <tags>wrwr</tags>
-                    <user_answer>sfs</user_answer>
-                    <user_answer>sdds</user_answer>
-                    <user_answer>sdds</user_answer>
-                    <user_answer>sdds</user_answer>
-                    <user_answer>sd</user_answer>
-                <user_answer>sd</user_answer></question>
-            </questions>
-        </problem>
-        <problem id='66' incorrect_num='15' repeat_num='1' score='12' types='4'>
-            <title>呵呵呵分得的</title>
+        <problem id='3' incorrect_num='1' score='5' types='0'>
+            <title>山东大厦</title>
             <category>1</category>
             <questions>
-                <question correct_type='3' error_percent='0' id='80' repeat_num='1' score='0'>
-                    <description>反反复复</description>
-                    <answer>是飒飒</answer>
-                    <analysis>发放给 </analysis>
-                    <questionattrs/>
-                    <tags/>
-                    <user_answer>得得得</user_answer>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                <user_answer/><user_answer/><user_answer/><user_answer>fffdddd</user_answer><user_answer>反反复复</user_answer></question>
+                <question correct_percent='50%' correct_type='0' id='3' score='5'>
+                    <answer>阿萨德</answer>
+                    <analysis/>
+                    <questionattrs>阿萨德;-;发动;-; 地方;-;国服</questionattrs>
+                    <tags/>           
+                    <user_answer>地方</user_answer>                   
+                <user_answer>国服</user_answer></question>
             </questions>
         </problem>
-        <problem id='4' incorrect_num='1' score='16' types='0'>
+        <problem id='4' incorrect_num='2' score='16' types='0'>
             <title>阿斯顿sad</title>
             <category>1</category>
             <questions>
@@ -124,10 +50,9 @@
                     <questionattrs>df ;-;fgf ;-;h ;-;ghgh</questionattrs>
                     <tags/>             
                     <user_answer>ghgh</user_answer>
-                <user_answer/></question>
+                <user_answer/><user_answer>ghgh</user_answer></question>
             </questions>
         </problem>
-
-    <problem id='3' score='5' types='2'><title>gerghrthtr</title><category>2</category><questions><question correct_type='2' error_percent='0' id='3' repeat_num='1' score='5'><answer>1</answer><analysis/><questionattrs/><tags/><user_answer></user_answer></question></questions></problem><problem id='6' score='21' types='4'><title>&lt;input type=&quot;button&quot; value=&quot;播放&quot; id=&apos;audio_control_6&apos; onclick=&quot;javascript:audio_play(6);&quot;&gt;&amp;nbsp;听音乐，回答下列问题。&lt;audio src=&quot;/media/music.mp3&quot; id=&apos;audio_6&apos;&gt;&lt;/audio&gt;</title><category>2</category><questions><question correct_type='0' error_percent='0' id='6' repeat_num='1' score='5'><description>efwergergerger</description><answer>gerh</answer><questionattrs>htrhrf;-;gerh;-;gerhew;-;regerge</questionattrs><tags/><user_answer></user_answer></question><question correct_type='1' error_percent='0' id='7' repeat_num='1' score='5'><description>ergrethrthrthfwefw</description><answer>fwefwh;|;thrth</answer><questionattrs>gegrh;-;fwefwh;-;thrth;-;gregerh</questionattrs><tags/><user_answer></user_answer></question><question correct_type='2' error_percent='0' id='8' repeat_num='1' score='3'><description>eghrthtrwfefw</description><answer>1</answer><questionattrs/><tags/><user_answer></user_answer></question><question correct_type='3' error_percent='0' id='9' repeat_num='1' score='2'><description>geghtrhrthtfwefew</description><answer>grehrtfwefwe</answer><questionattrs/><tags/><user_answer></user_answer></question></questions></problem></problems>
+    <problem id='9' score='5' types='0'><title>少打</title><category>1</category><questions><question correct_type='0' error_percent='0' id='9' repeat_num='1' score='5'><answer>adsad</answer><analysis/><questionattrs>adsad;-;规范法官;-;会更好;-;很久很久</questionattrs><tags/><user_answer>规范法官</user_answer></question></questions></problem><problem id='10' score='5' types='0'><title>阿斯顿sad</title><category>1</category><questions><question correct_type='0' error_percent='0' id='10' repeat_num='1' score='5'><answer>豆腐干</answer><analysis/><questionattrs>豆腐干;-;哥哥;-;塞维尔v;-;东方饭店个</questionattrs><tags/><user_answer>哥哥</user_answer></question></questions></problem><problem id='11' score='5' types='0'><title>但是发生堵塞</title><category>1</category><questions><question correct_type='0' error_percent='0' id='11' repeat_num='1' score='5'><answer>共和国</answer><analysis/><questionattrs>阿萨德;-;阿萨德打算;-;对方答复;-;共和国</questionattrs><tags/><user_answer>阿萨德打算</user_answer></question></questions></problem><problem id='12' score='5' types='0'><title>说的是对的</title><category>2</category><questions><question correct_type='0' error_percent='0' id='12' repeat_num='1' score='5'><answer>阿斯达岁的大幅度</answer><analysis>阿斯达岁的</analysis><questionattrs>阿斯达岁的大幅度;-;豆腐干风格;-;刚好好机会;-;很久很久</questionattrs><tags/><user_answer>很久很久</user_answer></question></questions></problem></problems>
 </collection>
 

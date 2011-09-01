@@ -45,8 +45,10 @@ class ExamListsController < ApplicationController
   end
 
   def feedback
-    @feedback=Feedback.create(:description=>params[:feedback][:description],:user_id=>"#{cookies[:user_id]}",:question_id=>params[:id])
-    redirect_to "/exam_lists/incorrect_list"
+    @feedback=Feedback.create(:description=>params[:description],:user_id=>"#{cookies[:user_id]}",:question_id=>params[:id])
+    @id=params[:id]
+    @feedbacks=Feedback.find_all_by_user_id_and_question_id(cookies[:user_id],params[:id])
+    render :partial=>"/exam_lists/feedback" 
   end
 
 
