@@ -1,0 +1,50 @@
+@charset "utf-8";
+* { padding: 0; margin: 0;}
+body { font-family: Arial,"宋体", "微软雅黑"; font-size: 12px; background:#000;}
+img { border: none;}
+ul { list-style: none;}
+.space10 { height: 10px;}
+.clear { clear: both;}
+
+.training_box { width: 492px;}
+.tb_top { width: 492px; height: 15px; background: url(/images/paper/all_bg.png) no-repeat -102px -72px;}
+.tb_midd { width: 480px; background: url(/images/paper/Training_m.png) repeat-y; padding: 0 6px;}
+.tb_bott { width: 492px; height: 15px; background: url(/images/paper/all_bg.png) no-repeat -102px -87px;}
+
+.tb_loading { width: 464px; height: 18px; background: url(/images/paper/all_bg.png) no-repeat -125px -114px; margin: 0 auto;}
+.tb_loading_t { width: 464px; height: 18px; background: url(/images/paper/all_bg.png) no-repeat -125px -136px;}
+.width_8 { width: 8px;}
+.width_108 { width: 108px;}
+
+.task_title { width: 466px; height: 38px; margin: 10px auto;}
+.task_title a { float: right; margin: 5px 10px 0 0;}
+
+.task_title_one { background: url(/images/paper/all_bg.png) no-repeat 0px -191px;}
+.task_title_two { background: url(/images/paper/all_bg.png) no-repeat 0px -230px;}
+
+
+.play { height:24px; line-height: 24px;}
+.play_btn { float: left; margin: 0 10px;}
+.tishi { float: left;}
+
+.explain_btn { width: 60px; height:27px; display: block; overflow: hidden; text-indent: 999px; background: url(/images/paper/all_bg.png) no-repeat -127px -157px; margin-left: 400px;}
+
+.tb_content { width: 466px; margin: 0 auto;}
+.tb_con_list { padding: 10px; border: 1px #CCC solid; margin-top: 10px;}
+.chooseQuestion { line-height: 24px; font-size: 12px;}
+.chooseQuestion li { height: 24px;}
+
+
+/*保存答案按钮-----*/
+.p_question_btn { margin-top: 5px; padding-left: 10px;}
+.save, .Uncertain {height: 26px; line-height: 26px; border: none; cursor: pointer; color: #FFF; margin: 0 5px;}
+.save { width: 48px;  background: url(/images/paper/all_bg.png) no-repeat -8px -8px;}
+.Uncertain { width: 60px; background: url(/images/paper/all_bg.png) no-repeat -8px -45px;}
+
+
+/*tb_prevNext*/
+.tb_prevNext { height: 27px; padding-left: 320px; margin-top: 10px;}
+.tb_goleft, .tb_goright { float: left; width: 26px; height: 27px;}
+.tb_goleft { background: url(/images/paper/all_bg.png) no-repeat 0 -157px;}
+.tb_goright { background: url(/images/paper/all_bg.png) no-repeat -95px -157px;}
+.tb_check { float: left; margin: 0 10px; width: 60px; height: 27px; background: url(/images/paper/all_bg.png) no-repeat -30px -157px;}

@@ -75,12 +75,19 @@ function tab(tag, n){
 
 }
 function feedb(id){
-        new Ajax.Updater("feedb" , "/exam_lists/feedback",
+    var text=$("description").value;
+    if (text==""||text.length==0){
+    alert("请输入你要问的问题.");
+    return false;
+    }else{
+
+        new Ajax.Updater("feedback" , "/exam_lists/feedback",
         {
-            asynchronous:false,
+            asynchronous:true,
             evalScripts:true,
             method:"post",
-            parameters:'id='+ id+ '&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+            parameters:'id='+ id+ '&description='+ text+ '&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
         });
         return false;
+    }
 }

@@ -1,0 +1,128 @@
+@charset "utf-8";
+* { padding: 0; margin: 0;}
+body { background: url(/images/paper/_bg.jpg) repeat; font-family: Arial,"宋体", "微软雅黑"; font-size: 12px;}
+ul { list-style: none;}
+img { border: none;}
+.wrap {}
+
+.fraction { text-align: right;line-height: 24px; font-size: 12px; color: #666;}
+.correctRight_bg { background: #a1e5ff;}
+
+
+.space10 { height: 10px;}
+
+.clear { clear: both;}
+
+
+/*testPaper-----top*/
+.testPaper_top { height: 38px; background: url(/images/paper/testPaper_top_bg.png) repeat-x top center;}
+.tp_top_box { width: 960px; height: 38px; line-height: 38px; margin: 0 auto; font-size: 14px; color: #FFF;}
+.tp_top_box div { float: left; width: 320px;}
+.paper_name { display: inline;}
+.timer { text-align: center; font-size: 16px; background: url(/images/paper/timerIcon.png) no-repeat 100px center;}
+.paper_info { text-align: right;}
+.paper_info a { color: #FFF;}
+.paper_info a:hover { color: #BA2636;}
+.paper_info strong { padding: 0 5px;}
+
+
+/*testPaper-----main*/
+.testPaper_main { width: 960px; margin: 0 auto; padding-top: 50px; overflow: hidden;}
+
+/*tp_left-------------*/
+.tp_left { float: left; width: 690px; overflow: hidden; display: inline;}
+
+
+
+.part_title { font-size: 16px; color: #164a63; font-weight: bold; line-height: 32px;}
+.part_box { font-size: 14px; }
+.part_div { margin-top: 10px;}
+
+/*题目说明区块-----*/
+.part_passage { padding: 10px; background: #fafdff;}
+.part_passage p { line-height: 22px; text-indent: 24px;}
+
+.p_directions { font-weight:bold;}
+.p_contents { margin-top: 10px;}
+
+/*答题样式-----*/
+.part_padding { padding: 10px;}
+.part_question {
+    border-top: 1px #CCC solid;
+	border-left: 1px #CCC solid;
+	border-right: 5px #CCC solid;
+	border-bottom: 5px #CCC solid;
+	margin-top: 10px;
+	background: #FFF;
+}
+
+
+
+.p_question_list {border-bottom: 1px #CCC solid; position: relative;}
+.answer_text { padding: 5px;}
+
+.answer_textarea { }
+.answer_textarea textarea { padding: 5px; width: 600px; height: 200px; margin: 10px 0 0 15px;}
+
+
+.question_yes { background: url(/images/paper/question_yesno_bg.jpg) no-repeat 0px 0px #FFF;}
+.question_no {background: url(/images/paper/question_yesno_bg.jpg) no-repeat 0px -396px #FFF;}
+
+.p_q_l_left { float: left; width: 31px;text-align: center; padding-top: 5px;}
+.p_q_l_right { float: left; padding: 5px; width:640px;}
+
+/*审查-----*/
+.review_btn { position: absolute; top: 5px; right: 5px;}
+.review_btn button { width: 80px; height: 28px; line-height: 28px; border: none; cursor: pointer; color:#5d728a; background: url(/images/paper/all_bg.png) no-repeat -7px -83px;}
+
+/*解析笔记弹出层----*/
+.jiexi_tab { display: none; position: absolute; z-index: 100;}
+.tab_t { width: 397px; height: 27px; background: url(/images/paper/all_bg.png) -114px -8px no-repeat;}
+.tab_t a { float: right; margin: 15px 12px 0 0;}
+.tab_m { width: 377px;  background: url(/images/paper/tab_m.png) repeat-y #FFF; padding: 5px 10px; line-height: 22px;}
+.tab_m h3 { color: #F00;}
+.tab_b { width: 397px; height: 18px; background: url(/images/paper/all_bg.png) -114px -35px no-repeat;}
+
+.biji_tab {display: none; position: absolute; z-index: 100; top: 25px; right: 70px;}
+.tab_m_textarea textarea { width: 370px;}
+
+
+
+
+/*保存答案按钮-----*/
+.p_question_btn { margin-top: 5px; padding-left: 10px;}
+.save, .Uncertain {height: 26px; line-height: 26px; border: none; cursor: pointer; color: #FFF; margin: 0 5px;}
+.save { width: 48px;  background: url(/images/paper/all_bg.png) no-repeat -8px -8px;}
+.Uncertain { width: 60px; background: url(/images/paper/all_bg.png) no-repeat -8px -45px;}
+
+
+
+
+/*选择题-------*/
+.chooseQuestion { line-height: 24px; font-size: 12px;}
+.chooseQuestion li { height: 24px;}
+
+
+
+
+/*tp_right-----------------*/
+.tp_right { float: left; width: 250px; padding-left: 20px; position: relative;}
+.first_title { font-size: 14px; color: #333; overflow: hidden; cursor: pointer;}
+.first_title p { background: url(/images/paper/xline.png) repeat-x center bottom; padding: 5px; line-height: 32px;}
+.second_menu li { float: left; margin: 5px 8px;}
+.highLight { color: #164a63; font-size: 16px; font-weight:bold;}
+
+
+
+
+.title_shadow { display: inline-block;text-shadow:1px 0 0 #ffffff, 0 1px 0 #ffffff, 0 -1px 0 #ffffff, -1px 0 0 #ffffff, 1px 0 1px #ffffff, 0 1px 1px #ffffff, 0 -1px 1px #ffffff, -1px 0 1px #ffffff;
+   filter:
+	Dropshadow(offx=1,offy=0,color=#ffffff)
+    Dropshadow(offx=0,offy=1,color=#ffffff)
+    Dropshadow(offx=0,offy=-1,color=#ffffff)
+    Dropshadow(offx=-1,offy=0,color=#ffffff);
+}
+
+.testPaper_foot { height: 100px;}
+
+

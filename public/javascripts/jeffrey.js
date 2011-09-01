@@ -669,8 +669,8 @@ function audio_play(id){
         }
         else{
             if(confirm("该音频有播放次数限制，\"停止\"播放也会记录播放次数。这可能导致你的损失。你确定要停止么？\n 当前播放次数/总次数 ："+getCookie("audio_"+id)+"/"+get_canplay_time())){
-            $("audio_"+id).pause();
-            $("audio_control_"+id).value="播放";
+                $("audio_"+id).pause();
+                $("audio_control_"+id).value="播放";
             }
         }
     }
