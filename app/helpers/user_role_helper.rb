@@ -3,7 +3,8 @@ module UserRoleHelper
 
 
   def is_vip?
-    cookies[:is_vip]=1 if Order.find_by_user_id(cookies[:user_id]) unless cookies[:is_vip]
+    cookies[:is_vip] = false
+    cookies[:is_vip] = true if Order.find_by_user_id(cookies[:user_id]) unless cookies[:is_vip]
     return cookies[:is_vip]
   end
 

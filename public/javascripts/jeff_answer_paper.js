@@ -73,7 +73,7 @@ function create_block(bocks_div, block,practice_type) {
         block_hidden_nav_div.innerHTML = "<a href='javascript:void(0);' title='本部分答题时间固定，展开时候计时即将开始，请谨慎答题。' onclick='javascript:open_nav(\""+block.id+"\", \""+block.time+"\");'>"+block.base_info.title + "</a><br/>";
     } else {
         block_hidden_nav_div.innerHTML = "<a href='javascript:void(0);' onclick='javascript:open_nav(\""+block.id+"\", \""+block.time+"\");'>"+block.base_info.title + "</a><br/>";
-    }-
+    }
     navigation_div.appendChild(block_hidden_nav_div);
     if (block_block_flag == 0 && (block.time == null || block.time == "" || block.time == "0")) {
         block_div.style.display = "block";

@@ -56,7 +56,7 @@ class User::CombinePracticesController < ApplicationController
       question_ids.each do |question_id|
         question_hash[question_id] = [params["answer_" + question_id], "1"]
       end if question_ids
-      @exam_user.auto_add(@exam_user,question_hash) if params[:types].to_i==Examination::TYPES[:OLD_EXAM]
+      @exam_user.auto_add_collection(@exam_user,question_hash) if params[:types].to_i==Examination::TYPES[:OLD_EXAM]
       @exam_user.generate_answer_sheet_url(@exam_user.update_answer_url(@exam_user.open_xml, question_hash), "result")
       @exam_user.submited!
       flash[:notice] = "标准答案已给出，请检查。"
