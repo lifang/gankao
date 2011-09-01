@@ -95,12 +95,12 @@ Gankao::Application.routes.draw do
         get "do_exam", "enter_password"
       end
       collection do
-        get "error_page"
+        get "error_page", "test"
       end
     end
     resources :combine_practices do
       member do
-        get "start","show2","show3","show4","show5","show6"
+        get "start"
         post "save_result"
       end
     end

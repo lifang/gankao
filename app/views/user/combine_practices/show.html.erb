@@ -10,16 +10,16 @@
   :onsubmit => "return generate_result_paper('#{@examination.paper_id}')"} do |f| %>
   <div id="paper_show_info" style="position:relative;">
     <ul class="tab_biz" id="float_test">
-      <li class="actived"><a href="javascript:void(0);">综合训练四</a></li>
+      <li class="actived"><a href="javascript:void(0);"><%=  @practice_name %></a></li>
     </ul>
     <div class="soso">
-            <input type="hidden" name="practice_type" id="practice_type" value="5"/>
-      <input type="hidden" name="canplaytime" id="canplaytime" value="<%= Constant::CANPLAYTIME[:practice_5] %>"/>
+      <input type="hidden" name="practice_type" id="practice_type" value="<%= @practice_type %>"/>
+      <input type="hidden" name="canplaytime" id="canplaytime" value="<%= Constant::CANPLAYTIME[:practice_2] %>"/>
       <input type="hidden" name="paper_id" id="paper_id" value=""/>
       <input type="hidden" name="all_quesiton_ids" id="all_question_ids" value=""/>
       <input type="hidden" name="problem_ids" id="problem_ids" value=""/>
       <input type="hidden" name="examination_id" id="examination_id" value="<%= @examination.id %>"/>
-            <div>题目数：共<span id="total_num"></span>题/已完成<span id="complete_num">0</span>题</div>
+      <div>题目数：共<span id="total_num"></span>题/已完成<span id="complete_num">0</span>题</div>
       <div><span id="local_time"></span></div>
       <%= f.submit "交卷" , :class=>"submit_btn" %>
     </div>
@@ -38,7 +38,7 @@
 <% end %>
 <script type="text/javascript" src="/javascripts/local_save/answer.js" charset="utf-8"></script>
 <script language="javascript" type="text/javascript">
-
+ 
   //用户保存本地存储的答案
   var answer_hash = null;
   //load已有的答案
@@ -48,7 +48,7 @@
   var load_fix_time = null;
 
   //页面load成功之后加载试卷
-  window.onload(load_paper(5));
+  window.onload(load_paper(<%= @practice_type %>));
   answer_hash = null;
 
 

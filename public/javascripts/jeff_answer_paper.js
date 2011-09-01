@@ -73,7 +73,7 @@ function create_block(bocks_div, block,practice_type) {
         block_hidden_nav_div.innerHTML = "<a href='javascript:void(0);' title='本部分答题时间固定，展开时候计时即将开始，请谨慎答题。' onclick='javascript:open_nav(\""+block.id+"\", \""+block.time+"\");'>"+block.base_info.title + "</a><br/>";
     } else {
         block_hidden_nav_div.innerHTML = "<a href='javascript:void(0);' onclick='javascript:open_nav(\""+block.id+"\", \""+block.time+"\");'>"+block.base_info.title + "</a><br/>";
-    }-
+    }
     navigation_div.appendChild(block_hidden_nav_div);
     if (block_block_flag == 0 && (block.time == null || block.time == "" || block.time == "0")) {
         block_div.style.display = "block";
@@ -364,13 +364,14 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
         } else {
             if(practice_type==6){
                 var num=1;
-                while(document.getElementById("problem_"+problem_id+"_writeplace_"+num)){
-                    document.getElementById("problem_"+problem_id+"_writeplace_"+num).onfocus=function(){
+                while(document.getElementById("problem_"+problem_id+"_writefont_"+num)){
+                    var input_id = "problem_"+problem_id+"_writeplace_"+num
+                    document.getElementById("problem_"+problem_id+"_writefont_"+num).innerHTML="<input type='text' id='"+input_id+"' ></input>"
+                    document.getElementById(input_id).onfocus=function(){
                         show_que_save_button(question.id);
                     };
                     num++;
                 }
-                
             }
             else{
                 for (var i=0; i<que_attrs.length; i++) {
