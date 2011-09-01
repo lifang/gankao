@@ -48,7 +48,7 @@ class ExamListsController < ApplicationController
     @feedback=Feedback.create(:description=>params[:description],:user_id=>"#{cookies[:user_id]}",:question_id=>params[:id])
     @id=params[:id]
     @feedbacks=Feedback.find_all_by_user_id_and_question_id(cookies[:user_id],params[:id])
-    render :partial=>"/exam_lists/feedback"
+    render :partial=>"/exam_lists/feedback" 
   end
 
 

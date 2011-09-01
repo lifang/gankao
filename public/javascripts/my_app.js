@@ -87,7 +87,7 @@ function feedb(id){
             evalScripts:true,
             method:"post",
             parameters:'id='+ id+ '&description='+ text+ '&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
-        });
+        }); 
         return false;
     }
 }
