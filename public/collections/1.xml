@@ -5,7 +5,7 @@
             <title>Until then, his family ________ from him for six months.</title>
             <category>3</category>
             <questions>
-                <question correct_type='0' error_percent='0' id='1' repeat_num='1' score='5'>
+                <question correct_type='0' error_percent='0' id='1' repeat_num='2' score='5'>
                     <answer>D   hadn’t heard</answer>
                     <analysis>直到刚才，表明从“刚才”以后我有他的消息了，表示过去我没有他的消息，所以用 “hadn&apos;t heard”</analysis>
                     <questionattrs>A   didn’t hear;-;B   hasn’t been hearing;-;C   hasn’t heard;-;D   hadn’t heard</questionattrs>
@@ -18,7 +18,7 @@
             <title>Until then, his family ________ from him for six months.</title>
             <category>3</category>
             <questions>
-                <question correct_type='0' error_percent='0' id='2' repeat_num='1' score='5'>
+                <question correct_type='0' error_percent='0' id='2' repeat_num='2' score='5'>
                     <answer>D   hadn’t heard</answer>
                     <analysis>直到刚才，表明从“刚才”以后我有他的消息了，表示过去我没有他的消息，所以用 “hadn&apos;t heard”</analysis>
                     <questionattrs>A   didn’t hear;-;B   hasn’t been hearing;-;C   hasn’t heard;-;D   hadn’t heard</questionattrs>
@@ -32,7 +32,7 @@
             <category>3</category>
             <complete_title>[[what|where;why;when||名称]] [[is|are;was;were||助词]] your name? [{常用搭配,|常用搭配}][(5,|5)]</complete_title>
             <questions>
-                <question correct_type='0' delete_status='1' error_percent='0' id='4' repeat_num='1' score='5'>
+                <question correct_type='0' delete_status='1' error_percent='0' id='4' repeat_num='2' score='5'>
                     <answer>what</answer>
                     <analysis>常用搭配</analysis>
                     <questionattrs>what;-;where;-;why;-;when</questionattrs>
@@ -42,7 +42,6 @@
                     <user_answer/>
                     <user_answer>why</user_answer>
                 <user_answer>why</user_answer><user_answer>where</user_answer><user_answer>why</user_answer><user_answer>why</user_answer><user_answer/></question>
-                        
                 <question correct_type='0' error_percent='0' id='5' repeat_num='1' score='5'>
                     <answer>is</answer>
                     <analysis>常用搭配</analysis>
@@ -73,7 +72,7 @@
                 <user_answer>65</user_answer><user_answer>65</user_answer><user_answer>65</user_answer><user_answer>65</user_answer><user_answer>wer</user_answer><user_answer/></question>
             </questions>
         </problem>
-        <problem id='9' incorrect_num='4' score='5' types='0'>
+        <problem id='9' incorrect_num='4' repeat_num='1' score='5' types='0'>
             <title>我撒的飞洒</title>
             <category>3</category>
             <questions>
@@ -87,10 +86,10 @@
                     <user_answer>sdds</user_answer>
                     <user_answer>sdds</user_answer>
                     <user_answer>sd</user_answer>
-                </question>
+                <user_answer>sd</user_answer></question>
             </questions>
         </problem>
-        <problem id='66' incorrect_num='15' score='12' types='4'>
+        <problem id='66' incorrect_num='15' repeat_num='1' score='12' types='4'>
             <title>呵呵呵分得的</title>
             <category>1</category>
             <questions>
@@ -112,7 +111,7 @@
                     <user_answer/>
                     <user_answer/>
                     <user_answer/>
-                <user_answer/><user_answer/><user_answer/><user_answer>fffdddd</user_answer></question>
+                <user_answer/><user_answer/><user_answer/><user_answer>fffdddd</user_answer><user_answer>反反复复</user_answer></question>
             </questions>
         </problem>
         <problem id='4' incorrect_num='1' score='16' types='0'>
@@ -128,6 +127,7 @@
                 <user_answer/></question>
             </questions>
         </problem>
-    </problems>
+
+    <problem id='3' score='5' types='2'><title>gerghrthtr</title><category>2</category><questions><question correct_type='2' error_percent='0' id='3' repeat_num='1' score='5'><answer>1</answer><analysis/><questionattrs/><tags/><user_answer></user_answer></question></questions></problem><problem id='6' score='21' types='4'><title>&lt;input type=&quot;button&quot; value=&quot;播放&quot; id=&apos;audio_control_6&apos; onclick=&quot;javascript:audio_play(6);&quot;&gt;&amp;nbsp;听音乐，回答下列问题。&lt;audio src=&quot;/media/music.mp3&quot; id=&apos;audio_6&apos;&gt;&lt;/audio&gt;</title><category>2</category><questions><question correct_type='0' error_percent='0' id='6' repeat_num='1' score='5'><description>efwergergerger</description><answer>gerh</answer><questionattrs>htrhrf;-;gerh;-;gerhew;-;regerge</questionattrs><tags/><user_answer></user_answer></question><question correct_type='1' error_percent='0' id='7' repeat_num='1' score='5'><description>ergrethrthrthfwefw</description><answer>fwefwh;|;thrth</answer><questionattrs>gegrh;-;fwefwh;-;thrth;-;gregerh</questionattrs><tags/><user_answer></user_answer></question><question correct_type='2' error_percent='0' id='8' repeat_num='1' score='3'><description>eghrthtrwfefw</description><answer>1</answer><questionattrs/><tags/><user_answer></user_answer></question><question correct_type='3' error_percent='0' id='9' repeat_num='1' score='2'><description>geghtrhrthtfwefew</description><answer>grehrtfwefwe</answer><questionattrs/><tags/><user_answer></user_answer></question></questions></problem></problems>
 </collection>
 

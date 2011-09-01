@@ -1,6 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>      <exam id='16'>
+<?xml version='1.0' encoding='UTF-8'?>      <exam id='17'>
         <paper id='5' score='0'>
-          <questions><question id='17' is_sure='1' score='0'><answer>abc;|;def;|;kkk</answer></question><question id='18' is_sure='1' score='0'><answer>jeffrey;|;boy;|;girl;|;hellokitty</answer></question><question id='19' is_sure='1' score='0'><answer>;|;;|;;|;</answer></question></questions>
+          <questions><question id='17' is_sure='1' score='0'><answer></answer></question><question id='18' is_sure='1' score='0'><answer></answer></question><question id='19' is_sure='1' score='0'><answer></answer></question></questions>
           <auto_score/>
           <rate_score/>
         </paper>

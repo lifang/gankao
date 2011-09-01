@@ -100,7 +100,7 @@ Gankao::Application.routes.draw do
     end
     resources :combine_practices do
       member do
-        get "start","show2","show3","show4","show5","show6"
+        get "start"
         post "save_result"
       end
     end
