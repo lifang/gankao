@@ -74,3 +74,13 @@ function tab(tag, n){
     document.getElementById("div_" + tag).className = "actived";
 
 }
+function feedb(id){
+        new Ajax.Updater("feedb" , "/exam_lists/feedback",
+        {
+            asynchronous:false,
+            evalScripts:true,
+            method:"post",
+            parameters:'id='+ id+ '&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+        });
+        return false;
+}
