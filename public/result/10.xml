@@ -1,7 +1,8 @@
-<?xml version='1.0' encoding='UTF-8'?>      <exam id='19'>
-        <paper id='6' score='0'>
-          <questions><question id='20' is_sure='1' score='0'><answer>aaaaa;|;bbbbb;|;ddddd;|;jtyhtrhr</answer></question></questions>
-          <auto_score/>
-          <rate_score/>
+<<<<<<< HEAD
+<?xml version='1.0' encoding='UTF-8'?>      <exam id='55'>
+        <paper id='24' score='0'>
+          <questions></questions>
+          <auto_score></auto_score>
+          <rate_score></rate_score>
         </paper>
       </exam>

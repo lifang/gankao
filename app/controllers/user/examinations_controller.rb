@@ -119,6 +119,10 @@ class User::ExaminationsController < ApplicationController
     end
     render :text => start_time
   end
+
+  def test
+    render :layout => "gankao"
+  end
     
 
 end
