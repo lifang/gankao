@@ -35,6 +35,7 @@ function create_paper(practice_type) {
 var question_num = 1;   //根据提点显示导航
 var block_block_flag = 0;   //记录打开的模块
 function create_block(bocks_div, block,practice_type) {
+    bocks_div.appendChild(create_element("div", null, null, "clear", null, "innerHTML"));
     //添加block的div
     if ($("block_ids") != null && $("block_ids").innerHTML != "") {
         $("block_ids").innerHTML = $("block_ids").innerHTML + "," + block.id;
@@ -64,11 +65,15 @@ function create_block(bocks_div, block,practice_type) {
     //试卷导航展开部分
     var navigation_div = $("paper_navigation");
     var block_nav_div = create_element("div", null, "block_nav_"+block.id, null, null, "innerHTML");
+    block_nav_div.style.cssFloat="left";
+    block_nav_div.style.width="100px";
     block_nav_div.innerHTML = ""+block.base_info.title + "<br/>";
     block_nav_div.style.display = "none";
     navigation_div.appendChild(block_nav_div);
     //试卷导航隐藏部分
     var block_hidden_nav_div = create_element("div", null, "block_hidden_nav_"+block.id, null, null, "innerHTML");
+    block_hidden_nav_div.style.cssFloat="left";
+    block_hidden_nav_div.style.width="100px";
     if (block.time != null && block.time != "" && block.time != "0") {
         block_hidden_nav_div.innerHTML = "<a href='javascript:void(0);' title='本部分答题时间固定，展开时候计时即将开始，请谨慎答题。' onclick='javascript:open_nav(\""+block.id+"\", \""+block.time+"\");'>"+block.base_info.title + "</a><br/>";
     } else {
@@ -188,9 +193,9 @@ function local_fixup_time(block_id, fixup_time_start, fixup_time_end) {
 
 //生成试卷提点导航
 function create_question_navigation(block_nav_div, question, innerHTML, problem_id) {
-    var question_nav_div = create_element("div", null, "question_nav_"+question.id, null, null, "innerHTML");
+    var question_nav_div = create_element("span", null, "question_nav_"+question.id, null, null, "innerHTML");
     question_nav_div.className = "problem_nav_div";
-    question_nav_div.innerHTML = "<a href='javascript:void(0);' onclick='javascript:get_question_height(\""+question.id+"\", \""+problem_id+"\");'>" + innerHTML + "</a>";
+    question_nav_div.innerHTML = "<a style='padding:5px;' href='javascript:void(0);' onclick='javascript:get_question_height(\""+question.id+"\", \""+problem_id+"\");'>"+innerHTML+ "</a>";
     block_nav_div.appendChild(question_nav_div);
 }
 
@@ -239,7 +244,9 @@ function create_problem(ul, problem, block_nav_div,practice_type) {
     var question_id_input = create_element("input", "question_ids", "question_ids_" + problem.id, null, "hidden", "value");
     parent_div.innerHTML = "<input type='hidden' name='problem_"+ problem.id +"' id='problem_"+ problem.id +"' value='"+ problem.id +"'/>";
     parent_div.innerHTML += "<div class='title'><h2>"+ problem.title + "</h2> </div>";
-
+    if(practice_type=="3"){
+        parent_div.innerHTML += "<a href='javascript:void(0);' class='explain_btn'></a>";
+    }
     if (problem.questions != undefined && problem.questions.question != undefined) {
         var questions = problem.questions.question;
         if (tof(questions) == "array") {
@@ -326,7 +333,7 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
         var store_id = new String;
         var attr = create_element("div", null, null, "attr", null, "innerHTML");
         que_div_conlist.appendChild(attr);
-        if(practice_type==4){
+        if(practice_type=="4"){
             que_attrs = que_attrs.sort(sortRandom);
             for (var i=0; i<que_attrs.length; i++) {
                 if (que_attrs[i] != null && que_attrs[i] != "") {
@@ -363,14 +370,14 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
             } //检测并设置题目描述中答案落点位置。  提示，题目描述中请按要求设置落点，如 <font color="green" id="problem_x_dropplace_1">_________</font> 和 <font color="green" id="problem_x_dropplace_2">_________</font>
         //选词填空题，为只有一个多选题的综合题。 多选题答案的顺序要与描述中落点位置对应起来。
         } else {
-            if(practice_type==6){
+            if(practice_type=="6"){
                 var num=1;
                 while(document.getElementById("problem_"+problem_id+"_writefont_"+num)){
-                    var input_id = "problem_"+problem_id+"_writeplace_"+num
-                    document.getElementById("problem_"+problem_id+"_writefont_"+num).innerHTML="<input type='text' id='"+input_id+"' ></input>"
-                    document.getElementById(input_id).onfocus=function(){
-                        show_que_save_button(question.id);
-                    };
+                    var input_id = "problem_"+problem_id+"_writeplace_"+num;
+                    document.getElementById("problem_"+problem_id+"_writefont_"+num).innerHTML="<input type='text' id='"+input_id+"' onfocus='javascript:show_que_save_button("+question.id+");' ></input>";
+                    //                    document.getElementById(input_id).onfocus=function(){
+                    //                        show_que_save_button(question.id);
+                    //                    };
                     num++;
                 }
             }
@@ -430,7 +437,7 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
     var answer_input = create_element("input", "answer_" + question.id, "answer_" + question.id, null, "hidden", "value");
     if (answer_hash != null && answer_hash[question.id] != null) {
         answer_input.value = answer_hash[question.id][0];
-        if(practice_type==4){
+        if(practice_type=="4"){
             var question_array = answer_hash[question.id][0].split(";|;");
             for(i=0;i<question_array.length;i++){
                 $("problem_"+problem_id+"_dropplace_"+(i+1)).innerHTML=question_array[i];
@@ -598,7 +605,7 @@ function is_problem_answer(problem_id,practice_type) {
                 answer_flag = "none";
             }
         }else{
-            if(practice_type==6){
+            if(practice_type=="6"){
                 var index=1;
                 var question_id=question_ids.split(",")[0];         
                 if(load_switch==0&&answer_hash&&answer_hash[question_id]!=null){
@@ -625,7 +632,7 @@ function is_problem_answer(problem_id,practice_type) {
             else{
                 //第三类综合题经过这里
                 if($("is_answer_" + problem_id).value = "1"){
-                return "all";
+                    return "all";
                 }
             }
         }
@@ -769,7 +776,7 @@ function generate_result_paper(paper_id) {
             }
         }
         if (answer_length < (problem_ids.length-1)) {
-  //          alert($("practice_type")!=null&&$("practice_type").value=="3");
+            //          alert($("practice_type")!=null&&$("practice_type").value=="3");
             if(!($("practice_type")!=null&&$("practice_type").value=="3")){
 
                 if(!confirm('您还有题尚未答完，确定要交卷么?')) {

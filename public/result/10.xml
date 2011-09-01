@@ -1,8 +1,7 @@
-<?xml version='1.0' encoding='UTF-8'?>      
-<exam id='14'>
-    <paper id='4' score='0'>
-        <questions></questions>
-        <auto_score></auto_score>
-        <rate_score></rate_score>
-    </paper>
-</exam>
+<?xml version='1.0' encoding='UTF-8'?>      <exam id='15'>
+        <paper id='5' score='0'>
+          <questions><question id='17' is_sure='1' score='0'><answer>adwda;|;;|;</answer></question><question id='18' is_sure='1' score='0'><answer>;|;;|;;|;fefwgew</answer></question><question id='19' is_sure='1' score='0'><answer>;|;gerger;|;;|;</answer></question></questions>
+          <auto_score/>
+          <rate_score/>
+        </paper>
+      </exam>
