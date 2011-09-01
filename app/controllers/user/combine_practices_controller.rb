@@ -6,7 +6,7 @@ class User::CombinePracticesController < ApplicationController
   def show
     
     @practice_type=params[:practice_type]
-    Examination::TYPE_NAMETYPESS.each_value do |array|
+    Examination::TYPE_NAMES.each_value do |array|
       if array[0]==@practice_type.to_i
         @practice_name=array[1]
         break
