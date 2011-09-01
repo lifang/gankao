@@ -1,4 +1,5 @@
 class User::ExamUsersController < ApplicationController
+  layout "gankao" ,:only=>[:show]
   require 'rexml/document'
   include REXML
   def show
