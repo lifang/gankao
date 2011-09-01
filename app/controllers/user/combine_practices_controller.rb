@@ -23,7 +23,8 @@ class User::CombinePracticesController < ApplicationController
         @paper_url = "#{Constant::PAPER_CLIENT_PATH}/#{@exam_user.paper_id}.js"
         @exam_user.update_info_for_join_exam(@examination.start_at_time,
           @examination.exam_time) if @examination.started_at.nil? or @examination.started_at == ""
-        render :layout => "application"
+         render :layout => "practice_layout"
+ #       render :layout =>'application'
       else
         flash[:warn] = "试卷加载错误，请您重新尝试。"
         redirect_to "/user/examinations"

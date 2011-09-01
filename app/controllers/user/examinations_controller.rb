@@ -1,5 +1,5 @@
 class User::ExaminationsController < ApplicationController
-  layout "paper", :only => [:do_exam, :save_result]
+  layout "paper", :only => [:save_result]
   before_filter :access?
   
   def index
@@ -13,8 +13,9 @@ class User::ExaminationsController < ApplicationController
       :password => User::DEFAULT_PASSWORD, :is_user_affiremed => ExamUser::IS_USER_AFFIREMED[:YES]) if @exam_user.nil?
     arr = ExamUser.can_answer(cookies[:user_id], params[:id].to_i)
     if arr[0] == "" and arr[1].any?
-      render :inline => "<iframe src='#{Constant::SERVER_PATH}/user/examinations/#{params[:id]}'
-            frameborder='0' style='width: 1270px; height: 760px;'></iframe>"
+#      render :inline => "<iframe src='#{Constant::SERVER_PATH}/user/examinations/#{params[:id]}'
+#            frameborder='0' border='0' style='width: 1270px; height: 760px;'></iframe>"
+      redirect_to "/user/examinations/#{params[:id]}"
     else
       flash[:warn] = arr[0]
       redirect_to request.referer
@@ -31,7 +32,8 @@ class User::ExaminationsController < ApplicationController
         @paper_url = "#{Constant::PAPER_CLIENT_PATH}/#{@exam_user.paper_id}.js"
         @exam_user.update_info_for_join_exam(@examination.start_at_time,
           @examination.exam_time) if @examination.started_at.nil? or @examination.started_at == ""
-        render :layout => "application"
+        #render 'old_show', :layout => "application"
+        render 'show', :layout => "gankao"
       else
         flash[:warn] = "试卷加载错误，请您重新尝试。"
         redirect_to "/user/examinations"

@@ -1,6 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>      <exam id='20'>
-        <paper id='7' score='0'>
-          <questions><question id='21' is_sure='1' score='0'><answer>jeffrey1;|;jeffrey2</answer></question></questions>
+<?xml version='1.0' encoding='UTF-8'?>      <exam id='4'>
+        <paper id='1' score='0'>
+          <questions><question id='14' is_sure='1' score='0'><answer></answer></question><question id='15' is_sure='1' score='0'><answer></answer></question></questions>
           <auto_score/>
           <rate_score/>
         </paper>
