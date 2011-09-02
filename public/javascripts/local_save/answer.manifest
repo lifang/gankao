@@ -1,6 +1,9 @@
 CACHE MANIFEST
 # version: 2011-06-08 13:00
 
+/javascripts/jquery.js
+/javascripts/TestPaper.js
+/javascripts/DD_belatedPNG_0.0.8a-min.js
 /javascripts/prototype.js
 /javascripts/effects.js
 /javascripts/dragdrop.js
@@ -12,8 +15,8 @@ CACHE MANIFEST
 /javascripts/prototip.js
 /stylesheets/validates/tooltips.css
 
-/stylesheets/exam_biz_back.css
-/stylesheets/login.css
+
+/stylesheets/paper.css
 
 
 NETWORK:

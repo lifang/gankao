@@ -1,5 +1,5 @@
 class User::ExaminationsController < ApplicationController
-  layout "paper", :only => [:save_result]
+  layout "exam", :only => [:show, :save_result]
   before_filter :access?
   
   def index
@@ -8,32 +8,32 @@ class User::ExaminationsController < ApplicationController
   end
 
   def do_exam
-    @exam_user = ExamUser.find_by_examination_id_and_user_id(params[:id].to_i, cookies[:user_id].to_i) 
-    @exam_user = ExamUser.create(:user_id => cookies[:user_id],:examination_id => params[:id].to_i,
-      :password => User::DEFAULT_PASSWORD, :is_user_affiremed => ExamUser::IS_USER_AFFIREMED[:YES]) if @exam_user.nil?
-    arr = ExamUser.can_answer(cookies[:user_id], params[:id].to_i)
-    if arr[0] == "" and arr[1].any?
-#      render :inline => "<iframe src='#{Constant::SERVER_PATH}/user/examinations/#{params[:id]}'
-#            frameborder='0' border='0' style='width: 1270px; height: 760px;'></iframe>"
+#    @exam_user = ExamUser.find_by_examination_id_and_user_id(params[:id].to_i, cookies[:user_id].to_i)
+#    @exam_user = ExamUser.create(:user_id => cookies[:user_id],:examination_id => params[:id].to_i,
+#      :password => User::DEFAULT_PASSWORD, :is_user_affiremed => ExamUser::IS_USER_AFFIREMED[:YES]) if @exam_user.nil?
+#    arr = ExamUser.can_answer(cookies[:user_id], params[:id].to_i)
+#    if arr[0] == "" and arr[1].any?
+      #      render :inline => "<iframe src='#{Constant::SERVER_PATH}/user/examinations/#{params[:id]}'
+      #            frameborder='0' border='0' style='width: 1270px; height: 760px;'></iframe>"
       redirect_to "/user/examinations/#{params[:id]}"
-    else
-      flash[:warn] = arr[0]
-      redirect_to request.referer
-    end
+#    else
+#      flash[:warn] = arr[0]
+#      redirect_to request.referer
+#    end
   end
 
-  def show  
+  def show
+    @exam_user = ExamUser.find_by_examination_id_and_user_id(params[:id].to_i, cookies[:user_id].to_i)
+    @exam_user = ExamUser.create(:user_id => cookies[:user_id],:examination_id => params[:id].to_i,
+      :password => User::DEFAULT_PASSWORD, :is_user_affiremed => ExamUser::IS_USER_AFFIREMED[:YES]) if @exam_user.nil?
     arr = ExamUser.can_answer(cookies[:user_id].to_i, params[:id].to_i)
     if arr[0] == "" and arr[1].any?
       @examination = arr[1][0]
-      @exam_user = ExamUser.find_by_examination_id_and_user_id(@examination.id, cookies[:user_id].to_i)
       @exam_user.set_paper(@examination) if @exam_user.paper_id.nil?
       if @exam_user and @exam_user.paper_id
         @paper_url = "#{Constant::PAPER_CLIENT_PATH}/#{@exam_user.paper_id}.js"
         @exam_user.update_info_for_join_exam(@examination.start_at_time,
           @examination.exam_time) if @examination.started_at.nil? or @examination.started_at == ""
-        #render 'old_show', :layout => "application"
-        render 'show', :layout => "exam"
       else
         flash[:warn] = "试卷加载错误，请您重新尝试。"
         redirect_to "/user/examinations"
@@ -42,6 +42,25 @@ class User::ExaminationsController < ApplicationController
       flash[:warn] = arr[0]
       redirect_to request.referer
     end
+  end
+
+  def get_exam_time
+    text = ""
+    @examination = Examination.find(params[:id].to_i)
+    @exam_user = ExamUser.find_by_examination_id_and_user_id(@examination.id, params[:user_id].to_i)
+    unless @exam_user
+      end_time = (@examination.ended_at - Time.now) unless @examination.ended_at.nil? or @examination.ended_at == ""
+    else
+      end_time = (@exam_user.ended_at - Time.now) unless @exam_user.ended_at.nil? or @exam_user.ended_at == ""
+    end
+    if end_time.nil? or end_time == ""
+      text = "不限时"
+    elsif end_time > 0
+      text = (end_time/3600).to_i.to_s + ":" + ((end_time%3600)/60).to_i.to_s + ":" + (end_time%3600%60).to_i.to_s
+    else
+      text = "00:00:02"
+    end
+    render :text => text
   end
 
   def save_result

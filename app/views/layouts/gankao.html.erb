@@ -9,40 +9,61 @@
     <script>
       /* EXAMPLE */
       DD_belatedPNG.fix('*');
-
       /* string argument can be any CSS selector */
       /* .png_bg example is unnecessary */
       /* change it to what suits you! */
     </script>
     <![endif]-->
-
   </head>
 
   <body>
     <div class="wrap">
       <div class="head">
         <div class="head_top">
-          <div class="top_myGankao"><div class="t_gk"><a href="#">我的考试</a></div></div>
+          <div class="top_myGankao">
+            <% if cookies[:user_id] %>
+              <div class="t_gk">
+                <% if is_student? %>
+                  <%= link_to "我的考试", "/user/examinations" %>
+                <% end %>
+                <% if is_vicegerent? %>
+                  <%= link_to "代理充值","/payments/agency_recharge" %>
+                <% end %>
+                <% if is_paper_creater? %>
+                  <%= link_to "代理权限","/users/roles_manage" %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
           <div class="top_loginArea">
-            <div style="display: none;">你好:<a href="#">小明</a>|<a href="#" class="signColor">退出</a></div>
-            <div>你好,<a href="#" class="signColor">登录</a>|<a href="#" class="signColor">注册</a></div>
+            <div>
+              <% if cookies[:user_id] %>
+                你好,<a href="/users/<%= cookies[:user_id] %>">
+                  <%= current_user.name if current_user %>
+                </a>
+                |<a href="/signout" class="signColor">退出</a>
+              <% else %>
+                你好,<a href="/sessions/new" class="signColor">登录</a>
+                |<a href="/users/new" class="signColor">注册</a>
+              <% end %>
+            </div>
           </div>
         </div>
-        <div class="logo"><a href="#"><img src="/images/paper/logo.png" /></a></div>
+        <div class="logo"><a href="/"><img src="/images/paper/logo.png" /></a></div>
         <div class="nav">
           <div class="menu">
             <ul>
-              <li><a href="#">首页</a></li>
+              <li><a href="/users/<%= cookies[:user_id] %>/first_page">首页</a></li>
               <li><img src="/images/paper/menu_li.png" /></li>
-              <li><a href="#">模拟考试</a></li>
+              <li><a href="/exam_lists/simulate_list">模拟考试</a></li>
               <li><img src="/images/paper/menu_li.png" /></li>
-              <li><a href="#" class="hover">真题训练</a></li>
+              <li><a href="/exam_lists/old_exam_list" class="hover">真题训练</a></li>
               <li><img src="/images/paper/menu_li.png" /></li>
-              <li><a href="#">综合训练</a></li>
+              <li><a href="/combine_practices">综合训练</a></li>
               <li><img src="/images/paper/menu_li.png" /></li>
-              <li><a href="#">错题库</a></li>
+              <li><a href="/exam_lists/incorrect_list">错题库</a></li>
               <li><img src="/images/paper/menu_li.png" /></li>
-              <li><a href="#">笔记</a></li>
+              <li><a href="/user/notes">笔记</a></li>
             </ul>
           </div>
         </div>
@@ -52,13 +73,9 @@
         <%=  render :partial => "/common/display_flash" %>
         <%= yield %>
       </div>
-
       <div class="clear"></div>
       <div class="foot">
-        <p><a href="#">联系我们</a> | <a href="#">合作伙伴</a> | <a href="#">加入Gankao官方QQ群</a> | <a href="#">友情链接</a> | <a href="#">帮助</a> </p>
-
-        <p>苏ICP备110110110号 Copyright © 2011 - gankao.co All Rights Reserved.</p>
-
+        <%=  render :partial => "/common/footer" %>
       </div>
     </div>
 
