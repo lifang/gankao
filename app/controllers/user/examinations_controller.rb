@@ -33,7 +33,7 @@ class User::ExaminationsController < ApplicationController
         @exam_user.update_info_for_join_exam(@examination.start_at_time,
           @examination.exam_time) if @examination.started_at.nil? or @examination.started_at == ""
         #render 'old_show', :layout => "application"
-        render 'show', :layout => "gankao"
+        render 'show', :layout => "exam"
       else
         flash[:warn] = "试卷加载错误，请您重新尝试。"
         redirect_to "/user/examinations"
