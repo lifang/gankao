@@ -2,15 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>考试--试卷</title>
-    <link href="/stylesheets/paper.css" rel="stylesheet" type="text/css" />
-    <%= javascript_include_tag :defaults %>
-    <%= use_validate_js_tooltip %>
-    <%#*<script type="text/javascript" src="/javascripts/jquery.js"></script>%>
-    <%#*<script type="text/javascript" src="/javascripts/TestPaper.js"></script>%>
-
+    <title>真题</title>
+    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css" />
     <!--[if IE 6]>
-    <script src="js/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script src="/javascripts/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>
       /* EXAMPLE */
       DD_belatedPNG.fix('*');
@@ -20,14 +15,52 @@
       /* change it to what suits you! */
     </script>
     <![endif]-->
+
   </head>
 
   <body>
     <div class="wrap">
-      <%=  render :partial => "/common/display_flash" %>
-      <%= yield %>
+      <div class="head">
+        <div class="head_top">
+          <div class="top_myGankao"><div class="t_gk"><a href="#">我的考试</a></div></div>
+          <div class="top_loginArea">
+            <div style="display: none;">你好:<a href="#">小明</a>|<a href="#" class="signColor">退出</a></div>
+            <div>你好,<a href="#" class="signColor">登录</a>|<a href="#" class="signColor">注册</a></div>
+          </div>
+        </div>
+        <div class="logo"><a href="#"><img src="/images/paper/logo.png" /></a></div>
+        <div class="nav">
+          <div class="menu">
+            <ul>
+              <li><a href="#">首页</a></li>
+              <li><img src="/images/paper/menu_li.png" /></li>
+              <li><a href="#">模拟考试</a></li>
+              <li><img src="/images/paper/menu_li.png" /></li>
+              <li><a href="#" class="hover">真题训练</a></li>
+              <li><img src="/images/paper/menu_li.png" /></li>
+              <li><a href="#">综合训练</a></li>
+              <li><img src="/images/paper/menu_li.png" /></li>
+              <li><a href="#">错题库</a></li>
+              <li><img src="/images/paper/menu_li.png" /></li>
+              <li><a href="#">笔记</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="main">
+        <%=  render :partial => "/common/display_flash" %>
+        <%= yield %>
+      </div>
+
       <div class="clear"></div>
-      <div class="testPaper_foot"></div>
+      <div class="foot">
+        <p><a href="#">联系我们</a> | <a href="#">合作伙伴</a> | <a href="#">加入Gankao官方QQ群</a> | <a href="#">友情链接</a> | <a href="#">帮助</a> </p>
+
+        <p>苏ICP备110110110号 Copyright © 2011 - gankao.co All Rights Reserved.</p>
+
+      </div>
     </div>
+
   </body>
 </html>

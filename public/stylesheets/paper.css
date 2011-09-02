@@ -79,7 +79,7 @@ img { border: none;}
 .jiexi_tab { display: none; position: absolute; z-index: 100;}
 .tab_t { width: 397px; height: 27px; background: url(/images/paper/all_bg.png) -114px -8px no-repeat;}
 .tab_t a { float: right; margin: 15px 12px 0 0;}
-.tab_m { width: 377px;  background: url(/images/paper/tab_m.png) repeat-y #FFF; padding: 5px 10px; line-height: 22px;}
+.tab_m { width: 377px;  background: url(/images/paper/tab_m.png) repeat-y; padding: 5px 10px; line-height: 22px;}
 .tab_m h3 { color: #F00;}
 .tab_b { width: 397px; height: 18px; background: url(/images/paper/all_bg.png) -114px -35px no-repeat;}
 

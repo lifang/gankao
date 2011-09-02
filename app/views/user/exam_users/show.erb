@@ -1,20 +1,17 @@
 <%= javascript_include_tag "#{Constant::SERVER_PATH}/javascripts/answer_sheet.js" %>
-<div id="note_div"></div>
-<div id="paper_show_info">
-  <ul class="tab_biz">
-    <li class="actived"><a href="javascript:void(0);"><%= @xml.elements['base_info'].elements['title'].text if @xml!=nil %></a></li>
-  </ul>
-  <div class="soso">
-    <div align="right"><font color="red" ><strong><%= @doc.elements["paper"].attributes["score"].nil? ? "分数暂未公布":" 总  分:"+ @doc.elements["paper"].attributes["score"] %>
-        </strong></font></div>
-    <div>试卷编号：<%= @xml.attributes['id']%></div>
-    <div>出卷时间：<%= @xml.elements['base_info'].elements['created_at'].text%></div>
-    <div>最后修改时间：<%= @xml.elements['base_info'].elements['updated_at'].text%></div>
-    <div>总题数：<%= @xml.attributes["total_num"]%></div>
-    <div>卷面总分：<%= @xml.attributes["total_score"]%></div>
-    <div>备注：<%= @xml.elements['base_info'].elements['description'].text%></div>
+<%= javascript_include_tag 'pileadd' %>
+<div class="testPaper_top" id="paper_show_info">
+  <div class="tp_top_box" id="float_test">
+    <div class="paper_name" id="paper_title"><a href="javascript:void(0);"><%= @xml.elements['base_info'].elements['title'].text if @xml!=nil %></a></div>
+
+    <div  id="exam_time"><%= @doc.elements["paper"].attributes["score"].nil? ? "分数暂未公布":" 总  分:"+ @doc.elements["paper"].attributes["score"] %></div>
+    <div class="paper_info">
+      <strong>总题数：<%= @xml.attributes["total_num"]%></strong>
+    </div>
   </div>
 </div>
+<div id="note_div"></div>
+ <div class="testPaper_main">
 <div class="soso" id="paper_navigation">
   <div>试卷导航</div>
   <% num = 1
@@ -47,7 +44,7 @@
 </div>
 <div id="block_ids" style="display:none;"><%= block_ids %></div>
 <% block_index = 0
- problem_ids = "" %>
+problem_ids = "" %>
 <% @xml.elements['blocks'].each_element do |block| %>
   <div id="block_<%= block.attributes["id"] %>" <% if block_index > 0 %>style="display: none;"<% end %>>
     <h1 class="biz_art_title" id="block_show">
@@ -78,4 +75,6 @@
   <% block_index += 1 %>
 <% end %>
 <input type="hidden" id="problem_ids" name="problem_ids" value="<%= problem_ids %>"/>
+  <div class="clear"></div>
+ </div>
 <div class="clear"></div>
