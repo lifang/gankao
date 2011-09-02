@@ -1,8 +1,38 @@
 //加载试卷
 function load_paper() {
     setTimeout(function(){
-        create_paper();
+        get_exam_time();
     }, 500);
+}
+
+//获取考试的时间
+function get_exam_time(){
+    var examination_id = $("examination_id").value;
+    var user_id = $("user_id").value;
+    new Ajax.Updater("exam_time", "/user/examinations/"+ examination_id +"/get_exam_time",
+    {
+        asynchronous:true,
+        evalScripts:true,
+        method:"post",
+        onComplete:function(request){
+            load_exam_tiem()
+        },
+        parameters:"user_id="+ user_id +"&authenticity_token=" + encodeURIComponent('BgLpQ3SADBr4tuiYZOJeoOvY4VOHogJvqQEpMwYVBM4=')
+    });
+    return false;
+}
+
+//加载是否是定时考试
+function load_exam_tiem() {
+    if ($("exam_time").innerHTML == "不限时") {
+        start = "00:00:00:00";
+    } else {
+        start = $("exam_time").innerHTML + ":00";
+        is_fix_time = true;
+        block_start_hash = $H({});
+        block_end_hash = $H({});
+    }
+    create_paper();
 }
 
 //创建试卷
@@ -10,6 +40,8 @@ function create_paper() {
     //显示基本信息部分
     $("paper_title").innerHTML = papers.paper.base_info.title;
     $("paper_id").value = papers.paper.id;
+    $("leaving_num").innerHTML = papers.paper.total_num;
+    
     if (papers.paper.blocks != undefined && papers.paper.blocks.block != undefined) {
         var blocks = papers.paper.blocks.block;
         var bocks_div = $("blocks");
@@ -21,6 +53,7 @@ function create_paper() {
             create_block(bocks_div, blocks);
         }
     }
+    
     show_exam_time();
     local_save_start();
 //load_scroll();
@@ -222,7 +255,7 @@ function create_problem(block_div, problem, block_nav_div) {
 
     problem_div.innerHTML = "<input type='hidden' name='problem_"+ problem.id +"' id='problem_"+ problem.id +"' value='"+ problem.id +"'/>";
     problem_div.innerHTML += "<div class='part_passage'><div class='p_directions'><p>"+ problem.title
-        + "</p></div><div class='fraction'>" + problem.score + "分</div></div>";
+    + "</p></div><div class='fraction'>" + problem.score + "分</div></div>";
     var out_que_div = create_element("div", null, "question_" + problem.id, "part_question", null, "innerHTML");
     problem_div.appendChild(out_que_div);
     var que_inner_div = create_element("div", null, null, null, null, "innerHTML");
@@ -335,11 +368,20 @@ function create_single_question(problem_id, que_div, question) {
                 attr1.innerHTML += "<input type='radio' id='question_attr_0' name='question_attr_"+ question.id +"' value='0' onclick='javascript:show_que_save_button(\""+question.id+"\")'/>错/否&nbsp;&nbsp;";
             }
         } else {
-            if (answer_hash != null && answer_hash[question.id] != null) {
-                attr1.innerHTML += "<textarea cols='35' rows='3' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")'>"+ answer_hash[question.id][0] +"</textarea>";
+            if (question.correct_type == "3") {
+                if (answer_hash != null && answer_hash[question.id] != null) {
+                    attr1.innerHTML += "<input type='text' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")' value='"+ answer_hash[question.id][0] +"' />";
+                } else {
+                    attr1.innerHTML += "<input type='text' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")' />";
+                }
             } else {
-                attr1.innerHTML += "<textarea cols='35' rows='3' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")'></textarea>";
+                if (answer_hash != null && answer_hash[question.id] != null) {
+                    attr1.innerHTML += "<textarea cols='35' rows='3' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")'>"+ answer_hash[question.id][0] +"</textarea>";
+                } else {
+                    attr1.innerHTML += "<textarea cols='35' rows='3' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")'></textarea>";
+                }
             }
+            
         }
         que_div.appendChild(attr1);
     }
