@@ -428,7 +428,7 @@ function new_module(){
 }
 
 //显示题目
-function question_info(id){
+function question_info(id){alert(id);
     manage_div(id, "question_info");
     if(close_question_info_id != 0 && close_question_info_id != id){
         document.getElementById("question_info_" + close_question_info_id).style.display = "none";
