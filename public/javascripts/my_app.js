@@ -74,20 +74,3 @@ function tab(tag, n){
     document.getElementById("div_" + tag).className = "actived";
 
 }
-function feedb(id){
-    var text=$("description").value;
-    if (text==""||text.length==0){
-    alert("请输入你要问的问题.");
-    return false;
-    }else{
-
-        new Ajax.Updater("feedback" , "/exam_lists/feedback",
-        {
-            asynchronous:true,
-            evalScripts:true,
-            method:"post",
-            parameters:'id='+ id+ '&description='+ text+ '&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
-        }); 
-        return false;
-    }
-}

@@ -1,18 +1,16 @@
 <div class="part_question">
   <div>
     <% question_with_answer.elements["questions"].each_element do |question| %>
-      <div class="p_question_list question_no">
-
+      <div class="p_question_list question_no"  >
         <div class="p_q_l_left"><%= question.attributes["id"] %></div>
-        <div class="p_q_l_right">
+        <div class="p_q_l_right" onmouseover="javascript:feedback('<%= question.attributes["id"] %>')">
           <div class="p_contents">
             <p>小题描述：
               &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["description"].text if question.elements["description"] %>
             </p>
           </div>
-          [<%= question.attributes["score"] %>分]
-          [<span id="user_score_<%= question.attributes["id"].to_i %>">
-          </span>]<span style="float:right"><a href="javascript:feedback('<%= question.attributes["id"] %>')">提问</a> </span>
+          <span id="user_score_<%= question.attributes["id"].to_i %>">
+          </span>
           <ul class="chooseQuestion">
             <% attrs_str = question.elements["questionattrs"].text
             attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
@@ -56,24 +54,19 @@
         </div>
         <div class="clear"></div>
         <div class="review_btn">
-          <button class="jiexi_btn">解析</button>
+          <input  id="btn_<%= question.attributes["id"] %>_analysis" type="hidden" value="<%=  %>"/>
+          <button class="jiexi_btn" id="btn_<%= question.attributes['id'] %>">解析</button>
           <button class="biji_btn">笔记</button>
           <button onclick="javascript:document.getElementById('status').submit();">删出错题库</button>
         </div>
-      </div>
-    </div>
+      <input type="hidden" id="btn_<%= question.attributes["id"] %>_analysis" type="hidden" value="<%= question.elements["analysis"].text %>"/>
+      <%= form_for :exam, :html=> {:id => :status, :name => :exam_form}, :url => "/exam_lists/delete_problem" do |f|%>
+        <input type="hidden" value="<%= question_with_answer.attributes["id"] %>" id="problem_id" name="problem_id"/>
+        <input type="hidden" value="<%= question.attributes["id"] %>" name="question_id" />
+        <input type="hidden" value="<%= params[:page].nil? ? 1:params[:page] %>" name="page" />
+      <% end %>
+      <div class="clear"></div>
+    <% end %>
   </div>
-
-  <div class="title">&nbsp;&nbsp;&nbsp;&nbsp;解析：
-    &nbsp;&nbsp;&nbsp;&nbsp;<% analysis = question.elements["analysis"] %>
-    &nbsp;&nbsp;&nbsp;&nbsp;<%= if analysis and !analysis.nil?
-      analysis.text
-    end %>
-  </div>
-  <%= form_for :exam, :html=> {:id => :status, :name => :exam_form}, :url => "/exam_lists/delete_problem" do |f|%>
-    <input type="hidden" value="<%= question_with_answer.attributes["id"] %>" id="problem_id" name="problem_id"/>
-    <input type="hidden" value="<%= question.attributes["id"] %>" name="question_id" />
-    <input type="hidden" value="<%= params[:page] %>" name="page" />
-  <% end %>
-  <div class="clear"></div>
-<% end %>
+</div>
+</div>
