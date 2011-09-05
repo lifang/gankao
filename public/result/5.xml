@@ -1,6 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>      <exam id='5'>
-        <paper id='3' score='0'>
-          <questions><question id='12' is_sure='1' score='0'><answer>dfbfnee;|;ewefwefewg;|;fwefweg;|;hrtthtr</answer></question><question id='11' is_sure='1' score='0'><answer>first;|;second;|;third</answer></question><question id='13' is_sure='1' score='0'><answer>rthrt;|;wefwege;|;fweg;|;wergerger</answer></question></questions>
+<?xml version='1.0' encoding='UTF-8'?>      <exam id='17'>
+        <paper id='5' score='0'>
+          <questions><question id='18' is_sure='1' score='0'><answer>hello;|;good;|;morning;|;afternoon</answer></question><question id='17' is_sure='1' score='0'><answer>11;|;22;|;33</answer></question><question id='19' is_sure='1' score='0'><answer>abc;|;ddd;|;eee;|;ffff</answer></question></questions>
           <auto_score/>
           <rate_score/>
         </paper>

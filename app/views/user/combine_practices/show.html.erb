@@ -1,3 +1,4 @@
+
 <%= javascript_include_tag 'jeffrey' %>
 <%= javascript_include_tag 'cookie' %>
 <script language="javascript" type="text/javascript">
@@ -7,7 +8,7 @@
 <%= form_for :paper , :url => "/user/combine_practices/#{@examination.id}/save_result",
   :html => {:name => "paper_form", :id => "paper_form",
   :onsubmit => "return generate_result_paper('#{@examination.paper_id}')"} do |f| %>
-  <div id="paper_show_info" style="position:relative;">
+  <div id="paper_show_info">
     <% if @practice_type==Examination::TYPES[:PRACTICE1].to_s %>
       <div class="task_title task_title_one"><a href="#"><img alt="Explain_icon" src="/images/paper/Explain_icon.png"/></a></div>
     <% elsif @practice_type==Examination::TYPES[:PRACTICE2].to_s  %>
@@ -30,7 +31,7 @@
       <input type="hidden" id="complete_num"/>
       <!--      <div>题目数：共<span id="total_num"></span>题/已完成<span id="complete_num">0</span>题</div>   -->
       <div><span id="local_time"></span></div>
-      <%= f.submit "交卷" , :class=>"submit_btn" %>
+
     </div>
   </div>
   <div class="soso" id="paper_navigation">
@@ -45,14 +46,15 @@
   <input type="hidden" name="answer_url" id="answer_url"
          value="<%= Constant::ANSWER_CLIENT_PATH %>/<%= @examination.exam_user_id %>.xml"/>
   <div class="clear"></div>
-<% end %>
-  
-<div class="tb_prevNext">
+  <div class="tb_prevNext">
   <a href="#" id="tb_goleft" class="tb_goleft"></a>
-  <a href="#" class="tb_check"></a>
+  <%= f.submit "",:class=>"tb_check"%>
   <a href="#" id="tb_goright" class="tb_goright"></a>
 </div>
+
+<% end %>
   
+
 <script type="text/javascript" src="/javascripts/local_save/answer.js" charset="utf-8"></script>
 <%= javascript_include_tag "#{Constant::SERVER_PATH}/javascripts/jeff_answer_paper.js" %>
 <script language="javascript" type="text/javascript">

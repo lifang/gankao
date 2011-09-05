@@ -1,6 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>      <exam id='24'>
-        <paper id='1' score='0'>
-          <questions><question id='3' is_sure='1' score='0'><answer>1</answer></question><question id='5' is_sure='1' score='0'><answer>jeffrey</answer></question><question id='4' is_sure='1' score='0'><answer>jeffrey</answer></question><question id='1' is_sure='1' score='0'><answer>gerh</answer></question><question id='2' is_sure='1' score='0'><answer>hrth</answer></question><question id='6' is_sure='1' score='0'><answer>gerh</answer></question><question id='7' is_sure='1' score='0'><answer>fwefwh;|;thrth</answer></question><question id='8' is_sure='1' score='0'><answer>1</answer></question><question id='9' is_sure='1' score='0'><answer>345534543</answer></question><question id='10' is_sure='1' score='0'><answer>5465675653</answer></question><question id='23' is_sure='1' score='0'><answer>312</answer></question></questions>
+<?xml version='1.0' encoding='UTF-8'?>      <exam id='12'>
+        <paper id='4' score='0'>
+          <questions><question id='15' is_sure='1' score='0'><answer>qianjun</answer></question><question id='14' is_sure='1' score='0'><answer>money</answer></question><question id='16' is_sure='1' score='0'><answer>windy</answer></question></questions>
           <auto_score/>
           <rate_score/>
         </paper>
