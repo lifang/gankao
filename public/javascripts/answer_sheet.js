@@ -1,22 +1,29 @@
-function open_nav(block_id, block_time) {
+//打开模块
+function open_nav(block_id) {
     var block_ids = $("block_ids");
     if (block_ids != null && block_ids.innerHTML != "") {
         var b_ids = block_ids.innerHTML.split(",");
         if (b_ids != null) {
             for (var i=0; i<b_ids.length; i++) {
-                $("block_nav_" + b_ids[i]).style.display = "none";
-                $("block_hidden_nav_" + b_ids[i]).style.display = "block";
-                $("block_" + b_ids[i]).style.display = "none";
+                close_block_nav(b_ids[i]);
             }
         }
     }
-    if (block_time != null && block_time != "" && block_time != "0") {
-        update_block_time(block_id);
-    } else {
-        $("block_nav_" + block_id).style.display = "block";
-        $("block_hidden_nav_" + block_id).style.display = "none";
-        $("block_" + block_id).style.display = "block";
-    }
+    open_block_nav(block_id);
+}
+
+//打开模块
+function open_block_nav(block_id) {
+    $("block_nav_" + block_id).className = "first_title highLight";
+    $("nav_block_" + block_id).style.display = "block";
+    $("block_" + block_id).style.display = "block";
+}
+
+//关闭模块
+function close_block_nav(block_id) {
+    $("block_nav_" + block_id).className = "first_title";
+    $("nav_block_" + block_id).style.display = "none";
+    $("block_" + block_id).style.display = "none";
 }
 
 function get_question_height(question_id, problem_id) {

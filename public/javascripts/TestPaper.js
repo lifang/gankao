@@ -11,7 +11,10 @@ jQuery(function(){
  
 //解析弹出层
 jQuery(function(){
+    
     jQuery('.jiexi_btn').click(function(e){
+        alert(e.pageY);
+        alert(e.pageX);
         jQuery('.jiexi_tab').css('display','block');
         jQuery('.jiexi_tab').css({
             'top':(e.pageY+20)+'px',
@@ -28,6 +31,7 @@ jQuery(function(){
 }) 
 //笔记弹出层
 jQuery(function(){
+    
     jQuery('.biji_btn').click(function(e){
         jQuery('.biji_tab').css('display','block');
         jQuery('.biji_tab').css({
