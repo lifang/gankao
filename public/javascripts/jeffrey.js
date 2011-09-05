@@ -662,9 +662,11 @@ function audio_play(id){
         if($("audio_"+id).paused){
             $("audio_"+id).load();
             $("audio_"+id).play();
+            $("audio_control_"+id).src="/images/paper/zanting_icon.png";
             if(id!="x"){
                 setCookie(("audio_"+id),parseInt(getCookie("audio_"+id))+1);
-                $("audio_control_"+id).title="停止";   // 记录，需要另写一个方法，当音频文件播放完毕，按钮可用
+                $("audio_control_"+id).title="停止";   
+                $("audio_control_"+id).src="/images/paper/zanting_icon.png";
             }
         }
         else{
@@ -672,10 +674,12 @@ function audio_play(id){
                 setCookie(("audio_"+id),0);
                 $("audio_"+id).pause();
                 $("audio_control_"+id).title="播放";
+                $("audio_control_"+id).src="/images/paper/play_icon.png";
             }else{
                 if(confirm("该音频有播放次数限制，\"停止\"播放也会记录播放次数。这可能导致你的损失。你确定要停止么？\n 当前播放次数/总次数 ："+getCookie("audio_"+id)+"/"+get_canplay_time())){
                     $("audio_"+id).pause();
                     $("audio_control_"+id).title="播放";
+                    $("audio_control_"+id).src="/images/paper/play_icon.png";
                 }
             }
         }
@@ -683,6 +687,7 @@ function audio_play(id){
     else{
         $("audio_"+id).pause();
         $("audio_control_"+id).title="播放";
+        $("audio_control_"+id).src="/images/paper/play_icon.png";
         alert("该录音已经播放了"+get_canplay_time()+"次！不能再播放！");
     }
 }

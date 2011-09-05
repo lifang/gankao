@@ -63,6 +63,9 @@ ul { list-style: none;}
 .task3_li li { width: 61px; height: 25px; border: 1px #CCC solid; text-align: center; line-height: 25px; margin: 5px 7px; float: left;}
 .task3_li li.dropOver { border: 1px #f0f0f0 solid; background: #f9f9f9; color: #cccccc;}
 
+.task1_con { padding: 5px; line-height: 24px; margin-top: 10px;}
+.task1_con p { text-indent: 24px;}
+
 .task3_con { border: 1px #CCC solid; padding: 5px; line-height: 24px; margin-top: 10px;}
 .task3_con p { text-indent: 24px;}
 

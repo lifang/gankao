@@ -54,7 +54,9 @@ question_num = single_question[1]
     </div>
   </div>
   <input type="hidden" id="btn_<%= question.attributes["id"] %>_answer" type="hidden" value="<%= answers.join(";") %>"/>
+  <% if question.elements["analysis"] %>
   <input type="hidden" id="btn_<%= question.attributes["id"] %>_analysis" type="hidden" value="<%= question.elements["analysis"].text %>"/>
+  <% end %>
   <div class="clear"></div>
   <div class="review_btn">
     <button class="jiexi_btn" id="btn_<%= question.attributes["id"] %>">解析</button>
