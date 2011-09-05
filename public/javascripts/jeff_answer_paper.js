@@ -1,10 +1,10 @@
 
-    var last_open_problem_id=0;    //记录最后一次打开的题目
-    var do_examination_id=document.getElementById("examination_id").value;
-    if(getCookie("do_examination_"+do_examination_id)!=null){
-        last_open_problem_id=getCookie("do_examination_"+do_examination_id);     //通过cookie记录这场考试最后一道题目的id
-    }
-    var load_switch=0;   //页面载入前，置0；页面载入后，置1。该变量目前只在综合训练5中控制流程。
+var last_open_problem_id=0;    //记录最后一次打开的题目
+var do_examination_id=document.getElementById("examination_id").value;
+if(getCookie("do_examination_"+do_examination_id)!=null){
+    last_open_problem_id=getCookie("do_examination_"+do_examination_id);     //通过cookie记录这场考试最后一道题目的id
+}
+var load_switch=0;   //页面载入前，置0；页面载入后，置1。该变量目前只在综合训练5中控制流程。
 
 
 //加载综合训练
@@ -69,7 +69,6 @@ function create_block(bocks_div, block,practice_type) {
     //试卷导航隐藏部分
     var block_nav_div = create_element("div", null, "block_nav_"+block.id, null, null, "innerHTML");
     block_nav_div.style.cssFloat="left";
-    block_nav_div.style.width="100px";
     navigation_div.appendChild(block_nav_div);
     if (block_block_flag == 0 && (block.time == null || block.time == "" || block.time == "0")) {
         block_div.style.display = "block";
@@ -183,10 +182,19 @@ function local_fixup_time(block_id, fixup_time_start, fixup_time_end) {
 
 //生成试卷提点导航
 function create_question_navigation(block_nav_div, question, innerHTML, problem_id) {
-    var question_nav_div = create_element("span", null, "question_nav_"+question.id, null, null, "innerHTML");
-    question_nav_div.className = "problem_nav_div";
-    question_nav_div.innerHTML = "<a style='padding:5px;' href='javascript:void(0);' onclick='javascript:choose_problem(\""+question.id+"\", \""+problem_id+"\");'>"+innerHTML+ "</a>";
-    block_nav_div.appendChild(question_nav_div);
+    if(question!=null){
+        var question_nav_div = create_element("span", null, "question_nav_"+question.id, null, null, "innerHTML");
+        question_nav_div.className = "problem_nav_div";
+        question_nav_div.innerHTML = "<a style='padding:5px;' href='javascript:void(0);' onclick='javascript:choose_problem(\""+question.id+"\", \""+problem_id+"\");'>"+innerHTML+ "</a>";
+        block_nav_div.appendChild(question_nav_div);
+    }
+    else{
+        var question_nav_div = create_element("span", null, "problem_nav_"+innerHTML, null, null, "innerHTML");
+        question_nav_div.className = "problem_nav_div";
+        question_nav_div.innerHTML = "<a style='padding:5px;'  href='javascript:void(0);' onclick='javascript:choose_problem(\""+null+"\", \""+problem_id+"\");'>"+innerHTML+ "</a>";
+        question_nav_div.style.background = "#A3C6C8";
+        block_nav_div.appendChild(question_nav_div);
+    }
 }
 
 function choose_problem(question_id,problem_id){
@@ -194,15 +202,6 @@ function choose_problem(question_id,problem_id){
     $("full_problem_"+problem_id).style.display="block";
     last_open_problem_id=problem_id;
 }
-
-function next_problem(){
-    
-}
-
-function previous_problem(){
-    
-}
-
 
 //取得点击的题点的高度
 function get_question_height(question_id, problem_id) {
@@ -272,6 +271,9 @@ function create_problem(ul, problem, block_nav_div,practice_type) {
             create_question(problem.title,problem.id, question_id_input, parent_div, questions,practice_type);
             question_num ++ ;
         }
+    }else{
+        create_question_navigation(block_nav_div, null, question_num, problem.id);
+        question_num++;
     }
 
 
@@ -290,7 +292,7 @@ function create_problem(ul, problem, block_nav_div,practice_type) {
         alreay_answer_que_num();
     // answer_hash = null;
     }
-//alert(parent_div.innerHTML);
+    //alert(parent_div.innerHTML);
 }
 
 //增加提点保存和不确定按钮

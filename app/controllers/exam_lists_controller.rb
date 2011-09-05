@@ -27,6 +27,7 @@ class ExamListsController < ApplicationController
     @old_lists=Examination.where("types=? and is_published=1",Examination::TYPES[:OLD_EXAM])
     examnation_ids=@old_lists.map(&:id).join(",")
     @hash=Examination.exam_users_hash(cookies[:user_id],examnation_ids)
+    render :layout=>"gankao"
   end
 
   def incorrect_list

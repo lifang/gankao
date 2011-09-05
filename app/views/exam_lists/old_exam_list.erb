@@ -1,63 +1,32 @@
 <script type="text/javascript" src="/javascripts/plugin_assets/My97DatePicker/WdatePicker.js" ></script>
 <div class="main_box_back">
   <div class="in">
-    <table>
-      <colgroup>
-        <col width="160" />
-        <col width="80" />
-        <col width="130" />
-        <col width="80" />
-        <col width="80" />
-        <col width="60" />
-        <col width="70" />
-        <col width="" />
-      </colgroup>
-      <% if @old_lists.blank? %>
-        <tbody>
-          <tr>
-            <td align="center" colspan="8">您目前没有参加任何考试</td>
-          </tr>
-        </tbody>
-      <% else %>
-        <thead align="center">
-          <tr>
-            <th>模拟考试名称</th>
-            <th>题目总数</th>
-            <th>完成情况</th>
-            <th>练习时间</th>
-            <th>正确率</th>
-            <th>考卷</th>
-          </tr>
-        </thead>
-        <% @old_lists.each do |examination| %>
-          <tbody>
-            <tr>
-              <td><%= examination.title %></td>
-              <td><%= examination.papers[0].total_question_num.to_s+"题" %></td>
-              <td><%= @hash["#{examination.id}"].nil? ? "未完成":"已完成" %></td>
-              <td><%= examination.start_at_time.nil? ? "任何时候" : examination.start_at_time.strftime("%Y-%m-%d %H:%M:%S") %></td>
-              <% unless @hash["#{examination.id}"].nil? %>
-                <% percent=(100.0*(@hash["#{examination.id}"].correct_percent.to_f/examination.papers[0].total_question_num)+0.5).to_i %>
-                <td><%= percent.to_s+"%"%></td>
-              <% else %>
-                <td><%= "-" %></td>
-              <% end %>
-              <td>
+    <% if @old_lists.blank? %>
+      <h1>您目前没有参加任何考试</h1>
+    <% else %>
+      <div class="main">
+        <div class="main_con">
+          <div class="zhenti_box">
+            <ul>
+              <% @old_lists.each do |examination| %>
                 <% unless @hash["#{examination.id}"].nil?%>
                   <% if @hash["#{examination.id}"].is_submited.nil?||@hash["#{examination.id}"].is_submited==0%>
-                    <a href="/user/examinations/<%= examination.id %>/do_exam" target="_blank">开始练习</a>
-                  <% else %>
-                    <%= link_to "查看", "/user/exam_users/#{examination.id}?user_id=#{cookies[:user_id]}" %>
-                  <% end %>
-                <% else %>
-                  <a href="/user/examinations/<%= examination.id %>/do_exam" target="_blank">开始练习</a>
-                <% end %>
-              </td>
-            </tr>
-          </tbody>
-        <% end %>
-      <% end %>
-    </table>
+                    <li><a href="/user/examinations/<%= examination.id %>/do_exam" target="_blank"><span class="paper_time">
+                          <%= examination.title %></span><span class="paper_over"></span></a></li>
+                        <% else %>
+                    <li><a href="/user/exam_users/<%= examination.id %>?user_id=<%= cookies[:user_id] %>" target="_blank"><span class="paper_time">
+                          <%= examination.title %></span><span class="paper_over"><img alt="真题" src="/images/paper/paper_over.png" /></span></a></li>
+                        <% end %>
+                      <% else %>
+                  <li><a href="/user/examinations/<%= examination.id %>/do_exam" target="_blank"><span class="paper_time">
+                        <%= examination.title %></span><span class="paper_over"></span></a></li>
+                      <% end %>
+                    <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 

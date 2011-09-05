@@ -1,43 +1,64 @@
-<div class="products_list_style_box" id="question_info_<%= single_question.attributes["id"].to_i %>" style="display:none">
-  <div class="arrow" style="top:35px;"></div>
-  <div class="big_pic_box" style="top:0px;">
-    <div class="in">
-      <div class="title">
-        <div>
-          <%= single_question.elements["title"].text.to_s.html_safe %>
-        </div>
-        <% if params[:result].nil? and @exam and cookies[:user_id].to_i == @exam.user_id %>
-        <% end %>
-        <div class="clear"></div>
+<% question = single_question[0]
+question_num = single_question[1]
+%>
+<div class="p_question_list <% if question.attributes["user_score"].to_i == question.attributes["score"].to_i %>question_yes<% else %>question_no<% end %>">
+  <div class="p_q_l_left"><%= question_num %></div>
+  <div class="p_q_l_right">
+    <% if question.elements["description"] %>
+      <p><%= question.elements["description"].text  %></p>
+    <% end %>
+    <% attrs_str = question.elements["questionattrs"].text
+    attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
+    correct_type = question.attributes["correct_type"]
+    answer = question.elements["answer"]
+    answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
+    user_answer = question.attributes["user_answer"]
+    user_answers = user_answer.nil? ? [] :  user_answer.split(";|;")
+    if (correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] or
+          correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE]) %>
+      <ul class="chooseQuestion">
+        <% (0..attrs_array.length-1).each do |i|
+          is_answer = answers.include?(attrs_array[i])
+          is_user_answer = user_answers.include?(attrs_array[i]) %>
+          <li <% if is_answer %> class="correctRight_bg" <% end %>>
+            <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
+              <input type="checkbox" name="question_attr_<%= question.attributes["id"].to_i %>"
+                     id="question_attr_<%= i %>"  <% if is_user_answer %>checked="true"<% end %> />
+                   <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
+              <input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>"
+                     id="question_attr_<%= i %>" <% if is_user_answer %>checked="true"<% end %> />
+                   <% end %>
+            &nbsp;&nbsp;<%= attrs_array[i] %>
+          </li>
+        <% end if attrs_array and attrs_array.any? %>
+      </ul>
+    <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:JUDGE] %>
+      <div <% if answers[0].to_i==1 %>class="correctRight_bg"<% end %>>
+        <input type="radio"<% if user_answer==1.to_s %> checked="true"<% end %>  /><label>对</label>
       </div>
-      <% question_ids = "" %>
-      <% single_question.elements["questions"].each_element do |question| %>
-        <% question_ids += question.attributes["id"] + "," %>
-        <%= render :partial => "/user/exam_users/question_with_answer", :object => question %>
-        <div>
-          <input type="button" name="collection_<%= question.attributes["id"] %>" id="collection_<%= question.attributes["id"] %>"
-               value="收藏" class="submit_btn"
-               onclick="javascript:start_collection(<%= question.attributes["id"] %>,
-                        <%= single_question.attributes["id"] %>, <%= @doc.elements["paper"].attributes["id"] %>,
-                        <%= @doc.attributes["id"] %>, '<%= single_question.xpath %>', '<%= question.xpath %>');" />
-          <input type="button" name="note_<%= question.attributes["id"] %>" id="note_<%= question.attributes["id"] %>"
-               value="记笔记" class="submit_btn"
-               onclick="javascript:start_note(<%= question.attributes["id"] %>, <%= single_question.attributes["id"] %>,
-                        <%= @doc.elements["paper"].attributes["id"] %>, <%= @doc.attributes["id"] %>);" />
-          <%= form_remote_tag :method => "post", :html => {:class => "required-validate"},
-            :condition => "check_note_form('#{question.attributes["id"] }')",
-            :url => "/user/notes/#{question.attributes["id"]}/create_note?paper_id=#{@doc.attributes["id"]}&examination_id=#{@doc.elements["paper"].attributes["id"]}&problem_id=#{single_question.attributes["id"]}" do -%>
-            <input type="hidden" id="p_xpath_<%= question.attributes["id"] %>"
-                   name="p_xpath_<%= question.attributes["id"] %>" value="<%= single_question.xpath %>" />
-            <input type="hidden" id="q_xpath_<%= question.attributes["id"] %>"
-                   name="q_xpath_<%= question.attributes["id"] %>" value="<%= question.xpath %>"/>
-            <div id="start_note_<%= question.attributes["id"] %>" style="display:none;">
-            </div>
-          <% end -%>
-        </div>
-      <% end %>
-      <input type="hidden" id="question_ids_<%= single_question.attributes["id"] %>"
-             name="question_ids_<%= single_question.attributes["id"] %>" value="<%= question_ids %>" />
+      <div <% if answers[0].to_i==0 %>class="correctRight_bg"<% end %>>
+        <input type="radio"  <% if user_answer==0.to_s %> checked="true"<% end %>  /><label>错</label>
+      </div>
+    <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] %>
+      <div class="answer_text">
+        <input name="answer" type="text" value="<%= user_answers[0].to_s %>" />(<%= answers[0].to_s %>)
+      </div>
+    <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] %>
+      <div class="answer_textarea">
+        <textarea cols="" rows=""><%= user_answers[0].to_s %></textarea>(<%= answers[0].to_s %>)
+      </div>
+    <% end %>
+    <div class="fraction">
+      <font color="red"><% if question.attributes["user_score"] %>
+          <%= question.attributes["user_score"] %><% else %>0<% end %></font>/<%= question.attributes["score"] %>分
     </div>
+  </div>
+  <input type="hidden" id="btn_<%= question.attributes["id"] %>_answer" type="hidden" value="<%= answers.join(";") %>"/>
+  <input type="hidden" id="btn_<%= question.attributes["id"] %>_analysis" type="hidden" value="<%= question.elements["analysis"].text %>"/>
+  <div class="clear"></div>
+  <div class="review_btn">
+    <button class="jiexi_btn" id="btn_<%= question.attributes["id"] %>">解析</button>
+    <button class="biji_btn" id="biji_<%= question.attributes["id"] %>">笔记</button>
+    <button>加入错题库</button>
   </div>
 </div>

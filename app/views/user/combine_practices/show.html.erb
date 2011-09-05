@@ -46,11 +46,13 @@
          value="<%= Constant::ANSWER_CLIENT_PATH %>/<%= @examination.exam_user_id %>.xml"/>
   <div class="clear"></div>
 <% end %>
+  
 <div class="tb_prevNext">
-  <a href="#" class="tb_goleft"></a>
+  <a href="#" id="tb_goleft" class="tb_goleft"></a>
   <a href="#" class="tb_check"></a>
-  <a href="#" class="tb_goright"></a>
+  <a href="#" id="tb_goright" class="tb_goright"></a>
 </div>
+  
 <script type="text/javascript" src="/javascripts/local_save/answer.js" charset="utf-8"></script>
 <%= javascript_include_tag "#{Constant::SERVER_PATH}/javascripts/jeff_answer_paper.js" %>
 <script language="javascript" type="text/javascript">
