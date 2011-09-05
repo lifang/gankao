@@ -4,13 +4,15 @@ body { background: url(/images/paper/_bg.jpg) repeat; font-family: Arial,"宋体
 ul { list-style: none;}
 img { border: none;}
 .clear { clear: both;}
+.orange { color: #F60;}
+
 .wrap { height: 38px; background: url(/images/paper/top_bg.png) repeat-x;}
 
 .head { width: 900px; margin: 0 auto; padding-bottom: 10px; background: url(/images/paper/xline.png) repeat-x center bottom;}
 .head_top { height: 34px; line-height: 34px; margin-bottom: 10px;}
 
 .top_myGankao { float: right;}
-.t_gk { width: 159px; height: 34px; background: url(/images/paper/t_gk.gif) no-repeat 0 center; padding-left: 26px;}
+.t_gk { width: 59px; height: 34px; background: url(/images/paper/t_gk.gif) no-repeat 0 center; padding-left: 26px;}
 .t_gk a { color: #333; text-decoration: none;}
 .top_loginArea {}
 .top_loginArea a { color: #333; margin: 0 10px;}
@@ -23,8 +25,8 @@ img { border: none;}
 .menu li a { color: #333; text-decoration: none;}
 .menu li a:hover, .menu li a.hover { color: #1abcf0;}
 
-.main { width: 880px; margin: 0 auto; padding: 10px;}
-.main_con { margin: 10px;}
+.main { width: 880px; margin: 0 auto; padding: 10px; overflow: hidden;}
+.main_con { margin: 10px; overflow: hidden;}
 
 /*真题训练--------------*/
 .zhenti_box { width: 790px; margin: 20px auto 0; overflow: hidden;}
@@ -35,13 +37,54 @@ img { border: none;}
 
 
 /*错题库---------------*/
-.errorLibrary_left { width: 560px; float: left;}
-.errorLibrary_right { width: 300px; float: left; background: #000; height: 300px;}
+.errorLibrary_left { width: 560px; float: left; background: url(/images/paper/yline.png) repeat-y right center; padding-right: 15px;}
+.errorLibrary_right { width: 270px; float: left; padding-left: 15px; position: relative;}
+
 
 .pattern { height: 26px; line-height: 26px;}
 .pattern a { color: #333; font-weight:bold; float: left; text-decoration: none;}
 .moveBlock_bg { width: 73px; height: 26px; background: url(/images/paper/moveBlock_bg.gif) no-repeat; float: left; margin: 0 10px; position: relative;}
 .moveBlock { position: absolute; top: 1px; left: 1px;}
+
+
+.ep_prevNext { height: 22px; line-height: 22px; margin: 20px 0; padding-left: 450px;}
+.ep_goLeft, .ep_goRight { width: 22px; height: 22px; text-indent: -999px; overflow: hidden; float: left;}
+.ep_goLeft a, .ep_goRight a { width: 22px; height: 22px; display: block;}
+.ep_goLeft { background: url(/images/paper/all_bg.png) -247px -159px no-repeat; }
+.ep_goRight { background: url(/images/paper/all_bg.png) -215px -159px no-repeat;}
+
+.ep_number { width: 50px; height: 22px; line-height: 22px; text-align: center; float: left; font-size: 14px; font-family: "微软雅黑";}
+
+/*errorLibrary_right----*/
+.searchProblem { height: 25px; padding: 5px 0; background: #FFF; border: 1px #CCC solid;}
+.se_input { height: 25px; line-height: 25px; width: 230px; float: left; border: none; background: none; display: inline; padding-left:5px; color: #999;}
+.se_btn { width: 22px; height: 25px; text-indent: -9999px; overflow: hidden; background: url(/images/paper/fangdajing.png) no-repeat; border: none; cursor: pointer;}
+
+.answerPro { padding: 5px; font-size: 12px;}
+.answerPro li { margin: 5px 0;line-height: 24px;}
+.an_p { width: 250px; background: url(/images/paper/dd.png) no-repeat left center; padding-left: 10px;}
+.an_p a { color:#133DB6;}
+.danHang {overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.an_text_indent { text-indent: 24px;}
+.an_text_indent a { color: #A10000;}
+
+.an_member, .an_answer { width: 250px; margin: 5px auto; padding: 5px; background: #FFF; display: none;}
+.an_member p, .an_answer p { line-height: 18px;}
+.an_member h4, .an_answer h4 { font-size: 12px; color:#437f8d;}
+.an_x { float: right; margin-right: 5px;}
+
+.an_textarea {width: 248px;}
+.an_tj_btn {
+    background: url(/images/paper/all_bg.png) no-repeat -8px -122px;
+	width: 56px;
+	height: 24px;
+	line-height: 24px;
+	text-align: center;
+	border: none;
+	cursor: pointer;
+	margin-left: 150px;
+}
+
 
 
 
@@ -56,12 +99,12 @@ img { border: none;}
 
 /*答题样式-----*/
 .part_padding { padding: 10px;}
-.part_question { 
+.part_question {
     border-top: 1px #CCC solid;
-	border-left: 1px #CCC solid; 
+	border-left: 1px #CCC solid;
 	border-right: 5px #CCC solid;
-	border-bottom: 5px #CCC solid; 
-	margin-top: 10px; 
+	border-bottom: 5px #CCC solid;
+	margin-top: 10px;
 	background: #FFF;
 }
 
@@ -77,8 +120,9 @@ img { border: none;}
 .question_yes { background: url(/images/paper/question_yesno_bg.jpg) no-repeat 0px 0px #FFF;}
 .question_no {background: url(/images/paper/question_yesno_bg.jpg) no-repeat 0px -396px #FFF;}
 
-.p_q_l_left { float: left; width: 31px;text-align: center; padding-top: 5px;}
-.p_q_l_right { float: left; padding: 5px; width:510px;}
+.p_q_l_left { float: left; width: 31px; text-align: center; padding-top: 5px;}
+.p_q_l_right { float: left; padding: 5px; width: 510px;}
+.p_q_l_right_s { float: left; padding: 5px; width: 320px;}
 
 /*审查-----*/
 .review_btn { position: absolute; top: 5px; right: 5px;}
@@ -100,7 +144,7 @@ img { border: none;}
 
 /*保存答案按钮-----*/
 .p_question_btn { margin-top: 5px; padding-left: 10px;}
-.save, .Uncertain {height: 26px; line-height: 26px; border: none; cursor: pointer; color: #FFF; margin: 0 5px;}
+.save, .Uncertain {height: 26px; line-height: 26px; text-align: center; border: none; cursor: pointer; color: #FFF; margin: 0 5px;}
 .save { width: 48px;  background: url(/images/paper/all_bg.png) no-repeat -8px -8px;}
 .Uncertain { width: 60px; background: url(/images/paper/all_bg.png) no-repeat -8px -45px;}
 
@@ -114,6 +158,37 @@ img { border: none;}
 .correctRight_bg { background: #a1e5ff;}
 
 .fraction { text-align: right;line-height: 24px; font-size: 12px; color: #666;}
+
+
+
+/*笔记簿---------------------------------------*/
+.noteBook_left { width: 480px; float: left; display: inline; padding: 20px 0; margin: 0 20px 20px 0; background: #FFF;}
+.noteBook_right { width: 380px; float:left; position: relative;}
+
+.se_nb_box { padding-left: 200px;}
+.searchNotebook { width: 247px; height: 32px; padding: 7px 0 0 7px; background: url(/images/paper/searchNotebook.png) no-repeat;}
+.se_nb_input { float: left; width: 199px; _width: 196px; height: 24px; line-height: 24px; border: none; background:none; padding-left: 5px; color: #FFF;}
+.se_nb_btn { width: 35px; height:24px; background: url(/images/paper/fdj.png) no-repeat; border: none; cursor: pointer;}
+
+.notebook_con { padding: 10px;}
+.notebook_con li { margin: 5px 0; line-height: 18px; padding: 5px;}
+.nb_li_bg { border: 1px #CCC solid; background: #FFF;}
+.nb_li_bg00 { border: 1px #289fdb solid; background: #A1E5FF;}
+
+.nb_li_btn { padding-left: 350px;}
+.bn_write { display: none;}
+.bn_write textarea { width: 448px; height: 100px; margin: 0 auto;}
+
+
+.nb_r_box { width: 380px;}
+.nb_r_title { width: 360px; height: 33px; line-height: 33px; padding-left: 20px; background: url(/images/paper/all_bg.png) no-repeat 0 -394px;}
+.nb_r_con { width: 368px; padding: 5px; border: 1px #dbdbdb solid; background: #FFF; overflow: hidden;}
+
+.nb_r_daan { padding: 5px; border: 1px #d6eaff solid; background: #fafdff; margin-top: 20px;}
+.nb_r_daan h3 { color:#FF0000}
+.nb_r_daan p { line-height: 18px; text-indent: 24px;}
+
+
 
 
 
