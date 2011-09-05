@@ -37,6 +37,7 @@ class ExamListsController < ApplicationController
     current_element = Examination.return_page_element(@lists, @has_next_page)
     @lists = current_element[0]
     @has_next_page = current_element[1]
+    render :layout=>"gankao"
   end
 
   def feedback_list
