@@ -49,14 +49,16 @@ question_num = single_question[1]
       </div>
     <% end %>
     <div class="fraction">
-      [<font color="red"><% if question.attributes["user_score"] %><%= question.attributes["user_score"] %><% else %>0<% end %></font>]
-      <%= question.attributes["score"] %>分
+      <font color="red"><% if question.attributes["user_score"] %>
+          <%= question.attributes["user_score"] %><% else %>0<% end %></font>/<%= question.attributes["score"] %>分
     </div>
   </div>
+  <input type="hidden" id="btn_<%= question.attributes["id"] %>_answer" type="hidden" value="<%= answers.join(";") %>"/>
+  <input type="hidden" id="btn_<%= question.attributes["id"] %>_analysis" type="hidden" value="<%= question.elements["analysis"].text %>"/>
   <div class="clear"></div>
   <div class="review_btn">
-    <button class="jiexi_btn">解析</button>
-    <button class="biji_btn">笔记</button>
+    <button class="jiexi_btn" id="btn_<%= question.attributes["id"] %>">解析</button>
+    <button class="biji_btn" id="biji_<%= question.attributes["id"] %>">笔记</button>
     <button>加入错题库</button>
   </div>
 </div>
