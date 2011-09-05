@@ -4,27 +4,26 @@
   <div class="searchProblem"><input name="" type="text" class="se_input" value="输入想知道的问题..." /><button class="se_btn">搜索</button></div>
   <div class="answerPro">
     <ul>
-      <% @feedbacks.each do |feedback| %>
+      <% @hash_list["#{feedback.attributes["id"]}"].each do |feed| %>
         <li>
-          <div class="an_p danHang" onmouseover="javascript:$('<%= feedback.id %>').style.display='block';" ><a><%= feedback.description %></a></div>
-          <div class="an_member" id="<%= feedback.id %>" style="display:none">
-              <%if feedback.answer.nil? %>
-                <%= "等待回答中..." %>
-              <%else%>
-                <%=feedback.answer %>
-              <%end%>
-            </div>
+          <div class="an_p danHang" onmouseover="javascript:$('<%= feed.id %>').style.display='block';" ><a><%= feed.description %></a></div>
+          <div class="an_member" id="<%= feed.id %>" style="display:none">
+            <%if feed.answer.nil? %>
+              <%= "等待回答中..." %>
+            <%else%>
+              <%=feed.answer %>
+            <%end%>
+          </div>
         </li>
-      <%end unless @feedbacks.nil?%>
+      <%end unless @hash_list["#{feedback.attributes["id"]}"].nil?%>
     </ul>
   </div>
 </div>
 &nbsp;&nbsp;&nbsp;&nbsp;请在以下输入框输入你遇到的问题：
-<input type="hidden" value="<%= @id %>" id="id" name="id"/>
 <div class="field">
   &nbsp;&nbsp;&nbsp;&nbsp;<textarea cols="30" rows="4"  name="description" id="description">
   </textarea>
-</div> 
+</div>
 <div class="actions">
-  &nbsp;&nbsp;&nbsp;&nbsp;<input  type="button"value="提问" onclick="javascript:feedb('<%= @id %>')" />
+  &nbsp;&nbsp;&nbsp;&nbsp;<input  type="button"value="提问" onclick="javascript:feedb('<%= feedback.attributes["id"] %>')" />
 </div>
