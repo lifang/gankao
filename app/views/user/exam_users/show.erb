@@ -6,7 +6,7 @@
 
     <div  id="exam_time"><%= @doc.elements["paper"].attributes["score"].nil? ? "分数暂未公布":" 得  分:"+ @doc.elements["paper"].attributes["score"] %></div>
     <div class="paper_info">
-      <strong>总题数：<%= @xml.attributes["total_num"]%>&nbsp;&nbsp;|&nbsp;&nbsp;总分:<%= @xml.attributes["total_score"]%></strong>
+      <strong>总题数：<%= @xml.attributes["total_num"]%>总分:<%= @xml.attributes["total_score"]%></strong>
     </div>
   </div>
 </div>
