@@ -32,11 +32,12 @@ class ExamListsController < ApplicationController
 
   def incorrect_list
     @has_next_page = false
-    @lists=list
-    @lists =Examination.get_start_element(params[:page], @lists)
+    @list=list
+    @lists =Examination.get_start_element(params[:page], @list)
     current_element = Examination.return_page_element(@lists, @has_next_page)
     @lists = current_element[0]
     @has_next_page = current_element[1]
+    render :layout=>"gankao"
   end
 
   def feedback_list
