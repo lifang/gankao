@@ -1,6 +1,5 @@
 class ExamListsController < ApplicationController
   before_filter :access?
-
   def  list
     lists=Collection.find_by_user_id(cookies[:user_id]).open_xml
     lists.elements["/collection/problems"].each_element do |problem|
@@ -29,21 +28,21 @@ class ExamListsController < ApplicationController
     @hash=Examination.exam_users_hash(cookies[:user_id],examnation_ids)
     render :layout=>"gankao"
   end
-
   def incorrect_list
+    @hash_list={}
     @has_next_page = false
-    @lists=list
-    @lists =Examination.get_start_element(params[:page], @lists)
+    @list=list
+    @lists =Examination.get_start_element(params[:page], @list)
     current_element = Examination.return_page_element(@lists, @has_next_page)
     @lists = current_element[0]
+    problem=@lists.elements["/collection/problems/problem/questions"]
+    problem.each_element do |question|
+      @hash_list["#{question.attributes['id']}"]=Feedback.find_all_by_user_id_and_question_id(cookies[:user_id],question.attributes["id"].to_i)
+    end unless problem.nil?
     @has_next_page = current_element[1]
+    render :layout=>"gankao"
   end
 
-  def feedback_list
-    @id=params[:id]
-    @feedbacks=Feedback.find_all_by_user_id_and_question_id(cookies[:user_id],params[:id])
-    render :partial=>"/exam_lists/feedback"
-  end
 
   def feedback
     @feedback=Feedback.create(:description=>params[:description],:user_id=>"#{cookies[:user_id]}",:question_id=>params[:id])

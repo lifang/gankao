@@ -32,10 +32,10 @@ ul { list-style: none;}
 .tb_scroll {overflow: auto;}
 
 .height630 { height: 630px;}
-.height657 { height: 657px;} 
+.height657 { height: 657px;}
 .height694 { height: 694px;}
 .height507 { height: 507px;}
-.height628 { height:628px;} 
+.height628 { height:628px;}
 
 .tb_list { margin-top: 20px;}
 .task_textarea { width: 448px; height: 100px; margin: 5px 0;}
@@ -76,7 +76,7 @@ ul { list-style: none;}
 .task3_li li.dropOver { border: 1px #f0f0f0 solid; background: #f9f9f9; color: #cccccc;}
 
 .task3_con { border: 1px #CCC solid; padding: 5px; line-height: 24px; width: 440px; margin: 10px auto 0;}
-.task3_con p { text-indent: 24px;} 
+.task3_con p { text-indent: 24px;}
 
 
 

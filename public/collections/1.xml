@@ -1,30 +1,33 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <collection id='1'>
     <problems>
-        <problem id='1' repeat_num='1' score='5' types='0'>
+        <problem delete_status='1' id='1' repeat_num='1' score='5' types='0'>
             <title>Until then, his family ________ from him for six months.</title>
             <category>3</category>
             <questions>
-                <question correct_type='0' error_percent='0' id='1' repeat_num='2' score='5'>
+                <question correct_type='0' delete_status='1' error_percent='0' id='1' repeat_num='2' score='5'>
                     <answer>D   hadn’t heard</answer>
                     <analysis>直到刚才，表明从“刚才”以后我有他的消息了，表示过去我没有他的消息，所以用 “hadn&apos;t heard”</analysis>
                     <questionattrs>A   didn’t hear;-;B   hasn’t been hearing;-;C   hasn’t heard;-;D   hadn’t heard</questionattrs>
                     <tags>过去时</tags>
                     <user_answer>A   didn’t hear</user_answer>
-                <user_answer>B   hasn’t been hearing</user_answer><user_answer/></question>
+                    <user_answer>B   hasn’t been hearing</user_answer>
+                    <user_answer/>
+                </question>
             </questions>
         </problem>
-        <problem id='2' incorrect_num='1' score='5' types='0'>
+        <problem delete_status='1' id='2' incorrect_num='1' score='5' types='0'>
             <title>Until then, his family ________ from him for six months.</title>
             <category>3</category>
             <questions>
-                <question correct_type='0' error_percent='0' id='2' repeat_num='2' score='5'>
+                <question correct_type='0' delete_status='1' error_percent='0' id='2' repeat_num='2' score='5'>
                     <answer>D   hadn’t heard</answer>
                     <analysis>直到刚才，表明从“刚才”以后我有他的消息了，表示过去我没有他的消息，所以用 “hadn&apos;t heard”</analysis>
                     <questionattrs>A   didn’t hear;-;B   hasn’t been hearing;-;C   hasn’t heard;-;D   hadn’t heard</questionattrs>
                     <tags>过去时</tags>
                     <user_answer>C   hasn’t heard</user_answer>
-                <user_answer/></question>
+                    <user_answer/>
+                </question>
             </questions>
         </problem>
         <problem id='3' incorrect_num='1' score='5' types='0'>
@@ -35,9 +38,10 @@
                     <answer>阿萨德</answer>
                     <analysis/>
                     <questionattrs>阿萨德;-;发动;-; 地方;-;国服</questionattrs>
-                    <tags/>           
-                    <user_answer>地方</user_answer>                   
-                <user_answer>国服</user_answer></question>
+                    <tags/>
+                    <user_answer>地方</user_answer>
+                    <user_answer>国服</user_answer>
+                </question>
             </questions>
         </problem>
         <problem id='4' incorrect_num='2' score='16' types='0'>
@@ -48,21 +52,81 @@
                     <answer>df </answer>
                     <analysis/>
                     <questionattrs>df ;-;fgf ;-;h ;-;ghgh</questionattrs>
-                    <tags/>             
+                    <tags/>
                     <user_answer>ghgh</user_answer>
-                <user_answer/><user_answer>ghgh</user_answer></question>
+                    <user_answer/>
+                    <user_answer>ghgh</user_answer>
+                </question>
             </questions>
         </problem>
-    <problem id='9' score='5' types='0'><title>少打</title><category>1</category><questions><question correct_type='0' error_percent='0' id='9' repeat_num='1' score='5'><answer>adsad</answer><analysis/><questionattrs>adsad;-;规范法官;-;会更好;-;很久很久</questionattrs><tags/><user_answer>规范法官</user_answer></question><question correct_type='0' error_percent='0' id='14' repeat_num='1' score='5'>
-                            <answer>sfs</answer>
-                            <analysis>sfafwerwr2r2</analysis>
-                            <questionattrs>sfs;-;sfss;-;sdds;-;sd</questionattrs>
-                            <tags>wrwr</tags>
-                        <user_answer></user_answer></question></questions></problem><problem id='10' score='5' types='0'><title>阿斯顿sad</title><category>1</category><questions><question correct_type='0' error_percent='0' id='10' repeat_num='1' score='5'><answer>豆腐干</answer><analysis/><questionattrs>豆腐干;-;哥哥;-;塞维尔v;-;东方饭店个</questionattrs><tags/><user_answer>哥哥</user_answer></question><question correct_type='0' error_percent='0' id='15' repeat_num='1' score='5'>
-                            <answer>789</answer>
-                            <analysis>sdfsfasf</analysis>
-                            <questionattrs>23;-;wer;-;65;-;789</questionattrs>
-                            <tags>ew</tags>
-                        <user_answer></user_answer></question></questions></problem><problem id='11' score='5' types='0'><title>但是发生堵塞</title><category>1</category><questions><question correct_type='0' error_percent='0' id='11' repeat_num='1' score='5'><answer>共和国</answer><analysis/><questionattrs>阿萨德;-;阿萨德打算;-;对方答复;-;共和国</questionattrs><tags/><user_answer>阿萨德打算</user_answer></question></questions></problem><problem id='12' score='5' types='0'><title>说的是对的</title><category>2</category><questions><question correct_type='0' error_percent='0' id='12' repeat_num='1' score='5'><answer>阿斯达岁的大幅度</answer><analysis>阿斯达岁的</analysis><questionattrs>阿斯达岁的大幅度;-;豆腐干风格;-;刚好好机会;-;很久很久</questionattrs><tags/><user_answer>很久很久</user_answer></question></questions></problem></problems>
+        <problem id='9' score='5' types='0'>
+            <title>少打</title>
+            <category>1</category>
+            <questions>
+                <question correct_type='0' error_percent='0' id='9' repeat_num='1' score='5'>
+                    <answer>adsad</answer>
+                    <analysis/>
+                    <questionattrs>adsad;-;规范法官;-;会更好;-;很久很久</questionattrs>
+                    <tags/>
+                    <user_answer>规范法官</user_answer>
+                </question>
+                <question correct_type='0' error_percent='0' id='14' repeat_num='1' score='5'>
+                    <answer>sfs</answer>
+                    <analysis>sfafwerwr2r2</analysis>
+                    <questionattrs>sfs;-;sfss;-;sdds;-;sd</questionattrs>
+                    <tags>wrwr</tags>
+                    <user_answer/>
+                </question>
+            </questions>
+        </problem>
+        <problem id='10' score='5' types='0'>
+            <title>阿斯顿sad</title>
+            <category>1</category>
+            <questions>
+                <question correct_type='0' error_percent='0' id='10' repeat_num='1' score='5'>
+                    <answer>豆腐干</answer>
+                    <analysis/>
+                    <questionattrs>豆腐干;-;哥哥;-;塞维尔v;-;东方饭店个</questionattrs>
+                    <tags/>
+                    <user_answer>哥哥</user_answer>
+                </question>
+                <question correct_type='0' error_percent='0' id='15' repeat_num='1' score='5'>
+                    <answer>789</answer>
+                    <analysis>sdfsfasf</analysis>
+                    <questionattrs>23;-;wer;-;65;-;789</questionattrs>
+                    <tags>ew</tags>
+                    <user_answer/>
+                </question>
+            </questions>
+        </problem>
+        <problem id='11' score='5' types='0'>
+            <title>但是发生堵塞</title>
+            <category>1</category>
+            <questions>
+                <question correct_type='0' error_percent='0' id='11' repeat_num='1' score='5'>
+                    <answer>共和国</answer>
+                    <analysis/>
+                    <questionattrs>阿萨德;-;阿萨德打算;-;对方答复;-;共和国</questionattrs>
+                    <tags/>
+                    <user_answer>阿萨德打算</user_answer>
+                </question>
+            </questions>
+        </problem>
+        <problem id='12' repeat_num='2' score='5' types='0'>
+            <title>说的是对的</title>
+            <category>2</category>
+            <questions>
+                <question correct_type='0' error_percent='0' id='12' repeat_num='1' score='5'>
+                    <answer>阿斯达岁的大幅度</answer>
+                    <analysis>阿斯达岁的</analysis>
+                    <questionattrs>阿斯达岁的大幅度;-;豆腐干风格;-;刚好好机会;-;很久很久</questionattrs>
+                    <tags/>
+                    <user_answer>很久很久</user_answer>
+                    <user_answer/>
+                    <user_answer>很久很久</user_answer>
+                </question>
+            </questions>
+        </problem>
+    </problems>
 </collection>
 

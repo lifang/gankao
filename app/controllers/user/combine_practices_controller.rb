@@ -21,8 +21,6 @@ class User::CombinePracticesController < ApplicationController
       @exam_user.set_paper(@examination) if @exam_user.paper_id.nil?
       if @exam_user and @exam_user.paper_id
         @paper_url = "#{Constant::PAPER_CLIENT_PATH}/#{@exam_user.paper_id}.js"
-        @exam_user.update_info_for_join_exam(@examination.start_at_time,
-          @examination.exam_time) if @examination.started_at.nil? or @examination.started_at == ""
          render :layout => "practice_layout"
  #       render :layout =>'application'
       else
