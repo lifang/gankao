@@ -6,7 +6,6 @@ class User::ExamUsersController < ApplicationController
    # begin
       @doc=ExamRater.open_file("#{Constant::PUBLIC_PATH}/result/#{@exam.id}.xml")
       @xml=ExamUser.show_result(@exam.paper_id, @doc)
-
       render :layout=>"show_paper"
   #  rescue
   #    flash[:error] = "当前考试试卷不能正常打开，请检查试卷是否正常。"

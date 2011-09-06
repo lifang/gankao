@@ -31,18 +31,17 @@ jQuery(function(){
 //笔记弹出层
 jQuery(function(){
     jQuery('.biji_btn').click(function(e){
-        var btn_id = this.id;
         jQuery('.biji_tab').css('display','block');
         jQuery('.biji_tab').css({
             'top':(e.pageY+20)+'px',
             'left':(e.pageX-350)+'px'
         });
-        
+
     }
     )
     jQuery('.tab_t > a').click(function(){
         jQuery('.biji_tab').css('display','none')
     }
     )
-	
+
 })

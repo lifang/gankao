@@ -122,8 +122,8 @@ class Note < ActiveRecord::Base
   end
 
   #返回开始显示的节点
-  def get_start_element(page, doc)
-    start_num = (page.nil? or page == "" or page == "1") ? 0 : (page.to_i-1) * 1
+  def get_start_element(page, doc, pre_page)
+    start_num = (page.nil? or page == "" or page == "1") ? 0 : (page.to_i-1) * pre_page
     doc.root.elements['problems'].each_element do |problem|
       problem.elements["questions"].each_element do |question|
         doc.delete_element(question.xpath) if start_num > 0
@@ -134,11 +134,11 @@ class Note < ActiveRecord::Base
   end
 
   #返回所有要显示的节点
-  def return_page_element(doc, has_next_page)
+  def return_page_element(doc, has_next_page, pre_page)
     current_num = 0
     doc.elements["note"].elements['problems'].each_element do |problem|
       problem.elements["questions"].each_element do |question|
-        if current_num >= 1
+        if current_num >= pre_page
           doc.delete_element(question.xpath)
           has_next_page = true unless has_next_page
         end
@@ -146,6 +146,17 @@ class Note < ActiveRecord::Base
       end
     end
     return [doc, has_next_page]
+  end
+
+  #返回总页数
+  def return_total_page(doc, pre_page)
+    total_num = 0
+    doc.elements["note"].elements['problems'].each_element do |problem|
+      problem.elements["questions"].each_element do |question|
+        total_num += 1
+      end
+    end
+    return (total_num%pre_page == 0) ? total_num/pre_page : (total_num/pre_page + 1)
   end
 
 end

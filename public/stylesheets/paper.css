@@ -27,7 +27,7 @@ img { border: none;}
 
 
 /*testPaper-----main*/
-.testPaper_main { width: 960px; margin: 0 auto; padding-top: 50px; overflow: hidden;}
+.testPaper_main { width: 960px; margin: 0 auto; padding-top: 30px; overflow: hidden;}
 
 /*tp_left-------------*/
 .tp_left { float: left; width: 690px; overflow: hidden; display: inline;}
@@ -47,18 +47,19 @@ img { border: none;}
 
 /*答题样式-----*/
 .part_padding { padding: 10px;}
-.part_question {
+.part_question { 
     border-top: 1px #CCC solid;
-	border-left: 1px #CCC solid;
+	border-left: 1px #CCC solid; 
 	border-right: 5px #CCC solid;
-	border-bottom: 5px #CCC solid;
-	margin-top: 10px;
+	border-bottom: 5px #CCC solid; 
+	margin-top: 10px; 
 	background: #FFF;
 }
 
 
 
 .p_question_list {border-bottom: 1px #CCC solid; position: relative;}
+.border_bottom {border-bottom: 1px #CCC solid;}
 .answer_text { padding: 5px;}
 
 .answer_textarea { }
@@ -69,10 +70,10 @@ img { border: none;}
 .question_no {background: url(/images/paper/question_yesno_bg.jpg) no-repeat 0px -396px #FFF;}
 
 .p_q_l_left { float: left; width: 31px;text-align: center; padding-top: 5px;}
-.p_q_l_right { float: left; padding: 5px; width:640px;}
+.p_q_l_right { float: left; padding: 5px; width: 640px;}
 
 /*审查-----*/
-.review_btn { position: absolute; top: 5px; right: 5px;}
+.review_btn { position: absolute; bottom: 5px; left: 40px;}
 .review_btn button { width: 80px; height: 28px; line-height: 28px; border: none; cursor: pointer; color:#5d728a; background: url(/images/paper/all_bg.png) no-repeat -7px -83px;}
 
 /*解析笔记弹出层----*/
@@ -107,8 +108,8 @@ img { border: none;}
 
 /*tp_right-----------------*/
 .tp_right { float: left; width: 250px; padding-left: 20px; position: relative;}
-.first_title { font-size: 14px; color: #333; overflow: hidden; cursor: pointer;}
-.first_title p { background: url(/images/paper/xline.png) repeat-x center bottom; padding: 5px; line-height: 32px;}
+.first_title { font-size: 14px; color: #333; overflow: hidden; clear: both; cursor: pointer; background: url(/images/paper/xline.png) repeat-x center bottom; padding-bottom: 10px;}
+.first_title p { padding: 5px; line-height: 32px;}
 .second_menu li { float: left; margin: 5px 8px;}
 .highLight { color: #164a63; font-size: 16px; font-weight:bold;}
 
@@ -116,13 +117,16 @@ img { border: none;}
 
 
 .title_shadow { display: inline-block;text-shadow:1px 0 0 #ffffff, 0 1px 0 #ffffff, 0 -1px 0 #ffffff, -1px 0 0 #ffffff, 1px 0 1px #ffffff, 0 1px 1px #ffffff, 0 -1px 1px #ffffff, -1px 0 1px #ffffff;
-   filter:
-	Dropshadow(offx=1,offy=0,color=#ffffff)
-    Dropshadow(offx=0,offy=1,color=#ffffff)
-    Dropshadow(offx=0,offy=-1,color=#ffffff)
+   filter: 
+	Dropshadow(offx=1,offy=0,color=#ffffff) 
+    Dropshadow(offx=0,offy=1,color=#ffffff) 
+    Dropshadow(offx=0,offy=-1,color=#ffffff) 
     Dropshadow(offx=-1,offy=0,color=#ffffff);
 }
 
 .testPaper_foot { height: 100px;}
 
+
+.tishi_tab { width: 130px; height: 59px; background: url(/images/paper/tishi_tab_bg.png) no-repeat;}
+.tishi_tab p { text-align: center; line-height: 59px; font-size: 14px; font-family:"微软雅黑"; color: #060;}
 

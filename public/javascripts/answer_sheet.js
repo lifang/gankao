@@ -73,7 +73,21 @@ note_question_info_id = 0;
 function note_question_info(id){
     if(note_question_info_id != 0 && note_question_info_id != id){
         document.getElementById("question_info_" + note_question_info_id).style.display = "none";
+        document.getElementById("show_note_" + note_question_info_id).style.display = "block";
+        document.getElementById("hidden_note_" + note_question_info_id).style.display = "none";
     }
     document.getElementById("question_info_" + id).style.display = "block";
+    document.getElementById("show_note_" + id).style.display = "none";
+    document.getElementById("hidden_note_" + id).style.display = "block";
     note_question_info_id = id;
+}
+
+function cancel_note(question_id) {
+    $("start_note_" + question_id).style.display = "none";
+    $("note_" + question_id).style.display = "block";
+}
+
+function update_note(question_id) {
+    $("start_note_" + question_id).style.display = "block";
+    $("note_" + question_id).style.display = "none";
 }
