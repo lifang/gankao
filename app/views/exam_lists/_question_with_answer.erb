@@ -4,7 +4,7 @@
       <div class="p_question_list question_no"  >
         <div class="p_q_l_left"><%= question.attributes["id"] %></div>
         <div class="p_q_l_right" onmouseover="javascript:$('question_<%= question.attributes["id"] %>').style.display='block';" 
-             onmouseout="javascript:$('question_<%= question.attributes["id"] %>').style.display='none';" >
+              >
           <div class="p_contents">
             <p>小题描述：
               &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["description"].text if question.elements["description"] %>
