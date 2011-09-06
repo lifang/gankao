@@ -1,5 +1,6 @@
 <% question = single_question[0]
 question_num = single_question[1]
+problem = single_question[2]
 %>
 <div class="p_question_list <% if question.attributes["user_score"].to_i == question.attributes["score"].to_i %>question_yes<% else %>question_no<% end %>">
   <div class="p_q_l_left"><%= question_num %></div>
@@ -58,7 +59,14 @@ question_num = single_question[1]
   <div class="clear"></div>
   <div class="review_btn">
     <button class="jiexi_btn" id="btn_<%= question.attributes["id"] %>">解析</button>
-    <button class="biji_btn" id="biji_<%= question.attributes["id"] %>">笔记</button>
-    <button>加入错题库</button>
+    <button class="biji_btn" 
+            name="note_<%= question.attributes["id"] %>" id="note_<%= question.attributes["id"] %>"
+            onclick="javascript:start_note(<%= question.attributes["id"] %>, <%= problem.attributes["id"] %>,
+       <%= @doc.elements["paper"].attributes["id"] %>, <%= @doc.attributes["id"] %>,
+         '<%= problem.xpath %>', '<%= question.xpath %>');">笔记</button>
+    <button name="collection_<%= question.attributes["id"] %>" id="collection_<%= question.attributes["id"] %>"
+            onclick="javascript:start_collection(<%= question.attributes["id"] %>,
+            <%= problem.attributes["id"] %>, <%= @doc.elements["paper"].attributes["id"] %>,
+            <%= @doc.attributes["id"] %>, '<%= problem.xpath %>', '<%= question.xpath %>');">加入错题库</button>
   </div>
 </div>

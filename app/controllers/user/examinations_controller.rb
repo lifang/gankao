@@ -1,6 +1,6 @@
 class User::ExaminationsController < ApplicationController
   layout "exam", :only => [:show, :save_result]
-  before_filter :access?
+  #before_filter :access?
   
   def index
     @examinations = Examination.return_examinations(cookies[:user_id])
@@ -142,7 +142,17 @@ class User::ExaminationsController < ApplicationController
   end
 
   def test
-    render :layout => "gankao"
+    render :layout => "application"
+  end
+
+  def add_word
+    word = params[:word]
+    hash = {"word" => word}
+    f=File.new("e:/gankao/public/javascripts/word.js","w")
+    f.write("#{"word="+hash.to_json.force_encoding('UTF-8')}")
+    f.close
+    puts "========================"
+    render :text => "添加成功！"
   end
     
 

@@ -334,15 +334,15 @@ function input_value(id){
 
 
 function feedback(id){
-        new Ajax.Updater("feedback" , "/exam_lists/feedback_list",
-        {
-            asynchronous:true,
-            evalScripts:true,
-            method:"post",
-            parameters:'id='+ id+ '&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
-        });
-        return false;
-    }
+    new Ajax.Updater("feedback" , "/exam_lists/feedback_list",
+    {
+        asynchronous:true,
+        evalScripts:true,
+        method:"post",
+        parameters:'id='+ id+ '&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+    });
+    return false;
+}
 
 function problem_values(id){
     var page=$("page").value;
@@ -363,17 +363,26 @@ function problem_values(id){
     return false;
 }
 
-function start_note(question_id, problem_id, examination_id, paper_id) {
-    $("start_note_" + question_id).style.display = "block";
-    $("note_" + question_id).style.display = "none";
-    new Ajax.Updater("start_note_" + question_id , "/user/notes/"+question_id+"/load_note",
+function start_note(question_id, problem_id, examination_id, paper_id, problem_path, question_path) {
+    new Ajax.Updater("biji_tab", "/user/notes/"+question_id+"/load_note",
     {
         asynchronous:true,
         evalScripts:true,
         method:"post",
+        onComplete:function(request){
+            prepare_params(problem_id, examination_id, paper_id, problem_path, question_path)
+        },
         parameters:'problem_id='+problem_id+'&examination_id='+examination_id+'&paper_id='+paper_id+'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
     });
     return false;
+}
+
+function prepare_params(problem_id, examination_id, paper_id, problem_path, question_path) {
+    $("paper_id").value = paper_id;
+    $("examination_id").value = examination_id;
+    $("problem_id").value = problem_id;
+    $("problem_path").value = problem_path;
+    $("question_path").value = question_path;
 }
 
 function start_collection(question_id, problem_id, examination_id, paper_id, problem_path, question_path) {
@@ -383,7 +392,7 @@ function start_collection(question_id, problem_id, examination_id, paper_id, pro
         evalScripts:true,
         method:"post",
         parameters:'problem_id='+problem_id+'&examination_id='+examination_id+'&paper_id='+paper_id+'&problem_path='+problem_path
-        +'&question_path='+question_path+'authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+        +'&question_path='+question_path+'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
     });
     return false;
 }
@@ -415,15 +424,6 @@ function question_values(question_id) {
     }
 }
 
-function cancel_note(question_id) {
-    $("start_note_" + question_id).style.display = "none";
-    $("note_" + question_id).style.display = "block";
-}
-
-function update_note(question_id) {
-    $("start_note_" + question_id).style.display = "block";
-    $("note_" + question_id).style.display = "none";
-}
 
 
 function question_style(id){

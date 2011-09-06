@@ -1,0 +1,1 @@
+word={"word":"phrases;noticed;express;similar;depending on;situation;usage;formal;informal;exception;reference;compositions;essays;conversation;colleagues;tends to;polite;stranger;vocabulary;be bound to;pressure;meaning;adjusting;aware;realize;competition;accustomed;upset;inquire;threaten;funds;regard;extensions;determine;involvement;identification;adults"}

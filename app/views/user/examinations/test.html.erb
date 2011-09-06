@@ -1,73 +1,64 @@
-<%= javascript_include_tag 'jeffrey' %>
-<%= javascript_include_tag 'cookie' %>
-<script language="javascript" type="text/javascript">
-  var papers = new Object();
+<script type="text/javascript">
+  var word = new Object();
 </script>
-<%= javascript_include_tag "#{@paper_url}" %>
-<%= javascript_include_tag "#{Constant::SERVER_PATH}/javascripts/answer_paper.js" %>
-<%= form_for :paper , :url => "/user/examinations/#{@examination.id}/save_result",
-  :html => {:name => "paper_form", :id => "paper_form",
-  :onsubmit => "return generate_result_paper('#{@examination.paper_id}')"} do |f| %>
-  <div id="show_flash"></div>
-  <div class="testPaper_top" id="paper_show_info">
-    <div class="tp_top_box" id="float_test">
-      <input type="hidden" name="paper_id" id="paper_id" value=""/>
-      <input type="hidden" name="all_quesiton_ids" id="all_question_ids" value=""/>
-      <input type="hidden" name="problem_ids" id="problem_ids" value=""/>
-      <input type="hidden" name="examination_id" id="examination_id" value="<%= @examination.id %>"/>
-      <input type="hidden" name="user_id" id="user_id" value="<%= cookies[:user_id] %>"/>
-      <div class="paper_name" id="paper_title"></div>
-      <div class="timer" id="exam_time"></div>
-      <div class="paper_info">
-        <strong><span id="leaving_num"></span></strong>题未完成&nbsp;&nbsp;|&nbsp;&nbsp;
-        <%= f.submit "结束考试" %>
-      </div>
-    </div>
-  </div>
+<div id="note_div"></div>
+<%= javascript_include_tag "/javascripts/word.js" %>
+请输入单词:<input type="text" name="word" id="word" value=""/><br/>
+<div id="show_word">&nbsp;&nbsp;</div>
+<input type="button"  onclick="javascript:check_word();" value="查找" />
+<input type="button"  onclick="javascript:add_word();" value="添加" />
+<script type="text/javascript">
+  function check_word() {
+    var is_in_flag = false;
+    if (word.word != null && word.word != "") {
+      var word_list = word.word.split(";");
+      if (word_list != null) {
+        for (var i=0; i<word_list.length; i++) {
+          if (word_list[i] == document.getElementById("word").value.strip()) {
+            is_in_flag = true;
+            alert("当前词汇已经在词表中");
+            break;
+          }
+        }
+      }
+    }
+    if (is_in_flag == false) {
+      var current_word = word.word.split(";");
+      current_word.push(document.getElementById("word").value.strip());
+      current_word.sort();
+      var current_index = current_word.indexOf(document.getElementById("word").value.strip());
+      var new_arry = new Array();
+      var start_num = 0;
+      var end_num = 0;
+      if (current_index > 5) {
+        start_num = current_index-5;
+        if (current_word.length > current_index + 5) {
+          end_num = current_index+5;
+        } else {
+          end_num = current_word.length;
+        }
+      } else {
+        if (current_word.length > current_index + 5) {
+          end_num = current_index+5;
+        } else {
+          end_num = current_word.length;
+        }
+      }
+      for (var j=start_num; j<=end_num; j++) {
+        new_arry.push(current_word[j]);
+      }
+      document.getElementById("show_word").innerHTML = "当前词相关的词组：" + new_arry;
+    }
+  }
 
-  <div class="testPaper_main">
-    <div id="blocks">
-      <div id="block_ids" style="display:none;"></div>
-    </div>
-    <!--试卷left-->
-    <div class="tp_right" id="paper_navigation">
-    </div>
-    <div id="remote_div" style="display:none;"></div>
-    <input type="hidden" name="types" value="<%= @examination.types %>"/>
-    <input type="hidden" name="answer_url" id="answer_url"
-           value="<%= Constant::ANSWER_CLIENT_PATH %>/<%= @examination.exam_user_id %>.xml"/>
-    <div class="clear"></div>
-  </div>
-<% end %>
-<script type="text/javascript" src="/javascripts/local_save/answer.js" charset="utf-8"></script>
-<script language="javascript" type="text/javascript">
-  //考试时间定时器所需变量
-  var timer = null;
-  var normalelapse = 100;
-  var nextelapse = normalelapse;
-  var start = "";
-  //模块定时和考试定时
-  var is_fix_time = false;
-  var block_start_hash = null;
-  var block_end_hash = null;
-  var finish = "00:00:00:00";
-
-  //本地存储所需变量finish
-  var local_timer = null;
-  var local_start_time = "05:00:00";
-  var local_finish_time = "00:00:00";
-
-  //用户保存本地存储的答案
-  var answer_hash = null;
-  //load已有的答案
-  load_answer('<%= @exam_user.paper_id %>', '<%= @examination.id %>');
-
-  //定时模块完成定时器
-  var load_fix_time = null;
-
-  //页面load成功之后加载试卷
-  window.onload(load_paper());
-  answer_hash = null;
-
-
+  function add_word() {
+    if (word.word != "") {
+      word = {"word":"" + word.word + ";" + document.getElementById("word").value.strip()};
+    } else {
+      word = {"word":"" + document.getElementById("word").value.strip()};
+    }
+    new Ajax.Updater('note_div', '/user/examinations/add_word',
+    {asynchronous:true, evalScripts:true, method:"get",
+      parameters:'word='+word.word+'&authenticity_token=' + encodeURIComponent('c+wqKLg+ecWrWdmLy2R652rtjV/W5LDZlnfF139V2/o=')}); return false;
+  }
 </script>
