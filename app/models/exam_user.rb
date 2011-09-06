@@ -415,7 +415,7 @@ class ExamUser < ActiveRecord::Base
   end
 
   #返回用户当前提点的答案
-  def return_question_answer(question_id)
+  def self.return_question_answer(question_id)
     doc = ExamRater.open_file("#{Constant::PUBLIC_PATH}#{self.answer_sheet_url}")
     return doc.elements["/exam/paper/questions/question[@id='#{question_id}']/answer"]
   end

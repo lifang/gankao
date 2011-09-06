@@ -30,11 +30,11 @@
                 </question>
             </questions>
         </problem>
-        <problem id='3' incorrect_num='1' score='5' types='0'>
+        <problem delete_status='1' id='3' incorrect_num='1' score='5' types='0'>
             <title>山东大厦</title>
             <category>1</category>
             <questions>
-                <question correct_percent='50%' correct_type='0' id='3' score='5'>
+                <question correct_percent='50%' correct_type='0' delete_status='1' id='3' score='5'>
                     <answer>阿萨德</answer>
                     <analysis/>
                     <questionattrs>阿萨德;-;发动;-; 地方;-;国服</questionattrs>
