@@ -20,6 +20,7 @@ class ExamListsController < ApplicationController
     end
     examnation_ids=@examination_lists.map(&:id).join(",")
     @hash=Examination.exam_users_hash(cookies[:user_id],examnation_ids)
+    render :layout=>"gankao"
   end
   
   def old_exam_list
@@ -45,10 +46,13 @@ class ExamListsController < ApplicationController
 
 
   def feedback
-    @feedback=Feedback.create(:description=>params[:description],:user_id=>"#{cookies[:user_id]}",:question_id=>params[:id])
-    @id=params[:id]
-    @feedbacks=Feedback.find_all_by_user_id_and_question_id(cookies[:user_id],params[:id])
-    render :partial=>"/exam_lists/feedback" 
+    @feedback=Feedback.create(:description=>params[:description],:user_id=>"#{cookies[:user_id]}",:question_id=>params[:question_id])
+    @hash_list={}
+    @hash_list["#{params[:question_id]}"]=Feedback.find_all_by_user_id_and_question_id(cookies[:user_id],params[:question_id])
+    doc=Collection.find_by_user_id(cookies[:user_id]).open_xml
+    problem=doc.elements["/collection/problems/problem[@id='#{params[:problem_id]}']"]
+    question=problem.elements["questions/question[@id='#{params[:question_id]}']"]
+    render :partial=>"/exam_lists/feedback",:object=>[question,problem]
   end
 
 
@@ -102,6 +106,40 @@ class ExamListsController < ApplicationController
     end
   end
 
+  def load_note
+    note_text = ""
+    note = Note.find_by_user_id(cookies["user_id"])
+    if note and note.note_url
+      note_text = note.return_note_text(params[:problem_id], params[:id])
+    end
+    render :partial => "/exam_lists/note_div", :object => [note_text, params[:id]]
+  end
+
+  def create_note
+    note = Note.find_or_create_by_user_id(cookies[:user_id])
+    note.set_note_url
+    note_doc = note.open_xml
+    problem = note.problem_in_note(params[:problem_id], note_doc)
+    doc=Collection.find_by_user_id(cookies[:user_id]).open_xml
+    collection_problem=doc.elements["/collection/problems/problem[@id=#{params[:problem_id]}]"]
+    if problem
+      question = note.question_in_note(problem, params[:id])
+      if question
+        Note.update_question(params["note_text_#{params[:id]}"].strip, question.xpath, note_doc)
+      else
+        collection_question=collection_problem["/questions/question[@id=#{params[:question_id]}]"]
+        note_doc.add_element(problem.add_elements(collection_question))
+      end
+    else
+      note_doc.add_element(collection_problem)
+    end
+    Note.save(note_doc)
+    flash[:notice] = "笔记添加成功."
+    render :update do |page|
+      page.replace_html "note_div" , :partial => "/common/display_flash"
+      page.replace_html "biji_tab" , :inline => "<script>document.getElementById('note_area').style.display='none';</script>"
+    end
+  end
 
 
 end

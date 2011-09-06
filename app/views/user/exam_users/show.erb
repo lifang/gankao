@@ -1,6 +1,5 @@
 <%= javascript_include_tag "/javascripts/answer_sheet.js" %>
 <%= javascript_include_tag 'pileadd' %>
-
 <div id="note_div"></div>
 <div class="testPaper_top">
   <div class="tp_top_box">
@@ -34,10 +33,10 @@
             <% end %>
             <div class="part_question" id="question_info_<%= problem.attributes["id"].to_i %>">
               <div>
-                <% question_ids = ""
+                <%= question_ids = ""
                 problem.elements["questions"].each_element do |question| %>
                   <% question_ids += question.attributes["id"] + "," %>
-                  <%= render :partial=>"/user/exam_users/single_question",:object=> [question,question_num]  %>
+                  <%= render :partial=>"/user/exam_users/single_question",:object=> [question,question_num, problem]  %>
                   <% question_num = question_num + 1 %>
                 <% end %>
                 <input type="hidden" id="question_ids_<%= problem.attributes["id"] %>"
@@ -85,11 +84,12 @@
   <div class="tab_b"></div>
 </div>
 
-<div class="biji_tab">
+<div class="biji_tab" id="note_area">
   <div class="tab_t"><a href="#"><img src="/images/paper/x.gif" /></a></div>
-  <div class="tab_m">
-    <div class="tab_m_textarea"><textarea name="" cols="42"></textarea></div>
-    <div class="p_question_btn"><button class="save">保存</button></div>
+  <div class="tab_m"  id="biji_tab">
+   
   </div>
   <div class="tab_b"></div>
 </div>
+
+  

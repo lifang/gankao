@@ -1,5 +1,14 @@
-<textarea id="note_text_<%= show_note_div[1] %>"
-          name="note_text_<%= show_note_div[1] %>" rows="4" cols="45" class="required"><%= show_note_div[0] %></textarea>
-<input type="submit" name="note" value="提交" class="submit_btn"/>
-<input type="button" name="reset" value="取消" class="submit_btn"
-       onclick="javascript:cancel_note(<%= show_note_div[1] %>);"/>
+<%= form_remote_tag :method => "post", 
+                   :condition => "check_note_form('#{show_note_div[1]}')",
+                   :url => "/user/notes/#{show_note_div[1]}/create_note" do -%>
+<div class="tab_m_textarea">
+  <textarea id="note_text_<%= show_note_div[1] %>"
+            name="note_text_<%= show_note_div[1] %>" cols="42" class="required"><%= show_note_div[0] %></textarea>
+  <input type="hidden" name="paper_id" id="paper_id" value="1" />
+  <input type="hidden" name="examination_id" id="examination_id" value="2" />
+  <input type="hidden" name="problem_id" id="problem_id" value="3" />
+  <input type="hidden" name="problem_path" id="problem_path" value="4" />
+  <input type="hidden" name="question_path" id="question_path" value="5" />
+</div>
+<div class="p_question_btn"><button type="submit" class="save">保存</button></div>
+<% end %>

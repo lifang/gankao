@@ -5,6 +5,8 @@ ul { list-style: none;}
 img { border: none;}
 .clear { clear: both;}
 .orange { color: #F60;}
+.red { color: #F00;}
+.blue { color: #1167aa;}
 
 .wrap { height: 38px; background: url(/images/paper/top_bg.png) repeat-x;}
 
@@ -29,7 +31,7 @@ img { border: none;}
 .main_con { margin: 10px; overflow: hidden;}
 
 /*真题训练--------------*/
-.zhenti_box { width: 790px; margin: 20px auto 0; overflow: hidden;}
+.zhenti_box { width: 790px; margin: 30px auto 0; overflow: hidden;}
 .zhenti_box li { width: 117px; height: 144px; position: relative; float: left; margin: 20px; display: inline;}
 .zhenti_box li a { width: 117px; height: 144px; display: block; text-decoration: none; background: url(/images/paper/zhenti_bg.png) no-repeat;}
 .paper_time { position: absolute; top: 5px; left: 5px; font-family: "微软雅黑"; color: #b8c1d2; font-size: 14px; width: 70px; display: block; font-weight: bold;}
@@ -37,7 +39,7 @@ img { border: none;}
 
 
 /*错题库---------------*/
-.errorLibrary_left { width: 560px; float: left; background: url(/images/paper/yline.png) repeat-y right center; padding-right: 15px;}
+.errorLibrary_left { width: 580px; float: left; background: url(/images/paper/yline.png) repeat-y right center; padding-right: 15px;}
 .errorLibrary_right { width: 270px; float: left; padding-left: 15px; position: relative;}
 
 
@@ -55,10 +57,12 @@ img { border: none;}
 
 .ep_number { width: 50px; height: 22px; line-height: 22px; text-align: center; float: left; font-size: 14px; font-family: "微软雅黑";}
 
+.ep_prevNext_bj { height: 22px; line-height: 22px; margin: 20px 0; padding-left: 340px;}
+
 /*errorLibrary_right----*/
-.searchProblem { height: 25px; padding: 5px 0; background: #FFF; border: 1px #CCC solid;}
-.se_input { height: 25px; line-height: 25px; width: 230px; float: left; border: none; background: none; display: inline; padding-left:5px; color: #999;}
-.se_btn { width: 22px; height: 25px; text-indent: -9999px; overflow: hidden; background: url(/images/paper/fangdajing.png) no-repeat; border: none; cursor: pointer;}
+.searchProblem { height: 25px; background: #FFF; border: 1px #CCC solid;}
+.se_input { height: 25px; line-height: 25px; width: 213px; _width: 210px; float: left; border: none; background: none; display: inline; padding-left:5px; color: #999;}
+.se_btn { width: 50px; height: 25px; text-indent: -9999px; overflow: hidden; background: url(/images/paper/tiwen_btn.png) no-repeat; border: none; cursor: pointer;}
 
 .answerPro { padding: 5px; font-size: 12px;}
 .answerPro li { margin: 5px 0;line-height: 24px;}
@@ -68,20 +72,20 @@ img { border: none;}
 .an_text_indent { text-indent: 24px;}
 .an_text_indent a { color: #A10000;}
 
-.an_member, .an_answer { width: 250px; margin: 5px auto; padding: 5px; background: #FFF; display: none;}
-.an_member p, .an_answer p { line-height: 18px;}
-.an_member h4, .an_answer h4 { font-size: 12px; color:#437f8d;}
+.an_member { width: 250px; margin: 5px auto; padding: 5px; background: #FFF; display: none;}
+.an_member p { line-height: 18px; padding: 5px;}
+.an_member h4 { font-size: 12px; color:#437f8d; border-bottom: 1px #CCC dotted;}
 .an_x { float: right; margin-right: 5px;}
 
 .an_textarea {width: 248px;}
-.an_tj_btn {
+.an_tj_btn { 
     background: url(/images/paper/all_bg.png) no-repeat -8px -122px;
-	width: 56px;
-	height: 24px;
-	line-height: 24px;
-	text-align: center;
-	border: none;
-	cursor: pointer;
+	width: 56px; 
+	height: 24px; 
+	line-height: 24px; 
+	text-align: center; 
+	border: none; 
+	cursor: pointer; 
 	margin-left: 150px;
 }
 
@@ -99,12 +103,12 @@ img { border: none;}
 
 /*答题样式-----*/
 .part_padding { padding: 10px;}
-.part_question {
+.part_question { 
     border-top: 1px #CCC solid;
-	border-left: 1px #CCC solid;
+	border-left: 1px #CCC solid; 
 	border-right: 5px #CCC solid;
-	border-bottom: 5px #CCC solid;
-	margin-top: 10px;
+	border-bottom: 5px #CCC solid; 
+	margin-top: 10px; 
 	background: #FFF;
 }
 
@@ -121,11 +125,11 @@ img { border: none;}
 .question_no {background: url(/images/paper/question_yesno_bg.jpg) no-repeat 0px -396px #FFF;}
 
 .p_q_l_left { float: left; width: 31px; text-align: center; padding-top: 5px;}
-.p_q_l_right { float: left; padding: 5px; width: 510px;}
+.p_q_l_right { float: left; padding: 5px; width: 533px;}
 .p_q_l_right_s { float: left; padding: 5px; width: 320px;}
 
 /*审查-----*/
-.review_btn { position: absolute; top: 5px; right: 5px;}
+.review_btn { position: absolute; bottom: 5px; left: 40px;}
 .review_btn button { width: 80px; height: 28px; line-height: 28px; border: none; cursor: pointer; color:#5d728a; background: url(/images/paper/all_bg.png) no-repeat -7px -83px;}
 
 /*解析笔记弹出层----*/
@@ -191,9 +195,40 @@ img { border: none;}
 
 
 
+/*模考---------------*/
+.mokao_box { width: 880px; height: 364px; background: url(/images/paper/mokao_bg.png) no-repeat;}
+.mokao_left, .mokao_right { float: left; width: 385px; padding-left: 55px;}
+.mokaoList { height: 70px; margin-top: 40px; line-height: 24px;}
+.mk_l_t { float: left; width: 160px;}
+.mk_l_b { float: left; width: 200px;}
+.mk_l_b h3 { font-size: 14px; color: #333;}
+.b14 { font-size: 14px; color: #333; padding-top: 5px;}
+.b16 { font-size: 18px; color: #F00;}
+.mk_l_b p a { font-size: 12px; margin-left: 10px; color: #00F;}
+
+.begin_ks, .wait_ks { width: 80px; height: 28px; text-indent: -999px; overflow: hidden; display: block; margin: 0 auto;}
+.begin_ks { background: url(/images/paper/all_bg.png) no-repeat 0px -438px;}
+.wait_ks { background: url(/images/paper/all_bg.png) no-repeat -83px -438px;}
+
+.cet_title { width: 377px; height: 37px; background: url(/images/paper/all_bg.png) no-repeat 0px -479px; margin-top: 40px;}
+.begin_time_p { line-height: 24px; margin-top: 30px;}
+
+.mokao_right h2 { font-size: 16px; margin-top: 40px; line-height: 24px;}
+.mk_table table { background: #CCC; margin-top: 20px;}
+.mk_table table td { background:  #FFF; height: 32px; text-align: center;}
+
+
+
+/*tb_check*/
+.tb_checkBox { height: 27px; padding-left: 490px; margin-top: 10px;}
+
+.tb_check {  width: 60px; height: 27px; display: block; background: url(/images/paper/all_bg.png) no-repeat -30px -157px;}
+
+
 
 
 /*foot-------------*/
 .foot { width: 880px; margin: 0 auto; background: url(/images/paper/xline.png) repeat-x center 0px; padding: 20px 10px 10px;}
 .foot p { text-align: center; line-height: 24px; height: 24px; color: #999;}
 .foot p a { padding: 0 5px; color: #999;}
+

@@ -22,7 +22,7 @@ Gankao::Application.routes.draw do
       get :question_info
     end
     member do
-       
+       post :load_note,:create_note
     end
   end
   resources :advertises do
@@ -95,7 +95,7 @@ Gankao::Application.routes.draw do
         get "do_exam", "enter_password"
       end
       collection do
-        get "error_page", "test"
+        get "error_page", "test", "add_word"
       end
     end
     resources :combine_practices do

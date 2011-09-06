@@ -334,15 +334,15 @@ function input_value(id){
 
 
 function feedback(id){
-        new Ajax.Updater("feedback" , "/exam_lists/feedback_list",
-        {
-            asynchronous:true,
-            evalScripts:true,
-            method:"post",
-            parameters:'id='+ id+ '&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
-        });
-        return false;
-    }
+    new Ajax.Updater("feedback" , "/exam_lists/feedback_list",
+    {
+        asynchronous:true,
+        evalScripts:true,
+        method:"post",
+        parameters:'id='+ id+ '&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+    });
+    return false;
+}
 
 function problem_values(id){
     var page=$("page").value;
@@ -363,17 +363,26 @@ function problem_values(id){
     return false;
 }
 
-function start_note(question_id, problem_id, examination_id, paper_id) {
-    $("start_note_" + question_id).style.display = "block";
-    $("note_" + question_id).style.display = "none";
-    new Ajax.Updater("start_note_" + question_id , "/user/notes/"+question_id+"/load_note",
+function start_note(question_id, problem_id, examination_id, paper_id, problem_path, question_path) {
+    new Ajax.Updater("biji_tab", "/user/notes/"+question_id+"/load_note",
     {
         asynchronous:true,
         evalScripts:true,
         method:"post",
+        onComplete:function(request){
+            prepare_params(problem_id, examination_id, paper_id, problem_path, question_path)
+        },
         parameters:'problem_id='+problem_id+'&examination_id='+examination_id+'&paper_id='+paper_id+'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
     });
     return false;
+}
+
+function prepare_params(problem_id, examination_id, paper_id, problem_path, question_path) {
+    $("paper_id").value = paper_id;
+    $("examination_id").value = examination_id;
+    $("problem_id").value = problem_id;
+    $("problem_path").value = problem_path;
+    $("question_path").value = question_path;
 }
 
 function start_collection(question_id, problem_id, examination_id, paper_id, problem_path, question_path) {
@@ -383,7 +392,7 @@ function start_collection(question_id, problem_id, examination_id, paper_id, pro
         evalScripts:true,
         method:"post",
         parameters:'problem_id='+problem_id+'&examination_id='+examination_id+'&paper_id='+paper_id+'&problem_path='+problem_path
-        +'&question_path='+question_path+'authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+        +'&question_path='+question_path+'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
     });
     return false;
 }
@@ -415,15 +424,6 @@ function question_values(question_id) {
     }
 }
 
-function cancel_note(question_id) {
-    $("start_note_" + question_id).style.display = "none";
-    $("note_" + question_id).style.display = "block";
-}
-
-function update_note(question_id) {
-    $("start_note_" + question_id).style.display = "block";
-    $("note_" + question_id).style.display = "none";
-}
 
 
 function question_style(id){
@@ -432,11 +432,11 @@ function question_style(id){
     });
 }
 
-function feedb(id){
-    var text=$("description").value;
-    if (text==""||text.length==0){
-    alert("请输入你要问的问题.");
-    return false;
+function feedb(question_id,problem_id){
+    var text=$("description_"+question_id).value;
+    if (text=="输入想知道的问题..."||text.length==0||text==""){
+        alert("请输入你要问的问题.");
+        return false;
     }else{
 
         new Ajax.Updater("feedback" , "/exam_lists/feedback",
@@ -444,8 +444,20 @@ function feedb(id){
             asynchronous:true,
             evalScripts:true,
             method:"post",
-            parameters:'id='+ id+ '&description='+ text+ '&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+            parameters:'question_id='+ question_id+'&problem_id='+ problem_id+ '&description='+ text+ '&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
         });
         return false;
     }
+}
+function cuoti_note(question_id, problem_id) {
+    new Ajax.Updater("biji_tab", "/exam_lists/"+question_id+"/load_note",
+    {
+        asynchronous:true,
+        evalScripts:true,
+        method:"post",
+        onComplete:function(request){
+        },
+        parameters:'problem_id='+problem_id+'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+    });
+    return false;
 }

@@ -57,6 +57,8 @@ class User::CollectionsController < ApplicationController
         flash[:notice] = "收藏成功。"
       end
     end
+    puts flash[:notice]
+    puts flash[:warn]
     render :partial => "/common/display_flash"
   end
   

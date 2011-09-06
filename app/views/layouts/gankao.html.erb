@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>真题</title>
+    <title>赶考</title>
     <link href="/stylesheets/style.css" rel="stylesheet" type="text/css" />
     <%= javascript_include_tag :defaults %>
     <%= use_validate_js_tooltip %>
@@ -34,10 +34,10 @@
                   <%= link_to "我的考试", "/user/examinations" %>
                 <% end %>
                 <% if is_vicegerent? %>
-                  <%= link_to "代理充值","/payments/agency_recharge" %>
+                  <%#= link_to "代理充值","/payments/agency_recharge" %>
                 <% end %>
                 <% if is_paper_creater? %>
-                  <%= link_to "代理权限","/users/roles_manage" %>
+                  <%#= link_to "代理权限","/users/roles_manage" %>
                 <% end %>
               </div>
             <% end %>
