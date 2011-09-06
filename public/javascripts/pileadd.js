@@ -432,7 +432,7 @@ function question_style(id){
     });
 }
 
-function feedb(id){
+function feedb(question_id,problem_id){
     var text=$("description").value;
     if (text==""||text.length==0){
     alert("请输入你要问的问题.");
@@ -444,7 +444,7 @@ function feedb(id){
             asynchronous:true,
             evalScripts:true,
             method:"post",
-            parameters:'id='+ id+ '&description='+ text+ '&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+            parameters:'question_id='+ question_id+'&problem_id='+ problem_id+ '&description='+ text+ '&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
         });
         return false;
     }

@@ -48,7 +48,7 @@
         </ul>
       </div>
     </div>
-    <div class="cuoti">
+    <div class="cuoti" id="feedback">
      <% @lists.elements["/collection/problems"].each_element do |problem|%>
         <% problem.elements["questions"].each_element do |question|%>
         <div class="cuoti" id="question_<%= question.attributes["id"] %>" style="display:none">

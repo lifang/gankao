@@ -45,10 +45,15 @@ class ExamListsController < ApplicationController
 
 
   def feedback
-    @feedback=Feedback.create(:description=>params[:description],:user_id=>"#{cookies[:user_id]}",:question_id=>params[:id])
-    @id=params[:id]
-    @feedbacks=Feedback.find_all_by_user_id_and_question_id(cookies[:user_id],params[:id])
-    render :partial=>"/exam_lists/feedback" 
+    @feedback=Feedback.create(:description=>params[:description],:user_id=>"#{cookies[:user_id]}",:question_id=>params[:question_id])
+    @hash_list={}
+    @hash_list["#{params[:question_id]}"]=Feedback.find_all_by_user_id_and_question_id(cookies[:user_id],params[:question_id])
+    doc=Collection.find_by_user_id(cookies[:user_id]).open_xml
+    problem=doc.elements["/collection/problems/problem[@id='#{params[:problem_id]}']"]
+    puts problem
+    question=problem.elements["questions/question[@id='#{params[:question_id]}']"]
+    puts question
+    render :partial=>"/exam_lists/feedback",:object=>[question,problem]
   end
 
 
