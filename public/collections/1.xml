@@ -90,13 +90,13 @@
                     <tags/>
                     <user_answer>哥哥</user_answer>
                 <user_answer>哥哥</user_answer></question>
-                <question correct_type='0' error_percent='0' id='15' repeat_num='1' score='5'>
+                <question correct_type='0' error_percent='0' id='15' repeat_num='2' score='5'>
                     <answer>789</answer>
                     <analysis>sdfsfasf</analysis>
                     <questionattrs>23;-;wer;-;65;-;789</questionattrs>
                     <tags>ew</tags>
                     <user_answer/>
-                <user_answer>65</user_answer></question>
+                <user_answer>65</user_answer><user_answer>23</user_answer></question>
             </questions>
         </problem>
         <problem id='11' repeat_num='6' score='5' types='0'>

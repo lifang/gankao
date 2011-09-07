@@ -24,19 +24,19 @@
   <div class="mokao" >
     真题练习<br/>
     <div class="shuzi">
-       <%= "#{@hashh["#{Examination::TYPES[:OLD_EXAM]}"]}/#{@hash["#{Examination::TYPES[:OLD_EXAM]}"]}" %>
-        </div>
+      <%= @type_hash["1"][1].nil? ? 0 : @type_hash["1"][1] %>/<%= @type_hash["1"][0].nil? ? 0 : @type_hash["1"][0] %>
+    </div>
     <td><input type="button" value="开始练习" class="practice" onclick="javascript:window.location.href='/exam_lists/old_exam_list'"/></td>
   </div>
   <div class="mokao" >
     综合训练<br/>
     <div class="shuzi">
-      <%= @hash["#{Examination::TYPES[:PRACTICE1]}"]/@hashh["#{Examination::TYPES[:PRACTICE1]}"] %>
+      <%= @type_hash["practice"][1].nil? ? 0 : @type_hash["practice"][1] %>/<%= @type_hash["practice"][0].nil? ? 0 : @type_hash["practice"][0] %>
     </div>
     <td><input type="button" value="开始训练" class="practice" onclick="javascript:window.location.href='/combine_practices'"/></td>
   </div>
 
-  <div class="mokao">
+  <div class="mokao" >
     <% if is_vip? %>
       信心指数:<br/>
       <div class="shu">
@@ -44,7 +44,7 @@
         </div>
     <% else %>
       你当前还不是<font color="red">VIP</font>哦，购买<font color="red">VIP</font>可以显示你自己当前的信心指数，无限制的综合训练次数以及模考试卷主观题的修改，心动不如行动，赶快来<a href="/users/goto_vip"><font color="blue">购买</font></a>吧</font>！
-    <% end %>     
+    <% end %>
     <div class="xian">
     </div>
     错题训练：<br/>

@@ -1,5 +1,5 @@
 class User::ExaminationsController < ApplicationController
-  layout "exam", :only => [:show, :save_result]
+  layout "exam", :only => [:show]
   before_filter :access?
   
   def index
@@ -75,9 +75,10 @@ class User::ExaminationsController < ApplicationController
       @exam_user.generate_answer_sheet_url(@exam_user.update_answer_url(@exam_user.open_xml, question_hash), "result")
       @exam_user.submited!
       flash[:notice] = "您的试卷已经成功提交。"
+      render :layout => "show_paper"
     else
       flash[:warn] = "您已经交卷。"
-      render "error_page"
+      render "error_page", :layout => "show_paper"
     end
   end
 
