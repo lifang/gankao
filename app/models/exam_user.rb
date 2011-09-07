@@ -222,7 +222,7 @@ class ExamUser < ActiveRecord::Base
   def self.is_exam_user_in(paper_id, examination_id, user_id)
     exam_user = ExamUser.find_by_sql(["select e.id, e.user_id, e.answer_sheet_url, p.paper_url from exam_users e
         inner join papers p on p.id = e.paper_id
-        where e.paper_id = ? and e.examination_id = ? and e.user_id = ?", examination_id, paper_id, user_id])
+        where e.paper_id = ? and e.examination_id = ? and e.user_id = ? limit 1", examination_id, paper_id, user_id])
     return exam_user[0]
   end
 
@@ -416,7 +416,7 @@ class ExamUser < ActiveRecord::Base
   end
 
   #返回用户当前提点的答案
-  def self.return_question_answer(question_id)
+  def return_question_answer(question_id)
     doc = ExamRater.open_file("#{Constant::PUBLIC_PATH}#{self.answer_sheet_url}")
     return doc.elements["/exam/paper/questions/question[@id='#{question_id}']/answer"]
   end
