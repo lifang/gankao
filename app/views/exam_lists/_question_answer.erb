@@ -1,67 +1,86 @@
-<div class="part_question" id="show_div">
-  <% @lists.elements["questions"].each_element do |question| %>
-    <div class="p_question_list question_no"  >
-      <div class="p_q_l_left"><%= question.attributes["id"] %></div>
-      <div class="p_q_l_right">
-        <div class="p_contents">
-          <p>小题描述：
-            &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["description"].text if question.elements["description"] %>
-          </p>
-        </div>
+<% @lists.elements["questions"].each_element do |question| %>
+  <div class="p_question_list question_no"  >
+    <div class="p_q_l_left"><%= question.attributes["id"] %></div>
+    <div class="p_q_l_right">
+      <div class="p_contents">
+        <p>小题描述：
+          &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["description"].text if question.elements["description"] %>
+        </p>
+      </div>
+
+      <% attrs_str = question.elements["questionattrs"].text
+      attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
+      correct_type = question.attributes["correct_type"]
+      answer = question.elements["answer"]
+      answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
+      user_answer=question.elements["user_answer"].text
+      user_answers=user_answer.nil? ? [] :  user_answer.split(";|;") %>
+      <% if (correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] or
+            correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE]) %>
         <ul class="chooseQuestion">
-          <% attrs_str = question.elements["questionattrs"].text
-          attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
-          correct_type = question.attributes["correct_type"]
-          answer = question.elements["answer"]
-          answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
-          user_answer=question.elements["user_answer"].text
-          user_answers=user_answer.nil? ? [] :  user_answer.split(";|;")
+          <%
           (0..attrs_array.length-1).each do |i|
             is_answer = answers.include?(attrs_array[i])
             is_user_answer=user_answers.include?(attrs_array[i])
           %>
-            <div class="attr" <% if is_answer %>style="border: 1px green solid;"<% end %>>
-              <% if !correct_type.nil? %>
-                <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
-                  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="question_attr_<%= question.attributes["id"].to_i %>"
-                                                 id="question_attr_<%= i %>"  <% if is_user_answer %>checked="true"<% end %> />
-                                               <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
-                  &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>"
-                                                 id="question_attr_<%= i %>" <% if is_user_answer %>checked="true"<% end %> />
-                                               <% end %>
-                <label><%= attrs_array[i] %></label>
-              <% end %>
-            </div>
+            <li <% if is_answer %> class="correctRight_bg" <% end %>>
+              <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
+                &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="question_attr_<%= question.attributes["id"].to_i %>"
+                                               id="question_attr_<%= i %>"  <% if is_user_answer %>checked="true"<% end %> />
+                                             <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
+                &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>"
+                                               id="question_attr_<%= i %>" <% if is_user_answer %>checked="true"<% end %> />
+              <% end %>&nbsp;&nbsp;<%= attrs_array[i] %>
+            </li>
           <% end if attrs_array and attrs_array.any? %>
-          <div>
-            <% if correct_type.to_i == Problem::QUESTION_TYPE[:JUDGE] %>
-              <div <% if answers[0].to_i==1 %>class="correctRight_bg"<% end %>>&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio"<% if user_answer==1.to_s %>
-                                                                                                                         checked="true"<% end %>  /><label>对</label></div>
-              <div <% if answers[0].to_i==0 %>class="correctRight_bg"<% end %>>&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio"  <% if user_answer==0.to_s %>
-                                                                                                                         checked="true"<% end %>  /><label>错</label></div>
-              <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] or correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER]
-              %>
-              <div style="border: 1px green solid;">&nbsp;&nbsp;&nbsp;&nbsp;<%= "答案："+ answers[0].to_s %> </div>
-              <div ><font color="red">&nbsp;&nbsp;&nbsp;&nbsp;<%= "考生答案："+ user_answers[0].to_s %></font></div>
-            <% end  %>
-          </div>
         </ul>
-        <div class="p_question_btn" style="display: none;"><button class="save">保存</button><button class="Uncertain">不确定</button></div>
-      </div>
-      <div class="clear"></div>
-      <%#*<div class="p_q_l_right">&nbsp;&nbsp;&nbsp;&nbsp;解析：<br/>%>
-        <%#*&nbsp;&nbsp;&nbsp;&nbsp;<% analysis = question.elements["analysis"] %>
-        <%#*&nbsp;&nbsp;&nbsp;&nbsp;<%= if analysis and !analysis.nil?%>
-          <%#*analysis.text%>
-        <%#*end %>%>
-      <%#*</div>%>
-      <%#*<div class="p_q_l_right">&nbsp;&nbsp;&nbsp;&nbsp;知识点标签：%>
-        <%#*&nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["tags"].text %>%>
-      <%#*</div>%>
-    <% end %>
-    <% if @has_next_page %>
-      <% current_page = (params[:page] and params[:page].to_i > 1) ? params[:page].to_i : 1 %>
-      <a href="/exam_lists/question_info?page=<%= current_page + 1 %>">下一题</a>
-    <% end %>
+      <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:JUDGE] %>
+        <div <% if answers[0].to_i==1 %>class="correctRight_bg"<% end %>>
+          <input type="radio"<% if user_answer==1.to_s %> checked="true"<% end %>  /><label>对</label>
+        </div>
+        <div <% if answers[0].to_i==0 %>class="correctRight_bg"<% end %>>
+          <input type="radio"  <% if user_answer==0.to_s %> checked="true"<% end %>  /><label>错</label>
+        </div>
+      <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] %>
+        <div class="answer_text">
+          <input name="answer" type="text" value="<%= user_answers[0].to_s %>" />(<%= answers[0].to_s %>)
+        </div>
+      <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] %>
+        <div class="answer_textarea">
+          <textarea cols="" rows=""><%= user_answers[0].to_s %></textarea>(<%= answers[0].to_s %>)
+        </div>
+      <% end %>
+      <div class="p_question_btn" style="display: none;"><button class="save">保存</button><button class="Uncertain">不确定</button></div>
+      <div class="fraction"><%= question.attributes["score"] %>分</div>
+    </div>
+    <div class="clear"></div>
+    <div class="review_btn">
+      <input  id="btn_<%= question.attributes["id"] %>_analysis" type="hidden" value="<%=  %>"/>
+      <button class="jiexi_btn" id="btn_<%= question.attributes['id'] %>">解析</button>
+    </div>
+    <input type="hidden" id="btn_<%= question.attributes["id"] %>_answer" type="hidden" value="<%= answers.join(";") %>"/>
+    <input type="hidden" id="btn_<%= question.attributes["id"] %>_analysis" type="hidden" value="<%= question.elements["analysis"].text %>"/>
   </div>
+<% end %>
+<div class="ep_prevNext">
+  <input type="hidden" value="<%= params[:page] %>" id="current_page" />
+  <% if params[:page] and params[:page].to_i > 1 %>
+    <div class="ep_goLeft">
+      <a href="<%= request.path %>?page=<%= params[:page].to_i - 1 %>">&lt;</a>
+    </div>
+  <% end %>
+  <div class="ep_number"><span class="orange"><%= params[:page].nil? ? 1 :params[:page] %></span>/<%= @num %></div>
+  <% if @has_next_page %>
+    <% current_page = (params[:page] and params[:page].to_i > 1) ? params[:page].to_i : 1 %>
+    <div class="ep_goRight"><a href="<%= request.path %>?page=<%= current_page + 1 %>">&gt;</a></div>
+  <% end %>
+</div>
+<div class="jiexi_tab" id="analysis_div">
+  <div class="tab_t"><a href="#"><img  src="/images/paper/x.gif" /></a></div>
+  <div class="tab_m">
+    <h3 id="answer"></h3>
+    <p id="analysis"></p>
+  </div>
+  <div class="tab_b"></div>
+
 </div>
