@@ -39,7 +39,7 @@ jQuery(function(){
 
 //笔记弹出层
 jQuery(function(){
-    jQuery('.biji_btn').click(function(e){
+    jQuery('.biji_btn').click(function(e){alert(1);
         jQuery('.biji_tab').css('display','block');
         jQuery('.biji_tab').css({
             'top':(e.pageY+20)+'px',
@@ -54,6 +54,14 @@ jQuery(function(){
 
 })
 
+
+jQuery(function(){jQuery.noConflict();
+    jQuery('.tb_check').click(function(){
+       problem_values();
+    }
+    )
+})
+
 //提示框弹出层
 function show_flash_div() {
     (function(){
@@ -65,7 +73,7 @@ function show_flash_div() {
         jQuery('.tishi_tab').css('top',(win_height-z_layer_height)/2);
         jQuery('.tishi_tab').css('left',(win_width-z_layer_width)/2);
         jQuery('.tishi_tab').css('display','block');
-        
+
         setTimeout(function(){
             jQuery('.tishi_tab').fadeTo("slow",0);
         }, 1500);

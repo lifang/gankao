@@ -18,15 +18,13 @@ class ExamListsController < ApplicationController
     @examination_lists.each do |examination|
       @examination_lists -=[examination] unless examinations.include?(examination.id)  if examination.status==Examination::STATUS[:CLOSED ]
     end
-    examnation_ids=@examination_lists.map(&:id).join(",")
-    @hash=Examination.exam_users_hash(cookies[:user_id])
+    @hash=Examination.exam_users_hash(cookies[:user_id],Examination::TYPES[:SIMULATION])
     render :layout=>"gankao"
   end
   
   def old_exam_list
     @old_lists=Examination.where("types=? and is_published=1",Examination::TYPES[:OLD_EXAM])
-    examnation_ids=@old_lists.map(&:id).join(",")
-    @hash=Examination.exam_users_hash(cookies[:user_id],examnation_ids)
+    @hash=Examination.exam_users_hash(cookies[:user_id],Examination::TYPES[:OLD_EXAM])
     render :layout=>"gankao"
   end
   
@@ -61,6 +59,7 @@ class ExamListsController < ApplicationController
   def question_info
     @has_next_page = false
     @lists=list
+    @num=@lists.get_elements("//problems/problem").size
     @lists =Examination.get_start_element(params[:page], @lists)
     current_element = Examination.return_page_element(@lists, @has_next_page)
     @lists = current_element[0]
@@ -86,6 +85,7 @@ class ExamListsController < ApplicationController
     end
     self.write_xml("#{Constant::PUBLIC_PATH}#{collection.collection_url}", doc)
     doc=collection.open_xml
+     @num=list.get_elements("//problems/problem").size
     @lists =problem
     @has_next_page =!doc.elements["/collection/problems/problem[@id='#{problem_id}']"].next_element.nil?
     render :partial=>"/exam_lists/question_answer"

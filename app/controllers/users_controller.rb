@@ -109,36 +109,35 @@ class UsersController < ApplicationController
   def first_page
     @simulations = Examination.find_by_sql("select * from examinations where types = #{Examination::TYPES[:SIMULATION]}
       and is_published = #{Examination::IS_PUBLISHED[:ALREADY]} order by created_at")
-    @hash1 = Examination.exam_users_hash(cookies[:user_id])
+    @hash1 = Examination.exam_users_hash(cookies[:user_id],Examination::TYPES[:SIMULATION])
     @simulations.each do |simulation|
-      @simulations = @simulations - simulation if (!@hash1.keys.include?(simulation.id.to_s) and
-        simulation.status == Examination::STATUS[:CLOSED])
+<<<<<<< HEAD
+      @simulations = @simulations - [simulation] if (!@hash1.keys.include?(simulation.id.to_s) and
+          simulation.status == Examination::STATUS[:CLOSED])
     end
-    @all_examinations = Examination.find_by_sql("select count(types) sums, types from examinations
-      where is_published = #{Examination::IS_PUBLISHED[:ALREADY]} and types != #{Examination::TYPES[:SIMULATION]} group by types")
-    @user_exams = Examination.find_by_sql("select count(types) sums,types from examinations e
-      inner join exam_users u on u.examination_id = e.id
-      where e.types != #{Examination::TYPES[:SIMULATION]} and u.is_submited = #{ExamUser::IS_SUBMITED[:YES]}
-      and u.user_id = #{cookies[:user_id]} group by types")
-    @type_hash ={}
-    @all_examinations.each do |examination|
-      @type_hash["#{examination.types}"]=[examination.sums, 0]
-      @user_exams.each do |exam|
-          if examination.types == exam.types
-            @type_hash["#{examination.types}"] = [examination.sums, exam.sums]
-            break
-          end
-        end unless @user_exams.blank?
-    end
-    all_practice = 0
-    exam_practice = 0
-    @type_hash.keys.each do |key|
-      if key.to_i > Examination::TYPES[:OLD_EXAM]
-        all_practice += @type_hash[key][0]
-        exam_practice += @type_hash[key][1]
+    @examinations=Examination.find_by_sql("select count(types) sums,types from examinations e where e.is_published =#{Examination::IS_PUBLISHED[:ALREADY]} group by types")
+    @hash={}
+    sums=0
+    @examinations.each do |examination|
+      if examination.types.to_i==1||examination.types.to_i==0
+        @hash["#{examination.types}"]=examination.sums
+      else
+        sums +=examination.sums
       end
-    end
-    @type_hash["practice"] = [all_practice, exam_practice]
+    end unless @examinations.blank?
+    @hash["#{Examination::TYPES[:PRACTICE1]}"]=sums
+    @exams=Examination.find_by_sql("select count(e.types) sums,e.types from examinations e inner join exam_users  u
+     on u.examination_id=e.id where u.user_id=#{cookies[:user_id]} and is_published = #{Examination::IS_PUBLISHED[:ALREADY]} and u.is_submited=1  group by types")
+    @hashh={}
+    sums=0
+    @exams.each do |exam|
+      if exam.types.to_i==1||exam.types.to_i==0
+        @hashh["#{exam.types}"]=exam.sums
+      else
+        sums +=exam.sums
+      end
+    end unless @exams.blank?
+    @hashh["#{Examination::TYPES[:PRACTICE1]}"]=sums
     collection = Collection.find_by_user_id(cookies[:user_id])
     @incorrect_list = collection.open_xml.root if collection and collection.collection_url
   end

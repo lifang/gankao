@@ -24,14 +24,14 @@
   <div class="mokao" >
     真题练习<br/>
     <div class="shuzi">
-      <%= @type_hash["1"][1].nil? ? 0 : @type_hash["1"][1] %>/<%= @type_hash["1"][0].nil? ? 0 : @type_hash["1"][0] %>
-    </div>
+       <%= "#{@hashh["#{Examination::TYPES[:OLD_EXAM]}"]}/#{@hash["#{Examination::TYPES[:OLD_EXAM]}"]}" %>
+        </div>
     <td><input type="button" value="开始练习" class="practice" onclick="javascript:window.location.href='/exam_lists/old_exam_list'"/></td>
   </div>
   <div class="mokao" >
     综合训练<br/>
     <div class="shuzi">
-      <%= @type_hash["practice"][1].nil? ? 0 : @type_hash["practice"][1] %>/<%= @type_hash["practice"][0].nil? ? 0 : @type_hash["practice"][0] %>
+      <%= @hash["#{Examination::TYPES[:PRACTICE1]}"]/@hashh["#{Examination::TYPES[:PRACTICE1]}"] %>
     </div>
     <td><input type="button" value="开始训练" class="practice" onclick="javascript:window.location.href='/combine_practices'"/></td>
   </div>
