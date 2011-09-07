@@ -45,7 +45,6 @@ jQuery(function(){
             'top':(e.pageY+20)+'px',
             'left':(e.pageX-350)+'px'
         });
-
     }
     )
     jQuery('.tab_t > a').click(function(){
@@ -54,3 +53,21 @@ jQuery(function(){
     )
 
 })
+
+//提示框弹出层
+function show_flash_div() {
+    (function(){
+        var win_height = jQuery(window).height();
+        var win_width = jQuery(window).width();
+        var z_layer_height = jQuery('.tishi_tab').height();
+        var z_layer_width = jQuery('.tishi_tab').width();
+
+        jQuery('.tishi_tab').css('top',(win_height-z_layer_height)/2);
+        jQuery('.tishi_tab').css('left',(win_width-z_layer_width)/2);
+        jQuery('.tishi_tab').css('display','block');
+        
+        setTimeout(function(){
+            jQuery('.tishi_tab').fadeTo("slow",0);
+        }, 1500);
+    })(jQuery)
+}

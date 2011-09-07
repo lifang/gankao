@@ -8,18 +8,18 @@ class User::ExaminationsController < ApplicationController
   end
 
   def do_exam
-#    @exam_user = ExamUser.find_by_examination_id_and_user_id(params[:id].to_i, cookies[:user_id].to_i)
-#    @exam_user = ExamUser.create(:user_id => cookies[:user_id],:examination_id => params[:id].to_i,
-#      :password => User::DEFAULT_PASSWORD, :is_user_affiremed => ExamUser::IS_USER_AFFIREMED[:YES]) if @exam_user.nil?
-#    arr = ExamUser.can_answer(cookies[:user_id], params[:id].to_i)
-#    if arr[0] == "" and arr[1].any?
-#      render :inline => "<iframe src='#{Constant::SERVER_PATH}/user/examinations/#{params[:id]}'
-#                  frameborder='0' border='0' style='width: 1270px; height: 760px;'></iframe>"
-           redirect_to "/user/examinations/#{params[:id]}"
-#    else
-#      flash[:warn] = arr[0]
-#      redirect_to request.referer
-#    end
+    @exam_user = ExamUser.find_by_examination_id_and_user_id(params[:id].to_i, cookies[:user_id].to_i)
+    @exam_user = ExamUser.create(:user_id => cookies[:user_id],:examination_id => params[:id].to_i,
+      :password => User::DEFAULT_PASSWORD, :is_user_affiremed => ExamUser::IS_USER_AFFIREMED[:YES]) if @exam_user.nil?
+    arr = ExamUser.can_answer(cookies[:user_id], params[:id].to_i)
+    if arr[0] == "" and arr[1].any?
+      render :inline => "<iframe src='#{Constant::SERVER_PATH}/user/examinations/#{params[:id]}'
+                  frameborder='0' border='0' style='width: 1270px; height: 760px;'></iframe>"
+#           redirect_to "/user/examinations/#{params[:id]}"
+    else
+      flash[:warn] = arr[0]
+      redirect_to request.referer
+    end
   end
 
   def show

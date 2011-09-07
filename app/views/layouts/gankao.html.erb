@@ -29,7 +29,6 @@
         <%=  render :partial => "/common/menu" %>
       </div>
       <div class="main">
-        <%=  render :partial => "/common/display_flash" %>
         <%= yield %>
       </div>
       <div class="clear"></div>
@@ -37,6 +36,6 @@
         <%=  render :partial => "/common/footer" %>
       </div>
     </div>
-
+    <%=  render :partial => "/common/flash_div" %>
   </body>
 </html>

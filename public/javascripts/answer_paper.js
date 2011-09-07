@@ -195,7 +195,10 @@ function hand_open_nav(block_id) {
         if ((block_end_hash.get(block_id) == null || block_end_hash.get(block_id) == "")) {
             var ss = return_giving_time(block_start_hash.get(block_id));
             if (ss < fs) {
-                alert("当前部分还未可以开始答题。");
+                var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
+                flash_div.innerHTML = "<p>当前部分还未可以开始答题。</p>";
+                document.body.appendChild(flash_div);
+                show_flash_div();
             } else {
                 open_nav(block_id);
             }
@@ -204,7 +207,10 @@ function hand_open_nav(block_id) {
             if (bs < fs) {
                 open_nav(block_id);
             } else {
-                alert("当前部分答题时间固定，答题时间已过。");
+                var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
+                flash_div.innerHTML = "<p>当前部分答题时间固定，答题时间已过。</p>";
+                document.body.appendChild(flash_div);
+                show_flash_div();
             }
 
         }
@@ -260,7 +266,7 @@ function get_question_height(question_id, problem_id) {
 function create_problem(block_div, problem, block_nav_div) {
     var out_que_div = create_element("div", null, "question_" + problem.id, "part_question", null, "innerHTML");
     out_que_div.innerHTML = "<div class='part_passage border_bottom'><div class='p_contents'><p>"+ problem.title
-            + "</p></div><div class='fraction'>" + problem.score + "分</div></div>";
+    + "</p></div><div class='fraction'>" + problem.score + "分</div></div>";
     block_div.appendChild(out_que_div);
     
     var question_id_input = create_element("input", "question_ids", "question_ids_" + problem.id, null, "hidden", "value");
@@ -440,7 +446,10 @@ function onTimer() {
         window.clearInterval(timer);
         $("paper_form").submit();
         setTimeout(function(){
-            alert("答卷时间已到，请您停止答题，系统已经自动帮您提交试卷!")
+            var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
+            flash_div.innerHTML = "<p>答卷时间已到，请您停止答题，系统已经自动帮您提交试卷</p>";
+            document.body.appendChild(flash_div);
+            show_flash_div();
         }, 100);
         return;
     }
@@ -488,13 +497,18 @@ function colse_or_open_block(current_time) {
         for (var j=0; j<all_block_end_time.length; j++) {
             var block_title = $("b_title_" + block_end_hash.index(all_block_end_time[j])).innerHTML;
             if (all_block_end_time[j] == current_time) {
-                $("show_flash").innerHTML = block_title + " 部分答题时间已到，您的答案将自动被提交，请您继续做其它部分的题。";
+                var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
+                flash_div.innerHTML = "<p> "+ block_title + " 部分答题时间已到，您的答案将自动被提交，请您继续做其它部分的题。</p>";
+                document.body.appendChild(flash_div);
+                show_flash_div();
                 window.clearInterval(local_timer);
                 local_storage_answer();
                 has_close_block = true;
                 break;
             } else if ((return_giving_time(current_time) - return_giving_time(all_block_end_time[j])) == 100*60) {
-                $("show_flash").innerHTML = "当前 "+block_title+" 部分剩余答题时间为1分钟，请您尽快答题，并提交答案。";
+                flash_div.innerHTML = "<p>当前 "+block_title+" 部分剩余答题时间为1分钟，请您尽快答题，并提交答案。</p>";
+                document.body.appendChild(flash_div);
+                show_flash_div();
             }
         }
         if (has_close_block) {

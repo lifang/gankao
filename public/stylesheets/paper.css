@@ -6,7 +6,7 @@ img { border: none;}
 .wrap {}
 
 .fraction { text-align: right;line-height: 24px; font-size: 12px; color: #666;}
-.correctRight_bg { background: #a1e5ff;}
+.correctRight_bg { background: #96ae89;}
 
 
 .space10 { height: 10px;}
@@ -47,12 +47,12 @@ img { border: none;}
 
 /*答题样式-----*/
 .part_padding { padding: 10px;}
-.part_question { 
+.part_question {
     border-top: 1px #CCC solid;
-	border-left: 1px #CCC solid; 
+	border-left: 1px #CCC solid;
 	border-right: 5px #CCC solid;
-	border-bottom: 5px #CCC solid; 
-	margin-top: 10px; 
+	border-bottom: 5px #CCC solid;
+	margin-top: 10px;
 	background: #FFF;
 }
 
@@ -117,16 +117,16 @@ img { border: none;}
 
 
 .title_shadow { display: inline-block;text-shadow:1px 0 0 #ffffff, 0 1px 0 #ffffff, 0 -1px 0 #ffffff, -1px 0 0 #ffffff, 1px 0 1px #ffffff, 0 1px 1px #ffffff, 0 -1px 1px #ffffff, -1px 0 1px #ffffff;
-   filter: 
-	Dropshadow(offx=1,offy=0,color=#ffffff) 
-    Dropshadow(offx=0,offy=1,color=#ffffff) 
-    Dropshadow(offx=0,offy=-1,color=#ffffff) 
+   filter:
+	Dropshadow(offx=1,offy=0,color=#ffffff)
+    Dropshadow(offx=0,offy=1,color=#ffffff)
+    Dropshadow(offx=0,offy=-1,color=#ffffff)
     Dropshadow(offx=-1,offy=0,color=#ffffff);
 }
 
 .testPaper_foot { height: 100px;}
 
 
-.tishi_tab { width: 130px; height: 59px; background: url(/images/paper/tishi_tab_bg.png) no-repeat;}
-.tishi_tab p { text-align: center; line-height: 59px; font-size: 14px; font-family:"微软雅黑"; color: #060;}
+.tishi_tab { width: 250px; padding: 10px; background: url(/images/paper/mk_b_zz_bg.png) repeat; border: 1px #fff solid; position: fixed; display: none;}
+.tishi_tab p { text-align: center; line-height: 24px; font-size: 14px; font-family:"微软雅黑"; color: #fff;}
 
