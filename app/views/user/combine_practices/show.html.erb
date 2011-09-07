@@ -5,9 +5,16 @@
   var papers = new Object();
 </script>
 <%= javascript_include_tag "#{@paper_url}" %>
-<%= form_for :paper , :url => "/user/combine_practices/#{@examination.id}/save_result",
+<% if params[:show_answer];
+  url="/user/combine_practices/#{@examination.id}/save_result?submit=1"
+else;
+  url="/user/combine_practices/#{@examination.id}/save_result"
+end %>
+
+<%= form_for :paper , :url =>url,
   :html => {:name => "paper_form", :id => "paper_form",
   :onsubmit => "return generate_result_paper('#{@examination.paper_id}')"} do |f| %>
+
   <div id="paper_show_info">
     <% if @practice_type==Examination::TYPES[:PRACTICE1].to_s %>
       <div class="task_title task_title_one"><a href="#"><img alt="Explain_icon" src="/images/paper/Explain_icon.png"/></a></div>
@@ -29,8 +36,10 @@
       <input type="hidden" name="examination_id" id="examination_id" value="<%= @examination.id %>"/>
       <input type="hidden" id="total_num"/>
       <input type="hidden" id="complete_num"/>
+      <% if params[:show_answer] %><input type="hidden" name="show_answer" id="show_answer" value="<%= @answer_array.to_s[1..-2] %>"/><% end %>
       <!--      <div>题目数：共<span id="total_num"></span>题/已完成<span id="complete_num">0</span>题</div>   -->
       <div><span id="local_time"></span></div>
+      <%=  render :partial => "/common/display_flash" %>
 
     </div>
   </div>
@@ -47,13 +56,13 @@
          value="<%= Constant::ANSWER_CLIENT_PATH %>/<%= @examination.exam_user_id %>.xml"/>
   <div class="clear"></div>
   <div class="tb_prevNext">
-  <a href="#" id="tb_goleft" class="tb_goleft"></a>
-  <%= f.submit "",:class=>"tb_check"%>
-  <a href="#" id="tb_goright" class="tb_goright"></a>
-</div>
+    <a href="#" id="tb_goleft" class="tb_goleft"></a>
+    <%= f.submit "",:class=>"tb_check"%>
+    <a href="#" id="tb_goright" class="tb_goright"></a>
+  </div>
 
 <% end %>
-  
+
 
 <script type="text/javascript" src="/javascripts/local_save/answer.js" charset="utf-8"></script>
 <%= javascript_include_tag "#{Constant::SERVER_PATH}/javascripts/jeff_answer_paper.js" %>

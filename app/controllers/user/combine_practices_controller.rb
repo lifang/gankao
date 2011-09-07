@@ -1,10 +1,10 @@
 class User::CombinePracticesController < ApplicationController
   layout "paper", :only => [:save_result]
   before_filter :access?
-  
+  include REXML
+  require 'rexml/document'
 
   def show
-    
     @practice_type=params[:practice_type]
     Examination::TYPE_NAMES.each_value do |array|
       if array[0]==@practice_type.to_i
@@ -21,8 +21,13 @@ class User::CombinePracticesController < ApplicationController
       @exam_user.set_paper(@examination) if @exam_user.paper_id.nil?
       if @exam_user and @exam_user.paper_id
         @paper_url = "#{Constant::PAPER_CLIENT_PATH}/#{@exam_user.paper_id}.js"
-         render :layout => "practice_layout"
- #       render :layout =>'application'
+        if params[:show_answer]
+          xml_url="#{Constant::BACK_PUBLIC_PATH}/papers/#{@exam_user.paper_id}.xml"
+          xml=Document.new(File.open(xml_url)).root
+          @answer_array=xml.to_s.split("<answer>").each.map{|answer| answer=answer.split("</answer>")[0]}[1..-1]
+        end
+        render :layout => "practice_layout"
+        #       render :layout =>'application'
       else
         flash[:warn] = "试卷加载错误，请您重新尝试。"
         redirect_to "/user/examinations"
@@ -48,18 +53,18 @@ class User::CombinePracticesController < ApplicationController
   end
 
   def save_result
-    @exam_user = ExamUser.find_by_examination_id_and_user_id(params[:id], cookies[:user_id])
-    if @exam_user and (@exam_user.is_submited.nil? or @exam_user.is_submited == false)
-      question_hash = {}
-      question_ids = params[:all_quesiton_ids].split(",") if params[:all_quesiton_ids]
-      question_ids.each do |question_id|
-        question_hash[question_id] = [params["answer_" + question_id], "1"]
-      end if question_ids
-      @exam_user.auto_add_collection(@exam_user,question_hash) if params[:types].to_i==Examination::TYPES[:OLD_EXAM]
-      @exam_user.generate_answer_sheet_url(@exam_user.update_answer_url(@exam_user.open_xml, question_hash), "result")
-      @exam_user.submited!
+    @exam_user = ExamUser.find_by_examination_id_and_user_id(params[:id].to_i, cookies[:user_id].to_i)
+    if params[:submit]==nil
+      arr = ExamUser.can_answer(cookies[:user_id], params[:id].to_i)
       flash[:notice] = "标准答案已给出，请检查。"
-      redirect_to "/user/exam_users/#{@exam_user.examination_id}?user_id=#{cookies[:user_id]}"
+      if arr[0] == "" and arr[1].any?
+        render :inline => "<iframe src='#{Constant::SERVER_PATH}/user/combine_practices/#{params[:id]}/?practice_type=#{params[:practice_type]}&show_answer=1'
+            frameborder='0' style='width: 1270px; height: 760px;'></iframe>"
+      end
+    else
+      @exam_user.submited!
+      flash[:notice] = "你顺利完成了一份综合训练题，再接再厉。"
+      redirect_to "/combine_practices"
     end
   end
 
