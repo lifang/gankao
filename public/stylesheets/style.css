@@ -27,8 +27,50 @@ img { border: none;}
 .menu li a { color: #333; text-decoration: none;}
 .menu li a:hover, .menu li a.hover { color: #1abcf0;}
 
-.main { width: 880px; margin: 0 auto; padding: 10px; overflow: hidden;}
-.main_con { margin: 10px; overflow: hidden;}
+.main { width: 880px; margin: 0 auto; padding: 10px; overflow: hidden; }
+
+/*个人首页------------------*/
+.person_box { overflow: hidden; height: 600px;}
+.m_box_one { width: 230px; height: 398px; overflow: hidden; float: left; margin: 0 5px;}
+.m_box_two { width: 148px; height: 337px; overflow: hidden; float: left; background: url(/images/paper/m_box_two.png) no-repeat; margin: 0 6px;}
+.per_ex_p { margin-top: 40px; line-height: 24px; padding: 2px;}
+
+.mnks { background: url(/images/paper/mnks.png) no-repeat;}
+.ztlx { background: url(/images/paper/ztlx.png) no-repeat;}
+.zhxl { background: url(/images/paper/zhxl.png) no-repeat;}
+
+.per_con { padding-top: 160px; height: 55px; font-family: "微软雅黑"; color: #333; }
+.per_con h2 { font-size: 14px; line-height: 24px; text-align: center;}
+.per_con p { font-size: 12px; line-height: 24px; text-align: center;}
+.per_btn { height: 28px; margin-top: 20px;}
+.per_btn a { 
+    font-family: "微软雅黑";
+    height: 28px; 
+	width: 80px;
+	margin: 0 auto;
+	line-height: 28px; 
+	display: block; 
+	text-align: center; 
+	color: #29405c; 
+	text-decoration: none; 
+	background: url(/images/paper/all_bg.png) no-repeat -7px -83px;
+}
+.per_load_bg { width: 199px; height: 20px; background: url(/images/paper/per_load_bg.png) no-repeat; padding: 7px 0 0 7px; margin: 0 auto;}
+.per_load_t { width: 207px; height: 11px; background: url(/images/paper/per_load_t.png) no-repeat;}
+
+
+.per_two_box { width: 141px; height: 105px; margin: 5px auto;}
+.per_tb_title { width: 141px; height: 27px; overflow: hidden; line-height: 27px; text-align: center; font-size: 14px; color: #437f8d; font-family: "微软雅黑";}
+.per_tb_xinx { background: url(/images/paper/all_bg.png) no-repeat 0px -524px;}
+.per_tb_ctk { background: url(/images/paper/all_bg.png) no-repeat 0px -563px;}
+.per_tb_biji { background: url(/images/paper/all_bg.png) no-repeat 0px -603px;}
+
+.per_two_box h3 { font-size: 14px; height: 24px; text-align: center; line-height: 24px; margin: 10px 0;}
+.per_two_box p { text-align: center;}
+
+
+
+
 
 /*真题训练--------------*/
 .zhenti_box { width: 790px; margin: 30px auto 0; overflow: hidden;}
@@ -48,7 +90,7 @@ img { border: none;}
 .moveBlock_bg { width: 73px; height: 26px; background: url(/images/paper/moveBlock_bg.gif) no-repeat; float: left; margin: 0 10px; position: relative;}
 .moveBlock { position: absolute; top: 1px; left: 1px;}
 
-
+.ep_prevNext_bj { height: 22px; line-height: 22px; margin: 20px 0; padding-left: 340px;}
 .ep_prevNext { height: 22px; line-height: 22px; margin: 20px 0; padding-left: 450px;}
 .ep_goLeft, .ep_goRight { width: 22px; height: 22px; text-indent: -999px; overflow: hidden; float: left;}
 .ep_goLeft a, .ep_goRight a { width: 22px; height: 22px; display: block;}
@@ -56,8 +98,6 @@ img { border: none;}
 .ep_goRight { background: url(/images/paper/all_bg.png) -215px -159px no-repeat;}
 
 .ep_number { width: 50px; height: 22px; line-height: 22px; text-align: center; float: left; font-size: 14px; font-family: "微软雅黑";}
-
-.ep_prevNext_bj { height: 22px; line-height: 22px; margin: 20px 0; padding-left: 340px;}
 
 /*errorLibrary_right----*/
 .searchProblem { height: 25px; background: #FFF; border: 1px #CCC solid;}
@@ -197,20 +237,23 @@ img { border: none;}
 
 /*模考---------------*/
 .mokao_box { width: 880px; height: 364px; background: url(/images/paper/mokao_bg.png) no-repeat;}
-.mokao_left, .mokao_right { float: left; width: 385px; padding-left: 55px;}
-.mokaoList { height: 70px; margin-top: 40px; line-height: 24px;}
-.mk_l_t { float: left; width: 160px;}
-.mk_l_b { float: left; width: 200px;}
-.mk_l_b h3 { font-size: 14px; color: #333;}
-.b14 { font-size: 14px; color: #333; padding-top: 5px;}
-.b16 { font-size: 18px; color: #F00;}
-.mk_l_b p a { font-size: 12px; margin-left: 10px; color: #00F;}
+.mokao_left { width: 135px; padding-left: 60px; padding-top: 30px; float: left; }
+.mokao_right { float: left; width: 685px; height: 364px;}
+.mokaoList { height: 70px; padding-top: 30px; line-height: 24px; cursor: pointer;}
+.mokaoList h3 { font-size: 14px; color: #333;}
+.mkl_h h3 { color: #1167aa;}
+
+.mk_r_div {padding-left: 290px; width: 395px; padding-top: 40px; height: 324px; overflow: hidden;}
+.mkList_jt0 { background: url(/images/paper/mkList_jt0.jpg) no-repeat 0 center;}
+.mkList_jt1 { background: url(/images/paper/mkList_jt1.jpg) no-repeat 0 center; }
+.mkList_jt2 { background: url(/images/paper/mkList_jt2.jpg) no-repeat 0 center;}
+
 
 .begin_ks, .wait_ks { width: 80px; height: 28px; text-indent: -999px; overflow: hidden; display: block; margin: 0 auto;}
 .begin_ks { background: url(/images/paper/all_bg.png) no-repeat 0px -438px;}
 .wait_ks { background: url(/images/paper/all_bg.png) no-repeat -83px -438px;}
 
-.cet_title { width: 377px; height: 37px; background: url(/images/paper/all_bg.png) no-repeat 0px -479px; margin-top: 40px;}
+.cet_title { width: 377px; height: 37px; background: url(/images/paper/all_bg.png) no-repeat 0px -479px;}
 .begin_time_p { line-height: 24px; margin-top: 30px;}
 
 .mokao_right h2 { font-size: 16px; margin-top: 40px; line-height: 24px;}
@@ -231,4 +274,3 @@ img { border: none;}
 .foot { width: 880px; margin: 0 auto; background: url(/images/paper/xline.png) repeat-x center 0px; padding: 20px 10px 10px;}
 .foot p { text-align: center; line-height: 24px; height: 24px; color: #999;}
 .foot p a { padding: 0 5px; color: #999;}
-

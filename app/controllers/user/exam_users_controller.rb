@@ -2,15 +2,16 @@ class User::ExamUsersController < ApplicationController
   require 'rexml/document'
   include REXML
   def show
-    @exam=ExamUser.find_by_user_id_and_examination_id(params[:user_id],params[:id])
-   # begin
-      @doc=ExamRater.open_file("#{Constant::PUBLIC_PATH}/result/#{@exam.id}.xml")
-      @xml=ExamUser.show_result(@exam.paper_id, @doc)
+    @exam=ExamUser.find_by_user_id_and_examination_id(params[:user_id].to_i,params[:id].to_i)
+    begin
+      @examination = Examination.find(params[:id].to_i)
+      @doc = ExamRater.open_file("#{Constant::PUBLIC_PATH}/result/#{@exam.id}.xml")
+      @xml = ExamUser.show_result(@exam.paper_id, @doc)
       render :layout=>"show_paper"
-  #  rescue
-  #    flash[:error] = "当前考试试卷不能正常打开，请检查试卷是否正常。"
-  #    redirect_to request.referer
-  #  end
+    rescue
+      flash[:error] = "当前考试试卷不能正常打开，请检查试卷是否正常。"
+      redirect_to request.referer
+    end
   end
 
   def edit_score

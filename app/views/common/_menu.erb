@@ -1,0 +1,57 @@
+<div class="head_top">
+  <div class="top_myGankao">
+    <% if cookies[:user_id] %>
+      <div class="t_gk">
+        <% if is_student? %>
+          <%= link_to "我的考试", "/user/examinations" %>
+        <% end %>
+        <% if is_vicegerent? %>
+    <%#= link_to "代理充值","/payments/agency_recharge" %>
+        <% end %>
+        <% if is_paper_creater? %>
+    <%#= link_to "代理权限","/users/roles_manage" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="top_loginArea">
+    <div>
+      <% if cookies[:user_id] %>
+        你好,<a href="/users/<%= cookies[:user_id] %>">
+          <%= current_user.name if current_user %>
+        </a>
+        |<a href="/signout" class="signColor">退出</a>
+      <% else %>
+        你好,<a href="/sessions/new" class="signColor">登录</a>
+        |<a href="/users/new" class="signColor">注册</a>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="logo"><a href="/"><img src="/images/paper/logo.png" /></a></div>
+<div class="nav">
+  <div class="menu">
+    <ul>
+      <li>
+        <a href="/users/<%= cookies[:user_id] %>/first_page" <% if request.path == "/users/#{cookies[:user_id]}/first_page" %>class="hover"<% end %>>首页</a>
+      </li>
+      <li><img src="/images/paper/menu_li.png" /></li>
+      <li>
+        <a href="/exam_lists/simulate_list" <% if request.path == "/exam_lists/simulate_list" %>class="hover"<% end %>>模拟考试</a>
+      </li>
+      <li><img src="/images/paper/menu_li.png" /></li>
+      <li>
+        <a href="/exam_lists/old_exam_list" <% if request.path == "/exam_lists/old_exam_list" %>class="hover"<% end %>>真题训练</a>
+      </li>
+      <li><img src="/images/paper/menu_li.png" /></li>
+      <li><a href="/combine_practices" <% if request.path == "/combine_practices" %>class="hover"<% end %>>综合训练</a></li>
+      <li><img src="/images/paper/menu_li.png" /></li>
+      <li>
+        <a href="/exam_lists/incorrect_list" <% if request.path == "/exam_lists/incorrect_list" %>class="hover"<% end %>>错题库</a>
+      </li>
+      <li><img src="/images/paper/menu_li.png" /></li>
+      <li><a href="/user/notes" <% if request.path == "/user/notes" %>class="hover"<% end %>>笔记</a></li>
+    </ul>
+  </div>
+</div>
+<div class="clear"></div>

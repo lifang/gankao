@@ -19,7 +19,7 @@ class ExamListsController < ApplicationController
       @examination_lists -=[examination] unless examinations.include?(examination.id)  if examination.status==Examination::STATUS[:CLOSED ]
     end
     examnation_ids=@examination_lists.map(&:id).join(",")
-    @hash=Examination.exam_users_hash(cookies[:user_id],examnation_ids)
+    @hash=Examination.exam_users_hash(cookies[:user_id])
   end
   
   def old_exam_list

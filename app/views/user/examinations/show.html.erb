@@ -20,7 +20,7 @@
       <div class="timer" id="exam_time"></div>
       <div class="paper_info">
         <strong><span id="leaving_num"></span></strong>题未完成&nbsp;&nbsp;|&nbsp;&nbsp;
-        <%= f.submit "结束考试" %>
+        <%= f.submit "结束考试", :class => "Uncertain" %>
       </div>
     </div>
   </div>
@@ -40,7 +40,7 @@
   </div>
 <% end %>
 <script type="text/javascript" src="/javascripts/local_save/answer.js" charset="utf-8"></script>
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
   //考试时间定时器所需变量
   var timer = null;
   var normalelapse = 100;

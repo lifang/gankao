@@ -4,27 +4,28 @@
     <% if @simulations.blank? %>
       <p style="font-size:120%;color:red;font-weight: bold;margin-left: 20px;margin-top: 80px;">当前没有模考...</p>
     <%else%>
-      <% index=0 %>
-      <% @simulations.each do |simulation| %>
+      <% index = 0 %>
+      <% @simulations[0, 3].each do |simulation| %>
         <tr>
-          <%index += 1%>
+          <% index += 1 %>
           <td>&nbsp;模考<%= index %>:<%= simulation.title %></td>
-          <% if @hash1["#{simulation.id}"] ==nil %>
+          <% if @hash1["#{simulation.id}"].nil? %>
             <td><input type="button" value="开始考试" class="practice" onclick="javascript:window.location.href='/user/examinations/<%= simulation.id %>/do_exam'"/></td>
-          <%elsif @hash1["#{simulation.id}"].total_score.nil?%>
+          <% elsif @hash1["#{simulation.id}"].total_score.nil? or @hash1["#{simulation.id}"].total_score == 0 %>
             <td><p style="font-size:70%;color:red;font-weight: bold;margin-left: 80px;">阅卷中...</p></td>
-          <%else%>
+          <% else %>
             <td><p style="font-size:80%;margin-left: 40px;">得分：<%= @hash1["#{simulation.id}"].total_score %></p>分</td>
-          <%end%>
+          <% end %>
         </tr>
-      <%end%>
-    <%end%>
+        <%# break if index == 3 %>
+      <% end %>
+    <% end %>
   </div>
 
   <div class="mokao" >
     真题练习<br/>
     <div class="shuzi">
-      <%=@hash["1"].nil? ? 0:@hash["1"][1] %>/<%=@hash["1"].nil? ? 0:@hash["1"][0]%>
+      <%=@type_hash["1"].nil? ? 0:@type_hash["1"][1] %>/<%=@type_hash["1"].nil? ? 0:@type_hash["1"][0]%>
 
     </div>
     <td><input type="button" value="开始练习" class="practice" onclick="javascript:window.location.href='/exam_lists/old_exam_list'"/></td>
@@ -33,7 +34,7 @@
   <div class="mokao" >
     综合训练<br/>
     <div class="shuzi">
-      <%=(@hash["2"].nil? ? 0:@hash["2"][1])+(@hash["3"].nil? ? 0:@hash["3"][1])+(@hash["4"].nil? ? 0:@hash["4"][1])+(@hash["5"].nil? ? 0:@hash["5"][1])+(@hash["6"].nil? ? 0:@hash["6"][1]) %>/<%=(@hash["2"].nil? ? 0:@hash["2"][0])+(@hash["3"].nil? ? 0:@hash["3"][0])+(@hash["4"].nil? ? 0:@hash["4"][0])+(@hash["5"].nil? ? 0:@hash["5"][0])+(@hash["6"].nil? ? 0:@hash["6"][0]) %>
+      <%=(@type_hash["2"].nil? ? 0:@type_hash["2"][1])+(@type_hash["3"].nil? ? 0:@type_hash["3"][1])+(@type_hash["4"].nil? ? 0:@type_hash["4"][1])+(@type_hash["5"].nil? ? 0:@type_hash["5"][1])+(@type_hash["6"].nil? ? 0:@type_hash["6"][1]) %>/<%=(@type_hash["2"].nil? ? 0:@type_hash["2"][0])+(@type_hash["3"].nil? ? 0:@type_hash["3"][0])+(@type_hash["4"].nil? ? 0:@type_hash["4"][0])+(@type_hash["5"].nil? ? 0:@type_hash["5"][0])+(@type_hash["6"].nil? ? 0:@type_hash["6"][0]) %>
     </div>
     <td><input type="button" value="开始训练" class="practice" onclick="javascript:window.location.href='/combine_practices'"/></td>
   </div>
