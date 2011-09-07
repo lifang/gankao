@@ -18,7 +18,9 @@ namespace :belief do
     end unless @examinations.blank?
     hash["3"]=sums
     users.each do |user|
-      @exams=Examination.find_by_sql("select count(e.types) sums,e.types from examinations e inner join exam_users  u on u.examination_id=e.id where u.user_id=#{user.id} and u.is_submited=1  group by types")
+      @exams=Examination.find_by_sql("select count(e.types) sums,e.types from examinations e
+      inner join exam_users  u on u.examination_id=e.id where u.user_id=#{user.id}
+      and u.is_submited=#{ExamUser::IS_SUBMITED[:YES]}  group by types")
       hash1={}
       sums=0
       @exams.each do |exam|
@@ -32,7 +34,8 @@ namespace :belief do
       puts hash
       puts hash1
       simulation_belief=0
-      num=Examination.find_by_sql("select count(e.id) ids from examinations e inner join exam_users  u on u.examination_id=e.id inner join papers p on p.id=u.paper_id  where u.user_id=#{user.id} and u.is_submited=1 and u.total_score>(p.total_score*0.6) and e.types=#{Examination::TYPES[:SIMULATION]}")[0].ids
+      num=Examination.find_by_sql("select count(e.id) ids from examinations e inner join exam_users  u on u.examination_id=e.id inner join papers p on p.id=u.paper_id
+where u.user_id=#{user.id} and u.is_submited=#{ExamUser::IS_SUBMITED[:YES]} and u.total_score>(p.total_score*0.6) and e.types=#{Examination::TYPES[:SIMULATION]}")[0].ids
       simulation_belief=0.5 if num==1
       simulation_belief=0.8 if num==2
       simulation_belief=1 if num>=3

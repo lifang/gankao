@@ -10,6 +10,7 @@ class ExamUser < ActiveRecord::Base
   include REXML
   require 'spreadsheet'
 
+  IS_SUBMITED = {:YES => 1, :NO => 0} #用户是否提交 1 提交 2 未提交
   IS_USER_AFFIREMED = {:YES => 1, :NO => 0} #用户是否确认  1 已确认 0 未确认
   IS_FREE = {:YES => 1, :NO => 0} #是否免费用户 1 是  0 否
   default_scope :order => "exam_users.total_score desc"
@@ -348,7 +349,7 @@ class ExamUser < ActiveRecord::Base
     str = ""
     examination = Examination.return_examinations(user_id, examination_id)
     if examination.any?
-      if !examination[0].is_submited.nil? and examination[0].is_submited == 1
+      if !examination[0].is_submited.nil? and examination[0].is_submited == true
         str = "您已经交卷。"
       else
         if examination[0].paper_id.nil? and examination[0].start_at_time > Time.now

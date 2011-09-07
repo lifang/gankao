@@ -111,6 +111,7 @@ class UsersController < ApplicationController
       and is_published = #{Examination::IS_PUBLISHED[:ALREADY]} order by created_at")
     @hash1 = Examination.exam_users_hash(cookies[:user_id],Examination::TYPES[:SIMULATION])
     @simulations.each do |simulation|
+<<<<<<< HEAD
       @simulations = @simulations - [simulation] if (!@hash1.keys.include?(simulation.id.to_s) and
           simulation.status == Examination::STATUS[:CLOSED])
     end
@@ -137,9 +138,6 @@ class UsersController < ApplicationController
       end
     end unless @exams.blank?
     @hashh["#{Examination::TYPES[:PRACTICE1]}"]=sums
-    puts @hashh
-    puts @hash
-    puts @hash["1"]
     collection = Collection.find_by_user_id(cookies[:user_id])
     @incorrect_list = collection.open_xml.root if collection and collection.collection_url
   end

@@ -27,6 +27,7 @@ class ExamListsController < ApplicationController
     @hash=Examination.exam_users_hash(cookies[:user_id],Examination::TYPES[:OLD_EXAM])
     render :layout=>"gankao"
   end
+  
   def incorrect_list
     @hash_list={}
     @has_next_page = false
