@@ -32,7 +32,9 @@ function load_exam_tiem() {
         block_start_hash = $H({});
         block_end_hash = $H({});
     }
-    create_paper();
+    setTimeout(function(){
+        create_paper();
+    }, 500);
 }
 
 //创建试卷
@@ -83,6 +85,13 @@ function create_block(bocks_div, block) {
     bocks_div.appendChild(block_div);
     var b_div = create_element("div", null, "inner_block_" + block.id, "part_box", null, "innerHTML");
     block_div.appendChild(b_div);
+    var b_description_div = create_element("div", null, "b_description_" + block.id, "part_div", null, "innerHTML");
+    if (block.base_info.description != null && block.base_info.description != "") {
+        b_description_div.innerHTML = "<div class='part_passage'><div class='p_directions'>"
+        + block.base_info.description + "<p></p></div></div>";
+    }
+    b_div.appendChild(b_description_div);
+
     //试卷导航展开部分
     var navigation_div = $("paper_navigation");
     var block_nav_div = create_element("div", null, "block_nav_"+block.id, "first_title", null, "innerHTML");
@@ -110,10 +119,10 @@ function create_block(bocks_div, block) {
         var problems = block.problems.problem;
         if (tof(problems) == "array") {
             for (var j=0; j<problems.size(); j++) {
-                create_problem(b_div, problems[j], ul);
+                create_problem(b_description_div, problems[j], ul);
             }
         } else {
-            create_problem(b_div, problems, ul);
+            create_problem(b_description_div, problems, ul);
         }
         block_nav_div.appendChild(create_element("div", null, null, "clear", null, "innerHTML"));
     }
@@ -222,8 +231,8 @@ function get_question_height(question_id, problem_id) {
                 if (p_ids[i] == problem_id) {
                     break;
                 } else {
-                    if ($("full_problem_" + p_ids[i]) != null) {
-                        p_height += $("full_problem_" + p_ids[i]).offsetHeight;
+                    if ($("question_" + p_ids[i]) != null) {
+                        p_height += $("question_" + p_ids[i]).offsetHeight;
                     }
                 }
             }
@@ -249,15 +258,13 @@ function get_question_height(question_id, problem_id) {
 
 //添加problem
 function create_problem(block_div, problem, block_nav_div) {
-    var problem_div = create_element("div", null, "full_problem_" + problem.id, "part_div", null, "innerHTML");
-    block_div.appendChild(problem_div);
+    var out_que_div = create_element("div", null, "question_" + problem.id, "part_question", null, "innerHTML");
+    out_que_div.innerHTML = "<div class='part_passage border_bottom'><div class='p_contents'><p>"+ problem.title
+            + "</p></div><div class='fraction'>" + problem.score + "分</div></div>";
+    block_div.appendChild(out_que_div);
+    
     var question_id_input = create_element("input", "question_ids", "question_ids_" + problem.id, null, "hidden", "value");
 
-    problem_div.innerHTML = "<input type='hidden' name='problem_"+ problem.id +"' id='problem_"+ problem.id +"' value='"+ problem.id +"'/>";
-    problem_div.innerHTML += "<div class='part_passage'><div class='p_directions'><p>"+ problem.title
-    + "</p></div><div class='fraction'>" + problem.score + "分</div></div>";
-    var out_que_div = create_element("div", null, "question_" + problem.id, "part_question", null, "innerHTML");
-    problem_div.appendChild(out_que_div);
     var que_inner_div = create_element("div", null, null, null, null, "innerHTML");
     out_que_div.appendChild(que_inner_div);
     //添加question所需div
@@ -276,11 +283,11 @@ function create_problem(block_div, problem, block_nav_div) {
         }
     }
     
-    problem_div.appendChild(question_id_input);
+    out_que_div.appendChild(question_id_input);
     var is_answer_input = create_element("input", "is_answer", "is_answer_" + problem.id, null, "hidden", "value");
-    problem_div.appendChild(is_answer_input);
+    out_que_div.appendChild(is_answer_input);
     var is_sure_input = create_element("input", "is_sure", "is_sure_" + problem.id, null, "hidden", "value");
-    problem_div.appendChild(is_sure_input);
+    out_que_div.appendChild(is_sure_input);
     
     $("problem_ids").value += "" + problem.id + ",";
     if (answer_hash != null) {

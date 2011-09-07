@@ -21,22 +21,31 @@
       </div>
       <div class="part_box">
         <div class="part_div">
+          <% unless block.elements['base_info'].elements['description'].nil? or
+              block.elements['base_info'].elements['description'].text.nil? or
+              block.elements['base_info'].elements['description'].text.strip == "" %>
+            <div class="part_passage">
+              <div class="p_directions">
+                <p><%= block.elements['base_info'].elements['description'].text %></p>
+              </div>
+            </div>
+          <% end %>
           <% block.elements['problems'].each_element do |problem| %>
             <% problem_ids += problem.attributes["id"] + "," %>
-            <% if !problem.elements['title'].nil? %>
-              <div class="part_passage">
-                <div class="p_directions">
-                  <p><%= problem.elements['title'].text.to_s.html_safe %></p>
-                </div>
-                <div class="fraction"><%= problem.attributes["score"] %>分</div>
-              </div>
-            <% end %>
             <div class="part_question" id="question_info_<%= problem.attributes["id"].to_i %>">
+              <% unless problem.elements['title'].nil? %>
+                <div class="part_passage border_bottom">
+                  <div class="p_contents">
+                    <p><%= problem.elements['title'].text.to_s.html_safe %></p>
+                  </div>
+                  <div class="fraction"><%= problem.attributes["score"] %>分</div>
+                </div>
+              <% end %>
               <div>
                 <%= question_ids = ""
                 problem.elements["questions"].each_element do |question| %>
                   <% question_ids += question.attributes["id"] + "," %>
-                  <%= render :partial=>"/user/exam_users/single_question",:object=> [question,question_num, problem]  %>
+                  <%= render :partial=>"/user/exam_users/single_question", :object=> [question,question_num, problem]  %>
                   <% question_num = question_num + 1 %>
                 <% end %>
                 <input type="hidden" id="question_ids_<%= problem.attributes["id"] %>"
@@ -87,9 +96,9 @@
 <div class="biji_tab" id="note_area">
   <div class="tab_t"><a href="#"><img src="/images/paper/x.gif" /></a></div>
   <div class="tab_m"  id="biji_tab">
-   
+
   </div>
   <div class="tab_b"></div>
 </div>
 
-  
+

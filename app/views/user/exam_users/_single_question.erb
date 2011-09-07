@@ -1,21 +1,24 @@
-<% question = single_question[0]
-question_num = single_question[1]
-problem = single_question[2]
-%>
-<div class="p_question_list <% if question.attributes["user_score"].to_i == question.attributes["score"].to_i %>question_yes<% else %>question_no<% end %>">
-  <div class="p_q_l_left"><%= question_num %></div>
-  <div class="p_q_l_right">
-    <% if question.elements["description"] %>
-      <p><%= question.elements["description"].text  %></p>
-    <% end %>
-    <% attrs_str = question.elements["questionattrs"].text
+<%  question = single_question[0]
+    question_num = single_question[1]
+    problem = single_question[2]
+    attrs_str = question.elements["questionattrs"].text
     attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
     correct_type = question.attributes["correct_type"]
     answer = question.elements["answer"]
     answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
     user_answer = question.attributes["user_answer"]
     user_answers = user_answer.nil? ? [] :  user_answer.split(";|;")
-    if (correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] or
+    is_right = false
+    all_answer = answers | user_answers
+    is_right = true if all_answer == answers and answers - user_answers == []
+%>
+<div class="p_question_list <% if is_right %>question_yes<% else %>question_no<% end %>">
+  <div class="p_q_l_left"><%= question_num %></div>
+  <div class="p_q_l_right">
+    <% if question.elements["description"] %>
+      <p><%= question.elements["description"].text  %></p>
+    <% end %>
+    <% if (correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] or
           correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE]) %>
       <ul class="chooseQuestion">
         <% (0..attrs_array.length-1).each do |i|
@@ -50,21 +53,25 @@ problem = single_question[2]
       </div>
     <% end %>
     <div class="fraction">
-      <font color="red"><% if question.attributes["user_score"] %>
-          <%= question.attributes["user_score"] %><% else %>0<% end %></font>/<%= question.attributes["score"] %>分
+      <% if @examination.types == Examination::TYPES[:SIMULATION] %><font color="red"><% if question.attributes["user_score"] %>
+            <%= question.attributes["user_score"] %><% else %>0<% end %></font>/<% end %><%= question.attributes["score"] %>分
     </div>
   </div>
   <input type="hidden" id="btn_<%= question.attributes["id"] %>_answer" type="hidden" value="<%= answers.join(";") %>"/>
   <input type="hidden" id="btn_<%= question.attributes["id"] %>_analysis" type="hidden" 
-         value="<%= question.elements["analysis"].text if question.elements["analysis"] %>"/>
+         value="<%= "解析：" + question.elements["analysis"].text unless (question.elements["analysis"].nil? or
+             question.elements["analysis"].text.nil? or question.elements["analysis"].text == "") %>"/>
   <div class="clear"></div>
   <div class="review_btn">
-    <button class="jiexi_btn" id="btn_<%= question.attributes["id"] %>">解析</button>
-    <button class="biji_btn" 
+    <% unless question.elements["analysis"].nil? or question.elements["analysis"].text.nil? or
+        question.elements["analysis"].text == "" %>
+      <button class="jiexi_btn" id="btn_<%= question.attributes["id"] %>">解析</button>
+    <% end %>
+    <button class="biji_btn"
             name="note_<%= question.attributes["id"] %>" id="note_<%= question.attributes["id"] %>"
             onclick="javascript:start_note(<%= question.attributes["id"] %>, <%= problem.attributes["id"] %>,
-       <%= @doc.elements["paper"].attributes["id"] %>, <%= @doc.attributes["id"] %>,
-         '<%= problem.xpath %>', '<%= question.xpath %>');">笔记</button>
+            <%= @doc.elements["paper"].attributes["id"] %>, <%= @doc.attributes["id"] %>,
+  '<%= problem.xpath %>', '<%= question.xpath %>');">笔记</button>
     <button name="collection_<%= question.attributes["id"] %>" id="collection_<%= question.attributes["id"] %>"
             onclick="javascript:start_collection(<%= question.attributes["id"] %>,
             <%= problem.attributes["id"] %>, <%= @doc.elements["paper"].attributes["id"] %>,

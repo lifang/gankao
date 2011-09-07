@@ -13,8 +13,8 @@ class Examination < ActiveRecord::Base
   TYPES = {:SIMULATION => 0, :OLD_EXAM => 1, :PRACTICE1 => 2, :PRACTICE2 => 3, :PRACTICE3 => 4, :PRACTICE4 => 5,
     :PRACTICE5 => 6} #考试的类型： 0 模拟考试  1 真题练习  2 综合训练1  3 综合训练2  4 综合训练3  5 综合训练4  6 综合训练5
 
-    TYPE_NAMES = {:SIMULATION => [0, "模拟考试"], :OLD_EXAM => [1, "真题练习"], :PRACTICE1 => [2, "综合训练1"],
-      :PRACTICE2 => [3, "综合训练2"], :PRACTICE3 => [4, "综合训练3"], :PRACTICE4 => [5, "综合训练4"], :PRACTICE5 => [6, "综合训练5"]}
+  TYPE_NAMES = {:SIMULATION => [0, "模拟考试"], :OLD_EXAM => [1, "真题练习"], :PRACTICE1 => [2, "综合训练1"],
+    :PRACTICE2 => [3, "综合训练2"], :PRACTICE3 => [4, "综合训练3"], :PRACTICE4 => [5, "综合训练4"], :PRACTICE5 => [6, "综合训练5"]}
   default_scope :order => "examinations.created_at desc"
 
   #创建考试
@@ -91,7 +91,7 @@ class Examination < ActiveRecord::Base
   def Examination.return_examinations(user_id, examination_id = nil)
     sql = "select e.*, eu.id exam_user_id, eu.paper_id, eu.started_at, eu.ended_at, eu.is_submited from examinations e
           left join exam_users eu on e.id = eu.examination_id
-          where e.is_published = 1 and e.status != #{STATUS[:CLOSED]} "
+          where e.is_published = #{IS_PUBLISHED[:ALREADY]} and e.status != #{STATUS[:CLOSED]} "
     sql += " and e.id = #{examination_id} " if !examination_id.nil? and examination_id != ""
     sql += " and eu.user_id = #{user_id} "    
     Examination.find_by_sql(sql)
@@ -113,13 +113,13 @@ class Examination < ActiveRecord::Base
     return is_in
   end
 
-  def self.exam_users_hash(id,examnation_ids)
-    hash={}
-    unless examnation_ids.nil?||examnation_ids==""
-      ExamUser.find_by_sql("select eu.total_score,eu.is_submited,eu.examination_id,correct_percent from exam_users  eu where eu.user_id=#{id} and eu.examination_id in (#{examnation_ids})").each do |exam_user|
-        hash["#{exam_user.examination_id}"] =exam_user
-      end
-    end
+  def self.exam_users_hash(user_id)
+    hash ={}
+    ExamUser.find_by_sql("select eu.total_score,eu.is_submited,eu.examination_id,
+        correct_percent from exam_users eu inner join examinations e on e.id = eu.examination_id
+        where e.types = #{TYPES[:SIMULATION]} and eu.user_id = #{user_id}").each do |exam_user|
+        hash["#{exam_user.examination_id}"] = exam_user
+      end unless user_id.nil? or user_id == ""
     return hash
   end
 

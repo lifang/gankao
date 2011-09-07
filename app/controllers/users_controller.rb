@@ -107,29 +107,30 @@ class UsersController < ApplicationController
   end
   
   def first_page
-    @simulations=Examination.find_by_sql("select * from examinations where types=#{Examination::TYPES[:SIMULATION]} order by created_at limit 3")
-    examnation_ids=@simulations.map(&:id).join(",")
-    @hash1=Examination.exam_users_hash(cookies[:user_id],examnation_ids)
-    @examinations=Examination.find_by_sql("select count(types) sums,types from examinations group by types")
-    @exams=Examination.find_by_sql("select count(types) sums,types from examinations e inner join exam_users  u on u.examination_id=e.id where u.user_id=#{cookies[:user_id]} and u.is_submited=1  group by types")
-    @hash={}
-    @examinations.each do |examination|
-      @hash["#{examination.types}"]=[examination.sums,0]
-      unless @exams.blank?
-        @exams.each do |exam|
-          if examination.types==exam.types
-            @hash["#{examination.types}"]=[examination.sums,exam.sums]
+    @simulations = Examination.find_by_sql("select * from examinations where types = #{Examination::TYPES[:SIMULATION]}
+      and is_published = #{Examination::IS_PUBLISHED[:ALREADY]} order by created_at")
+    @hash1 = Examination.exam_users_hash(cookies[:user_id])
+    @simulations.each do |simulation|
+      @simulations = @simulations - simulation if (!@hash1.keys.include?(simulation.id.to_s) and
+        simulation.status == Examination::STATUS[:CLOSED])
+    end
+    @all_examinations = Examination.find_by_sql("select count(types) sums, types from examinations
+      where is_published = #{Examination::IS_PUBLISHED[:ALREADY]} and types != #{Examination::TYPES[:SIMULATION]} group by types")
+    @user_exams = Examination.find_by_sql("select count(types) sums,types from examinations e
+      inner join exam_users u on u.examination_id = e.id
+      where e.types != #{Examination::TYPES[:SIMULATION]} and u.user_id = #{cookies[:user_id]} group by types")
+    @type_hash ={}
+    @all_examinations.each do |examination|
+      @type_hash["#{examination.types}"]=[examination.sums, 0]
+      @user_exams.each do |exam|
+          if examination.types == exam.types
+            @type_hash["#{examination.types}"] = [examination.sums, exam.sums]
             break
           end
-        end
-      end
+        end unless @user_exams.blank?
     end
-    puts @hash
-    if Collection.find_by_user_id(cookies[:user_id])==nil
-      @incorrect_list==nil
-    else
-      @incorrect_list=Collection.find_by_user_id(cookies[:user_id]).open_xml.root
-    end
+    collection = Collection.find_by_user_id(cookies[:user_id])
+    @incorrect_list = collection.open_xml.root if collection and collection.collection_url
   end
 
   def roles_manage
