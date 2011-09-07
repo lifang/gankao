@@ -1,50 +1,55 @@
-
-<div id="show_div">
-  <div class="biz_art_list_box" >
+<%= javascript_include_tag 'pileadd' %>
+<div class="part_question" id="show_div">
+  <div>
     <% attr="" %>
-    <% problem=@lists.elements["/collection/problems"].elements["problem"]%>
-    &nbsp;&nbsp;&nbsp;&nbsp;<%= problem.elements["title"].text.to_s.html_safe %>
-    <% problem.elements["questions"].each_element do |question| %>
+    <% @problem.elements["questions"].each_element do |question| %>
       <% attr +=question.attributes["id"]+"," %>
-      <div id="show_problem">
-        <div class="question">
-          &nbsp;&nbsp;&nbsp;&nbsp;小题描述：
-          <%= question.elements["description"].text if question.elements["description"] %>
-          <% ""
-          attrs_str=question.elements["questionattrs"].text
-          attrs_array=attrs_str.split(";-;") unless attrs_str.nil?
-          correct_type = question.attributes["correct_type"]
-          (0..attrs_array.length-1).each do |i|
-          %>
-            <div class="attr">
-              <% if !correct_type.nil? %>
-                <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
-                  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="question_attr_<%= question.attributes["id"].to_i %>"
-                                                 id="question_attr_<%= i %>" value="<%=attrs_array[i]  %>"  />
-                                               <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
-                  &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>"
-                                                 id="question_attr_<%= i %>" value="<%=attrs_array[i]  %>" />
-                                               <% end %>
-                <label><%= attrs_array[i] %></label>
-              <% end %>
-            </div>
-          <% end if attrs_array and attrs_array.any? %>
-          <div class="attr" >
-            <% if correct_type.to_i == Problem::QUESTION_TYPE[:JUDGE] %>
-              <div >&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>" value="<%=attrs_array[i]  %>"/><label>对</label></div>
-              <div>&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>" value="<%=attrs_array[i]  %>"/><label>错</label></div>
-            <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] or correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER]
-              %><div>&nbsp;&nbsp;&nbsp;&nbsp;<input type="textfield" id="question_answer_<%= question.attributes["id"].to_i %>" value=""/></div>
-              <% end  %>
+      <div class="p_question_list question_no"  >
+        <div class="p_q_l_left"><%= question.attributes["id"] %></div>
+        <div class="p_q_l_right">
+          <div class="p_contents">
+            <p>小题描述：
+              &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["description"].text if question.elements["description"] %>
+            </p>
           </div>
+          <ul class="chooseQuestion">
+            <% ""
+            attrs_str=question.elements["questionattrs"].text
+            attrs_array=attrs_str.split(";-;") unless attrs_str.nil?
+            correct_type = question.attributes["correct_type"]
+            (0..attrs_array.length-1).each do |i|
+            %>
+              <div class="attr">
+                <% if !correct_type.nil? %>
+                  <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="question_attr_<%= question.attributes["id"].to_i %>"
+                                                   id="question_attr_<%= i %>" value="<%=attrs_array[i]  %>"  />
+                                                 <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>"
+                                                   id="question_attr_<%= i %>" value="<%=attrs_array[i]  %>" />
+                                                 <% end %>
+                  <label><%= attrs_array[i] %></label>
+                <% end %>
+              </div>
+            <% end if attrs_array and attrs_array.any? %>
+            <div class="attr" >
+              <% if correct_type.to_i == Problem::QUESTION_TYPE[:JUDGE] %>
+                <div >&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>" value="<%=attrs_array[i]  %>"/><label>对</label></div>
+                <div>&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>" value="<%=attrs_array[i]  %>"/><label>错</label></div>
+              <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] or correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER]
+                %><div>&nbsp;&nbsp;&nbsp;&nbsp;<input type="textfield" id="question_answer_<%= question.attributes["id"].to_i %>" value=""/></div>
+                <% end  %>
+            </div>
+          </ul>
+          <div class="p_question_btn" style="display: none;"><button class="save">保存</button><button class="Uncertain">不确定</button></div>
+          <div class="fraction"><%= question.attributes["score"] %>分</div>
         </div>
-        <div>
-          <input type="hidden" value=" " id="answer_<%= question.attributes["id"] %>"  name="answer_<%= question.attributes["id"] %>"/>
-          <input type="hidden" value="<%=correct_type  %>" id="question_type_<%= question.attributes["id"] %>" />
-        </div>
+        <div class="clear"></div>
+        <input type="hidden" value=" " id="answer_<%= question.attributes["id"] %>"  name="answer_<%= question.attributes["id"] %>"/>
+        <input type="hidden" value="<%=correct_type  %>" id="question_type_<%= question.attributes["id"] %>" />
       </div>
+      <input type="hidden" value="<%= @problem.attributes["id"] %>" id="problem_id" />
     <% end %>
-    <input type="hidden" value="<%= problem.attributes["id"] %>" id="problem_id" />
     <input type="submit" value="提交" onclick="javascript:problem_values('<%= attr.chop %>')" />
     <input type="hidden" value="<%= params[:page] %>" id="page" />
     <% if @has_next_page %>
