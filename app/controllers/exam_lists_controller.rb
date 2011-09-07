@@ -1,5 +1,6 @@
 class ExamListsController < ApplicationController
   before_filter :access?
+  layout "gankao"
   def  list
     lists=Collection.find_by_user_id(cookies[:user_id]).open_xml
     lists.elements["/collection/problems"].each_element do |problem|
@@ -19,13 +20,11 @@ class ExamListsController < ApplicationController
       @examination_lists -=[examination] unless examinations.include?(examination.id)  if examination.status==Examination::STATUS[:CLOSED ]
     end
     @hash=Examination.exam_users_hash(cookies[:user_id],Examination::TYPES[:SIMULATION])
-    render :layout=>"gankao"
   end
   
   def old_exam_list
     @old_lists=Examination.where("types=? and is_published=1",Examination::TYPES[:OLD_EXAM])
     @hash=Examination.exam_users_hash(cookies[:user_id],Examination::TYPES[:OLD_EXAM])
-    render :layout=>"gankao"
   end
   
   def incorrect_list
@@ -41,7 +40,6 @@ class ExamListsController < ApplicationController
       @hash_list["#{question.attributes['id']}"]=Feedback.find_all_by_user_id_and_question_id(cookies[:user_id],question.attributes["id"].to_i)
     end unless problem.nil?
     @has_next_page = current_element[1]
-    render :layout=>"gankao"
   end
 
 
@@ -65,7 +63,6 @@ class ExamListsController < ApplicationController
     @lists = current_element[0]
     @problem=@lists.elements["/collection/problems/problem"]
     @has_next_page = current_element[1]
-    render :layout=>"gankao"
   end
 
   def compare_answer

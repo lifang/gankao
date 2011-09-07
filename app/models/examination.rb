@@ -145,36 +145,17 @@ class Examination < ActiveRecord::Base
     end if start_num > 0
     return doc
   end
-
-  def self.examination_types
-    examinations=Examination.find_by_sql("select count(types) sums,types from examinations e where e.is_published =#{Examination::IS_PUBLISHED[:ALREADY]} group by types")
-    hash={}
-    sums=0
-    examinations.each do |examination|
-      if examination.types.to_i==1||examination.types.to_i==0
-        hash["#{examination.types}"]=examination.sums
-      else
-        sums +=examination.sums
-      end
-    end unless examinations.blank?
-    hash["#{Examination::TYPES[:PRACTICE1]}"]=sums
-    return hash
-  end
-
-  def self.examination_user(id)
-    exams=Examination.find_by_sql("select count(e.types) sums,e.types from examinations e inner join exam_users  u
-     on u.examination_id=e.id where u.user_id=#{id} and is_published = #{Examination::IS_PUBLISHED[:ALREADY]} and u.is_submited=1  group by types")
-    hash={}
-    sums=0
-    exams.each do |exam|
-      if exam.types.to_i==1||exam.types.to_i==0
-        hash["#{exam.types}"]=exam.sums
-      else
-        sums +=exam.sums
-      end
-    end unless exams.blank?
-    hash["#{Examination::TYPES[:PRACTICE1]}"]=sums
-    return hash
-  end
+ def self.count_correct(id)
+   correct=0.0
+   n=0
+    users=ExamUser.find_by_sql("select eu.total_score,eu.is_submited,eu.examination_id,
+        correct_percent from exam_users eu inner join examinations e on e.id = eu.examination_id
+        where e.types =#{Examination::TYPES[:SIMULATION]} and eu.user_id = #{id} and eu.is_submited=1 and is_published=#{Examination::IS_PUBLISHED[:ALREADY]}")
+   users.each do |exam_user|
+     n +=1
+       correct += (exam_user.correct_percent.nil? ? 0 :exam_user.correct_percent)
+    end unless users.blank?
+    return (correct/n)*100
+ end
 
 end
