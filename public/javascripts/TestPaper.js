@@ -8,6 +8,15 @@ jQuery(function(){
         },1000);
     })
 })
+
+jQuery(function(){
+    jQuery(window).scroll(function(){
+        var top = jQuery(window).scrollTop();
+        jQuery('.errorLibrary_right').stop().animate({
+            top:top
+        },1000);
+    })
+})
  
 //解析弹出层
 jQuery(function(){

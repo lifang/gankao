@@ -3,8 +3,8 @@
     <% question_with_answer.elements["questions"].each_element do |question| %>
       <div class="p_question_list question_no"  >
         <div class="p_q_l_left"><%= question.attributes["id"] %></div>
-        <div class="p_q_l_right" onmouseover="javascript:$('question_<%= question.attributes["id"] %>').style.display='block';" 
-              >
+        <div class="p_q_l_right" onmouseover="javascript:$('question_<%= question.attributes["id"] %>').style.display='block';"
+             >
           <div class="p_contents">
             <p>小题描述：
               &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["description"].text if question.elements["description"] %>
@@ -57,8 +57,10 @@
         <div class="review_btn">
           <input  id="btn_<%= question.attributes["id"] %>_analysis" type="hidden" value="<%=  %>"/>
           <button class="jiexi_btn" id="btn_<%= question.attributes['id'] %>">解析</button>
-          <button class="biji_btn">笔记</button>
-          <button onclick="javascript:document.getElementById('status').submit();">删出错题库</button>
+            <button class="biji_btn"
+            name="note_<%= question.attributes["id"] %>" id="note_<%= question.attributes["id"] %>"
+            onclick="javascript:cuoti_note(<%= question.attributes["id"] %>, <%= question_with_answer.attributes["id"] %>);">笔记</button>
+          <button onclick="javascript:document.getElementById('status').submit();">删除</button>
         </div>
         <input type="hidden" id="btn_<%= question.attributes["id"] %>_answer" type="hidden" value="<%= answers.join(";") %>"/>
         <input type="hidden" id="btn_<%= question.attributes["id"] %>_analysis" type="hidden" value="<%= question.elements["analysis"].text %>"/>
@@ -68,7 +70,6 @@
           <input type="hidden" value="<%= params[:page].nil? ? 1:params[:page] %>" name="page" />
         <% end %>
         <div class="clear"></div>
-       
       <% end %>
     </div>
   </div>

@@ -433,10 +433,10 @@ function question_style(id){
 }
 
 function feedb(question_id,problem_id){
-    var text=$("description").value;
-    if (text==""||text.length==0){
-    alert("请输入你要问的问题.");
-    return false;
+    var text=$("description_"+question_id).value;
+    if (text=="输入想知道的问题..."||text.length==0||text==""){
+        alert("请输入你要问的问题.");
+        return false;
     }else{
 
         new Ajax.Updater("feedback" , "/exam_lists/feedback",
@@ -448,4 +448,16 @@ function feedb(question_id,problem_id){
         });
         return false;
     }
+}
+function cuoti_note(question_id, problem_id) {
+    new Ajax.Updater("biji_tab", "/exam_lists/"+question_id+"/load_note",
+    {
+        asynchronous:true,
+        evalScripts:true,
+        method:"post",
+        onComplete:function(request){
+        },
+        parameters:'problem_id='+problem_id+'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+    });
+    return false;
 }

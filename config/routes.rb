@@ -22,7 +22,7 @@ Gankao::Application.routes.draw do
       get :question_info
     end
     member do
-       
+       post :load_note,:create_note
     end
   end
   resources :advertises do
