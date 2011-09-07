@@ -111,33 +111,11 @@ class UsersController < ApplicationController
       and is_published = #{Examination::IS_PUBLISHED[:ALREADY]} order by created_at")
     @hash1 = Examination.exam_users_hash(cookies[:user_id],Examination::TYPES[:SIMULATION])
     @simulations.each do |simulation|
-<<<<<<< HEAD
       @simulations = @simulations - [simulation] if (!@hash1.keys.include?(simulation.id.to_s) and
           simulation.status == Examination::STATUS[:CLOSED])
     end
-    @examinations=Examination.find_by_sql("select count(types) sums,types from examinations e where e.is_published =#{Examination::IS_PUBLISHED[:ALREADY]} group by types")
-    @hash={}
-    sums=0
-    @examinations.each do |examination|
-      if examination.types.to_i==1||examination.types.to_i==0
-        @hash["#{examination.types}"]=examination.sums
-      else
-        sums +=examination.sums
-      end
-    end unless @examinations.blank?
-    @hash["#{Examination::TYPES[:PRACTICE1]}"]=sums
-    @exams=Examination.find_by_sql("select count(e.types) sums,e.types from examinations e inner join exam_users  u
-     on u.examination_id=e.id where u.user_id=#{cookies[:user_id]} and is_published = #{Examination::IS_PUBLISHED[:ALREADY]} and u.is_submited=1  group by types")
-    @hashh={}
-    sums=0
-    @exams.each do |exam|
-      if exam.types.to_i==1||exam.types.to_i==0
-        @hashh["#{exam.types}"]=exam.sums
-      else
-        sums +=exam.sums
-      end
-    end unless @exams.blank?
-    @hashh["#{Examination::TYPES[:PRACTICE1]}"]=sums
+     @hash=Examination.examination_types
+    @hashh=Examination.examination_user(cookies[:user_id])
     collection = Collection.find_by_user_id(cookies[:user_id])
     @incorrect_list = collection.open_xml.root if collection and collection.collection_url
   end
