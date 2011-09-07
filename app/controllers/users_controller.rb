@@ -118,7 +118,8 @@ class UsersController < ApplicationController
       where is_published = #{Examination::IS_PUBLISHED[:ALREADY]} and types != #{Examination::TYPES[:SIMULATION]} group by types")
     @user_exams = Examination.find_by_sql("select count(types) sums,types from examinations e
       inner join exam_users u on u.examination_id = e.id
-      where e.types != #{Examination::TYPES[:SIMULATION]} and u.user_id = #{cookies[:user_id]} group by types")
+      where e.types != #{Examination::TYPES[:SIMULATION]} and u.is_submited = #{ExamUser::IS_SUBMITED[:YES]}
+      and u.user_id = #{cookies[:user_id]} group by types")
     @type_hash ={}
     @all_examinations.each do |examination|
       @type_hash["#{examination.types}"]=[examination.sums, 0]
@@ -129,6 +130,15 @@ class UsersController < ApplicationController
           end
         end unless @user_exams.blank?
     end
+    all_practice = 0
+    exam_practice = 0
+    @type_hash.keys.each do |key|
+      if key.to_i > Examination::TYPES[:OLD_EXAM]
+        all_practice += @type_hash[key][0]
+        exam_practice += @type_hash[key][1]
+      end
+    end
+    @type_hash["practice"] = [all_practice, exam_practice]
     collection = Collection.find_by_user_id(cookies[:user_id])
     @incorrect_list = collection.open_xml.root if collection and collection.collection_url
   end
