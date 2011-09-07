@@ -25,7 +25,7 @@ jQuery(function(){
         jQuery('.jiexi_tab').css('display','block');
         jQuery('.jiexi_tab').css({
             'top':(e.pageY+20)+'px',
-            'left':(e.pageX-350)+'px'
+            'left':(e.pageX-30)+'px'
         });
         jQuery('#answer').html("正确答案 " + jQuery('#' + btn_id + '_answer').attr("value"));
         jQuery('#analysis').html(jQuery('#' + btn_id + '_analysis').attr("value"));
@@ -39,11 +39,11 @@ jQuery(function(){
 
 //笔记弹出层
 jQuery(function(){
-    jQuery('.biji_btn').click(function(e){alert(1);
+    jQuery('.biji_btn').click(function(e){
         jQuery('.biji_tab').css('display','block');
         jQuery('.biji_tab').css({
             'top':(e.pageY+20)+'px',
-            'left':(e.pageX-350)+'px'
+            'left':(e.pageX-30)+'px'
         });
     }
     )

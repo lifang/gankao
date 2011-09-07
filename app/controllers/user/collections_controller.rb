@@ -24,7 +24,7 @@ class User::CollectionsController < ApplicationController
       end     
     end
     flash[:notice] = "收藏成功."
-    render :partial => "/common/display_flash"
+    render :partial => "/common/flash_div"
   end
 
   def search
@@ -57,9 +57,7 @@ class User::CollectionsController < ApplicationController
         flash[:notice] = "收藏成功。"
       end
     end
-    puts flash[:notice]
-    puts flash[:warn]
-    render :partial => "/common/display_flash"
+    render :partial => "/common/flash_div"
   end
   
 end
