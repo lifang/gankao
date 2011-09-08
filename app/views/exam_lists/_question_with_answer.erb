@@ -1,64 +1,65 @@
 <div class="part_question">
-    <% question_with_answer.elements["questions"].each_element do |question| %>
-      <div class="p_question_list question_no"  >
-        <div class="p_q_l_left"><%= question.attributes["id"] %></div>
-        <div class="p_q_l_right" onmouseover="javascript:$('question_<%= question.attributes["id"] %>').style.display='block';"
-             >
-          <div class="p_contents">
-            <p>小题描述：
-              &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["description"].text if question.elements["description"] %>
-            </p>
+  <% attr="" %>
+  <% question_with_answer.elements["questions"].each_element do |question| %>
+    <% attr +=question.attributes["id"]+"," %>
+    <div class="p_question_list question_no"  >
+      <div class="p_q_l_left"><%= question.attributes["id"] %></div>
+      <div class="p_q_l_right" onmouseover="javascript:show_question('<%= question.attributes["id"] %>')"
+           >
+        <div class="p_contents">
+          <p>小题描述：
+            &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["description"].text if question.elements["description"] %>
+          </p>
+        </div>
+        <span id="user_score_<%= question.attributes["id"].to_i %>">
+        </span>
+        <% attrs_str = question.elements["questionattrs"].text
+        attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
+        correct_type = question.attributes["correct_type"]
+        answer = question.elements["answer"]
+        answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
+        user_answer=question.elements["user_answer"].text
+        user_answers=user_answer.nil? ? [] :  user_answer.split(";|;") %>
+        <% if (correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] or
+              correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE]) %>
+          <ul class="chooseQuestion">
+            <%
+            (0..attrs_array.length-1).each do |i|
+              is_answer = answers.include?(attrs_array[i])
+              is_user_answer=user_answers.include?(attrs_array[i])
+            %>
+              <li <% if is_answer %> class="correctRight_bg" <% end %>>
+                <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
+                  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="question_attr_<%= question.attributes["id"].to_i %>"
+                                                 id="question_attr_<%= i %>"  <% if is_user_answer %>checked="true"<% end %> />
+                                               <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
+                  &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>"
+                                                 id="question_attr_<%= i %>" <% if is_user_answer %>checked="true"<% end %> />
+                <% end %>&nbsp;&nbsp;<%= attrs_array[i] %>
+              </li>
+            <% end if attrs_array and attrs_array.any? %>
+          </ul>
+        <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:JUDGE] %>
+          <div <% if answers[0].to_i==1 %>class="correctRight_bg"<% end %>>
+            <input type="radio"<% if user_answer==1.to_s %> checked="true"<% end %>  /><label>对</label>
           </div>
-          <span id="user_score_<%= question.attributes["id"].to_i %>">
-          </span>
-          <% attrs_str = question.elements["questionattrs"].text
-          attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
-          correct_type = question.attributes["correct_type"]
-          answer = question.elements["answer"]
-          answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
-          user_answer=question.elements["user_answer"].text
-          user_answers=user_answer.nil? ? [] :  user_answer.split(";|;") %>
-          <% if (correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] or
-                correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE]) %>
-            <ul class="chooseQuestion">
-              <%
-              (0..attrs_array.length-1).each do |i|
-                is_answer = answers.include?(attrs_array[i])
-                is_user_answer=user_answers.include?(attrs_array[i])
-              %>
-                <li <% if is_answer %> class="correctRight_bg" <% end %>>
-                  <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="question_attr_<%= question.attributes["id"].to_i %>"
-                                                   id="question_attr_<%= i %>"  <% if is_user_answer %>checked="true"<% end %> />
-                                                 <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>"
-                                                   id="question_attr_<%= i %>" <% if is_user_answer %>checked="true"<% end %> />
-                  <% end %>&nbsp;&nbsp;<%= attrs_array[i] %>
-                </li>
-              <% end if attrs_array and attrs_array.any? %>
-            </ul>
-          <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:JUDGE] %>
-            <div <% if answers[0].to_i==1 %>class="correctRight_bg"<% end %>>
-              <input type="radio"<% if user_answer==1.to_s %> checked="true"<% end %>  /><label>对</label>
-            </div>
-            <div <% if answers[0].to_i==0 %>class="correctRight_bg"<% end %>>
-              <input type="radio"  <% if user_answer==0.to_s %> checked="true"<% end %>  /><label>错</label>
-            </div>
-          <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] %>
-            <div class="answer_text">
-              <input name="answer" type="text" value="<%= user_answers[0].to_s %>" />(<%= answers[0].to_s %>)
-            </div>
-          <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] %>
-            <div class="answer_textarea">
-              <textarea cols="" rows=""><%= user_answers[0].to_s %></textarea>(<%= answers[0].to_s %>)
-            </div>
-          <% end %>
+          <div <% if answers[0].to_i==0 %>class="correctRight_bg"<% end %>>
+            <input type="radio"  <% if user_answer==0.to_s %> checked="true"<% end %>  /><label>错</label>
+          </div>
+        <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] %>
+          <div class="answer_text">
+            <input name="answer" type="text" value="<%= user_answers[0].to_s %>" />(<%= answers[0].to_s %>)
+          </div>
+        <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] %>
+          <div class="answer_textarea">
+            <textarea cols="" rows=""><%= user_answers[0].to_s %></textarea>(<%= answers[0].to_s %>)
+          </div>
+        <% end %>
         <div class="p_question_btn" style="display: none;"><button class="save">保存</button><button class="Uncertain">不确定</button></div>
         <div class="fraction"><%= question.attributes["score"] %>分</div>
       </div>
       <div class="clear"></div>
       <div class="review_btn">
-        <input  id="btn_<%= question.attributes["id"] %>_analysis" type="hidden" value="<%=  %>"/>
         <button class="jiexi_btn" id="btn_<%= question.attributes['id'] %>">解析</button>
         <button class="biji_btn"
                 name="note_<%= question.attributes["id"] %>" id="note_<%= question.attributes["id"] %>"
@@ -75,6 +76,7 @@
       <div class="clear"></div>
     </div>
   <% end %>
+  <input type="hidden" value="<%= attr.chop %>" id="questions" />
 </div>
 
 

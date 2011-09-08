@@ -51,21 +51,29 @@
                 <%= User.find(cookies[:user_id]).belief %>%
               </div>
             <% else %>
-              你当前还不是<font color="red">VIP</font>哦，购买<font color="red">VIP</font>可以显示你自己当前的信心指数，无限制的综合训练次数以及模考试卷主观题的修改，心动不如行动，赶快来<a href="/users/goto_vip"><font color="blue">购买</font></a>吧</font>！
+              <%= "" %>
             <% end %>
           </span></h3>
-        <p><a href="#">如何增加信心？</a></p>
+        <p><a href="/users/goto_vip">如何增加信心？</a></p>
       </div>
 
       <div class="per_two_box">
         <div class="per_tb_title per_tb_ctk">错题库</div>
-        <h3><span class="red"><%= @incorrect_list.elements['problems'].elements.size %></span> 错题</h3>
-        <p><a href="/exam_lists/incorrect_list">马上复习</a></p>
+        <% unless @incorrect_list.nil? %>
+          <h3><span class="red"><%=@incorrect_list.elements['problems'].elements.size %></span> 错题</h3>
+          <p><a href="/exam_lists/incorrect_list">马上复习</a></p>
+        <% else %>
+          <h3><span class="red"><%= "您没有错题" %></span></h3>
+        <% end %>
       </div>
       <div class="per_two_box">
         <div class="per_tb_title per_tb_biji">笔记</div>
-        <h3><span class="red"><%= @notes.elements['problems'].elements.size %></span> 篇</h3>
-        <p><a href="/user/notes">翻阅笔记</a></p>
+        <% unless @notes.nil? %>
+          <h3><span class="red"><%= @notes.elements['problems'].elements.size %></span> 篇</h3>
+          <p><a href="/user/notes">翻阅笔记</a></p>
+        <% else %>
+          <h3><span class="red"><%= "您没有做笔记" %></span></h3>
+        <% end %>
       </div>
     </div>
   </div>

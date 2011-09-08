@@ -854,9 +854,49 @@ function answer_xml() {
         if (questions.length > 0) {
             answer_hash = new Hash();
             for(var i=0;i<questions.length;i++){
-                answer_hash[questions[i].getAttribute("id")] = [questions[i].firstChild.firstChild.nodeValue, questions[i].getAttribute("is_sure")];
+                var answer = questions[i].getElementsByTagName("answer")[0].firstChild != null ?
+                questions[i].getElementsByTagName("answer")[0].firstChild.data : "";
+                answer_hash[questions[i].getAttribute("id")] = [answer, questions[i].getAttribute("is_sure")];
             }
         }
+    }
+}
+
+//控制音频内容
+var is_first_in = true;
+function control_media(audio_id, types) {
+    try {
+        var audio = $("audio_" + audio_id);
+        setCookie("exam_audio_" + audio_id, 0);
+        setCookie("audio_time_" + audio_id, 0);
+        if (getCookie("audio_time_" + audio_id) != "end") {
+            if(getCookie("exam_audio_" + audio_id) == null){
+                setCookie("exam_audio_" + audio_id, 0);
+            }
+            if(new Number(getCookie("exam_audio_" + audio_id)) < 1){
+                audio_timer = window.setInterval("audio_current_time('"+ audio_id +"', '"+ types +"')", 100);
+                if (types == "audio") {
+                    if(audio.paused){
+                        if (getCookie("audio_time_" + audio_id) != null && new Number(getCookie("audio_time_" + audio_id)) != 0) {
+                            audio.currentTime += getCookie("audio_time_" + audio_id);
+                        }
+                    }
+                } else {
+                    if (getCookie("audio_time_" + audio_id) != null) {
+                        audio.currentPosition += getCookie("audio_time_" + audio_id);
+                    }
+                }
+                audio.play();
+            } else {
+                $("audio_control_" + audio_id).title = "停止";
+                $("audio_control_" + audio_id).src = "/images/paper/zanting_icon.png";
+            }
+        }
+    }catch (e) {
+        var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
+        flash_div.innerHTML = "<p>音频文件不能播放，请您检查您的音频文件是否存在。</p>";
+        document.body.appendChild(flash_div);
+        show_flash_div();
     }
 }
 
@@ -864,48 +904,62 @@ function answer_xml() {
 var audio_timer = null;
 function control_audio(audio_id) {
     if (window.HTMLAudioElement) {
-        try {
-            var audio = $("audio" + audio_id);
-            if (getCookie("audio_time_" + audio_id) != "end") {
-                if(getCookie("exam_audio_" + audio_id) == null){
-                    setCookie("exam_audio_" + audio_id, 0);
-                }
-                if(new Number(getCookie("exam_audio_" + audio_id)) < 1){
-                    audio_timer = window.setInterval("audio_current_time('"+ audio_id +"')", 100);
-                    if(audio.paused){
-                        audio.load();
-                        audio.play();
-                    }
-                }
+        control_media(audio_id, "audio");
+    } else {
+        load_object_audio(audio_id);
+    }
+}
+
+//不支持html5的浏览器使用
+function load_object_audio(audio_id) {
+    control_media(audio_id, "media");
+}
+
+//记录当前播放时间
+function audio_current_time(audio_id, types) {
+    if (new Number(getCookie("exam_audio_" + audio_id)) == 1) {
+        window.clearInterval(audio_timer);
+    } else {
+        setTimeout(function(){
+            add_time_to_cookies(audio_id, types);
+            if (is_first_in) {
+                is_first_in = false;
             }
-        }catch (e) {
-            var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
-            flash_div.innerHTML = "<p>音频文件不能播放，请您检查您的音频文件是否存在。</p>";
-            document.body.appendChild(flash_div);
-            show_flash_div();
+        }, 10000);
+    }
+    if (types == "media") {
+        if (new Number(getCookie("audio_time_" + audio_id)) == 0 && is_first_in == false) {
+            add_audio_cookies(audio_id);
         }
     }
 }
 
-//记录当前播放时间
-function audio_current_time(audio_id) {
-    if (new Number(getCookie("exam_audio_" + audio_id)) < 1) {
-        window.clearInterval(audio_timer);
-        setCookie("audio_time_" + audio_id, "end");
+//将音频播放的时间记录到cookie
+function add_time_to_cookies(audio_id, types) {
+    if (types == "audio") {
+        if ($("audio_" + audio_id).currentTime != null) {
+            setCookie("audio_time_" + audio_id, $("audio_" + audio_id).currentTime);
+        }
     } else {
-        setTimeout(function(){
-            if ($("audio" + audio_id).currentTime != null) {
-                setCookie("audio_time_" + audio_id, $("audio" + audio_id).currentTime);
-            }
-        }, 5000);
-        window.clearInterval(audio_timer);
-        audio_timer = window.setInterval("audio_current_time('"+ audio_id +"')", 100);
+        if ($("audio_" + audio_id).currentPosition != null) {
+            setCookie("audio_time_" + audio_id, $("audio_" + audio_id).currentPosition);
+        }
     }
+    window.clearInterval(audio_timer);
+    audio_timer = window.setInterval("audio_current_time('"+ audio_id +"', '"+ types +"')", 100);
 }
 
 //记录听力已经播放
 function add_audio_cookies(audio_id) {
     if (getCookie("exam_audio_" + audio_id) != null) {
         setCookie("exam_audio_" + audio_id, new Number(getCookie("exam_audio_" + audio_id))+1);
+        setCookie("audio_time_" + audio_id, "end");
+        $("audio_control_" + audio_id).title = "停止";   
+        $("audio_control_" + audio_id).src = "/images/paper/zanting_icon.png";
+
+        var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
+        flash_div.innerHTML = "<p>听力播放结束，请开始答题。</p>";
+        document.body.appendChild(flash_div);
+        show_flash_div();
     }
 }

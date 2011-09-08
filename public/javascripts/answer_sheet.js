@@ -91,3 +91,5 @@ function update_note(question_id) {
     $("start_note_" + question_id).style.display = "block";
     $("note_" + question_id).style.display = "none";
 }
+
+function add_audio_cookies(audio_id) {}

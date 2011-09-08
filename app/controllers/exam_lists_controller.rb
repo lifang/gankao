@@ -130,7 +130,7 @@ class ExamListsController < ApplicationController
       if question
         note.update_question(params["note_text_#{params[:id]}"].strip, question.xpath, note_doc)
       else
-        problem.add_elements(collection_question)
+        problem.add_element(collection_question)
         note.save_xml(note_doc)
       end
     else
