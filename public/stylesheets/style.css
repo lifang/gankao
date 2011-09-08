@@ -6,7 +6,7 @@ img { border: none;}
 .clear { clear: both;}
 .orange { color: #F60;}
 .red { color: #F00;}
-.blue { color: #1167aa;}
+.blue { color: #2875ae;}
 
 .wrap { height: 38px; background: url(/images/paper/top_bg.png) repeat-x;}
 
@@ -25,7 +25,7 @@ img { border: none;}
 .menu { width: 437px; height: 39px; padding: 0 12px; _width: 445px; _padding: 0 8px; background: url(/images/paper/menu_bg.png) no-repeat;}
 .menu li { float: left; padding: 0 9px; height: 39px; line-height: 42px;}
 .menu li a { color: #333; text-decoration: none;}
-.menu li a:hover, .menu li a.hover { color: #1abcf0;}
+.menu li a:hover, .menu li a.hover { color: #2875af;}
 
 .main { width: 880px; margin: 0 auto; padding: 10px; overflow: hidden; }
 
@@ -56,11 +56,12 @@ img { border: none;}
 	background: url(/images/paper/all_bg.png) no-repeat -7px -83px;
 }
 .per_load_bg { width: 199px; height: 20px; background: url(/images/paper/per_load_bg.png) no-repeat; padding: 7px 0 0 7px; margin: 0 auto;}
+
 .per_load_t { height: 11px; background: url(/images/paper/per_load_t.png) no-repeat;}
 
 
 .per_two_box { width: 141px; height: 105px; margin: 5px auto;}
-.per_tb_title { width: 141px; height: 27px; overflow: hidden; line-height: 27px; text-align: center; font-size: 14px; color: #437f8d; font-family: "微软雅黑";}
+.per_tb_title { width: 141px; height: 27px; overflow: hidden; line-height: 27px; text-align: center; font-size: 14px; color: #2875ae; font-family: "微软雅黑";}
 .per_tb_xinx { background: url(/images/paper/all_bg.png) no-repeat 0px -524px;}
 .per_tb_ctk { background: url(/images/paper/all_bg.png) no-repeat 0px -563px;}
 .per_tb_biji { background: url(/images/paper/all_bg.png) no-repeat 0px -603px;}
@@ -241,7 +242,7 @@ img { border: none;}
 .mokao_right { float: left; width: 635px; height: 364px; position: relative;}
 .mokaoList { height: 70px; padding-top: 30px; line-height: 24px; cursor: pointer;}
 .mokaoList h3 { font-size: 14px; color: #333;}
-.mkl_h h3 { color: #1167aa;}
+.mkl_h h3 { color: #2875ae;}
 
 .mk_r_div {padding-left: 240px; width: 395px; padding-top: 40px; height: 324px; overflow: hidden;}
 .mkList_jt0 { background: url(/images/paper/mkList_jt0.jpg) no-repeat 0 center;}
@@ -293,6 +294,29 @@ img { border: none;}
 
 
 .zh_p { padding-left: 50px; height: 32px; line-height: 32px; font-size: 14px;}
+
+
+/*综合-----------------------------*/
+.zonghe_div { padding: 10px; height: 600px; position: relative;}
+.zh_tab { width: 250px; height:176px; background: url(/images/paper/zh_tab.png) no-repeat; _background: url(/images/paper/zh_tab.gif) no-repeat; position: absolute;}
+.zh_tab0 { background: url(/images/paper/zh_tab0.png) no-repeat; _background: url(/images/paper/zh_tab0.gif) no-repeat;}
+.zh_tab_title { height: 40px; line-height: 40px; padding-right: 10px; text-align: right; font-size: 18px; color: #2875ae;}
+.zh_tab_box { width: 240px; height:120px; padding: 5px; line-height: 24px; overflow: hidden;}
+.zh_position_one { z-index: 5; left: 50px;}
+.zh_position_two { z-index: 4; left: 180px;}
+.zh_position_three { z-index: 3; left: 310px;}
+.zh_position_four { z-index: 2; left: 440px;}
+.zh_position_five { z-index: 1; left: 570px;}
+
+
+.zh_top { width: 100%;height: 50px; margin-top: 20px; padding-left: 200px;}
+.zh_load { width: 250px; float: left; margin-top: 5px;}
+.zh_addTo_btn { width: 160px; float: left; height: 35px; }
+.zh_addTo_btn a { width: 160px; height: 35px; display: block; margin: 0 auto; background: url(/images/paper/all_bg.png) no-repeat -198px -440px; text-indent: -999px; overflow: hidden;}
+
+
+.zh_p { padding-left: 50px; height: 32px; line-height: 32px; font-size: 14px;}
+
 
 
 

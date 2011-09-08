@@ -23,7 +23,7 @@
 
     <div class="m_box_one ztlx">
       <div class="per_con">
-        <% pro=(@type_hash["1"][1].nil? ? 0 : @type_hash["1"][1]).to_f/(@type_hash["1"][0].nil? ? 1 : @type_hash["1"][0])*100 %>
+        <% pro=(@type_hash["#{Examination::TYPES[:OLD_EXAM]}"][1].nil? ? 0 : @type_hash["#{Examination::TYPES[:OLD_EXAM]}"][1]).to_f/(@type_hash["#{Examination::TYPES[:OLD_EXAM]}"][0].nil? ? 1 : @type_hash["#{Examination::TYPES[:OLD_EXAM]}"][0])*100 %>
         <h2>完成度： <span class="red"><%= "#{pro.to_i}%"   %></span></h2>
         <h2>正确率： <span class="red"><%= "#{@correct.to_i}%" %></span></h2>
       </div>
@@ -33,9 +33,10 @@
 
     <div class="m_box_one zhxl">
       <div class="per_con">
-        <% progress=(@type_hash["practice"][1].nil? ? 0 : @type_hash["practice"][1])*1.0/(@type_hash["practice"][0].nil? ? 1 : @type_hash["practice"][0]) %>
+        <% progress=(@type_hash["2"][1].nil? ? 0 :
+            @type_hash["2"][1])*1.0/(@type_hash["2"][0].nil? ? 1 : @type_hash["2"][0]) %>
         <div class="per_load_bg"><div class="per_load_t" style="width:<%= (progress*100).to_s + "%" %>"></div></div>
-        <p><span class="red"><%= @type_hash["practice"][0].nil? ? 0 : @type_hash["practice"][0] %></span> 篇</p>
+        <p><span class="red"><%= @type_hash["2"][0].nil? ? 0 : @type_hash["2"][0] %></span> 篇</p>
       </div>
       <div class="per_btn"><a href="/combine_practices">开始训练</a></div>
       <div class="per_ex_p"><span class="red">*</span>60篇短文，密集训练听力词汇阅读和写作能力。</div>
@@ -50,21 +51,29 @@
                 <%= User.find(cookies[:user_id]).belief %>%
               </div>
             <% else %>
-              你当前还不是<font color="red">VIP</font>哦，购买<font color="red">VIP</font>可以显示你自己当前的信心指数，无限制的综合训练次数以及模考试卷主观题的修改，心动不如行动，赶快来<a href="/users/goto_vip"><font color="blue">购买</font></a>吧</font>！
+              <%= "" %>
             <% end %>
           </span></h3>
-        <p><a href="#">如何增加信心？</a></p>
+        <p><a href="/users/goto_vip">如何增加信心？</a></p>
       </div>
 
       <div class="per_two_box">
         <div class="per_tb_title per_tb_ctk">错题库</div>
-        <h3><span class="red"><%= @incorrect_list.elements['problems'].elements.size %></span> 错题</h3>
-        <p><a href="/exam_lists/incorrect_list">马上复习</a></p>
+        <% unless @incorrect_list.nil? %>
+          <h3><span class="red"><%=@incorrect_list.elements['problems'].elements.size %></span> 错题</h3>
+          <p><a href="/exam_lists/incorrect_list">马上复习</a></p>
+        <% else %>
+          <h3><span class="red"><%= "您没有错题" %></span></h3>
+        <% end %>
       </div>
       <div class="per_two_box">
         <div class="per_tb_title per_tb_biji">笔记</div>
-        <h3><span class="red"><%= @notes.elements['problems'].elements.size %></span> 篇</h3>
-        <p><a href="/user/notes">翻阅笔记</a></p>
+        <% unless @notes.nil? %>
+          <h3><span class="red"><%= @notes.elements['problems'].elements.size %></span> 篇</h3>
+          <p><a href="/user/notes">翻阅笔记</a></p>
+        <% else %>
+          <h3><span class="red"><%= "您没有做笔记" %></span></h3>
+        <% end %>
       </div>
     </div>
   </div>

@@ -1,5 +1,15 @@
-<%= javascript_include_tag 'pileadd' %>
 <div class="errorLibrary_left">
+  <div class="pattern"><a href="/exam_lists/incorrect_list" class="chay_pat">查阅</a><div class="moveBlock_bg">
+      <div class="moveBlock"><img alt="moveBlock" src="/images/paper/moveBlock.png" /></div></div><a href="/exam_lists/question_info" class="lianx_pat">练习</a></div>
+  <div class="clear"></div>
+  <h1>
+    <div class="part_passage">
+      <div class="p_directions">
+        <p> <%=@problem.elements['title'].text.to_s.html_safe  %></p>
+      </div>
+      <div class="fraction"><%= @problem.attributes["score"] %>分</div>
+    </div>
+  </h1>
   <div class="part_question" id="show_div">
     <% attr="" %>
     <% @problem.elements["questions"].each_element do |question| %>
@@ -54,7 +64,7 @@
     <% end %>
     <div class="tb_checkBox"><a class="tb_check"></a></div>
     <div class="ep_prevNext">
-      <input type="hidden" value="<%= params[:page] %>" id="current_page" />
+      <input type="hidden" value="<%= params[:page].nil? ? 1:params[:page] %>" id="current_page" />
       <input type="hidden" value="<%= attr.chop  %>" id="all_question" />
       <% if params[:page] and params[:page].to_i > 1 %>
         <div class="ep_goLeft">

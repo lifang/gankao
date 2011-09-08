@@ -55,8 +55,7 @@
     </div>
     <div class="clear"></div>
     <div class="review_btn">
-      <input  id="btn_<%= question.attributes["id"] %>_analysis" type="hidden" value="<%=  %>"/>
-      <button class="jiexi_btn" id="btn_<%= question.attributes['id'] %>">解析</button>
+      <button class="jiexi_btn" id="btn_<%= question.attributes['id'] %>" onclick="javascript:show_analysis('btn_<%= question.attributes['id'] %>')">解析</button>
     </div>
     <input type="hidden" id="btn_<%= question.attributes["id"] %>_answer" type="hidden" value="<%= answers.join(";") %>"/>
     <input type="hidden" id="btn_<%= question.attributes["id"] %>_analysis" type="hidden" value="<%= question.elements["analysis"].text %>"/>
