@@ -130,15 +130,6 @@ class UsersController < ApplicationController
         end
       end unless @user_exams.blank?
     end
-    all_practice = 0
-    exam_practice = 0
-    @type_hash.keys.each do |key|
-      if key.to_i > Examination::TYPES[:OLD_EXAM]
-        all_practice += @type_hash[key][0]
-        exam_practice += @type_hash[key][1]
-      end
-    end
-    @type_hash["practice"] = [all_practice, exam_practice]
     @correct=Examination.count_correct(cookies[:user_id])
     collection = Collection.find_by_user_id(cookies[:user_id])
     @incorrect_list = collection.open_xml.root if collection and collection.collection_url
