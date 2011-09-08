@@ -115,7 +115,8 @@ class Examination < ActiveRecord::Base
     hash ={}
     ExamUser.find_by_sql("select eu.total_score,eu.is_submited,eu.examination_id,
         correct_percent from exam_users eu inner join examinations e on e.id = eu.examination_id
-        where e.types =#{types} and eu.user_id = #{user_id} and eu.is_submited=1 and is_published=#{Examination::IS_PUBLISHED[:ALREADY]}").each do |exam_user|
+        where e.types =#{types} and eu.user_id = #{user_id} and eu.is_submited=1
+        and is_published=#{Examination::IS_PUBLISHED[:ALREADY]}").each do |exam_user|
       hash["#{exam_user.examination_id}"] = exam_user
     end unless user_id.nil? or user_id == ""
     return hash
@@ -143,17 +144,15 @@ class Examination < ActiveRecord::Base
     end if start_num > 0
     return doc
   end
- def self.count_correct(id)
-   correct=0.0
-   n=0
-    users=ExamUser.find_by_sql("select eu.total_score,eu.is_submited,eu.examination_id,
-        correct_percent from exam_users eu inner join examinations e on e.id = eu.examination_id
-        where e.types =#{Examination::TYPES[:SIMULATION]} and eu.user_id = #{id} and eu.is_submited=1 and is_published=#{Examination::IS_PUBLISHED[:ALREADY]}")
-   users.each do |exam_user|
-     n +=1
-       correct += (exam_user.correct_percent.nil? ? 0 :exam_user.correct_percent)
-    end unless users.blank?
-    return (correct/n)*100
- end
+  
+  def self.count_correct(id)
+    correct = 0
+    users = ExamUser.find_by_sql("select count(eu.id) count_id, sum(eu.correct_percent) correct_percent
+        from exam_users eu inner join examinations e on e.id = eu.examination_id
+        where is_published = #{Examination::IS_PUBLISHED[:ALREADY]} and eu.is_submited = 1 
+        and eu.user_id = #{id} and e.types = #{TYPES[:OLD_EXAM]}")
+    correct = users[0].count_id == 0 ? 0 : (users[0].correct_percent/users[0].count_id)*100 if users and users[0]
+    return correct
+  end
 
 end

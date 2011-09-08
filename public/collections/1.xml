@@ -83,7 +83,7 @@
             <title>阿斯顿sad</title>
             <category>1</category>
             <questions>
-                <question correct_type='0' error_percent='0' id='10' repeat_num='1' score='5'>
+                <question correct_type='0' delete_status='1' error_percent='0' id='10' repeat_num='1' score='5'>
                     <answer>豆腐干</answer>
                     <analysis/>
                     <questionattrs>豆腐干;-;哥哥;-;塞维尔v;-;东方饭店个</questionattrs>
@@ -124,7 +124,7 @@
                     <user_answer>很久很久</user_answer>
                     <user_answer/>
                     <user_answer>很久很久</user_answer>
-                <user_answer>豆腐干风格</user_answer><user_answer>很久很久</user_answer><user_answer>刚好好机会</user_answer><user_answer>很久很久</user_answer><user_answer>很久很久</user_answer><user_answer/><user_answer>很久很久</user_answer><user_answer/><user_answer>刚好好机会</user_answer><user_answer></user_answer></question>
+                <user_answer>豆腐干风格</user_answer><user_answer>很久很久</user_answer><user_answer>刚好好机会</user_answer><user_answer>很久很久</user_answer><user_answer>很久很久</user_answer><user_answer/><user_answer>很久很久</user_answer><user_answer/><user_answer>刚好好机会</user_answer><user_answer/></question>
             </questions>
         </problem>
     </problems>

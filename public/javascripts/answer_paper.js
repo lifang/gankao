@@ -734,8 +734,6 @@ function alreay_answer_que_num() {
     }
 }
 
-
-
 //提交试卷之前判断试卷是否已经全部答完
 function generate_result_paper(paper_id) {
     var flag = true;
@@ -863,28 +861,26 @@ function answer_xml() {
 }
 
 //音频控制
+var audio_timer = null;
 function control_audio(audio_id) {
-    var audio = $("audio" + audio_id);
     if (window.HTMLAudioElement) {
         try {
-            if(getCookie("exam_audio_" + audio_id) == null){
-                setCookie("exam_audio_" + audio_id, 0)
-            }
-            if(getCookie("exam_audio_" + audio_id) <1 ){
-                if(audio.paused){
-                    audio.load();
-                    audio.play();
-                    setCookie("exam_audio_" + audio_id, parseInt(getCookie("exam_audio_" + audio_id))+1);
-                } else {
-                    var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
-                    flash_div.innerHTML = "<p>听力播放过程中不能暂停或停止。</p>";
-                    document.body.appendChild(flash_div);
-                    show_flash_div();
+            var audio = $("audio" + audio_id);
+            if (getCookie("audio_time_" + audio_id) != "end") {
+                if(getCookie("exam_audio_" + audio_id) == null){
+                    setCookie("exam_audio_" + audio_id, 0);
+                }
+                if(new Number(getCookie("exam_audio_" + audio_id)) < 1){
+                    audio_timer = window.setInterval("audio_current_time('"+ audio_id +"')", 100);
+                    if(audio.paused){
+                        audio.load();
+                        audio.play();
+                    }
                 }
             }
         }catch (e) {
             var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
-            flash_div.innerHTML = "<p>播放错误，请您检查您的音频文件是否存在。</p>";
+            flash_div.innerHTML = "<p>音频文件不能播放，请您检查您的音频文件是否存在。</p>";
             document.body.appendChild(flash_div);
             show_flash_div();
         }
@@ -892,6 +888,24 @@ function control_audio(audio_id) {
 }
 
 //记录当前播放时间
-function audio_current_time() {
-    
+function audio_current_time(audio_id) {
+    if (new Number(getCookie("exam_audio_" + audio_id)) < 1) {
+        window.clearInterval(audio_timer);
+        setCookie("audio_time_" + audio_id, "end");
+    } else {
+        setTimeout(function(){
+            if ($("audio" + audio_id).currentTime != null) {
+                setCookie("audio_time_" + audio_id, $("audio" + audio_id).currentTime);
+            }
+        }, 5000);
+        window.clearInterval(audio_timer);
+        audio_timer = window.setInterval("audio_current_time('"+ audio_id +"')", 100);
+    }
+}
+
+//记录听力已经播放
+function add_audio_cookies(audio_id) {
+    if (getCookie("exam_audio_" + audio_id) != null) {
+        setCookie("exam_audio_" + audio_id, new Number(getCookie("exam_audio_" + audio_id))+1);
+    }
 }
