@@ -5,13 +5,7 @@ class User::CombinePracticesController < ApplicationController
   require 'rexml/document'
 
   def show
-    @practice_type=params[:practice_type]
-    Examination::TYPE_NAMES.each_value do |array|
-      if array[0]==@practice_type.to_i
-        @practice_name=array[1]
-        break
-      end
-    end
+    @practice_type=params[:step].to_i+2    #因为js中，综合训练类型1-5，分别对应2-6.而step为0..4
     arr = ExamUser.can_answer(cookies[:user_id].to_i, params[:id].to_i)
     if arr[0] == "" and arr[1].any?
       @examination = arr[1][0]
@@ -24,7 +18,7 @@ class User::CombinePracticesController < ApplicationController
         if params[:show_answer]
           xml_url="#{Constant::BACK_PUBLIC_PATH}/papers/#{@exam_user.paper_id}.xml"
           xml=Document.new(File.open(xml_url)).root
-          @answer_array=xml.to_s.split("<answer>").each.map{|answer| answer=answer.split("</answer>")[0]}[1..-1]
+          @answer_array=xml.get_elements("/paper/blocks//problems//questions//answer").map{|n|n=n.text}.to_s.gsub("\"","")[1..-2]
         end
         render :layout => "practice_layout"
         #       render :layout =>'application'
@@ -44,8 +38,7 @@ class User::CombinePracticesController < ApplicationController
       :password => User::DEFAULT_PASSWORD, :is_user_affiremed => ExamUser::IS_USER_AFFIREMED[:YES]) if @exam_user.nil?
     arr = ExamUser.can_answer(cookies[:user_id], params[:id].to_i)
     if arr[0] == "" and arr[1].any?
-      render :inline => "<iframe src='#{Constant::SERVER_PATH}/user/combine_practices/#{params[:id]}/?practice_type=#{params[:practice_type]}'
-            frameborder='0' style='width: 1270px; height: 760px;'></iframe>"
+      redirect_to "#{Constant::SERVER_PATH}/user/combine_practices/#{params[:id]}?step=0"
     else
       flash[:warn] = arr[0]
       redirect_to request.referer
@@ -53,18 +46,19 @@ class User::CombinePracticesController < ApplicationController
   end
 
   def save_result
-    @exam_user = ExamUser.find_by_examination_id_and_user_id(params[:id].to_i, cookies[:user_id].to_i)
+    @step=params[:step].to_i
     if params[:submit]==nil
-      arr = ExamUser.can_answer(cookies[:user_id], params[:id].to_i)
       flash[:notice] = "标准答案已给出，请检查。"
-      if arr[0] == "" and arr[1].any?
-        render :inline => "<iframe src='#{Constant::SERVER_PATH}/user/combine_practices/#{params[:id]}/?practice_type=#{params[:practice_type]}&show_answer=1'
-            frameborder='0' style='width: 1270px; height: 760px;'></iframe>"
-      end
+      redirect_to "#{Constant::SERVER_PATH}/user/combine_practices/#{params[:id]}?step=#{@step}&show_answer=1"
     else
-      @exam_user.submited!
-      flash[:notice] = "你顺利完成了一份综合训练题，再接再厉。"
-      redirect_to "/combine_practices"
+      if @step<4
+        redirect_to "#{Constant::SERVER_PATH}/user/combine_practices/#{params[:id]}?step=#{@step+1}"
+      else
+        @exam_user = ExamUser.find_by_examination_id_and_user_id(params[:id].to_i, cookies[:user_id].to_i)
+        @exam_user.submited!
+        flash[:notice] = "你顺利完成了一份综合训练题，再接再厉。"
+        redirect_to "/combine_practices"
+      end
     end
   end
 
