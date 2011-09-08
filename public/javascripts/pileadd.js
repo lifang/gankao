@@ -462,3 +462,11 @@ function cuoti_note(question_id, problem_id) {
     });
     return false;
 }
+function show_question(id){
+    var questions=$("questions").value;
+     var ids=questions.split(",");
+     for (var i=0;i<ids.length;i=i+1){
+         $('question_'+ids[i]).style.display='none';
+     }
+    $('question_'+id).style.display='block';
+}

@@ -143,17 +143,18 @@ class Examination < ActiveRecord::Base
     end if start_num > 0
     return doc
   end
- def self.count_correct(id)
-   correct=0.0
-   n=0
+  def self.count_correct(id)
+    correct=0.0
+    n=0
     users=ExamUser.find_by_sql("select eu.total_score,eu.is_submited,eu.examination_id,
         correct_percent from exam_users eu inner join examinations e on e.id = eu.examination_id
         where e.types =#{Examination::TYPES[:SIMULATION]} and eu.user_id = #{id} and eu.is_submited=1 and is_published=#{Examination::IS_PUBLISHED[:ALREADY]}")
-   users.each do |exam_user|
-     n +=1
-       correct += (exam_user.correct_percent.nil? ? 0 :exam_user.correct_percent)
-    end unless users.blank?
+    users.each do |exam_user|
+      n +=1
+      correct += (exam_user.correct_percent.nil? ? 0 :exam_user.correct_percent)
+    end unless users.nil?
+    n=1 if n==0
     return (correct/n)*100
- end
+  end
 
 end

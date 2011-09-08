@@ -79,11 +79,11 @@
                 <user_answer/><user_answer>sdds</user_answer><user_answer>sfss</user_answer><user_answer>sfss</user_answer><user_answer/></question>
             </questions>
         </problem>
-        <problem id='10' repeat_num='5' score='5' types='0'>
+        <problem id='10' repeat_num='6' score='5' types='0'>
             <title>阿斯顿sad</title>
             <category>1</category>
             <questions>
-                <question correct_type='0' error_percent='0' id='10' repeat_num='1' score='5'>
+                <question correct_type='0' error_percent='50' id='10' repeat_num='1' score='5'>
                     <answer>豆腐干</answer>
                     <analysis/>
                     <questionattrs>豆腐干;-;哥哥;-;塞维尔v;-;东方饭店个</questionattrs>
@@ -96,7 +96,7 @@
                     <questionattrs>23;-;wer;-;65;-;789</questionattrs>
                     <tags>ew</tags>
                     <user_answer/>
-                <user_answer>65</user_answer><user_answer>23</user_answer><user_answer/></question>
+                <user_answer>65</user_answer><user_answer>23</user_answer><user_answer/><user_answer>65</user_answer></question>
             </questions>
         </problem>
         <problem id='11' repeat_num='8' score='5' types='0'>
@@ -124,7 +124,7 @@
                     <user_answer>很久很久</user_answer>
                     <user_answer/>
                     <user_answer>很久很久</user_answer>
-                <user_answer>豆腐干风格</user_answer><user_answer>很久很久</user_answer><user_answer>刚好好机会</user_answer><user_answer>很久很久</user_answer><user_answer>很久很久</user_answer><user_answer/><user_answer>很久很久</user_answer><user_answer/><user_answer>刚好好机会</user_answer><user_answer></user_answer></question>
+                <user_answer>豆腐干风格</user_answer><user_answer>很久很久</user_answer><user_answer>刚好好机会</user_answer><user_answer>很久很久</user_answer><user_answer>很久很久</user_answer><user_answer/><user_answer>很久很久</user_answer><user_answer/><user_answer>刚好好机会</user_answer><user_answer/></question>
             </questions>
         </problem>
     </problems>

@@ -38,5 +38,23 @@
                             <tags>ew</tags>
                         <user_answer/><note_text>bbb</note_text></question>
                     </questions>
-                </problem></problems>
+                <question correct_type='0' error_percent='50' id='10' repeat_num='1' score='5'>
+                    <answer>豆腐干</answer>
+                    <analysis/>
+                    <questionattrs>豆腐干;-;哥哥;-;塞维尔v;-;东方饭店个</questionattrs>
+                    <tags/>
+                    <user_answer>哥哥</user_answer>
+                <user_answer>哥哥</user_answer><user_answer>东方饭店个</user_answer><user_answer>东方饭店个</user_answer><note_text>fffdddd</note_text></question><question correct_type='0' error_percent='50' id='10' repeat_num='1' score='5'>
+                    <answer>豆腐干</answer>
+                    <analysis/>
+                    <questionattrs>豆腐干;-;哥哥;-;塞维尔v;-;东方饭店个</questionattrs>
+                    <tags/>
+                    <user_answer>哥哥</user_answer>
+                <user_answer>哥哥</user_answer><user_answer>东方饭店个</user_answer><user_answer>东方饭店个</user_answer><note_text>gggggf</note_text></question><question correct_type='0' error_percent='50' id='10' repeat_num='1' score='5'>
+                    <answer>豆腐干</answer>
+                    <analysis/>
+                    <questionattrs>豆腐干;-;哥哥;-;塞维尔v;-;东方饭店个</questionattrs>
+                    <tags/>
+                    <user_answer>哥哥</user_answer>
+                <user_answer>哥哥</user_answer><user_answer>东方饭店个</user_answer><user_answer>东方饭店个</user_answer><note_text>ggggg</note_text></question></problem></problems>
 </note>
