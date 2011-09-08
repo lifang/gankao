@@ -861,3 +861,37 @@ function answer_xml() {
         }
     }
 }
+
+//音频控制
+function control_audio(audio_id) {
+    var audio = $("audio" + audio_id);
+    if (window.HTMLAudioElement) {
+        try {
+            if(getCookie("exam_audio_" + audio_id) == null){
+                setCookie("exam_audio_" + audio_id, 0)
+            }
+            if(getCookie("exam_audio_" + audio_id) <1 ){
+                if(audio.paused){
+                    audio.load();
+                    audio.play();
+                    setCookie("exam_audio_" + audio_id, parseInt(getCookie("exam_audio_" + audio_id))+1);
+                } else {
+                    var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
+                    flash_div.innerHTML = "<p>听力播放过程中不能暂停或停止。</p>";
+                    document.body.appendChild(flash_div);
+                    show_flash_div();
+                }
+            }
+        }catch (e) {
+            var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
+            flash_div.innerHTML = "<p>播放错误，请您检查您的音频文件是否存在。</p>";
+            document.body.appendChild(flash_div);
+            show_flash_div();
+        }
+    }
+}
+
+//记录当前播放时间
+function audio_current_time() {
+    
+}
