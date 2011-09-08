@@ -344,10 +344,11 @@ function feedback(id){
     return false;
 }
 
-function problem_values(id){
-    var page=$("page").value;
+function problem_values(){
+    jQuery.noConflict();
+    var page=$("current_page").value;
     var problem_num=$("problem_id").value;
-    var ids=id.split(",");
+    var ids=$("all_question").value.split(",");
     var  str=""
     for(var i=0;i<ids.length;i++){
         question_values(ids[i]);

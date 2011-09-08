@@ -1,5 +1,6 @@
 class ExamListsController < ApplicationController
   before_filter :access?
+  layout "gankao"
   def  list
     lists=Collection.find_by_user_id(cookies[:user_id]).open_xml
     lists.elements["/collection/problems"].each_element do |problem|
@@ -18,22 +19,20 @@ class ExamListsController < ApplicationController
     @examination_lists.each do |examination|
       @examination_lists -=[examination] unless examinations.include?(examination.id)  if examination.status==Examination::STATUS[:CLOSED ]
     end
-    examnation_ids=@examination_lists.map(&:id).join(",")
-    @hash=Examination.exam_users_hash(cookies[:user_id])
-    render :layout=>"gankao"
+    @hash=Examination.exam_users_hash(cookies[:user_id],Examination::TYPES[:SIMULATION])
   end
   
   def old_exam_list
     @old_lists=Examination.where("types=? and is_published=1",Examination::TYPES[:OLD_EXAM])
-    examnation_ids=@old_lists.map(&:id).join(",")
-    @hash=Examination.exam_users_hash(cookies[:user_id],examnation_ids)
-    render :layout=>"gankao"
+    @hash=Examination.exam_users_hash(cookies[:user_id],Examination::TYPES[:OLD_EXAM])
   end
+  
   def incorrect_list
     @hash_list={}
     @has_next_page = false
-    @list=list
-    @lists =Examination.get_start_element(params[:page], @list)
+    @lists=list
+    @num=@lists.get_elements("//problems/problem").size
+    @lists =Examination.get_start_element(params[:page], @lists)
     current_element = Examination.return_page_element(@lists, @has_next_page)
     @lists = current_element[0]
     problem=@lists.elements["/collection/problems/problem/questions"]
@@ -41,7 +40,6 @@ class ExamListsController < ApplicationController
       @hash_list["#{question.attributes['id']}"]=Feedback.find_all_by_user_id_and_question_id(cookies[:user_id],question.attributes["id"].to_i)
     end unless problem.nil?
     @has_next_page = current_element[1]
-    render :layout=>"gankao"
   end
 
 
@@ -59,9 +57,11 @@ class ExamListsController < ApplicationController
   def question_info
     @has_next_page = false
     @lists=list
+    @num=@lists.get_elements("//problems/problem").size
     @lists =Examination.get_start_element(params[:page], @lists)
     current_element = Examination.return_page_element(@lists, @has_next_page)
     @lists = current_element[0]
+    @problem=@lists.elements["/collection/problems/problem"]
     @has_next_page = current_element[1]
   end
 
@@ -82,8 +82,9 @@ class ExamListsController < ApplicationController
     end
     self.write_xml("#{Constant::PUBLIC_PATH}#{collection.collection_url}", doc)
     doc=collection.open_xml
-    @lists=problem
-    @has_next_page =true
+     @num=list.get_elements("//problems/problem").size
+    @lists =problem
+    @has_next_page =!doc.elements["/collection/problems/problem[@id='#{problem_id}']"].next_element.nil?
     render :partial=>"/exam_lists/question_answer"
   end
   
@@ -91,8 +92,7 @@ class ExamListsController < ApplicationController
     collection=Collection.find_by_user_id(cookies[:user_id])
     doc=collection.open_xml
     problem=doc.elements["/collection/problems/problem[@id=#{params[:problem_id]}]"]
-    problem.elements["questions/question[@id=#{params[:question_id]}]"].
-      add_attribute("delete_status",1)
+    problem.elements["questions/question[@id=#{params[:question_id]}]"].add_attribute("delete_status",1)
     n=0
     problem.elements["questions"].each_element do |question|
       n=1 if question.attributes["delete_status"].nil?
@@ -108,9 +108,10 @@ class ExamListsController < ApplicationController
 
   def load_note
     note_text = ""
+    @problem_id=params[:problem_id]
     note = Note.find_by_user_id(cookies["user_id"])
     if note and note.note_url
-      note_text = note.return_note_text(params[:problem_id], params[:id])
+      note_text = note.return_note_text(@problem_id, params[:id])
     end
     render :partial => "/exam_lists/note_div", :object => [note_text, params[:id]]
   end
@@ -122,23 +123,22 @@ class ExamListsController < ApplicationController
     problem = note.problem_in_note(params[:problem_id], note_doc)
     doc=Collection.find_by_user_id(cookies[:user_id]).open_xml
     collection_problem=doc.elements["/collection/problems/problem[@id=#{params[:problem_id]}]"]
+    collection_question=collection_problem.elements["questions/question[@id=#{params[:id]}]"]
+    collection_question.add_element("note_text").add_text("#{params["note_text_#{params[:id]}"].strip}")
     if problem
       question = note.question_in_note(problem, params[:id])
       if question
-        Note.update_question(params["note_text_#{params[:id]}"].strip, question.xpath, note_doc)
+        note.update_question(params["note_text_#{params[:id]}"].strip, question.xpath, note_doc)
       else
-        collection_question=collection_problem["/questions/question[@id=#{params[:question_id]}]"]
-        note_doc.add_element(problem.add_elements(collection_question))
+        problem.add_elements(collection_question)
+        note.save_xml(note_doc)
       end
     else
-      note_doc.add_element(collection_problem)
+      note_doc.elements["note/problems"].add_element(collection_problem)
+      note.save_xml(note_doc)
     end
-    Note.save(note_doc)
     flash[:notice] = "笔记添加成功."
-    render :update do |page|
-      page.replace_html "note_div" , :partial => "/common/display_flash"
-      page.replace_html "biji_tab" , :inline => "<script>document.getElementById('note_area').style.display='none';</script>"
-    end
+    redirect_to request.referer
   end
 
 

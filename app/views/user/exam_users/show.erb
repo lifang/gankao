@@ -1,6 +1,5 @@
 <%= javascript_include_tag "/javascripts/answer_sheet.js" %>
 <%= javascript_include_tag 'pileadd' %>
-<div id="note_div"></div>
 <div class="testPaper_top">
   <div class="tp_top_box">
     <div class="paper_name"><%= @xml.elements['base_info'].elements['title'].text if @xml!=nil %></div>
@@ -100,5 +99,6 @@
   </div>
   <div class="tab_b"></div>
 </div>
+<div id="note_div"></div>
 
 

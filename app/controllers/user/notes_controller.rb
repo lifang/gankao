@@ -14,7 +14,6 @@ class User::NotesController < ApplicationController
       current_element = @note.return_page_element(@doc, @has_next_page, pre_page)
       @doc = current_element[0]
       @has_next_page = current_element[1]
-      
     rescue
       flash[:warn] = "您当前未做任何笔记。"
     end

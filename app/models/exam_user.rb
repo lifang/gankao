@@ -10,6 +10,7 @@ class ExamUser < ActiveRecord::Base
   include REXML
   require 'spreadsheet'
 
+  IS_SUBMITED = {:YES => 1, :NO => 0} #用户是否提交 1 提交 2 未提交
   IS_USER_AFFIREMED = {:YES => 1, :NO => 0} #用户是否确认  1 已确认 0 未确认
   IS_FREE = {:YES => 1, :NO => 0} #是否免费用户 1 是  0 否
   default_scope :order => "exam_users.total_score desc"
@@ -221,7 +222,7 @@ class ExamUser < ActiveRecord::Base
   def self.is_exam_user_in(paper_id, examination_id, user_id)
     exam_user = ExamUser.find_by_sql(["select e.id, e.user_id, e.answer_sheet_url, p.paper_url from exam_users e
         inner join papers p on p.id = e.paper_id
-        where e.paper_id = ? and e.examination_id = ? and e.user_id = ?", examination_id, paper_id, user_id])
+        where e.paper_id = ? and e.examination_id = ? and e.user_id = ? limit 1", examination_id, paper_id, user_id])
     return exam_user[0]
   end
 
@@ -348,7 +349,7 @@ class ExamUser < ActiveRecord::Base
     str = ""
     examination = Examination.return_examinations(user_id, examination_id)
     if examination.any?
-      if !examination[0].is_submited.nil? and examination[0].is_submited == 1
+      if !examination[0].is_submited.nil? and examination[0].is_submited == true
         str = "您已经交卷。"
       else
         if examination[0].paper_id.nil? and examination[0].start_at_time > Time.now
@@ -415,7 +416,7 @@ class ExamUser < ActiveRecord::Base
   end
 
   #返回用户当前提点的答案
-  def self.return_question_answer(question_id)
+  def return_question_answer(question_id)
     doc = ExamRater.open_file("#{Constant::PUBLIC_PATH}#{self.answer_sheet_url}")
     return doc.elements["/exam/paper/questions/question[@id='#{question_id}']/answer"]
   end

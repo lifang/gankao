@@ -50,7 +50,7 @@ class Note < ActiveRecord::Base
 
   #当前题目是否已经做过笔记
   def problem_in_note(problem_id, note_doc)
-    problem = note_doc.elements["note"].elements["problems"].elements["problem[@id='#{problem_id}']"]
+    problem = note_doc.elements["note/problems/problem[@id='#{problem_id}']"]
     return problem
   end
 
