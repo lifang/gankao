@@ -111,8 +111,8 @@ class UsersController < ApplicationController
       and is_published = #{Examination::IS_PUBLISHED[:ALREADY]} order by created_at")
     @hash1 = Examination.exam_users_hash(cookies[:user_id], Examination::TYPES[:SIMULATION])
     @simulations.each do |simulation|
-      @simulations = @simulations - simulation if (!@hash1.keys.include?(simulation.id.to_s) and
-        simulation.status == Examination::STATUS[:CLOSED])
+      @simulations = @simulations - [simulation] if (!@hash1.keys.include?(simulation.id.to_s) and
+          simulation.status == Examination::STATUS[:CLOSED])
     end
     @all_examinations = Examination.find_by_sql("select count(types) sums, types from examinations
       where is_published = #{Examination::IS_PUBLISHED[:ALREADY]} and types != #{Examination::TYPES[:SIMULATION]} group by types")
@@ -124,14 +124,18 @@ class UsersController < ApplicationController
     @all_examinations.each do |examination|
       @type_hash["#{examination.types}"]=[examination.sums, 0]
       @user_exams.each do |exam|
-          if examination.types == exam.types
-            @type_hash["#{examination.types}"] = [examination.sums, exam.sums]
-            break
-          end
-        end unless @user_exams.blank?
+        if examination.types == exam.types
+          @type_hash["#{examination.types}"] = [examination.sums, exam.sums]
+          break
+        end
+      end unless @user_exams.blank?
     end
+    @correct=Examination.count_correct(cookies[:user_id])
     collection = Collection.find_by_user_id(cookies[:user_id])
     @incorrect_list = collection.open_xml.root if collection and collection.collection_url
+    note=Note.find_by_user_id(cookies[:user_id])
+    @notes = note.open_xml.root if note and note.note_url
+    render :layout=>"gankao"
   end
 
   def roles_manage

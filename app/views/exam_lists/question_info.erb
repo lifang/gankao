@@ -54,7 +54,7 @@
     <% end %>
     <div class="tb_checkBox"><a class="tb_check"></a></div>
     <div class="ep_prevNext">
-      <input type="hidden" value="<%= params[:page] %>" id="current_page" />
+      <input type="hidden" value="<%= params[:page].nil? ? 1:params[:page] %>" id="current_page" />
       <input type="hidden" value="<%= attr.chop  %>" id="all_question" />
       <% if params[:page] and params[:page].to_i > 1 %>
         <div class="ep_goLeft">

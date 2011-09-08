@@ -56,7 +56,8 @@ img { border: none;}
 	background: url(/images/paper/all_bg.png) no-repeat -7px -83px;
 }
 .per_load_bg { width: 199px; height: 20px; background: url(/images/paper/per_load_bg.png) no-repeat; padding: 7px 0 0 7px; margin: 0 auto;}
-.per_load_t { width: 193px; height: 11px; background: url(/images/paper/per_load_t.png) no-repeat;}
+
+.per_load_t { height: 11px; background: url(/images/paper/per_load_t.png) no-repeat;}
 
 
 .per_two_box { width: 141px; height: 105px; margin: 5px auto;}
