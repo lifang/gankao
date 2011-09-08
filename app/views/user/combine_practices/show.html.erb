@@ -7,26 +7,23 @@
   var papers = new Object();
 </script>
 <%= javascript_include_tag "#{@paper_url}" %>
-<% if params[:show_answer];
-  url="/user/combine_practices/#{@examination.id}/save_result?submit=1&step=#{@practice_type-2}"
-else;
-  url="/user/combine_practices/#{@examination.id}/save_result?step=#{@practice_type-2}"
-end %>
+
+ <% url="/user/combine_practices/#{@examination.id}/save_result?step=#{@step[0]}" %>
 
 <%= form_for :paper , :url =>url,
   :html => {:name => "paper_form", :id => "paper_form",
   :onsubmit => "return generate_result_paper('#{@examination.paper_id}')"} do |f| %>
 
   <div id="paper_show_info">
-    <% if @practice_type==Examination::TYPES[:PRACTICE1] %>
+    <% if @practice_type==2 %>
       <div class="task_title task_title_one"><a href="#" onclick="javascript:document.getElementById('jiexi_tab').style.display='block';"><img alt="Explain_icon" src="/images/paper/Explain_icon.png"/></a></div>
-    <% elsif @practice_type==Examination::TYPES[:PRACTICE2]  %>
+    <% elsif @practice_type==3  %>
       <div class="task_title task_title_two"><a href="#" onclick="javascript:document.getElementById('jiexi_tab').style.display='block';"><img alt="Explain_icon" src="/images/paper/Explain_icon.png"/></a></div>
-    <% elsif @practice_type==Examination::TYPES[:PRACTICE3]  %>
+    <% elsif @practice_type==4  %>
       <div class="task_title task_title_three"><a href="#" onclick="javascript:document.getElementById('jiexi_tab').style.display='block';"><img alt="Explain_icon" src="/images/paper/Explain_icon.png"/></a></div>
-    <% elsif @practice_type==Examination::TYPES[:PRACTICE4]  %>
+    <% elsif @practice_type==5  %>
       <div class="task_title task_title_four"><a href="#" onclick="javascript:document.getElementById('jiexi_tab').style.display='block';"><img alt="Explain_icon" src="/images/paper/Explain_icon.png"/></a></div>
-    <% elsif @practice_type==Examination::TYPES[:PRACTICE5]  %>
+    <% elsif @practice_type==6  %>
       <div class="task_title task_title_five"><a href="#" onclick="javascript:document.getElementById('jiexi_tab').style.display='block';"><img alt="Explain_icon" src="/images/paper/Explain_icon.png"/></a></div>
     <% end %>
     <div class="jiexi_tab" id="jiexi_tab" style="top: 93px; left: 498px; ">
@@ -46,11 +43,10 @@ end %>
       <input type="hidden" name="examination_id" id="examination_id" value="<%= @examination.id %>"/>
       <input type="hidden" id="total_num"/>
       <input type="hidden" id="complete_num"/>
-      <% if params[:show_answer] %><input type="hidden" name="show_answer" id="show_answer" value="<%= @answer_array %>"/><% end %>
+      <% if @step[1]="1" %><input type="hidden" name="show_answer" id="show_answer" value="<%= @answer_array %>"/><% end %>
       <!--      <div>题目数：共<span id="total_num"></span>题/已完成<span id="complete_num">0</span>题</div>   -->
       <div><span id="local_time"></span></div>
       <%=  render :partial => "/common/display_flash" %>
-
     </div>
   </div>
   <div  id="paper_navigation" class="tb_content">

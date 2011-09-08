@@ -8,8 +8,8 @@ if(getCookie("do_examination_"+do_examination_id)!=null){
 }
 var load_switch=0;   //页面载入前，置0；页面载入后，置1。该变量目前只在综合训练5中控制流程。
 
-var answer=new Array;     //载入答案
-if($("show_answer")){
+var answer=new Array;
+if($("show_answer")!=null&&$("show_answer").value!=""){
     answer=$("show_answer").value.replace(/(")/g, "").split(", ");
 }
 var question_result_color=0; //记录题目的颜色。默认为0；1为答对；2错误;
@@ -33,7 +33,6 @@ function create_paper(practice_type) {
             //                create_block(bocks_div, blocks[i],practice_type);
             //            }
             create_block(bocks_div, blocks[step],practice_type);
-            create_block(bocks_div, blocks[i],practice_type);
         } else {
             create_block(bocks_div, blocks,practice_type);
         }
@@ -408,7 +407,7 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
             if(practice_type=="6"){
                 var num=1;
                 if(answer.length==0){
-                    while(document.getElementById("problem_"+problem_id+"_writefont_"+num)){
+                    while(document.getElementById("problem_"+problem_id+"_writefont_"+num)!=null){
                         var input_id = "problem_"+problem_id+"_writeplace_"+num;
                         document.getElementById("problem_"+problem_id+"_writefont_"+num).innerHTML="<input type='text' id='"+input_id+"' onfocus='javascript:show_que_save_button("+question.id+");' ></input>";
                         num++;
@@ -427,12 +426,12 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
                                 attr.innerHTML += "<input type='radio' name='question_attr_"+ question.id +"' id='question_attr_"+ i +"' value='"+ que_attrs[i] +"' onclick='javascript:show_que_save_button(\""+question.id+"\")'/>";
                             }
                             
-                            if(answer.length>0&&answer[question_num-1]==que_attrs[i]){
+                            if(answer!=null&&answer.length>0&&answer[question_num-1]==que_attrs[i]){
                                 attr.innerHTML += "<label style=\"color:green;\">"+ que_attrs[i] +"</label>";
                             }else{
                                 attr.innerHTML += "<label>"+ que_attrs[i] +"</label>";
                             }
-                            if(answer.length>0){
+                            if(answer!=null&&answer.length>0){
                                 if(answer_hash!=null&&answer_hash[question.id] != null &&answer[question_num-1]==answer_hash[question.id][0]){
                                     question_result_color=1;
                                     question_color(question.id);
@@ -447,7 +446,10 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
                             } else {
                                 attr.innerHTML += "<input type='checkbox' name='question_attr_"+ question.id +"' id='question_attr_"+ i +"' value='"+ que_attrs[i] +"' onclick='javascript:show_que_save_button(\""+question.id+"\")'/>";
                             }
-                            if(answer.length>0){
+                            if(answer!=null&&answer.length>0){
+//                                alert("".length);
+//                                alert(answer=="");
+//                                alert(answer.length);
                                 var this_answer=answer[question_num-1].split(";|;");
                                 var true_false=false;
                                 for(var true_false_n=0;true_false_n<this_answer.length;true_false_n++){
@@ -463,7 +465,7 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
                             }else{
                                 attr.innerHTML += "<label>"+ que_attrs[i] +"</label>";
                             }
-                            if(answer.length>0){
+                            if(answer!=null&&answer.length>0){
                                 if(answer_hash!=null&&answer_hash[question.id] != null &&answer[question_num-1]==answer_hash[question.id][0]){
                                     question_result_color=1;
                                     question_color(question.id);
@@ -484,13 +486,13 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
             var attr1 = create_element("li", null, null, null, null, "innerHTML");
             que_div_ul.appendChild(attr1);
             if (answer_hash != null && answer_hash[question.id] != null && answer_hash[question.id][0] == "1") {
-                if(answer.length>0&&answer[question_num-1]=="1"){
+                if(answer!=null&&answer.length>0&&answer[question_num-1]=="1"){
                     attr1.innerHTML = "<input type='radio' id='question_attr_1' name='question_attr_"+ question.id +"' value='1' checked='true' onclick='javascript:show_que_save_button(\""+question.id+"\")' /><font style=\"color:green\">对/是&nbsp;&nbsp;</font>";
                 }else{
                     attr1.innerHTML = "<input type='radio' id='question_attr_1' name='question_attr_"+ question.id +"' value='1' checked='true' onclick='javascript:show_que_save_button(\""+question.id+"\")' />对/是&nbsp;&nbsp;";
                 }
             } else {
-                if(answer.length>0&&answer[question_num-1]=="1"){
+                if(answer!=null&&answer.length>0&&answer[question_num-1]=="1"){
                     attr1.innerHTML = "<input type='radio' id='question_attr_1' name='question_attr_"+ question.id +"' value='1' onclick='javascript:show_que_save_button(\""+question.id+"\")' /><font style=\"color:green\">对/是&nbsp;&nbsp;</font>";
                 }else{
                     attr1.innerHTML = "<input type='radio' id='question_attr_1' name='question_attr_"+ question.id +"' value='1' onclick='javascript:show_que_save_button(\""+question.id+"\")' />对/是&nbsp;&nbsp;";
@@ -498,19 +500,19 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
             }
 
             if (answer_hash != null && answer_hash[question.id] != null && answer_hash[question.id][0] == "0") {
-                if(answer.length>0&&answer[question_num-1]=="0"){
+                if(answer!=null&&answer.length>0&&answer[question_num-1]=="0"){
                     attr1.innerHTML = "<input type='radio' id='question_attr_1' name='question_attr_"+ question.id +"' value='1' checked='true' onclick='javascript:show_que_save_button(\""+question.id+"\")' /><font style=\"color:green\">错/否&nbsp;&nbsp;</font>";
                 }else{
                     attr1.innerHTML += "<input type='radio' id='question_attr_0' name='question_attr_"+ question.id +"' value='0' checked='true' onclick='javascript:show_que_save_button(\""+question.id+"\")' />错/否&nbsp;&nbsp;";
                 }
             } else {
-                if(answer.length>0&&answer[question_num-1]=="0"){
+                if(answer!=null&&answer.length>0&&answer[question_num-1]=="0"){
                     attr1.innerHTML = "<input type='radio' id='question_attr_1' name='question_attr_"+ question.id +"' value='1' onclick='javascript:show_que_save_button(\""+question.id+"\")' /><font style=\"color:green\">错/否&nbsp;&nbsp;</font>";
                 }else{
                     attr1.innerHTML += "<input type='radio' id='question_attr_0' name='question_attr_"+ question.id +"' value='0' onclick='javascript:show_que_save_button(\""+question.id+"\")'/>错/否&nbsp;&nbsp;";
                 }
             }
-            if(answer.length>0){
+            if(answer!=null&&answer.length>0){
                 if(answer_hash!=null&&answer_hash[question.id] != null &&answer[question_num-1]==answer_hash[question.id][0]){
                     question_result_color=1;
                     question_color(question.id);
@@ -527,7 +529,7 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
             } else {
                 attr1.innerHTML += "<textarea cols='35' rows='3' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")'></textarea>";
             }
-            if(answer.length>0){
+            if(answer!=null&&answer.length>0){
                 attr1.innerHTML += "<p style='color:green'>参考答案: "+answer[question_num-1]+"</p>"
                 if(answer_hash!=null&&answer_hash[question.id] != null &&answer[question_num-1]==answer_hash[question.id][0]){
                     question_result_color=1;
@@ -550,19 +552,18 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
     if (answer_hash != null && answer_hash[question.id] != null) {
         answer_input.value = answer_hash[question.id][0];
         if(practice_type=="4"){
-            var question_array = answer_hash[question.id][0].split(";|;");
-            
+            var question_array = answer_hash[question.id][0].split(";|;");   
             if(answer.length==0){
-                for(i=0;i<question_array.length;i++){
+                for(var i=0;i<question_array.length;i++){
                     $("problem_"+problem_id+"_dropplace_"+(i+1)).innerHTML=question_array[i];
                 }
             }else{
                 var this_answer_array = answer[question_num-1].split(";|;");
-                for(i=0;i<question_array.length;i++){
+                for(var i=0;i<question_array.length;i++){
                     if(question_array[i]==this_answer_array[i]){
                         $("problem_"+problem_id+"_dropplace_"+(i+1)).innerHTML=question_array[i];
                     }else{
-                        $("problem_"+problem_id+"_dropplace_"+(i+1)).innerHTML="<font color='red'>"+question_array[i]+"</font> (正确答案："+this_answer_array[i]+")";
+                        $("problem_"+problem_id+"_dropplace_"+(i+1)).innerHTML="<font color='red'>"+question_array[i]+"</font> （正确答案："+this_answer_array[i]+"）";
                     }
                 }
                 if(answer_hash&&answer_hash[question.id] != null &&answer[question_num-1]==answer_hash[question.id][0]){
@@ -574,20 +575,14 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
                 }
             }
         }
-        if(practice_type=="6"&&answer.length>0){
+        if(practice_type=="6"&&answer!=null&&answer.length>0){
             var this_answer_array=answer[question_num-1].split(";|;");
-            if(answer_hash!=null&&answer_hash[question.id] != null){
-                var answer_array=answer_hash[question.id][0].split(";|;");
-                for(var a=0;a<this_answer_array.length;a++){
-                    if(this_answer_array[a]==answer_array[a]){
-                        $("problem_"+problem_id+"_writefont_"+(a+1)).innerHTML="<font color='green'>"+this_answer_array[a]+"</font>";
-                    }else{
-                        $("problem_"+problem_id+"_writefont_"+(a+1)).innerHTML="<font color='red'>"+answer_array[a]+"</font><font color='green'>正确答案： "+this_answer_array[a]+"</font>";
-                    }
-                }
-            }else{
-                for(var b=0;b<this_answer_array.length;b++){
-                    $("problem_"+problem_id+"_writefont_"+(b+1)).innerHTML="正确答案： "+this_answer_array[b]+"</font>";
+            var answer_array=answer_hash[question.id][0].split(";|;");
+            for(var a=0;a<this_answer_array.length;a++){
+                if(this_answer_array[a]==answer_array[a]){
+                    $("problem_"+problem_id+"_writefont_"+(a+1)).innerHTML="<font color='green'>"+this_answer_array[a]+"</font>";
+                }else{
+                    $("problem_"+problem_id+"_writefont_"+(a+1)).innerHTML="<font color='red'>"+answer_array[a]+"</font><font color='green'>（正确答案： "+this_answer_array[a]+")</font>";
                 }
             }
             if(answer_hash!=null&&answer_hash[question.id] != null &&answer[question_num-1]==answer_hash[question.id][0]){
@@ -598,6 +593,24 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
                 question_color(question.id);
             }
         }
+    }else{
+        if(practice_type=="4"&&answer!=null&&answer.length>0){
+            var this_answer_array=answer[question_num-1].split(";|;");
+            var i=0;
+            while($("problem_"+problem_id+"_dropplace_"+(i+1))!=null){
+                $("problem_"+problem_id+"_dropplace_"+(i+1)).innerHTML="(正确答案："+this_answer_array[i]+")";
+                i++;
+            }
+        }
+        if(practice_type=="6"&&answer!=null&&answer.length>0){
+           
+            var this_answer_array=answer[question_num-1].split(";|;");
+            var j=0;
+            while($("problem_"+problem_id+"_writefont_"+(j+1))!=null){
+                $("problem_"+problem_id+"_writefont_"+(j+1)).innerHTML="<font color='green'>（正确答案： "+this_answer_array[j]+"）</font>";
+                j++;
+            }
+        } 
     }
     que_div_conlist.appendChild(answer_input);
 }
