@@ -3,7 +3,7 @@
     <% if @simulations.blank? %>
       <p style="font-size:120%;color:red;font-weight: bold;margin-left: 20px;margin-top: 80px;">当前没有模考...</p>
     <%else%>
-      <% @simulations[0, 3].each do |simulation| %>
+      <% @simulations[0].each do |simulation| %>
         <div class="m_box_one mnks">
           <div class="per_con">
             <h2><%= simulation.title %></h2>

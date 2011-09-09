@@ -15,7 +15,7 @@ class ExamListsController < ApplicationController
   def simulate_list
     @examination_lists=Examination.where("types=? and is_published=1",Examination::TYPES[:SIMULATION])
     examinations=Examination.find_by_sql("select e.id from examinations e inner join exam_users u on u.examination_id=e.id
-                  where u.user_id=#{cookies[:user_id]} and e.status=#{Examination::STATUS[:CLOSED ]} and e.is_published=1 ")
+                  where u.user_id=#{cookies[:user_id]} and e.status=#{Examination::STATUS[:CLOSED ]} and e.types =#{Examination::TYPES[:SIMULATION]} and e.is_published=1 ")
     @examination_lists.each do |examination|
       @examination_lists -=[examination] unless examinations.include?(examination.id)  if examination.status==Examination::STATUS[:CLOSED ]
     end
@@ -82,7 +82,7 @@ class ExamListsController < ApplicationController
     end
     self.write_xml("#{Constant::PUBLIC_PATH}#{collection.collection_url}", doc)
     doc=collection.open_xml
-     @num=list.get_elements("//problems/problem").size
+    @num=list.get_elements("//problems/problem").size
     @lists =problem
     @has_next_page =!doc.elements["/collection/problems/problem[@id='#{problem_id}']"].next_element.nil?
     render :partial=>"/exam_lists/question_answer"

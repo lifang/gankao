@@ -50,16 +50,11 @@
           </ul>
         </div>
       </div>
-      <div  id="feedback">
-
         <% problem.elements["questions"].each_element do |question|%>
-
           <div class="cuoti" id="question_<%= question.attributes["id"] %>" style="display:none">
-            <%= question.attributes["id"] %>
             <%= render :partial=>"/exam_lists/feedback",:object=>[question,problem] %>
           </div>
         <% end %>
-        </div>
       <% end
     end %>
   </div>

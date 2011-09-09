@@ -438,9 +438,8 @@ function feedb(question_id,problem_id){
     if (text=="输入想知道的问题..."||text.length==0||text==""){
         alert("请输入你要问的问题.");
         return false;
-    }else{
-
-        new Ajax.Updater("feedback" , "/exam_lists/feedback",
+    }else{ $('question_'+question_id).style.display='block';
+        new Ajax.Updater("question_"+question_id , "/exam_lists/feedback",
         {
             asynchronous:true,
             evalScripts:true,
