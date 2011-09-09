@@ -1,9 +1,9 @@
 #encoding: utf-8
 class PagesController < ApplicationController
-  layout "login"
 
   def index
-    
+    @title="首页"
+    render :layout=>"index"
   end
 
   def sina_index

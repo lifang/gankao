@@ -1,19 +1,80 @@
-
-
-<script type="text/javascript">
-  function open_sina_login() {
-    window.open('/sessions/sina_login', '_blank', 'height=500,width=600,left=300,top=100');
-  }
-  function refresh() {
-    window.location.reload();
-  }
-</script>
-<%= form_for(:session, :url => sessions_path ,:html => {:onsubmit => "return signin_page()", :class => "required-validate"} ) do |f| %>
- <div class="error_login"><%= flash[:error] %></div>
+<div class="wrap">
+  <%= form_for(:session, :url => sessions_path ,:html => {:onsubmit => "return signin_page()", :class => "required-validate"} ) do |f| %>
+    <div class="head_index">
+      <div class="head_top">
+        <div class="top_other_zh"><span class="t_o_text">使用其他帐号登录：</span><a href="#"><img src="/images/paper/qq.png" /></a><a href="#"><img src="/images/paper/renren.png" /></a><a href="#"><img src="/images/paper/sina.png" /></a></div>
+        <div class="top_loginArea">
           <div class="login_i_text"><label>帐号：</label><%= f.text_field :email, :value=>"",:class => "login_input" %></div>
           <div class="login_i_text"><label>密码：</label><%= f.password_field :password ,:value=>"",:class => "login_input" %></div>
-          <div class="login_i_p"><a href="/sessions/get_code">忘记密码</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/users/new">立即注册</a></div>
-          <div class="login_i_p"><input name="" type="checkbox" value="" />下次自动登录</div>
-          <div class="login_btn"><button type="submit"></button></div>
-          <div class="other_login"><span class="t_o_text">使用其他帐号登录：</span><a href="#" onclick="javascript:toQzoneLogin();"><img src="images/paper/qq.png"/></a><a href="#" onclick ="javascript:window.open('/sessions/renren_login', '_blank', 'height=500,width=800,left=200,top=100');"><img src="images/paper/renren.png"/></a><a href="#" onclick ="javascript:window.open('/sessions/sina_login', '_blank', 'height=500,width=800,left=200,top=100');"><img src="images/paper/sina.png"/></a></div>
+          <div class="login_i_text login_i_padding"><button type="submit" class="login_i_btn"></button></div>
+          <div class="login_i_text login_i_padding"><a href="/users/new">注册</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/sessions/get_code">忘记密码</a></div>
+        </div>
+      </div>
+      <div class="logo"><a href="#"><img src="/images/paper/logo1.png" /></a></div>
+      <div class="nav_cet"><a href="#" class="nav_cet_4">CET-4</a><a href="#" class="nav_cet_6">CET-6</a></div>
+      <div class="clear"></div>
+    </div>
   <%end%>
+  <div class="main_index">
+    <div class="main_index_top">
+      <div class="lunbo_box">
+
+        <div class="change">
+          <ul>
+            <li><a href="#"><img src="/images/paper/01.png"/></a></li>
+            <li><a href="#"><img src="/images/paper/02.png"/></a></li>
+            <li><a href="#"><img src="/images/paper//03.png"/></a></li>
+          </ul>
+        </div>
+
+        <div class="weibo"><a href="#"><img src="/images/paper/sina_weibo.png" /></a><a href="#"><img src="/images/paper/qq_weibo.png" /></a></div>
+      </div>
+
+    </div>
+    <div class="main_index_con">
+      <div class="pd_con_box">
+        <div class="pd_h pd_mn">模拟考试</div>
+        <div class="pd_text">
+          <ul>
+            <li>3场万人PK真实模拟考试</li>
+            <li>了解你的真实水平和过关几率</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pd_con_box">
+        <div class="pd_h pd_zt">真题训练</div>
+        <div class="pd_text">
+          <ul>
+            <li>新四六级考试真题全解</li>
+            <li>丰富详实的解析</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pd_con_box">
+        <div class="pd_h pd_zh">综合训练</div>
+        <div class="pd_text">
+          <ul>
+            <li>60篇短文，密集训练听力词汇阅读和写作能力</li>
+            <li>提升30%做题速率</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pd_con_box">
+        <div class="pd_h pd_ctk">个人错题库</div>
+        <div class="pd_text">
+          <ul>
+            <li>突破薄弱环节</li>
+            <li>提升50%的复习效果</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="foot_index">
+    <div class="foot_index_box">
+      <p><a href="#">用户协议</a>   |   <a href="#">关于我们</a>    |   <a href="#">官方微博</a></p>
+      <p>Copyright © 2011 gankao.co 版权所有 苏ICP备11024201</p>
+    </div>
+  </div>
+</div>

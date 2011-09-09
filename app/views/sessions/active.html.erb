@@ -39,7 +39,6 @@
   }
 </script>
 <body onload="GetRTime()">
-<center>
 <div class="reg_content">
   <div class="clear"></div>
   <p class="expForLoginEmail">激活邮件已经发送到<span><%= @user.email %></span>，请登录邮箱激活账号</p>
@@ -66,5 +65,4 @@
   </div>
   <input type="hidden" value="<%= @user.id %>" name="sid" id="sid"/>
 </div>
-</center>
 </body>

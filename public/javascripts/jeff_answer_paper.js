@@ -50,19 +50,16 @@ function create_block(bocks_div, block,practice_type) {
     } else {
         $("block_ids").innerHTML = block.id;
     }
-    if(block.base_info.description!=null){
+    if(block.base_info.description!=null&&answer.length==0){
         $("jiexi_tab_p").innerHTML = block.base_info.description;
+    }else{
+        $("jiexi_tab").style.display="block";
     }
     var block_div = create_element("div", null, "block_" + block.id, null, null, "innerHTML");
     bocks_div.appendChild(block_div);
     var ul_div = create_element("div", null, "block_ul_" + block.id, null, null, "innerHTML");
     block_div.appendChild(ul_div);
-    if(practice_type!="4"){
-    var ul = create_element("div", null, "ul_" + block.id, "tb_scroll height507", null, "innerHTML");
-    }
-    else{
-      var ul = create_element("div", null, "ul_" + block.id, null, null, "innerHTML");
-    }   //滚动条存在的情况下，draggable没有效果。
+        var ul = create_element("div", null, "ul_" + block.id, "tb_scroll height507", null, "innerHTML");
 
     ul_div.appendChild(ul);
     //试卷导航展开部分
@@ -83,7 +80,8 @@ function create_block(bocks_div, block,practice_type) {
             //create_problem_navigation(block_nav_div, problems, "1");
             create_problem(ul, problems, block_nav_div,practice_type);
         }
- //        ul.innerHTML+="<div style='height:450px;'></div>";
+        var fill_blank=ul.appendChild(create_element("div", null, null, "clear", null, "innerHTML"));
+        fill_blank.innerHTML+="<div style='height:50px;'></div>";
         block_nav_div.appendChild(create_element("div", null, null, "clear", null, "innerHTML"));
     }
 }
@@ -204,9 +202,11 @@ function practice2_list(problem_id){
     if(last_open_problem_id!=0){       
         if(last_open_problem_id!=problem_id){
             $("practice2_list_"+problem_id).slideDown();
-            $("practice2_list_"+last_open_problem_id).hide();
+            $("practice2_list_"+last_open_problem_id).hide()           
         }else{
             $("practice2_list_"+problem_id).slideUp();
+            last_open_problem_id=0;
+            return 0;
         }
     }
     last_open_problem_id=problem_id;
@@ -273,9 +273,9 @@ function create_problem(ul, problem, block_nav_div,practice_type) {
         parent_div_str += "<div class='task3_con'><p>"+ problem.title + " ";
         parent_div_str +="</p></div>";
     }else{
-        parent_div_str += "<div class='task3_con' >";
+        parent_div_str += "<div class='task3_con'>";
         parent_div_str += "<div class='play'><div class='play_btn'><a href='javascript:void(0);' onclick='javascript:audio_play("+problem.id+");'><img id='practice2_audio_control_"+problem.id+"' src='/images/paper/play_icon.png'></a></div><a  href='javascript:void(0);' class='explain_btn_task2' onclick=\"javascript:practice2_list("+problem.id+");\" ></a></div>";
-        parent_div_str += "<div class='tb_con_list' id='practice2_list_"+problem.id+"'>&nbsp;&nbsp;&nbsp;"+problem.title+"<br/></div>";
+        parent_div_str += "<div class='tb_con_list' id='practice2_list_"+problem.id+"'><p>"+problem.title+"</p><br/></div>";
         parent_div_str +="</div>";
     }
     parent_div.innerHTML = parent_div_str;
@@ -536,9 +536,9 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
             var attr1 = create_element("div", null, null, null, null, "innerHTML");
             que_div_conlist.appendChild(attr1);
             if (answer_hash != null && answer_hash[question.id] != null) {
-                attr1.innerHTML += "<textarea cols='35' rows='3' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")'>"+ answer_hash[question.id][0] +"</textarea>";
+                attr1.innerHTML += "<textarea style='width: 440px; height: 100px; margin: 10px 0;' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")'>"+ answer_hash[question.id][0] +"</textarea>";
             } else {
-                attr1.innerHTML += "<textarea cols='35' rows='3' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")'></textarea>";
+                attr1.innerHTML += "<textarea style='width: 440px; height: 100px; margin: 10px 0;' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")'></textarea>";
             }
             if(answer!=null&&answer.length>0){
                 attr1.innerHTML += "<p style='color:green'>参考答案: "+answer[question_num-1]+"</p>"

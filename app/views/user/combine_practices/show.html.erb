@@ -6,7 +6,7 @@
 </script>
 <%= javascript_include_tag "#{@paper_url}" %>
 
- <% url="/user/combine_practices/#{@examination.id}/check_step" %>
+<% url="/user/combine_practices/#{@examination.id}/check_step" %>
 
 <%= form_for :paper , :url =>url,
   :html => {:name => "paper_form", :id => "paper_form",
@@ -27,8 +27,11 @@
     <div class="jiexi_tab" id="jiexi_tab" style="top: 93px; left: 498px; ">
       <div class="tab_t"><a href="#" onclick="javascript:document.getElementById('jiexi_tab').style.display='none';"><img alt="close" src="/images/paper/x.gif"/></a></div>
       <div class="tab_m">
-        <h3>注意事项：</h3>
-        <p id="jiexi_tab_p"></p>
+        <% if @step[1]=="1" %>
+          <p id="jiexi_tab_p">标准答案已给出，请检查。</p>
+        <% else %>
+          <p id="jiexi_tab_p"></p>
+        <% end %>
       </div>
       <div class="tab_b"></div>
     </div>
@@ -47,11 +50,10 @@
       <%=  render :partial => "/common/display_flash" %>
     </div>
   </div>
-  <div  id="paper_navigation" class="tb_content">
+  <div  id="paper_navigation" style="display:none;" class="tb_content">
   </div>
-<div class="clear"/><hr/>
+  <div class="clear"/><hr/>
   <div id="blocks">
-    
     <div id="block_ids" style="display:none;"></div>
   </div>
   <hr/>
@@ -60,7 +62,6 @@
   <input type="hidden" name="answer_url" id="answer_url"
          value="<%= Constant::ANSWER_CLIENT_PATH %>/<%= @examination.exam_user_id %>.xml"/>
   <div class="tb_prevNext">
-    <br/>
     <a href="#" id="tb_goleft" class="tb_goleft"></a>
     <%= f.submit "",:class=>"tb_check"%>
     <a href="#" id="tb_goright" class="tb_goright"></a>

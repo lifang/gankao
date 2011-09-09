@@ -1,5 +1,6 @@
 #encoding: utf-8
 class SessionsController < ApplicationController
+  layout "login"
   
   def new
     session[:signin_code] = proof_code(4)
@@ -31,13 +32,13 @@ class SessionsController < ApplicationController
 
   #退出登录
   def destroy
-#    cookies.each do |key,value|
-#      cookies.delete(key)
-#    end
-#    puts "================================================"
-#    session.each do |key,value|
-#     session.delete(key)
-#    end
+    #    cookies.each do |key,value|
+    #      cookies.delete(key)
+    #    end
+    #    puts "================================================"
+    #    session.each do |key,value|
+    #     session.delete(key)
+    #    end
     cookies.delete(:user_id)
     cookies.delete(:user_name)
     cookies.delete(:user_roles)

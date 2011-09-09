@@ -6,13 +6,14 @@
         <a href="javascript:void(0);" title="练习已经全部完成">开始训练</a>
       <% else %>
         <a href="/combine_practices/<%= Examination::TYPES[:PRACTICE] %>/start"
-           title="您尚未做任何练习" target='_blank'>开始训练</a>
+           title="开始训练" target='_blank'>开始训练</a>
       <% end %>
     <% else %>
       <a href="javascript:void(0);" title="尚未有练习"></a>
     <% end %>
   </div>
 </div>
+<%=  render :partial => "/common/display_flash" %>
 <div class="zh_p">综合训练五步</div>
 <div class="zonghe_div">
   <div class="zh_tab zh_position_one" style="z-index: 5; ">
