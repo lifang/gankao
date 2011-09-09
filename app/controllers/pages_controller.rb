@@ -1,5 +1,7 @@
 #encoding: utf-8
 class PagesController < ApplicationController
+  layout "login"
+
   def index
     
   end
