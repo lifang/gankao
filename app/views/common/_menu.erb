@@ -47,7 +47,10 @@
       <li><a href="/combine_practices" <% if request.path == "/combine_practices" %>class="hover"<% end %>>综合训练</a></li>
       <li><img src="/images/paper/menu_li.png" /></li>
       <li>
-        <a href="/exam_lists/incorrect_list" <% if request.path == "/exam_lists/incorrect_list" %>class="hover"<% end %>>错题库</a>
+        <a href="/exam_lists/incorrect_list"
+        <% if request.path == "/exam_lists/incorrect_list" or  request.path == "/exam_lists/question_info" %>
+             class="hover"<% end %>>错题库
+        </a>
       </li>
       <li><img src="/images/paper/menu_li.png" /></li>
       <li><a href="/user/notes" <% if request.path == "/user/notes" %>class="hover"<% end %>>笔记</a></li>

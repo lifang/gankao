@@ -40,6 +40,7 @@ function load_exam_tiem() {
 //创建试卷
 function create_paper() {
     //显示基本信息部分
+    $("problem_ids").value = "";
     $("paper_title").innerHTML = papers.paper.base_info.title;
     $("paper_id").value = papers.paper.id;
     $("leaving_num").innerHTML = papers.paper.total_num;

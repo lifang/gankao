@@ -361,3 +361,6 @@ img { border: none;}
 .foot { width: 880px; margin: 0 auto; background: url(/images/paper/xline.png) repeat-x center 0px; padding: 20px 10px 10px;}
 .foot p { text-align: center; line-height: 24px; height: 24px; color: #999;}
 .foot p a { padding: 0 5px; color: #999;}
+
+.tishi_tab { width: 250px; padding: 10px; background: url(/images/paper/mk_b_zz_bg.png) repeat; border: 1px #fff solid; position: fixed; display: none;}
+.tishi_tab p { text-align: center; line-height: 24px; font-size: 14px; font-family:"微软雅黑"; color: #fff;}
