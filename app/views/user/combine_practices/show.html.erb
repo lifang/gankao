@@ -1,5 +1,3 @@
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-  <script language="javascript" type="text/javascript">jQuery.noConflict();</script>
 
 <%= javascript_include_tag 'jeffrey' %>
 <%= javascript_include_tag 'cookie' %>
@@ -8,7 +6,7 @@
 </script>
 <%= javascript_include_tag "#{@paper_url}" %>
 
- <% url="/user/combine_practices/#{@examination.id}/save_result?step=#{@step[0]}" %>
+<% url="/user/combine_practices/#{@examination.id}/check_step" %>
 
 <%= form_for :paper , :url =>url,
   :html => {:name => "paper_form", :id => "paper_form",
@@ -29,8 +27,11 @@
     <div class="jiexi_tab" id="jiexi_tab" style="top: 93px; left: 498px; ">
       <div class="tab_t"><a href="#" onclick="javascript:document.getElementById('jiexi_tab').style.display='none';"><img alt="close" src="/images/paper/x.gif"/></a></div>
       <div class="tab_m">
-        <h3>注意事项：</h3>
-        <p id="jiexi_tab_p"></p>
+        <% if @step[1]=="1" %>
+          <p id="jiexi_tab_p">标准答案已给出，请检查。</p>
+        <% else %>
+          <p id="jiexi_tab_p"></p>
+        <% end %>
       </div>
       <div class="tab_b"></div>
     </div>
@@ -43,17 +44,19 @@
       <input type="hidden" name="examination_id" id="examination_id" value="<%= @examination.id %>"/>
       <input type="hidden" id="total_num"/>
       <input type="hidden" id="complete_num"/>
-      <% if @step[1]="1" %><input type="hidden" name="show_answer" id="show_answer" value="<%= @answer_array %>"/><% end %>
+      <% if @step[1]=="1" %><input type="hidden" name="show_answer" id="show_answer" value="<%= @answer_array %>"/><% end %>
       <!--      <div>题目数：共<span id="total_num"></span>题/已完成<span id="complete_num">0</span>题</div>   -->
       <div><span id="local_time"></span></div>
       <%=  render :partial => "/common/display_flash" %>
     </div>
   </div>
-  <div  id="paper_navigation" class="tb_content">
+  <div  id="paper_navigation" style="display:none;" class="tb_content">
   </div>
+  <div class="clear"/><hr/>
   <div id="blocks">
     <div id="block_ids" style="display:none;"></div>
   </div>
+  <hr/>
   <div id="remote_div" style="display:none;"></div>
   <input type="hidden" name="types" value="<%= @examination.types %>"/>
   <input type="hidden" name="answer_url" id="answer_url"
