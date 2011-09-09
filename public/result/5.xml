@@ -1,7 +1,9 @@
-<?xml version='1.0' encoding='UTF-8'?>      <exam id='17'>
-        <paper id='5' score='0'>
-          <questions><question id='18' is_sure='1' score='0'><answer>hello;|;good;|;morning;|;afternoon</answer></question><question id='17' is_sure='1' score='0'><answer>11;|;22;|;33</answer></question><question id='19' is_sure='1' score='0'><answer>abc;|;ddd;|;eee;|;ffff</answer></question></questions>
-          <auto_score/>
-          <rate_score/>
+<?xml version='1.0' encoding='UTF-8'?>      <exam check='1' id='24' step='1'>
+        <paper id='' score='0'>
+          <block/>
+          <block/>
+          <block/>
+          <block/>
+          <block/>
         </paper>
       </exam>
