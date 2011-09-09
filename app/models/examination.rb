@@ -144,7 +144,8 @@ class Examination < ActiveRecord::Base
     end if start_num > 0
     return doc
   end
-  
+
+  #返回真题的正确率
   def self.count_correct(id)
     correct = 0
     users = ExamUser.find_by_sql("select count(eu.id) count_id, sum(eu.correct_percent) correct_percent
@@ -153,6 +154,22 @@ class Examination < ActiveRecord::Base
         and eu.user_id = #{id} and e.types = #{TYPES[:OLD_EXAM]}")
     correct = users[0].count_id == 0 ? 0 : (users[0].correct_percent/users[0].count_id).round if users and users[0]
     return correct
+  end
+
+  #返回不同的考试类型的次数
+  def self.return_exam_count(types)
+   return Examination.count(:id,
+      :conditions => "is_published = #{Examination::IS_PUBLISHED[:ALREADY]}
+          and status != #{Examination::STATUS[:CLOSED]} and types = #{types}")
+  end
+
+  #随机返回用户一条试卷记录
+  def self.rand_examnation(types, user_id)
+    Examination.find_by_sql("select e.id from examinations e where e.id not in(select eu.id count_id from exam_users eu
+      inner join examinations ex on eu.examination_id = ex.id
+      where eu.is_submited = #{ExamUser::IS_SUBMITED[:YES]} and ex.types = #{types} and eu.user_id = #{user_id})
+       and e.is_published = #{Examination::IS_PUBLISHED[:ALREADY]}
+       and status != #{Examination::STATUS[:CLOSED]} and types = #{types} order by rand() limit 1")
   end
 
 end

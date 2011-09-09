@@ -68,6 +68,9 @@ module Constant
    #vip价格
    VIP=10
 
+  #非vip能做综合训练的次数
+  PRACTICES_COUNT = 3
+
   
   
 end

@@ -17,9 +17,13 @@ class ExamListsController < ApplicationController
     examinations=Examination.find_by_sql("select e.id from examinations e inner join exam_users u on u.examination_id=e.id
                   where u.user_id=#{cookies[:user_id]} and e.status=#{Examination::STATUS[:CLOSED ]} and e.types =#{Examination::TYPES[:SIMULATION]} and e.is_published=1 ")
     @examination_lists.each do |examination|
+      puts examination.id
+     puts  examinations.include?(examination.id)
+     puts examination.status==Examination::STATUS[:CLOSED ]
       @examination_lists -=[examination] unless examinations.include?(examination.id)  if examination.status==Examination::STATUS[:CLOSED ]
     end
     @hash=Examination.exam_users_hash(cookies[:user_id],Examination::TYPES[:SIMULATION])
+    puts @examination_lists.size
   end
   
   def old_exam_list

@@ -522,4 +522,13 @@ class ExamUser < ActiveRecord::Base
   end
 
 
+  #返回用户参与的不同考试类型的次数
+  def self.return_join_exam_count(types, user_id)
+    exam_sums = Examination.find_by_sql("select count(eu.id) count_id from exam_users eu
+      inner join examinations ex on eu.examination_id = ex.id
+      where eu.is_submited = #{ExamUser::IS_SUBMITED[:YES]} and ex.types = #{types} and eu.user_id = #{user_id}")
+    return exam_sums[0] ? exam_sums[0].count_id : 0
+  end
+  
+
 end
