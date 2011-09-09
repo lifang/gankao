@@ -29,11 +29,12 @@
           <div class="mk_r_div mkList_jt<%= i %>"  <%  if i!=0 %> style="display:none" <% end %> >
             <div class="cet_title"></div>
             <p class="begin_time_p">考试时间：<span class="blue"><%= examination.updated_at.strftime("%m-%d-%Y") %></span></p>
-            <h2>总分：<span class="red"><%= examination.papers[0].total_score %></span></h2>
             <% unless @hash["#{examination.id}"].nil? %>
-              <% if @hash["#{examination.id}"].total_score.nil?%>
+              <h2>总分：<span class="red"><%=  @hash["#{examination.id}"][0].total_score.nil? ? "暂无" :@hash["#{examination.id}"][0].total_score %></span></h2>
+              <% if @hash["#{examination.id}"][0].total_score.nil?%>
                 <div class="mk_table">
                   <table width="300" border="0" cellspacing="1" cellpadding="0">
+                   <%=  @hash["#{examination.id}"][1].elements["paper"] %>
                     <tr>
                       <td><strong>听力</strong>(20%)</td>
                       <td><strong>阅读</strong>(40%)</td>
@@ -41,15 +42,16 @@
                       <td><strong>作文</strong>(15%)</td>
                     </tr>
                     <tr>
-                      <td>20</td>
-                      <td>20</td>
-                      <td>20</td>
-                      <td>20</td>
+                      <td>暂无</td>
+                      <td>暂无</td>
+                      <td>暂无</td>
+                      <td>暂无</td>
                     </tr>
                   </table>
                 </div>
               <% else %>
                 <div class="mk_table">
+                   <% scores=@hash["#{examination.id}"][1].get_elements("//blocks/block") %>
                   <table width="300" border="0" cellspacing="1" cellpadding="0">
                     <tr>
                       <td><strong>听力</strong>(20%)</td>
@@ -58,17 +60,17 @@
                       <td><strong>作文</strong>(15%)</td>
                     </tr>
                     <tr>
-                      <td>20</td>
-                      <td>20</td>
-                      <td>20</td>
-                      <td>20</td>
+                      <td><%= scores[0].attributes["total_score"] unless scores[0].nil?  %></td>
+                      <td><%= scores[1].attributes["total_score"] unless scores[2].nil? %></td>
+                      <td><%= scores[2].attributes["total_score"] unless scores[2].nil?  %></td>
+                      <td><%= scores[3].attributes["total_score"] unless scores[3].nil?  %></td>
                     </tr>
                   </table>
                 </div>
               <% end %>
             <% end %>
           </div>
-          <% if @hash["#{examination.id}"].nil? || !@hash["#{examination.id}"].is_submited ==1%>
+          <% if @hash["#{examination.id}"].nil? || !@hash["#{examination.id}"][0].is_submited ==1%>
             <div class="mk_b_zz" id="mk_<%= i %>" >
               <div class="mk_b_yh">做为高级用户，在您考试完毕三个工作日内，将有老师批改你的答卷，你将得到完整的成绩报告。</div>
               <% if examination.exam_password1.nil? %>
