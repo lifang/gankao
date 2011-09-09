@@ -54,7 +54,7 @@ class User::NotesController < ApplicationController
     end
     flash[:notice] = "笔记添加成功."
     render :update do |page|
-      page.replace_html "note_div" , :partial => "/common/display_flash"
+      page.replace_html "note_div" , :partial => "/common/flash_div"
       page.replace_html "biji_tab" , :inline => "<script>document.getElementById('note_area').style.display='none';</script>"
     end
   end

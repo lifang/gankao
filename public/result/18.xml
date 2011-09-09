@@ -1,7 +1,5 @@
-<?xml version='1.0' encoding='UTF-8'?>      <exam id='13'>
-        <paper id='4' score='0'>
-          <questions><question id='15' is_sure='1' score='0'><answer>qianjun</answer></question><question id='14' is_sure='1' score='0'><answer>money</answer></question><question id='16' is_sure='1' score='0'><answer>windy</answer></question></questions>
-          <auto_score/>
-          <rate_score/>
+<?xml version='1.0' encoding='UTF-8'?>      <exam check='0' id='33' step='6'>
+        <paper id='' score='0'>
+          <blocks/>
         </paper>
       </exam>

@@ -91,3 +91,15 @@ function update_note(question_id) {
     $("start_note_" + question_id).style.display = "block";
     $("note_" + question_id).style.display = "none";
 }
+
+function audio_element(problem_title) {
+    var final_title = "";
+        if (window.HTMLAudioElement) {
+            final_title = "<audio id='audio' controls='controls'><source src='"+ problem_title +
+                "' type='audio/mpeg'></audio>";
+        } else {
+            final_title = "<object><embed id='audio' src='"+ problem_title +
+            "' autostart='false' type='audio/midi'></object>";
+        }
+    document.write(final_title);
+}

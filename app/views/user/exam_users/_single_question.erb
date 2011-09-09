@@ -54,7 +54,7 @@
     <% end %>
     <div class="fraction">
       <% if @examination.types == Examination::TYPES[:SIMULATION] %><font color="red"><% if question.attributes["user_score"] %>
-            <%= question.attributes["user_score"] %><% else %>0<% end %></font>/<% end %><%= question.attributes["score"] %>分
+            <%= question.attributes["user_score"] %><% else %>0<% end %></font>/<%= question.attributes["score"] %>分<% end %>
     </div>
   </div>
   <input type="hidden" id="btn_<%= question.attributes["id"] %>_answer" type="hidden" value="<%= answers.join(";") %>"/>

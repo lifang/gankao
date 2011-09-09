@@ -105,6 +105,104 @@ class ExamUser < ActiveRecord::Base
     self.toggle!(:is_submited)
   end
 
+  # <<<<head ==========================================================  综合训练记录result
+
+  #创建考生综合训练答案
+  def create_practice_result
+    self.answer_sheet_url = self.create_practice_result_url(self.practice_result_xml_content, "result")
+    self.save
+  end
+
+  def practice_result_xml_content
+    content = "<?xml version='1.0' encoding='UTF-8'?>"
+    content += <<-XML
+      <exam id='#{self.examination_id}' step='1' check='0'>
+        <paper id='#{self.paper_id}' score='0'>
+          <block></block>
+          <block></block>
+          <block></block>
+          <block></block>
+          <block></block>
+        </paper>
+      </exam>
+    XML
+    return content
+  end
+
+  #生成考生综合考试result文件
+  def create_practice_result_url(str, path)
+    dir = "#{Rails.root}/public/" + path
+    unless File.directory?(dir)
+      Dir.mkdir(dir)
+    end
+    file_name = "/#{self.id}.xml"
+    url = dir + file_name
+    f=File.new(url,"w")
+    f.write("#{str.force_encoding('UTF-8')}")
+    f.close
+    return "/" + path + file_name
+  end
+
+  #下一步
+  def next_step(doc,url)
+    step=doc.root.attributes['step']
+    check=doc.root.attributes['check']
+    if check=="1"||step=="2"
+      doc.root.attributes['step']=step.to_i+1
+    end
+    if check=="0"&&step!="2"
+      doc.root.attributes['check']=1
+    else
+      doc.root.attributes['check']=0
+    end
+    f=File.new("#{Rails.root}/public#{url}","w")
+    f.write("#{doc.to_s.force_encoding('UTF-8')}")
+    f.close
+  end
+
+  #设置step和check
+  def set_step(doc,url,step=nil,check=nil)
+    doc.root.attributes['check']=check if check
+    doc.root.attributes['step']=step if step
+    f=File.new("#{Rails.root}/public#{url}","w")
+    f.write("#{doc.to_s.force_encoding('UTF-8')}")
+    f.close
+  end
+
+  #取得综合训练进度step
+  def get_step(doc)
+    arr=[]
+    arr<<doc.root.attributes['step']
+    arr<<doc.root.attributes['check']
+    return arr
+  end
+
+  def practice_save_step_answer(doc,url,step,answer)
+    if doc.root.elements["paper/blocks/block[#{step.to_i}]"]==nil
+      blocks=doc.root.elements["paper/blocks"]
+      block=blocks.add_element("block")
+      answer.each do |single_answer|
+        question=block.add_element("question")
+        question.add_text(single_answer)
+      end
+      f=File.new("#{Rails.root}/public#{url}","w")
+      f.write("#{doc.to_s.force_encoding('UTF-8')}")
+      f.close
+    end
+
+    block = doc.root.elements["blocks"].elements["block[@id='#{block_id}']"]
+    problems = block.elements["problems"]
+    problem = problems.add_element("problem")
+    problem.add_attribute("id","#{self.id}")
+    problem.add_attribute("types", "#{self.types}")
+    title = problem.add_element("title")
+    title.add_text("#{self.title}")
+    problem.add_element("category").add_text("#{self.category_id}")
+    problem.add_element("complete_title").add_text("#{self.complete_title}") unless self.complete_title.nil?
+  end
+
+  # >>>>end ===========================================================  综合训练记录result
+
   #考生更新考试时长信息
   def update_info_for_join_exam(exam_start_time = nil, exam_time)
     self.toggle!(:is_user_affiremed)
@@ -115,6 +213,8 @@ class ExamUser < ActiveRecord::Base
     self.save
   end
 
+
+  
   #创建考生答卷
   def create_answer_xml(options = {})
     content = "<?xml version='1.0' encoding='UTF-8'?>"
@@ -353,15 +453,15 @@ class ExamUser < ActiveRecord::Base
         str = "您已经交卷。"
       else
         if examination[0].paper_id.nil? and examination[0].start_at_time > Time.now
-            str = "本场考试开始时间为#{examination[0].start_at_time.strftime("%Y-%m-%d %H:%M:%S")},请您做好准备。"
-          elsif (!examination[0].start_at_time.nil? and !examination[0].exam_time.nil? and examination[0].exam_time !=0 and
-                (examination[0].start_at_time + examination[0].exam_time.minutes) < Time.now) or
-              examination[0].status == Examination::STATUS[:CLOSED]
-            str = "本场考试已经结束。"
-          elsif examination[0].paper_id.nil? and examination[0].start_end_time  < Time.now
-            str = "您不能入场，本场考试入场时间为#{examination[0].start_at_time.strftime("%Y-%m-%d %H:%M:%S")}
+          str = "本场考试开始时间为#{examination[0].start_at_time.strftime("%Y-%m-%d %H:%M:%S")},请您做好准备。"
+        elsif (!examination[0].start_at_time.nil? and !examination[0].exam_time.nil? and examination[0].exam_time !=0 and
+              (examination[0].start_at_time + examination[0].exam_time.minutes) < Time.now) or
+            examination[0].status == Examination::STATUS[:CLOSED]
+          str = "本场考试已经结束。"
+        elsif examination[0].paper_id.nil? and examination[0].start_end_time  < Time.now
+          str = "您不能入场，本场考试入场时间为#{examination[0].start_at_time.strftime("%Y-%m-%d %H:%M:%S")}
               -#{examination[0].start_end_time.strftime("%Y-%m-%d %H:%M:%S")}。"
-          end if examination[0].start_at_time
+        end if examination[0].start_at_time
       end
     else
       str = "本场考试已经取消，或者您没有资格参加本场考试。"
@@ -397,7 +497,7 @@ class ExamUser < ActiveRecord::Base
         end
       end
     end unless question_hash.empty?
-    self.update_attributes(:correct_percent => correct_num)
+    self.update_attributes(:correct_percent => ((correct_num.to_f/xml.attributes["total_num"].to_f)*100).round)
   end
 
   #添加收藏

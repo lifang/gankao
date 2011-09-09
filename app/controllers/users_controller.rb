@@ -130,10 +130,10 @@ class UsersController < ApplicationController
         end
       end unless @user_exams.blank?
     end
-    @correct=Examination.count_correct(cookies[:user_id])
+    @correct = Examination.count_correct(cookies[:user_id])
     collection = Collection.find_by_user_id(cookies[:user_id])
     @incorrect_list = collection.open_xml.root if collection and collection.collection_url
-    note=Note.find_by_user_id(cookies[:user_id])
+    note = Note.find_by_user_id(cookies[:user_id])
     @notes = note.open_xml.root if note and note.note_url
     render :layout=>"gankao"
   end

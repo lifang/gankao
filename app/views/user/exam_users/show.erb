@@ -3,7 +3,10 @@
 <div class="testPaper_top">
   <div class="tp_top_box">
     <div class="paper_name"><%= @xml.elements['base_info'].elements['title'].text if @xml!=nil %></div>
-    <div class="timer"><%= @doc.elements["paper"].attributes["score"].nil? ? "分数暂未公布":" 得  分:"+ @doc.elements["paper"].attributes["score"] %></div>
+    <div class="timer"><% if @examination.types == Examination::TYPES[:SIMULATION] %>
+        <%= @doc.elements["paper"].attributes["score"].nil? ? "分数暂未公布":" 得  分:"+ @doc.elements["paper"].attributes["score"] %>
+      <% else %>不限时
+      <% end %></div>
     <div class="paper_info"><strong><%= @xml.attributes["total_num"]%></strong>题</div>
   </div>
 </div>
@@ -35,9 +38,18 @@
               <% unless problem.elements['title'].nil? %>
                 <div class="part_passage border_bottom">
                   <div class="p_contents">
-                    <p><%= problem.elements['title'].text.to_s.html_safe %></p>
+                    <p><% title = problem.elements['title'].text.to_s.html_safe %>
+                      <% if title =~ /<mp3>/  %>
+                        <script type="text/javascript">audio_element("<%= title.split("<mp3>")[1] %>");</script>
+                        <%= title.split("<mp3>")[2] %>
+                      <% else %>
+                        <%= problem.elements['title'].text.to_s.html_safe %>
+                      <% end %>
+                    </p>
                   </div>
-                  <div class="fraction"><%= problem.attributes["score"] %>分</div>
+                  <% if @examination.types == Examination::TYPES[:SIMULATION] %>
+                    <div class="fraction"><%= problem.attributes["score"] %>分</div>
+                  <% end %>
                 </div>
               <% end %>
               <div>
