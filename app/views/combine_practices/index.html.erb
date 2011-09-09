@@ -1,69 +1,32 @@
-<%= javascript_include_tag 'progressbar/jquery.js' %>
-<%= javascript_include_tag 'progressbar/jquery.progressbar.min.js' %>
-<%= javascript_include_tag 'progressbar/jquery.progressbar.js' %>
 
-<script type="text/javascript">
-  function loading(){
-    $("#spaceused1").progressBar();
-    $("#spaceused2").progressBar();
-    $("#spaceused3").progressBar();
-    $("#spaceused4").progressBar();
-    $("#spaceused5").progressBar();
-    jQuery.noConflict();
-  };
- 
-</script>
-
-<body onload="loading();">
-
-  <div class="main_box_back">
-    <h2><span>综合训练列表</span></h2>
-    <div class="in">
-      <table style="text-align:center">
-        <thead>
-          <tr>
-            <th width="280" style="text-align:center">练习名称</th>
-            <th width="210" style="text-align:center">练习总数</th>
-            <th width="210" style="text-align:center">完成情况</th>
-            <th width="80" style="text-align:center"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="text-align:center"><%=  Examination::TYPE_NAMES[:PRACTICE1][1] %></td>
-            <td style="text-align:center"><%= count1=@sum_hash[Examination::TYPE_NAMES[:PRACTICE1][0]] %></td>
-            <td><span class="progressBar" id="spaceused1"><%= ((@join_hash[Examination::TYPE_NAMES[:PRACTICE1][0]]*1.0/count1))*100 if @join_hash[Examination::TYPE_NAMES[:PRACTICE1][0]] %> % </span></td>
-            <td style="text-align:center"><input type="button" style="padding:4px;" value="开始训练" onclick="window.open('/combine_practices/<%= Examination::TYPE_NAMES[:PRACTICE1][0] %>/start','_blank')" /></td>
-          </tr>
-          <tr>
-            <td  style="text-align:center"><%=  Examination::TYPE_NAMES[:PRACTICE2][1] %></td>
-            <td style="text-align:center"><%= count2=@sum_hash[Examination::TYPE_NAMES[:PRACTICE2][0]] %></td>
-            <td><span class="progressBar" id="spaceused2"><%= ((@join_hash[Examination::TYPE_NAMES[:PRACTICE2][0]]*1.0/count2))*100 if @join_hash[Examination::TYPE_NAMES[:PRACTICE2][0]] %> %</span></td>
-            <td style="text-align:center"><input type="button" style="padding:4px;" value="开始训练" onclick="window.open('/combine_practices/<%= Examination::TYPE_NAMES[:PRACTICE2][0] %>/start','_blank')" /></td>
-          </tr>
-          <tr>
-            <td  style="text-align:center"><%=  Examination::TYPE_NAMES[:PRACTICE3][1] %></td>
-            <td style="text-align:center"><%= count3=@sum_hash[Examination::TYPE_NAMES[:PRACTICE3][0]] %></td>
-            <td><span class="progressBar" id="spaceused3"><%= ((@join_hash[Examination::TYPE_NAMES[:PRACTICE3][0]]*1.0/count3))*100 if @join_hash[Examination::TYPE_NAMES[:PRACTICE3][0]] %> %</span></td>
-            <td style="text-align:center"><input type="button" style="padding:4px;" value="开始训练" onclick="window.open('/combine_practices/<%= Examination::TYPE_NAMES[:PRACTICE3][0] %>/start','_blank')" /></td>
-          </tr>
-          <tr>
-            <td style="text-align:center"><%=  Examination::TYPE_NAMES[:PRACTICE4][1] %></td>
-            <td style="text-align:center"><%= count4=@sum_hash[Examination::TYPE_NAMES[:PRACTICE4][0]] %></td>
-            <td><span class="progressBar" id="spaceused4"><%= ((@join_hash[Examination::TYPE_NAMES[:PRACTICE4][0]]*1.0/count4))*100 if @join_hash[Examination::TYPE_NAMES[:PRACTICE4][0]] %> %</span></td>
-            <td style="text-align:center"><input type="button" style="padding:4px;" value="开始训练" onclick="window.open('/combine_practices/<%= Examination::TYPE_NAMES[:PRACTICE4][0] %>/start','_blank')" /></td>
-          </tr>
-          <tr>
-            <td style="text-align:center"><%=  Examination::TYPE_NAMES[:PRACTICE5][1] %></td>
-            <td style="text-align:center"><%= count5=@sum_hash[Examination::TYPE_NAMES[:PRACTICE5][0]] %></td>
-            <td><span class="progressBar" id="spaceused5"><%= ((@join_hash[Examination::TYPE_NAMES[:PRACTICE5][0]]*1.0/count5))*100 if @join_hash[Examination::TYPE_NAMES[:PRACTICE5][0]] %> %</span></td>
-            <td style="text-align:center"><input type="button" style="padding:4px;" value="开始训练" onclick="window.open('/combine_practices/<%= Examination::TYPE_NAMES[:PRACTICE5][0] %>/start','_blank')"/></td>
-          </tr>
-
-        </tbody>
-      </table>
-    </div>
+<%=  render :partial => "/common/display_flash" %>
+<div class="zh_top">
+  <div class="zh_load"><div class="per_load_bg"><div class="per_load_t"></div></div></div>
+  <div class="zh_addTo_btn"><a href="/combine_practices/<%= Examination::TYPES[:PRACTICE] %>/start" target=_blank>开始训练</a></div>
+</div>
+<div class="zh_p">综合训练五步</div>
+<div class="zonghe_div">
+  <div class="zh_tab zh_position_one" style="z-index: 5; ">
+    <div class="zh_tab_title" style="color: rgb(40, 117, 174); ">1</div>
+    <div class="zh_tab_box">综合训练1：做为普通用户，你答卷的主观题部分将不会被批改，这部分成绩将以你的客观题部分比例换算，考试成绩将不够准确。</div>
   </div>
+  <div class="zh_tab zh_position_two" style="z-index: 4; ">
+    <div class="zh_tab_title" style="color: rgb(40, 117, 174); ">2</div>
+    <div class="zh_tab_box">综合训练2：做为普通用户，你答卷的主观题部分将不会被批改，这部分成绩将以你的客观题部分比例换算，考试成绩将不够准确。</div>
+  </div>
+  <div class="zh_tab zh_position_three" style="z-index: 3; ">
+    <div class="zh_tab_title" style="color: rgb(40, 117, 174); ">3</div>
+    <div class="zh_tab_box">综合训练3：做为普通用户，你答卷的主观题部分将不会被批改，这部分成绩将以你的客观题部分比例换算，考试成绩将不够准确。</div>
+  </div>
+  <div class="zh_tab zh_position_four" style="z-index: 2; ">
+    <div class="zh_tab_title" style="color: rgb(40, 117, 174); ">4</div>
+    <div class="zh_tab_box">综合训练4：做为普通用户，你答卷的主观题部分将不会被批改，这部分成绩将以你的客观题部分比例换算，考试成绩将不够准确。</div>
+  </div>
+  <div class="zh_tab zh_position_five" style="z-index: 1; ">
+    <div class="zh_tab_title" style="color: rgb(40, 117, 174); ">5</div>
+    <div class="zh_tab_box">综合训练5：做为普通用户，你答卷的主观题部分将不会被批改，这部分成绩将以你的客观题部分比例换算，考试成绩将不够准确。</div>
+  </div>
+</div>
+<script type="text/javascript" src="/javascripts/zh_tab.js"></script>
 
-</body>
 
