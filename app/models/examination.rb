@@ -151,7 +151,7 @@ class Examination < ActiveRecord::Base
         from exam_users eu inner join examinations e on e.id = eu.examination_id
         where is_published = #{Examination::IS_PUBLISHED[:ALREADY]} and eu.is_submited = 1 
         and eu.user_id = #{id} and e.types = #{TYPES[:OLD_EXAM]}")
-    correct = users[0].count_id == 0 ? 0 : (users[0].correct_percent/users[0].count_id)*100 if users and users[0]
+    correct = users[0].count_id == 0 ? 0 : (users[0].correct_percent/users[0].count_id).round if users and users[0]
     return correct
   end
 

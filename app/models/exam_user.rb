@@ -397,7 +397,7 @@ class ExamUser < ActiveRecord::Base
         end
       end
     end unless question_hash.empty?
-    self.update_attributes(:correct_percent => (correct_num.to_f/xml.attributes["total_num"].to_f).round)
+    self.update_attributes(:correct_percent => ((correct_num.to_f/xml.attributes["total_num"].to_f)*100).round)
   end
 
   #添加收藏
