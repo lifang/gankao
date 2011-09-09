@@ -2,10 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- manifest="test.manifest"-->
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>登录</title>
-    <link href="/stylesheets/re_login.css" rel="stylesheet" type="text/css"/>
+    <title><%= @title %></title>
+    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="/javascripts/jquery-1.5.2.js"></script>
-    <script type="text/javascript">jQuery.noConflict();</script>
+    <script type="text/javascript" src="/javascripts/lunbo.js"></script>
+
     <!--[if IE 6]>
     <script src="js/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>
@@ -17,9 +18,8 @@
       /* change it to what suits you! */
     </script>
     <![endif]-->
-
   </head>
   <body>
-    <%=yield%>
+  <%= yield %>
   </body>
 </html>

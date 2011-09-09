@@ -437,7 +437,8 @@ function feedb(question_id,problem_id){
     if (text=="输入想知道的问题..."||text.length==0||text==""){
         alert("请输入你要问的问题.");
         return false;
-    }else{ $('question_'+question_id).style.display='block';
+    }else{
+        $('question_'+question_id).style.display='block';
         new Ajax.Updater("question_"+question_id , "/exam_lists/feedback",
         {
             asynchronous:true,
@@ -462,9 +463,20 @@ function cuoti_note(question_id, problem_id) {
 }
 function show_question(id){
     var questions=$("questions").value;
-     var ids=questions.split(",");
-     for (var i=0;i<ids.length;i=i+1){
-         $('question_'+ids[i]).style.display='none';
-     }
+    var ids=questions.split(",");
+    for (var i=0;i<ids.length;i=i+1){
+        $('question_'+ids[i]).style.display='none';
+    }
     $('question_'+id).style.display='block';
 }
+
+
+jQuery(function() {
+    jQuery('.mokao_left > div').bind('click',function(){
+        jQuery(this).addClass('mkl_h').siblings().removeClass('mkl_h');
+        var index = jQuery('.mokao_left > div').index(this);
+        jQuery('.mk_r_tab > .mk_r_div').eq(index).show().siblings().hide();
+        jQuery('#mk_'+this.id).css('display','block');
+    });
+})
+

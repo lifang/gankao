@@ -158,7 +158,7 @@ class Examination < ActiveRecord::Base
 
   #返回不同的考试类型的次数
   def self.return_exam_count(types)
-   return Examination.count(:id,
+    return Examination.count(:id,
       :conditions => "is_published = #{Examination::IS_PUBLISHED[:ALREADY]}
           and status != #{Examination::STATUS[:CLOSED]} and types = #{types}")
   end
@@ -172,4 +172,16 @@ class Examination < ActiveRecord::Base
        and status != #{Examination::STATUS[:CLOSED]} and types = #{types} order by rand() limit 1")
   end
 
+
+  def self.exam_users_paper(user_id,types)
+    hash ={}
+    ExamUser.find_by_sql("select eu.total_score,eu.is_submited,eu.examination_id,eu.paper_id,eu.created_at
+        correct_percent from exam_users eu inner join examinations e on e.id = eu.examination_id
+        where e.types =#{types} and eu.user_id = #{user_id} and eu.is_submited=1
+        and is_published=#{Examination::IS_PUBLISHED[:ALREADY]}").each do |exam_user|
+      doc=ExamRater.open_file("#{Constant::BACK_PUBLIC_PATH}/papers/#{exam_user.paper_id}.xml") unless exam_user.paper_id.nil?
+      hash["#{exam_user.examination_id}"] = [exam_user,doc]
+    end unless user_id.nil? or user_id == ""
+    return hash
+  end
 end

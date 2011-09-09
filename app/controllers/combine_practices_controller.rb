@@ -15,15 +15,15 @@ class CombinePracticesController < ApplicationController
     can_practies = false unless is_vip? and practies_count < Constant::PRACTICES_COUNT
     if can_practies
       all_practies = Examination.return_exam_count(Examination::TYPES[:PRACTICE])
-      if all_practies == practies_count
-        falsh[:notice] = "您的综合训练已经全部做完。"
+      if all_practies <= practies_count
+        flash[:notice] = "您的综合训练已经全部做完。"
         redirect_to "/combine_practices"
       else
         examination = Examination.rand_examnation(Examination::TYPES[:PRACTICE], cookies[:user_id].to_i)
         if examination and examination[0]
           redirect_to "/user/combine_practices/#{examination[0].id}/start"
         else
-          falsh[:notice] = "您的综合训练已经全部做完。"
+          flash[:notice] = "您的综合训练已经全部做完。"
           redirect_to "/combine_practices"
         end
       end

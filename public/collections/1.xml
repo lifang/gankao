@@ -75,7 +75,11 @@
                 </question>
             </questions>
         </problem>
+<<<<<<< HEAD
         <problem id='9' repeat_num='11' score='5' types='0'>
+=======
+        <problem id='9' repeat_num='9' score='5' types='0'>
+>>>>>>> f759e93f5394b205104d875e9dd953e125aa27b8
             <title>少打</title>
             <category>1</category>
             <questions>
@@ -85,12 +89,16 @@
                     <questionattrs>adsad;-;规范法官;-;会更好;-;很久很久</questionattrs>
                     <tags/>
                     <user_answer>规范法官</user_answer>
+<<<<<<< HEAD
                     <user_answer/>
                     <user_answer>会更好</user_answer>
                     <user_answer>规范法官</user_answer>
                     <user_answer/>
                     <user_answer>规范法官</user_answer>
                 </question>
+=======
+                <user_answer/><user_answer>会更好</user_answer><user_answer>规范法官</user_answer><user_answer/></question>
+>>>>>>> f759e93f5394b205104d875e9dd953e125aa27b8
                 <question correct_type='0' error_percent='0' id='14' repeat_num='1' score='5'>
                     <answer>sfs</answer>
                     <analysis>sfafwerwr2r2</analysis>

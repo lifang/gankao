@@ -101,8 +101,8 @@ Gankao::Application.routes.draw do
     end
     resources :combine_practices do
       member do
-        get "start","save_result"
-        post "save_result"
+        get "start"
+        post "save_result","check_step"
       end
     end
     resources :exam_users do
