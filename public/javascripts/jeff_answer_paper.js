@@ -339,10 +339,15 @@ function create_question(problem_title,problem_id, question_id_input, parent_div
 
     $("all_question_ids").value += "" + question.id + ",";
     question_id_input.value += "" + question.id + ",";
+    if(question.correct_type=="3"||question.correct_type=="5"){
+    var que_div = create_element("div", null, "question_" + question.id, null, null, "innerHTML");
+    }
+    else{
     var que_div = create_element("div", null, "question_" + question.id, "tb_content", null, "innerHTML");
+    }
     que_div.innerHTML = "<input type='hidden' name='question_type' id='question_type_"+ question.id +"' value='"+ question.correct_type +"'/>";
     if (question.description != undefined) {
-        que_div.innerHTML += "小题描述：" + question.description;
+        que_div.innerHTML += "<br/>小题描述：" + question.description;
     }
     parent_div.appendChild(que_div);
     //根据problem是否确定来判断question是否确定
@@ -525,9 +530,9 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
             var attr1 = create_element("div", null, null, null, null, "innerHTML");
             que_div_conlist.appendChild(attr1);
             if (answer_hash != null && answer_hash[question.id] != null) {
-                attr1.innerHTML += "<textarea cols='35' rows='3' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")'>"+ answer_hash[question.id][0] +"</textarea>";
+                attr1.innerHTML += "<textarea class='task_textarea' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")'>"+ answer_hash[question.id][0] +"</textarea>";
             } else {
-                attr1.innerHTML += "<textarea cols='35' rows='3' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")'></textarea>";
+                attr1.innerHTML += "<textarea class='task_textarea' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")'></textarea>";
             }
             if(answer!=null&&answer.length>0){
                 attr1.innerHTML += "<p style='color:green'>参考答案: "+answer[question_num-1]+"</p>"

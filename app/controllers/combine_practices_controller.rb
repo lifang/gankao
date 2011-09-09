@@ -4,6 +4,17 @@ class CombinePracticesController < ApplicationController
   layout "gankao"
 
   def index
+    @type_sums = Examination.find_by_sql("select count(types) sums,types from examinations group by types")
+    @sum_hash={}
+    @type_sums.each do |types_and_sums|
+      @sum_hash[types_and_sums.types]=types_and_sums.sums
+    end
+    @join_sums=Examination.find_by_sql("select count(types) joins,types from examinations ex
+inner join exam_users eu on eu.examination_id=ex.id where eu.is_submited=#{ExamUser::IS_SUBMITED[:YES]} group by ex.types")
+    @join_hash={}
+    @join_sums.each do |types_and_joins|
+      @join_hash[types_and_joins.types]=types_and_joins.joins
+    end
   end
 
   def start
