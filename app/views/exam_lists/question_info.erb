@@ -2,14 +2,12 @@
   <div class="pattern"><a href="/exam_lists/incorrect_list" class="chay_pat">查阅</a><div class="moveBlock_bg">
       <div class="moveBlock"><img alt="moveBlock" src="/images/paper/moveBlock.png" /></div></div><a href="/exam_lists/question_info" class="lianx_pat">练习</a></div>
   <div class="clear"></div>
-  <h1>
-    <div class="part_passage">
-      <div class="p_directions">
-        <p> <%=@problem.elements['title'].text.to_s.html_safe  %></p>
-      </div>
-      <div class="fraction"><%= @problem.attributes["score"] %>分</div>
+  <div class="part_passage">
+    <div class="p_contents">
+      <p> <%=@problem.elements['title'].text.to_s.html_safe  %></p>
     </div>
-  </h1>
+    <div class="fraction"><%= @problem.attributes["score"] %>分</div>
+  </div>
   <div class="part_question" id="show_div">
     <% attr="" %>
     <% @problem.elements["questions"].each_element do |question| %>
@@ -62,20 +60,20 @@
       </div>
       <input type="hidden" value="<%= @problem.attributes["id"] %>" id="problem_id" />
     <% end %>
-    <div class="tb_checkBox"><a class="tb_check"></a></div>
-    <div class="ep_prevNext">
-      <input type="hidden" value="<%= params[:page].nil? ? 1:params[:page] %>" id="current_page" />
-      <input type="hidden" value="<%= attr.chop  %>" id="all_question" />
-      <% if params[:page] and params[:page].to_i > 1 %>
-        <div class="ep_goLeft">
-          <a href="<%= request.path %>?page=<%= params[:page].to_i - 1 %>">&lt;</a>
-        </div>
-      <% end %>
-      <div class="ep_number"><span class="orange"><%= params[:page].nil? ? 1 :params[:page] %></span>/<%= @num %></div>
-      <% if @has_next_page %>
-        <% current_page = (params[:page] and params[:page].to_i > 1) ? params[:page].to_i : 1 %>
-        <div class="ep_goRight"><a href="<%= request.path %>?page=<%= current_page + 1 %>">&gt;</a></div>
-      <% end %>
-    </div>
+  </div>
+  <div class="tb_checkBox"><a class="tb_check"></a></div>
+  <div class="ep_prevNext">
+    <input type="hidden" value="<%= params[:page].nil? ? 1:params[:page] %>" id="current_page" />
+    <input type="hidden" value="<%= attr.chop  %>" id="all_question" />
+    <% if params[:page] and params[:page].to_i > 1 %>
+      <div class="ep_goLeft">
+        <a href="<%= request.path %>?page=<%= params[:page].to_i - 1 %>">&lt;</a>
+      </div>
+    <% end %>
+    <div class="ep_number"><span class="orange"><%= params[:page].nil? ? 1 :params[:page] %></span>/<%= @num %></div>
+    <% if @has_next_page %>
+      <% current_page = (params[:page] and params[:page].to_i > 1) ? params[:page].to_i : 1 %>
+      <div class="ep_goRight"><a href="<%= request.path %>?page=<%= current_page + 1 %>">&gt;</a></div>
+    <% end %>
   </div>
 </div>
