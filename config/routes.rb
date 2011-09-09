@@ -73,7 +73,7 @@ Gankao::Application.routes.draw do
       post "load_set_right","set_right"
     end
     member do
-      get "active", "user_active","first_page"
+      get "active", "user_active"
       post "update_info"
     end
   end
@@ -89,6 +89,7 @@ Gankao::Application.routes.draw do
     end
   end
   namespace :user do
+    resources :homes
     resources :examinations do
       member do
         post "save_result", "five_min_save", "check_exam_pwd", "start_fixup_time", "get_exam_time"

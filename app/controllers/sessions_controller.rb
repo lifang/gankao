@@ -1,15 +1,12 @@
 #encoding: utf-8
 class SessionsController < ApplicationController
-  
+  layout "gankao"
+
   def new
     session[:signin_code] = proof_code(4)
   end
   
   def create
-    #if params[:proof_code].downcase != session[:signin_code].to_s.downcase
-    #  flash[:error] = "请输入正确的验证码"
-    #  redirect_to '/sessions/new'
-    #else
     @user = User.find_by_email(params[:session][:email])
     if @user.nil?
       flash[:error] = "邮箱不存在"
@@ -24,9 +21,7 @@ class SessionsController < ApplicationController
     if flash[:error]
       redirect_to request.referer
     else
-      puts request.referer
-      path = (request.referer and request.referer.to_s != "http://localhost:3000/sessions/new") ? request.referer : root_path
-      puts path
+      path = request.referer ? request.referer : root_path
       redirect_to path
     end
   end
@@ -82,10 +77,6 @@ class SessionsController < ApplicationController
   #收取邮件并登录
   def active
     @user = User.find(params[:id].to_i)
-  end
-  
-  def index
-    
   end
 
   def sina_login

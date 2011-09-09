@@ -3,17 +3,19 @@
     <input  type="button" value="提问" class="se_btn" onclick="javascript:feedb('<%= feedback[0].attributes["id"] %>','<%= feedback[1].attributes["id"] %>')" /></div>
   <div class="answerPro">
     <ul>
-     问题列表：<br/>
       <% @hash_list["#{feedback[0].attributes["id"]}"].each do |feed| %>
         <li>
-          <div class="an_p danHang"  onmouseover="javascript:$('<%= feed.id %>').style.display='block';" onmouseout="javascript:$('<%= feed.id %>').style.display='none';" >
-           <%= feed.description %></div>
-          <div class="an_member" id="<%= feed.id %>" style="display:none">
-            <%if feed.answer.nil? %>
-              <%= "等待回答中..." %>
-            <%else%>
-              <%=feed.answer %>
-            <%end%>
+          <div class="an_p danHang">
+            <a href="javascript:void(0);" onmouseover="javascript:$('<%= feed.id %>').style.display='block';" onmouseout="javascript:$('<%= feed.id %>').style.display='none';" >
+              <%= feed.description %>
+            </a>
+          </div>
+          <div class="an_member" id="<%= feed.id %>" style="display:none;">
+            <p><%if feed.answer.nil? %>
+                <%= "等待回答中..." %>
+              <%else%>
+                <%=feed.answer %>
+              <%end%></p>
           </div>
         </li>
       <%end unless @hash_list["#{ feedback[0].attributes["id"]}"].nil?%>

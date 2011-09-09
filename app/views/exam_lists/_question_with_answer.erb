@@ -7,8 +7,7 @@
       <div class="p_q_l_right" onmouseover="javascript:show_question('<%= question.attributes["id"] %>')"
            >
         <div class="p_contents">
-          <p>小题描述：
-            &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["description"].text if question.elements["description"] %>
+          <p><%= question.elements["description"].text if question.elements["description"] %>
           </p>
         </div>
         <span id="user_score_<%= question.attributes["id"].to_i %>">

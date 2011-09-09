@@ -345,7 +345,6 @@ function feedback(id){
 }
 
 function problem_values(){
-    jQuery.noConflict();
     var page=$("current_page").value;
     var problem_num=$("problem_id").value;
     var ids=$("all_question").value.split(",");

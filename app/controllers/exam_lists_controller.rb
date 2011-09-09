@@ -1,6 +1,8 @@
+#encoding: utf-8
 class ExamListsController < ApplicationController
   before_filter :access?
   layout "gankao"
+  
   def  list
     lists=Collection.find_by_user_id(cookies[:user_id]).open_xml
     lists.elements["/collection/problems"].each_element do |problem|
@@ -13,48 +15,51 @@ class ExamListsController < ApplicationController
   end
   
   def simulate_list
-    @examination_lists=Examination.where("types=? and is_published=1",Examination::TYPES[:SIMULATION])
-    examinations=Examination.find_by_sql("select e.id from examinations e inner join exam_users u on u.examination_id=e.id
-                  where u.user_id=#{cookies[:user_id]} and e.status=#{Examination::STATUS[:CLOSED ]} and e.types =#{Examination::TYPES[:SIMULATION]} and e.is_published=1 ")
+    @examination_lists = Examination.where("types = ? and is_published = ?",
+      Examination::TYPES[:SIMULATION], Examination::IS_PUBLISHED[:ALREADY])
+    examinations = Examination.find_by_sql("select e.id from examinations e 
+          inner join exam_users u on u.examination_id = e.id
+          where e.status = #{Examination::STATUS[:CLOSED]} and e.types = #{Examination::TYPES[:SIMULATION]}
+          and e.is_published = #{Examination::IS_PUBLISHED[:ALREADY]} and u.user_id = #{cookies[:user_id].to_i} ")
     @examination_lists.each do |examination|
-      puts examination.id
-     puts  examinations.include?(examination.id)
-     puts examination.status==Examination::STATUS[:CLOSED ]
-      @examination_lists -=[examination] unless examinations.include?(examination.id)  if examination.status==Examination::STATUS[:CLOSED ]
+      @examination_lists -=[examination] unless examinations.include?(examination.id) if examination.status == Examination::STATUS[:CLOSED]
     end
-    @hash=Examination.exam_users_hash(cookies[:user_id],Examination::TYPES[:SIMULATION])
-    puts @examination_lists.size
+    @hash = Examination.exam_users_hash(cookies[:user_id].to_i, Examination::TYPES[:SIMULATION])
   end
   
   def old_exam_list
-    @old_lists=Examination.where("types=? and is_published=1",Examination::TYPES[:OLD_EXAM])
-    @hash=Examination.exam_users_hash(cookies[:user_id],Examination::TYPES[:OLD_EXAM])
+    @old_lists = Examination.where("types = ? and is_published = ?",
+      Examination::TYPES[:OLD_EXAM], Examination::IS_PUBLISHED[:ALREADY])
+    @hash = Examination.exam_users_hash(cookies[:user_id].to_i, Examination::TYPES[:OLD_EXAM])
   end
   
   def incorrect_list
-    @hash_list={}
+    @hash_list = {}
     @has_next_page = false
-    @lists=list
-    @num=@lists.get_elements("//problems/problem").size
-    @lists =Examination.get_start_element(params[:page], @lists)
+    @lists = list
+    @num = @lists.get_elements("//problems/problem").size
+    @lists = Examination.get_start_element(params[:page], @lists)
     current_element = Examination.return_page_element(@lists, @has_next_page)
     @lists = current_element[0]
-    problem=@lists.elements["/collection/problems/problem/questions"]
+    problem = @lists.elements["/collection/problems/problem/questions"]
     problem.each_element do |question|
-      @hash_list["#{question.attributes['id']}"]=Feedback.find_all_by_user_id_and_question_id(cookies[:user_id],question.attributes["id"].to_i)
+      @hash_list["#{question.attributes['id']}"] = Feedback.
+        find_all_by_user_id_and_question_id(cookies[:user_id], question.attributes["id"].to_i)
     end unless problem.nil?
     @has_next_page = current_element[1]
   end
 
 
   def feedback
-    @feedback=Feedback.create(:description=>params[:description],:user_id=>"#{cookies[:user_id]}",:question_id=>params[:question_id])
-    @hash_list={}
-    @hash_list["#{params[:question_id]}"]=Feedback.find_all_by_user_id_and_question_id(cookies[:user_id],params[:question_id])
-    doc=Collection.find_by_user_id(cookies[:user_id]).open_xml
-    problem=doc.elements["/collection/problems/problem[@id='#{params[:problem_id]}']"]
-    question=problem.elements["questions/question[@id='#{params[:question_id]}']"]
-    render :partial=>"/exam_lists/feedback",:object=>[question,problem]
+    @feedback=Feedback.create(:description => params[:description],
+      :user_id => cookies[:user_id].to_i, :question_id => params[:question_id].to_i)
+    @hash_list ={}
+    @hash_list["#{params[:question_id]}"] = Feedback.
+      find_all_by_user_id_and_question_id(cookies[:user_id].to_i, params[:question_id].to_i)
+    doc = Collection.find_by_user_id(cookies[:user_id]).open_xml
+    problem = doc.elements["/collection/problems/problem[@id='#{params[:problem_id]}']"]
+    question = problem.elements["questions/question[@id='#{params[:question_id]}']"]
+    render :partial => "/exam_lists/feedback",:object=>[question, problem]
   end
 
 
@@ -70,25 +75,22 @@ class ExamListsController < ApplicationController
   end
 
   def compare_answer
-    problem_id=params[:problem_id]
-    collection=Collection.find_by_user_id(cookies[:user_id])
-    doc=collection.open_xml
-    problem=doc.elements["/collection/problems/problem[@id='#{problem_id}']"]
+    problem_id = params[:problem_id]
+    collection = Collection.find_by_user_id(cookies[:user_id].to_s)
+    doc = collection.open_xml
+    problem = doc.elements["/collection/problems/problem[@id='#{problem_id}']"]
     problem.elements["questions"].each_element do |question|
-      id=question.attributes["id"]
-      if params["answer_#{id}"]==question.elements["answer"].text
-        correct_percent=1.0/(question.elements["user_answer"].size+1)*100
-        question.attributes["error_percent"]=(100-correct_percent).to_i
-      else
-        question.add_element("user_answer").add_text(params["answer_#{id}"])
-        problem.attributes["repeat_num"] =problem.attributes["repeat_num"].to_i+1
+      id = question.attributes["id"]
+      true_num = (((question.attributes["error_percent"].to_f)/100) * (question.attributes["repeat_num"].to_i)).round
+      if params["answer_#{id}"].strip == question.elements["answer"].text.strip
+        true_num += 1
       end
+      question.add_element("user_answer").add_text(params["answer_#{id}"])
+      question.attributes["repeat_num"] = question.attributes["repeat_num"].to_i + 1
+      question.attributes["error_percent"] = ((true_num.to_f/(question.attributes["repeat_num"].to_i))*100).round
     end
     self.write_xml("#{Constant::PUBLIC_PATH}#{collection.collection_url}", doc)
-    doc=collection.open_xml
-    @num=list.get_elements("//problems/problem").size
-    @lists =problem
-    @has_next_page =!doc.elements["/collection/problems/problem[@id='#{problem_id}']"].next_element.nil?
+    @lists = problem
     render :partial=>"/exam_lists/question_answer"
   end
   
@@ -103,6 +105,7 @@ class ExamListsController < ApplicationController
     end
     problem.add_attribute("delete_status",1) if n==0
     self.write_xml("#{Constant::PUBLIC_PATH}#{collection.collection_url}", doc)
+    flash[:notice] = "删除成功。"
     if params[:page].to_i>1
       redirect_to  "/exam_lists/incorrect_list?page=#{params[:page].to_i-1}"
     else
@@ -113,7 +116,7 @@ class ExamListsController < ApplicationController
   def load_note
     note_text = ""
     @problem_id=params[:problem_id]
-    note = Note.find_by_user_id(cookies["user_id"])
+    note = Note.find_by_user_id(cookies["user_id"].to_i)
     if note and note.note_url
       note_text = note.return_note_text(@problem_id, params[:id])
     end

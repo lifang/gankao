@@ -449,7 +449,7 @@ class ExamUser < ActiveRecord::Base
     str = ""
     examination = Examination.return_examinations(user_id, examination_id)
     if examination.any?
-      if !examination[0].is_submited.nil? and examination[0].is_submited == true
+      if !examination[0].is_submited.nil? and (examination[0].is_submited == true or examination[0].is_submited == 1)
         str = "您已经交卷。"
       else
         if examination[0].paper_id.nil? and examination[0].start_at_time > Time.now

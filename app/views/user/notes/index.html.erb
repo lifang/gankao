@@ -5,7 +5,8 @@
       <div class="searchNotebook">
         <%= form_tag "/user/notes/search", :method => "post" do -%>
           <input type="text" class="se_nb_input" name="note_text" id="note_text"
-                 value="<%= session[:note_text] if session[:note_text] %>" />
+                 value="<% if session[:note_text] %><%= session[:note_text] %><% else %>请输入笔记关键字查询...<% end %>"
+                 onfocus="javascript:$('note_text').value='';" />
           <button type="submit" name="button" class="se_nb_btn"></button>
         <% end -%>
       </div>
@@ -56,13 +57,13 @@
     </div>
   </div>
   <div class="noteBook_right">
-    <div class="nb_r_box">
-      <div class="nb_r_title">原题</div>
-      <% @doc.root.elements["problems"].each_element do |problem|
-        problem.elements["questions"].each_element do |question|
-          unless (question.elements["note_text"].nil? or question.elements["note_text"].text.nil? or
-                question.elements["note_text"].text == "") %>
-            <div class="nb_r_con" id="question_info_<%= question.attributes["id"] %>" style="display:none;">
+    <% @doc.root.elements["problems"].each_element do |problem|
+      problem.elements["questions"].each_element do |question|
+        unless (question.elements["note_text"].nil? or question.elements["note_text"].text.nil? or
+              question.elements["note_text"].text == "") %>
+          <div class="nb_r_box" id="question_info_<%= question.attributes["id"] %>" style="display:none;">
+            <div class="nb_r_title">原题</div>
+            <div class="nb_r_con">
               <!--原题-->
               <div class="part_passage">
                 <div class="p_contents">
@@ -72,10 +73,10 @@
               </div>
               <%= render :partial => "/user/notes/question_with_answer", :object => question %>
             </div>
-          <% end
-        end
-      end %>
-    </div>
+          </div>
+        <% end
+      end
+    end %>
   </div>
 <% else %>
   <div class="noteBook_left">您当前未做任何笔记。</div>

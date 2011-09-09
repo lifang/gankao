@@ -3,18 +3,15 @@
     <div class="p_q_l_left"><%= question.attributes["id"] %></div>
     <div class="p_q_l_right">
       <div class="p_contents">
-        <p>小题描述：
-          &nbsp;&nbsp;&nbsp;&nbsp;<%= question.elements["description"].text if question.elements["description"] %>
-        </p>
+        <p><%= question.elements["description"].text if question.elements["description"] %></p>
       </div>
-
       <% attrs_str = question.elements["questionattrs"].text
       attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
       correct_type = question.attributes["correct_type"]
       answer = question.elements["answer"]
       answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
-      user_answer=question.elements["user_answer"].text
-      user_answers=user_answer.nil? ? [] :  user_answer.split(";|;") %>
+      user_answer = question.get_elements("#{question.xpath}/user_answer")[-1].text
+      user_answers = user_answer.nil? ? [] :  user_answer.split(";|;") %>
       <% if (correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] or
             correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE]) %>
         <ul class="chooseQuestion">
@@ -55,31 +52,11 @@
     </div>
     <div class="clear"></div>
     <div class="review_btn">
-      <button class="jiexi_btn" id="btn_<%= question.attributes['id'] %>" onclick="javascript:show_analysis('btn_<%= question.attributes['id'] %>')">解析</button>
+      <button class="jiexi_btn" id="btn_<%= question.attributes['id'] %>" onclick="javascript:show_analysis('btn_<%= question.attributes['id'] %>');">解析</button>
     </div>
     <input type="hidden" id="btn_<%= question.attributes["id"] %>_answer" type="hidden" value="<%= answers.join(";") %>"/>
     <input type="hidden" id="btn_<%= question.attributes["id"] %>_analysis" type="hidden" value="<%= question.elements["analysis"].text %>"/>
   </div>
 <% end %>
-<div class="ep_prevNext">
-  <input type="hidden" value="<%= params[:page] %>" id="current_page" />
-  <% if params[:page] and params[:page].to_i > 1 %>
-    <div class="ep_goLeft">
-      <a href="<%= request.path %>?page=<%= params[:page].to_i - 1 %>">&lt;</a>
-    </div>
-  <% end %>
-  <div class="ep_number"><span class="orange"><%= params[:page].nil? ? 1 :params[:page] %></span>/<%= @num %></div>
-  <% if @has_next_page %>
-    <% current_page = (params[:page] and params[:page].to_i > 1) ? params[:page].to_i : 1 %>
-    <div class="ep_goRight"><a href="<%= request.path %>?page=<%= current_page + 1 %>">&gt;</a></div>
-  <% end %>
-</div>
-<div class="jiexi_tab" id="analysis_div">
-  <div class="tab_t"><a href="#"><img  src="/images/paper/x.gif" /></a></div>
-  <div class="tab_m">
-    <h3 id="answer"></h3>
-    <p id="analysis"></p>
-  </div>
-  <div class="tab_b"></div>
 
-</div>
+

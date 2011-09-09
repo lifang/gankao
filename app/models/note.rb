@@ -150,12 +150,7 @@ class Note < ActiveRecord::Base
 
   #返回总页数
   def return_total_page(doc, pre_page)
-    total_num = 0
-    doc.elements["note"].elements['problems'].each_element do |problem|
-      problem.elements["questions"].each_element do |question|
-        total_num += 1
-      end
-    end
+    total_num = doc.get_elements("/note/problems/problem").size
     return (total_num%pre_page == 0) ? total_num/pre_page : (total_num/pre_page + 1)
   end
 

@@ -55,12 +55,12 @@ jQuery(function(){
 })
 
 
-jQuery(function(){jQuery.noConflict();
-    jQuery('.tb_check').click(function(){
-       problem_values();
-    }
-    )
-})
+//jQuery(function(){jQuery.noConflict();
+//    jQuery('.tb_check').click(function(){
+//       problem_values();
+//    }
+//    )
+//})
 
 //提示框弹出层
 function show_flash_div() {
@@ -81,22 +81,18 @@ function show_flash_div() {
 }
 
 
-//
 function show_analysis(btn_id) {
     (function(){
-    jQuery('#' + btn_id).click(function(e){
         jQuery('.jiexi_tab').css('display','block');
         jQuery('.jiexi_tab').css({
-            'top':(e.pageY+20)+'px',
-            'left':(e.pageX-30)+'px'
+            'top':(this.event.pageY+20)+'px',
+            'left':(this.event.pageX-30)+'px'
         });
         jQuery('#answer').html("正确答案 " + jQuery('#' + btn_id + '_answer').attr("value"));
         jQuery('#analysis').html(jQuery('#' + btn_id + '_analysis').attr("value"));
-    }
-    )
-    jQuery('.tab_t > a').click(function(){
-        jQuery('.jiexi_tab').css('display','none')
-    }
-    )
-})(jQuery)
+        jQuery('.tab_t > a').click(function(){
+            jQuery('.jiexi_tab').css('display','none')
+        }
+        )
+    })(jQuery)
 }
