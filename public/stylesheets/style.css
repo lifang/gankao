@@ -8,17 +8,73 @@ img { border: none;}
 .red { color: #F00;}
 .blue { color: #2875ae;}
 
-.wrap { height: 38px; background: url(/images/paper/top_bg.png) repeat-x;}
+.wrap { background: url(/images/paper/top_bg.png) repeat-x;}
 
 .head { width: 900px; margin: 0 auto; padding-bottom: 10px; background: url(/images/paper/xline.png) repeat-x center bottom;}
-.head_top { height: 34px; line-height: 34px; margin-bottom: 10px;}
+.head_top { height: 44px; line-height: 44px}
+
+
+
+
+.head_index { width: 960px; margin: 0 auto; padding-bottom: 10px; background: url(/images/paper/xline.png) repeat-x center bottom;}
+.top_other_zh { float: right; height: 44px; line-height: 44px;}
+.t_o_text { vertical-align: middle; display: block; float: left; height: 44px;}
+.top_other_zh a { margin: 0 10px;}
+.login_i_text { height: 41px; line-height: 41px; float: left;}
+.login_i_text label { display: inline-block; width: 60px; text-align: right; vertical-align: middle; color: #2875ae;}
+.login_input { width: 121px; height: 21px; vertical-align: middle; padding: 0 5px; line-height: 21px; background: url(/images/paper/i_text_input_bg.png) repeat-x; border: 1px #c1c1c1 solid;}
+
+.login_i_padding { padding-left: 10px;}
+.login_i_btn { width: 52px; height: 27px; margin-top: 7px; background: url(/images/paper/all_bg.png) no-repeat 0 -918px; border:none;}
+
+.login_i_a { text-decoration: none;}
+.login_i_a0 { text-decoration: none; color: #F00;}
+
+.nav_cet { float: left; width: 540px; height:45px; padding: 25px 0 0 120px;}
+.nav_cet a { width: 160px; height: 45px; float: left; margin: 0 40px; overflow: hidden; text-indent: -999px;}
+.nav_cet_4 { background: url(/images/paper/all_bg.png) no-repeat 0 -651px;}
+.nav_cet_6 { background: url(/images/paper/all_bg.png) no-repeat -217px -651px;}
+
+
+.main_index { padding: 0px 0;}
+
+.main_index_top { margin: 0 auto; height: 350px; background: #000;}
+.lunbo_box { width: 960px; height: 350px; margin: 0 auto; position: relative;}
+.weibo { width: 176px; position: absolute; bottom: 30px; right: 70px;}
+.weibo a { width: 176px; height: 36px; display: block; margin: 20px 0; }
+
+
+.main_index_con { width: 960px; margin: 20px auto; overflow: hidden;}
+.pd_con_box { width: 200px; float: left; margin: 0 20px; display: inline;}
+.pd_h { width: 146px; height: 35px; text-indent: -999px; overflow: hidden;}
+.pd_text { font-size: 14px; color: #333; font-family: "微软雅黑"; line-height: 24px; padding: 10px;}
+.pd_text li { padding-left: 10px; line-height: 24px; background: url(/images/paper/dd.png) no-repeat 0 12px;}
+
+.pd_mn { background: url(/images/paper/all_bg.png) no-repeat 0 -721px;}
+.pd_zt { background: url(/images/paper/all_bg.png) no-repeat -227px -721px;}
+.pd_zh { background: url(/images/paper/all_bg.png) no-repeat 0 -775px;}
+.pd_ctk { background: url(/images/paper/all_bg.png) no-repeat -227px -775px; }
+
+
+.foot_index { padding-top: 40px;background: url(/images/paper/foot_index_bg.png) repeat-x center 0px;}
+.foot_index_box { width: 960px; margin: 0 auto;}
+.foot_index p { text-align: center; line-height: 24px; height: 24px; color: #999;}
+.foot_index p a { padding: 0 5px; color: #999;}
+
+
+
+
 
 .top_myGankao { float: right;}
-.t_gk { width: 59px; height: 34px; background: url(/images/paper/t_gk.gif) no-repeat 0 center; padding-left: 26px;}
+
+
+.t_gk { width: 59px; height: 44px; background: url(/images/paper/t_gk.gif) no-repeat 0 top; padding-left: 26px;}
 .t_gk a { color: #333; text-decoration: none;}
 .top_loginArea {}
 .top_loginArea a { color: #333; margin: 0 10px;}
 .top_loginArea a.signColor { color: #A10000;}
+
+
 
 .logo { float: left; width: 300px; height: 70px;}
 .nav { float: left; width: 480px; height:39px; padding: 31px 0 0 120px;}
@@ -28,6 +84,9 @@ img { border: none;}
 .menu li a:hover, .menu li a.hover { color: #2875af;}
 
 .main { width: 880px; margin: 0 auto; padding: 10px; overflow: hidden; }
+
+
+
 
 /*个人首页------------------*/
 .person_box { overflow: hidden; height: 600px;}
@@ -56,7 +115,6 @@ img { border: none;}
 	background: url(/images/paper/all_bg.png) no-repeat -7px -83px;
 }
 .per_load_bg { width: 199px; height: 20px; background: url(/images/paper/per_load_bg.png) no-repeat; padding: 7px 0 0 7px; margin: 0 auto;}
-
 .per_load_t { height: 11px; background: url(/images/paper/per_load_t.png) no-repeat;}
 
 
@@ -274,27 +332,6 @@ img { border: none;}
 .tb_check {  width: 60px; height: 27px; display: block; background: url(/images/paper/all_bg.png) no-repeat -30px -157px;}
 
 
-/*综合训练列表*/
-.zonghe_div { padding: 10px; height: 600px; position: relative;}
-.zh_tab { width: 250px; height:176px; background: url(/images/paper/zh_tab.png) no-repeat; _background: url(/images/paper/zh_tab.gif) no-repeat; position: absolute;}
-.zh_tab0 { background: url(/images/paper/zh_tab0.png) no-repeat; _background: url(/images/paper/zh_tab0.gif) no-repeat;}
-.zh_tab_title { height: 40px; line-height: 40px; padding-right: 10px; text-align: right; font-size: 18px; color: #2875ae;}
-.zh_tab_box { width: 240px; height:120px; padding: 5px; line-height: 24px; overflow: hidden;}
-.zh_position_one { z-index: 5; left: 50px;}
-.zh_position_two { z-index: 4; left: 180px;}
-.zh_position_three { z-index: 3; left: 310px;}
-.zh_position_four { z-index: 2; left: 440px;}
-.zh_position_five { z-index: 1; left: 570px;}
-
-
-.zh_top { width: 100%;height: 50px; margin-top: 20px; padding-left: 200px;}
-.zh_load { width: 250px; float: left; margin-top: 5px;}
-.zh_addTo_btn { width: 160px; float: left; height: 35px; }
-.zh_addTo_btn a { width: 160px; height: 35px; display: block; margin: 0 auto; background: url(/images/paper/all_bg.png) no-repeat -198px -440px; text-indent: -999px; overflow: hidden;}
-
-
-.zh_p { padding-left: 50px; height: 32px; line-height: 32px; font-size: 14px;}
-
 
 /*综合-----------------------------*/
 .zonghe_div { padding: 10px; height: 600px; position: relative;}
@@ -324,6 +361,3 @@ img { border: none;}
 .foot { width: 880px; margin: 0 auto; background: url(/images/paper/xline.png) repeat-x center 0px; padding: 20px 10px 10px;}
 .foot p { text-align: center; line-height: 24px; height: 24px; color: #999;}
 .foot p a { padding: 0 5px; color: #999;}
-
-.tishi_tab { width: 250px; padding: 10px; background: url(/images/paper/mk_b_zz_bg.png) repeat; border: 1px #fff solid; position: fixed; display: none;}
-.tishi_tab p { text-align: center; line-height: 24px; font-size: 14px; font-family:"微软雅黑"; color: #fff;}

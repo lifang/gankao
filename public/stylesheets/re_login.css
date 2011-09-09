@@ -1,0 +1,44 @@
+@charset "utf-8";
+* { padding: 0; margin: 0;}
+body { background: url(/images/paper/zd_body_bg.png) repeat-x #FFF; font-family: Arial,"宋体", "微软雅黑"; font-size: 12px;}
+ul { list-style: none;}
+img { border: none;}
+.red { color: #F00;}
+
+.wrap { background: url(/images/paper/zd_wrap_bg.png) no-repeat center 0;}
+.head { width: 900px; margin: 0 auto; padding-top: 10px;}
+.main { width: 900px; margin: 0 auto; padding-top: 20px;}
+.zhuce_box { width: 390px; margin: 0 auto; padding-top: 30px;}
+.rcf_box { color: #333; font-size: 14px; margin: 20px 0;}
+.rcf_box label { width: 100px; display: inline-block; text-align: right;}
+.rcf_box input { width: 216px; height: 24px; border: 1px #d2d2d2 solid;}
+.zhuce_xy { width: 260px; margin: 60px auto;}
+
+.rcf_p { font-size: 12px; padding-left: 110px; line-height: 18px; }
+
+.zd_tj_btn { width: 169px; height: 39px; margin: 0 auto;}
+.zd_tj_btn a { width: 169px; height: 39px; display: block; background: url(/images/paper/all_bg.png) no-repeat 0 -829px;}
+
+.zhuce_cg { font-size: 14px; text-align: center;}
+
+
+/*登录------------*/
+
+
+.wrap_login { width: 960px; height: 404px; margin: 0 auto; padding-top: 36px; background: url(/images/paper/wrap_login_bg.png) no-repeat center 0;}
+.main_login { width: 319px; height: 257px; padding-top: 40px; margin-left: 612px;}
+
+.error_login { color: #F00; height: 24px; line-height: 24px; padding-top: 6px; text-align: center;}
+
+.login_i_text { height: 32px; margin: 5px 0;}
+.login_i_text label { width: 100px; height: 32px; line-height: 32px; vertical-align: middle; color: #2875ae; font-size: 14px; display: inline-block; text-align: right;}
+.login_input { width: 140px; height: 21px; vertical-align: middle; padding: 0 5px; line-height: 21px; background: url(/images/paper/i_text_input_bg.png) repeat-x; border: 1px #c1c1c1 solid;}
+
+.login_i_p { height: 32px; line-height: 32px; text-align: center;}
+.login_i_p a { color: #2875ae;}
+.login_btn { width: 110px; height: 37px; margin: 10px auto;}
+.login_btn button { width: 110px; height: 37px; background: url(/images/paper/all_bg.png) no-repeat 0 -877px; border: none; cursor: pointer;}
+
+.other_login { height: 32px; padding-top: 20px;}
+.t_o_text { vertical-align: middle; display: block; float: left; height: 20px; padding-top: 12px; padding-left: 30px;}
+.other_login a { margin: 0 10px;}
