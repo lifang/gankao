@@ -16,13 +16,14 @@ Gankao::Application.routes.draw do
   end
   resources :exam_lists do
     collection do
-      get :simulate_list,:old_exam_list,:incorrect_list
+      get :incorrect_list
       post :show_problem,:next_problem,:compare_answer,:delete_problem
       post :feedback,:feedback_list
       get :question_info
     end
     member do
-       post :load_note,:create_note
+      get :simulate_list,:old_exam_list
+      post :load_note,:create_note
     end
   end
   resources :advertises do
