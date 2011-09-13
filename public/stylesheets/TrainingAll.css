@@ -29,7 +29,7 @@ ul { list-style: none;}
 .task_title_five { background: url(/images/paper/all_bg.png) no-repeat 0px -347px;}
 
 
-.tb_scroll {overflow: auto;}
+.tb_scroll {overflow: scroll;}
 
 .height630 { height: 630px;}
 .height657 { height: 657px;}

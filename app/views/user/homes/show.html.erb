@@ -36,7 +36,9 @@
       <div class="per_load_bg"><div class="per_load_t" style="width:<%= (progress*100).to_s + "%" %>"></div></div>
       <p><span class="red"><%= @type_hash["2"].nil? ? 0 : @type_hash["2"][0] %></span> 篇</p>
     </div>
-    <div class="per_btn"><a href="/combine_practices" target="_blank">开始训练</a></div>
+    <div class="per_btn">
+      <a href="/combine_practices/<%= Examination::TYPES[:PRACTICE] %>/start" target="_blank">开始训练</a>
+    </div>
     <div class="per_ex_p"><span class="red">*</span>60篇短文，密集训练听力词汇阅读和写作能力。</div>
   </div>
 

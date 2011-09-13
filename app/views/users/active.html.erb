@@ -57,7 +57,9 @@
         <br/>
         <p>如果您没有收到激活邮件，请点击下面的重发按钮，重新发送激活邮件</p>
         <div align="center">
-          <button class="resend_btn" id="resend_btn" onclick="GetRTime();re_active();" style="display:none;">重新发送激活邮件</button>
+          <div class="sendAgain_btn">
+            <button id="resend_btn" onclick="GetRTime();re_active();" style="display:none;"></button>
+          </div>
           <span class="resend_btn_wait"  id="resend_btn_wait" style="display:inline;">重新发送激活邮件（最多只能重发5次）
             <span id="time" style="display:inline;"></span>
           </span>

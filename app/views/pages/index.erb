@@ -22,11 +22,13 @@
           </div>
         <%end%>
       <% else %>
-      <div class="top_other_zh">&nbsp;</div>
-      <div class="top_loginArea">
-        <div class="login_i_text">你好，<a href="/users/<%= cookies[:user_id] %>/edit"><%= current_user.name %></a></div>
-        <div class="login_i_text"><a href="/signout">退出</a></div>
-      </div>
+        <div class="top_other_zh">&nbsp;</div>
+        <div class="top_loginArea">
+          <div class="top_la_ks">
+            <div class="login_i_text">你好，<a href="/users/<%= cookies[:user_id] %>/edit"><%= current_user.name %></a></div>
+            <div class="login_i_text"><a href="/signout">退出</a></div>
+          </div>
+        </div>
       <% end %>
     </div>
     <div class="logo"><a href="/"><img src="/images/paper/logo1.png" /></a></div>

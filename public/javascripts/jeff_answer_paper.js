@@ -361,9 +361,6 @@ function create_question(problem_title,problem_id, question_id_input, parent_div
     question_id_input.value += "" + question.id + ",";
     var que_div = create_element("div", null, "question_" + question.id, "tb_content", null, "innerHTML");
     que_div.innerHTML = "<input type='hidden' name='question_type' id='question_type_"+ question.id +"' value='"+ question.correct_type +"'/>";
-    if (question.description != undefined) {
-        que_div.innerHTML += "小题描述：" + question.description;
-    }
     parent_div.appendChild(que_div);
     //根据problem是否确定来判断question是否确定
     var question_is_sure = create_element("input", "question_sure", "question_sure_" + question.id, null, "hidden", "value");
@@ -377,10 +374,11 @@ var sortRandom = function (){
 }
 
 function create_single_question(problem_title,problem_id, que_div, question,practice_type) {
-    if(question.correct_type=="3"||question.correct_type=="5"||practice_type=="6"){
-        var que_div_conlist=create_element("div", null, null, null, null, "innerHTML");
+    var que_div_conlist = null;
+    if(question.correct_type=="3" || question.correct_type=="5" || practice_type=="6"){
+        que_div_conlist = create_element("div", null, null, null, null, "innerHTML");
     }else{
-        var que_div_conlist=create_element("div", null, null, "tb_con_list", null, "innerHTML");
+        que_div_conlist=create_element("div", null, null, "tb_con_list", null, "innerHTML");
     }
     que_div.appendChild(que_div_conlist);
     if (question.questionattrs != undefined && question.questionattrs != null) {
@@ -408,9 +406,10 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
                 if(answer.length==0){
                     Droppables.add(store_id, {
                         onDrop:function(element,store_id){
+                            alert($(store_id));
                             $(store_id).innerHTML=element.innerHTML;
                             show_que_save_button(question.id);
-                            var this_answer=""
+                            var thiDroppabless_answer=""
                             for(i=1;i<place_num;i++){
                                 this_answer +=$("problem_"+problem_id+"_dropplace_"+i).innerHTML;
                                 if(i<place_num-1){
@@ -428,14 +427,15 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
         //选词填空题，为只有一个多选题的综合题。 多选题答案的顺序要与描述中落点位置对应起来。
         } else {
             if(practice_type=="6"){
-                var num=1;
-                if(answer.length==0){
-                    while(document.getElementById("problem_"+problem_id+"_writefont_"+num)!=null){
-                        var input_id = "problem_"+problem_id+"_writeplace_"+num;
-                        document.getElementById("problem_"+problem_id+"_writefont_"+num).innerHTML="<input type='text' id='"+input_id+"' onfocus='javascript:show_que_save_button("+question.id+");' ></input>";
-                        num++;
-                    }
-                }
+            //                alert(1);
+            //                var num=1;
+            //                if(answer.length==0){
+            //                    while(document.getElementById("problem_"+problem_id+"_writefont_"+num)!=null){
+            //                        var input_id = "problem_"+problem_id+"_writeplace_"+num;
+            //                        document.getElementById("problem_"+problem_id+"_writefont_"+num).innerHTML="<input type='text' id='"+input_id+"' onfocus='javascript:show_que_save_button("+question.id+");' ></input>";
+            //                        num++;
+            //                    }
+            //                }
             }
             else{
                 for (var i=0; i<que_attrs.length; i++) {
@@ -599,22 +599,22 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
             }
         }
         if(practice_type=="6"&&answer!=null&&answer.length>0){
-            var this_answer_array=answer[question_num-1].split(";|;");
-            var answer_array=answer_hash[question.id][0].split(";|;");
-            for(var a=0;a<this_answer_array.length;a++){
-                if(this_answer_array[a]==answer_array[a]){
-                    $("problem_"+problem_id+"_writefont_"+(a+1)).innerHTML="<font color='green'>"+this_answer_array[a]+"</font>";
-                }else{
-                    $("problem_"+problem_id+"_writefont_"+(a+1)).innerHTML="<font color='red'>"+answer_array[a]+"</font><font color='green'>（正确答案： "+this_answer_array[a]+")</font>";
-                }
-            }
-            if(answer_hash!=null&&answer_hash[question.id] != null &&answer[question_num-1]==answer_hash[question.id][0]){
-                question_result_color=1;
-                question_color(question.id);
-            }else{
-                question_result_color=2;
-                question_color(question.id);
-            }
+//            var this_answer_array=answer[question_num-1].split(";|;");
+//            var answer_array=answer_hash[question.id][0].split(";|;");
+//            for(var a=0;a<this_answer_array.length;a++){
+//                if(this_answer_array[a]==answer_array[a]){
+//                    $("problem_"+problem_id+"_writefont_"+(a+1)).innerHTML="<font color='green'>"+this_answer_array[a]+"</font>";
+//                }else{
+//                    $("problem_"+problem_id+"_writefont_"+(a+1)).innerHTML="<font color='red'>"+answer_array[a]+"</font><font color='green'>（正确答案： "+this_answer_array[a]+")</font>";
+//                }
+//            }
+//            if(answer_hash!=null&&answer_hash[question.id] != null &&answer[question_num-1]==answer_hash[question.id][0]){
+//                question_result_color=1;
+//                question_color(question.id);
+//            }else{
+//                question_result_color=2;
+//                question_color(question.id);
+//            }
         }
     }else{
         if(practice_type=="4"&&answer!=null&&answer.length>0){

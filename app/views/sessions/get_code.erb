@@ -2,11 +2,16 @@
 <div class="wrap">
   <div class="head"><div class="logo"><a href="/"><img src="/images/paper/logo1.png" /></a></div></div>
   <div class="main">
-    <div class="zhuce_box">
+    <div class="zhuce_box" style="width: 50%;align:center;">
       <%= form_for :session,:url=>"/sessions/user_code" do %>
-        邮  箱： <input value="" id="anonymous" name="anonymous" />
-        <input type="submit" value="确定"/>
+      <div style="float:left;">
+          邮  箱： <input value="" id="anonymous" name="anonymous" />
+      </div>
+      <div class="s_49x23_btn">
+        <button type="submit" value="确定">确定</button>
+      </div>
       <% end %>
+      <div class="clear"></div>
     </div>
     <div class="zhuce_box">
       <p>获取密码第一步，请输入正确邮箱以便接收邮件更新密码！</p>

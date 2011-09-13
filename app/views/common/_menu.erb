@@ -1,21 +1,8 @@
 <div class="head_top">
-  <div class="top_myGankao">
-    <% if cookies[:user_id] %>
-      <div class="t_gk">
-        <% if is_student? %>
-          <%= link_to "我的考试", "/user/examinations" %>
-        <% end %>
-        <% if is_vicegerent? %>
-    <%#= link_to "代理充值","/payments/agency_recharge" %>
-        <% end %>
-        <% if is_paper_creater? %>
-    <%#= link_to "代理权限","/users/roles_manage" %>
-        <% end %>
-      </div>
-    <% end %>
+  <div class="top_myGankao">    
   </div>
   <div class="top_loginArea">
-    <div>
+    <div class="top_la_ks">
       <% if cookies[:user_id] %>
         你好,<a href="/users/<%= cookies[:user_id] %>/edit">
           <%= current_user.name if current_user %>

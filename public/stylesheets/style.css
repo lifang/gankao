@@ -70,9 +70,9 @@ img { border: none;}
 
 .t_gk { width: 59px; height: 44px; background: url(/images/paper/t_gk.gif) no-repeat 0 top; padding-left: 26px;}
 .t_gk a { color: #333; text-decoration: none;}
-.top_loginArea {}
 .top_loginArea a { color: #333; margin: 0 10px;}
 .top_loginArea a.signColor { color: #A10000;}
+.top_la_ks { float: right;}
 
 
 
