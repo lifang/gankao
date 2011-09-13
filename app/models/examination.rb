@@ -150,7 +150,7 @@ class Examination < ActiveRecord::Base
     correct = 0
     users = ExamUser.find_by_sql("select count(eu.id) count_id, sum(eu.correct_percent) correct_percent
         from exam_users eu inner join examinations e on e.id = eu.examination_id
-        where is_published = #{Examination::IS_PUBLISHED[:ALREADY]} and e.category_id=#{category_id} and eu.is_submited = 1
+        where is_published = #{Examination::IS_PUBLISHED[:ALREADY]} and e.category_id = #{category_id} and eu.is_submited = 1
         and eu.user_id = #{id} and e.types = #{TYPES[:OLD_EXAM]}")
     correct = users[0].count_id == 0 ? 0 : (users[0].correct_percent/users[0].count_id).round if users and users[0]
     return correct

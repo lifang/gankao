@@ -15,16 +15,17 @@ class ExamListsController < ApplicationController
   end
   
   def simulate_list
-    @examination_lists = Examination.where("types = ? and is_published = ? and category_id=?",
-      Examination::TYPES[:SIMULATION], Examination::IS_PUBLISHED[:ALREADY],params[:id])
+    @examination_lists = Examination.where("types = ? and is_published = ? and category_id = ?",
+      Examination::TYPES[:SIMULATION], Examination::IS_PUBLISHED[:ALREADY], params[:id].to_i)
     examinations = Examination.find_by_sql("select e.id from examinations e 
           inner join exam_users u on u.examination_id = e.id
-          where e.status = #{Examination::STATUS[:CLOSED]} and e.category_id=#{params[:id]} and  e.types = #{Examination::TYPES[:SIMULATION]}
+          where e.status = #{Examination::STATUS[:CLOSED]} and e.category_id = #{params[:id].to_i}
+          and  e.types = #{Examination::TYPES[:SIMULATION]}
           and e.is_published = #{Examination::IS_PUBLISHED[:ALREADY]} and u.user_id = #{cookies[:user_id].to_i} ")
     @examination_lists.each do |examination|
       @examination_lists -=[examination] unless examinations.include?(examination.id) if examination.status == Examination::STATUS[:CLOSED]
     end
-    @hash = Examination.exam_users_paper(cookies[:user_id].to_i, Examination::TYPES[:SIMULATION],params[:id])
+    @hash = Examination.exam_users_paper(cookies[:user_id].to_i, Examination::TYPES[:SIMULATION], params[:id].to_i)
   end
   
   def old_exam_list

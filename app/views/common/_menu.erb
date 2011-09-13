@@ -20,7 +20,7 @@
   <div class="menu">
     <ul>
       <li>
-        <a href="/user/homes/<%= params[:id] %>" <% if request.path == "/user/homes/1" %>class="hover"<% end %>>首页</a>
+        <a href="/user/homes/<%= params[:id] %>" <% if request.path == "/user/homes/#{params[:id]}" %>class="hover"<% end %>>首页</a>
       </li>
       <li><img src="/images/paper/menu_li.png" /></li>
       <li>

@@ -1,12 +1,13 @@
 <script type="text/javascript" src="/javascripts/plugin_assets/My97DatePicker/WdatePicker.js" ></script>
 <div class="main_box_back">
   <div class="in">
-    <% if @old_lists.blank? %>
-      <h1>您目前没有参加任何考试</h1>
-    <% else %>
-      <div class="main">
-        <div class="main_con">
-          <div class="zhenti_box">
+
+    <div class="main">
+      <div class="main_con">
+        <div class="zhenti_box">
+          <% if @old_lists.blank? %>
+            <p>暂无真题训练</p>
+          <% else %>
             <ul>
               <% @old_lists.each do |examination| %>
                 <% unless @hash["#{examination.id}"].nil?%>
@@ -21,8 +22,8 @@
                   <li><a href="/user/examinations/<%= examination.id %>/do_exam" target="_blank"><span class="paper_time">
                         <%= examination.title %></span><span class="paper_over"></span></a></li>
                       <% end %>
-                    <% end %>
-            </ul>
+              </ul>
+            <% end %>
           </div>
         </div>
       </div>
