@@ -73,7 +73,7 @@ Gankao::Application.routes.draw do
       post "load_set_right","set_right"
     end
     member do
-      get "active", "user_active"
+      get "active", "user_active", "edit_password"
       post "update_info"
     end
   end

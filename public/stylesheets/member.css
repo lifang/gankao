@@ -1,0 +1,63 @@
+@charset "utf-8";
+* { padding: 0; margin: 0;}
+body { background: url(/images/paper/zd_body_bg.png) repeat-x #FFF; font-family: Arial,"宋体", "微软雅黑"; font-size: 12px;}
+ul { list-style: none;}
+a { text-decoration: none;}
+img { border: none;}
+.clear { clear: both;}
+.red { color: #F00;}
+
+
+
+.wrap { background: url(/images/paper/zd_wrap_bg.png) no-repeat center 0;}
+.head { height: 44px; background: url(/images/paper/top_bg.png) repeat-x center 0;}
+
+.head_box { width: 900px; margin: 0 auto;}
+.member_logo { width: 140px; height: 41px;}
+.member_nav { height: 41px; line-height: 41px; float: right;}
+.member_nav a { color: #333; margin: 0 5px;}
+
+.main { width: 810px; margin: 40px auto;}
+.main_top { width: 810px; height: 10px; margin: 0 auto; background: url(/images/paper/member_main_tb_bg.png) no-repeat 0 0; overflow: hidden;}
+.main_bottom {width: 810px; height: 10px; margin: 0 auto; background: url(/images/paper/member_main_tb_bg.png) no-repeat 0 -11px; overflow: hidden;}
+
+.main_middle { width: 790px; padding: 10px; background: url(/images/paper/member_main_box_bg.png) repeat-y;}
+
+.main_left { float: left; width: 250px; height: 480px; background: url(/images/paper/member_main_left.png) no-repeat right 0; display: inline;}
+.main_right { float: left; width: 540px; padding-top: 50px;}
+
+.main_left ul { padding-left: 30px;}
+.main_left li { width: 185px; height: 32px; margin: 15px 0; font-size: 14px;}
+.main_left li a { width: 185px; height: 32px; display: block; color: #666; line-height: 32px; padding-left: 20px;}
+.main_left li a img { float: left; margin-top: 1px; margin: 1px 8px;}
+.main_left li a:hover {color: #2875ae;}
+.main_left li a.hover {color: #2875ae; background: url(/images/paper/member_li_bg.png) no-repeat;}
+
+
+.member_info_div { width: 400px; height: 32px; margin: 10px auto; line-height: 32px;}
+.member_info_div label { width: 100px; display: inline-block; text-align: right; font-size: 14px;}
+.member_info_div input { line-height: 24px; height: 24px; border: 1px #CCC solid;}
+.member_info_div a { color: #2875ae; text-decoration: underline;}
+.member_info_btn { width: 280px; height: 40px; padding-left: 120px; margin: 40px auto 10px; line-height: 32px;}
+.member_info_btn button { width: 114px; height: 40px; background: url(/images/paper/all_bg.png) no-repeat 0 -950px; border: none; cursor: pointer;}
+
+
+/*VIP--------------------*/
+.vip_h { height: 32px; line-height: 32px; padding-left: 80px; font-size: 14px; font-weight: bold; color: #2875ae;}
+.vip_info { width: 400px; margin: 0 auto;}
+.vip_info table { background: #1b527a;}
+.vip_info td {background: #FFF; height: 38px; line-height: 38px; text-align: center;}
+.vip_info td img {}
+
+#vip_table_head { width: 128px; height: 38px; background: url(/images/paper/vip_table_head.png) no-repeat; color: #FFF;}
+
+
+
+
+/*foot--------------*/
+.foot { width: 900px; margin: 0 auto; background: url(/images/paper/xline.png) repeat-x; padding-top: 10px;}
+.foot p { height: 24px; line-height: 24px; text-align: center; color: #999;}
+.foot p a { color: #999;}
+
+.tishi_tab { width: 250px; padding: 10px; background: url(/images/paper/mk_b_zz_bg.png) repeat; border: 1px #fff solid; position: absolute; display: none;}
+.tishi_tab p { text-align: center; line-height: 24px; font-size: 14px; font-family:"微软雅黑"; color: #fff;}

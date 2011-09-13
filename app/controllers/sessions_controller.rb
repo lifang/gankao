@@ -14,14 +14,13 @@ class SessionsController < ApplicationController
     elsif @user.status == User::STATUS[:LOCK]
       flash[:error] = "您的账号还未验证，请先去您的注册邮箱进行验证"
     else
-      cookies[:user_id]=@user.id
-      cookies[:user_name]=@user.name
+      cookies[:user_id] = @user.id
+      cookies[:user_name] = @user.name
     end
     if flash[:error]
       redirect_to request.referer
     else
-      path = request.referer ? request.referer : root_path
-      redirect_to path
+      redirect_to "/users/#{cookies[:user_id]}/edit"
     end
   end
 
@@ -51,7 +50,7 @@ class SessionsController < ApplicationController
     user=User.find_by_email(params[:anonymous])
     if user
       UserMailer.update_code(user).deliver
-      redirect_to "/sessions/#{user.id}/active"
+      redirect_to "/users/#{user.id}/active"
     else
       flash[:error]="密码有误，请重新输入"
       render "/sessions/get_code"
@@ -70,7 +69,7 @@ class SessionsController < ApplicationController
     user.encrypt_password
     user.save
     flash[:success]="密码更新成功"
-    redirect_to "/"
+    redirect_to "/sessions/new"
   end
 
   #收取邮件并登录

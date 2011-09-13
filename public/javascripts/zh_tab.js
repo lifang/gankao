@@ -1,5 +1,3 @@
-
-jQuery.noConflict();
 // JavaScript Document
 jQuery(function(){
     var thisCss;

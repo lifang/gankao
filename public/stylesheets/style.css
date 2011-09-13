@@ -102,20 +102,20 @@ img { border: none;}
 .per_con h2 { font-size: 14px; line-height: 24px; text-align: center;}
 .per_con p { font-size: 12px; line-height: 24px; text-align: center;}
 .per_btn { height: 28px; margin-top: 20px;}
-.per_btn a {
+.per_btn a { 
     font-family: "微软雅黑";
-    height: 28px;
+    height: 28px; 
 	width: 80px;
 	margin: 0 auto;
-	line-height: 28px;
-	display: block;
-	text-align: center;
-	color: #29405c;
-	text-decoration: none;
+	line-height: 28px; 
+	display: block; 
+	text-align: center; 
+	color: #29405c; 
+	text-decoration: none; 
 	background: url(/images/paper/all_bg.png) no-repeat -7px -83px;
 }
 .per_load_bg { width: 199px; height: 20px; background: url(/images/paper/per_load_bg.png) no-repeat; padding: 7px 0 0 7px; margin: 0 auto;}
-.per_load_t { height: 11px; background: url(/images/paper/per_load_t.png) no-repeat;}
+.per_load_t { width: 193px; height: 11px; background: url(/images/paper/per_load_t.png) no-repeat;}
 
 
 .per_two_box { width: 141px; height: 105px; margin: 5px auto;}
@@ -177,14 +177,14 @@ img { border: none;}
 .an_x { float: right; margin-right: 5px;}
 
 .an_textarea {width: 248px;}
-.an_tj_btn {
+.an_tj_btn { 
     background: url(/images/paper/all_bg.png) no-repeat -8px -122px;
-	width: 56px;
-	height: 24px;
-	line-height: 24px;
-	text-align: center;
-	border: none;
-	cursor: pointer;
+	width: 56px; 
+	height: 24px; 
+	line-height: 24px; 
+	text-align: center; 
+	border: none; 
+	cursor: pointer; 
 	margin-left: 150px;
 }
 
@@ -202,12 +202,12 @@ img { border: none;}
 
 /*答题样式-----*/
 .part_padding { padding: 10px;}
-.part_question {
+.part_question { 
     border-top: 1px #CCC solid;
-	border-left: 1px #CCC solid;
+	border-left: 1px #CCC solid; 
 	border-right: 5px #CCC solid;
-	border-bottom: 5px #CCC solid;
-	margin-top: 10px;
+	border-bottom: 5px #CCC solid; 
+	margin-top: 10px; 
 	background: #FFF;
 }
 
@@ -362,5 +362,5 @@ img { border: none;}
 .foot p { text-align: center; line-height: 24px; height: 24px; color: #999;}
 .foot p a { padding: 0 5px; color: #999;}
 
-.tishi_tab { width: 250px; padding: 10px; background: url(/images/paper/mk_b_zz_bg.png) repeat; border: 1px #fff solid; position: fixed; display: none;}
+.tishi_tab { width: 250px; padding: 10px; background: url(/images/paper/mk_b_zz_bg.png) repeat; border: 1px #fff solid; position: absolute; display: none;}
 .tishi_tab p { text-align: center; line-height: 24px; font-size: 14px; font-family:"微软雅黑"; color: #fff;}

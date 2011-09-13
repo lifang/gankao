@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>会员中心</title>
+    <link href="/stylesheets/member.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/javascripts/jquery-1.5.2.js"></script>
+    <script type="text/javascript" src="/javascripts/TestPaper.js"></script>
+    <script type="text/javascript">jQuery.noConflict();</script>
+    <%= javascript_include_tag :defaults %>
+    <%= use_validate_js_tooltip %>
+    <%= javascript_include_tag 'pileadd' %>
+    <!--[if IE 6]>
+    <script src="js/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>
+      /* EXAMPLE */
+      DD_belatedPNG.fix('*');
+
+      /* string argument can be any CSS selector */
+      /* .png_bg example is unnecessary */
+      /* change it to what suits you! */
+    </script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="wrap">
+      <div class="head">
+        <div class="head_box">
+
+          <div class="member_nav">
+            <a href="/">首页</a>  |
+            <a href="/user/homes/<%= Category::TYPE_IDS[:english_fourth_level] %>">CET-4</a>  |
+            <a href="/user/homes/<%= Category::TYPE_IDS[:english_sixth_level] %>">CET-6</a>  |
+            <a href="/signout">退出</a>
+          </div>
+          <div class="member_logo"><img src="/images/paper/member_logo.png" /></div>
+        </div>
+      </div>
+      <div class="main">
+        <div class="main_top"></div>
+        <div class="main_middle">
+          <div class="main_left">
+            <ul>
+              <li>
+                <a href="/users/<%= cookies[:user_id] %>/edit" <% if request.path == "/users/#{cookies[:user_id]}/edit" %>class="hover"<% end %>>
+                  <img src="/images/paper/member_info_icon.png" />修改个人信息
+                </a>
+              </li>
+              <li>
+                <a href="/users/<%= cookies[:user_id] %>/edit_password" <% if request.path == "/users/#{cookies[:user_id]}/edit_password" %>class="hover"<% end %>>
+                  <img src="/images/paper/member_info_icon.png" />修改密码
+                </a>
+              </li>
+              <li>
+                <a href="/users/goto_vip" <% if request.path == "/users/goto_vip" %>class="hover"<% end %>>
+                  <img src="/images/paper/vip.png" />V I P
+                </a>
+              </li>
+            </ul>
+          </div>
+          <%= yield %>
+          <div class="clear"></div>
+        </div>
+        <div class="main_bottom"></div>
+      </div>
+
+      <div class="clear"></div>
+      <div class="foot">
+        <p><a href="#">用户协议</a>   |   <a href="#">关于我们</a>    |   <a href="#">官方微博</a></p>
+        <p>Copyright © 2011 gankao.co 版权所有 苏ICP备11024201</p>
+      </div>
+    </div>
+    <%= render :partial => "/common/flash_div" %>
+  </body>
+</html>

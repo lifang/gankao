@@ -1,36 +1,45 @@
-<div class="reg_content">
-  <div class="step_one"></div>
-  <table>
+<div class="wrap">
+  <div class="head"><div class="logo"><a href="/"><img src="/images/paper/logo1.png" /></a></div></div>
+  <div class="main">
     <%= form_for @user, :html =>{:onsubmit => ' return check_new()', :class => "required-validate"} do |f| %>
-     <tr>
-        <td valign="top" align="right"><span class="must_r">*</span>注册邮箱：</td>
-        <td><%= f.text_field :email, :class => "required input_style" %><span class="expForEmail">确保邮箱有效，我们将发送激活说明到此地址，每个邮箱只能使用一次<span  id="emailErr"></span><span class="must_r"><%= flash[:emailused] %></span></span></td>
-      </tr>
-      <tr>
-        <td valign="top" align="right"><span class="must_r ">*</span>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
-        <td><%= f.password_field :password, :class => "required input_style" %><span class="expForEmail">密码长度在6到20位之间<span id="passwordErr"></span></span></td>
-      </tr>
-      <tr>
-        <td valign="top" align="right"><span class="must_r">*</span>确认密码：</td>
-        <td><%= f.password_field :password_confirmation, :class => "required input_style" %><span class="expForEmail"><span id="confirmationErr"></span></span></td>
-      </tr>
-      <tr>
-        <td valign="top" align="right"><span class="must_r">&nbsp;&nbsp;</span>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp名：</td>
-        <td><%= f.text_field :name, :class => "required input_style" %><span id="passwordErr"></span></td>
-      </tr>
-      <tr>
-        <td valign="top" align="right"><span class="must_r">*</span>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校：</td>
-        <td><%= f.text_field :school, :class => "required input_style" %></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td><input type="checkbox" name="checkbox"  value="999" onclick="javascript:buttoncontrol();"/>&nbsp;&nbsp;同意赶考<a href="/app/users/servers" target="blank">服务条款</a></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td><%= f.submit"", :class =>"reg_btn_no" ,:disabled=>"disabled", :id=> "submit_button" %>  <%= image_tag "ajax-loader.gif", :id => "spinner_user", :style => "display:none" %></td>
-      </tr>
+      <div class="zd_jd"><img src="/images/paper/zd_jd0.png" /></div>
+      <div class="zhuce_box">
+        <div class="rcf_box">
+          <label>邮箱：</label>
+          <%= f.text_field :email, :class => "required input_style" %>
+          <p class="rcf_p">确保邮箱有效，我们将发送激活说明到此地址，每个邮箱只能使用一次</p>
+          <p class="rcf_p red" id="emailErr"><%= flash[:emailused] %></p>
+        </div>
+        <div class="rcf_box">
+          <label>密码：</label>
+          <%= f.password_field :password, :class => "required input_style" %>
+          <p class="rcf_p">密码长度在6到20位之间</p>
+        </div>
+        <div class="rcf_box">
+          <label>确认密码：</label>
+          <%= f.password_field :password_confirmation, :class => "required input_style" %>
+        </div>
+        <div class="rcf_box">
+          <label>昵称：</label>
+          <%= f.text_field :name, :class => "required input_style" %>
+        </div>
+        <div class="rcf_box">
+          <label>学校：</label>
+          <%= f.text_field :school, :class => "required input_style" %>
+        </div>
+        <div class="zhuce_xy">
+          <input type="checkbox" name="checkbox"  value="999" onclick="javascript:buttoncontrol();"/>我已经阅读且同意<a href="#">《赶考网络服务使用协议》</a></div>
+        <div class="zd_tj_btn">
+          <button type="submit" class="reg_btn_no" disabled="disabled" id="submit_button"></button>
+          <%= image_tag "ajax-loader.gif", :id => "spinner_user", :style => "display:none" %>
+        </div>
+      </div>
     <% end %>
-      <script type="text/javascript">buttoncontrol()</script>
-  </table>
+    <script type="text/javascript">buttoncontrol()</script>
+  </div>
+  <div class="clear"></div>
+  <div class="foot">
+    <p><a href="#">用户协议</a>   |   <a href="#">关于我们</a>    |   <a href="#">官方微博</a></p>
+    <p>Copyright © 2011 gankao.co 版权所有 苏ICP备11024201</p>
+  </div>
 </div>

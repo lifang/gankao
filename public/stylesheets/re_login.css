@@ -3,11 +3,12 @@
 body { background: url(/images/paper/zd_body_bg.png) repeat-x #FFF; font-family: Arial,"宋体", "微软雅黑"; font-size: 12px;}
 ul { list-style: none;}
 img { border: none;}
+.clear { clear: both;}
 .red { color: #F00;}
 
 .wrap { background: url(/images/paper/zd_wrap_bg.png) no-repeat center 0;}
 .head { width: 900px; margin: 0 auto; padding-top: 10px;}
-.main { width: 900px; margin: 0 auto; padding-top: 20px;}
+.main { width: 900px; height: 500px; margin: 0 auto; padding-top: 20px;}
 .zhuce_box { width: 390px; margin: 0 auto; padding-top: 30px;}
 .rcf_box { color: #333; font-size: 14px; margin: 20px 0;}
 .rcf_box label { width: 100px; display: inline-block; text-align: right;}
@@ -17,7 +18,7 @@ img { border: none;}
 .rcf_p { font-size: 12px; padding-left: 110px; line-height: 18px; }
 
 .zd_tj_btn { width: 169px; height: 39px; margin: 0 auto;}
-.zd_tj_btn a { width: 169px; height: 39px; display: block; background: url(/images/paper/all_bg.png) no-repeat 0 -829px;}
+.zd_tj_btn button { width: 169px; height: 39px; display: block; background: url(/images/paper/all_bg.png) no-repeat 0 -829px; border: none; cursor: pointer;}
 
 .zhuce_cg { font-size: 14px; text-align: center;}
 
@@ -26,7 +27,7 @@ img { border: none;}
 
 
 .wrap_login { width: 960px; height: 404px; margin: 0 auto; padding-top: 36px; background: url(/images/paper/wrap_login_bg.png) no-repeat center 0;}
-.main_login { width: 319px; height: 257px; padding-top: 40px; margin-left: 612px;}
+.main_login { width: 319px; height: 500px; padding-top: 40px; margin-left: 612px;}
 
 .error_login { color: #F00; height: 24px; line-height: 24px; padding-top: 6px; text-align: center;}
 
@@ -42,3 +43,13 @@ img { border: none;}
 .other_login { height: 32px; padding-top: 20px;}
 .t_o_text { vertical-align: middle; display: block; float: left; height: 20px; padding-top: 12px; padding-left: 30px;}
 .other_login a { margin: 0 10px;}
+
+
+
+/*foot--------------*/
+.foot { background: url(/images/paper/xline.png) repeat-x; padding-top: 10px;}
+.foot p { height: 24px; line-height: 24px; text-align: center; color: #999;}
+.foot p a { color: #999;}
+
+.tishi_tab { width: 250px; padding: 10px; background: url(/images/paper/mk_b_zz_bg.png) repeat; border: 1px #fff solid; position: absolute; display: none;}
+.tishi_tab p { text-align: center; line-height: 24px; font-size: 14px; font-family:"微软雅黑"; color: #fff;}

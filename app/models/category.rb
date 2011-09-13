@@ -7,6 +7,7 @@ class Category < ActiveRecord::Base
   FAURTH = 2
   SIXTH = 3
   TYPES = {"2" => "english_fourth_level", "3" => "english_sixth_level"}   # :FOURTH_LEVEL 四级； :SIXTH_LEVEL 六级
+  TYPE_IDS = {:english_fourth_level => 2, :english_sixth_level => 3} # :FOURTH_LEVEL 四级； :SIXTH_LEVEL 六级
   
   def Category.is_exists?(name)
     return !Category.find_by_name(name).nil?

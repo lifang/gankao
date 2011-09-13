@@ -56,16 +56,14 @@ function check_password() {
     var password=$("user_password").value;
     var confirmation=$("user_password_confirmation").value;
     if (password == null || password.length ==0||password.length>40||password.length<6){
-        document.getElementById("passwordErr").innerHTML="<font color = 'red'>密码不能为空，长度在6和20之间</font>";
         return false;
     } else	{
-        document.getElementById("passwordErr").innerHTML="";
         if (confirmation != password){
             document.getElementById("confirmationErr").innerHTML="<font color = 'red'>两次输入的密码不一致，请重新输入</font>";
             return false;
         }else{
             document.getElementById("confirmationErr").innerHTML="";
-            return ture;
+            return true;
         }
     }
 }

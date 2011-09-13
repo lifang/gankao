@@ -1,16 +1,18 @@
 #encoding: utf-8
 class UsersController < ApplicationController
   before_filter :access?, :only => [:show, :update, :update_info,:home]
+  layout "login", :only => ["new", "active", "re_active", "active_success", "active_false"]
+
   def update #更新密码
     @user =User.find(params[:id])
     if @user.has_password?(params[:user][:old_password])
       @user.update_attributes(:password=>params[:user][:password])
       @user.encrypt_password
       @user.save
-      flash[:notice]="密码修改成功"
-      redirect_to "/users/#{params[:id]}"
+      flash[:notice] = "密码修改成功"
+      redirect_to "/users/#{params[:id]}/edit"
     else
-      flash[:error]="您输入的密码不正确"
+      flash[:error] = "您输入的密码不正确"
       render "edit"
     end
   end
@@ -19,12 +21,12 @@ class UsersController < ApplicationController
     @user_info = User.find(params[:id])
     @user_info.update_attributes(params[:user_info])
     flash[:notice]="用户信息修改成功"
-    redirect_to "/users/#{params[:id]}"
+    redirect_to "/users/#{params[:id]}/edit"
   end
   
   def new #新建用户页面
     session[:register_proof_code] = proof_code(4)
-    @user=User.new
+    @user = User.new
   end
 
   def create  #新建用户
@@ -95,10 +97,14 @@ class UsersController < ApplicationController
     render :inline => session[:proof_code]
   end
 
-  
-
   def edit
     @user= User.find(params[:id])
+    render :layout => "member"
+  end
+
+  def edit_password
+    @user= User.find(params[:id])
+    render :layout => "member"
   end
 
   def get_register_code
@@ -133,6 +139,10 @@ class UsersController < ApplicationController
       @model_role.update_attributes(:right_sum=>@right_sum)
     end
     redirect_to request.referer
+  end
+
+  def goto_vip
+    render :layout => "member"
   end
 
 end
