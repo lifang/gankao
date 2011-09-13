@@ -1,41 +1,36 @@
+<%= javascript_include_tag 'my_app.js' %>
 <div class="head"><div class="logo"><img alt="logo1" src="/images/paper/logo1.png" /></div></div>
 <div class="main">
-
   <div class="zd_jd"><img alt="zd_jd0" src="/images/paper/zd_jd0.png" /></div>
-  <%= form_for @user, :html =>{:onsubmit => ' return check_new()', :class => "required-validate",:id=>"user_info"} do |f| %>
+  <%= form_for :user, :html =>{:onsubmit => 'return check_new()', :class => "required-validate"} do %>
     <div class="zhuce_box">
       <div class="rcf_box">
         <label>邮箱：</label>
-        <input name="" type="text" name="email" />
+        <input name="email" id="email" type="text" />
         <p class="rcf_p">确保邮箱有效，我们将发送激活说明到此地址，每个邮箱只能使用一次</p>
-        <p class="rcf_p red" style="display:none;">此邮箱已被使用，请使用其他邮箱。</p>
+        <p class="rcf_p red" style="display:none;" >此邮箱已被使用，请使用其他邮箱。</p><span  id="emailErr"></span>
       </div>
       <div class="rcf_box">
         <label>密码：</label>
-        <input name="" type="text" name="password" />
-        <p class="rcf_p">密码长度在6到20位之间</p>
+        <input id="password" type="text" name="password" />
+        <p class="rcf_p" id="passwordErr">密码长度在6到20位之间</p>
       </div>
       <div class="rcf_box">
         <label>确认密码：</label>
-        <input name="" type="text" name="password_confirmation" />
+        <input id="password_confirmation" type="text" name="password_confirmation" /><span id="confirmationErr"></span>
       </div>
       <div class="rcf_box">
         <label>昵称：</label>
-        <input name="" type="text" name="username"/>
+        <input  type="text" name="username" id="username"/><span id="usernameErr"></span>
       </div>
       <div class="rcf_box">
         <label>学校：</label>
-        <input name="" type="text" name="school" />
+        <input type="text" name="school" id="school" />
       </div>
-      <div class="zhuce_xy"><input name="" type="checkbox" value="" checked="checked" />我已经阅读且同意<a href="#">《赶考网络服务使用协议》</a></div>
+      <div class="zhuce_xy"><input name="read_file" id="read_file" type="checkbox"  onclick="javascript:buttoncontrol();"/>我已经阅读且同意<a href="#">《赶考网络服务使用协议》</a></div>
     </div>
+    <input class ="reg_btn_no" disabled="disabled" id="submit_button" type="submit" />  <%= image_tag "ajax-loader.gif", :id => "spinner_user", :style => "display:none" %>
   <% end %>
-  <div class="zd_tj_btn"><a  href="javascript:alert(1);send_user();alert("></a></div>
 </div>
-       <td><input type="checkbox" name="checkbox"  value="999" onclick="javascript:buttoncontrol();"/>&nbsp;&nbsp;同意赶考<a href="/app/usersrvers" target="blank">服务条款</a></td>
-      <tr>
-        <td></td>
-        <td><%= f.submit"", :class =>"reg_btn_no" ,:disabled=>"disabled", :id=> "submit_button" %>  <%= image_tag "ajax-loader.gif", :id => "spinner_user", :style => "display:none" %></td>
-      </tr>
-    <% end %>
-      <script type="text/javascript">buttoncontrol()</script>
+<script type="text/javascript">buttoncontrol()</script>
+
