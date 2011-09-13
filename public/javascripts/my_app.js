@@ -1,6 +1,6 @@
 //验证注册按钮
 function buttoncontrol(){
-    var sles=document.getElementsByName("checkbox");
+    var sles=document.getElementsByName("read_file");
     var all=document.getElementById("btn_div");
     all.className="zd_tj_btn";
     for (var k=0;k<sles.length;k++) {
@@ -22,6 +22,7 @@ function check_new(){
     var confirmation=document.getElementById("user_password_confirmation").value;
     var myReg =new RegExp(/^\w+([-+.])*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/);
     var check_value = new RegExp(/[a-z0-9_]/g);
+    document.getElementById("emailErr").innerHTML="";
     if (strEmail == null || strEmail.length ==0||strEmail.length>50){alert(1);
         document.getElementById("emailErr").innerHTML="<font color = 'red'>邮箱不能为空，长度不能超过50</font>";
         return false;
