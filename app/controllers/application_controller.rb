@@ -30,6 +30,8 @@ class ApplicationController < ActionController::Base
     return @grade
   end
 
+
+
   #总体处理错误
   def rescue_action_in_public(exception)
     case exception

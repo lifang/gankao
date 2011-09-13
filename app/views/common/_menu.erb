@@ -20,18 +20,18 @@
   <div class="menu">
     <ul>
       <li>
-        <a href="/user/homes/1" <% if request.path == "/user/homes/1" %>class="hover"<% end %>>首页</a>
+        <a href="/user/homes/<%= params[:id] %>" <% if request.path == "/user/homes/1" %>class="hover"<% end %>>首页</a>
       </li>
       <li><img src="/images/paper/menu_li.png" /></li>
       <li>
-        <a href="/exam_lists/simulate_list" <% if request.path == "/exam_lists/simulate_list" %>class="hover"<% end %>>模拟考试</a>
+        <a href="/exam_lists/simulate_list?id=<%= params[:id] %>" <% if request.path == "/exam_lists/simulate_list" %>class="hover"<% end %>>模拟考试</a>
       </li>
       <li><img src="/images/paper/menu_li.png" /></li>
       <li>
-        <a href="/exam_lists/old_exam_list" <% if request.path == "/exam_lists/old_exam_list" %>class="hover"<% end %>>真题训练</a>
+        <a href="/exam_lists/old_exam_list?id=<%= params[:id] %>" <% if request.path == "/exam_lists/old_exam_list" %>class="hover"<% end %>>真题训练</a>
       </li>
       <li><img src="/images/paper/menu_li.png" /></li>
-      <li><a href="/combine_practices" <% if request.path == "/combine_practices" %>class="hover"<% end %>>综合训练</a></li>
+      <li><a href="/combine_practices?id=<%= params[:id] %>" <% if request.path == "/combine_practices" %>class="hover"<% end %>>综合训练</a></li>
       <li><img src="/images/paper/menu_li.png" /></li>
       <li>
         <a href="/exam_lists/incorrect_list"
