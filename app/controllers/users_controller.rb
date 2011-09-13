@@ -30,18 +30,19 @@ class UsersController < ApplicationController
   end
 
   def create  #新建用户
-    @user=User.new(:email=>params[:email],:encrypted_password=>params[:password],:school=>params[:school])
-    if User.find_by_email(params[:email])
+    if User.find_by_email(params[:user][:email])
       flash[:emailused] = "此邮箱已被使用，请使用其他邮箱。"
       redirect_to "/users/new"
     else
-      @user.username=params[:username]
+      @user = User.new(:email => params[:user][:email], :encrypted_password => params[:user][:password],
+        :school => params[:user][:school])
+      @user.username = params[:user][:username]
       @user.status = User::STATUS[:LOCK]
       @user.active_code = proof_code(6)
       @user.set_role(Role.find(Role::TYPES[:STUDENT]))
       @user.encrypt_password
       if @user.save!
-        UserMailer.welcome_email(@user).deliver
+        #UserMailer.welcome_email(@user).deliver
         redirect_to "/users/#{@user.id}/active"
       else
         redirect_to "/users/new"
