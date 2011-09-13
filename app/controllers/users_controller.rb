@@ -1,6 +1,6 @@
 #encoding: utf-8
 class UsersController < ApplicationController
-  before_filter :access?, :only => [:show, :update, :update_info,:home]
+  before_filter :access?, :only => [:show, :update, :update_info]
   layout "login", :only => ["new", "active", "re_active", "active_success", "active_false"]
 
   def update #更新密码
@@ -30,12 +30,12 @@ class UsersController < ApplicationController
   end
 
   def create  #新建用户
-    @user=User.new(params[:user])
-    if (User.find_by_email(params[:user][:email]) !=nil)
+    @user=User.new(:email=>params[:email],:encrypted_password=>params[:password],:school=>params[:school])
+    if User.find_by_email(params[:email])
       flash[:emailused] = "此邮箱已被使用，请使用其他邮箱。"
       redirect_to "/users/new"
     else
-      @user.username=params[:user][:name]
+      @user.username=params[:username]
       @user.status = User::STATUS[:LOCK]
       @user.active_code = proof_code(6)
       @user.set_role(Role.find(Role::TYPES[:STUDENT]))

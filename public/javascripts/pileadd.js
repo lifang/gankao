@@ -468,6 +468,13 @@ function show_question(id){
     $('question_'+id).style.display='block';
 }
 
+times=0
+function send_user(){alert(1);
+    if (times==0){
+         $('user_info').submit();
+         times=1;
+    }
+}
 
 jQuery(function() {
     jQuery('.mokao_left > div').bind('click',function(){
@@ -477,4 +484,6 @@ jQuery(function() {
         jQuery('#mk_'+this.id).css('display','block');
     });
 })
+jQuery.noConflict();
+
 

@@ -50,7 +50,11 @@
       <%=  render :partial => "/common/display_flash" %>
     </div>
   </div>
+<% if @step[1]=="1" %>
+  <div  id="paper_navigation"  class="tb_content"/>
+<% else %>
   <div  id="paper_navigation" style="display:none;" class="tb_content">
+<% end %>
   </div>
   <div class="clear"/><hr/>
   <div id="blocks">
@@ -68,7 +72,6 @@
   </div>
 
 <% end %>
-
 
 <script type="text/javascript" src="/javascripts/local_save/answer.js" charset="utf-8"></script>
 <%= javascript_include_tag "#{Constant::SERVER_PATH}/javascripts/jeff_answer_paper.js" %>

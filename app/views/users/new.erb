@@ -1,3 +1,4 @@
+<%= javascript_include_tag 'my_app.js' %>
 <div class="wrap">
   <div class="head"><div class="logo"><a href="/"><img src="/images/paper/logo1.png" /></a></div></div>
   <div class="main">
@@ -28,8 +29,8 @@
           <%= f.text_field :school, :class => "required input_style" %>
         </div>
         <div class="zhuce_xy">
-          <input type="checkbox" name="checkbox"  value="999" onclick="javascript:buttoncontrol();"/>我已经阅读且同意<a href="#">《赶考网络服务使用协议》</a></div>
-        <div class="zd_tj_btn">
+          <input type="checkbox" name="read_file" id="read_file"  value="999" onclick="javascript:buttoncontrol();"/>我已经阅读且同意<a href="#">《赶考网络服务使用协议》</a></div>
+        <div class="zd_tj_btn00" id="btn_div">
           <button type="submit" class="reg_btn_no" disabled="disabled" id="submit_button"></button>
           <%= image_tag "ajax-loader.gif", :id => "spinner_user", :style => "display:none" %>
         </div>

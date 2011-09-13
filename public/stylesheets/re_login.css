@@ -8,7 +8,7 @@ img { border: none;}
 
 .wrap { background: url(/images/paper/zd_wrap_bg.png) no-repeat center 0;}
 .head { width: 900px; margin: 0 auto; padding-top: 10px;}
-.main { width: 900px; height: 500px; margin: 0 auto; padding-top: 20px;}
+.main { width: 900px; height: 600px; margin: 0 auto; padding-top: 20px;}
 .zhuce_box { width: 390px; margin: 0 auto; padding-top: 30px;}
 .rcf_box { color: #333; font-size: 14px; margin: 20px 0;}
 .rcf_box label { width: 100px; display: inline-block; text-align: right;}
@@ -19,6 +19,9 @@ img { border: none;}
 
 .zd_tj_btn { width: 169px; height: 39px; margin: 0 auto;}
 .zd_tj_btn button { width: 169px; height: 39px; display: block; background: url(/images/paper/all_bg.png) no-repeat 0 -829px; border: none; cursor: pointer;}
+
+.zd_tj_btn00 { width: 169px; height: 39px; margin: 0 auto;}
+.zd_tj_btn00 button { width: 169px; height: 39px; display: block; background: url(/images/paper/all_bg.png) no-repeat -174px -829px; border: none; cursor: pointer;}
 
 .zhuce_cg { font-size: 14px; text-align: center;}
 
