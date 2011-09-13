@@ -3,7 +3,7 @@ class CombinePracticesController < ApplicationController
   before_filter :access?
   layout "gankao"
 
-  def index
+  def show
     @all_practies = Examination.return_exam_count(Examination::TYPES[:PRACTICE],params[:id])
     @practies_count = ExamUser.return_join_exam_count(Examination::TYPES[:PRACTICE], cookies[:user_id].to_i,params[:id])
     @practies_precent = @all_practies != 0 ? ((@practies_count.to_f/@all_practies)*100).round : 0
