@@ -1,6 +1,6 @@
 //验证注册按钮
 function buttoncontrol(){
-    var sles=document.getElementsByName("read_file");
+    var sles=document.getElementsByName("checkbox");
     var all=document.getElementById("btn_div");
     all.className="zd_tj_btn";
     for (var k=0;k<sles.length;k++) {
@@ -15,10 +15,11 @@ function buttoncontrol(){
 }
 
 function check_new(){
-    var username=document.getElementById("username").value;
-    var strEmail=document.getElementById("email").value;
-    var password=document.getElementById("password").value;
-    var confirmation=document.getElementById("password_confirmation").value;
+    var username=document.getElementById("user_name").value;
+    var strEmail=document.getElementById("user_email").value;
+    var password=document.getElementById("user_password").value;
+    alert(username);
+    var confirmation=document.getElementById("user_password_confirmation").value;
     var myReg =new RegExp(/^\w+([-+.])*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/);
     var check_value = new RegExp(/[a-z0-9_]/g);
     if (strEmail == null || strEmail.length ==0||strEmail.length>50){alert(1);
