@@ -245,6 +245,14 @@ ActiveRecord::Schema.define(:version => 20110923032509) do
     t.integer "num",  :default => 0
   end
 
+  create_table "user_beliefs", :force => true do |t|
+    t.integer "user_id"
+    t.date    "created_at"
+    t.integer "belief"
+  end
+
+  add_index "user_beliefs", ["user_id"], :name => "index_user_beliefs_on_user_id"
+
   create_table "user_role_relations", :force => true do |t|
     t.integer "role_id"
     t.integer "user_id"
