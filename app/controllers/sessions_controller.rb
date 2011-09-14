@@ -8,16 +8,15 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by_email(params[:session][:email])
     if @user.nil?
-      flash[:error] = "用户不存在1"
+      flash[:error] = "用户不存在"
     elsif !@user.has_password?(params[:session][:password])
-      flash[:error] = "密码输入有误2"
+      flash[:error] = "密码输入有误"
     elsif @user.status == User::STATUS[:LOCK]
-      flash[:error] = "您的账号还未验证，请先去您的注册邮箱进行验证3"
+      flash[:error] = "您的账号还未验证，请先去您的注册邮箱进行验证"
     else
       cookies[:user_id] = @user.id
       cookies[:user_name] = @user.name
     end
-    puts flash[:error]
     if flash[:error]
       redirect_to request.referer
     else
