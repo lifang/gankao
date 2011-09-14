@@ -661,7 +661,7 @@ function audio_play(id){
     if(getCookie("audio_"+id)==null){
         setCookie(("audio_"+id),0)
     }
-    if(get_canplay_time()==0||$("audio_control_"+id).title=="停止"||getCookie("audio_"+id)<get_canplay_time()){  //设置播放次数
+    if(get_canplay_time()==0||($("audio_control_"+id).title&&$("audio_control_"+id).title=="停止")||getCookie("audio_"+id)<get_canplay_time()){  //设置播放次数
         if($("audio_"+id).paused||$("audio_"+id).ended){
             if(playing>0){
                 alert("音频正在播放中，请等待播放结束，或者手动\"停止\"播放...");

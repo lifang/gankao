@@ -165,7 +165,7 @@ class Examination < ActiveRecord::Base
 
   #随机返回用户一条试卷记录
   def self.rand_examnation(types, user_id)
-    Examination.find_by_sql("select e.id from examinations e where e.id not in(select eu.id count_id from exam_users eu
+    Examination.find_by_sql("select e.id from examinations e where e.id not in(select ex.id count_id from exam_users eu
       inner join examinations ex on eu.examination_id = ex.id
       where eu.is_submited = #{ExamUser::IS_SUBMITED[:YES]} and ex.types = #{types} and eu.user_id = #{user_id})
        and e.is_published = #{Examination::IS_PUBLISHED[:ALREADY]}
