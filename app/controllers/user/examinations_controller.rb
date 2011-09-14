@@ -1,3 +1,4 @@
+#encoding: utf-8
 class User::ExaminationsController < ApplicationController
   layout "exam", :only => [:show]
   before_filter :access?

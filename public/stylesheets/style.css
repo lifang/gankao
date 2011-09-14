@@ -70,9 +70,9 @@ img { border: none;}
 
 .t_gk { width: 59px; height: 44px; background: url(/images/paper/t_gk.gif) no-repeat 0 top; padding-left: 26px;}
 .t_gk a { color: #333; text-decoration: none;}
-.top_loginArea {}
 .top_loginArea a { color: #333; margin: 0 10px;}
 .top_loginArea a.signColor { color: #A10000;}
+.top_la_ks { float: right;}
 
 
 
@@ -362,5 +362,5 @@ img { border: none;}
 .foot p { text-align: center; line-height: 24px; height: 24px; color: #999;}
 .foot p a { padding: 0 5px; color: #999;}
 
-.tishi_tab { width: 250px; padding: 10px; background: url(/images/paper/mk_b_zz_bg.png) repeat; border: 1px #fff solid; position: absolute; display: none;}
+.tishi_tab { width: 250px; padding: 10px; background: url(/images/paper/mk_b_zz_bg.png) repeat; border: 1px #fff solid; position: absolute; display: none; z-index: 9999;}
 .tishi_tab p { text-align: center; line-height: 24px; font-size: 14px; font-family:"微软雅黑"; color: #fff;}

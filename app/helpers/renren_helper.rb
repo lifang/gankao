@@ -1,3 +1,4 @@
+#encoding: utf-8
 module RenrenHelper
   require 'oauth2'
   require 'net/http'

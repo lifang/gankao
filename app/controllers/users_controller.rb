@@ -42,7 +42,7 @@ class UsersController < ApplicationController
       @user.set_role(Role.find(Role::TYPES[:STUDENT]))
       @user.encrypt_password
       if @user.save!
-        #UserMailer.welcome_email(@user).deliver
+        UserMailer.welcome_email(@user).deliver
         redirect_to "/users/#{@user.id}/active"
       else
         redirect_to "/users/new"

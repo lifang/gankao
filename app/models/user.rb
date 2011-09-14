@@ -1,3 +1,4 @@
+#encoding: utf-8
 class User < ActiveRecord::Base
   has_many :user_role_relations,:dependent=>:destroy
   has_many :roles,:through=>:user_role_relations,:foreign_key=>"role_id"

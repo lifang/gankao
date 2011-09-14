@@ -1,11 +1,11 @@
-<div class="person_box">
-  <% if @simulations.blank? %>
-    <p style="font-size:120%;color:red;font-weight: bold;margin-left: 20px;margin-top: 80px;">当前没有模考...</p>
-  <%else%>
-    <div class="m_box_one mnks">
+<div class="person_box"> 
+  <div class="m_box_one mnks">
+    <% if @simulations.blank? %>
+    <div class="per_con"><p>暂无模考</p></div>
+    <%else%>
       <div class="per_con">
         <h2><%= @simulations[0].title %></h2>
-        <p><%= @simulations[0].start_at_time.nil? ? "不限制时间":@simulations[0].start_at_time %></p>
+        <p><%= @simulations[0].start_at_time.nil? ? "不限制时间":@simulations[0].start_at_time.strftime("%Y-%m-%d") %></p>
       </div>
       <div class="per_btn">
         <% if @hash1["#{@simulations[0].id}"].nil? %>
@@ -16,16 +16,15 @@
           <p style="font-size:80%;margin-left: 40px;">得分：<%= @hash1["#{@simulations[0].id}"].total_score %></p>
         <% end %></div>
       <div class="per_ex_p"><span class="red">*</span>模拟考试帮助我们了解你的水平和准备程度更好的预测你通过考试的可能性。</div>
-    </div>
-  <% end %>
-
+    <% end %>
+  </div>
   <div class="m_box_one ztlx">
     <div class="per_con">
       <% pro=(@type_hash["#{Examination::TYPES[:OLD_EXAM]}"].nil? ? 0 : @type_hash["#{Examination::TYPES[:OLD_EXAM]}"][1]).to_f/(@type_hash["#{Examination::TYPES[:OLD_EXAM]}"].nil? ? 1 : @type_hash["#{Examination::TYPES[:OLD_EXAM]}"][0])*100 %>
       <h2>完成度： <span class="red"><%= "#{pro.to_i}%"   %></span></h2>
       <h2>正确率： <span class="red"><%= "#{@correct.to_i}%" %></span></h2>
     </div>
-    <div class="per_btn"><a href="/exam_lists/old_exam_list" target="_blank">开始练习</a></div>
+    <div class="per_btn"><a href="/exam_lists/<%= params[:id] %>/old_exam_list" target="_blank">开始练习</a></div>
     <div class="per_ex_p"><span class="red">*</span>新四级历年真题及丰富详实的解析，有自动搜索错题的功能。</div>
   </div>
 
@@ -36,7 +35,9 @@
       <div class="per_load_bg"><div class="per_load_t" style="width:<%= (progress*100).to_s + "%" %>"></div></div>
       <p><span class="red"><%= @type_hash["2"].nil? ? 0 : @type_hash["2"][0] %></span> 篇</p>
     </div>
-    <div class="per_btn"><a href="/combine_practices" target="_blank">开始训练</a></div>
+    <div class="per_btn">
+      <a href="/combine_practices/<%= params[:id] %>/start" target="_blank">开始训练</a>
+    </div>
     <div class="per_ex_p"><span class="red">*</span>60篇短文，密集训练听力词汇阅读和写作能力。</div>
   </div>
 
@@ -50,7 +51,7 @@
             </div>
           </span></h3>
       <% else %>
-       <h3><span class="red"><div class="shu">0%</div></span></h3>
+        <h3><span class="red"><div class="shu">0%</div></span></h3>
         <p><a href="/users/goto_vip" target="_blank">如何增加信心？</a></p>
       <% end %>
     </div>
@@ -59,7 +60,7 @@
       <div class="per_tb_title per_tb_ctk">错题库</div>
       <% unless @incorrect_list.nil? %>
         <h3><span class="red"><%=@incorrect_list.elements['problems'].elements.size %></span> 错题</h3>
-        <p><a href="/exam_lists/incorrect_list" target="_blank">马上复习</a></p>
+        <p><a href="/exam_lists/<%= params[:id] %>/incorrect_list" target="_blank">马上复习</a></p>
       <% else %>
         <h3><span class="red"><%= "您没有错题" %></span></h3>
       <% end %>
@@ -68,7 +69,7 @@
       <div class="per_tb_title per_tb_biji">笔记</div>
       <% unless @notes.nil? %>
         <h3><span class="red"><%= @notes.elements['problems'].elements.size %></span> 篇</h3>
-        <p><a href="/user/notes" target="_blank">翻阅笔记</a></p>
+        <p><a href="/user/notes/<%= params[:id] %>" target="_blank">翻阅笔记</a></p>
       <% else %>
         <h3><span class="red"><%= "您没有做笔记" %></span></h3>
       <% end %>

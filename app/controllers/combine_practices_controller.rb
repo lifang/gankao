@@ -3,9 +3,9 @@ class CombinePracticesController < ApplicationController
   before_filter :access?
   layout "gankao"
 
-  def index
-    @all_practies = Examination.return_exam_count(Examination::TYPES[:PRACTICE])
-    @practies_count = ExamUser.return_join_exam_count(Examination::TYPES[:PRACTICE], cookies[:user_id].to_i)
+  def show
+    @all_practies = Examination.return_exam_count(Examination::TYPES[:PRACTICE], params[:id].to_i)
+    @practies_count = ExamUser.return_join_exam_count(Examination::TYPES[:PRACTICE], cookies[:user_id].to_i, params[:id].to_i)
     @practies_precent = @all_practies != 0 ? ((@practies_count.to_f/@all_practies)*100).round : 0
   end
 
@@ -16,15 +16,15 @@ class CombinePracticesController < ApplicationController
       return 0
     end  #优先进入已经打开的综合测试
     can_practies = true
-    practies_count = ExamUser.return_join_exam_count(Examination::TYPES[:PRACTICE], cookies[:user_id].to_i)
+    practies_count = ExamUser.return_join_exam_count(Examination::TYPES[:PRACTICE], cookies[:user_id].to_i,Category::TYPE_IDS[:english_fourth_level])
     can_practies = false unless is_vip? and practies_count < Constant::PRACTICES_COUNT
     if can_practies
-      all_practies = Examination.return_exam_count(Examination::TYPES[:PRACTICE])
+      all_practies = Examination.return_exam_count(Examination::TYPES[:PRACTICE],Category::TYPE_IDS[:english_fourth_level])
       if all_practies <= practies_count
         flash[:notice] = "您的综合训练已经全部做完。"
         redirect_to "/combine_practices"
       else
-        examination = Examination.rand_examnation(Examination::TYPES[:PRACTICE], cookies[:user_id].to_i)
+        examination = Examination.rand_examnation(Examination::TYPES[:PRACTICE], cookies[:user_id].to_i,Category::TYPE_IDS[:english_fourth_level])
         if examination and examination[0]
           redirect_to "/user/combine_practices/#{examination[0].id}/start"
         else

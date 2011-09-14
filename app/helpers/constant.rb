@@ -1,3 +1,4 @@
+#encoding: utf-8
 module Constant
   #邮箱地址
   EMAILS = {
@@ -69,7 +70,7 @@ module Constant
    VIP=10
 
   #非vip能做综合训练的次数
-  PRACTICES_COUNT = 333
+  PRACTICES_COUNT = 5
 
   
   

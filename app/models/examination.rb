@@ -111,11 +111,11 @@ class Examination < ActiveRecord::Base
     return is_in
   end
 
-  def self.exam_users_hash(user_id,types)
+  def self.exam_users_hash(user_id,types,category_id)
     hash ={}
     ExamUser.find_by_sql("select eu.total_score,eu.is_submited,eu.examination_id,eu.created_at
         correct_percent from exam_users eu inner join examinations e on e.id = eu.examination_id
-        where e.types =#{types} and eu.user_id = #{user_id} and eu.is_submited = #{ExamUser::IS_SUBMITED[:YES]}
+        where e.types =#{types} and eu.user_id = #{user_id} and e.category_id=#{category_id} and eu.is_submited = #{ExamUser::IS_SUBMITED[:YES]}
         and is_published = #{Examination::IS_PUBLISHED[:ALREADY]}").each do |exam_user|
       hash["#{exam_user.examination_id}"] = exam_user
     end unless user_id.nil? or user_id == ""
@@ -146,38 +146,38 @@ class Examination < ActiveRecord::Base
   end
 
   #返回真题的正确率
-  def self.count_correct(id)
+  def self.count_correct(id,category_id)
     correct = 0
     users = ExamUser.find_by_sql("select count(eu.id) count_id, sum(eu.correct_percent) correct_percent
         from exam_users eu inner join examinations e on e.id = eu.examination_id
-        where is_published = #{Examination::IS_PUBLISHED[:ALREADY]} and eu.is_submited = 1 
+        where is_published = #{Examination::IS_PUBLISHED[:ALREADY]} and e.category_id = #{category_id} and eu.is_submited = 1
         and eu.user_id = #{id} and e.types = #{TYPES[:OLD_EXAM]}")
     correct = users[0].count_id == 0 ? 0 : (users[0].correct_percent/users[0].count_id).round if users and users[0]
     return correct
   end
 
   #返回不同的考试类型的次数
-  def self.return_exam_count(types)
+  def self.return_exam_count(types,category_id)
     return Examination.count(:id,
       :conditions => "is_published = #{Examination::IS_PUBLISHED[:ALREADY]}
-          and status != #{Examination::STATUS[:CLOSED]} and types = #{types}")
+          and status != #{Examination::STATUS[:CLOSED]} and category_id=#{category_id} and types = #{types}")
   end
 
   #随机返回用户一条试卷记录
-  def self.rand_examnation(types, user_id)
+  def self.rand_examnation(types, user_id,category_id)
     Examination.find_by_sql("select e.id from examinations e where e.id not in(select ex.id count_id from exam_users eu
       inner join examinations ex on eu.examination_id = ex.id
       where eu.is_submited = #{ExamUser::IS_SUBMITED[:YES]} and ex.types = #{types} and eu.user_id = #{user_id})
-       and e.is_published = #{Examination::IS_PUBLISHED[:ALREADY]}
+       and e.is_published = #{Examination::IS_PUBLISHED[:ALREADY]} and e.category_id = #{category_id}
        and status != #{Examination::STATUS[:CLOSED]} and types = #{types} order by rand() limit 1")
   end
 
 
-  def self.exam_users_paper(user_id,types)
+  def self.exam_users_paper(user_id,types,category_id)
     hash ={}
     ExamUser.find_by_sql("select eu.total_score,eu.is_submited,eu.examination_id,eu.paper_id,eu.created_at
         correct_percent from exam_users eu inner join examinations e on e.id = eu.examination_id
-        where e.types =#{types} and eu.user_id = #{user_id} and eu.is_submited=1
+        where e.types =#{types} and eu.user_id = #{user_id} and e.category_id=#{category_id} and eu.is_submited=1
         and is_published=#{Examination::IS_PUBLISHED[:ALREADY]}").each do |exam_user|
       doc=ExamRater.open_file("#{Constant::BACK_PUBLIC_PATH}/papers/#{exam_user.paper_id}.xml") unless exam_user.paper_id.nil?
       hash["#{exam_user.examination_id}"] = [exam_user,doc]

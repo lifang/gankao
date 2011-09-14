@@ -1,3 +1,4 @@
+#encoding: utf-8
 module UserRoleHelper
   def is_vip?
     if Order.find_by_user_id(cookies[:user_id])

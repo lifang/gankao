@@ -327,7 +327,7 @@ class ExamUser < ActiveRecord::Base
 
   #显示答卷
   def self.show_result(paper_id, doc)
-    @xml = ExamRater.open_file(Constant::BACK_PUBLIC_PATH+"/papers/#{paper_id}.xml")
+    @xml = ExamRater.open_file(Constant::BACK_PUBLIC_PATH + "/papers/#{paper_id}.xml")
     @xml.elements["blocks"].each_element do  |block|
       block.elements["problems"].each_element do |problem|
         problem.elements["questions"].each_element do |question|
@@ -336,7 +336,7 @@ class ExamUser < ActiveRecord::Base
               question.add_attribute("user_answer","#{element.elements["answer"].text}")
               question.add_attribute("user_score","#{element.attributes["score"]}")
             end
-          end
+          end unless doc.nil?
         end
       end
     end
@@ -522,10 +522,10 @@ class ExamUser < ActiveRecord::Base
 
 
   #返回用户参与的不同考试类型的次数
-  def self.return_join_exam_count(types, user_id)
+  def self.return_join_exam_count(types, user_id,category_id)
     exam_sums = Examination.find_by_sql("select count(eu.id) count_id from exam_users eu
       inner join examinations ex on eu.examination_id = ex.id
-      where eu.is_submited = #{ExamUser::IS_SUBMITED[:YES]} and ex.types = #{types} and eu.user_id = #{user_id}")
+      where eu.is_submited = #{ExamUser::IS_SUBMITED[:YES]} and ex.category_id=#{category_id} and ex.types = #{types} and eu.user_id = #{user_id}")
     return exam_sums[0] ? exam_sums[0].count_id : 0
   end
   

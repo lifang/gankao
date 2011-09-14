@@ -10,7 +10,7 @@
 
 <%= form_for :paper , :url =>url,
   :html => {:name => "paper_form", :id => "paper_form",
-  :onsubmit => "return generate_result_paper('#{@examination.paper_id}')"} do |f| %>
+  :onsubmit => "return generate_result_paper('#{@examination.paper_id}',#{@practice_type})"} do |f| %>
 
   <div id="paper_show_info">
     <% if @practice_type==2 %>
@@ -53,8 +53,9 @@
   <div  id="paper_navigation" style="display:none;" class="tb_content">
   </div>
   <div class="clear"/><hr/>
+  <div id="block_ids" style="display:none;"></div>
   <div id="blocks">
-    <div id="block_ids" style="display:none;"></div>
+    
   </div>
   <hr/>
   <div id="remote_div" style="display:none;"></div>

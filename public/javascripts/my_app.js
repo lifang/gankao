@@ -15,13 +15,14 @@ function buttoncontrol(){
 }
 
 function check_new(){
-    var username=document.getElementById("username").value;
-    var strEmail=document.getElementById("email").value;
-    var password=document.getElementById("password").value;
-    var confirmation=document.getElementById("password_confirmation").value;
+    var username=document.getElementById("user_name").value;
+    var strEmail=document.getElementById("user_email").value;
+    var password=document.getElementById("user_password").value;
+    var confirmation=document.getElementById("user_password_confirmation").value;
     var myReg =new RegExp(/^\w+([-+.])*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/);
     var check_value = new RegExp(/[a-z0-9_]/g);
-    if (strEmail == null || strEmail.length ==0||strEmail.length>50){alert(1);
+    document.getElementById("emailErr").innerHTML="";
+    if (strEmail == null || strEmail.length ==0||strEmail.length>50){
         document.getElementById("emailErr").innerHTML="<font color = 'red'>邮箱不能为空，长度不能超过50</font>";
         return false;
     } else {

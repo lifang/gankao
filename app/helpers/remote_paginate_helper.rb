@@ -1,3 +1,4 @@
+#encoding: utf-8
 module RemotePaginateHelper
   @@pagination_options = {
     :class => 'pagination',

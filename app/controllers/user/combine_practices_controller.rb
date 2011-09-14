@@ -1,3 +1,4 @@
+#encoding: utf-8
 class User::CombinePracticesController < ApplicationController
   layout "paper", :only => [:save_result]
   before_filter :access?
