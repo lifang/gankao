@@ -34,9 +34,9 @@ class UsersController < ApplicationController
       flash[:emailused] = "此邮箱已被使用，请使用其他邮箱。"
       redirect_to "/users/new"
     else
-      @user = User.new(:email => params[:user][:email], :encrypted_password => params[:user][:password],
+      @user = User.new(:email => params[:user][:email], :password => params[:user][:password],
         :school => params[:user][:school])
-      @user.username = params[:user][:username]
+      @user.username = params[:user][:name]
       @user.status = User::STATUS[:LOCK]
       @user.active_code = proof_code(6)
       @user.set_role(Role.find(Role::TYPES[:STUDENT]))
