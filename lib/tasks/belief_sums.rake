@@ -12,6 +12,7 @@ namespace :belief do
     @examinations.each do |examination|
       hash["#{examination.types}"] = examination.sums
     end unless @examinations.blank?
+    date=Time.now()
     users.each do |user|
       @exams = Examination.find_by_sql("select count(types) sums,e.types from examinations e
         inner join exam_users u on u.examination_id = e.id
@@ -57,10 +58,10 @@ namespace :belief do
         incorrect_percent = percent.to_f/n/100 if percent != 0 and n != 0
       end
       puts incorrect_percent
-      sum = (simulation_belief*100) * ((old_percent*0.3 + collect_percent*0.5 + incorrect_percent*0.2)*100)
+      sum = (simulation_belief) * ((old_percent*0.3 + collect_percent*0.5 + incorrect_percent*0.2)*100)
       puts sum
-      user.belief = sum.round
-      user.save
+      user_belief=UserBelief.find_by_user_id_and_created_at(user.id,date.to_date)
+      UserBelief.create(:user_id=>user.id,:belief=>sum.round()) unless user_belief
     end
   end
 end
