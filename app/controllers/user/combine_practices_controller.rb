@@ -1,3 +1,4 @@
+#encoding: utf-8
 class User::CombinePracticesController < ApplicationController
   layout "paper", :only => [:save_result]
   before_filter :access?
@@ -50,7 +51,7 @@ class User::CombinePracticesController < ApplicationController
       else
         @exam_user.submited!       # @step=6 完成该综合训练
         flash[:notice] = "你顺利完成了一份综合训练题，再接再厉。"
-        redirect_to "/combine_practices"
+        redirect_to "/combine_practices/#{params[:category_id]}"
       end
     else
       flash[:warn] = arr[0]

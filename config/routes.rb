@@ -16,14 +16,12 @@ Gankao::Application.routes.draw do
   end
   resources :exam_lists do
     collection do
-      get :incorrect_list
-      post :show_problem,:next_problem,:compare_answer,:delete_problem
+      post :show_problem,:next_problem,:compare_answer
       post :feedback,:feedback_list
-      get :question_info
     end
     member do
-      get :simulate_list,:old_exam_list
-      post :load_note,:create_note
+      get :simulate_list, :old_exam_list, :incorrect_list, :question_info
+      post :load_note,:create_note,:delete_problem
     end
   end
   resources :advertises do
@@ -120,10 +118,7 @@ Gankao::Application.routes.draw do
     end
     resources :notes do
       member do
-        post "create_note", "load_note", "update_note"
-      end
-      collection do
-        post "search"
+        post "create_note", "load_note", "update_note", "search"
         get "search_list"
       end
     end

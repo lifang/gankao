@@ -18,12 +18,11 @@ function check_new(){
     var username=document.getElementById("user_name").value;
     var strEmail=document.getElementById("user_email").value;
     var password=document.getElementById("user_password").value;
-    alert(username);
     var confirmation=document.getElementById("user_password_confirmation").value;
     var myReg =new RegExp(/^\w+([-+.])*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/);
     var check_value = new RegExp(/[a-z0-9_]/g);
     document.getElementById("emailErr").innerHTML="";
-    if (strEmail == null || strEmail.length ==0||strEmail.length>50){alert(1);
+    if (strEmail == null || strEmail.length ==0||strEmail.length>50){
         document.getElementById("emailErr").innerHTML="<font color = 'red'>邮箱不能为空，长度不能超过50</font>";
         return false;
     } else {

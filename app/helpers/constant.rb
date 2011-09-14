@@ -1,3 +1,4 @@
+#encoding: utf-8
 module Constant
   #邮箱地址
   EMAILS = {
@@ -27,7 +28,7 @@ module Constant
   BACK_SERVER_PATH = "http://localhost:3000"
   #项目文件目录
   PUBLIC_PATH = "#{Rails.root}/public"
-  BACK_PUBLIC_PATH="f:/exam_app/public"
+  BACK_PUBLIC_PATH = "/opt/projects/exam_app/public"
   #试卷生成路径
   PAPER_PATH = BACK_SERVER_PATH+"/papers"
   #试卷服务器访问路径
@@ -69,7 +70,7 @@ module Constant
    VIP=10
 
   #非vip能做综合训练的次数
-  PRACTICES_COUNT = 333
+  PRACTICES_COUNT = 5
 
   
   

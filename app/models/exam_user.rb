@@ -328,7 +328,7 @@ class ExamUser < ActiveRecord::Base
 
   #显示答卷
   def self.show_result(paper_id, doc)
-    @xml = ExamRater.open_file(Constant::BACK_PUBLIC_PATH+"/papers/#{paper_id}.xml")
+    @xml = ExamRater.open_file(Constant::BACK_PUBLIC_PATH + "/papers/#{paper_id}.xml")
     @xml.elements["blocks"].each_element do  |block|
       block.elements["problems"].each_element do |problem|
         problem.elements["questions"].each_element do |question|
@@ -337,7 +337,7 @@ class ExamUser < ActiveRecord::Base
               question.add_attribute("user_answer","#{element.elements["answer"].text}")
               question.add_attribute("user_score","#{element.attributes["score"]}")
             end
-          end
+          end unless doc.nil?
         end
       end
     end

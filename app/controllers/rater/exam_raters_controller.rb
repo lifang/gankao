@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Rater::ExamRatersController < ApplicationController
   layout "rater"
 

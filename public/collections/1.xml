@@ -39,11 +39,11 @@
                 </question>
             </questions>
         </problem>
-        <problem id='3' incorrect_num='1' score='5' types='0'>
+        <problem delete_status='1' id='3' incorrect_num='1' score='5' types='0'>
             <title>山东大厦</title>
             <category>1</category>
             <questions>
-                <question correct_percent='50%' correct_type='0' id='3' score='5'>
+                <question correct_percent='50%' correct_type='0' delete_status='1' id='3' score='5'>
                     <answer>阿萨德</answer>
                     <analysis/>
                     <questionattrs>阿萨德;-;发动;-; 地方;-;国服</questionattrs>
@@ -53,11 +53,11 @@
                 </question>
             </questions>
         </problem>
-        <problem id='4' incorrect_num='2' repeat_num='7' score='16' types='0'>
+        <problem delete_status='1' id='4' incorrect_num='2' repeat_num='7' score='16' types='0'>
             <title>阿斯顿sad</title>
             <category>1</category>
             <questions>
-                <question correct_percent='50%' correct_type='0' error_percent='50' id='4' score='16'>
+                <question correct_percent='50%' correct_type='0' delete_status='1' error_percent='0' id='4' repeat_num='1' score='16'>
                     <answer>df </answer>
                     <analysis/>
                     <questionattrs>df ;-;fgf ;-;h ;-;ghgh</questionattrs>
@@ -72,14 +72,14 @@
                     <user_answer/>
                     <user_answer>h </user_answer>
                     <user_answer>h </user_answer>
-                </question>
+                <user_answer>fgf </user_answer></question>
             </questions>
         </problem>
         <problem id='9' repeat_num='11' score='5' types='0'>
             <title>少打</title>
             <category>1</category>
             <questions>
-                <question correct_type='0' error_percent='50' id='9' repeat_num='1' score='5'>
+                <question correct_type='0' delete_status='1' error_percent='50' id='9' repeat_num='2' score='5'>
                     <answer>adsad</answer>
                     <analysis/>
                     <questionattrs>adsad;-;规范法官;-;会更好;-;很久很久</questionattrs>
@@ -90,8 +90,8 @@
                     <user_answer>规范法官</user_answer>
                     <user_answer/>
                     <user_answer>规范法官</user_answer>
-                </question>
-                <question correct_type='0' error_percent='0' id='14' repeat_num='1' score='5'>
+                <user_answer>规范法官</user_answer></question>
+                <question correct_type='0' error_percent='0' id='14' repeat_num='2' score='5'>
                     <answer>sfs</answer>
                     <analysis>sfafwerwr2r2</analysis>
                     <questionattrs>sfs;-;sfss;-;sdds;-;sd</questionattrs>
@@ -103,7 +103,7 @@
                     <user_answer>sfss</user_answer>
                     <user_answer/>
                     <user_answer>sdds</user_answer>
-                </question>
+                <user_answer>sfss</user_answer></question>
             </questions>
         </problem>
         <problem id='10' repeat_num='6' score='5' types='0'>

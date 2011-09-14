@@ -1,0 +1,41 @@
+<script type="text/javascript" src="/javascripts/zh_tab.js"></script>
+<div class="zh_top">
+  <div class="zh_load"><div class="per_load_bg"><div class="per_load_t" style="width:<%= @practies_precent.to_s + "%" %>"></div></div></div>
+  <div class="zh_addTo_btn">
+    <% if @all_practies != 0 %>
+      <% if @all_practies == @practies_count %>
+        <a href="javascript:void(0);" title="练习已经全部完成">开始训练</a>
+      <% else %>
+        <a href="/combine_practices/<%= params[:id] %>/start" target='_blank'>开始训练</a>
+      <% end %>
+    <% else %>
+      <a href="javascript:void(0);" title="尚未有练习"></a>
+    <% end %>
+  </div>
+</div>
+<div class="zh_p">综合训练五步</div>
+<div class="zonghe_div">
+  <div class="zh_tab zh_position_one" style="z-index: 5; ">
+    <div class="zh_tab_title" style="color: rgb(40, 117, 174); ">1</div>
+    <div class="zh_tab_box">综合训练1：做为普通用户，你答卷的主观题部分将不会被批改，这部分成绩将以你的客观题部分比例换算，考试成绩将不够准确。</div>
+  </div>
+  <div class="zh_tab zh_position_two" style="z-index: 4; ">
+    <div class="zh_tab_title" style="color: rgb(40, 117, 174); ">2</div>
+    <div class="zh_tab_box">综合训练2：做为普通用户，你答卷的主观题部分将不会被批改，这部分成绩将以你的客观题部分比例换算，考试成绩将不够准确。</div>
+  </div>
+  <div class="zh_tab zh_position_three" style="z-index: 3; ">
+    <div class="zh_tab_title" style="color: rgb(40, 117, 174); ">3</div>
+    <div class="zh_tab_box">综合训练3：做为普通用户，你答卷的主观题部分将不会被批改，这部分成绩将以你的客观题部分比例换算，考试成绩将不够准确。</div>
+  </div>
+  <div class="zh_tab zh_position_four" style="z-index: 2; ">
+    <div class="zh_tab_title" style="color: rgb(40, 117, 174); ">4</div>
+    <div class="zh_tab_box">综合训练4：做为普通用户，你答卷的主观题部分将不会被批改，这部分成绩将以你的客观题部分比例换算，考试成绩将不够准确。</div>
+  </div>
+  <div class="zh_tab zh_position_five" style="z-index: 1; ">
+    <div class="zh_tab_title" style="color: rgb(40, 117, 174); ">5</div>
+    <div class="zh_tab_box">综合训练5：做为普通用户，你答卷的主观题部分将不会被批改，这部分成绩将以你的客观题部分比例换算，考试成绩将不够准确。</div>
+  </div>
+</div>
+
+<%=  render :partial => "/common/flash_div" %>
+

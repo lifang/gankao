@@ -1,9 +1,11 @@
-<% if @lists.elements["/collection/problems"].blank? %>
-  <%= "您目前没有错题"  %>
+<% if @lists.nil? or @lists.elements["/collection/problems"].blank? %>
+<div class="errorLibrary_left">
+  您目前没有错题
+</div>
 <% else %>
   <div class="errorLibrary_left">
-    <div class="pattern"><a href="/exam_lists/incorrect_list" class="chay_pat">查阅</a><div class="moveBlock_bg">
-        <div class="moveBlock"><img alt="moveBlock" src="/images/paper/moveBlock.png" /></div></div><a href="/exam_lists/question_info" class="lianx_pat">练习</a></div>
+    <div class="pattern"><a href="/exam_lists/<%= params[:id] %>/incorrect_list" class="chay_pat">查阅</a><div class="moveBlock_bg">
+        <div class="moveBlock"><img alt="moveBlock" src="/images/paper/moveBlock.png" /></div></div><a href="/exam_lists/<%= params[:id] %>/question_info" class="lianx_pat">练习</a></div>
     <div class="clear"></div>
     <div class="errorProblem_div">
       <% @lists.elements["/collection/problems"].each_element do |problem|%>

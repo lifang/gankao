@@ -4,13 +4,14 @@ class ExamListsController < ApplicationController
   layout "gankao"
   
   def  list
-    lists=Collection.find_by_user_id(cookies[:user_id]).open_xml
+    collection = Collection.find_by_user_id(cookies[:user_id])
+    lists = collection.open_xml if collection and collection.collection_url
     lists.elements["/collection/problems"].each_element do |problem|
       problem.elements["questions"].each_element do |question|
         lists.elements["/collection/problems"].delete_element(question.xpath) unless question.attributes["delete_status"].nil?
       end
       lists.elements["/collection/problems"].delete_element(problem.xpath) unless  problem.attributes["delete_status"].nil?
-    end
+    end if lists
     return lists
   end
   
@@ -38,16 +39,19 @@ class ExamListsController < ApplicationController
     @hash_list = {}
     @has_next_page = false
     @lists = list
-    @num = @lists.get_elements("//problems/problem").size
-    @lists = Examination.get_start_element(params[:page], @lists)
-    current_element = Examination.return_page_element(@lists, @has_next_page)
-    @lists = current_element[0]
-    problem = @lists.elements["/collection/problems/problem/questions"]
-    problem.each_element do |question|
-      @hash_list["#{question.attributes['id']}"] = Feedback.
-        find_all_by_user_id_and_question_id(cookies[:user_id], question.attributes["id"].to_i)
-    end unless problem.nil?
-    @has_next_page = current_element[1]
+    if @lists
+      @num = @lists.get_elements("//problems/problem").size
+      @lists = Examination.get_start_element(params[:page], @lists)
+      current_element = Examination.return_page_element(@lists, @has_next_page)
+      @lists = current_element[0]
+      problem = @lists.elements["/collection/problems/problem/questions"]
+      problem.each_element do |question|
+        @hash_list["#{question.attributes['id']}"] = Feedback.
+          find_all_by_user_id_and_question_id(cookies[:user_id], question.attributes["id"].to_i)
+      end unless problem.nil?
+      @has_next_page = current_element[1]
+    end
+    
   end
 
 
@@ -108,9 +112,9 @@ class ExamListsController < ApplicationController
     self.write_xml("#{Constant::PUBLIC_PATH}#{collection.collection_url}", doc)
     flash[:notice] = "删除成功。"
     if params[:page].to_i>1
-      redirect_to  "/exam_lists/incorrect_list?page=#{params[:page].to_i-1}"
+      redirect_to  "/exam_lists/#{params[:id]}/incorrect_list?page=#{params[:page].to_i-1}"
     else
-      redirect_to  "/exam_lists/incorrect_list"
+      redirect_to  "/exam_lists/#{params[:id]}/incorrect_list"
     end
   end
 

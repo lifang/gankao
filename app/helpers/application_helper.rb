@@ -1,3 +1,4 @@
+#encoding: utf-8
 module ApplicationHelper
   def re_h(html)
     return "" if html.blank? or html.nil?

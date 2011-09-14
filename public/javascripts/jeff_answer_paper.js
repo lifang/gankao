@@ -406,7 +406,6 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
                 if(answer.length==0){
                     Droppables.add(store_id, {
                         onDrop:function(element,store_id){
-                            alert($(store_id));
                             $(store_id).innerHTML=element.innerHTML;
                             show_que_save_button(question.id);
                             var thiDroppabless_answer=""

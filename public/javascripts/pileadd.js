@@ -415,7 +415,6 @@ function question_values(question_id) {
         }
     } else {
         var answer = $("question_answer_" + question_id);
-        alert(answer);
         if (answer != null && !checkspace(answer.value)) {
             $("answer_" + question_id).value = answer.value;
         }
@@ -469,7 +468,7 @@ function show_question(id){
 }
 
 times=0
-function send_user(){alert(1);
+function send_user(){
     if (times==0){
          $('user_info').submit();
          times=1;

@@ -91,6 +91,10 @@ ul { list-style: none;}
 .tab_m h3 { color: #F00;}
 .tab_b { width: 397px; height: 18px; background: url(/images/paper/all_bg.png) -114px -35px no-repeat;}
 
+.tishi_tab { width: 250px; padding: 10px; background: url(/images/paper/mk_b_zz_bg.png) repeat; border: 1px #fff solid; position: absolute; display: none; z-index: 9999;}
+.tishi_tab p { text-align: center; line-height: 24px; font-size: 14px; font-family:"微软雅黑"; color: #fff;}
+
+
 
 
 

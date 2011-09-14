@@ -1,8 +1,9 @@
+#encoding: utf-8
 class User::NotesController < ApplicationController
   layout "gankao", :except => ["load_note", "create_note"]
   before_filter :access?
 
-  def index
+  def show
     session[:tag] = nil
     @note = Note.find_by_user_id(cookies[:user_id])
     begin
@@ -64,12 +65,12 @@ class User::NotesController < ApplicationController
     note.update_question(params["note_text_#{params[:id]}"].strip, 
       params["q_xpath_#{params[:id]}"], note.open_xml) if note
     flash[:notice] = "笔记编辑成功。"
-    redirect_to "/user/notes"
+    redirect_to "/user/notes/#{params["category_id_" + params[:id]]}"
   end
 
   def search
     session[:note_text] = params[:note_text]
-    redirect_to "/user/notes/search_list"
+    redirect_to "/user/notes/#{params[:id]}/search_list"
   end
 
   def search_list
@@ -82,7 +83,7 @@ class User::NotesController < ApplicationController
     current_element = @note.return_page_element(@doc, @has_next_page, pre_page)
     @doc = current_element[0]
     @has_next_page = current_element[1]
-    render "index"
+    render "show"
   end
 
   
