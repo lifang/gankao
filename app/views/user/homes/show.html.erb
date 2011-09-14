@@ -2,6 +2,7 @@
   <div class="m_box_one mnks">
     <% if @simulations.blank? %>
     <div class="per_con"><p>暂无模考</p></div>
+    <div class="per_btn"></div>
     <%else%>
       <div class="per_con">
         <h2><%= @simulations[0].title %></h2>
@@ -15,8 +16,8 @@
         <% else %>
           <p style="font-size:80%;margin-left: 40px;">得分：<%= @hash1["#{@simulations[0].id}"].total_score %></p>
         <% end %></div>
-      <div class="per_ex_p"><span class="red">*</span>模拟考试帮助我们了解你的水平和准备程度更好的预测你通过考试的可能性。</div>
     <% end %>
+    <div class="per_ex_p"><span class="red">*</span>模拟考试帮助我们了解你的水平和准备程度更好的预测你通过考试的可能性。</div>
   </div>
   <div class="m_box_one ztlx">
     <div class="per_con">

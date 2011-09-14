@@ -268,7 +268,7 @@ function get_question_height(question_id, problem_id) {
 function create_problem(block_div, problem, block_nav_div) {
     var out_que_div = create_element("div", null, "question_" + problem.id, "part_question", null, "innerHTML");
     var score_str = "";
-    if (problem.score != null && problem.score != 0) {
+    if (problem.score != null && new Number(problem.score != 0)) {
         score_str = "<div class='fraction'>" + problem.score + "分</div>";
     }
     out_que_div.innerHTML = "<div class='part_passage border_bottom'><div class='p_contents'><p>"+ is_has_audio(block_div, problem)
@@ -404,10 +404,11 @@ function create_single_question(problem_id, que_div, question) {
         }
         que_div.appendChild(attr1);
     }
-    var score = (question.score != undefined) ? question.score : 0;
-    var score_div = create_element("div", null, null, "fraction", null, "innerHTML");
-    score_div.innerHTML = score + "分";
-    que_div.appendChild(score_div);
+    if (question.score != undefined && question.score != null && new Number(question.score) != 0) {
+        var score_div = create_element("div", null, null, "fraction", null, "innerHTML");
+        score_div.innerHTML = question.score + "分";
+        que_div.appendChild(score_div);
+    }
     
     add_que_save_button(que_div, question.id, problem_id);
     var answer_input = create_element("input", "answer_" + question.id, "answer_" + question.id, null, "hidden", "value");
@@ -648,11 +649,12 @@ function save_question(question_id, is_sure) {
     var paper_id = $("paper_id").value;
     var examination_id = $("examination_id").value;
     var answer = $("answer_" + question_id);
+    if(window.openDatabase){
+        if (answer != null && !checkspace(answer.value)) {
+            remove_answer(question_id, getCookie('user_id'), paper_id, examination_id);
+            add_answer(question_id, getCookie('user_id'), paper_id, examination_id, answer.value, is_sure);
 
-    if (answer != null && !checkspace(answer.value)) {
-        remove_answer(question_id, getCookie('user_id'), paper_id, examination_id);
-        add_answer(question_id, getCookie('user_id'), paper_id, examination_id, answer.value, is_sure);
-
+        }
     }
 }
 
@@ -892,8 +894,8 @@ function is_has_audio(block_div, problem) {
 //当打开的模块有音频时，播放有音频
 function start_block_audio(block_id) {
     if ($("audio_" + block_id) != null) {
-//                setCookie("exam_audio_" + block_id, 0);
-//                setCookie("audio_time_" + block_id, 0);
+        //                setCookie("exam_audio_" + block_id, 0);
+        //                setCookie("audio_time_" + block_id, 0);
         var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
         if (getCookie("exam_audio_" + block_id) == null || getCookie("exam_audio_" + block_id) == 0) {
             flash_div.innerHTML = "<p>您当前打开的模块为听力模块，5秒钟后播放听力，请做好准备。</p>";

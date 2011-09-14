@@ -16,11 +16,12 @@ class SessionsController < ApplicationController
     else
       cookies[:user_id] = @user.id
       cookies[:user_name] = @user.name
+      cookie_role(cookies[:user_id])
     end
     if flash[:error]
       redirect_to request.referer
     else
-      redirect_to "/users/#{cookies[:user_id]}/edit"
+      redirect_to "/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}"
     end
   end
 
@@ -50,7 +51,7 @@ class SessionsController < ApplicationController
     user=User.find_by_email(params[:anonymous])
     if user
       UserMailer.update_code(user).deliver
-      redirect_to "/users/#{user.id}/active"
+      redirect_to "/sessions/#{user.id}/active"
     else
       flash[:error]="密码有误，请重新输入"
       render "/sessions/get_code"

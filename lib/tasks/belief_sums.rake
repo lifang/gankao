@@ -1,6 +1,5 @@
 #encoding:utf-8
 require 'rexml/document'
-require 'rake'
 include REXML
 namespace :belief do
   desc "rate paper"
@@ -60,7 +59,7 @@ namespace :belief do
       puts incorrect_percent
       sum = (simulation_belief*100) * ((old_percent*0.3 + collect_percent*0.5 + incorrect_percent*0.2)*100)
       puts sum
-      user.belief = sum.round()
+      user.belief = sum.round
       user.save
     end
   end

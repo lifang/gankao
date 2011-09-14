@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     @user_info = User.find(params[:id])
     @user_info.update_attributes(params[:user_info])
     flash[:notice]="用户信息修改成功"
-    redirect_to "/users/#{params[:id]}/edit"
+    redirect_to "/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}"
   end
   
   def new #新建用户页面
@@ -34,8 +34,7 @@ class UsersController < ApplicationController
       flash[:emailused] = "此邮箱已被使用，请使用其他邮箱。"
       redirect_to "/users/new"
     else
-      @user = User.new(:email => params[:user][:email], :password => params[:user][:password],
-        :school => params[:user][:school])
+      @user = User.new(params[:user])
       @user.username = params[:user][:name]
       @user.status = User::STATUS[:LOCK]
       @user.active_code = proof_code(6)
@@ -75,6 +74,8 @@ class UsersController < ApplicationController
         @user.active_code = ""
         @user.status = true
         @user.save!
+        cookies[:user_id] = @user.id
+        cookies[:user_name] = @user.name
         redirect_to "/users/active_success"
       else
         redirect_to "/users/active_false"

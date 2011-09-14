@@ -3,6 +3,7 @@
   <div class="head"><div class="logo"><a href="/"><img src="/images/paper/logo1.png" /></a></div></div>
   <div class="main">
     <div class="zhuce_box" style="width: 50%;align:center;">
+      请输入您注册的邮箱，我们将发送修改密码的链接到您的邮箱<br></br>
       <%= form_for :session,:url=>"/sessions/user_code" do %>
       <div style="float:left;">
           邮  箱： <input value="" id="anonymous" name="anonymous" />
@@ -12,9 +13,6 @@
       </div>
       <% end %>
       <div class="clear"></div>
-    </div>
-    <div class="zhuce_box">
-      <p>获取密码第一步，请输入正确邮箱以便接收邮件更新密码！</p>
     </div>
   </div>
 </div>
