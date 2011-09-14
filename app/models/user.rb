@@ -30,6 +30,8 @@ class User < ActiveRecord::Base
   end
 
   def has_password?(submitted_password)
+    puts encrypt(submitted_password)
+    puts encrypted_password
 		encrypted_password == encrypt(submitted_password)
 	end
 
