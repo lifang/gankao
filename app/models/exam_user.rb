@@ -102,7 +102,8 @@ class ExamUser < ActiveRecord::Base
   end
 
   def submited!
-    self.toggle!(:is_submited)
+    self.is_submited=1
+    self.save
   end
 
   # <<<<head ==========================================================  综合训练记录result
@@ -116,7 +117,7 @@ class ExamUser < ActiveRecord::Base
   def practice_result_xml_content
     content = "<?xml version='1.0' encoding='UTF-8'?>"
     content += <<-XML
-      <exam id='#{self.examination_id}' step='1' check='0'>
+      <exam id='#{self.examination_id}' step='1'>
         <paper id='#{self.paper_id}' score='0'>
           <block></block>
           <block></block>
@@ -146,15 +147,15 @@ class ExamUser < ActiveRecord::Base
   #下一步
   def next_step(doc,url)
     step=doc.root.attributes['step']
-    check=doc.root.attributes['check']
-    if check=="1"||step=="2"
+#    check=doc.root.attributes['check']
+#    if check=="1"||step=="2"
       doc.root.attributes['step']=step.to_i+1
-    end
-    if check=="0"&&step!="2"
-      doc.root.attributes['check']=1
-    else
-      doc.root.attributes['check']=0
-    end
+#    end
+#    if check=="0"&&step!="2"
+#      doc.root.attributes['check']=1
+#    else
+#      doc.root.attributes['check']=0
+#    end
     f=File.new("#{Rails.root}/public#{url}","w")
     f.write("#{doc.to_s.force_encoding('UTF-8')}")
     f.close
@@ -171,9 +172,8 @@ class ExamUser < ActiveRecord::Base
 
   #取得综合训练进度step
   def get_step(doc)
-    arr=[]
-    arr<<doc.root.attributes['step']
-    arr<<doc.root.attributes['check']
+    arr=doc.root.attributes['step']
+#    arr<<doc.root.attributes['check']
     return arr
   end
 
