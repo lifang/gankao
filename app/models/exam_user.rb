@@ -102,7 +102,8 @@ class ExamUser < ActiveRecord::Base
   end
 
   def submited!
-    self.toggle!(:is_submited)
+    self.is_submited=1
+    self.save
   end
 
   # <<<<head ==========================================================  综合训练记录result

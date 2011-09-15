@@ -10,7 +10,7 @@
 
 <%= form_for :paper , :url =>url,
   :html => {:name => "paper_form", :id => "paper_form",
-  :onsubmit => "return generate_result_paper('#{@examination.paper_id}',#{@practice_type})"} do |f| %>
+  :onsubmit => "return generate_result_paper('#{@examination.paper_id}', '#{@examination.id}',#{@practice_type});"} do |f| %>
 
   <div id="paper_show_info">
     <% if @practice_type==2 %>
@@ -27,11 +27,7 @@
     <div class="jiexi_tab" id="jiexi_tab" style="top: 93px; left: 498px; ">
       <div class="tab_t"><a href="#" onclick="javascript:document.getElementById('jiexi_tab').style.display='none';"><img alt="close" src="/images/paper/x.gif"/></a></div>
       <div class="tab_m">
-        <% if @step[1]=="1" %>
-          <p id="jiexi_tab_p"><%= @notice %></p>
-        <% else %>
           <p id="jiexi_tab_p"></p>
-        <% end %>
       </div>
       <div class="tab_b"></div>
     </div>
@@ -55,7 +51,7 @@
   <div class="clear"/><hr/>
   <div id="block_ids" style="display:none;"></div>
   <div id="blocks">
-    
+
   </div>
   <hr/>
   <div id="remote_div" style="display:none;"></div>
@@ -74,7 +70,7 @@
 <%= javascript_include_tag "#{Constant::SERVER_PATH}/javascripts/jeff_answer_paper.js" %>
 <script language="javascript" type="text/javascript">
 
-   //本地存储所需变量finish
+  //本地存储所需变量finish
   var local_timer = null;
   var local_start_time = "05:00:00";
   var local_finish_time = "00:00:00";
