@@ -84,7 +84,7 @@
   var load_fix_time = null;
 
   //页面load成功之后加载试卷
-  window.onload(load_paper(<%= @practice_type %>));
+  load_paper(<%= @practice_type %>);
   answer_hash = null;
 
 

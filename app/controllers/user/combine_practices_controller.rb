@@ -44,7 +44,7 @@ class User::CombinePracticesController < ApplicationController
     else
       @exam_user.submited!       # @step=6 完成该综合训练
       flash[:notice] = "你顺利完成了一份综合训练题，再接再厉。"
-      redirect_to "/combine_practices"
+      redirect_to "/combine_practices/#{Examination::TYPES[:PRACTICE]}"
     end
   end
 
@@ -66,7 +66,7 @@ class User::CombinePracticesController < ApplicationController
       if this_step>5
         @exam_user.submited!           # @step=6 完成该综合训练
         flash[:notice] = "你顺利完成了一份综合训练题，再接再厉。"
-        redirect_to "/combine_practices"
+        redirect_to "/combine_practices/#{Examination::TYPES[:PRACTICE]}"
         return 0
       end
       redirect_to "#{Constant::SERVER_PATH}/user/combine_practices/#{params[:id]}"
