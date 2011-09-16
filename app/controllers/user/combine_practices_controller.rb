@@ -39,7 +39,7 @@ class User::CombinePracticesController < ApplicationController
       @exam_user.create_practice_result
     end
     @step=@exam_user.get_step(@exam_user.open_xml)
-    if @step[0].to_i<=5
+    if @step.to_i<=5
       redirect_to "#{Constant::SERVER_PATH}/user/combine_practices/#{params[:id]}"
     else
       @exam_user.submited!       # @step=6 完成该综合训练
