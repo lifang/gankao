@@ -189,9 +189,15 @@ function create_question_navigation(block_nav_div, question, innerHTML, problem_
             question_nav_div.className = "problem_nav_div";
             if (que_attrs[i] != null && que_attrs[i] != "") {
                 var store_id="question_"+question.id+"_draggable_"+(i+1);
-                var attr = create_element("span", null, null, null, null, "innerHTML");
+                var attr = create_element("span", null,null, null, null, "innerHTML");     
                 question_nav_div.appendChild(attr);
-                attr.innerHTML += "<span id=\""+store_id+"\" style='display:inline-block;height:20px;width:50px;'>"+que_attrs[i]+"</span>";
+                var drag_span = create_element("span", null, store_id, null, null, "innerHTML");
+                drag_span.style.display='inline-block';
+                drag_span.style.height='20px';
+                drag_span.style.width='50px';
+                drag_span.style.cursor='Move';
+                drag_span.innerHTML +=que_attrs[i];
+                attr.appendChild(drag_span);
                 block_nav_div.appendChild(question_nav_div);
                 new Draggable(store_id,{
                     revert:true
@@ -390,9 +396,7 @@ function create_single_question(problem_title,problem_id, que_div, question,prac
             var place_num = 1;
             while(problem_title.indexOf("problem_"+problem_id+"_dropplace_"+place_num)>=0){
                 var store_id="problem_"+problem_id+"_dropplace_"+place_num;
-//                $(store_id).style.display='inline-block';
-//                $(store_id).style.height='20px';
-//                $(store_id).style.width='50px';
+                $(store_id).style.cursor='Move';
                 Droppables.add(store_id, {
                     onDrop:function(element,store_id){
                         $(store_id).innerHTML=element.innerHTML;

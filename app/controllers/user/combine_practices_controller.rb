@@ -52,7 +52,7 @@ class User::CombinePracticesController < ApplicationController
     @exam_user = ExamUser.find_by_examination_id_and_user_id(params[:id].to_i, cookies[:user_id].to_i)
     @step=@exam_user.get_step(@exam_user.open_xml)
     @practice_type=@step.to_i+1
-    if @step.to_i<=5
+    if @step.to_i<5
       #      if @step[1].to_i==0&&@step[0].to_i!=2      # 符合条件则保存答案
       #        if params["all_quesiton_ids"]
       #          user_answer=[]
@@ -62,14 +62,12 @@ class User::CombinePracticesController < ApplicationController
       #        end
       #      end
       @exam_user.next_step(@exam_user.open_xml,@exam_user.answer_sheet_url)
-      this_step=@step.to_i+1
-      if this_step>5
-        @exam_user.submited!           # @step=6 完成该综合训练
-        flash[:notice] = "你顺利完成了一份综合训练题，再接再厉。"
-        redirect_to "/combine_practices/#{Examination::TYPES[:PRACTICE]}"
-        return 0
-      end
       redirect_to "#{Constant::SERVER_PATH}/user/combine_practices/#{params[:id]}"
+    else
+      @exam_user.submited! # @step=6 完成该综合训练
+      flash[:notice] = "你顺利完成了一份综合训练题，再接再厉。"
+      redirect_to "/combine_practices/#{Examination::TYPES[:PRACTICE]}"
+      return 0
     end
   end
 end

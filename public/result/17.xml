@@ -1,10 +1,9 @@
-
-<?xml version='1.0' encoding='UTF-8'?>      <exam check='0' id='27' step='6'>
+<?xml version='1.0' encoding='UTF-8'?>      <exam id='48' step='1'>
         <paper id='' score='0'>
-          <block/>
-          <block/>
-          <block/>
-          <block/>
-          <block/>
+          <block></block>
+          <block></block>
+          <block></block>
+          <block></block>
+          <block></block>
         </paper>
       </exam>
