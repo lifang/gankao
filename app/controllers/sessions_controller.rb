@@ -88,5 +88,29 @@ class SessionsController < ApplicationController
     redirect_to client.web_server.authorize_url(:redirect_uri => RenrenHelper::CALL_BACK_URL, :response_type=>'code')
   end
 
+  def friend_add_request
+    oauth = Weibo::OAuth.new(Weibo::Config.api_key, Weibo::Config.api_secret)
+    request_token = oauth.consumer.get_request_token
+    session[:rtoken], session[:rsecret] = request_token.token, request_token.secret
+    redirect_to "#{request_token.authorize_url}&oauth_callback=http://#{request.env["HTTP_HOST"]}/sessions/friend_add"
+  end
+
+  def friend_add
+    oauth = Weibo::OAuth.new(Weibo::Config.api_key, Weibo::Config.api_secret)
+    oauth.authorize_from_request(session[:rtoken],session[:rsecret], params[:oauth_verifier])
+    session[:rtoken], session[:rsecret] = nil, nil
+    unless  Weibo::Base.new(oauth).friendship_show({:target_id=>1987395943})[:source][:following]
+      Weibo::Base.new(oauth).friendship_create(1987395943, follow=false)
+      flash[:warn]="添加关注成功"
+    else
+      flash[:warn]="已添加关注"
+    end
+    render :inline => " <link href='/stylesheets/style.css' rel='stylesheet' type='text/css' />
+    <script type='text/javascript' src='/javascripts/jquery-1.5.2.js'></script>
+    <script type='text/javascript' src='/javascripts/TestPaper.js'></script><div id='flash_notice' class='tishi_tab'><p><%= flash[:warn] %></p></div>
+    <script type='text/javascript'>show_flash_div();</script><script> setTimeout(function(){
+      window.close();}, 2000)</script>"
+  end
+
 end
 
