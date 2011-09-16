@@ -164,6 +164,7 @@ class Examination < ActiveRecord::Base
   end
 
   #随机返回用户一条试卷记录
+
   def self.rand_examnation(types, user_id, category_id)
     Examination.find_by_sql("select e.id from examinations e where e.id not in(select eu.id count_id from exam_users eu
       inner join examinations ex on eu.examination_id = ex.id
