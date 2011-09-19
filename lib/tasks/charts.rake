@@ -32,23 +32,31 @@ namespace :charts do
           xy_axis_labels << [x_label.to_i, belief.belief.to_i]
         end
       end
-      puts "#{xy_axis_labels}"
-      begin
-      lc = GoogleChart::LineChart.new('320x200', "", true)
-      lc.data "belief", xy_axis_labels, '458B00'
       if x_axis_labels.length >= 8
         max_axis_x = x_axis_labels.sort.last
       else
         max_axis_x = 1229
         x_axis_labels << [1229]
       end
-      lc.max_value [max_axis_x,100]
-      lc.axis :y, :labels => [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-      lc.axis :x, :labels => x_axis_labels
-      lc.data_encoding = :text
-      lc.show_legend = false
-#      lc.grid :x_step => 8, :y_step => 10, :length_segment => 1, :length_blank => 3
-      write_img(URI.escape(lc.to_url), user)
+      #      puts "#{xy_axis_labels}"
+      begin
+        lc = GoogleChart::LineChart.new('320x200', "", true)
+        #        lc.data "belief", xy_axis_labels, '458B00'
+        #      lc.max_value [max_axis_x,100]
+        #      lc.axis :y, :labels => [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+        #      lc.axis :x, :labels => x_axis_labels
+        #      lc.data_encoding = :text
+        #      lc.show_legend = false
+        lc.data "belief", [[0,5], [15,2], [30,1], [45,4]], '458B00'
+        lc.max_value [60,10]
+        lc.axis :x, :range => [0, 40], :labels => [20, 30, 40, 50, 60]
+        lc.axis :y, :range => [0, 10], :labels => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        
+        lc.data_encoding = :text
+        lc.show_legend = false
+        puts lc.to_url
+              lc.grid :x_step => 10, :y_step => 10, :length_segment => 10, :length_blank => 3
+        write_img(URI.escape(lc.to_url), user)
       rescue
         puts "web lost"
       end

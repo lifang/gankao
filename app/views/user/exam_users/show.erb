@@ -2,12 +2,17 @@
 <%= javascript_include_tag 'pileadd' %>
 <div class="testPaper_top">
   <div class="tp_top_box">
-    <div class="paper_name"><%= @xml.elements['base_info'].elements['title'].text if @xml!=nil %></div>
+    <div class="paper_name">
+      <span class="test_logo"><img src="/images/paper/test_logo.png" /></span>
+      <%= @xml.elements['base_info'].elements['title'].text if @xml!=nil %>
+    </div>
     <div class="timer"><% if @examination.types == Examination::TYPES[:SIMULATION] %>
         <%= @doc.elements["paper"].attributes["score"].nil? ? "分数暂未公布":" 得  分:"+ @doc.elements["paper"].attributes["score"] %>
       <% else %>不限时
       <% end %></div>
-    <div class="paper_info"><strong><%= @xml.attributes["total_num"]%></strong>题</div>
+    <div class="paper_info">
+      <strong><%= @xml.attributes["total_num"]%></strong>题
+    </div>
   </div>
 </div>
 
@@ -17,81 +22,99 @@
   question_num = 1 %>
   <% @xml.elements['blocks'].each_element do |block| %>
     <div class="tp_left" id="block_<%= block.attributes["id"] %>" <% if block_index > 0 %>style="display: none;"<% end %>>
-      <div class="part_title">
-        <%= block.elements['base_info'].elements['title'].text %>
-        <% if block.attributes["time"] and block.attributes["time"] != "" %>( <%= block.attributes["time"] %> minutes )<% end %>
-      </div>
       <div class="part_box">
-        <div class="part_div">
+        <div class="part_passage">
+          <div class="part_title">
+            <%= block.elements['base_info'].elements['title'].text %>
+            <% if block.attributes["time"] and block.attributes["time"] != "" %> (<%= block.attributes["time"] %> minutes)<% end %>
+          </div>
           <% unless block.elements['base_info'].elements['description'].nil? or
               block.elements['base_info'].elements['description'].text.nil? or
               block.elements['base_info'].elements['description'].text.strip == "" %>
-            <div class="part_passage">
-              <div class="p_directions">
-                <p><%= block.elements['base_info'].elements['description'].text %></p>
-              </div>
-            </div>
+            <p><%= block.elements['base_info'].elements['description'].text %></p>
           <% end %>
-          <% block.elements['problems'].each_element do |problem| %>
-            <% problem_ids += problem.attributes["id"] + "," %>
-            <div class="part_question" id="question_info_<%= problem.attributes["id"].to_i %>">
-              <% unless problem.elements['title'].nil? %>
-                <div class="part_passage border_bottom">
-                  <div class="p_contents">
-                    <p><% title = problem.elements['title'].text.to_s.html_safe %>
-                      <% if title =~ /<mp3>/  %>
-                        <script type="text/javascript">audio_element("<%= title.split("<mp3>")[1] %>");</script>
-                        <%= title.split("<mp3>")[2] %>
-                      <% else %>
-                        <%= problem.elements['title'].text.to_s.html_safe %>
-                      <% end %>
-                    </p>
-                  </div>
-                  <% if @examination.types == Examination::TYPES[:SIMULATION] %>
-                    <div class="fraction"><%= problem.attributes["score"] %>分</div>
-                  <% end %>
-                </div>
-              <% end %>
-              <div>
-                <%= question_ids = ""
-                problem.elements["questions"].each_element do |question| %>
-                  <% question_ids += question.attributes["id"] + "," %>
-                  <%= render :partial=>"/user/exam_users/single_question", :object=> [question,question_num, problem]  %>
-                  <% question_num = question_num + 1 %>
-                <% end %>
-                <input type="hidden" id="question_ids_<%= problem.attributes["id"] %>"
-                       name="question_ids_<%= problem.attributes["id"] %>" value="<%= question_ids %>" />
-              </div>
-            </div>
-          <% end if !block.elements['problems'].nil? %>
+          <% if @examination.types == Examination::TYPES[:SIMULATION] %>
+            <div class="fraction"><%= block.attributes["total_score"] %>分</div>
+          <% end %>
         </div>
+
+        <% block.elements['problems'].each_element do |problem| %>
+          <% problem_ids += problem.attributes["id"] + "," %>
+          <div class="part_div">
+            <div class="part_question" id="question_info_<%= problem.attributes["id"].to_i %>">
+              <div class="part_q_text">
+                <% unless problem.elements['title'].nil? %>
+                  <p><% title = problem.elements['title'].text.to_s.html_safe %>
+                    <% if title =~ /<mp3>/  %>
+                      <script type="text/javascript">audio_element("<%= title.split("<mp3>")[1] %>");</script>
+                      <%= title.split("<mp3>")[2] %>
+                    <% else %>
+                      <%= problem.elements['title'].text.to_s.html_safe %>
+                    <% end %>
+                  </p>
+                <% end %>
+                <% if @examination.types == Examination::TYPES[:SIMULATION] %>
+                  <div class="fraction_h"><%= problem.attributes["score"] %>分</div>
+                <% end %>
+              </div>
+              <%= question_ids = ""
+              problem.elements["questions"].each_element do |question| %>
+                <% question_ids += question.attributes["id"] + "," %>
+                <%= render :partial=>"/user/exam_users/single_question", :object=> [question,question_num, problem]  %>
+                <% question_num = question_num + 1 %>
+              <% end %>
+              <input type="hidden" id="question_ids_<%= problem.attributes["id"] %>"
+                     name="question_ids_<%= problem.attributes["id"] %>" value="<%= question_ids %>" />
+            </div>
+          </div>
+        <% end if !block.elements['problems'].nil? %>
       </div>
     </div>
     <% block_index += 1 %>
   <% end %>
   <input type="hidden" id="problem_ids" name="problem_ids" value="<%= problem_ids %>"/>
 
-  <div class="tp_right" id="paper_navigation">
-    <% block_index = 0
-    block_ids = "" %>
-    <% @xml.elements['blocks'].each_element do |block|%>
-      <% block_ids = block_ids == "" ? block.attributes["id"] : block_ids + "," + block.attributes["id"] %>
-      <div class="first_title <% if block_index == 0 %>highLight<% end %>" id="block_nav_<%= block.attributes["id"] %>"  onclick="javascript:open_nav('<%= block.attributes["id"] %>');">
-        <p><%= block.elements['base_info'].elements['title'].text %>
-          <% if block.attributes["time"] and block.attributes["time"] != "" %>( <%= block.attributes["time"] %> minutes )<% end %>
-        </p>
-        <ul class="second_menu" <% if block_index > 0 %>style="display: none;"<% end %> id="nav_block_<%= block.attributes["id"] %>">
-          <% block.elements['problems'].each_element do |problem| %>
-            <% problem.elements["questions"].each_element do |question| %>
-              <li><a href="#"><img src="/images/paper/yida.png" /></a></li>
+  <div class="tp_right">
+    <div class="tp_right_box" id="paper_navigation">
+      <% block_index = 0
+      block_ids = "" %>
+      <% @xml.elements['blocks'].each_element do |block|%>
+        <% block_ids = block_ids == "" ? block.attributes["id"] : block_ids + "," + block.attributes["id"] %>
+        <div class="first_title <% if block_index == 0 %>highLight<% end %>" id="block_nav_<%= block.attributes["id"] %>"  onclick="javascript:open_nav('<%= block.attributes["id"] %>');">
+          <p><%= block.elements['base_info'].elements['title'].text %>
+            <% if block.attributes["time"] and block.attributes["time"] != "" %>( <%= block.attributes["time"] %> minutes )<% end %>
+          </p>
+          <ul class="second_menu" <% if block_index > 0 %>style="display: none;"<% end %> id="nav_block_<%= block.attributes["id"] %>">
+            <% block.elements['problems'].each_element do |problem| %>
+              <% problem.elements["questions"].each_element do |question| %>
+                <% answer = question.elements["answer"]
+                answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
+                user_answer = question.attributes["user_answer"]
+                user_answers = user_answer.nil? ? [] :  user_answer.split(";|;")
+                is_right = false
+                all_answer = answers | user_answers
+                is_right = true if all_answer == answers and answers - user_answers == []  %>
+                <li><% if is_right %>
+                  <a href="javascript:void(0);" onclick="javascript:get_question_height(<%= question.attributes["id"] %>, <%= problem.attributes["id"] %>);">
+                    <img src="/images/paper/dui.jpg" />
+                  </a>
+                  <% else %>
+                    <a href="javascript:void(0);" onclick="javascript:get_question_height(<%= question.attributes["id"] %>, <%= problem.attributes["id"] %>);">
+                      <img src="/images/paper/cuo.jpg" />
+                    </a>
+                  <% end %>
+                </li>
+              <% end %>
             <% end %>
-          <% end %>
-        </ul>
-      </div>
-      <% block_index += 1 %>
-    <% end %>
-    <div id="block_ids" style="display:none;"><%= block_ids %></div>
+          </ul>
+        </div>
+        <% block_index += 1 %>
+      <% end %>
+      <div id="block_ids" style="display:none;"><%= block_ids %></div>
+    </div>
   </div>
+  <div class="clear"></div>
+  <div class="zhijiao"></div>
 </div>
 <div class="clear"></div>
 <div class="testPaper_foot"></div>
