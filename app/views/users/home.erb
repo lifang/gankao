@@ -42,7 +42,7 @@
 
   <div class="m_box_two">
     <div class="per_two_box">
-      <div class="per_tb_title per_tb_xinx">信心</div>
+      <div class="per_tb_title">信心</div>
       <% if is_vip? == true %>
         <h3><span class="red">
             <div class="shu">
@@ -50,28 +50,18 @@
             </div>
           </span></h3>
       <% else %>
-       <h3><span class="red"><div class="shu">0%</div></span></h3>
-        <p><a href="/users/goto_vip" target="_blank">如何增加信心？</a></p>
+        <div class="xx_biao"><img src="/images/paper/xx_biao.jpg"/></div>
       <% end %>
-    </div>
 
-    <div class="per_two_box">
-      <div class="per_tb_title per_tb_ctk">错题库</div>
-      <% unless @incorrect_list.nil? %>
-        <h3><span class="red"><%=@incorrect_list.elements['problems'].elements.size %></span> 错题</h3>
-        <p><a href="/exam_lists/incorrect_list" target="_blank">马上复习</a></p>
-      <% else %>
-        <h3><span class="red"><%= "您没有错题" %></span></h3>
-      <% end %>
+      <div class="space20"></div>
     </div>
     <div class="per_two_box">
-      <div class="per_tb_title per_tb_biji">笔记</div>
-      <% unless @notes.nil? %>
-        <h3><span class="red"><%= @notes.elements['problems'].elements.size %></span> 篇</h3>
-        <p><a href="/user/notes" target="_blank">翻阅笔记</a></p>
-      <% else %>
-        <h3><span class="red"><%= "您没有做笔记" %></span></h3>
-      <% end %>
+      <div class="per_tb_title">错题库</div>
+      <div class="per_t_text"><span class="red"><%=@incorrect_list.elements['problems'].elements.size %></span> 错题<a href="/exam_lists/incorrect_list" target="_blank">马上复习</a></div>
+    </div>
+    <div class="per_two_box">
+      <div class="per_tb_title">笔记</div>
+      <div class="per_t_text"><span class="red"><%= @notes.elements['problems'].elements.size %></span> 篇<a href="/user/notes" target="_blank">翻阅笔记</a></div>
     </div>
   </div>
 </div>

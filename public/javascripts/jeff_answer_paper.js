@@ -345,7 +345,7 @@ function create_problem(ul, problem, block_nav_div,practice_type) {
 //增加提点保存和不确定按钮
 function add_que_save_button(parent_div, question_id, problem_id,practice_type) {
     var buttons_div = create_element("div", null, "save_button_" + question_id, "p_question_btn", null, "innerHTML");
-    buttons_div.innerHTML = "<input type='button' name='question_submit' class='save' onclick='javascript:generate_question_answer(\""+ question_id +"\", \""+problem_id+"\", \"1\","+practice_type+");' value='保存'/>";
+    buttons_div.innerHTML = "<input type='button' name='question_submit' class='save' onclick='javascript:generate_question_answer(\""+ question_id +"\", \""+problem_id+"\", \"1\","+practice_type+");'/>";
     buttons_div.style.display = "none";
     parent_div.appendChild(buttons_div);
 }
