@@ -7,26 +7,36 @@
       <div class="zhuce_box">
         <div class="rcf_box">
           <label>邮箱：</label>
-          <%= f.text_field :email, :class => "required input_style" %>
-          <p class="rcf_p">确保邮箱有效，我们将发送激活说明到此地址，每个邮箱只能使用一次</p>
-          <p class="rcf_p red" id="emailErr"><%= flash[:emailused] %></p>
+          <div class="setting-item-main">
+            <%= f.text_field :email, :class => "required input_style" %>
+            <p class="rcf_p">确保邮箱有效，我们将发送激活说明到此地址，每个邮箱只能使用一次</p>
+            <p class="rcf_p red" id="emailErr"><%= flash[:emailused] %></p>
+          </div>
         </div>
         <div class="rcf_box">
           <label>密码：</label>
-          <%= f.password_field :password, :class => "required input_style" %>
-          <p class="rcf_p">密码长度在6到20位之间</p>
+          <div class="setting-item-main">
+            <%= f.password_field :password, :class => "required input_style" %>
+            <p class="rcf_p">密码长度在6到20位之间</p>
+          </div>
         </div>
         <div class="rcf_box">
           <label>确认密码：</label>
-          <%= f.password_field :password_confirmation, :class => "required input_style" %>
+          <div class="setting-item-main">
+            <%= f.password_field :password_confirmation, :class => "required input_style" %>
+          </div>
         </div>
         <div class="rcf_box">
           <label>昵称：</label>
-          <%= f.text_field :name, :class => "required input_style" %>
+          <div class="setting-item-main">
+            <%= f.text_field :name, :class => "required input_style" %>
+          </div>
         </div>
-        <div class="rcf_box">
+        <div class="rcf_box rcf_box_bottom">
           <label>学校：</label>
-          <%= f.text_field :school, :class => "required input_style" %>
+          <div class="setting-item-main">
+            <%= f.text_field :school, :class => "required input_style" %>
+          </div>
         </div>
         <div class="zhuce_xy">
           <input type="checkbox" name="read_file" id="read_file"  value="999" onclick="javascript:buttoncontrol();"/>我已经阅读且同意<a href="#">《赶考网络服务使用协议》</a></div>
