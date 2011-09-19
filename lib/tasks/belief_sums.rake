@@ -21,7 +21,6 @@ namespace :belief do
       @exams.each do |exam|
         hash1["#{exam.types}"]=exam.sums
       end unless @exams.blank?
-
       simulation_belief = 0
       num = Examination.find_by_sql("select count(e.id) ids from examinations e 
         inner join exam_users  u on u.examination_id = e.id inner join papers p on p.id = u.paper_id
@@ -41,7 +40,6 @@ namespace :belief do
       collect_percent=hash1["#{Examination::TYPES[:PRACTICE]}"].to_f/hash["#{Examination::TYPES[:PRACTICE]}"] unless
       hash["#{Examination::TYPES[:PRACTICE]}"].nil? or hash["#{Examination::TYPES[:PRACTICE]}"] == 0
       puts collect_percent
-      
       collection = Collection.find_by_user_id(user.id)
       incorrect_percent = 0
       if collection and collection.collection_url

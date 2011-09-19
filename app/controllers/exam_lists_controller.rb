@@ -1,6 +1,6 @@
 #encoding: utf-8
 class ExamListsController < ApplicationController
-  before_filter :access?
+#  before_filter :access?
   layout "gankao"
   
   def  list

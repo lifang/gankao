@@ -800,7 +800,7 @@ function generate_result_paper(paper_id) {
             }
         }
     }
-    return flag;
+//    return flag;
 }
 
 function local_storage_answer() {

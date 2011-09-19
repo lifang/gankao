@@ -11,13 +11,14 @@ Gankao::Application.routes.draw do
   resources :pages do
     collection do
       get "sina_index"
-      get "renren_index"
+      get "renren_index","follow_me"
     end
   end
   resources :exam_lists do
     collection do
       post :show_problem,:next_problem,:compare_answer
       post :feedback,:feedback_list
+      get :honoured_guest
     end
     member do
       get :simulate_list, :old_exam_list, :incorrect_list, :question_info
@@ -58,7 +59,7 @@ Gankao::Application.routes.draw do
     collection do
       get "get_code"
       post "user_code"
-      get "sina_login"
+      get "sina_login","friend_add_request","friend_add"
       get "renren_login"
     end
     member do

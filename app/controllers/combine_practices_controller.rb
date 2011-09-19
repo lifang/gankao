@@ -17,7 +17,7 @@ class CombinePracticesController < ApplicationController
         and ex.category_id = #{params[:id].to_i} and eu.is_submited = #{ExamUser::IS_SUBMITED[:NO]}
         and eu.user_id=#{cookies[:user_id].to_i} limit 1")
     if user_examinations.any?
-      redirect_to "/user/combine_practices/#{user_examinations[0].examination_id}/start?category_id=#{params[:id]}"
+      redirect_to "/user/combine_practices/#{user_examinations[0].examination_id}/start"
     else
     can_practies = true
     practies_count = ExamUser.return_join_exam_count(Examination::TYPES[:PRACTICE], cookies[:user_id].to_i, params[:id].to_i)
@@ -29,8 +29,11 @@ class CombinePracticesController < ApplicationController
         redirect_to "/combine_practices/#{params[:id]}"
       else
         examination = Examination.rand_examnation(Examination::TYPES[:PRACTICE], cookies[:user_id].to_i, params[:id].to_i)
+        puts "=============================================================================================="
+        puts examination[0].id
+        puts "==============================================================================================="
         if examination and examination[0]
-          redirect_to "/user/combine_practices/#{examination[0].id}/start?category_id=#{params[:id]}"
+          redirect_to "/user/combine_practices/#{examination[0].id}/start"
         else
           flash[:notice] = "您的综合训练已经全部做完。"
           redirect_to "/combine_practices/#{params[:id]}"
