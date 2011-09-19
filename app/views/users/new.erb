@@ -1,6 +1,5 @@
 <%= javascript_include_tag 'my_app.js' %>
 <div class="wrap">
-  <div class="head"><div class="logo"><a href="/"><img src="/images/paper/logo1.png" /></a></div></div>
   <div class="main">
     <%= form_for @user, :html =>{:onsubmit => ' return check_new()', :class => "required-validate"} do |f| %>
       <div class="zd_jd"><img src="/images/paper/zd_jd0.png" /></div>
