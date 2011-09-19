@@ -245,7 +245,7 @@ img { border: none;}
 .answer_text { padding: 10px;}
 
 .answer_textarea { }
-.answer_textarea textarea { padding: 5px; width: 600px; height: 180px; margin: 10px 0 30px 15px;}
+.answer_textarea textarea { padding: 5px; width: 95%; height: 180px; margin: 10px 0 30px 15px;}
 
 
 .question_yes { background: url(/images/paper/question_yesno_bg.jpg) no-repeat 0px 0px #FFF;}

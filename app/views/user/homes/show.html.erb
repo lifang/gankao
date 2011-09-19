@@ -1,8 +1,8 @@
 <div class="person_box"> 
   <div class="m_box_one mnks">
     <% if @simulations.blank? %>
-    <div class="per_con"><p>暂无模考</p></div>
-    <div class="per_btn"></div>
+      <div class="per_con"><p>暂无模考</p></div>
+      <div class="per_btn"></div>
     <%else%>
       <div class="per_con">
         <h2><%= @simulations[0].title %></h2>
@@ -44,36 +44,38 @@
 
   <div class="m_box_two">
     <div class="per_two_box">
-      <div class="per_tb_title per_tb_xinx">信心</div>
-      <% if is_vip? == true %>
-        <h3><span class="red">
-            <div class="shu">
-              <%#= current_user.belief %>0%
-            </div>
-          </span></h3>
-      <% else %>
-        <h3><span class="red"><div class="shu">0%</div></span></h3>
-        <p><a href="/users/goto_vip" target="_blank">如何增加信心？</a></p>
-      <% end %>
-    </div>
-
-    <div class="per_two_box">
-      <div class="per_tb_title per_tb_ctk">错题库</div>
-      <% unless @incorrect_list.nil? %>
-        <h3><span class="red"><%=@incorrect_list.elements['problems'].elements.size %></span> 错题</h3>
-        <p><a href="/exam_lists/<%= params[:id] %>/incorrect_list" target="_blank">马上复习</a></p>
-      <% else %>
-        <h3><span class="red"><%= "您没有错题" %></span></h3>
-      <% end %>
+      <div class="per_tb_title">信心</div>
+      <div class="xx_biao">
+        <% if is_vip? == true %>
+  <%#= current_user.belief_url %>0%
+        <% else %>
+          <h3><span class="red"><div class="shu">0%</div></span></h3>
+          <p><a href="/users/goto_vip" target="_blank">如何增加信心？</a></p>
+        <% end %>
+      </div>
+      <div class="space20"></div>
     </div>
     <div class="per_two_box">
-      <div class="per_tb_title per_tb_biji">笔记</div>
-      <% unless @notes.nil? %>
-        <h3><span class="red"><%= @notes.elements['problems'].elements.size %></span> 篇</h3>
-        <p><a href="/user/notes/<%= params[:id] %>" target="_blank">翻阅笔记</a></p>
-      <% else %>
-        <h3><span class="red"><%= "您没有做笔记" %></span></h3>
-      <% end %>
+      <div class="per_tb_title">错题库</div>
+      <div class="per_t_text">
+        <% unless @incorrect_list.nil? %>
+          <span class="red"><%=@incorrect_list.elements['problems'].elements.size %></span> 错题
+          <a href="/exam_lists/<%= params[:id] %>/incorrect_list" target="_blank">马上复习</a>
+        <% else %>
+          您没有错题
+        <% end %>
+      </div>
+    </div>
+    <div class="per_two_box">
+      <div class="per_tb_title">笔记</div>
+      <div class="per_t_text">
+        <% unless @notes.nil? %>
+        <span class="red"><%= @notes.elements['problems'].elements.size %></span> 篇
+        <a href="/user/notes/<%= params[:id] %>" target="_blank">翻阅笔记</a>
+        <% else %>
+          <h3><span class="red"><%= "您没有做笔记" %></span></h3>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
