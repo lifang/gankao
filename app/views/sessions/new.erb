@@ -6,14 +6,16 @@
     window.location.reload();
   }
 </script>
+
+
 <%= form_for(:session, :url => sessions_path ,:html => {:onsubmit => "return signin_page()", :class => "required-validate"} ) do |f| %>
-  <div class="wrap_login">
-    <div class="main_login">
+  <div class="login_main">
+    <div class="login_box">
       <div class="error_login"><%= flash[:error] %></div>
       <div class="login_i_text"><label>帐号：</label><%= f.text_field :email, :value=>"",:class => "login_input" %></div>
       <div class="login_i_text"><label>密码：</label><%= f.password_field :password ,:value=>"",:class => "login_input" %></div>
       <div class="login_i_p"><a href="/sessions/get_code">忘记密码</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/users/new">立即注册</a></div>
-      <div class="login_i_p"><input name="" type="checkbox" value="" />下次自动登录</div>
+      <div class="login_i_p"><input name="" type="checkbox" value="" checked="checked"/>下次自动登录</div>
       <div class="login_btn"><button type="submit"></button></div>
       <div class="other_login"><span class="t_o_text">使用其他帐号登录：</span>
         <a href="#" onclick="javascript:toQzoneLogin();"><img src="/images/paper/qq.png"/></a>
@@ -25,6 +27,9 @@
         </a>
       </div>
     </div>
-    <div class="foot"></div>
+    <div class="foot">
+      <p><a href="#">用户协议</a>   |   <a href="#">关于我们</a>    |   <a href="#">官方微博</a></p>
+      <p>Copyright © 2011 gankao.co 版权所有 苏ICP备11024201</p>
+    </div>
   </div>
-<%end%>
+<% end %>
