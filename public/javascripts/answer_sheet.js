@@ -1,5 +1,7 @@
 //打开模块
 function open_nav(block_id) {
+    jQuery('.biji_tab').css('display','none');
+    jQuery('.jiexi_tab').css('display','none');
     var block_ids = $("block_ids");
     if (block_ids != null && block_ids.innerHTML != "") {
         var b_ids = block_ids.innerHTML.split(",");
@@ -36,8 +38,8 @@ function get_question_height(question_id, problem_id) {
                 if (p_ids[i] == problem_id) {
                     break;
                 } else {
-                    if ($("li_" + p_ids[i]) != null) {
-                        p_height += $("li_" + p_ids[i]).offsetHeight;
+                    if ($("question_info_" + p_ids[i]) != null) {
+                        p_height += $("question_info_" + p_ids[i]).offsetHeight;
                     }
                 }
             }
@@ -48,17 +50,18 @@ function get_question_height(question_id, problem_id) {
         var q_ids = question_ids.split(",");
         if (q_ids != null) {
             for (var j=0; j<q_ids.length; j++) {
+                
                 if (q_ids[j] == question_id) {
                     break;
                 } else {
-                    if ($("question_" + q_ids[j]) != null) {
-                        p_height += $("question_" + q_ids[j]).offsetHeight;
+                    if ($("que_out_" + q_ids[j]) != null) {
+                        p_height += $("que_out_" + q_ids[j]).offsetHeight;
                     }
                 }
             }
         }
     }
-    window.scrollTo(100, p_height+200);
+    window.scrollTo(100, p_height);
 }
 
 function check_note_form(question_id) {

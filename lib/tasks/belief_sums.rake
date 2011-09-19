@@ -1,6 +1,5 @@
 #encoding:utf-8
 require 'rexml/document'
-require 'rake'
 include REXML
 namespace :belief do
   desc "rate paper"
@@ -8,12 +7,11 @@ namespace :belief do
     @examinations = Examination.find_by_sql("select count(types) sums, types from examinations
       where is_published = #{Examination::IS_PUBLISHED[:ALREADY]}
       and types != #{Examination::TYPES[:SIMULATION]} group by types")
-    users = User.find_by_sql("select u.belief,u.id from users u inner join orders o where u.id = o.user_id ")
+    users = User.find_by_sql("select u.id from users u inner join orders o where u.id = o.user_id ")
     hash = {}
     @examinations.each do |examination|
       hash["#{examination.types}"] = examination.sums
     end unless @examinations.blank?
-    date=Time.now()
     users.each do |user|
       @exams = Examination.find_by_sql("select count(types) sums,e.types from examinations e
         inner join exam_users u on u.examination_id = e.id
@@ -33,6 +31,7 @@ namespace :belief do
         simulation_belief = 0.8 if num[0].ids == 2
         simulation_belief = 1 if num[0].ids == 3
       end
+      puts simulation_belief
       old_percent = 0
       old_percent = hash1["#{Examination::TYPES[:OLD_EXAM]}"].to_f/hash["#{Examination::TYPES[:OLD_EXAM]}"] unless
       hash["#{Examination::TYPES[:OLD_EXAM]}"].nil? or hash["#{Examination::TYPES[:OLD_EXAM]}"] == 0
@@ -59,8 +58,9 @@ namespace :belief do
       puts incorrect_percent
       sum = (simulation_belief) * ((old_percent*0.3 + collect_percent*0.5 + incorrect_percent*0.2)*100)
       puts sum
-      user_belief=UserBelief.find_by_user_id_and_created_at(user.id,date.to_date)
-      UserBelief.create(:user_id=>user.id,:belief=>sum.round()) unless user_belief
+      user_belief = UserBelief.find_by_user_id_and_created_at(user.id, Time.now.to_date)
+      UserBelief.create(:user_id => user.id,:belief => sum.round) unless user_belief
+      puts "#{user.id}success"
     end
   end
 end

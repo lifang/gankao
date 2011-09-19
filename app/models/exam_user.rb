@@ -480,6 +480,7 @@ class ExamUser < ActiveRecord::Base
       block.elements["problems"].each_element do |problem|
         problem.elements["questions"].each_element do |xml_question|
           if xml_question.attributes["correct_type"].to_i != Problem::QUESTION_TYPE[:CHARACTER]
+            if xml_question.elements["answer"] and xml_question.elements["answer"].text
             answer = xml_question.elements["answer"].text
             answers = answer.split(";|;")
             user_answer = question_hash[xml_question.attributes["id"]][0]
@@ -492,6 +493,7 @@ class ExamUser < ActiveRecord::Base
               else
                 self.add_collection(collection, xml, collection_xml, problem, xml_question, user_answer.strip)
               end
+            end
             end
           end
         end

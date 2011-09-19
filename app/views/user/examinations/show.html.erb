@@ -16,11 +16,14 @@
       <input type="hidden" name="problem_ids" id="problem_ids" value=""/>
       <input type="hidden" name="examination_id" id="examination_id" value="<%= @examination.id %>"/>
       <input type="hidden" name="user_id" id="user_id" value="<%= cookies[:user_id] %>"/>
-      <div class="paper_name" id="paper_title"></div>
+      <div class="paper_name">
+        <span class="test_logo"><img src="/images/paper/test_logo.png" /></span>
+        <span id="paper_title"></span>
+      </div>
       <div class="timer" id="exam_time"></div>
       <div class="paper_info">
-        <strong><span id="leaving_num"></span></strong>题未完成&nbsp;&nbsp;|&nbsp;&nbsp;
-        <%= f.submit "结束考试", :class => "Uncertain" %>
+        <button type="submit" class="test_over_btn"></button>
+        <strong><span id="leaving_num"></span></strong>题未完成
       </div>
     </div>
   </div>
@@ -30,13 +33,16 @@
       <div id="block_ids" style="display:none;"></div>
     </div>
     <!--试卷left-->
-    <div class="tp_right" id="paper_navigation">
+    <div class="tp_right">
+      <div class="tp_right_box" id="paper_navigation">
+      </div>
     </div>
     <div id="remote_div" style="display:none;"></div>
     <input type="hidden" name="types" value="<%= @examination.types %>"/>
     <input type="hidden" name="answer_url" id="answer_url"
            value="<%= Constant::ANSWER_CLIENT_PATH %>/<%= @examination.exam_user_id %>.xml"/>
     <div class="clear"></div>
+    <div class="zhijiao"></div>
   </div>
 <% end %>
 <script type="text/javascript" src="/javascripts/local_save/answer.js" charset="utf-8"></script>

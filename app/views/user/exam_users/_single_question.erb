@@ -1,22 +1,22 @@
 <%  question = single_question[0]
-    question_num = single_question[1]
-    problem = single_question[2]
-    attrs_str = question.elements["questionattrs"].text
-    attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
-    correct_type = question.attributes["correct_type"]
-    answer = question.elements["answer"]
-    answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
-    user_answer = question.attributes["user_answer"]
-    user_answers = user_answer.nil? ? [] :  user_answer.split(";|;")
-    is_right = false
-    all_answer = answers | user_answers
-    is_right = true if all_answer == answers and answers - user_answers == []
+question_num = single_question[1]
+problem = single_question[2]
+attrs_str = question.elements["questionattrs"].text
+attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
+correct_type = question.attributes["correct_type"]
+answer = question.elements["answer"]
+answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
+user_answer = question.attributes["user_answer"]
+user_answers = user_answer.nil? ? [] :  user_answer.split(";|;")
+is_right = false
+all_answer = answers | user_answers
+is_right = true if all_answer == answers and answers - user_answers == []
 %>
-<div class="p_question_list <% if is_right %>question_yes<% else %>question_no<% end %>">
+<div class="p_question_list <% if is_right %>question_yes<% else %>question_no<% end %>" id="que_out_<%= question.attributes['id'] %>">
   <div class="p_q_l_left"><%= question_num %></div>
   <div class="p_q_l_right">
     <% if question.elements["description"] %>
-      <p><%= question.elements["description"].text  %></p>
+      <div class="question_title"><%= question.elements["description"].text  %></div>
     <% end %>
     <% if (correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] or
           correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE]) %>
@@ -37,44 +37,51 @@
         <% end if attrs_array and attrs_array.any? %>
       </ul>
     <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:JUDGE] %>
-      <div <% if answers[0].to_i==1 %>class="correctRight_bg"<% end %>>
-        <input type="radio"<% if user_answer==1.to_s %> checked="true"<% end %>  /><label>对</label>
-      </div>
-      <div <% if answers[0].to_i==0 %>class="correctRight_bg"<% end %>>
-        <input type="radio"  <% if user_answer==0.to_s %> checked="true"<% end %>  /><label>错</label>
-      </div>
+      <ul class="chooseQuestion">
+        <li <% if answers[0].to_i==1 %>class="correctRight_bg"<% end %>>
+          <input type="radio"<% if user_answer==1.to_s %> checked="true"<% end %>  /><label>对/是</label>
+        </li>
+        <li <% if answers[0].to_i==0 %>class="correctRight_bg"<% end %>>
+          <input type="radio"  <% if user_answer==0.to_s %> checked="true"<% end %>  /><label>错/否</label>
+        </li>
+      </ul>
     <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] %>
       <div class="answer_text">
-        <input name="answer" type="text" value="<%= user_answers[0].to_s %>" />(<%= answers[0].to_s %>)
+        <input name="answer" type="text" value="<%= user_answers[0].to_s %>" readonly />
       </div>
     <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] %>
       <div class="answer_textarea">
-        <textarea cols="" rows=""><%= user_answers[0].to_s %></textarea>(<%= answers[0].to_s %>)
+        <textarea disabled cols="" rows="" readonly><%= user_answers[0].to_s %></textarea>
       </div>
     <% end %>
-    <div class="fraction">
-      <% if @examination.types == Examination::TYPES[:SIMULATION] %><font color="red"><% if question.attributes["user_score"] %>
-            <%= question.attributes["user_score"] %><% else %>0<% end %></font>/<%= question.attributes["score"] %>分<% end %>
-    </div>
+    <% if @examination.types == Examination::TYPES[:SIMULATION] %>
+      <div class="fraction">
+        <font color="red"><% if question.attributes["user_score"] %>
+            <%= question.attributes["user_score"] %><% else %>0<% end %></font>/<%= question.attributes["score"] %>分
+      </div>
+    <% end %>
   </div>
-  <input type="hidden" id="btn_<%= question.attributes["id"] %>_answer" type="hidden" value="<%= answers.join(";") %>"/>
+  <% answer_text = correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] ? "参考答案：" : "正确答案：" %>
+  <input type="hidden" id="btn_<%= question.attributes["id"] %>_answer" type="hidden"
+         value="<%= answer_text + answers.join(";").to_s.html_safe %>"/>
   <input type="hidden" id="btn_<%= question.attributes["id"] %>_analysis" type="hidden" 
-         value="<%= "解析：" + question.elements["analysis"].text unless (question.elements["analysis"].nil? or
+         value="<%= "解析：" + question.elements["analysis"].text.to_s.html_safe unless (question.elements["analysis"].nil? or
              question.elements["analysis"].text.nil? or question.elements["analysis"].text == "") %>"/>
-  <div class="clear"></div>
   <div class="review_btn">
     <% unless question.elements["analysis"].nil? or question.elements["analysis"].text.nil? or
         question.elements["analysis"].text == "" %>
-      <button class="jiexi_btn" id="btn_<%= question.attributes["id"] %>">解析</button>
+      <a class="jiexi_btn" href="javascript:void(0);" id="btn_<%= question.attributes["id"] %>">解析</a>
     <% end %>
-    <button class="biji_btn"
-            name="note_<%= question.attributes["id"] %>" id="note_<%= question.attributes["id"] %>"
-            onclick="javascript:start_note(<%= question.attributes["id"] %>, <%= problem.attributes["id"] %>,
-            <%= @doc.elements["paper"].attributes["id"] %>, <%= @doc.attributes["id"] %>,
-  '<%= problem.xpath %>', '<%= question.xpath %>');">笔记</button>
-    <button name="collection_<%= question.attributes["id"] %>" id="collection_<%= question.attributes["id"] %>"
-            onclick="javascript:start_collection(<%= question.attributes["id"] %>,
-            <%= problem.attributes["id"] %>, <%= @doc.elements["paper"].attributes["id"] %>,
-            <%= @doc.attributes["id"] %>, '<%= problem.xpath %>', '<%= question.xpath %>');">加入错题库</button>
+    <a class="biji_btn" href="javascript:void(0);"
+       name="note_<%= question.attributes["id"] %>" id="note_<%= question.attributes["id"] %>"
+       onclick="javascript:start_note(<%= question.attributes["id"] %>, <%= problem.attributes["id"] %>,
+       <%= @doc.elements["paper"].attributes["id"] %>, <%= @doc.attributes["id"] %>,
+  '<%= problem.xpath %>', '<%= question.xpath %>');">笔记</a>
+    <a href="javascript:void(0);" name="collection_<%= question.attributes["id"] %>"
+       id="collection_<%= question.attributes["id"] %>"
+       onclick="javascript:start_collection(<%= question.attributes["id"] %>,
+       <%= problem.attributes["id"] %>, <%= @doc.elements["paper"].attributes["id"] %>,
+       <%= @doc.attributes["id"] %>, '<%= problem.xpath %>', '<%= question.xpath %>');">加入关注</a>
   </div>
+  <div class="clear"></div>
 </div>
