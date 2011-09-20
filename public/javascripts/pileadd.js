@@ -462,18 +462,15 @@ function show_question(id){
     var questions=$("questions").value;
     var ids=questions.split(",");
     for (var i=0;i<ids.length;i=i+1){
-        $('question_'+ids[i]).style.display='none';
+        if ($('question_'+ids[i]).style.display=='block'){
+            $('question_'+ids[i]).style.display='none';
+        }
     }
     $('question_'+id).style.display='block';
+    
 }
 
-times=0
-function send_user(){
-    if (times==0){
-         $('user_info').submit();
-         times=1;
-    }
-}
+
 
 jQuery(function() {
     jQuery('.mokao_left > div').bind('click',function(){
@@ -484,5 +481,3 @@ jQuery(function() {
     });
 })
 jQuery.noConflict();
-
-

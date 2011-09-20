@@ -40,11 +40,11 @@
         </div>
       <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] %>
         <div class="answer_text">
-          <input name="answer" type="text" value="<%= user_answers[0].to_s %>" />(<%= answers[0].to_s %>)
+          <input name="answer" type="text" value="<%= user_answers[0].to_s %>" />
         </div>
       <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] %>
         <div class="answer_textarea">
-          <textarea cols="" rows=""><%= user_answers[0].to_s %></textarea>(<%= answers[0].to_s %>)
+          <textarea cols="" rows=""><%= user_answers[0].to_s %></textarea>
         </div>
       <% end %>
       <div class="p_question_btn" style="display: none;"><button class="save">保存</button><button class="Uncertain">不确定</button></div>

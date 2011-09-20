@@ -22,7 +22,7 @@
   <div class="m_box_one ztlx">
     <div class="per_con">
       <% pro=(@type_hash["#{Examination::TYPES[:OLD_EXAM]}"].nil? ? 0 : @type_hash["#{Examination::TYPES[:OLD_EXAM]}"][1]).to_f/(@type_hash["#{Examination::TYPES[:OLD_EXAM]}"].nil? ? 1 : @type_hash["#{Examination::TYPES[:OLD_EXAM]}"][0])*100 %>
-      <h2>完成度： <span class="red"><%= "#{pro.to_i}%"   %></span></h2>
+      <h2>完成度： <span class="red"><%= "#{pro.to_i}%" %></span></h2>
       <h2>正确率： <span class="red"><%= "#{@correct.to_i}%" %></span></h2>
     </div>
     <div class="per_btn"><a href="/exam_lists/<%= params[:id] %>/old_exam_list" target="_blank">开始练习</a></div>
@@ -47,10 +47,10 @@
       <div class="per_tb_title">信心</div>
       <div class="xx_biao">
         <% if is_vip? == true %>
-  <%#= current_user.belief_url %>0%
+        <img src="<%= current_user.belief_url %>" />
         <% else %>
-          <h3><span class="red"><div class="shu">0%</div></span></h3>
-          <p><a href="/users/goto_vip" target="_blank">如何增加信心？</a></p>
+          <img src="/images/paper/xx_biao.jpg" />
+          <a href="/users/goto_vip" target="_blank">能不能过，信心指数告诉你！</a>
         <% end %>
       </div>
       <div class="space20"></div>
