@@ -1,8 +1,9 @@
 #encoding: utf-8
 class ExamListsController < ApplicationController
-#  before_filter :access?
+  #  before_filter :access?
   layout "gankao"
-  
+  require 'rexml/document'
+  include REXML
   def  list
     collection = Collection.find_by_user_id(cookies[:user_id])
     lists = collection.open_xml if collection and collection.collection_url
@@ -41,17 +42,16 @@ class ExamListsController < ApplicationController
     @lists = list
     if @lists
       @num = @lists.get_elements("//problems/problem").size
+      @tags=@lists.get_elements("//problems//questions//tags")
       @lists = Examination.get_start_element(params[:page], @lists)
       current_element = Examination.return_page_element(@lists, @has_next_page)
       @lists = current_element[0]
       problem = @lists.elements["/collection/problems/problem/questions"]
       problem.each_element do |question|
-        @hash_list["#{question.attributes['id']}"] = Feedback.
-          find_all_by_user_id_and_question_id(cookies[:user_id], question.attributes["id"].to_i)
+        @hash_list["#{question.attributes['id']}"] = Feedback.find_all_by_user_id_and_question_id(cookies[:user_id], question.attributes["id"].to_i)
       end unless problem.nil?
       @has_next_page = current_element[1]
     end
-    
   end
 
 
@@ -153,5 +153,24 @@ class ExamListsController < ApplicationController
     redirect_to request.referer
   end
 
+  def search_tag_problems
+    @hash_list = {}
+    @has_next_page = false
+    @lists =list
+    if @lists
+      @tags=@lists.get_elements("//problems//questions//tags")
+       @lists=Order.serarch_tags(@lists,params[:tag])
+      @num = @lists.get_elements("//problems/problem").size
+      @lists = Examination.get_start_element(params[:page], @lists)
+      current_element = Examination.return_page_element(@lists, @has_next_page)
+      @lists = current_element[0]
+      @has_next_page = current_element[1]
+      problem = @lists.elements["/collection/problems/problem/questions"]
+      problem.each_element do |question|
+        @hash_list["#{question.attributes['id']}"] = Feedback.find_all_by_user_id_and_question_id(cookies[:user_id], question.attributes["id"].to_i)
+      end unless problem.nil?
+    end
+    render "/exam_lists/incorrect_list"
+  end
 
 end

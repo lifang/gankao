@@ -21,7 +21,7 @@ Gankao::Application.routes.draw do
       get :honoured_guest
     end
     member do
-      get :simulate_list, :old_exam_list, :incorrect_list, :question_info
+      get :simulate_list, :old_exam_list, :incorrect_list, :question_info,:search_tag_problems
       post :load_note,:create_note,:delete_problem
     end
   end

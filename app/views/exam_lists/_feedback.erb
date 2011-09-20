@@ -1,24 +1,22 @@
-<div class="errorLibrary_right" >
-  <div class="searchProblem"><input name="description"  id="description_<%= feedback[0].attributes["id"] %>" type="text" class="se_input" value="输入想知道的问题..." onfocus="javascript:$('description_<%= feedback[0].attributes["id"] %>').value='';" />
-    <input  type="button" value="提问" class="se_btn" onclick="javascript:feedb('<%= feedback[0].attributes["id"] %>','<%= feedback[1].attributes["id"] %>')" /></div>
-  <div class="answerPro">
-    <ul>
-      <% @hash_list["#{feedback[0].attributes["id"]}"].each do |feed| %>
-        <li>
-          <div class="an_p danHang">
-            <a href="javascript:void(0);" onmouseover="javascript:$('<%= feed.id %>').style.display='block';" onmouseout="javascript:$('<%= feed.id %>').style.display='none';" >
-              <%= feed.description %>
-            </a>
-          </div>
-          <div class="an_member" id="<%= feed.id %>" style="display:none;">
-            <p><%if feed.answer.nil? %>
-                <%= "等待回答中..." %>
-              <%else%>
-                <%=feed.answer %>
-              <%end%></p>
-          </div>
-        </li>
-      <%end unless @hash_list["#{ feedback[0].attributes["id"]}"].nil?%>
-    </ul>
-  </div>
+<div class="searchProblem"><textarea name="description" id="description_<%= feedback[0].attributes["id"] %>" cols="" rows="" value="输入问题..." class="se_textarea" onfocus="javascript:$('description_<%= feedback[0].attributes["id"] %>').value='';"></textarea>
+  <button class="se_btn" onclick="javascript:feedb('<%= feedback[0].attributes["id"] %>','<%= feedback[1].attributes["id"] %>')">提问</button></div>
+<div class="answerPro">
+  <ul>
+    <% @hash_list["#{feedback[0].attributes["id"]}"].each do |feed| %>
+      <li>
+        <div class="an_p danHang">
+          <a href="javascript:void(0);" onmouseover="javascript:$('<%= feed.id %>').style.display='block';" onmouseout="javascript:$('<%= feed.id %>').style.display='none';" >
+            <%= feed.description %>
+          </a>
+        </div>
+        <div class="an_member" id="<%= feed.id %>" style="display:none;">
+          <p><%if feed.answer.nil? %>
+              <%= "等待回答中..." %>
+            <%else%>
+              <%=feed.answer %>
+            <%end%></p>
+        </div>
+      </li>
+    <%end unless @hash_list["#{ feedback[0].attributes["id"]}"].nil?%>
+  </ul>
 </div>
