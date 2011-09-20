@@ -97,7 +97,7 @@ img { border: none;}
 /*个人首页------------------*/
 .person_box { overflow: hidden; height: 600px; }
 .m_box_one { width: 193px; height: 398px; overflow: hidden; float: left; margin: 0 5px; display: inline;}
-.m_box_two { width: 260px; height: 337px; overflow: hidden; float: left; background: url(/images/paper/m_box_two.png) no-repeat; margin: 0 5px;}
+.m_box_two { width: 260px; height: 350px; overflow: hidden; float: left; background: url(/images/paper/m_box_two.png) no-repeat; margin: 0 5px;}
 .per_ex_p { margin-top: 40px; line-height: 24px; padding: 2px;}
 
 .mnks { background: url(/images/paper/mnks.png) no-repeat;}
@@ -138,7 +138,8 @@ img { border: none;}
 	background: url(/images/paper/all_bg.png) no-repeat -152px -522px;
 }
 
-.xx_biao { width: 240px; height: 130px; margin: 10px auto 0;}
+.xx_biao { width: 240px; height: 150px; margin: 10px auto 0; position: relative;}
+.xx_biao a { position: absolute; top: 50px; left: 60px;}
 .per_t_text { height: 36px; line-height: 36px; text-align: center;}
 .per_t_text a { margin: 0 5px; color: #00F;}
 
@@ -310,8 +311,8 @@ img { border: none;}
 .nb_li_bg00 { border: 1px #289fdb solid; background: #A1E5FF;}
 
 .nb_li_btn { padding: 10px 0 10px 350px;}
-.bianji_btn { width: 63px; height: 25px; line-height: 25px; background: url(/images/paper/all_bg.png) no-repeat -385px -443px; border: none; color: #FFF;}
-.baocun_btn { width: 63px; height: 25px; line-height: 25px; background: url(/images/paper/all_bg.png) no-repeat -385px -414px; border: none; color: #FFF;}
+.bianji_btn { width: 63px; height: 25px; line-height: 25px; background: url(/images/paper/all_bg.png) no-repeat -385px -443px; border: none; color: #FFF; cursor: pointer;}
+.baocun_btn { width: 63px; height: 25px; line-height: 25px; background: url(/images/paper/all_bg.png) no-repeat -385px -414px; border: none; color: #FFF; cursor: pointer;}
 .bn_write { display: none;}
 .bn_write textarea { width: 448px; height: 100px; margin: 0 auto;}
 
