@@ -70,8 +70,8 @@
       <div class="per_tb_title">笔记</div>
       <div class="per_t_text">
         <% unless @notes.nil? %>
-        <span class="red"><%= @notes.elements['problems'].elements.size %></span> 篇
-        <a href="/user/notes/<%= params[:id] %>" target="_blank">翻阅笔记</a>
+          <span class="red"><%= @notes.elements['problems'].elements.size %></span> 篇
+          <a href="/user/notes/<%= params[:id] %>" target="_blank">翻阅笔记</a>
         <% else %>
           <h3><span class="red"><%= "您没有做笔记" %></span></h3>
         <% end %>
