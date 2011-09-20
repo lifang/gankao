@@ -674,8 +674,8 @@ function audio_play(id){
             if(id!="x"){
                 setCookie(("audio_"+id),parseInt(getCookie("audio_"+id))+1);
                 if($("audio_control_"+id)!=null){
-                $("audio_control_"+id).title="停止";   
-                $("audio_control_"+id).src="/images/paper/zanting_icon.png";
+                    $("audio_control_"+id).title="停止";
+                    $("audio_control_"+id).src="/images/paper/zanting_icon.png";
                 }
                 if($("practice2_audio_control_"+id)!=null){
                     $("practice2_audio_control_"+id).title="停止";
@@ -746,4 +746,43 @@ function get_canplay_time(){
         return parseInt($("canplaytime").value);    //第一类综合训练播放3次
     }
     return 0;
+}
+
+
+//拖曳题 
+function drag_problem(problem_id,question_id,answer_element){
+    var place_num = 1;
+    var str = document.getElementById("question_"+problem_id).innerHTML;
+
+    while(str.indexOf("problem_"+problem_id+"_dropplace_"+place_num)>=0){
+        var store_id="problem_"+problem_id+"_dropplace_"+place_num;
+        $(store_id).style.cursor='Move';
+        Droppables.add(store_id, {
+            onDrop:function(element,store_id){
+                $(store_id).innerHTML=element.innerHTML;
+                $(store_id).style.color="blue";
+                var this_answer="";
+                for(i=1;i<place_num;i++){
+                    this_answer +=$("problem_"+problem_id+"_dropplace_"+i).innerHTML;
+                    if(i<place_num-1){
+                        this_answer +=";|;";
+                    }
+                }
+                $(answer_element).value=this_answer;
+                show_que_save_button(question_id);
+ //             alert($(answer_element).value);
+            }
+        })
+        place_num ++;
+    }    //设置落点
+
+    var attrs = document.getElementsByName("question_attr_"+question_id);
+    for( drag_id=0;drag_id<attrs.length;){
+        var drag_dom = attrs[drag_id].parentNode;
+        new Draggable(drag_dom,{
+            revert:true
+        });
+        drag_dom.innerHTML = attrs[drag_id].value;   //此句代码会让循环体中的attrs.length减1，所以循环中没有加入drag_id++;
+        drag_dom.style.cursor='Move';
+    }
 }

@@ -92,6 +92,7 @@ class Note < ActiveRecord::Base
     user_answer = (question_answer and question_answer.text) ? question_answer.text : ""
     paper_question.add_element("user_answer").add_text("#{user_answer}")
     paper_question.add_element("note_text").add_text("#{note_text}")
+    paper_question.add_element("created_at").add_text("#{Time.now.strftime("%Y-%m-%d %H:%M")}")
     questions.elements.add(paper_question)
     self.save_xml(note_doc)
   end
@@ -107,6 +108,7 @@ class Note < ActiveRecord::Base
     user_answer = (question_answer and question_answer.text) ? question_answer.text : ""
     last_question.add_element("user_answer").add_text("#{user_answer}")
     last_question.add_element("note_text").add_text("#{note_text}")
+    last_question.add_element("created_at").add_text("#{Time.now.strftime("%Y-%m-%d %H:%M")}")
     note_doc.elements["/note/problems"].elements.add(paper_problem)
     self.save_xml(note_doc)
   end
@@ -150,7 +152,12 @@ class Note < ActiveRecord::Base
 
   #返回总页数
   def return_total_page(doc, pre_page)
-    total_num = doc.get_elements("/note/problems/problem").size
+    total_num = 0
+    doc.elements["note"].elements["problems"].each_element do |problem|
+      problem.elements["questions"].each_element do |question|
+        total_num += 1
+      end
+    end
     return (total_num%pre_page == 0) ? total_num/pre_page : (total_num/pre_page + 1)
   end
 

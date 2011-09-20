@@ -7,7 +7,7 @@ class User::NotesController < ApplicationController
     session[:tag] = nil
     @note = Note.find_by_user_id(cookies[:user_id])
     begin
-      pre_page = 10
+      pre_page = 5
       @has_next_page = false
       @doc = @note.open_xml
       @total_page = @note.return_total_page(@doc, pre_page)
@@ -74,7 +74,7 @@ class User::NotesController < ApplicationController
   end
 
   def search_list
-    pre_page = 10
+    pre_page = 5
     @note = Note.find_by_user_id(cookies[:user_id].to_i)
     @doc = @note.search(@note.open_xml, session[:note_text])
     @total_page = @note.return_total_page(@doc, pre_page)

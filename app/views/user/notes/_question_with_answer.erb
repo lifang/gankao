@@ -1,23 +1,30 @@
-<!--题目内容-->
-<div class="part_question">
-  <% attrs_str = question_with_answer.elements["questionattrs"].text
-  attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
-  correct_type = question_with_answer.attributes["correct_type"]
-  answer = question_with_answer.elements["answer"]
-  answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
-  user_answer = question_with_answer.elements["user_answer"]
-  user_answers = user_answer.text.nil? ? [] :  user_answer.text.split(";|;")
-  is_right = false
-  all_answer = answers | user_answers
-  is_right = true if all_answer == answers and answers - user_answers == [] %>
-  <div>
+<div class="part_div">
+  <div class="part_question">
+    <div class="chank_yw"><a href="#">查看全文</a></div>
+    <div class="part_q_text part_q_sl">
+      <p><%= truncate_u(question_with_answer[1].elements["title"].text.to_s.html_safe, 195, "......").to_s.html_safe %></p>
+      <input type="hidden" id="title_<%= question_with_answer[0].attributes["id"] %>"
+             value="<%= question_with_answer[1].elements["title"].text.to_s.html_safe %>" />
+    </div>
+    <!--题目内容-->
+    <% attrs_str = question_with_answer[0].elements["questionattrs"].text
+    attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
+    correct_type = question_with_answer[0].attributes["correct_type"]
+    answer = question_with_answer[0].elements["answer"]
+    answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
+    user_answer = question_with_answer[0].elements["user_answer"]
+    user_answers = user_answer.text.nil? ? [] :  user_answer.text.split(";|;")
+    is_right = false
+    all_answer = answers | user_answers
+    is_right = true if all_answer == answers and answers - user_answers == [] %>
+
     <div class="p_question_list <% if is_right %>question_yes<% else %>question_no<% end %>">
       <!--[if IE 6]><table><tr><td valign="top"><![endif]-->
       <div class="p_q_l_left">1</div>
-      <!--[if IE 6]></td><td><![endif]--> 
+      <!--[if IE 6]></td><td><![endif]-->
       <div class="p_q_l_right_s">
-        <% if question_with_answer.elements["description"] %>
-          <p><%= question_with_answer.elements["description"].text  %></p>
+        <% if question_with_answer[0].elements["description"] %>
+          <div class="question_title"><%= question_with_answer[0].elements["description"].text  %></div>
         <% end %>
         <% if (correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] or
               correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE]) %>
@@ -27,10 +34,10 @@
               is_user_answer=user_answers.include?(attrs_array[i]) %>
               <li <% if is_answer %> class="correctRight_bg" <% end %>>
                 <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
-                  <input type="checkbox" name="question_attr_<%= question_with_answer.attributes["id"].to_i %>"
+                  <input type="checkbox" name="question_attr_<%= question_with_answer[0].attributes["id"].to_i %>"
                          id="question_attr_<%= i %>"  <% if is_user_answer %>checked="true"<% end %> />
                        <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
-                  <input type="radio" name="question_attr_<%= question_with_answer.attributes["id"].to_i %>"
+                  <input type="radio" name="question_attr_<%= question_with_answer[0].attributes["id"].to_i %>"
                          id="question_attr_<%= i %>" <% if is_user_answer %>checked="true"<% end %> />
                        <% end %>
                 &nbsp;&nbsp;<%= attrs_array[i] %>
@@ -46,27 +53,26 @@
           </div>
         <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] %>
           <div class="answer_text">
-            <input name="answer" type="text" value="<%= user_answers[0].to_s %>" />(<%= answers[0].to_s %>)
+            <input name="answer" type="text" readonly value="<%= user_answers[0].to_s %>" />
           </div>
         <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] %>
           <div class="answer_textarea">
-            <textarea cols="" rows=""><%= user_answers[0].to_s %></textarea>(<%= answers[0].to_s %>)
+            <textarea disabled cols="" rows=""><%= user_answers[0].to_s %></textarea>
           </div>
         <% end %>
-        <div class="fraction"><%= question_with_answer.attributes["score"] %>分</div>
       </div>
       <!--[if IE 6]> </td></tr></table><![endif]-->
       <div class="clear"></div>
     </div>
   </div>
-
 </div>
+
 <!--答案-->
 <div class="nb_r_daan">
-  <h3>正确答案 <%= answers.join(";") %></h3>
-  <% analysis = question_with_answer.elements["analysis"] %>
+  <h3>正确答案 <%= answers.join(";").to_s.html_safe %></h3>
+  <% analysis = question_with_answer[0].elements["analysis"] %>
   <% unless analysis.nil? or analysis.text.nil? or analysis.text == "" %>
-  <p>解析：<%= analysis.text %></p>
+    <p>解析：<%= analysis.text.to_s.html_safe %></p>
   <% end %>
 </div>
 
