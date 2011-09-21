@@ -12,25 +12,53 @@
   :html => {:name => "paper_form", :id => "paper_form",
   :onsubmit => "return generate_result_paper('#{@examination.paper_id}', '#{@examination.id}',#{@practice_type});"} do |f| %>
 
-  <div id="paper_show_info">
-    <% if @practice_type==2 %>
-      <div class="task_title task_title_one"><a href="#" onclick="javascript:document.getElementById('jiexi_tab').style.display='block';"><img alt="Explain_icon" src="/images/paper/Explain_icon.png"/></a></div>
-    <% elsif @practice_type==3  %>
-      <div class="task_title task_title_two"><a href="#" onclick="javascript:document.getElementById('jiexi_tab').style.display='block';"><img alt="Explain_icon" src="/images/paper/Explain_icon.png"/></a></div>
-    <% elsif @practice_type==4  %>
-      <div class="task_title task_title_three"><a href="#" onclick="javascript:document.getElementById('jiexi_tab').style.display='block';"><img alt="Explain_icon" src="/images/paper/Explain_icon.png"/></a></div>
-    <% elsif @practice_type==5  %>
-      <div class="task_title task_title_four"><a href="#" onclick="javascript:document.getElementById('jiexi_tab').style.display='block';"><img alt="Explain_icon" src="/images/paper/Explain_icon.png"/></a></div>
-    <% elsif @practice_type==6  %>
-      <div class="task_title task_title_five"><a href="#" onclick="javascript:document.getElementById('jiexi_tab').style.display='block';"><img alt="Explain_icon" src="/images/paper/Explain_icon.png"/></a></div>
-    <% end %>
-    <div class="jiexi_tab" id="jiexi_tab" style="top: 93px; left: 498px; ">
-      <div class="tab_t"><a href="#" onclick="javascript:document.getElementById('jiexi_tab').style.display='none';"><img alt="close" src="/images/paper/x.gif"/></a></div>
-      <div class="tab_m">
-          <p id="jiexi_tab_p"><font ></font></p>
-      </div>
-      <div class="tab_b"></div>
+  <% if @practice_type==2 %>
+    <div class="tb_loading"><div class="tb_loading_t width_8"></div></div>
+    <div class="tb_name">
+      <span class="tb_n_task1 tb_n_taskColor">Task I</span>
+      <span class="tb_n_task2">Task II</span>
+      <span class="tb_n_task3">Task III</span>
+      <span class="tb_n_task4">Task IV</span>
+      <span class="tb_n_task5">Task V</span>
     </div>
+  <% elsif @practice_type==3  %>
+    <div class="tb_loading"><div class="tb_loading_t width_122"></div></div>
+        <div class="tb_name">
+      <span class="tb_n_task1">Task I</span>
+      <span class="tb_n_task2 tb_n_taskColor">Task II</span>
+      <span class="tb_n_task3">Task III</span>
+      <span class="tb_n_task4">Task IV</span>
+      <span class="tb_n_task5">Task V</span>
+    </div>
+  <% elsif @practice_type==4  %>
+    <div class="tb_loading"><div class="tb_loading_t width_233"></div></div>
+        <div class="tb_name">
+      <span class="tb_n_task1">Task I</span>
+      <span class="tb_n_task2">Task II</span>
+      <span class="tb_n_task3 tb_n_taskColor">Task III</span>
+      <span class="tb_n_task4">Task IV</span>
+      <span class="tb_n_task5">Task V</span>
+    </div>
+  <% elsif @practice_type==5  %>
+    <div class="tb_loading"><div class="tb_loading_t width_345"></div></div>
+        <div class="tb_name">
+      <span class="tb_n_task1">Task I</span>
+      <span class="tb_n_task2">Task II</span>
+      <span class="tb_n_task3">Task III</span>
+      <span class="tb_n_task4 tb_n_taskColor">Task IV</span>
+      <span class="tb_n_task5">Task V</span>
+    </div>
+  <% elsif @practice_type==6  %>
+    <div class="tb_loading"><div class="tb_loading_t width_457"></div></div>
+        <div class="tb_name">
+      <span class="tb_n_task1">Task I</span>
+      <span class="tb_n_task2">Task II</span>
+      <span class="tb_n_task3">Task III</span>
+      <span class="tb_n_task4">Task IV</span>
+      <span class="tb_n_task5 tb_n_taskColor">Task V</span>
+    </div>
+  <% end %>
+    <div class="space20"></div>
     <div class="soso">
       <input type="hidden" name="practice_type" id="practice_type" value="<%= @practice_type %>"/>
       <input type="hidden" name="canplaytime" id="canplaytime" value="<%= Constant::CANPLAYTIME["practice_#{@practice_type.to_i}"] %>"/>
@@ -45,15 +73,12 @@
       <div><span id="local_time"></span></div>
       <%=  render :partial => "/common/display_flash" %>
     </div>
-  </div>
   <div  id="paper_navigation" style="display:none;" class="tb_content">
   </div>
-  <div class="clear"/><hr/>
   <div id="block_ids" style="display:none;"></div>
   <div id="blocks">
 
   </div>
-  <hr/>
   <div id="remote_div" style="display:none;"></div>
   <input type="hidden" name="types" value="<%= @examination.types %>"/>
   <input type="hidden" name="answer_url" id="answer_url"
