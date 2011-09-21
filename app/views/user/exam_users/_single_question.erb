@@ -16,20 +16,25 @@ is_right = true if all_answer == answers and answers - user_answers == []
   <div class="p_q_l_left"><%= question_num %></div>
   <div class="p_q_l_right">
     <% if question.elements["description"] %>
-      <div class="question_title"><%= question.elements["description"].text  %></div>
+      <div class="question_title" style="word-wrap:break-word; word-break:break-all;">
+        <%= question.elements["description"].text.to_s.html_safe.gsub("problem_x_dropplace", "problem_#{problem.attributes["id"]}_dropplace") %>
+      </div>
+      <script type="text/javascript">
+        droppable_element('<%= question.elements["description"].text.to_s.html_safe %>', <%= problem.attributes["id"] %>);
+      </script>
     <% end %>
     <% if (correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] or
-          correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE]) %>
+          correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE]) %>33333333
       <ul class="chooseQuestion">
         <% (0..attrs_array.length-1).each do |i|
           is_answer = answers.include?(attrs_array[i])
           is_user_answer = user_answers.include?(attrs_array[i]) %>
           <li <% if is_answer %> class="correctRight_bg" <% end %>>
             <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
-              <input type="checkbox" name="question_attr_<%= question.attributes["id"].to_i %>"
+            <input type="checkbox" disabled name="question_attr_<%= question.attributes["id"].to_i %>"
                      id="question_attr_<%= i %>"  <% if is_user_answer %>checked="true"<% end %> />
                    <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
-              <input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>"
+            <input type="radio" disabled name="question_attr_<%= question.attributes["id"].to_i %>"
                      id="question_attr_<%= i %>" <% if is_user_answer %>checked="true"<% end %> />
                    <% end %>
             &nbsp;&nbsp;<%= attrs_array[i] %>
@@ -39,20 +44,24 @@ is_right = true if all_answer == answers and answers - user_answers == []
     <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:JUDGE] %>
       <ul class="chooseQuestion">
         <li <% if answers[0].to_i==1 %>class="correctRight_bg"<% end %>>
-          <input type="radio"<% if user_answer==1.to_s %> checked="true"<% end %>  /><label>对/是</label>
+          <input type="radio"<% if user_answer==1.to_s %> checked="true"<% end %> disabled  /><label>对/是</label>
         </li>
         <li <% if answers[0].to_i==0 %>class="correctRight_bg"<% end %>>
-          <input type="radio"  <% if user_answer==0.to_s %> checked="true"<% end %>  /><label>错/否</label>
+          <input type="radio"  <% if user_answer==0.to_s %> checked="true"<% end %> disabled  /><label>错/否</label>
         </li>
       </ul>
     <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] %>
       <div class="answer_text">
-        <input name="answer" type="text" value="<%= user_answers[0].to_s %>" readonly />
+        <input name="answer" type="text" value="<%= user_answers[0].to_s %>" disabled />
       </div>
     <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] %>
       <div class="answer_textarea">
-        <textarea disabled cols="" rows="" readonly><%= user_answers[0].to_s %></textarea>
+        <textarea disabled cols="" rows=""><%= user_answers[0].to_s %></textarea>
       </div>
+    <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] %>
+      <script type="text/javascript">
+        droppable_result('<%= answers.join(",") %>', '<%= user_answers.join(",") %>', <%= problem.attributes["id"] %>);
+      </script>
     <% end %>
     <% if @examination.types == Examination::TYPES[:SIMULATION] %>
       <div class="fraction">
@@ -63,7 +72,7 @@ is_right = true if all_answer == answers and answers - user_answers == []
   </div>
   <% answer_text = correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] ? "参考答案：" : "正确答案：" %>
   <input type="hidden" id="btn_<%= question.attributes["id"] %>_answer" type="hidden"
-         value="<%= answer_text + answers.join(";").to_s.html_safe %>"/>
+         value="<%= answer_text + answers.join("<br/>").to_s.html_safe %>"/>
   <input type="hidden" id="btn_<%= question.attributes["id"] %>_analysis" type="hidden" 
          value="<%= "解析：" + question.elements["analysis"].text.to_s.html_safe unless (question.elements["analysis"].nil? or
              question.elements["analysis"].text.nil? or question.elements["analysis"].text == "") %>"/>

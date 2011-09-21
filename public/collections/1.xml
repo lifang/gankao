@@ -266,6 +266,46 @@ asf
                 </question>
             </questions>
         </problem>
-    </problems>
+    <problem id='70' score='15' types='0'>
+                    <title>得得得得</title>
+                    <category>1</category>
+                    <questions>
+                        <question correct_type='0' error_percent='0' id='84' repeat_num='1' score='15'>
+                            <answer>讲讲价</answer>
+                            <analysis/>
+                            <questionattrs>等待;-;凤飞飞;-;呵呵;-;讲讲价</questionattrs>
+                            <tags> 手动添加</tags>
+                        <user_answer/></question>
+                    </questions>
+                </problem><problem id='71' score='16' types='2'>
+                    <title>飞飞蜂蝶多</title>
+                    <category>1</category>
+                    <questions>
+                        <question correct_type='2' error_percent='0' id='85' repeat_num='1' score='16'>
+                            <answer>1</answer>
+                            <analysis>试试撒</analysis>
+                            <questionattrs/>
+                            <tags>dddd 凤飞飞 为鹅鹅鹅 弹弹堂 手动添加</tags>
+                        <user_answer/></question>
+                    </questions>
+                </problem><problem id='57' score='20' types='4'>
+                    <title>1111111111111</title>
+                    <category>1</category>
+                    <questions>
+                        
+                        <question correct_type='1' error_percent='0' id='69' repeat_num='1' score='3'>
+                            <description>11</description>
+                            <answer>11;|;111111</answer>
+                            <questionattrs>1;-;11;-;1111;-;111111;-;11111111</questionattrs>
+                            <tags> 手动添加</tags>
+                        <user_answer/></question>
+                        
+                    <question correct_type='2' error_percent='0' id='70' repeat_num='1' score='6'>
+                            <description>1111111</description>
+                            <answer>1</answer>
+                            <questionattrs/>
+                            <tags> 手动添加</tags>
+                        <user_answer></user_answer></question></questions>
+                </problem></problems>
 </collection>
 

@@ -51,10 +51,10 @@
               is_user_answer=user_answers.include?(attrs_array[i]) %>
               <li <% if is_answer %> class="correctRight_bg" <% end %>>
                 <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
-                  <input type="checkbox" name="question_attr_<%= question_with_answer[0].attributes["id"].to_i %>"
+                <input type="checkbox" disabled name="question_attr_<%= question_with_answer[0].attributes["id"].to_i %>"
                          id="question_attr_<%= i %>"  <% if is_user_answer %>checked="true"<% end %> />
                        <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
-                  <input type="radio" name="question_attr_<%= question_with_answer[0].attributes["id"].to_i %>"
+                <input type="radio" disabled name="question_attr_<%= question_with_answer[0].attributes["id"].to_i %>"
                          id="question_attr_<%= i %>" <% if is_user_answer %>checked="true"<% end %> />
                        <% end %>
                 &nbsp;&nbsp;<%= attrs_array[i] %>
@@ -63,14 +63,14 @@
           </ul>
         <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:JUDGE] %>
           <div <% if answers[0].to_i==1 %>class="correctRight_bg"<% end %>>
-            <input type="radio"<% if user_answer==1.to_s %> checked="true"<% end %>  /><label>对</label>
+            <input type="radio"<% if user_answer==1.to_s %> checked="true"<% end %> disabled  /><label>对</label>
           </div>
           <div <% if answers[0].to_i==0 %>class="correctRight_bg"<% end %>>
-            <input type="radio"  <% if user_answer==0.to_s %> checked="true"<% end %>  /><label>错</label>
+            <input type="radio"  <% if user_answer==0.to_s %> checked="true"<% end %> disabled  /><label>错</label>
           </div>
         <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] %>
           <div class="answer_text">
-            <input name="answer" type="text" readonly value="<%= user_answers[0].to_s %>" />
+            <input name="answer" type="text" disabled value="<%= user_answers[0].to_s %>" />
           </div>
         <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] %>
           <div class="answer_textarea">

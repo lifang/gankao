@@ -46,7 +46,7 @@
     <div class="per_two_box">
       <div class="per_tb_title">信心</div>
       <div class="xx_biao">
-        <% if is_vip? == true %>
+        <% if is_vip? %>
         <img src="<%= current_user.belief_url %>" />
         <% else %>
           <img src="/images/paper/xx_biao.jpg" />
@@ -59,7 +59,7 @@
       <div class="per_tb_title">错题库</div>
       <div class="per_t_text">
         <% unless @incorrect_list.nil? %>
-          <span class="red"><%=@incorrect_list.elements['problems'].elements.size %></span> 错题
+          <span class="red"><%=@incorrect_list.get_elements["/collection/problems/problem"].size %></span> 错题
           <a href="/exam_lists/<%= params[:id] %>/incorrect_list" target="_blank">马上复习</a>
         <% else %>
           您没有错题
