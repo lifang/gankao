@@ -21,12 +21,14 @@
               <li class="nb_li_bg nb_li_height" id="show_note_<%= question.attributes["id"] %>"
                   onclick="javascript:note_question_info(<%= question.attributes["id"].to_i %>)">
                 <span><%= question.elements["created_at"].text if question.elements["created_at"] and question.elements["created_at"].text %></span>
-                <p><%= truncate_u(question.elements["note_text"].text, 100, "......") %></p>
+                <p style="word-wrap:break-word; word-break:break-all;">
+                  <%= truncate_u(question.elements["note_text"].text, 100, "......") %>
+                </p>
               </li>
               <li class="nb_li_bg00" style="display:none;" id="hidden_note_<%= question.attributes["id"] %>">
                 <span><%= question.elements["created_at"].text if question.elements["created_at"] and question.elements["created_at"].text %></span>
                 <div class="nb_li_con" id="note_<%= question.attributes["id"] %>">
-                  <%= question.elements["note_text"].text %>
+                  <span style="word-wrap:break-word; word-break:break-all;"><%= question.elements["note_text"].text %></span>
                   <div class="nb_li_btn">
                     <button class="bianji_btn" onclick="javascript:update_note(<%= question.attributes["id"] %>);">编辑笔记</button>
                   </div>
@@ -72,6 +74,6 @@
 <% else %>
   <div class="noteBook_left">您当前未做任何笔记。</div>
 <% end %>
-  <script type="text/javascript">
-    note_question_info(<%= first_question %>);
-  </script>
+<script type="text/javascript">
+  note_question_info(<%= first_question %>);
+</script>
