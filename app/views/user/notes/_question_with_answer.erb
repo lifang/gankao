@@ -1,8 +1,8 @@
 <div class="part_div">
   <div class="part_question">
-    <div class="chank_yw"><a href="#">查看全文</a></div>
+    <div class="chank_yw"><a href="javascript:void(0);" onclick="openwindow(<%= question_with_answer[0].attributes["id"] %>);">查看全文</a></div>
     <div class="part_q_text part_q_sl">
-      <p><%= truncate_u(question_with_answer[1].elements["title"].text.to_s.html_safe, 195, "......").to_s.html_safe %></p>
+      <p><%= truncate_u(question_with_answer[1].elements["title"].text.to_s.html_safe.gsub(/<[^{><}]*>/, ""), 195, "......").to_s.html_safe %></p>
       <input type="hidden" id="title_<%= question_with_answer[0].attributes["id"] %>"
              value="<%= question_with_answer[1].elements["title"].text.to_s.html_safe %>" />
     </div>

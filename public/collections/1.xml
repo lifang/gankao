@@ -110,7 +110,7 @@
                     <user_answer>sdds</user_answer>
                     <user_answer>sfss</user_answer>
                     <user_answer/>
-                <user_answer/></question>
+                <user_answer></user_answer></question>
             </questions>
         </problem>
         <problem id='10' repeat_num='6' score='5' types='0'>
@@ -127,7 +127,7 @@
                     <user_answer>东方饭店个</user_answer>
                     <user_answer>东方饭店个</user_answer>
                 </question>
-                <question correct_type='0' error_percent='0' id='15' repeat_num='3' score='5'>
+                <question correct_type='0' error_percent='0' id='15' repeat_num='4' score='5'>
                     <answer>789</answer>
                     <analysis>sdfsfasf</analysis>
                     <questionattrs>23;-;wer;-;65;-;789</questionattrs>
@@ -138,7 +138,7 @@
                     <user_answer/>
                     <user_answer>65</user_answer>
                     <user_answer>wer</user_answer>
-                </question>
+                <user_answer>wer</user_answer></question>
             </questions>
         </problem>
         <problem id='11' repeat_num='8' score='5' types='0'>
@@ -211,8 +211,7 @@ asf
                     <analysis>444ererte</analysis>
                     <questionattrs/>
                     <tags/>
-                    <user_answer/>
-                <user_answer/></question>
+                <user_answer></user_answer></question>
             </questions>
         </problem>
         <problem id='35' score='65' types='4'>
@@ -226,7 +225,8 @@ asf
                     <questionattrs>wer;-;awre;-;sf;-;4t34</questionattrs>
                     <tags>3</tags>
                     <user_answer/>
-                <user_answer/></question>
+
+                <user_answer></user_answer></question>
                 <question correct_type='1' error_percent='0' id='39' repeat_num='2' score='6'>
                     <description>sadfasssssssssssssssssss4t344555</description>
                     <answer>sdfa;|;qq2</answer>
@@ -234,7 +234,7 @@ asf
                     <questionattrs>sdfa;-;qq2;-;zxc;-;tgrt</questionattrs>
                     <tags>4</tags>
                     <user_answer/>
-                <user_answer/></question>
+                <user_answer></user_answer></question>
                 <question correct_type='2' error_percent='0' id='40' repeat_num='2' score='54'>
                     <description>safwerwetewrtewrt</description>
                     <answer>1</answer>
@@ -242,7 +242,7 @@ asf
                     <questionattrs/>
                     <tags/>
                     <user_answer/>
-                <user_answer/></question>
+                <user_answer></user_answer></question>
                 <question correct_type='3' error_percent='0' id='41' repeat_num='2' score='0'>
                     <description>asdffffffffffffffffffffffffffffffffffffffff</description>
                     <answer>fffffwrrrrrrrrrrrrrrrrrrrrr</answer>
@@ -250,7 +250,7 @@ asf
                     <questionattrs/>
                     <tags/>
                     <user_answer/>
-                <user_answer/></question>
+                <user_answer></user_answer></question>
             </questions>
         </problem>
         <problem id='34' score='4' types='5'>

@@ -1,61 +1,49 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<note id='1'>
-    <problems>
-        <problem id='1' score='5' types='0'>
-            <title>阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的阿斯达岁的</title>
+<?xml version='1.0' encoding='UTF-8'?>      <note id='1'>
+        <problems><problem id='9' repeat_num='11' score='5' types='0'>
+            <title>少打</title>
             <category>1</category>
             <questions>
-                <question correct_type='0' id='1' score='5'>
-                    <answer>地方</answer>
+                <question correct_type='0' delete_status='1' error_percent='50' id='9' repeat_num='2' score='5'>
+                    <answer>adsad</answer>
                     <analysis/>
-                    <questionattrs>地方;-;刚好;-;就;-;地方速度</questionattrs>
+                    <questionattrs>adsad;-;规范法官;-;会更好;-;很久很久</questionattrs>
                     <tags/>
-                    <user_answer>刚好</user_answer>
-                    <note_text>地方ssss11222等等等爱爱爱地方ssss11222等等等爱爱爱地方ssss11222等等等爱爱爱地方ssss11222等等等爱爱爱地方ssss11222等等等爱爱爱地方ssss11222等等等爱爱爱地方ssss11222等等等爱爱爱地方ssss11222等等等爱爱爱地方ssss11222等等等爱爱爱地方ssss11222等等等爱爱爱地方ssss11222等等等爱爱爱地方ssss11222等等等爱爱爱地方ssss11222等等等爱爱爱地方ssss11222等等等爱爱爱地方ssss11222等等等爱爱爱</note_text>
-                    <created_at>2011-10-12 12:30</created_at>
+                    <user_answer>规范法官</user_answer>
+                    <user_answer/>
+                    <user_answer>会更好</user_answer>
+                    <user_answer>规范法官</user_answer>
+                    <user_answer/>
+                    <user_answer>规范法官</user_answer>
+                    <user_answer>规范法官</user_answer>
                 </question>
-            </questions>
-        </problem>
-
-        <problem id='9' score='5' types='0'>
-            <title>我撒的飞洒</title>
-            <category>3</category>
-            <questions>
-                <question correct_type='0' id='14' score='5'>
+                <question correct_type='0' error_percent='0' id='14' repeat_num='3' score='5'>
                     <answer>sfs</answer>
                     <analysis>sfafwerwr2r2</analysis>
                     <questionattrs>sfs;-;sfss;-;sdds;-;sd</questionattrs>
                     <tags>wrwr</tags>
                     <user_answer/>
-                    <note_text>eeesdddss</note_text>
-                </question>
+                    <user_answer/>
+                    <user_answer>sdds</user_answer>
+                    <user_answer>sfss</user_answer>
+                    <user_answer>sfss</user_answer>
+                    <user_answer/>
+                    <user_answer>sdds</user_answer>
+                    <user_answer>sfss</user_answer>
+                    <user_answer/>
+                <note_text>哈哈哈</note_text></question>
             </questions>
-        </problem>
-        <problem id='10' score='5' types='0'>
-            <title>fsdafafsfsaf</title>
+        </problem><problem id='34' score='4' types='5'>
+            <title>测试简答题&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;</title>
             <category>3</category>
             <questions>
-                <question correct_type='0' id='15' score='5'>
-                    <answer>789</answer>
-                    <analysis>sdfsfasf</analysis>
-                    <questionattrs>23;-;wer;-;65;-;789</questionattrs>
-                    <tags>ew</tags>
-                    <user_answer/>
-                    <note_text>bbb方法vvv</note_text>
-                </question>
-                  
-                <question correct_type='0' error_percent='50' id='10' repeat_num='1' score='5'>
-                    <answer>豆腐干</answer>
-                    <analysis/>
-                    <questionattrs>豆腐干;-;哥哥;-;塞维尔v;-;东方饭店个</questionattrs>
+                <question correct_type='5' error_percent='0' id='37' repeat_num='1' score='4'>
+                    <answer>测试简答题&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;</answer>
+                    <analysis>gdsfgdsgdsg</analysis>
+                    <questionattrs/>
                     <tags/>
-                    <user_answer>哥哥</user_answer>
-                    <user_answer>哥哥</user_answer>
-                    <user_answer>东方饭店个</user_answer>
-                    <user_answer>东方饭店个</user_answer>
-                    <note_text>fffdddd</note_text>
-                </question>
+                    <user_answer>dasdad</user_answer>
+                <note_text>一二三四五六七</note_text></question>
             </questions>
         </problem>
-    </problems>
+    <problem id='35' score='65' types='4'><title>测试测测试测测试测测试测测试测测试测&lt;div&gt;测试测测试测测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测测试测&lt;/div&gt;</title><category>3</category><questions><question correct_type='0' id='38' score='5'><description>单复数测试测测试测测试测测试测v</description><answer>wer</answer><analysis>sdfafsafsafsfsafaffasfsfasfsfsafsf</analysis><questionattrs>wer;-;awre;-;sf;-;4t34</questionattrs><tags>3</tags><user_answer/><note_text>111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</note_text><created_at>2011-09-21 10:11</created_at></question></questions></problem><problem id='34' score='4' types='5'><title>测试简答题&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;</title><category>3</category><questions><question correct_type='5' id='37' score='4'><answer>测试简答题&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;</answer><analysis>gdsfgdsgdsg</analysis><questionattrs/><tags/><user_answer>dasdad</user_answer><note_text>sfdasfsaffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</note_text><created_at>2011-09-21 10:12</created_at></question></questions></problem></problems>
 </note>

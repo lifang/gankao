@@ -97,13 +97,13 @@ function update_note(question_id) {
 
 function audio_element(problem_title) {
     var final_title = "";
-        if (window.HTMLAudioElement) {
-            final_title = "<audio id='audio' controls='controls'><source src='"+ problem_title +
-                "' type='audio/mpeg'></audio>";
-        } else {
-            final_title = "<object><embed id='audio' src='"+ problem_title +
-            "' autostart='false' type='audio/midi'></object>";
-        }
+    if (window.HTMLAudioElement) {
+        final_title = "<audio id='audio' controls='controls'><source src='"+ problem_title +
+        "' type='audio/mpeg'></audio>";
+    } else {
+        final_title = "<object><embed id='audio' src='"+ problem_title +
+        "' autostart='false' type='audio/midi'></object>";
+    }
     document.write(final_title);
 }
 
@@ -136,4 +136,21 @@ function droppable_result(true_answers, user_answers, problem_id) {
         }
         place_num ++;
     }
+}
+
+function openwindow(id){
+    var url = ""; //转向网页的地址;
+    var name = ""; //网页名称，可为空;
+    var iWidth = "400"; //弹出窗口的宽度;
+    var iHeight = "250"; //弹出窗口的高度;
+    var iTop = (window.screen.availHeight-30-iHeight)/2; //获得窗口的垂直位置;
+    var iLeft = (window.screen.availWidth-10-iWidth)/2; //获得窗口的水平位置;
+    var this_window = window.open(url, name, "height="+ iHeight +", innerHeight="+ iHeight
+        +", width="+ iWidth +", innerWidth="+ iWidth +", top="+ iTop +", left="+ iLeft
+        +", 'toolbar=0, menubar=0, scrollbars=0, location=0, status=0'");
+    this_window.document.clear();
+    this_window.document.close();
+    var title = this_window.opener.document.getElementById("title_"+id).value;
+    this_window.document.write(title);
+    this_window.focus();
 }
