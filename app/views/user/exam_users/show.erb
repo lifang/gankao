@@ -44,12 +44,21 @@
             <div class="part_question" id="question_info_<%= problem.attributes["id"].to_i %>">
               <div class="part_q_text">
                 <% unless problem.elements['title'].nil? %>
-                  <p><% title = problem.elements['title'].text.to_s.html_safe %>
+                  <p style="word-wrap:break-word; word-break:break-all;">
+                    <% title = problem.elements['title'].text.to_s.html_safe %>
                     <% if title =~ /<mp3>/  %>
                       <script type="text/javascript">audio_element("<%= title.split("<mp3>")[1] %>");</script>
-                      <%= title.split("<mp3>")[2] %>
+                      <%= title.split("<mp3>")[2].to_s.html_safe.
+                        gsub("problem_x_dropplace", "problem_#{problem.attributes["id"]}_dropplace") %>
+                      <script type="text/javascript">
+                        droppable_element('<%= title.split("<mp3>")[2].to_s.html_safe %>', <%= problem.attributes["id"] %>);
+                      </script>
                     <% else %>
-                      <%= problem.elements['title'].text.to_s.html_safe %>
+                      <%= problem.elements['title'].text.to_s.html_safe.
+                        gsub("problem_x_dropplace", "problem_#{problem.attributes["id"]}_dropplace") %>
+                      <script type="text/javascript">
+                        droppable_element('<%= problem.elements['title'].text.to_s.html_safe %>', <%= problem.attributes["id"] %>);
+                      </script>
                     <% end %>
                   </p>
                 <% end %>
@@ -95,9 +104,9 @@
                 all_answer = answers | user_answers
                 is_right = true if all_answer == answers and answers - user_answers == []  %>
                 <li><% if is_right %>
-                  <a href="javascript:void(0);" onclick="javascript:get_question_height(<%= question.attributes["id"] %>, <%= problem.attributes["id"] %>);">
-                    <img src="/images/paper/dui.jpg" />
-                  </a>
+                    <a href="javascript:void(0);" onclick="javascript:get_question_height(<%= question.attributes["id"] %>, <%= problem.attributes["id"] %>);">
+                      <img src="/images/paper/dui.jpg" />
+                    </a>
                   <% else %>
                     <a href="javascript:void(0);" onclick="javascript:get_question_height(<%= question.attributes["id"] %>, <%= problem.attributes["id"] %>);">
                       <img src="/images/paper/cuo.jpg" />
