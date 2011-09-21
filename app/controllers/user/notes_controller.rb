@@ -1,6 +1,6 @@
 #encoding: utf-8
 class User::NotesController < ApplicationController
-  layout "gankao", :except => ["load_note", "create_note"]
+  layout "gankao", :except => ["load_note", "create_note", "show_dialog"]
   before_filter :access?
 
   def show

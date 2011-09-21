@@ -51,6 +51,10 @@
             <div class="answer_textarea">
               <textarea cols="" rows=""readonly><%= user_answers[0].to_s %></textarea>
             </div>
+          <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] %>
+            <script type="text/javascript">
+              droppable_result('<%= answers.join(",") %>', '<%= user_answers.join(",") %>', <%= question_with_answer.attributes["id"] %>);
+            </script>
           <% end %>
         </ul>
         <div class="p_question_btn" style="display: none;"><button class="save">保存</button><button class="Uncertain">不确定</button></div>

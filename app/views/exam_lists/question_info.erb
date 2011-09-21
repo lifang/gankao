@@ -1,10 +1,29 @@
+<%= javascript_include_tag "/javascripts/answer_sheet.js" %>
 <div class="errorLibrary_left">
   <div class="pattern"><a href="/exam_lists/<%= params[:id] %>/incorrect_list" class="chay_pat">查阅</a><div class="moveBlock_bg">
       <div class="moveBlock" style="left: 49px; "><img alt="moveBlock" src="/images/paper/moveBlock.png" /></div></div><a href="/exam_lists/<%= params[:id] %>/question_info" class="lianx_pat">练习</a></div>
   <div class="clear"></div>
   <div class="errorProblem_div">
-    <div class="part_passage">
-      <p> <%=@problem.elements['title'].text.to_s.html_safe  %></p>
+    <div class="part_passage" id="question_info_<%= @problem.attributes["id"].to_i %>">
+     <% unless @problem.elements['title'].nil? %>
+            <p style="word-wrap:break-word; word-break:break-all;">
+              <% title = @problem.elements['title'].text.to_s.html_safe %>
+              <% if title =~ /<mp3>/  %>
+                <script type="text/javascript">audio_element("<%= title.split("<mp3>")[1] %>");</script>
+                <%= title.split("<mp3>")[2].to_s.html_safe.
+                  gsub("problem_x_dropplace", "problem_#{@problem.attributes["id"]}_dropplace") %>
+                <script type="text/javascript">
+                  droppable_element('<%= title.split("<mp3>")[2].to_s.html_safe %>', <%= @problem.attributes["id"] %>);
+                </script>
+              <% else %>
+                <%= @problem.elements['title'].text.to_s.html_safe.
+                  gsub("problem_x_dropplace", "problem_#{@problem.attributes["id"]}_dropplace") %>
+                <script type="text/javascript">
+                  droppable_element('<%= @problem.elements['title'].text.to_s.html_safe %>', <%= @problem.attributes["id"] %>);
+                </script>
+              <% end %>
+            </p>
+          <% end %>
       <div class="fraction"><%= @problem.attributes["score"] %>分</div>
     </div>
     <div class="space20"></div>

@@ -1,4 +1,4 @@
-
+<%= javascript_include_tag "/javascripts/answer_sheet.js" %>
 <% if @lists.nil? or @lists.elements["/collection/problems"].blank? %>
   <div class="errorLibrary_left">
     <%= "您目前没有错题" %>
@@ -11,8 +11,26 @@
     <div class="clear"></div>
     <div class="errorProblem_div">
       <% @lists.elements["/collection/problems"].each_element do |problem|%>
-        <div class="part_passage">
-          <p> <%=problem.elements['title'].text.to_s.html_safe  %></p>
+        <div class="part_passage" id="question_info_<%= problem.attributes["id"].to_i %>">
+          <% unless problem.elements['title'].nil? %>
+            <p style="word-wrap:break-word; word-break:break-all;">
+              <% title = problem.elements['title'].text.to_s.html_safe %>
+              <% if title =~ /<mp3>/  %>
+                <script type="text/javascript">audio_element("<%= title.split("<mp3>")[1] %>");</script>
+                <%= title.split("<mp3>")[2].to_s.html_safe.
+                  gsub("problem_x_dropplace", "problem_#{problem.attributes["id"]}_dropplace") %>
+                <script type="text/javascript">
+                  droppable_element('<%= title.split("<mp3>")[2].to_s.html_safe %>', <%= problem.attributes["id"] %>);
+                </script>
+              <% else %>
+                <%= problem.elements['title'].text.to_s.html_safe.
+                  gsub("problem_x_dropplace", "problem_#{problem.attributes["id"]}_dropplace") %>
+                <script type="text/javascript">
+                  droppable_element('<%= problem.elements['title'].text.to_s.html_safe %>', <%= problem.attributes["id"] %>);
+                </script>
+              <% end %>
+            </p>
+          <% end %>
           <div class="fraction"><%= problem.attributes["score"] %>分</div>
         </div>
         <div class="space20"></div>
