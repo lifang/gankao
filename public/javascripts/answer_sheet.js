@@ -96,6 +96,11 @@ function update_note(question_id) {
 }
 
 function audio_element(problem_title) {
+    var final_title = generate_audio_element(problem_title);
+    document.write(final_title);
+}
+
+function generate_audio_element(problem_title) {
     var final_title = "";
     if (window.HTMLAudioElement) {
         final_title = "<audio id='audio' controls='controls'><source src='"+ problem_title +
@@ -104,7 +109,7 @@ function audio_element(problem_title) {
         final_title = "<object><embed id='audio' src='"+ problem_title +
         "' autostart='false' type='audio/midi'></object>";
     }
-    document.write(final_title);
+    return final_title;
 }
 
 function droppable_element(problem_title, problem_id) {  
@@ -130,19 +135,19 @@ function droppable_result(true_answers, user_answers, problem_id) {
     while (str.indexOf("problem_" + problem_id + "_dropplace_" + place_num) >= 0) {
         $("problem_" + problem_id + "_dropplace_" + place_num).innerHTML = user_answer[place_num - 1];
         if (answers[place_num - 1] == user_answer[place_num - 1]) {
-            $("problem_" + problem_id + "_dropplace_" + place_num).style.color = "blue";
+            $("problem_" + problem_id + "_dropplace_" + place_num).className = "task_span correctRight_bg";
         } else {
-            $("problem_" + problem_id + "_dropplace_" + place_num).style.color = "red";
+            $("problem_" + problem_id + "_dropplace_" + place_num).className = "task_span red_bg";
         }
         place_num ++;
     }
 }
 
 function openwindow(id){
-    var url = ""; //转向网页的地址;
+    var url = "/user/notes/" + id + "/show_dialog"; //转向网页的地址;
     var name = ""; //网页名称，可为空;
-    var iWidth = "600"; //弹出窗口的宽度;
-    var iHeight = "450"; //弹出窗口的高度;
+    var iWidth = "700"; //弹出窗口的宽度;
+    var iHeight = "550"; //弹出窗口的高度;
     var iTop = (window.screen.availHeight-30-iHeight)/2; //获得窗口的垂直位置;
     var iLeft = (window.screen.availWidth-10-iWidth)/2; //获得窗口的水平位置;
     var this_window = window.open(url, name, "height="+ iHeight +", innerHeight="+ iHeight
@@ -150,7 +155,45 @@ function openwindow(id){
         +", 'toolbar=0, menubar=0, scrollbars=0, location=0, status=0'");
     this_window.document.clear();
     this_window.document.close();
-    var title = this_window.opener.document.getElementById("title_"+id).value;
-    this_window.document.write(title);
     this_window.focus();
+}
+
+function generate_dialog_html(id) {
+        var title = window.opener.document.getElementById("title_"+id).innerHTML;
+    var answers = window.opener.document.getElementById("answer_" + id).innerHTML;
+    var user_answers = window.opener.document.getElementById("user_answers_" + id).innerHTML;
+    var audio_title = show_title_for_note(title);
+    var final_title = audio_title.replace(/problem_x_dropplace/g, "problem_"+ id +"_dropplace");
+    window.document.getElementById("content").innerHTML = final_title;
+    replace_droppable_element(window, answers.replace(/<[^{><}]*>/g, ","), user_answers, id);
+}
+
+
+
+function show_title_for_note(title) {
+    var titles = title.replace(/<\/mp3>/g, "").split("<mp3>");
+    var audio_title = "";
+    var leving_title = "";
+    if (titles.length > 1) {
+        audio_title = generate_audio_element(titles[1]);
+        leving_title = titles[2];
+    } else {
+        leving_title = titles;
+    }
+    return audio_title + leving_title;
+}
+
+function replace_droppable_element(this_window, answers, user_answers, problem_id) {
+    var true_answers = answers.split(",");
+    var user_answer = user_answers.split(",");
+    var place_num = 1;
+    while (this_window.document.body.innerHTML.indexOf("problem_" + problem_id + "_dropplace_" + place_num) >= 0) {
+        this_window.document.getElementById("problem_" + problem_id + "_dropplace_" + place_num).innerHTML = user_answer[place_num - 1];
+        if (true_answers[place_num - 1] == user_answer[place_num - 1]) {
+            this_window.document.getElementById("problem_" + problem_id + "_dropplace_" + place_num).style.color = "blue";
+        } else {
+            this_window.document.getElementById("problem_" + problem_id + "_dropplace_" + place_num).style.color = "red";
+        }
+        place_num ++;
+    }
 }

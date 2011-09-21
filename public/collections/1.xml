@@ -318,6 +318,7 @@ asf
                             <tags> 手动添加</tags>
                         <user_answer/><user_answer/><user_answer/><user_answer/><user_answer/><user_answer/><user_answer/><user_answer/><user_answer></user_answer></question>
                     </questions>
-                </problem></problems>
+                </problem>
+                </problem><problem id='39' score='0' types='4'><title>测试</title><category>2</category><questions><question correct_type='6' error_percent='0' id='43' repeat_num='1' score='0'><description>&lt;span id=&quot;problem_x_dropplace_1&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_x_dropplace_2&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_x_dropplace_3&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_x_dropplace_4&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_x_dropplace_5&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_x_dropplace_6&quot;&gt;________&lt;/span&gt;</description><answer>111;|;222;|;333;|;444;|;555;|;666</answer><analysis>法上发生的</analysis><questionattrs>111;-;222;-;333;-;444;-;555;-;666</questionattrs><tags> 手动添加</tags><user_answer>333;|;222;|;444;|;666;|;555;|;222</user_answer></question></questions></problem></problems>
 </collection>
 

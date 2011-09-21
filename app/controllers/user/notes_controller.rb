@@ -1,6 +1,6 @@
 #encoding: utf-8
 class User::NotesController < ApplicationController
-  layout "gankao", :except => ["load_note", "create_note"]
+  layout "gankao", :except => ["load_note", "create_note", "show_dialog"]
   before_filter :access?
 
   def show
@@ -74,7 +74,7 @@ class User::NotesController < ApplicationController
   end
 
   def search_list
-    pre_page = 1
+    pre_page = 5
     @note = Note.find_by_user_id(cookies[:user_id].to_i)
     @doc = @note.search(@note.open_xml, session[:note_text])
     @total_page = @note.return_total_page(@doc, pre_page)

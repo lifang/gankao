@@ -2,9 +2,17 @@
   <div class="part_question">
     <div class="chank_yw"><a href="javascript:void(0);" onclick="openwindow(<%= question_with_answer[0].attributes["id"] %>);">查看全文</a></div>
     <div class="part_q_text part_q_sl">
-      <p><%= truncate_u(question_with_answer[1].elements["title"].text.to_s.html_safe.gsub(/<[^{><}]*>/, ""), 195, "......").to_s.html_safe %></p>
-      <input type="hidden" id="title_<%= question_with_answer[0].attributes["id"] %>"
-             value="<%= question_with_answer[1].elements["title"].text.to_s.html_safe %>" />
+      <p style="word-wrap:break-word; word-break:break-all;">
+        <% title = question_with_answer[1].elements["title"].text
+        if title =~ /<mp3>/  %>
+          <%= truncate_u(title.split("<mp3>")[2].to_s.html_safe.gsub(/<[^{><}]*>/, ""), 195, "......").to_s.html_safe %>
+        <% else %>
+          <%= truncate_u(title.to_s.html_safe.gsub(/<[^{><}]*>/, ""), 195, "......").to_s.html_safe %>
+        <% end %>
+      </p>
+      <div style="display:none;" id="title_<%= question_with_answer[0].attributes["id"] %>">
+        <%= question_with_answer[1].elements["title"].text.to_s.html_safe %>
+      </div>
     </div>
     <!--题目内容-->
     <% attrs_str = question_with_answer[0].elements["questionattrs"].text
@@ -17,14 +25,26 @@
     is_right = false
     all_answer = answers | user_answers
     is_right = true if all_answer == answers and answers - user_answers == [] %>
-
     <div class="p_question_list <% if is_right %>question_yes<% else %>question_no<% end %>">
       <!--[if IE 6]><table><tr><td valign="top"><![endif]-->
-      <div class="p_q_l_left">1</div>
+      <div class="p_q_l_left"></div>
       <!--[if IE 6]></td><td><![endif]-->
       <div class="p_q_l_right_s">
         <% if question_with_answer[0].elements["description"] %>
-          <div class="question_title"><%= question_with_answer[0].elements["description"].text  %></div>
+          <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] %>
+            <div class="q_drag_con" style="word-wrap:break-word; word-break:break-all;">
+              <p><%= question_with_answer[0].elements["description"].text.to_s.html_safe.
+                  gsub("problem_x_dropplace", "problem_#{question_with_answer[0].attributes["id"]}_dropplace")  %>
+              </p>
+              <script type="text/javascript">
+                droppable_result('<%= answers.join(",") %>', '<%= user_answers.join(",") %>', <%= question_with_answer[0].attributes["id"] %>);
+              </script>
+            </div>
+          <% else %>
+            <div class="question_title" style="word-wrap:break-word; word-break:break-all;">
+              <%= question_with_answer[0].elements["description"].text.to_s.html_safe  %>
+            </div>
+          <% end %>
         <% end %>
         <% if (correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] or
               correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE]) %>
@@ -34,10 +54,10 @@
               is_user_answer=user_answers.include?(attrs_array[i]) %>
               <li <% if is_answer %> class="correctRight_bg" <% end %>>
                 <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
-                <input type="checkbox" disabled name="question_attr_<%= question_with_answer[0].attributes["id"].to_i %>"
+                  <input type="checkbox" disabled name="question_attr_<%= question_with_answer[0].attributes["id"].to_i %>"
                          id="question_attr_<%= i %>"  <% if is_user_answer %>checked="true"<% end %> />
                        <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
-                <input type="radio" disabled name="question_attr_<%= question_with_answer[0].attributes["id"].to_i %>"
+                  <input type="radio" disabled name="question_attr_<%= question_with_answer[0].attributes["id"].to_i %>"
                          id="question_attr_<%= i %>" <% if is_user_answer %>checked="true"<% end %> />
                        <% end %>
                 &nbsp;&nbsp;<%= attrs_array[i] %>
@@ -66,10 +86,12 @@
     </div>
   </div>
 </div>
+<div style="display:none;"
+     id="user_answers_<%= question_with_answer[0].attributes["id"] %>"><%= user_answers.join(",") %></div>
 
 <!--答案-->
 <div class="nb_r_daan">
-  <h3>正确答案 <%= answers.join(";").to_s.html_safe %></h3>
+  <h3>正确答案：<span id="answer_<%= question_with_answer[0].attributes["id"] %>"><%= answers.join("<br/>").to_s.html_safe %></span></h3>
   <% analysis = question_with_answer[0].elements["analysis"] %>
   <% unless analysis.nil? or analysis.text.nil? or analysis.text == "" %>
     <p>解析：<%= analysis.text.to_s.html_safe %></p>
