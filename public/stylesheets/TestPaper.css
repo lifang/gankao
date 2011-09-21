@@ -1,7 +1,7 @@
 @charset "utf-8";
 * { padding: 0; margin: 0;}
 html {_BACKGROUND-ATTACHMENT: fixed; _BACKGROUND-IMAGE: url(about:blank);}/*IE6fixed无闪烁*/
-body { background: url(../images/_bg.jpg) repeat; font-family: Arial,"宋体", "微软雅黑"; font-size: 12px; position: relative;}
+body { background: url(/images/paper/_bg.jpg) repeat; font-family: Arial,"宋体", "微软雅黑"; font-size: 12px; position: relative;}
 ul { list-style: none;}
 img { border: none;}
 .wrap { height: 100%;}
@@ -22,7 +22,7 @@ img { border: none;}
 .testPaper_top {
     width: 100%;
 	height: 38px;
-	background: url(../images/testPaper_top_bg.png) repeat-x top center;
+	background: url(/images/paper/testPaper_top_bg.png) repeat-x top center;
 	z-index: 100;
 	position: fixed;
 	/*IE6fixed无闪烁*/
@@ -33,12 +33,12 @@ img { border: none;}
 .tp_top_box { width: 960px; height: 38px; line-height: 38px; margin: 0 auto; font-size: 14px; color: #FFF; font-family: "微软雅黑";}
 .tp_top_box div { float: left; width: 320px;}
 .paper_name { display: inline;}
-.timer { text-align: center; font-size: 16px; background: url(../images/timerIcon.png) no-repeat 100px center;}
+.timer { text-align: center; font-size: 16px; background: url(/images/paper/timerIcon.png) no-repeat 100px center;}
 .paper_info { text-align: right;}
 
 .paper_info strong { padding: 0 5px;}
 
-.test_over_btn { width: 102px; height: 28px; margin-left: 5px; float: right; margin-top: 5px; background: url(../images/test_over_btn.png) 0 0 no-repeat; border: none; cursor: pointer;}
+.test_over_btn { width: 102px; height: 28px; margin-left: 5px; float: right; margin-top: 5px; background: url(/images/paper/test_over_btn.png) 0 0 no-repeat; border: none; cursor: pointer;}
 
 
 /*testPaper-----main*/
@@ -85,8 +85,8 @@ img { border: none;}
 .answer_textarea textarea { padding: 5px; width: 95%; height: 180px; margin: 10px 0 10px 15px;}
 
 
-.question_yes { background: url(../images/question_yesno_bg.jpg) no-repeat 0px 0px #FFF;}
-.question_no {background: url(../images/question_yesno_bg.jpg) no-repeat 0px -396px #FFF;}
+.question_yes { background: url(/images/paper/question_yesno_bg.jpg) no-repeat 0px 0px #FFF;}
+.question_no {background: url(/images/paper/question_yesno_bg.jpg) no-repeat 0px -396px #FFF;}
 
 .p_q_l_left { float: left; width: 31px;text-align: center; padding-top: 5px;}
 .p_q_l_right { float: left; padding: 10px 5px; width: 600px; border-left: 1px #EAEAEA solid;}
@@ -123,11 +123,11 @@ img { border: none;}
 
 /*解析笔记弹出层----*/
 .jiexi_tab { display: none; position: absolute; z-index: 100;}
-.tab_t { width: 397px; height: 27px; background: url(../images/all_bg.png) -114px -8px no-repeat;}
+.tab_t { width: 397px; height: 27px; background: url(/images/paper/all_bg.png) -114px -8px no-repeat;}
 .tab_t a { float: right; margin: 15px 12px 0 0;}
-.tab_m { width: 377px;  background: url(../images/tab_m.png) repeat-y; padding: 5px 10px; line-height: 22px;}
+.tab_m { width: 377px;  background: url(/images/paper/tab_m.png) repeat-y; padding: 5px 10px; line-height: 22px;}
 .tab_m h3 { color: #F00;}
-.tab_b { width: 397px; height: 18px; background: url(../images/all_bg.png) -114px -35px no-repeat;}
+.tab_b { width: 397px; height: 18px; background: url(/images/paper/all_bg.png) -114px -35px no-repeat;}
 
 .biji_tab {display: none; position: absolute; z-index: 100; top: 25px; right: 70px;}
 .tab_m_textarea textarea { width: 370px;}
@@ -138,8 +138,8 @@ img { border: none;}
 /*保存答案按钮-----*/
 .p_question_btn { margin-top: 5px; padding-left: 10px;}
 .save, .Uncertain {height: 25px; line-height: 25px; border: none; cursor: pointer; color: #FFF; margin: 0 5px;}
-.save { width: 63px;  background: url(../images/all_bg.png) no-repeat -8px -8px;}
-.Uncertain { width: 63px; background: url(../images/all_bg.png) no-repeat -8px -45px;}
+.save { width: 63px;  background: url(/images/paper/all_bg.png) no-repeat -8px -8px;}
+.Uncertain { width: 63px; background: url(/images/paper/all_bg.png) no-repeat -8px -45px;}
 
 
 
@@ -150,14 +150,14 @@ img { border: none;}
 
 
 /*------*/
-.zhijiao { width: 62px; height: 41px; background: url(../images/zhijiao.png) no-repeat; float: right;}
+.zhijiao { width: 62px; height: 41px; background: url(/images/paper/zhijiao.png) no-repeat; float: right;}
 
 
 
 /*tp_right-----------------*/
 .tp_right { float: left; width: 250px; padding-left: 20px;}
 .tp_right_box { width: 240px; margin: 0 auto; position: fixed; _position: absolute; _top: expression(eval(documentElement.scrollTop + 50));}
-.first_title { font-size: 13px; color: #333; overflow: hidden; clear: both; cursor: pointer; background: url(../images/xline.png) repeat-x center bottom; padding: 10px 0;}
+.first_title { font-size: 13px; color: #333; overflow: hidden; clear: both; cursor: pointer; background: url(/images/paper/xline.png) repeat-x center bottom; padding: 10px 0;}
 .first_title p { padding: 5px; line-height: 18px; clear: both;}
 .second_menu li { float: left; margin: 3px 8px; overflow: hidden; height: 32px;}
 .highLight { color: #164a63; font-size: 15px; font-weight:bold;}

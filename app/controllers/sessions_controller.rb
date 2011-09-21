@@ -37,6 +37,7 @@ class SessionsController < ApplicationController
     cookies.delete(:user_id)
     cookies.delete(:user_name)
     cookies.delete(:user_roles)
+    cookies.delete(:is_vip)
     session.delete(:atoken)
     session.delete(:asecret)
     session.delete(:renren_access_token)
