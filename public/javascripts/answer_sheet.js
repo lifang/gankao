@@ -106,3 +106,34 @@ function audio_element(problem_title) {
         }
     document.write(final_title);
 }
+
+function droppable_element(problem_title, problem_id) {  
+    var place_num = 1;
+    while(problem_title.indexOf("problem_" + problem_id + "_dropplace_" + place_num) >= 0){
+        var store_id = "problem_" + problem_id + "_dropplace_" + place_num;
+        $(store_id).style.cursor = 'Move';
+        Droppables.add(store_id, {
+            onDrop:function(element,store_id){
+                $(store_id).innerHTML = element.innerHTML;
+                $(store_id).style.color = "blue";
+            }
+        })
+        place_num ++;
+    }
+}
+
+function droppable_result(true_answers, user_answers, problem_id) {
+    var answers = true_answers.split(",");
+    var user_answer = user_answers.split(",");
+    var str = $("question_info_" + problem_id).innerHTML;
+    var place_num = 1;
+    while (str.indexOf("problem_" + problem_id + "_dropplace_" + place_num) >= 0) {
+        $("problem_" + problem_id + "_dropplace_" + place_num).innerHTML = user_answer[place_num - 1];
+        if (answers[place_num - 1] == user_answer[place_num - 1]) {
+            $("problem_" + problem_id + "_dropplace_" + place_num).style.color = "blue";
+        } else {
+            $("problem_" + problem_id + "_dropplace_" + place_num).style.color = "red";
+        }
+        place_num ++;
+    }
+}
