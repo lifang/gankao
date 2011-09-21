@@ -150,7 +150,12 @@ function openwindow(id){
         +", 'toolbar=0, menubar=0, scrollbars=0, location=0, status=0'");
     this_window.document.clear();
     this_window.document.close();
-    var title = this_window.opener.document.getElementById("title_"+id).value;
+    var title = this_window.opener.document.getElementById("title_"+id).innerHTML;
+    
     this_window.document.write(title);
     this_window.focus();
+}
+
+function show_title_for_note(title, answers, user_answers) {
+    
 }
