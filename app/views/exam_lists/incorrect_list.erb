@@ -1,3 +1,23 @@
+<script type="text/javascript">
+  function openwindow(title){
+    var url=""; //转向网页的地址;
+    var name="problem_title"; //网页名称，可为空;
+    var iWidth="400"; //弹出窗口的宽度;
+    var iHeight="250"; //弹出窗口的高度;
+    var iTop = (window.screen.availHeight-30-iHeight)/2; //获得窗口的垂直位置;
+    var iLeft = (window.screen.availWidth-10-iWidth)/2; //获得窗口的水平位置;
+    var this_window=window.open(url,name,"height="+iHeight+",innerHeight="+iHeight+",width="+iWidth+",innerWidth="+iWidth+",top="+iTop+",left="+iLeft+",'toolbar=0,menubar=0,scrollbars=0,location=0,status=0'");
+    this_window.document.clear();
+    this_window.document.close();
+    this_window.document.write(title);
+    this_window.focus();
+  }
+</script>
+
+
+
+
+
 <% if @lists.nil? or @lists.elements["/collection/problems"].blank? %>
   <div class="errorLibrary_left">
     您目前没有错题
@@ -12,7 +32,7 @@
         <div class="part_div">
           <div class="part_passage">
             <div class="p_contents">
-              <p> <%=problem.elements['title'].text.to_s.html_safe  %></p>
+              <p> <a href="javascript:void(0);" onclick="openwindow('<%=problem.elements['title'].text.to_s.html_safe  %>');"><%=problem.elements['title'].text.to_s.html_safe  %></a></p>
             </div>
             <div class="fraction"><%= problem.attributes["score"] %>分</div>
           </div>

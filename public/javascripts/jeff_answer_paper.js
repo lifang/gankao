@@ -282,21 +282,22 @@ function create_problem(ul, problem, block_nav_div,practice_type) {
     var parent_div = create_element("div", null, "full_problem_" + problem.id, null, null, "innerHTML");
     var question_id_input = create_element("input", "question_ids", "question_ids_" + problem.id, null, "hidden", "value");
     var parent_div_str = "<input type='hidden' name='problem_"+ problem.id +"' id='problem_"+ problem.id +"' value='"+ problem.id +"'/>";
+    var problem_title=problem.title.replace("audio_play('x')","audio_play("+problem.id+")").replace("id=\"audio_x\"","id='audio_"+problem.id+"'").replace("id=\"audio_control_x\"","id='audio_control_"+problem.id+"'").replace("problem_x_dropplace","problem_"+problem.id+"_dropplace").replace("problem_x_writefont","problem_"+problem.id+"_writefont")
     if(practice_type=="3"){
         parent_div_str += "<div class='task3_con'>";
         parent_div_str += "<div class='play'><div class='play_btn'><a href='javascript:void(0);' onclick='javascript:audio_play("+problem.id+");'><img id='practice2_audio_control_"+problem.id+"' src='/images/paper/play_icon.png'></a></div><a  href='javascript:void(0);' class='explain_btn_task2' onclick=\"javascript:practice2_list("+problem.id+");\" ></a></div>";
-        parent_div_str += "<div class='tb_con_list' id='practice2_list_"+problem.id+"'>"+problem.title+"<br/></div>";
+        parent_div_str += "<div class='tb_con_list' id='practice2_list_"+problem.id+"'>"+problem_title+"<br/></div>";
         parent_div_str +="</div>";
     }else{
         if(practice_type=="6"){
             parent_div_str += "<div class='task3_con'>";
             parent_div_str += "<div class='play'><div class='play_btn'><a href='javascript:void(0);' onclick='javascript:audio_play("+problem.id+");'><img id='practice2_audio_control_"+problem.id+"' src='/images/paper/play_icon.png'></a></div></div>";
-            parent_div_str += "<div style='display:none;' >"+problem.title+"</div>";
-            parent_div_str += "<input type='hidden' id='practice5_list_"+problem.id+"' value=\""+problem.title.replace(/<[^{><}]*>/g, "")+"\" />";
+            parent_div_str += "<div style='display:none;' >"+problem_title+"</div>";
+            parent_div_str += "<input type='hidden' id='practice5_list_"+problem.id+"' value=\""+problem_title.replace(/<[^{><}]*>/g, "")+"\" />";
             //    字符串解析错误。
             parent_div_str += "</div>";
         }else{
-            parent_div_str += "<div class='task3_con'><p>"+ problem.title + "   </p></div>";
+            parent_div_str += "<div class='task3_con'><p>"+ problem_title + "   </p></div>";
         }
     }
     parent_div.innerHTML = parent_div_str;
@@ -312,12 +313,12 @@ function create_problem(ul, problem, block_nav_div,practice_type) {
         if (tof(questions) == "array") {
             for (var j=0; j<questions.size(); j++) {
                 create_question_navigation(block_nav_div, questions[j], question_num, problem.id,practice_type);
-                create_question(problem.title,problem.id, question_id_input, parent_div, questions[j],practice_type);
+                create_question(problem_title,problem.id, question_id_input, parent_div, questions[j],practice_type);
                 question_num ++ ;
             }
         } else {
             create_question_navigation(block_nav_div, questions, question_num, problem.id,practice_type);
-            create_question(problem.title,problem.id, question_id_input, parent_div, questions,practice_type);
+            create_question(problem_title,problem.id, question_id_input, parent_div, questions,practice_type);
             question_num ++ ;
         }
     }
