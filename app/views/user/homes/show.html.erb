@@ -59,7 +59,7 @@
       <div class="per_tb_title">错题库</div>
       <div class="per_t_text">
         <% unless @incorrect_list.nil? %>
-          <span class="red"><%=@incorrect_list.get_elements["/collection/problems/problem"].size %></span> 错题
+          <span class="red"><%=@incorrect_list.get_elements("//problems/problem").size %></span> 错题
           <a href="/exam_lists/<%= params[:id] %>/incorrect_list" target="_blank">马上复习</a>
         <% else %>
           您没有错题
@@ -70,7 +70,7 @@
       <div class="per_tb_title">笔记</div>
       <div class="per_t_text">
         <% unless @notes.nil? %>
-          <span class="red"><%= @notes.elements['problems'].elements.size %></span> 篇
+          <span class="red"><%= @notes.get_elements("//problems//questions/question").size %></span> 篇
           <a href="/user/notes/<%= params[:id] %>" target="_blank">翻阅笔记</a>
         <% else %>
           <h3><span class="red"><%= "您没有做笔记" %></span></h3>

@@ -1,14 +1,14 @@
 <div class="part_question">
   <% attr="" %>
   <% question_with_answer.elements["questions"].each_element do |question| %>
+    <div class="part_q_text">
+      <p><%= question.elements["description"].text if question.elements["description"] %> </p>
+      <div class="fraction_h">10分</div>
+    </div>
     <% attr +=question.attributes["id"]+"," %>
     <div class="p_question_list question_no"  >
       <div class="p_q_l_left"><%= question.attributes["id"] %></div>
       <div class="p_q_l_right_b" onmouseover="javascript:show_question('<%= question.attributes["id"] %>')" >
-        <div class="p_contents">
-          <p><%= question.elements["description"].text if question.elements["description"] %>
-          </p>
-        </div>
         <span id="user_score_<%= question.attributes["id"].to_i %>">
         </span>
         <% attrs_str = question.elements["questionattrs"].text
@@ -53,25 +53,25 @@
             </div>
           <% end %>
         </ul>
-           <div class="p_question_btn" style="display: none;"><button class="save">保存</button><button class="Uncertain">不确定</button></div>
-      <div class="fraction"><%= question.attributes["score"] %>分</div>
-    </div>
-    <div class="clear"></div>
-    <div class="review_btn">
-      <a class="jiexi_btn" id="btn_<%= question.attributes['id'] %>">解析</a>
-      <a class="biji_btn"
-         name="note_<%= question.attributes["id"] %>" id="note_<%= question.attributes["id"] %>"
-         onclick="javascript:cuoti_note(<%= question.attributes["id"] %>, <%= question_with_answer.attributes["id"] %>);">笔记</a>
-      <a onclick="javascript:document.getElementById('status').submit();">移出</a>
-    </div>
-    <input type="hidden" id="btn_<%= question.attributes["id"] %>_answer" type="hidden" value="<%= answers.join(";") %>"/>
-    <input type="hidden" id="btn_<%= question.attributes["id"] %>_analysis" type="hidden" value="<%=question.elements["analysis"].nil? ? '' : question.elements["analysis"].text %>"/>
-    <%= form_for :exam, :html=> {:id => :status, :name => :exam_form}, :url => "/exam_lists/#{params[:id]}/delete_problem" do |f|%>
-      <input type="hidden" value="<%= question_with_answer.attributes["id"] %>" id="problem_id" name="problem_id"/>
-      <input type="hidden" value="<%= question.attributes["id"] %>" name="question_id" />
-      <input type="hidden" value="<%= params[:page].nil? ? 1:params[:page] %>" name="page" />
-    <% end %>
-    <div class="clear"></div>
+        <div class="p_question_btn" style="display: none;"><button class="save">保存</button><button class="Uncertain">不确定</button></div>
+        <div class="fraction"><%= question.attributes["score"] %>分</div>
+      </div>
+      <div class="clear"></div>
+      <div class="review_btn">
+        <a class="jiexi_btn" id="btn_<%= question.attributes['id'] %>">解析</a>
+        <a class="biji_btn"
+           name="note_<%= question.attributes["id"] %>" id="note_<%= question.attributes["id"] %>"
+           onclick="javascript:cuoti_note(<%= question.attributes["id"] %>, <%= question_with_answer.attributes["id"] %>);">笔记</a>
+        <a onclick="javascript:document.getElementById('status').submit();">移出</a>
+      </div>
+      <input type="hidden" id="btn_<%= question.attributes["id"] %>_answer" type="hidden" value="<%= answers.join(";") %>"/>
+      <input type="hidden" id="btn_<%= question.attributes["id"] %>_analysis" type="hidden" value="<%=question.elements["analysis"].nil? ? '' : question.elements["analysis"].text %>"/>
+      <%= form_for :exam, :html=> {:id => :status, :name => :exam_form}, :url => "/exam_lists/#{params[:id]}/delete_problem" do |f|%>
+        <input type="hidden" value="<%= question_with_answer.attributes["id"] %>" id="problem_id" name="problem_id"/>
+        <input type="hidden" value="<%= question.attributes["id"] %>" name="question_id" />
+        <input type="hidden" value="<%= params[:page].nil? ? 1:params[:page] %>" name="page" />
+      <% end %>
+      <div class="clear"></div>
     </div>
   <% end %>
   <input type="hidden" value="<%= attr.chop %>" id="questions" />

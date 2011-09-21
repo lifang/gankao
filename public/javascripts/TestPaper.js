@@ -57,12 +57,6 @@ jQuery(function(){
 })
 
 
-//jQuery(function(){jQuery.noConflict();
-//    jQuery('.tb_check').click(function(){
-//       problem_values();
-//    }
-//    )
-//})
 
 //提示框弹出层
 function show_flash_div() {

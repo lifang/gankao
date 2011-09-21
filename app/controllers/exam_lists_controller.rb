@@ -85,7 +85,7 @@ class ExamListsController < ApplicationController
     problem.elements["questions"].each_element do |question|
       id = question.attributes["id"]
       true_num = (((question.attributes["error_percent"].to_f)/100) * (question.attributes["repeat_num"].to_i)).round
-      if params["answer_#{id}"].strip == question.elements["answer"].text.strip
+      if params["answer_#{id}"]== question.elements["answer"].text.strip
         true_num += 1
       end
       question.add_element("user_answer").add_text(params["answer_#{id}"])

@@ -83,7 +83,7 @@
             <title>少打</title>
             <category>1</category>
             <questions>
-                <question correct_type='0' delete_status='1' error_percent='50' id='9' repeat_num='2' score='5'>
+                <question correct_type='0' delete_status='1' error_percent='33' id='9' repeat_num='3' score='5'>
                     <answer>adsad</answer>
                     <analysis/>
                     <questionattrs>adsad;-;规范法官;-;会更好;-;很久很久</questionattrs>
@@ -95,8 +95,8 @@
                     <user_answer/>
                     <user_answer>规范法官</user_answer>
                     <user_answer>规范法官</user_answer>
-                </question>
-                <question correct_type='0' error_percent='0' id='14' repeat_num='3' score='5'>
+                <user_answer/></question>
+                <question correct_type='0' error_percent='0' id='14' repeat_num='4' score='5'>
                     <answer>sfs</answer>
                     <analysis>sfafwerwr2r2</analysis>
                     <questionattrs>sfs;-;sfss;-;sdds;-;sd</questionattrs>
@@ -110,7 +110,7 @@
                     <user_answer>sdds</user_answer>
                     <user_answer>sfss</user_answer>
                     <user_answer/>
-                </question>
+                <user_answer/></question>
             </questions>
         </problem>
         <problem id='10' repeat_num='6' score='5' types='0'>
@@ -145,7 +145,7 @@
             <title>但是发生堵塞</title>
             <category>1</category>
             <questions>
-                <question correct_type='0' error_percent='50' id='11' repeat_num='1' score='5'>
+                <question correct_type='0' error_percent='71' id='11' repeat_num='7' score='5'>
                     <answer>共和国</answer>
                     <analysis/>
                     <questionattrs>阿萨德;-;阿萨德打算;-;对方答复;-;共和国</questionattrs>
@@ -159,14 +159,14 @@
                     <user_answer/>
                     <user_answer/>
                     <user_answer/>
-                </question>
+                <user_answer/><user_answer>共和国</user_answer><user_answer>共和国</user_answer><user_answer>共和国</user_answer><user_answer>共和国</user_answer><user_answer>on</user_answer></question>
             </questions>
         </problem>
         <problem id='12' repeat_num='12' score='5' types='0'>
             <title>说的是对的</title>
             <category>2</category>
             <questions>
-                <question correct_type='0' error_percent='33' id='12' repeat_num='9' score='5'>
+                <question correct_type='0' error_percent='40' id='12' repeat_num='10' score='5'>
                     <answer>阿斯达岁的大幅度</answer>
                     <analysis>阿斯达岁的</analysis>
                     <questionattrs>阿斯达岁的大幅度;-;豆腐干风格;-;刚好好机会;-;很久很久</questionattrs>
@@ -192,14 +192,14 @@
                     <user_answer>阿斯达岁的大幅度</user_answer>
                     <user_answer>刚好好机会</user_answer>
                     <user_answer>豆腐干风格</user_answer>
-                </question>
+                <user_answer>阿斯达岁的大幅度</user_answer></question>
             </questions>
         </problem>
         <problem id='33' score='44' types='3'>
             <title>sdfasfasfasfasfsafdsaf&lt;div&gt;sdfafsafsf&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;sfdasfsaf&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;sfd&lt;/div&gt;&lt;div&gt;asfd&lt;/div&gt;&lt;div&gt;asf&lt;/div&gt;&lt;div&gt;saf&lt;/div&gt;&lt;div&gt;asf&lt;/div&gt;&lt;div&gt;asfasf&lt;/div&gt;</title>
             <category>3</category>
             <questions>
-                <question correct_type='3' error_percent='0' id='36' repeat_num='1' score='44'>
+                <question correct_type='3' error_percent='0' id='36' repeat_num='2' score='44'>
                     <answer>fsafdasfsaf
 &lt;p&gt;safd&lt;/p&gt;
 &lt;p&gt;asf&lt;/p&gt;
@@ -212,58 +212,58 @@ asf
                     <questionattrs/>
                     <tags/>
                     <user_answer/>
-                </question>
+                <user_answer/></question>
             </questions>
         </problem>
         <problem id='35' score='65' types='4'>
             <title>测试测测试测测试测测试测测试测测试测&lt;div&gt;测试测测试测测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测测试测&lt;/div&gt;</title>
             <category>3</category>
             <questions>
-                <question correct_type='0' error_percent='0' id='38' repeat_num='1' score='5'>
+                <question correct_type='0' error_percent='0' id='38' repeat_num='2' score='5'>
                     <description>单复数测试测测试测测试测测试测v</description>
                     <answer>wer</answer>
                     <analysis>sdfafsafsafsfsafaffasfsfasfsfsafsf</analysis>
                     <questionattrs>wer;-;awre;-;sf;-;4t34</questionattrs>
                     <tags>3</tags>
                     <user_answer/>
-                </question>
-                <question correct_type='1' error_percent='0' id='39' repeat_num='1' score='6'>
+                <user_answer/></question>
+                <question correct_type='1' error_percent='0' id='39' repeat_num='2' score='6'>
                     <description>sadfasssssssssssssssssss4t344555</description>
                     <answer>sdfa;|;qq2</answer>
                     <analysis>sdfasdfsafsafdsafa</analysis>
                     <questionattrs>sdfa;-;qq2;-;zxc;-;tgrt</questionattrs>
                     <tags>4</tags>
                     <user_answer/>
-                </question>
-                <question correct_type='2' error_percent='0' id='40' repeat_num='1' score='54'>
+                <user_answer/></question>
+                <question correct_type='2' error_percent='0' id='40' repeat_num='2' score='54'>
                     <description>safwerwetewrtewrt</description>
                     <answer>1</answer>
                     <analysis>erqetqqqtewt4333333333333</analysis>
                     <questionattrs/>
                     <tags/>
                     <user_answer/>
-                </question>
-                <question correct_type='3' error_percent='0' id='41' repeat_num='1' score='0'>
+                <user_answer/></question>
+                <question correct_type='3' error_percent='0' id='41' repeat_num='2' score='0'>
                     <description>asdffffffffffffffffffffffffffffffffffffffff</description>
                     <answer>fffffwrrrrrrrrrrrrrrrrrrrrr</answer>
                     <analysis>wetrwqtrwqerqtwqtwqetwqtwqt</analysis>
                     <questionattrs/>
                     <tags/>
                     <user_answer/>
-                </question>
+                <user_answer/></question>
             </questions>
         </problem>
         <problem id='34' score='4' types='5'>
             <title>测试简答题&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;</title>
             <category>3</category>
             <questions>
-                <question correct_type='5' error_percent='0' id='37' repeat_num='1' score='4'>
+                <question correct_type='5' error_percent='0' id='37' repeat_num='8' score='4'>
                     <answer>测试简答题&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;</answer>
                     <analysis>gdsfgdsgdsg</analysis>
                     <questionattrs/>
                     <tags/>
                     <user_answer>dasdad</user_answer>
-                </question>
+              <user_answer/><user_answer/><user_answer/><user_answer>dfddddssssdddd</user_answer><user_answer>jjjhhfffsdsasass</user_answer></question>
             </questions>
         </problem>
     <problem id='70' score='15' types='0'>
@@ -281,12 +281,12 @@ asf
                     <title>飞飞蜂蝶多</title>
                     <category>1</category>
                     <questions>
-                        <question correct_type='2' error_percent='0' id='85' repeat_num='1' score='16'>
+                        <question correct_type='2' error_percent='0' id='85' repeat_num='3' score='16'>
                             <answer>1</answer>
                             <analysis>试试撒</analysis>
                             <questionattrs/>
                             <tags>dddd 凤飞飞 为鹅鹅鹅 弹弹堂 手动添加</tags>
-                        <user_answer/></question>
+                        <user_answer/><user_answer>on</user_answer><user_answer>on</user_answer></question>
                     </questions>
                 </problem><problem id='57' score='20' types='4'>
                     <title>1111111111111</title>
@@ -305,7 +305,7 @@ asf
                             <answer>1</answer>
                             <questionattrs/>
                             <tags> 手动添加</tags>
-                        <user_answer></user_answer></question></questions>
+                        <user_answer/></question></questions>
                 </problem></problems>
 </collection>
 
