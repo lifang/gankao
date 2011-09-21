@@ -253,8 +253,8 @@ img { border: none;}
 .question_no {background: url(/images/paper/question_yesno_bg.jpg) no-repeat 0px -396px #FFF;}
 
 .p_q_l_left { float: left; width: 31px;text-align: center; padding-top: 5px;}
-.p_q_l_right_s { float: left; padding: 10px 5px; width: 300px;}
-.p_q_l_right_b { float: left; padding: 10px 5px; width: 500px;}
+.p_q_l_right_s { float: left; padding: 10px 5px; width: 300px; border-left: 1px #EAEAEA solid;}
+.p_q_l_right_b { float: left; padding: 10px 5px; width: 500px; border-left: 1px #EAEAEA solid;}
 
 /*审查-----*/
 .review_btn { position: absolute; bottom: 2px; right: 10px; font-family: "微软雅黑";}
@@ -407,6 +407,81 @@ img { border: none;}
 
 
 
+
+/*综合训练内容页-----------------*/
+
+.zh_test_left { width: 618px; float: left; margin-left: 10px; display: inline;}
+.zh_test_right { width: 232px; float: left; margin-left: 10px;}
+
+.zh_test_top { width: 618px; height: 30px; background: url(/images/paper/zhTest_l_bg.png) no-repeat 0 top;}
+.zh_test_bottom { width: 618px; height: 30px; background: url(/images/paper/zhTest_l_bg.png) no-repeat 0 bottom;}
+
+.zh_test_middle { width: 558px; padding: 0 30px; background: url(/images/paper/zhTest_m_bg.png) repeat-y;}
+
+.tb_loading { width: 464px; height: 18px; background: url(/images/paper/all_bg.png) no-repeat -125px -114px; margin: 0 auto;}
+.tb_loading_t { width: 464px; height: 18px; background: url(/images/paper/all_bg.png) no-repeat -125px -136px;}
+.width_8 { width: 8px;}
+.width_122 { width: 122px;}
+.width_233 { width: 233px;}
+.width_345 { width: 345px;}
+.width_457 { width: 457px;}
+
+.tb_name { width: 464px; height: 32px; line-height: 32px; margin: 0 auto; position: relative; color: #999; font-size: 14px;}
+.tb_name span { position: absolute;}
+.tb_n_task1 { left: -5px;}
+.tb_n_task2 { left: 105px;}
+.tb_n_task3 { left: 215px;}
+.tb_n_task4 { left: 325px;}
+.tb_n_task5 { right: -10px;}
+
+.tb_n_taskColor { color: #2875ae; font-size: 16px;}
+
+.play { height:27px; line-height: 27px;}
+.play_btn { float: left; margin: 0 10px; display: inline;}
+.tishi { float: left;}
+
+.tb_content { padding: 10px 0;}
+
+
+.zhTest_r_title { width: 212px; height: 33px; line-height: 33px; padding-left: 20px; color: #333; background: url(/images/paper/zhTest_r_title.png) no-repeat;}
+.zhTest_r_con { width: 230px; border: 1px #e7e7e8 solid;}
+.zhTest_r_con div { padding: 10px; color: #F00;}
+.zhTest_r_con dl { padding: 10px;}
+.zhTest_r_con dt { height: 32px; line-height: 32px; color: #2875ae; font-size: 14px;}
+.zhTest_r_con dd { color: #333;}
+
+
+.task_con { padding: 10px; border: 1px #CCC solid; margin-top: 10px; line-height: 24px;}
+.task_con p { text-indent: 24px;}
+
+
+/*综合训练1*/
+
+.question_title { line-height: 24px; padding-left: 20px; height: 1%; font-weight: bold; border-bottom: 1px #CCC dashed;}
+.chooseQuestion { line-height: 24px; font-size: 12px;}
+.chooseQuestion li { height: 24px;}
+
+/*综合训练2*/
+
+.tb_con_list { padding: 10px; border: 1px #CCC solid; margin-top: 10px; height: 1%;}
+.explain_btn { width: 60px; height:27px; display: block; overflow: hidden; text-indent: 999px; background: url(/images/paper/all_bg.png) no-repeat -127px -157px; margin-left: 400px;}
+.explain_btn_task2 { width: 60px; height:27px; float: left; background: url(/images/paper/all_bg.png) no-repeat -127px -157px; margin-left: 400px;}
+
+
+/*综合训练3-----------*/
+
+.task3_li { overflow: hidden; color: #333;}
+.task3_li li {height: 25px; border: 1px #CCC solid; text-align: center; line-height: 25px; margin: 5px 7px; padding: 0 10px; float: left;}
+.task3_li li.dropOver { border: 1px #f0f0f0 solid; background: #f9f9f9; color: #cccccc;}
+.task_span { padding: 0 5px; border-bottom: 1px #CCC solid;}
+
+
+/*综合训练5---------------*/
+.task_textarea { overflow: hidden;}
+.task_textarea textarea { width: 99%; height: 100px; margin: 5px 0;}
+
+
+
 /*CSS sabrosus style pagination*/
 
 .sabrosus { padding: 3px; margin: 3px; text-align: center;}
@@ -423,6 +498,13 @@ img { border: none;}
 .foot { width: 880px; margin: 0 auto; background: url(/images/paper/xline.png) repeat-x center 0px; padding: 20px 10px 10px;}
 .foot p { text-align: center; line-height: 24px; height: 24px; color: #999;}
 .foot p a { padding: 0 5px; color: #999;}
+
+
+
+/*笔记查看全文--------------*/
+.allText { width: 600px; padding: 10px; margin: 0 auto;}
+.allText h2 { font-size: 14px; color: #333; line-height: 32px; height: 32px;}
+.allText p { text-indent: 24px; line-height: 18px;}
 
 .tishi_tab { width: 250px; padding: 10px; background: url(/images/paper/mk_b_zz_bg.png) repeat; border: 1px #fff solid; position: absolute; display: none; z-index: 9999;}
 .tishi_tab p { text-align: center; line-height: 24px; font-size: 14px; font-family:"微软雅黑"; color: #fff;}

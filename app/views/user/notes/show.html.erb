@@ -57,9 +57,9 @@
     <% first_question = nil %>
     <% @doc.root.elements["problems"].each_element do |problem|
       problem.elements["questions"].each_element do |question|
-        first_question = question.attributes["id"] if first_question == nil
         unless (question.elements["note_text"].nil? or question.elements["note_text"].text.nil? or
-              question.elements["note_text"].text == "") %>
+              question.elements["note_text"].text == "")
+              first_question = question.attributes["id"] if first_question == nil %>
           <div class="nb_r_box" id="question_info_<%= question.attributes["id"] %>" style="display:none;">
             <div class="nb_r_title">原题</div>
             <div class="nb_r_con">
@@ -75,5 +75,5 @@
   <div class="noteBook_left">您当前未做任何笔记。</div>
 <% end %>
 <script type="text/javascript">
-  note_question_info(<%= first_question %>);
+  window.onload(note_question_info(<%= first_question %>));
 </script>

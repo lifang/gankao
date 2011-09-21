@@ -23,28 +23,28 @@
             <li <% if is_answer %> class="correctRight_bg" <% end %>>
               <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
                 &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="question_attr_<%= question.attributes["id"].to_i %>"
-                                               id="question_attr_<%= i %>"  <% if is_user_answer %>checked="true"<% end %> />
+                                               id="question_attr_<%= i %>"  <% if is_user_answer %>checked="true"<% end %> disabled/>
                                              <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
                 &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>"
-                                               id="question_attr_<%= i %>" <% if is_user_answer %>checked="true"<% end %> />
+                                               id="question_attr_<%= i %>" <% if is_user_answer %>checked="true"<% end %> disabled/>
               <% end %>&nbsp;&nbsp;<%= attrs_array[i] %>
             </li>
           <% end if attrs_array and attrs_array.any? %>
         </ul>
       <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:JUDGE] %>
         <div <% if answers[0].to_i==1 %>class="correctRight_bg"<% end %>>
-          <input type="radio"<% if user_answer==1.to_s %> checked="true"<% end %>  /><label>对</label>
+          <input type="radio"<% if user_answer==1.to_s %> checked="true"<% end %>  disabled/><label>对</label>
         </div>
         <div <% if answers[0].to_i==0 %>class="correctRight_bg"<% end %>>
-          <input type="radio"  <% if user_answer==0.to_s %> checked="true"<% end %>  /><label>错</label>
+          <input type="radio"  <% if user_answer==0.to_s %> checked="true"<% end %>  disabled/><label>错</label>
         </div>
       <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] %>
         <div class="answer_text">
-          <input name="answer" type="text" value="<%= user_answers[0].to_s %>" />
+          <input name="answer" type="text" value="<%= user_answers[0].to_s %>" disabled />
         </div>
       <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] %>
         <div class="answer_textarea">
-          <textarea cols="" rows=""><%= user_answers[0].to_s %></textarea>
+          <textarea cols="" rows="" readonly><%= user_answers[0].to_s %></textarea>
         </div>
       <% end %>
       <div class="p_question_btn" style="display: none;"><button class="save">保存</button><button class="Uncertain">不确定</button></div>

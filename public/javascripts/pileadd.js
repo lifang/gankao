@@ -469,7 +469,10 @@ function show_question(id){
     $('question_'+id).style.display='block';
     
 }
-
+function search_tag(tag){
+    $('tag').value=tag;
+    $("tag_name").submit();
+}
 
 
 jQuery(function() {
