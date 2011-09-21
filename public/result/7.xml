@@ -1,9 +1,7 @@
-<?xml version='1.0' encoding='UTF-8'?>      <exam id='21' step='1'>
-        <paper id='' score='0'>
-          <block></block>
-          <block></block>
-          <block></block>
-          <block></block>
-          <block></block>
+<?xml version='1.0' encoding='UTF-8'?>      <exam id='70'>
+        <paper id='28' score='0'>
+          <questions><question id='90' is_sure='1' score='0'><answer></answer></question><question id='69' is_sure='1' score='0'><answer></answer></question></questions>
+          <auto_score/>
+          <rate_score/>
         </paper>
       </exam>

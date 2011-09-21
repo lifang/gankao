@@ -1,6 +1,6 @@
 <div class="part_div">
-  <div class="part_question">
-    <% @lists.elements["questions"].each_element do |question| %>
+  <div class="part_question" >
+    <% question_answer.elements["questions"].each_element do |question| %>
       <div class="part_q_text">
         <p><%= question.elements["description"].text if question.elements["description"] %> </p>
         <div class="fraction_h">10分</div>
@@ -48,6 +48,10 @@
               <div class="answer_textarea">
                 <textarea cols="" rows=""readonly><%= user_answers[0].to_s %></textarea>
               </div>
+            <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] %>
+              <script type="text/javascript">
+                droppable_result('<%= answers.join(",") %>', '<%= user_answers.join(",") %>', <%= question_answer.attributes["id"] %>);
+              </script>
             <% end %>
           </ul>
           <div class="p_question_btn" style="display: none;"><button class="save">保存</button><button class="Uncertain">不确定</button></div>
