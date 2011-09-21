@@ -205,7 +205,8 @@ function hand_open_nav(block_id) {
                 flash_div.innerHTML = "<p>当前部分还未可以开始答题。</p>";
                 document.body.appendChild(flash_div);
                 show_flash_div();
-            } else {
+            }
+            else {
                 open_nav(block_id);
             }
         } else {
@@ -257,7 +258,8 @@ function get_question_height(question_id, problem_id) {
             for (var j=0; j<q_ids.length; j++) {
                 if (q_ids[j] == question_id) {
                     break;
-                } else {
+                }
+                else {
                     if ($("que_out_" + q_ids[j]) != null) {
                         p_height += $("que_out_" + q_ids[j]).offsetHeight;
                     }
@@ -277,8 +279,8 @@ function create_problem(block_div, problem, block_nav_div) {
     if (problem.score != null && new Number(problem.score) != 0) {
         score_str = "<div class='fraction_h'>" + problem.score + "分</div>";
     }
-    out_que_div.innerHTML = "<div class='part_q_text'><p style='word-wrap:break-word; word-break:break-all;'>"
-    + is_has_audio(block_div, problem) + "</p>" + score_str +"</div>";
+    out_que_div.innerHTML = "<div class='part_q_text'><p style='word-wrap:break-word; word-break:break-all;'>" +
+    is_has_audio(block_div, problem) + "</p>" + score_str +"</div>";
     b_description_div.appendChild(out_que_div);
     
     var question_id_input = create_element("input", "question_ids", "question_ids_" + problem.id, null, "hidden", "value");
@@ -336,14 +338,22 @@ function create_question(problem_id, question_id_input, parent_div, question, in
     //根据problem是否确定来判断question是否确定
     var question_is_sure = create_element("input", "question_sure", "question_sure_" + question.id, null, "hidden", "value");
     parent_div.appendChild(question_is_sure);
+    if (question.correct_type == "6") {
+        create_draggable_div(question, parent_div);
+    }
     var que_out_div = create_element("div", null, "que_out_" + question.id, "p_question_list", null, "innerHTML");
     que_out_div.innerHTML = "<div class='p_q_l_left'>" + innerHTML + "</div>";
     parent_div.appendChild(que_out_div);
     var single_question_div = create_element("div", null, "single_question_" + question.id, "p_q_l_right", null, "innerHTML");
     if (question.description != undefined) {
         var final_description = replace_title_span(question.description, problem_id);
-        single_question_div.innerHTML += "<div class='question_title' style='word-wrap:break-word; word-break:break-all;'>" +
-        final_description + "</div>";
+        if (question.correct_type == "6") {
+            single_question_div.innerHTML += "<div class='q_drag_con' style='word-wrap:break-word; word-break:break-all;'><p>" +
+            final_description + "</p></div>";
+        } else {
+            single_question_div.innerHTML += "<div class='question_title' style='word-wrap:break-word; word-break:break-all;'>" +
+            final_description + "</div>";
+        }
     }
     que_out_div.appendChild(single_question_div);
 
@@ -355,19 +365,45 @@ function create_question(problem_id, question_id_input, parent_div, question, in
     que_out_div.appendChild(create_element("div", null, null, "clear", null, "innerHTML"));
     if (question.correct_type == "6") {
         store_title_span(problem_id, question.id);
+    } else {
+        create_single_question(single_question_div, question);
     }
-    create_single_question(problem_id, single_question_div, question);
-    
+    create_answer_area(single_question_div, question, problem_id);
 }
 
-function create_single_question(problem_id, que_div, question) {
+//创建拖拽区域
+function create_draggable_div(question, que_div) {
+    if (question.correct_type == "6") {
+        if (question.questionattrs != undefined && question.questionattrs != null) {
+            var que_attrs = question.questionattrs.split(";-;");
+            que_attrs = que_attrs.sort(function(){
+                return Math.random()>0.5?-1:1;
+            });
+            var drop_div = create_element("div", null, null, "task3_li", null, "innerHTML");
+            que_div.appendChild(drop_div);
+            var drop_ul = create_element("ul", null, null, null, null, "innerHTML");
+            drop_div.appendChild(drop_ul);
+            for (var m=0; m<que_attrs.length; m++) {
+                if (que_attrs[m] != null && que_attrs[m] != "") {
+                    var drag_attr = create_element("li", null, null, null, null, "innerHTML");
+                    drag_attr.innerHTML = que_attrs[m];
+                    drop_ul.appendChild(drag_attr);
+                    new Draggable(drag_attr,{
+                        revert:true
+                    });
+                    drag_attr.style.cursor='Move';
+                }
+            }
+        }
+    }
+}
+
+//创建不同题型
+function create_single_question(que_div, question) {
     if (question.questionattrs != undefined && question.questionattrs != null) {
-        var que_attrs = question.questionattrs.split(";-;");
+        var que_attrs = question.questionattrs.split(";-;"); 
         var ul = create_element("ul", null, null, "chooseQuestion", null, "innerHTML");
         que_div.appendChild(ul);
-        if (question.correct_type == "6") {
-            que_attrs = que_attrs.sort(function(){return Math.random()>0.5?-1:1;});
-        }
         for (var i=0; i<que_attrs.length; i++) {
             if (que_attrs[i] != null && que_attrs[i] != "") {
                 var attr = create_element("li", null, null, null, null, "innerHTML");
@@ -385,15 +421,7 @@ function create_single_question(problem_id, que_div, question) {
                         attr.innerHTML += "<input type='checkbox' name='question_attr_"+ question.id +"' id='question_attr_"+ i +"' value='"+ que_attrs[i] +"' onclick='javascript:show_que_save_button(\""+question.id+"\")'/>";
                     }
                 }
-                if (question.correct_type == "6") {
-                    attr.innerHTML = que_attrs[i];
-                    new Draggable(attr,{
-                        revert:true
-                    });
-                    attr.style.cursor='Move';
-                } else {
-                    attr.innerHTML += "&nbsp;&nbsp;"+ que_attrs[i];
-                }
+                attr.innerHTML += "&nbsp;&nbsp;"+ que_attrs[i];
             }
         }
     } else {
@@ -429,12 +457,16 @@ function create_single_question(problem_id, que_div, question) {
         que_div.appendChild(attr1);
     }
     
+    
+}
+
+//创建按钮已经答案区域
+function create_answer_area(que_div, question, problem_id) {
     add_que_save_button(que_div, question.id, problem_id);
     var answer_input = create_element("input", "answer_" + question.id, "answer_" + question.id, null, "hidden", "value");
     if (answer_hash != null && answer_hash[question.id] != null) {
         answer_input.value = answer_hash[question.id][0];
     }
-
     que_div.appendChild(answer_input);
 }
 
@@ -941,6 +973,7 @@ function store_title_span(problem_id, question_id) {
     while(str.indexOf("problem_" + problem_id + "_dropplace_" + place_num) >= 0){
         var store_id = "problem_" + problem_id + "_dropplace_" + place_num;
         $(store_id).style.cursor = 'Move';
+        $(store_id).className = "task_span";
         Droppables.add(store_id, {
             onDrop:function(element,store_id){
                 $(store_id).innerHTML = element.innerHTML;

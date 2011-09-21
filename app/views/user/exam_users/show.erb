@@ -50,15 +50,9 @@
                       <script type="text/javascript">audio_element("<%= title.split("<mp3>")[1] %>");</script>
                       <%= title.split("<mp3>")[2].to_s.html_safe.
                         gsub("problem_x_dropplace", "problem_#{problem.attributes["id"]}_dropplace") %>
-                      <script type="text/javascript">
-                        droppable_element('<%= title.split("<mp3>")[2].to_s.html_safe %>', <%= problem.attributes["id"] %>);
-                      </script>
                     <% else %>
                       <%= problem.elements['title'].text.to_s.html_safe.
                         gsub("problem_x_dropplace", "problem_#{problem.attributes["id"]}_dropplace") %>
-                      <script type="text/javascript">
-                        droppable_element('<%= problem.elements['title'].text.to_s.html_safe %>', <%= problem.attributes["id"] %>);
-                      </script>
                     <% end %>
                   </p>
                 <% end %>
