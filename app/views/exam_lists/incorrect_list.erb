@@ -25,11 +25,14 @@
       <div class="el_fenlei">
         <ul>
           <% tag_ids=[] %>
+          <%= form_for :tags, :url=>"/exam_lists/#{params[:id]}/search_tag_problems" ,:html=>{:id=>:tag_name} do %>
+          <input type="hidden" value="" id="tag" name="tag" />
+          <% end %>
           <% @tags.each do |tags| %>
             <% tags.text.split(" ").each do |tag|%>
               <% unless   tag_ids.include?(tag) %>
                 <%  tag_ids<<tag %>
-                <li><a href="javascript:(0)" onclick="javascript:window.location.href='/exam_lists/<%= params[:id] %>/search_tag_problems?tag=<%= tag %>'"><%= tag %></a></li>
+                <li><a href="javascript:(0)" onclick="javascript:search_tag('<%= tag %>')"><%= tag %></a></li>
               <% end
             end unless tags.text.nil? %>
           <% end unless @tags.nil? %>

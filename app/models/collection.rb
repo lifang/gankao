@@ -138,12 +138,17 @@ class Collection < ActiveRecord::Base
   def hand_add_question(paper_url, question_answer, question_path, problem, collection_doc)
     paper = ExamRater.open_file("#{Constant::BACK_PUBLIC_PATH}#{paper_url}")
     paper_question = paper.elements["#{question_path}"]
+    paper_question.elements["tags"].text="#{paper_question.elements["tags"].text} 手动添加"
     add_question(paper_question, question_answer.text, problem, collection_doc)
   end
 
   #手动添加收藏提点
   def hand_add_problem(question_id, paper_url, question_answer, problem_path, collection_doc)
     paper_xml = ExamRater.open_file("#{Constant::BACK_PUBLIC_PATH}#{paper_url}")
+    paper_problem = paper_xml.elements["#{problem_path}"]
+    paper_problem.elements["questions"].each_element do |question|
+      question.elements["tags"].text="#{question.elements["tags"].text} 手动添加"
+    end
     auto_add_problem(paper_xml, question_id, problem_path, question_answer.text, collection_doc)
   end
 

@@ -1,9 +1,7 @@
 #encoding: utf-8
 class ExamListsController < ApplicationController
-  #  before_filter :access?
+  before_filter :access?
   layout "gankao"
-  require 'rexml/document'
-  include REXML
   def  list
     collection = Collection.find_by_user_id(cookies[:user_id])
     lists = collection.open_xml if collection and collection.collection_url
@@ -154,12 +152,17 @@ class ExamListsController < ApplicationController
   end
 
   def search_tag_problems
+    session[:tag]=params[:tag]
+    redirect_to "/exam_lists/#{params[:id]}/search_tag"
+  end
+
+  def search_tag
     @hash_list = {}
     @has_next_page = false
     @lists =list
     if @lists
       @tags=@lists.get_elements("//problems//questions//tags")
-       @lists=Order.serarch_tags(@lists,params[:tag])
+      @lists=Order.serarch_tags(@lists,session[:tag])
       @num = @lists.get_elements("//problems/problem").size
       @lists = Examination.get_start_element(params[:page], @lists)
       current_element = Examination.return_page_element(@lists, @has_next_page)
