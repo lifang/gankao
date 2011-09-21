@@ -1,14 +1,22 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>综合训练</title>
-    <link href="/stylesheets/TrainingAll.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css" />
+    <%= javascript_include_tag :defaults %>
+    <%= use_validate_js_tooltip %>
+    <%= javascript_include_tag 'pileadd' %>
     <script type="text/javascript" src="/javascripts/jquery-1.5.2.js"></script>
     <script type="text/javascript" src="/javascripts/TestPaper.js"></script>
     <script type="text/javascript">
       jQuery.noConflict();
     </script>
+    <%= javascript_include_tag :defaults %>
+    <%= use_validate_js_tooltip %>
+    <%= javascript_include_tag 'jeffrey' %>
+
     <!--[if IE 6]>
     <script src="/javascripts/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>
@@ -19,26 +27,47 @@
       /* change it to what suits you! */
     </script>
     <![endif]-->
-    <%= javascript_include_tag :defaults %>
-    <%= use_validate_js_tooltip %>
-    <%= javascript_include_tag 'jeffrey' %>
   </head>
 
   <body>
     <div class="wrap">
-      <div class="training_box">
-        <div class="tb_top"></div>
-        <div class="tb_midd">
-          <div class="tb_loading">
-            <div class="tb_loading_t width_8"></div>
+      <div class="head">
+        <%=  render :partial => "/common/practice_menu" %>
+      </div>
+
+      <div class="main">
+               <div class="zh_test_left">
+                    <div class="zh_test_top"></div>
+                    <div class="zh_test_middle">
+                         <%= yield  %>
+                    </div>
+                    <div class="zh_test_bottom"></div>
+               </div>
+               <div class="zh_test_right">
+                    <div class="zhTest_r_title">说明</div>
+                    <div class="zhTest_r_con">
+                         <div>综合训练共有五个任务，完成一个任务自动进入下一任务，五个任务完成时，即完成一篇完整的综合训练。</div>
+                         <dl>
+                            <dt>Task I</dt>
+                            <dd>听一边录音，做下面全部小题。</dd>
+                            <dt>Task II</dt>
+                            <dd>听一边录音，理解意思，可以和答案对照看自己是否理解有偏差。</dd>
+                            <dt>Task III</dt>
+                            <dd>根据短文意思，拖动相应的单词，放到短文的空白处。</dd>
+                            <dt>Task IV</dt>
+                            <dd>根据各段短文意思，拖动相应的单词，放到各段短文的空白处。</dd>
+                            <dt>Task V</dt>
+                            <dd>听各段录音，填写各段录音的内容。</dd>
+                         </dl>
+                    </div>
+               </div>
           </div>
-          <%= yield %>
-        </div>
-        <div class="tb_bott"></div>
+
+      <div class="clear"></div>
+      <div class="foot">
+        <%=  render :partial => "/common/footer" %>
       </div>
     </div>
+    <%=  render :partial => "/common/flash_div" %>
   </body>
-  <%= render :partial => "/common/flash_div" %>
-  
 </html>
-
