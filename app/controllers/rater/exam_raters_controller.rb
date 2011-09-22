@@ -65,7 +65,7 @@ class Rater::ExamRatersController < ApplicationController
     @exam_relation.toggle!(:is_marked)
     @exam_relation.update_attributes(:rate_time=>((Time.now-@exam_relation.started_at)/60+1).to_i)
     @exam_user=ExamUser.find(params[:id])
-    url="#{Rails.root}/public/result/#{params[:id]}.xml"
+    url="#{Rails.root}/public/#{@exam_user.answer_sheet_url}"
     doc=ExamRater.open_file(url)
     collection = Collection.find_or_create_by_user_id(@exam_user.user_id)
     collection.set_collection_url

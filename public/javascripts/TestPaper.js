@@ -61,12 +61,13 @@ jQuery(function(){
 //提示框弹出层
 function show_flash_div() {
     (function(){
-        var win_height = jQuery(document).height();
-        var win_width = jQuery(document).width();
+        var scolltop = document.body.scrollTop|document.documentElement.scrollTop;
+        var win_height = document.documentElement.clientHeight;//jQuery(document).height();
+        var win_width = jQuery(window).width();
         var z_layer_height = jQuery('.tishi_tab').height();
         var z_layer_width = jQuery('.tishi_tab').width();
 
-        jQuery('.tishi_tab').css('top',(win_height-z_layer_height)/2);
+        jQuery('.tishi_tab').css('top',(win_height-z_layer_height)/2 + scolltop);
         jQuery('.tishi_tab').css('left',(win_width-z_layer_width)/2);
         jQuery('.tishi_tab').css('display','block');
         setTimeout(function(){

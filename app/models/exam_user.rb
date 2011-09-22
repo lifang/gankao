@@ -235,7 +235,7 @@ class ExamUser < ActiveRecord::Base
 
   #生成考生文件
   def generate_answer_sheet_url(str, path)
-    dir = "#{Rails.root}/public/" + path
+    dir = "#{Rails.root}/public/" + path + "/#{self.examination_id}"
     unless File.directory?(dir)
       Dir.mkdir(dir)
     end
@@ -416,11 +416,11 @@ class ExamUser < ActiveRecord::Base
 
   #编辑考分
   def self.edit_scores(user_id,id,score)
-    url="#{Constant::PUBLIC_PATH}/result/#{user_id}.xml"
+    exam_user = ExamUser.find(user_id)
+    url="#{Constant::PUBLIC_PATH}/#{exam_user.answer_sheet_url}"
     doc=ExamRater.open_file(url)
     doc.elements["paper"].elements["questions"].each_element do |question|
       if question.attributes["id"]==id
-        exam_user=ExamUser.find(user_id)
         exam_user.total_score += (score.to_i-question.attributes["score"].to_i )
         doc.elements["paper"].attributes["score"]=exam_user.total_score
         exam_user.save
