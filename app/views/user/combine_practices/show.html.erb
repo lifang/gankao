@@ -58,23 +58,17 @@
       <span class="tb_n_task5 tb_n_taskColor">Task V</span>
     </div>
   <% end %>
-  <div class="soso">
+  <div>
     <input type="hidden" name="practice_type" id="practice_type" value="<%= @practice_type %>"/>
     <input type="hidden" name="canplaytime" id="canplaytime" value="<%= Constant::CANPLAYTIME["practice_#{@practice_type.to_i}"] %>"/>
     <input type="hidden" name="paper_id" id="paper_id" value=""/>
     <input type="hidden" name="all_quesiton_ids" id="all_question_ids" value=""/>
     <input type="hidden" name="problem_ids" id="problem_ids" value=""/>
     <input type="hidden" name="examination_id" id="examination_id" value="<%= @examination.id %>"/>
-    <input type="hidden" id="total_num"/>
-    <input type="hidden" id="complete_num"/>
     <input type="hidden" name="show_answer" id="show_answer" value="<%= @answer_array %>"/>
-    <!--      <div>题目数：共<span id="total_num"></span>题/已完成<span id="complete_num">0</span>题</div>   -->
-    <div><span id="local_time"></span></div>
-    <%=  render :partial => "/common/display_flash" %>
   </div>
   <div id="block_ids" style="display:none;"></div>
   <div id="blocks">
-    <%#*<div  id="paper_navigation" style="display:none;" class="tb_content"></div>%>
   </div>
   <div id="remote_div" style="display:none;"></div>
   <input type="hidden" name="types" value="<%= @examination.types %>"/>
