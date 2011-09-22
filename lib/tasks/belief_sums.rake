@@ -4,7 +4,7 @@ include REXML
 namespace :belief do
   desc "rate paper"
   task(:sums => :environment) do
-    if [1, 8, 15, 22, 29].include?(Time.now.to_date)
+    if [1, 8, 15, 22, 29].include?(Time.now.day)
       @examinations = Examination.find_by_sql("select count(types) sums, types from examinations
       where is_published = #{Examination::IS_PUBLISHED[:ALREADY]}
       and types != #{Examination::TYPES[:SIMULATION]} group by types")

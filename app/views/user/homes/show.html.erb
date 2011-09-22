@@ -47,7 +47,11 @@
       <div class="per_tb_title">信心</div>
       <div class="xx_biao">
         <% if is_vip? %>
-        <img src="<%= current_user.belief_url %>" />
+          <% if current_user.belief_url %>
+            <img src="<%= current_user.belief_url %>" />
+          <% else %>
+            <img src="/images/paper/xx_biao.jpg" />
+          <% end %>
         <% else %>
           <img src="/images/paper/xx_biao.jpg" />
           <a href="/users/goto_vip" target="_blank">能不能过，信心指数告诉你！</a>

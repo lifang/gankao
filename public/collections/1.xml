@@ -1,35 +1,377 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<collection id='2'>
+<collection id='1'>
     <problems>
-        <problem id='10' score='5' types='0'>
-            <title>fsdafafsfsaf</title>
+        <problem delete_status='1' id='1' repeat_num='10' score='5' types='0'>
+            <title>Until then, his family ________ from him for six months.</title>
             <category>3</category>
             <questions>
-                <question correct_type='0' error_percent='0' id='15' repeat_num='1' score='5'>
-                    <answer>789</answer>
-                    <analysis>sdfsfasf</analysis>
-                    <questionattrs>23;-;wer;-;65;-;789</questionattrs>
-                    <tags>ew</tags>
-                    <user_answer></user_answer>
+                <question correct_type='0' delete_status='1' error_percent='50' id='1' repeat_num='6' score='5'>
+                    <answer>D   hadn’t heard</answer>
+                    <analysis>直到刚才，表明从“刚才”以后我有他的消息了，表示过去我没有他的消息，所以用 “hadn&apos;t heard”</analysis>
+                    <questionattrs>A   didn’t hear;-;B   hasn’t been hearing;-;C   hasn’t heard;-;D   hadn’t heard</questionattrs>
+                    <tags>过去时</tags>
+                    <user_answer>A   didn’t hear</user_answer>
+                    <user_answer>B   hasn’t been hearing</user_answer>
+                    <user_answer/>
+                    <user_answer>A   didn’t hear</user_answer>
+                    <user_answer/>
+                    <user_answer>A   didn’t hear</user_answer>
+                    <user_answer/>
+                    <user_answer/>
+                    <user_answer/>
+                    <user_answer/>
+                    <user_answer>C   hasn’t heard</user_answer>
+                    <user_answer>C   hasn’t heard</user_answer>
+                    <user_answer/>
+                    <user_answer>er3</user_answer>
                 </question>
             </questions>
         </problem>
-        <problem id='9' score='5' types='0'>
-            <title>&lt;img title=&quot;播放&quot; src=&quot;/images/paper/play_icon.png&quot; id=&apos;audio_control_9&apos; onclick=&quot;javascript:control_audio(9);&quot;&gt;&amp;nbsp;
-&lt;mp3&gt;/media/music.mp3&lt;mp3&gt;
-
-我撒的飞洒
-            </title>
+        <problem delete_status='1' id='2' incorrect_num='1' score='5' types='0'>
+            <title>Until then, his family ________ from him for six months.</title>
             <category>3</category>
             <questions>
-                <question correct_type='0' error_percent='0' id='14' repeat_num='1' score='5'>
+                <question correct_type='0' delete_status='1' error_percent='0' id='2' repeat_num='2' score='5'>
+                    <answer>D   hadn’t heard</answer>
+                    <analysis>直到刚才，表明从“刚才”以后我有他的消息了，表示过去我没有他的消息，所以用 “hadn&apos;t heard”</analysis>
+                    <questionattrs>A   didn’t hear;-;B   hasn’t been hearing;-;C   hasn’t heard;-;D   hadn’t heard</questionattrs>
+                    <tags>过去时</tags>
+                    <user_answer>C   hasn’t heard</user_answer>
+                    <user_answer/>
+                </question>
+            </questions>
+        </problem>
+        <problem delete_status='1' id='3' incorrect_num='1' score='5' types='0'>
+            <title>山东大厦</title>
+            <category>1</category>
+            <questions>
+                <question correct_percent='50%' correct_type='0' delete_status='1' id='3' score='5'>
+                    <answer>阿萨德</answer>
+                    <analysis/>
+                    <questionattrs>阿萨德;-;发动;-; 地方;-;国服</questionattrs>
+                    <tags/>
+                    <user_answer>地方</user_answer>
+                    <user_answer>国服</user_answer>
+                </question>
+            </questions>
+        </problem>
+        <problem delete_status='1' id='4' incorrect_num='2' repeat_num='7' score='16' types='0'>
+            <title>阿斯顿sad</title>
+            <category>1</category>
+            <questions>
+                <question correct_percent='50%' correct_type='0' delete_status='1' error_percent='0' id='4' repeat_num='2' score='16'>
+                    <answer>df </answer>
+                    <analysis/>
+                    <questionattrs>df ;-;fgf ;-;h ;-;ghgh</questionattrs>
+                    <tags/>
+                    <user_answer>ghgh</user_answer>
+                    <user_answer/>
+                    <user_answer>ghgh</user_answer>
+                    <user_answer/>
+                    <user_answer/>
+                    <user_answer/>
+                    <user_answer>h </user_answer>
+                    <user_answer/>
+                    <user_answer>h </user_answer>
+                    <user_answer>h </user_answer>
+                    <user_answer>fgf </user_answer>
+                    <user_answer>11</user_answer>
+                </question>
+            </questions>
+        </problem>
+        <problem id='9' repeat_num='11' score='5' types='0'>
+            <title>少打</title>
+            <category>1</category>
+            <questions>
+                <question correct_type='0' delete_status='1' error_percent='33' id='9' repeat_num='3' score='5'>
+                    <answer>adsad</answer>
+                    <analysis/>
+                    <questionattrs>adsad;-;规范法官;-;会更好;-;很久很久</questionattrs>
+                    <tags/>
+                    <user_answer>规范法官</user_answer>
+                    <user_answer/>
+                    <user_answer>会更好</user_answer>
+                    <user_answer>规范法官</user_answer>
+                    <user_answer/>
+                    <user_answer>规范法官</user_answer>
+                    <user_answer>规范法官</user_answer>
+                    <user_answer/>
+                </question>
+                <question correct_type='0' error_percent='0' id='14' repeat_num='4' score='5'>
                     <answer>sfs</answer>
                     <analysis>sfafwerwr2r2</analysis>
                     <questionattrs>sfs;-;sfss;-;sdds;-;sd</questionattrs>
                     <tags>wrwr</tags>
+                    <user_answer/>
+                    <user_answer/>
+                    <user_answer>sdds</user_answer>
+                    <user_answer>sfss</user_answer>
+                    <user_answer>sfss</user_answer>
+                    <user_answer/>
+                    <user_answer>sdds</user_answer>
+                    <user_answer>sfss</user_answer>
+                    <user_answer/>
+                    <user_answer/>
+                </question>
+            </questions>
+        </problem>
+        <problem id='10' repeat_num='6' score='5' types='0'>
+            <title>阿斯顿sad</title>
+            <category>1</category>
+            <questions>
+                <question correct_type='0' error_percent='0' id='10' repeat_num='1' score='5'>
+                    <answer>豆腐干</answer>
+                    <analysis/>
+                    <questionattrs>豆腐干;-;哥哥;-;塞维尔v;-;东方饭店个</questionattrs>
+                    <tags>ew</tags>
+                    <user_answer>哥哥</user_answer>
+                    <user_answer>哥哥</user_answer>
+                    <user_answer>东方饭店个</user_answer>
+                    <user_answer>东方饭店个</user_answer>
+                </question>
+                <question correct_type='0' error_percent='0' id='15' repeat_num='4' score='5'>
+                    <answer>789</answer>
+                    <analysis>sdfsfasf</analysis>
+                    <questionattrs>23;-;wer;-;65;-;789</questionattrs>
+                    <tags>ew</tags>
+                    <user_answer/>
+                    <user_answer>65</user_answer>
+                    <user_answer>23</user_answer>
+                    <user_answer/>
+                    <user_answer>65</user_answer>
+                    <user_answer>wer</user_answer>
+                    <user_answer>wer</user_answer>
+                </question>
+            </questions>
+        </problem>
+        <problem id='11' repeat_num='8' score='5' types='0'>
+            <title>但是发生堵塞</title>
+            <category>1</category>
+            <questions>
+                <question correct_type='0' error_percent='71' id='11' repeat_num='7' score='5'>
+                    <answer>共和国</answer>
+                    <analysis/>
+                    <questionattrs>阿萨德;-;阿萨德打算;-;对方答复;-;共和国</questionattrs>
+                    <tags/>
+                    <user_answer>阿萨德打算</user_answer>
+                    <user_answer>对方答复</user_answer>
+                    <user_answer>阿萨德</user_answer>
+                    <user_answer>对方答复</user_answer>
+                    <user_answer/>
+                    <user_answer/>
+                    <user_answer/>
+                    <user_answer/>
+                    <user_answer/>
+                    <user_answer/>
+                    <user_answer>共和国</user_answer>
+                    <user_answer>共和国</user_answer>
+                    <user_answer>共和国</user_answer>
+                    <user_answer>共和国</user_answer>
+                    <user_answer>on</user_answer>
+                </question>
+            </questions>
+        </problem>
+        <problem id='12' repeat_num='12' score='5' types='0'>
+            <title>说的是对的</title>
+            <category>2</category>
+            <questions>
+                <question correct_type='0' error_percent='40' id='12' repeat_num='10' score='5'>
+                    <answer>阿斯达岁的大幅度</answer>
+                    <analysis>阿斯达岁的</analysis>
+                    <questionattrs>阿斯达岁的大幅度;-;豆腐干风格;-;刚好好机会;-;很久很久</questionattrs>
+                    <tags/>
+                    <user_answer>很久很久</user_answer>
+                    <user_answer/>
+                    <user_answer>很久很久</user_answer>
+                    <user_answer>豆腐干风格</user_answer>
+                    <user_answer>很久很久</user_answer>
+                    <user_answer>刚好好机会</user_answer>
+                    <user_answer>很久很久</user_answer>
+                    <user_answer>很久很久</user_answer>
+                    <user_answer/>
+                    <user_answer>很久很久</user_answer>
+                    <user_answer/>
+                    <user_answer>刚好好机会</user_answer>
+                    <user_answer/>
+                    <user_answer>豆腐干风格</user_answer>
+                    <user_answer>很久很久</user_answer>
+                    <user_answer>豆腐干风格</user_answer>
+                    <user_answer>很久很久</user_answer>
+                    <user_answer>阿斯达岁的大幅度</user_answer>
+                    <user_answer>阿斯达岁的大幅度</user_answer>
+                    <user_answer>刚好好机会</user_answer>
+                    <user_answer>豆腐干风格</user_answer>
+                    <user_answer>阿斯达岁的大幅度</user_answer>
+                </question>
+            </questions>
+        </problem>
+        <problem id='33' score='44' types='3'>
+            <title>sdfasfasfasfasfsafdsaf&lt;div&gt;sdfafsafsf&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;sfdasfsaf&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;sfd&lt;/div&gt;&lt;div&gt;asfd&lt;/div&gt;&lt;div&gt;asf&lt;/div&gt;&lt;div&gt;saf&lt;/div&gt;&lt;div&gt;asf&lt;/div&gt;&lt;div&gt;asfasf&lt;/div&gt;</title>
+            <category>3</category>
+            <questions>
+                <question correct_type='3' error_percent='0' id='36' repeat_num='2' score='44'>
+                    <answer>fsafdasfsaf
+&lt;p&gt;safd&lt;/p&gt;
+&lt;p&gt;asf&lt;/p&gt;
+asf
+asf
+saf
+asf
+                    </answer>
+                    <analysis>444ererte</analysis>
+                    <questionattrs/>
+                    <tags/>
+                    <user_answer/>
+                </question>
+            </questions>
+        </problem>
+        <problem id='35' score='65' types='4'>
+            <title>测试测测试测测试测测试测测试测测试测&lt;div&gt;测试测测试测测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测测试测&lt;/div&gt;</title>
+            <category>3</category>
+            <questions>
+                <question correct_type='0' error_percent='0' id='38' repeat_num='2' score='5'>
+                    <description>单复数测试测测试测测试测测试测v</description>
+                    <answer>wer</answer>
+                    <analysis>sdfafsafsafsfsafaffasfsfasfsfsafsf</analysis>
+                    <questionattrs>wer;-;awre;-;sf;-;4t34</questionattrs>
+                    <tags>3</tags>
+                    <user_answer/>
+
+                    <user_answer/>
+                </question>
+                <question correct_type='1' error_percent='0' id='39' repeat_num='2' score='6'>
+                    <description>sadfasssssssssssssssssss4t344555</description>
+                    <answer>sdfa;|;qq2</answer>
+                    <analysis>sdfasdfsafsafdsafa</analysis>
+                    <questionattrs>sdfa;-;qq2;-;zxc;-;tgrt</questionattrs>
+                    <tags>4</tags>
+                    <user_answer/>
+                    <user_answer/>
+                </question>
+                <question correct_type='2' error_percent='0' id='40' repeat_num='2' score='54'>
+                    <description>safwerwetewrtewrt</description>
+                    <answer>1</answer>
+                    <analysis>erqetqqqtewt4333333333333</analysis>
+                    <questionattrs/>
+                    <tags/>
+                    <user_answer/>
+                    <user_answer/>
+                </question>
+                <question correct_type='3' error_percent='0' id='41' repeat_num='2' score='0'>
+                    <description>asdffffffffffffffffffffffffffffffffffffffff</description>
+                    <answer>fffffwrrrrrrrrrrrrrrrrrrrrr</answer>
+                    <analysis>wetrwqtrwqerqtwqtwqetwqtwqt</analysis>
+                    <questionattrs/>
+                    <tags/>
+                    <user_answer/>
+                    <user_answer/>
+                </question>
+            </questions>
+        </problem>
+        <problem id='34' score='4' types='5'>
+            <title>测试简答题&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;</title>
+            <category>3</category>
+            <questions>
+                <question correct_type='5' error_percent='0' id='37' repeat_num='8' score='4'>
+                    <answer>测试简答题&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;</answer>
+                    <analysis>gdsfgdsgdsg</analysis>
+                    <questionattrs/>
+                    <tags/>
+                    <user_answer>dasdad</user_answer>
+                    <user_answer/>
+                    <user_answer/>
+                    <user_answer/>
+                    <user_answer>dfddddssssdddd</user_answer>
+                    <user_answer>jjjhhfffsdsasass</user_answer>
+                </question>
+            </questions>
+        </problem>
+        <problem id='70' score='15' types='0'>
+            <title>得得得得</title>
+            <category>1</category>
+            <questions>
+                <question correct_type='0' error_percent='0' id='84' repeat_num='1' score='15'>
+                    <answer>讲讲价</answer>
+                    <analysis/>
+                    <questionattrs>等待;-;凤飞飞;-;呵呵;-;讲讲价</questionattrs>
+                    <tags> 手动添加</tags>
+                    <user_answer/>
+                </question>
+            </questions>
+        </problem>
+        <problem id='71' score='16' types='2'>
+            <title>飞飞蜂蝶多</title>
+            <category>1</category>
+            <questions>
+                <question correct_type='2' error_percent='0' id='85' repeat_num='3' score='16'>
+                    <answer>1</answer>
+                    <analysis>试试撒</analysis>
+                    <questionattrs/>
+                    <tags>dddd 凤飞飞 为鹅鹅鹅 弹弹堂 手动添加</tags>
+                    <user_answer/>
+                    <user_answer>on</user_answer>
+                    <user_answer>on</user_answer>
+                </question>
+            </questions>
+        </problem>
+        <problem id='57' score='20' types='4'>
+            <title>1111111111111</title>
+            <category>1</category>
+            <questions>
+
+                <question correct_type='1' error_percent='0' id='69' repeat_num='1' score='3'>
+                    <description>11</description>
+                    <answer>11;|;111111</answer>
+                    <questionattrs>1;-;11;-;1111;-;111111;-;11111111</questionattrs>
+                    <tags> 手动添加</tags>
+                    <user_answer/>
+                </question>
+
+                <question correct_type='2' error_percent='0' id='70' repeat_num='1' score='6'>
+                    <description>1111111</description>
+                    <answer>1</answer>
+                    <questionattrs/>
+                    <tags> 手动添加</tags>
+                    <user_answer/>
+                </question>
+            </questions>
+        </problem>
+        <problem id='76' score='145' types='6'>
+            <title>The motivation for  &lt;font color=&quot;blue&quot; id=&quot;problem_x_dropplace_1&quot;&gt;____________&lt;/font&gt; starting Project Euler, and its continuation, is to provide a platform for  &lt;font color=&quot;blue&quot; id=&quot;problem_x_dropplace_2&quot;&gt;____________&lt;/font&gt;  the inquiring mind  &lt;font color=&quot;blue&quot; id=&quot;problem_x_dropplace_3&quot;&gt;____________&lt;/font&gt;  to delve into unfamiliar areas and  &lt;font color=&quot;blue&quot;  id=&quot;problem_x_dropplace_4&quot;&gt;____________&lt;/font&gt;   learn new concepts in a fun and recreational context.</title>
+            <category>2</category>
+            <questions>
+                <question correct_type='6' error_percent='0' id='88' repeat_num='9' score='145'>
+                    <description>出cccxxxx</description>
+                    <answer>得得得得的是;|;风风光光;|;gggg;|;9999iii</answer>
+                    <analysis>得得得得仿佛腹股沟管呵呵</analysis>
+                    <questionattrs>得得得得的是;-;风风光光;-;gggg;-;vvvhhy;-;9999iii;-;呵呵健健康康;-;卡卡卡卡卡</questionattrs>
+                    <tags> 手动添加</tags>
+                    <user_answer/>
+                    <user_answer/>
+                    <user_answer/>
+                    <user_answer/>
+                    <user_answer/>
+                    <user_answer/>
+                    <user_answer/>
+                    <user_answer/>
                     <user_answer></user_answer>
+                </question>
+            </questions>
+        </problem>
+        <problem id='39' score='0' types='4'>
+            <title>测试</title>
+            <category>2</category>
+            <questions>
+                <question correct_type='6' error_percent='0' id='43' repeat_num='1' score='0'>
+                    <description>&lt;span id=&quot;problem_x_dropplace_1&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_x_dropplace_2&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_x_dropplace_3&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_x_dropplace_4&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_x_dropplace_5&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_x_dropplace_6&quot;&gt;________&lt;/span&gt;</description>
+                    <answer>111;|;222;|;333;|;444;|;555;|;666</answer>
+                    <analysis>法上发生的</analysis>
+                    <questionattrs>111;-;222;-;333;-;444;-;555;-;666</questionattrs>
+                    <tags> 手动添加</tags>
+                    <user_answer>333;|;222;|;444;|;666;|;555;|;222</user_answer>
                 </question>
             </questions>
         </problem>
     </problems>
 </collection>
+
