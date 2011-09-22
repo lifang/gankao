@@ -1,4 +1,3 @@
-
 <%= javascript_include_tag 'jeffrey' %>
 <%= javascript_include_tag 'cookie' %>
 <script language="javascript" type="text/javascript">
@@ -46,11 +45,9 @@
     <div><span id="local_time"></span></div>
     <%=  render :partial => "/common/display_flash" %>
   </div>
-  <div  id="paper_navigation" style="display:none;" class="tb_content">
-  </div>
   <div id="block_ids" style="display:none;"></div>
   <div id="blocks">
-
+    <%#*<div  id="paper_navigation" style="display:none;" class="tb_content"></div>%>
   </div>
   <div id="remote_div" style="display:none;"></div>
   <input type="hidden" name="types" value="<%= @examination.types %>"/>
@@ -59,7 +56,6 @@
   <div class="tb_prevNext">
     <a href="#" id="tb_goleft" class="tb_goleft"></a>
     <%= f.submit "",:class=>"tb_check"%>
-    <a href="#" id="tb_goright" class="tb_goright"></a>
   </div>
 
 <% end %>

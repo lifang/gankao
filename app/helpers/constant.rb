@@ -70,7 +70,7 @@ module Constant
    VIP=10
 
   #非vip能做综合训练的次数
-  PRACTICES_COUNT = 5
+  PRACTICES_COUNT = 50
 
   
   
