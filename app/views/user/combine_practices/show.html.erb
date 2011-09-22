@@ -23,7 +23,7 @@
     </div>
   <% elsif @practice_type==3  %>
     <div class="tb_loading"><div class="tb_loading_t width_122"></div></div>
-        <div class="tb_name">
+    <div class="tb_name">
       <span class="tb_n_task1">Task I</span>
       <span class="tb_n_task2 tb_n_taskColor">Task II</span>
       <span class="tb_n_task3">Task III</span>
@@ -32,7 +32,7 @@
     </div>
   <% elsif @practice_type==4  %>
     <div class="tb_loading"><div class="tb_loading_t width_233"></div></div>
-        <div class="tb_name">
+    <div class="tb_name">
       <span class="tb_n_task1">Task I</span>
       <span class="tb_n_task2">Task II</span>
       <span class="tb_n_task3 tb_n_taskColor">Task III</span>
@@ -41,7 +41,7 @@
     </div>
   <% elsif @practice_type==5  %>
     <div class="tb_loading"><div class="tb_loading_t width_345"></div></div>
-        <div class="tb_name">
+    <div class="tb_name">
       <span class="tb_n_task1">Task I</span>
       <span class="tb_n_task2">Task II</span>
       <span class="tb_n_task3">Task III</span>
@@ -50,7 +50,7 @@
     </div>
   <% elsif @practice_type==6  %>
     <div class="tb_loading"><div class="tb_loading_t width_457"></div></div>
-        <div class="tb_name">
+    <div class="tb_name">
       <span class="tb_n_task1">Task I</span>
       <span class="tb_n_task2">Task II</span>
       <span class="tb_n_task3">Task III</span>
@@ -58,35 +58,30 @@
       <span class="tb_n_task5 tb_n_taskColor">Task V</span>
     </div>
   <% end %>
-    <div class="space20"></div>
-    <div class="soso">
-      <input type="hidden" name="practice_type" id="practice_type" value="<%= @practice_type %>"/>
-      <input type="hidden" name="canplaytime" id="canplaytime" value="<%= Constant::CANPLAYTIME["practice_#{@practice_type.to_i}"] %>"/>
-      <input type="hidden" name="paper_id" id="paper_id" value=""/>
-      <input type="hidden" name="all_quesiton_ids" id="all_question_ids" value=""/>
-      <input type="hidden" name="problem_ids" id="problem_ids" value=""/>
-      <input type="hidden" name="examination_id" id="examination_id" value="<%= @examination.id %>"/>
-      <input type="hidden" id="total_num"/>
-      <input type="hidden" id="complete_num"/>
-      <input type="hidden" name="show_answer" id="show_answer" value="<%= @answer_array %>"/>
-      <!--      <div>题目数：共<span id="total_num"></span>题/已完成<span id="complete_num">0</span>题</div>   -->
-      <div><span id="local_time"></span></div>
-      <%=  render :partial => "/common/display_flash" %>
-    </div>
-  <div  id="paper_navigation" style="display:none;" class="tb_content">
+  <div class="soso">
+    <input type="hidden" name="practice_type" id="practice_type" value="<%= @practice_type %>"/>
+    <input type="hidden" name="canplaytime" id="canplaytime" value="<%= Constant::CANPLAYTIME["practice_#{@practice_type.to_i}"] %>"/>
+    <input type="hidden" name="paper_id" id="paper_id" value=""/>
+    <input type="hidden" name="all_quesiton_ids" id="all_question_ids" value=""/>
+    <input type="hidden" name="problem_ids" id="problem_ids" value=""/>
+    <input type="hidden" name="examination_id" id="examination_id" value="<%= @examination.id %>"/>
+    <input type="hidden" id="total_num"/>
+    <input type="hidden" id="complete_num"/>
+    <input type="hidden" name="show_answer" id="show_answer" value="<%= @answer_array %>"/>
+    <!--      <div>题目数：共<span id="total_num"></span>题/已完成<span id="complete_num">0</span>题</div>   -->
+    <div><span id="local_time"></span></div>
+    <%=  render :partial => "/common/display_flash" %>
   </div>
   <div id="block_ids" style="display:none;"></div>
   <div id="blocks">
-
+    <%#*<div  id="paper_navigation" style="display:none;" class="tb_content"></div>%>
   </div>
   <div id="remote_div" style="display:none;"></div>
   <input type="hidden" name="types" value="<%= @examination.types %>"/>
   <input type="hidden" name="answer_url" id="answer_url"
          value="<%= Constant::ANSWER_CLIENT_PATH %>/<%= @examination.exam_user_id %>.xml"/>
-  <div class="tb_prevNext">
-    <a href="#" id="tb_goleft" class="tb_goleft"></a>
+  <div class="tb_checkBox">
     <%= f.submit "",:class=>"tb_check"%>
-    <a href="#" id="tb_goright" class="tb_goright"></a>
   </div>
 
 <% end %>
