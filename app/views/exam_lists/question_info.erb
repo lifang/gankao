@@ -26,11 +26,9 @@
                 </ul>
                 <% description =question.elements['description'].text.to_s.gsub("problem_x_dropplace", "problem_#{@problem.attributes["id"]}_dropplace") %>
                 <input type="hidden" value="<%= description %>" id="description_<%=question.attributes["id"]  %>" />
-                <script type="text/javascript"> show_drag_answer(<%= question.attributes["id"] %>,'<%= @problem.attributes["id"] %>','<%=description
-                %>');</script>
+                <script type="text/javascript"> show_drag_answer(<%= question.attributes["id"] %>);</script>
               <% end %>
             </div>
-
           <% end %>
           <% @problem.elements["questions"].each_element do |question| %>
             <% attr +=question.attributes["id"]+","
