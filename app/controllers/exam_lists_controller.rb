@@ -93,7 +93,7 @@ class ExamListsController < ApplicationController
       question.attributes["error_percent"] = ((true_num.to_f/(question.attributes["repeat_num"].to_i))*100).round
     end
     self.write_xml("#{Constant::PUBLIC_PATH}#{collection.collection_url}", doc)
-    render :partial=>"/exam_lists/question_answer",:object=>problem
+    render :partial=>"/exam_lists/question_answer",:object=>list.elements["/collection/problems/problem[@id='#{problem_id}']"]
   end
   
   def delete_problem

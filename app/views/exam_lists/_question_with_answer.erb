@@ -1,23 +1,45 @@
 <div class="part_question">
   <% attr="" %>
+  <div class="part_q_text">
+    <%=  question_with_answer.elements['title'].text %>
+    <div class="fraction_h">10分</div>
+  </div>
   <% question_with_answer.elements["questions"].each_element do |question| %>
-    <div class="part_q_text">
-      <p><%= question.elements["description"].text if question.elements["description"] %> </p>
-      <div class="fraction_h">10分</div>
-    </div>
-    <% attr +=question.attributes["id"]+"," %>
+    <% attr +=question.attributes["id"]+","
+    attrs_str = question.elements["questionattrs"].text
+    attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
+    correct_type = question.attributes["correct_type"]
+    answer = question.elements["answer"]
+    answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
+    user_answer = question.get_elements("#{question.xpath}/user_answer")[-1].text
+    user_answers=user_answer.nil? ? [] :  user_answer.split(";|;") %>
     <div class="p_question_list question_no"  >
       <div class="p_q_l_left"><%= question.attributes["id"] %></div>
       <div class="p_q_l_right_b" onmouseover="javascript:show_question('<%= question.attributes["id"] %>')" >
+        <div class="question_title">
+          <% unless  question.elements['description'].nil? || question.elements['description'].text.nil?%>
+            <p style="word-wrap:break-word; word-break:break-all;" id="question_info_<%= question_with_answer.attributes["id"] %>">
+              <% title = question.elements['description'].text.to_s.html_safe %>
+              <% if title =~ /<mp3>/  %>
+                <script type="text/javascript">audio_element("<%= title.split("<mp3>")[1] %>");</script>
+                <%= title.split("<mp3>")[2].to_s.html_safe.
+                  gsub("problem_x_dropplace", "problem_#{question_with_answer.attributes["id"]}_dropplace") %>
+                <script type="text/javascript">
+                  droppable_element('<%= title.split("<mp3>")[2].to_s.html_safe %>', <%= question_with_answer.attributes["id"] %>);
+                </script>
+              <% else %>
+                <% description=question.elements['description'].text.to_s.html_safe.
+                  gsub("problem_x_dropplace", "problem_#{question_with_answer.attributes["id"]}_dropplace") %>
+                <%= description %>
+              <% end %>
+            </p>
+          <% end %>
+          <script type="text/javascript">
+           droppable_result('<%= answers.join(",") %>', '<%= user_answers.join(",") %>', <%= question_with_answer.attributes["id"] %>);
+          </script>
+        </div>
         <span id="user_score_<%= question.attributes["id"].to_i %>">
         </span>
-        <% attrs_str = question.elements["questionattrs"].text
-        attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
-        correct_type = question.attributes["correct_type"]
-        answer = question.elements["answer"]
-        answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
-        user_answer=question.elements["user_answer"].text
-        user_answers=user_answer.nil? ? [] :  user_answer.split(";|;") %>
         <% if (correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] or
               correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE]) %>
           <ul class="chooseQuestion">
@@ -28,11 +50,11 @@
             %>
               <li <% if is_answer %> class="correctRight_bg" <% end %>>
                 <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
-                  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="question_attr_<%= question.attributes["id"].to_i %>"
-                                                 id="question_attr_<%= i %>"  <% if is_user_answer %>checked="true"<% end %> disabled/>
-                                               <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
-                  &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>"
-                                                 id="question_attr_<%= i %>" <% if is_user_answer %>checked="true"<% end %> disabled/>
+                  <input type="checkbox" name="question_attr_<%= question.attributes["id"].to_i %>"
+                         id="question_attr_<%= i %>"  <% if is_user_answer %>checked="true"<% end %> disabled/>
+                       <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
+                  <input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>"
+                         id="question_attr_<%= i %>" <% if is_user_answer %>checked="true"<% end %> disabled/>
                 <% end %>&nbsp;&nbsp;<%= attrs_array[i] %>
               </li>
             <% end if attrs_array and attrs_array.any? %>
@@ -51,10 +73,6 @@
             <div class="answer_textarea">
               <textarea cols="" rows=""readonly><%= user_answers[0].to_s %></textarea>
             </div>
-          <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] %>
-            <script type="text/javascript">
-              droppable_result('<%= answers.join(",") %>', '<%= user_answers.join(",") %>', <%= question_with_answer.attributes["id"] %>);
-            </script>
           <% end %>
         </ul>
         <div class="p_question_btn" style="display: none;"><button class="save">保存</button><button class="Uncertain">不确定</button></div>

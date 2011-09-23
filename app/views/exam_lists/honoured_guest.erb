@@ -1,2 +1,27 @@
-<div id="txWB_W1" style="left: 400px;background-color: red;"></div><script type="text/javascript">var tencent_wb_name = "jeffrey6052";
-var tencent_wb_sign = "edc68ad19fb0cc21fcc9801140712e5bf1147540";var tencent_wb_style = "3";</script><script type="text/javascript" src="http://v.t.qq.com/follow/widget.js" charset="utf-8"/></script>
+   <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] %>
+            <div class="part_question">
+              <div class="task3_li">
+                <ul id="question_lis">
+                  <% all_attr=attrs_array.shuffle%>
+                  <% (0..all_attr.length-1).each do |i| %>
+                    <li><%= all_attr[i] %> </li>
+                  <% end if attrs_array and attrs_array.any? %>
+                </ul>
+              </div>
+            </div>
+            <script type="text/javascript"> show_drag_answer();</script>
+            <div class="clear"></div>
+          <% end %>
+
+
+                            <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] %>
+                  <div class="q_drag_con">
+                    <p><%title=question.elements["description"].text.to_s.html_safe.
+                        gsub("problem_x_dropplace", "problem_#{@problem.attributes["id"]}_dropplace")  %>
+                      <%= title %>
+                    </p>
+                    <script type="text/javascript">
+                      droppable_element('<%= title %>', <%= @problem.attributes["id"] %>);
+                    </script>
+                  </div>
+                <% else %>

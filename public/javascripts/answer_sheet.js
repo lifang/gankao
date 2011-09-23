@@ -112,7 +112,7 @@ function generate_audio_element(problem_title) {
     return final_title;
 }
 
-function droppable_element(problem_title, problem_id) {  
+function droppable_element(problem_title, problem_id) {
     var place_num = 1;
     while(problem_title.indexOf("problem_" + problem_id + "_dropplace_" + place_num) >= 0){
         var store_id = "problem_" + problem_id + "_dropplace_" + place_num;
@@ -133,7 +133,12 @@ function droppable_result(true_answers, user_answers, problem_id) {
     var str = $("question_info_" + problem_id).innerHTML;
     var place_num = 1;
     while (str.indexOf("problem_" + problem_id + "_dropplace_" + place_num) >= 0) {
-        $("problem_" + problem_id + "_dropplace_" + place_num).innerHTML = user_answer[place_num - 1];
+        if(user_answer[place_num - 1]==""||user_answer[place_num - 1]==undefined){
+            $("problem_" + problem_id + "_dropplace_" + place_num).innerHTML="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+        }
+        else{
+            $("problem_" + problem_id + "_dropplace_" + place_num).innerHTML = user_answer[place_num - 1];
+        }
         if (answers[place_num - 1] == user_answer[place_num - 1]) {
             $("problem_" + problem_id + "_dropplace_" + place_num).className = "task_span correctRight_bg";
         } else {
@@ -159,7 +164,7 @@ function openwindow(id){
 }
 
 function generate_dialog_html(id) {
-        var title = window.opener.document.getElementById("title_"+id).innerHTML;
+    var title = window.opener.document.getElementById("title_"+id).innerHTML;
     var answers = window.opener.document.getElementById("answer_" + id).innerHTML;
     var user_answers = window.opener.document.getElementById("user_answers_" + id).innerHTML;
     var audio_title = show_title_for_note(title);
