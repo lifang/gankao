@@ -40,7 +40,11 @@ class ExamListsController < ApplicationController
     @lists = list
     if @lists
       @num = @lists.get_elements("//problems/problem").size
-      @tags = @lists.get_elements("//problems//questions//tags")
+      tags = @lists.get_elements("//problems//questions//tags")
+      @tags = []
+      tags.each do |tag|
+        @tags = @tags | tag.text.split(" ") unless tag.nil? or tag.text.nil? or tag.text == ""
+      end
       @lists = Examination.get_start_element(params[:page], @lists)
       current_element = Examination.return_page_element(@lists, @has_next_page)
       @lists = current_element[0]
@@ -160,7 +164,11 @@ class ExamListsController < ApplicationController
     @has_next_page = false
     @lists =list
     if @lists
-      @tags=@lists.get_elements("//problems//questions//tags")
+      tags = @lists.get_elements("//problems//questions//tags")
+      @tags = []
+      tags.each do |tag|
+        @tags = @tags | tag.text.split(" ") unless tag.nil? or tag.text.nil? or tag.text == ""
+      end
       @lists=Order.serarch_tags(@lists,session[:tag])
       @num = @lists.get_elements("//problems/problem").size
       @lists = Examination.get_start_element(params[:page], @lists)

@@ -1,5 +1,3 @@
-<%= javascript_include_tag "/javascripts/answer_sheet.js" %>
-<%= javascript_include_tag 'pileadd' %>
 <div class="testPaper_top">
   <div class="tp_top_box">
     <div class="paper_name">
@@ -42,10 +40,11 @@
           <% problem_ids += problem.attributes["id"] + "," %>
           <div class="part_div">
             <div class="part_question" id="question_info_<%= problem.attributes["id"].to_i %>">
-              <div class="part_q_text">
-                <% unless problem.elements['title'].nil? %>
-                  <p style="word-wrap:break-word; word-break:break-all;">
-                    <% title = problem.elements['title'].text.to_s.html_safe %>
+              <% unless problem.elements['title'].nil? or problem.elements['title'].text.nil? or problem.elements['title'].text == "" %>
+                <div class="part_q_text">
+                  <div class="question_text_div" id="problem_title_<%= problem.attributes["id"] %>"
+                       style="word-wrap:break-word; word-break:break-all;">
+                         <% title = problem.elements['title'].text.to_s.html_safe %>
                     <% if title =~ /<mp3>/  %>
                       <script type="text/javascript">audio_element("<%= title.split("<mp3>")[1] %>");</script>
                       <%= title.split("<mp3>")[2].to_s.html_safe.
@@ -54,12 +53,14 @@
                       <%= problem.elements['title'].text.to_s.html_safe.
                         gsub("problem_x_dropplace", "problem_#{problem.attributes["id"]}_dropplace") %>
                     <% end %>
-                  </p>
+                  </div>
                 <% end %>
                 <% if @examination.types == Examination::TYPES[:SIMULATION] %>
                   <div class="fraction_h"><%= problem.attributes["score"] %>分</div>
-                <% end %>
-              </div>
+                </div>
+              <% elsif @examination.types == Examination::TYPES[:SIMULATION] %>
+                <div class="part_q_text"><div class="fraction_h"><%= problem.attributes["score"] %>分</div></div>
+              <% end %>
               <%= question_ids = ""
               problem.elements["questions"].each_element do |question| %>
                 <% question_ids += question.attributes["id"] + "," %>

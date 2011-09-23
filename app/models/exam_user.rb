@@ -337,7 +337,7 @@ class ExamUser < ActiveRecord::Base
               question.add_attribute("user_answer","#{element.elements["answer"].text}")
               question.add_attribute("user_score","#{element.attributes["score"]}")
             end
-          end unless doc.nil?
+          end unless doc.nil? or doc.elements["paper"].elements["questions"].nil?
         end
       end
     end

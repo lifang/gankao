@@ -15,7 +15,8 @@ function sltall_price(checkstatus,checkbox){
     }
     if (n ==number){
         $("exam_getvalue").innerHTML=$("favourable").value+"(打包优惠价)";
-    }else{
+    }
+    else{
         $("exam_getvalue").innerHTML = checked_ids;
     }
 }
@@ -413,27 +414,22 @@ function question_values(question_id) {
                 }
             }
         }
-    } else {
-        if(correct_type == "6"){
-            var place_num = 1;
-            var problem_title=$("description_"+question_id).value;
-            var problem_id=$("problem_id").value;
-            var this_answer=""
-            while(problem_title.indexOf("problem_"+problem_id+"_dropplace_"+place_num)>=0){
-                if(place_num>1){
-                    this_answer +=";|;";
-                }
-                this_answer +=$("problem_"+problem_id+"_dropplace_"+place_num).innerHTML;
-                place_num ++;
+    } else if(correct_type == "6") {
+        var place_num = 1;
+        var problem_id = $("problem_id").value;
+        var str = document.getElementById("drag_question_" + question_id).innerHTML;
+        while(str.indexOf("problem_" + problem_id + "_dropplace_" + place_num) >= 0) {
+            if ($("answer_" + question_id).value == "") {
+                $("answer_" + question_id).value = $("problem_" + problem_id + "_dropplace_" + place_num).innerHTML;
+            } else {
+                $("answer_" + question_id).value += ";|;" + $("problem_" + problem_id + "_dropplace_" + place_num).innerHTML;
             }
-            $("answer_"+question_id).value=this_answer;
-            alert(this_answer);
-        }else{
-            var answer = $("question_answer_" + question_id);
-            if (answer != null && !checkspace(answer.value)) {
-                $("answer_" + question_id).value = answer.value;
-            }
-       
+            place_num ++ ;
+        }
+    }else{
+        var answer = $("question_answer_" + question_id);
+        if (answer != null && !checkspace(answer.value)) {
+            $("answer_" + question_id).value = answer.value;
         }
     }
 }
