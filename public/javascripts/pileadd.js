@@ -415,14 +415,29 @@ function question_values(question_id) {
             }
         }
     } else {
-        var answer = $("question_answer_" + question_id);
-        if (answer != null && !checkspace(answer.value)) {
-            $("answer_" + question_id).value = answer.value;
+        if(correct_type == "6"){
+            var place_num = 1;
+            var problem_title=$("description_"+question_id).value;
+            var problem_id=$("problem_id").value;
+            var this_answer=""
+            while(problem_title.indexOf("problem_"+problem_id+"_dropplace_"+place_num)>=0){
+                if(place_num>1){
+                    this_answer +=";|;";
+                }
+                this_answer +=$("problem_"+problem_id+"_dropplace_"+place_num).innerHTML;
+                place_num ++;
+            }
+            $("answer_"+question_id).value=this_answer;
+            alert(this_answer);
+        }else{
+            var answer = $("question_answer_" + question_id);
+            if (answer != null && !checkspace(answer.value)) {
+                $("answer_" + question_id).value = answer.value;
+            }
+       
         }
     }
 }
-
-
 
 function question_style(id){
     $(document).ready(function(){
@@ -475,6 +490,40 @@ function search_tag(tag){
     $("tag_name").submit();
 }
 
+function show_drag_answer(question_id,problem_id,problem_title){
+    var li=$("question_attrs_"+question_id).getElementsByTagName('li');
+    for(var i=0;i<=li.length;i++){
+        new Draggable(li[i],{
+            revert:true
+        });
+        li[i].style.cursor='Move';
+    }
+//    var place_num = 1;
+//    alert(place_num);
+//    while(problem_title.indexOf("problem_"+problem_id+"_dropplace_"+place_num)>=0){
+//        var store_id="problem_"+problem_id+"_dropplace_"+place_num;
+//        alert(store_id);
+//        Droppables.add(store_id, {
+//            onDrop:function(element,store_id){alert(element);
+//                $(store_id).innerHTML=element.innerHTML;
+//                $(store_id).style.color="blue";
+//                var this_answer=""
+//                for(i=1;i<place_num;i++){
+//                    this_answer +=$("problem_"+problem_id+"_dropplace_"+i).innerHTML;
+//                    if(i<place_num-1){
+//                        this_answer +=";|;";
+//                    }
+//                }
+//                $("answer_"+question_id).value=this_answer;
+//                $("is_answer_"+problem_id).value="1";
+//            }
+//        })
+//        place_num ++;
+//    }
+//    alert(this_answer);
+}//检测并设置题目描述中答案落点位置。  提示，题目描述中请按要求设置落点，如 <font color="green" id="problem_x_dropplace_1">_________</font> 和 <font color="green" id="problem_x_dropplace_2">_________</font>
+//选词填空题，为只有一个多选题的综合题。 多选题答案的顺序要与描述中落点位置对应起来。
+ 
 
 jQuery(function() {
     jQuery('.mokao_left > div').bind('click',function(){

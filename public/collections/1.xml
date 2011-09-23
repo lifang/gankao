@@ -83,7 +83,7 @@
             <title>少打</title>
             <category>1</category>
             <questions>
-                <question correct_type='0' delete_status='1' error_percent='33' id='9' repeat_num='3' score='5'>
+                <question correct_type='0' delete_status='1' error_percent='14' id='9' repeat_num='7' score='5'>
                     <answer>adsad</answer>
                     <analysis/>
                     <questionattrs>adsad;-;规范法官;-;会更好;-;很久很久</questionattrs>
@@ -95,9 +95,8 @@
                     <user_answer/>
                     <user_answer>规范法官</user_answer>
                     <user_answer>规范法官</user_answer>
-                    <user_answer/>
                 </question>
-                <question correct_type='0' error_percent='0' id='14' repeat_num='4' score='5'>
+                <question correct_type='0' error_percent='0' id='14' repeat_num='8' score='5'>
                     <answer>sfs</answer>
                     <analysis>sfafwerwr2r2</analysis>
                     <questionattrs>sfs;-;sfss;-;sdds;-;sd</questionattrs>
@@ -119,7 +118,7 @@
             <title>阿斯顿sad</title>
             <category>1</category>
             <questions>
-                <question correct_type='0' error_percent='0' id='10' repeat_num='1' score='5'>
+                <question correct_type='0' error_percent='0' id='10' repeat_num='4' score='5'>
                     <answer>豆腐干</answer>
                     <analysis/>
                     <questionattrs>豆腐干;-;哥哥;-;塞维尔v;-;东方饭店个</questionattrs>
@@ -128,8 +127,11 @@
                     <user_answer>哥哥</user_answer>
                     <user_answer>东方饭店个</user_answer>
                     <user_answer>东方饭店个</user_answer>
+                    <user_answer/>
+                    <user_answer/>
+                    <user_answer/>
                 </question>
-                <question correct_type='0' error_percent='0' id='15' repeat_num='4' score='5'>
+                <question correct_type='0' error_percent='0' id='15' repeat_num='7' score='5'>
                     <answer>789</answer>
                     <analysis>sdfsfasf</analysis>
                     <questionattrs>23;-;wer;-;65;-;789</questionattrs>
@@ -272,7 +274,7 @@ asf
             <title>测试简答题&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;</title>
             <category>3</category>
             <questions>
-                <question correct_type='5' error_percent='0' id='37' repeat_num='8' score='4'>
+                <question correct_type='5' error_percent='0' id='37' repeat_num='9' score='4'>
                     <answer>测试简答题&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;</answer>
                     <analysis>gdsfgdsgdsg</analysis>
                     <questionattrs/>
@@ -318,7 +320,7 @@ asf
             <title>1111111111111</title>
             <category>1</category>
             <questions>
-
+                        
                 <question correct_type='1' error_percent='0' id='69' repeat_num='1' score='3'>
                     <description>11</description>
                     <answer>11;|;111111</answer>
@@ -326,7 +328,7 @@ asf
                     <tags> 手动添加</tags>
                     <user_answer/>
                 </question>
-
+                        
                 <question correct_type='2' error_percent='0' id='70' repeat_num='1' score='6'>
                     <description>1111111</description>
                     <answer>1</answer>
@@ -337,27 +339,27 @@ asf
             </questions>
         </problem>
         <problem id='76' score='145' types='6'>
-            <title>The motivation for  &lt;font color=&quot;blue&quot; id=&quot;problem_x_dropplace_1&quot;&gt;____________&lt;/font&gt; starting Project Euler, and its continuation, is to provide a platform for  &lt;font color=&quot;blue&quot; id=&quot;problem_x_dropplace_2&quot;&gt;____________&lt;/font&gt;  the inquiring mind  &lt;font color=&quot;blue&quot; id=&quot;problem_x_dropplace_3&quot;&gt;____________&lt;/font&gt;  to delve into unfamiliar areas and  &lt;font color=&quot;blue&quot;  id=&quot;problem_x_dropplace_4&quot;&gt;____________&lt;/font&gt;   learn new concepts in a fun and recreational context.</title>
+            <title>jidikdolldoiqioj实际的差距扩大 反了佛 快乐风口付款了佛了 看飞 </title>
             <category>2</category>
             <questions>
-                <question correct_type='6' error_percent='0' id='88' repeat_num='9' score='145'>
-                    <description>出cccxxxx</description>
+                <question correct_type='6' error_percent='0' id='88' repeat_num='23' score='145'>
+                    <description>The motivation for  &lt;font color=&quot;blue&quot; id=&quot;problem_x_dropplace_1&quot;&gt;____________&lt;/font&gt; starting Project Euler, and its continuation, is to provide a platform for  &lt;font color=&quot;blue&quot; id=&quot;problem_x_dropplace_2&quot;&gt;____________&lt;/font&gt;  the inquiring mind  &lt;font color=&quot;blue&quot; id=&quot;problem_x_dropplace_3&quot;&gt;____________&lt;/font&gt;  to delve into unfamiliar areas and  &lt;font color=&quot;blue&quot;  id=&quot;problem_x_dropplace_4&quot;&gt;____________&lt;/font&gt;   learn new concepts in a fun and recreational context.</description>
                     <answer>得得得得的是;|;风风光光;|;gggg;|;9999iii</answer>
                     <analysis>得得得得仿佛腹股沟管呵呵</analysis>
                     <questionattrs>得得得得的是;-;风风光光;-;gggg;-;vvvhhy;-;9999iii;-;呵呵健健康康;-;卡卡卡卡卡</questionattrs>
                     <tags> 手动添加</tags>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
+                    <user_answer>9999iii</user_answer>
+                    <user_answer>9999iii风风光光卡卡卡卡卡gggg</user_answer>
+                    <user_answer>____________;|;____________;|;____________;|;____________</user_answer>
+                    <user_answer>得得得得的是;|;呵呵健健康康;|;gggg;|;vvvhhy</user_answer>
+                    <user_answer>得得得得的是;|;gggg;|;9999iii;|;风风光光</user_answer>
+                    <user_answer>vvvhhy;|;风风光光;|;gggg;|;9999iii</user_answer>
+                    <user_answer>得得得得的是;|;风风光光;|;9999iii;|;gggg</user_answer>
+                    <user_answer>得得得得的是;|;风风光光;|;9999iii;|;gggg</user_answer>
                 </question>
             </questions>
         </problem>
+
         <problem id='39' score='0' types='4'>
             <title>测试</title>
             <category>2</category>

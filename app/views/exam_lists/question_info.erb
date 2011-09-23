@@ -4,78 +4,90 @@
       <div class="moveBlock" style="left: 49px; "><img alt="moveBlock" src="/images/paper/moveBlock.png" /></div></div><a href="/exam_lists/<%= params[:id] %>/question_info" class="lianx_pat">练习</a></div>
   <div class="clear"></div>
   <div class="errorProblem_div">
-    <div class="part_passage" id="question_info_<%= @problem.attributes["id"].to_i %>">
-     <% unless @problem.elements['title'].nil? %>
-            <p style="word-wrap:break-word; word-break:break-all;">
-              <% title = @problem.elements['title'].text.to_s.html_safe %>
-              <% if title =~ /<mp3>/  %>
-                <script type="text/javascript">audio_element("<%= title.split("<mp3>")[1] %>");</script>
-                <%= title.split("<mp3>")[2].to_s.html_safe.
-                  gsub("problem_x_dropplace", "problem_#{@problem.attributes["id"]}_dropplace") %>
-                <script type="text/javascript">
-                  droppable_element('<%= title.split("<mp3>")[2].to_s.html_safe %>', <%= @problem.attributes["id"] %>);
-                </script>
-              <% else %>
-                <%= @problem.elements['title'].text.to_s.html_safe.
-                  gsub("problem_x_dropplace", "problem_#{@problem.attributes["id"]}_dropplace") %>
-                <script type="text/javascript">
-                  droppable_element('<%= @problem.elements['title'].text.to_s.html_safe %>', <%= @problem.attributes["id"] %>);
-                </script>
-              <% end %>
-            </p>
-          <% end %>
-      <div class="fraction"><%= @problem.attributes["score"] %>分</div>
-    </div>
-    <div class="space20"></div>
     <div id="show_div">
+      <% attr="" %>
       <div class="part_div">
-        <div class="part_question">
-          <% attr="" %>
-          <% @problem.elements["questions"].each_element do |question| %>
+        <div class="part_question" >
+          <% if @problem.attributes["types"].to_i != Problem::QUESTION_TYPE[:MORE_BLANKS] %>
             <div class="part_q_text">
-              <p><%= question.elements["description"].text if question.elements["description"] %> </p>
-              <div class="fraction_h">10分</div>
+              <%=  @problem.elements['title'].text %>
+              <div class="fraction_h"><%= @problem.attributes["score"] %></div>
             </div>
-            <% attr +=question.attributes["id"]+"," %>
+          <% else %>
+            <div class="task3_li">
+              <% @problem.elements["questions"].each_element do |question| %>
+                <%  attrs_str=question.elements["questionattrs"].text
+                attrs_array=attrs_str.split(";-;") unless attrs_str.nil? %>
+                <ul id="question_attrs_<%= question.attributes["id"] %>">
+                  <% attrs=attrs_array.shuffle %>
+                  <% (0..attrs.length-1).each do |i|  %>
+                    <li><%= attrs[i] %></li>
+                  <% end %>
+                </ul>
+                <% description =question.elements['description'].text.to_s.gsub("problem_x_dropplace", "problem_#{@problem.attributes["id"]}_dropplace") %>
+                <input type="hidden" value="<%= description %>" id="description_<%=question.attributes["id"]  %>" />
+                <script type="text/javascript"> show_drag_answer(<%= question.attributes["id"] %>,'<%= @problem.attributes["id"] %>','<%=description
+                %>');</script>
+              <% end %>
+            </div>
+
+          <% end %>
+          <% @problem.elements["questions"].each_element do |question| %>
+            <% attr +=question.attributes["id"]+","
+            attrs_str=question.elements["questionattrs"].text
+            attrs_array=attrs_str.split(";-;") unless attrs_str.nil?
+            correct_type = question.attributes["correct_type"]
+          %>
             <div class="p_question_list question_no"  >
               <div class="p_q_l_left"><%= question.attributes["id"] %></div>
               <div class="p_q_l_right_b">
-                <%
-                attrs_str=question.elements["questionattrs"].text
-                attrs_array=attrs_str.split(";-;") unless attrs_str.nil?
-                correct_type = question.attributes["correct_type"]
-              %>
-                <% if (correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] or
-                      correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE]) %>
-                  <ul class="chooseQuestion">
-                    <% (0..attrs_array.length-1).each do |i| %>
-                      <li>
-                        <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
-                          &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="question_attr_<%= question.attributes["id"].to_i %>"
-                                                         id="question_attr_<%= i %>"/>
-                                                       <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
-                          &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>"
-                                                         id="question_attr_<%= i %>" />
-                        <% end %>&nbsp;&nbsp;<%= attrs_array[i] %>
-                      </li>
-                    <% end if attrs_array and attrs_array.any? %>
+                <% unless  question.elements['description'].nil? || question.elements['description'].text.nil?%>
+                  <div <% if correct_type.to_i != Problem::QUESTION_TYPE[:MORE_BLANKS]  %>  class="question_title" <% else %>class="q_drag_con" <% end %> >
+                    <p style="word-wrap:break-word; word-break:break-all;">
+                      <% title = question.elements['description'].text.to_s.html_safe %>
+                      <% if title =~ /<mp3>/  %>
+                        <script type="text/javascript">audio_element("<%= title.split("<mp3>")[1] %>");</script>
+                        <%= title.split("<mp3>")[2].to_s.html_safe.
+                          gsub("problem_x_dropplace", "problem_#{@problem.attributes["id"]}_dropplace") %>
+                        <script type="text/javascript">
+                          droppable_element('<%= title.split("<mp3>")[2].to_s.html_safe %>', <%= @problem.attributes["id"] %>);
+                        </script>
+                      <% else %>
+                        <% description=question.elements['description'].text.to_s.html_safe.
+                          gsub("problem_x_dropplace", "problem_#{@problem.attributes["id"]}_dropplace") %>
+                        <%= description %>
+                        <script type="text/javascript">
+                          droppable_element('<%=description %>', <%=@problem.attributes["id"] %>);
+                        </script>
+                      <% end %>
+                    </p></div>
+                <% end %>
+                <% if correct_type.to_i != Problem::QUESTION_TYPE[:MORE_BLANKS]  %>
+                  <% if (correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] or
+                        correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE]) %>
+                    <ul class="chooseQuestion">
+                      <% (0..attrs_array.length-1).each do |i|  %>
+                        <li>
+                          <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
+                            <input type="checkbox" name="question_attr_<%= question.attributes["id"].to_i %>"
+                                   id="question_attr_<%= i %>"/>
+                                 <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
+                            <input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>"
+                                   id="question_attr_<%= i %>"/>
+                          <% end %>&nbsp;&nbsp;<%= attrs_array[i] %>
+                        </li>
+                      <% end if attrs_array and attrs_array.any? %>
+                    </ul>
                   <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:JUDGE] %>
-                    <div >
-                      <input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>"/><label>对</label>
-                    </div>
-                    <div>
-                      <input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>"/><label>错</label>
-                    </div>
+                    <div><input type="radio"/><label>对</label></div>
+                    <div><input type="radio" /><label>错</label></div>
                   <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] %>
-                    <div class="answer_text">
-                      <input name="answer" type="text" value="" id="question_answer_<%= question.attributes["id"].to_i %>"/>
-                    </div>
+                    <div class="answer_text"><input name="answer" type="text" value=""/></div>
                   <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] %>
-                    <div class="answer_textarea" >
-                      <textarea cols="" rows="" id="question_answer_<%= question.attributes["id"].to_i %>"></textarea>
-                    </div>
+                    <div class="answer_textarea"><textarea cols="" rows=""></textarea></div>
                   <% end %>
-                </ul>
+                <% end %>
+
                 <div class="p_question_btn" style="display: none;"><button class="save">保存</button><button class="Uncertain">不确定</button></div>
                 <div class="fraction"><%= question.attributes["score"] %>分</div>
               </div>
@@ -83,26 +95,17 @@
               <input type="hidden" value=" " id="answer_<%= question.attributes["id"] %>"  name="answer_<%= question.attributes["id"] %>"/>
               <input type="hidden" value="<%=correct_type  %>" id="question_type_<%= question.attributes["id"] %>" />
             </div>
-            <input type="hidden" value="<%= @problem.attributes["id"] %>" id="problem_id" />
           <% end %>
+          <input type="hidden" value="<%= @problem.attributes["id"] %>" id="problem_id" />
         </div>
       </div>
       <div class="tb_checkBox">
         <a class="tb_check" href="javascript:void(0);" onclick="javascript:problem_values();"></a>
       </div>
     </div>
-    <input type="hidden" value="<%= params[:page].nil? ? 1:params[:page] %>" id="current_page" />
-    <input type="hidden" value="<%= attr.chop  %>" id="all_question" />
-    <div class="sabrosus"><%= handle_paginate(params[:page], @num) %></div>
   </div>
+  <input type="hidden" value="<%= attr.chop  %>" id="all_question" />
+  <div class="sabrosus"><%= handle_paginate(params[:page], @num) %></div>
 </div>
+<input type="hidden" value="<%= params[:page].nil? ? 1:params[:page] %>" id="current_page" />
 
-<div class="jiexi_tab" id="analysis_div">
-  <div class="tab_t"><a href="#"><img  src="/images/paper/x.gif" /></a></div>
-  <div class="tab_m">
-    <h3 id="answer"></h3>
-    <p id="analysis"></p>
-  </div>
-  <div class="tab_b"></div>
-
-</div>
