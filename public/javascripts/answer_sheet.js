@@ -46,6 +46,7 @@ function get_question_height(question_id, problem_id) {
         }
     }
     var question_ids = $("question_ids_" + problem_id).value;
+    p_height += $("problem_title_" + problem_id).offsetHeight;
     if (question_ids != null) {
         var q_ids = question_ids.split(",");
         if (q_ids != null) {
@@ -120,7 +121,7 @@ function droppable_element(problem_title, problem_id) {
         Droppables.add(store_id, {
             onDrop:function(element,store_id){
                 $(store_id).innerHTML = element.innerHTML;
-                $(store_id).style.color = "blue";
+                $(store_id).style.color = "#96AE89";
             }
         })
         place_num ++;
@@ -190,9 +191,9 @@ function replace_droppable_element(this_window, answers, user_answers, problem_i
     while (this_window.document.body.innerHTML.indexOf("problem_" + problem_id + "_dropplace_" + place_num) >= 0) {
         this_window.document.getElementById("problem_" + problem_id + "_dropplace_" + place_num).innerHTML = user_answer[place_num - 1];
         if (true_answers[place_num - 1] == user_answer[place_num - 1]) {
-            this_window.document.getElementById("problem_" + problem_id + "_dropplace_" + place_num).style.color = "blue";
+            this_window.document.getElementById("problem_" + problem_id + "_dropplace_" + place_num).className = "task_span correctRight_bg";
         } else {
-            this_window.document.getElementById("problem_" + problem_id + "_dropplace_" + place_num).style.color = "red";
+            this_window.document.getElementById("problem_" + problem_id + "_dropplace_" + place_num).className = "task_span red_bg";
         }
         place_num ++;
     }

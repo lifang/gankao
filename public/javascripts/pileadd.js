@@ -15,7 +15,8 @@ function sltall_price(checkstatus,checkbox){
     }
     if (n ==number){
         $("exam_getvalue").innerHTML=$("favourable").value+"(打包优惠价)";
-    }else{
+    }
+    else{
         $("exam_getvalue").innerHTML = checked_ids;
     }
 }
