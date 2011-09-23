@@ -253,7 +253,9 @@ function get_question_height(question_id, problem_id) {
         }
     }
     var question_ids = $("question_ids_" + problem_id).value;
-    p_height += $("problem_title_" + problem_id).offsetHeight;
+    if ($("problem_title_" + problem_id) != null && $("problem_title_" + problem_id) != undefined) {
+        p_height += $("problem_title_" + problem_id).offsetHeight;
+    }
     if (question_ids != null) {
         var q_ids = question_ids.split(",");
         if (q_ids != null) {
@@ -281,8 +283,11 @@ function create_problem(block_div, problem, block_nav_div) {
     if (problem.score != null && new Number(problem.score) != 0) {
         score_str = "<div class='fraction_h'>" + problem.score + "分</div>";
     }
-    out_que_div.innerHTML = "<div class='part_q_text' id='problem_title_"+ problem.id +"'><div class='question_text_div' style='word-wrap:break-word; word-break:break-all;'>"
+    if (problem.title != null && problem.title != "") {
+        out_que_div.innerHTML = "<div class='part_q_text' id='problem_title_"+ problem.id
+        +"'><div class='question_text_div' style='word-wrap:break-word; word-break:break-all;'>"
         + is_has_audio(block_div, problem) + "</div>" + score_str +"</div>";
+    }
     b_description_div.appendChild(out_que_div);
     
     var question_id_input = create_element("input", "question_ids", "question_ids_" + problem.id, null, "hidden", "value");

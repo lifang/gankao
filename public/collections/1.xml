@@ -83,7 +83,7 @@
             <title>少打</title>
             <category>1</category>
             <questions>
-                <question correct_type='0' delete_status='1' error_percent='14' id='9' repeat_num='7' score='5'>
+                <question correct_type='0' delete_status='1' error_percent='8' id='9' repeat_num='13' score='5'>
                     <answer>adsad</answer>
                     <analysis/>
                     <questionattrs>adsad;-;规范法官;-;会更好;-;很久很久</questionattrs>
@@ -95,8 +95,8 @@
                     <user_answer/>
                     <user_answer>规范法官</user_answer>
                     <user_answer>规范法官</user_answer>
-                </question>
-                <question correct_type='0' error_percent='0' id='14' repeat_num='8' score='5'>
+                <user_answer/><user_answer/><user_answer/><user_answer/><user_answer/><user_answer/></question>
+                <question correct_type='0' error_percent='21' id='14' repeat_num='14' score='5'>
                     <answer>sfs</answer>
                     <analysis>sfafwerwr2r2</analysis>
                     <questionattrs>sfs;-;sfss;-;sdds;-;sd</questionattrs>
@@ -111,14 +111,14 @@
                     <user_answer>sfss</user_answer>
                     <user_answer/>
                     <user_answer/>
-                </question>
+                <user_answer>on</user_answer><user_answer>on</user_answer><user_answer>sfss</user_answer><user_answer>sfs</user_answer><user_answer>sfs</user_answer><user_answer>sfs</user_answer></question>
             </questions>
         </problem>
         <problem id='10' repeat_num='6' score='5' types='0'>
             <title>阿斯顿sad</title>
             <category>1</category>
             <questions>
-                <question correct_type='0' error_percent='0' id='10' repeat_num='4' score='5'>
+                <question correct_type='0' error_percent='20' id='10' repeat_num='5' score='5'>
                     <answer>豆腐干</answer>
                     <analysis/>
                     <questionattrs>豆腐干;-;哥哥;-;塞维尔v;-;东方饭店个</questionattrs>
@@ -130,8 +130,8 @@
                     <user_answer/>
                     <user_answer/>
                     <user_answer/>
-                </question>
-                <question correct_type='0' error_percent='0' id='15' repeat_num='7' score='5'>
+                <user_answer>豆腐干</user_answer></question>
+                <question correct_type='0' error_percent='0' id='15' repeat_num='8' score='5'>
                     <answer>789</answer>
                     <analysis>sdfsfasf</analysis>
                     <questionattrs>23;-;wer;-;65;-;789</questionattrs>
@@ -143,14 +143,14 @@
                     <user_answer>65</user_answer>
                     <user_answer>wer</user_answer>
                     <user_answer>wer</user_answer>
-                </question>
+                <user_answer>wer</user_answer></question>
             </questions>
         </problem>
         <problem id='11' repeat_num='8' score='5' types='0'>
             <title>但是发生堵塞</title>
             <category>1</category>
             <questions>
-                <question correct_type='0' error_percent='71' id='11' repeat_num='7' score='5'>
+                <question correct_type='0' error_percent='63' id='11' repeat_num='8' score='5'>
                     <answer>共和国</answer>
                     <analysis/>
                     <questionattrs>阿萨德;-;阿萨德打算;-;对方答复;-;共和国</questionattrs>
@@ -170,7 +170,7 @@
                     <user_answer>共和国</user_answer>
                     <user_answer>共和国</user_answer>
                     <user_answer>on</user_answer>
-                </question>
+                <user_answer>阿萨德打算</user_answer></question>
             </questions>
         </problem>
         <problem id='12' repeat_num='12' score='5' types='0'>
@@ -364,14 +364,14 @@ asf
             <title>测试</title>
             <category>2</category>
             <questions>
-                <question correct_type='6' error_percent='0' id='43' repeat_num='2' score='0'>
+                <question correct_type='6' error_percent='13' id='43' repeat_num='8' score='0'>
                     <description>&lt;span id=&quot;problem_x_dropplace_1&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_x_dropplace_2&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_x_dropplace_3&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_x_dropplace_4&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_x_dropplace_5&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_x_dropplace_6&quot;&gt;________&lt;/span&gt;</description>
                     <answer>111;|;222;|;333;|;444;|;555;|;666</answer>
                     <analysis>法上发生的</analysis>
                     <questionattrs>111;-;222;-;333;-;444;-;555;-;666</questionattrs>
                     <tags> 手动添加</tags>
                     <user_answer>333;|;222;|;444;|;666;|;555;|;222</user_answer>
-                <user_answer>333;|;222;|;444;|;111;|;555;|;222</user_answer></question>
+                <user_answer>333;|;222;|;444;|;111;|;555;|;222</user_answer><user_answer>444;|;222;|;111;|;555;|;333;|;666</user_answer><user_answer>444;|;555;|;333;|;222;|;666;|;111</user_answer><user_answer>________;|;________;|;________;|;________;|;________;|;________</user_answer><user_answer>111;|;222;|;222;|;444;|;555;|;666</user_answer><user_answer>111;|;222;|;333;|;444;|;555;|;666</user_answer><user_answer>________;|;555;|;333;|;666;|;________;|;________</user_answer></question>
             </questions>
         </problem>
     <problem id='37' score='5' types='6'>

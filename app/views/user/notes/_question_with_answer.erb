@@ -30,7 +30,8 @@
       <div class="p_q_l_left"></div>
       <!--[if IE 6]></td><td><![endif]-->
       <div class="p_q_l_right_s">
-        <% if question_with_answer[0].elements["description"] %>
+        <% unless question_with_answer[0].elements["description"].nil? or question_with_answer[0].elements['description'].text.nil? or
+          question_with_answer[0].elements['description'].text == "" %>
           <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] %>
             <div class="q_drag_con" style="word-wrap:break-word; word-break:break-all;">
               <p><%= question_with_answer[0].elements["description"].text.to_s.html_safe.
@@ -93,7 +94,9 @@
 
 <!--答案-->
 <div class="nb_r_daan">
-  <h3>正确答案：<span id="answer_<%= question_with_answer[0].attributes["id"] %>"><%= answers.join("<br/>").to_s.html_safe %></span></h3>
+  <h3><%= correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] ? "参考答案：" : "正确答案：" %>
+    <span id="answer_<%= question_with_answer[0].attributes["id"] %>"><%= answers.join("<br/>").to_s.html_safe %></span>
+  </h3>
   <% analysis = question_with_answer[0].elements["analysis"] %>
   <% unless analysis.nil? or analysis.text.nil? or analysis.text == "" %>
     <p>解析：<%= analysis.text.to_s.html_safe %></p>

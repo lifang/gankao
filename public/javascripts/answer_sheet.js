@@ -118,6 +118,7 @@ function droppable_element(problem_title, problem_id) {
     while(problem_title.indexOf("problem_" + problem_id + "_dropplace_" + place_num) >= 0){
         var store_id = "problem_" + problem_id + "_dropplace_" + place_num;
         $(store_id).style.cursor = 'Move';
+        $(store_id).className = "task_span";
         Droppables.add(store_id, {
             onDrop:function(element,store_id){
                 $(store_id).innerHTML = element.innerHTML;
@@ -134,7 +135,7 @@ function droppable_result(true_answers, user_answers, problem_id) {
     var str = $("question_info_" + problem_id).innerHTML;
     var place_num = 1;
     while (str.indexOf("problem_" + problem_id + "_dropplace_" + place_num) >= 0) {
-        if(user_answer[place_num - 1]==""||user_answer[place_num - 1]==undefined){
+        if(user_answer[place_num - 1] == "" || user_answer[place_num - 1] == undefined){
             $("problem_" + problem_id + "_dropplace_" + place_num).innerHTML="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
         }
         else{
@@ -194,7 +195,11 @@ function replace_droppable_element(this_window, answers, user_answers, problem_i
     var user_answer = user_answers.split(",");
     var place_num = 1;
     while (this_window.document.body.innerHTML.indexOf("problem_" + problem_id + "_dropplace_" + place_num) >= 0) {
-        this_window.document.getElementById("problem_" + problem_id + "_dropplace_" + place_num).innerHTML = user_answer[place_num - 1];
+        if(user_answer[place_num - 1] == null || user_answer[place_num - 1] == "" || user_answer[place_num - 1] == undefined){
+            this_window.document.getElementById("problem_" + problem_id + "_dropplace_" + place_num).innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+        } else {
+            this_window.document.getElementById("problem_" + problem_id + "_dropplace_" + place_num).innerHTML = user_answer[place_num - 1];
+        }
         if (true_answers[place_num - 1] == user_answer[place_num - 1]) {
             this_window.document.getElementById("problem_" + problem_id + "_dropplace_" + place_num).className = "task_span correctRight_bg";
         } else {
