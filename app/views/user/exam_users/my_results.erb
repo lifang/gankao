@@ -46,7 +46,7 @@
               <input type="hidden" value="<%= @exam_user.id %>" id="exam_user_id"/>
               <% if result.u_total_score %>
                 <% if result.is_paper_open %>
-                  <%= link_to "查看", href="/user/exam_users/#{result.e_id}?user_id=#{cookies[:user_id]}" %>
+                  <%= link_to "查看", href="/user/exam_users/#{result.u_id}" %>
                 <% else %>
                   考卷不公开
                 <% end %>

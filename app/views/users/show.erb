@@ -49,7 +49,7 @@
               <td>
                 <% if examination.u_total_score %>
                   <% if examination.is_paper_open %>
-                    <%= link_to "查看", "/user/exam_users/#{examination.ex_id}?user_id=#{cookies[:user_id]}" %>
+                    <%= link_to "查看", "/user/exam_users/#{examination.eu_id}" %>
                   <% else %>
                     考卷不公开
                   <% end %>

@@ -15,7 +15,7 @@
                     <li><a href="/user/examinations/<%= examination.id %>/do_exam" target="_blank"><span class="paper_time">
                           <%= examination.title %></span><span class="paper_over"></span></a></li>
                         <% else %>
-                    <li><a href="/user/exam_users/<%= examination.id %>?user_id=<%= cookies[:user_id] %>" target="_blank"><span class="paper_time">
+                    <li><a href="/user/exam_users/<%= @hash["#{examination.id}"].eu_id %>" target="_blank"><span class="paper_time">
                           <%= examination.title %></span><span class="paper_over"><img alt="真题" src="/images/paper/paper_over.png" /></span></a></li>
                         <% end %>
                       <% else %>

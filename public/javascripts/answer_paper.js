@@ -198,10 +198,11 @@ function return_giving_time(time) {
 function hand_open_nav(block_id) {
     if (is_fix_time) {
         var fs = return_giving_time(start);
+        var flash_div = null;
         if ((block_end_hash.get(block_id) == null || block_end_hash.get(block_id) == "")) {
             var ss = return_giving_time(block_start_hash.get(block_id));
             if (ss < fs) {
-                var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
+                flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
                 flash_div.innerHTML = "<p>当前部分还未可以开始答题。</p>";
                 document.body.appendChild(flash_div);
                 show_flash_div();
@@ -214,7 +215,7 @@ function hand_open_nav(block_id) {
             if (bs < fs) {
                 open_nav(block_id);
             } else {
-                var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
+                flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
                 flash_div.innerHTML = "<p>当前部分答题时间固定，答题时间已过。</p>";
                 document.body.appendChild(flash_div);
                 show_flash_div();
@@ -345,7 +346,7 @@ function create_question(problem_id, question_id_input, parent_div, question, in
     que_out_div.innerHTML = "<div class='p_q_l_left'>" + innerHTML + "</div>";
     parent_div.appendChild(que_out_div);
     var single_question_div = create_element("div", null, "single_question_" + question.id, "p_q_l_right", null, "innerHTML");
-    if (question.description != undefined) {
+    if (question.description != undefined && question.description != null && question.description != "") {
         var final_description = replace_title_span(question.description, problem_id);
         if (question.correct_type == "6") {
             single_question_div.innerHTML += "<div class='q_drag_con' style='word-wrap:break-word; word-break:break-all;'><p>" +
@@ -935,7 +936,7 @@ function answer_xml() {
 
 //记录当前模块是否有听力
 function is_has_audio(block_div, problem) {
-    var block_id = block_div.id.split("block_nav_")[1];
+    var block_id = block_div.id.split("inner_block_")[1];
     var titles = problem.title.split("<mp3>");
     var final_title = "";
     if (titles.length > 1) {

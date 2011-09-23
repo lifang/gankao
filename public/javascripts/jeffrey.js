@@ -655,15 +655,17 @@ function   openNew()
 }
 
 var playing=0;
-
 function audio_play(id){
     if(getCookie("audio_"+id)==null){
-        setCookie(("audio_"+id),0)
+        setCookie(("audio_"+id),0);
     }
     if(get_canplay_time()==0||($("audio_control_"+id).title&&$("audio_control_"+id).title=="停止")||getCookie("audio_"+id)<get_canplay_time()){  //设置播放次数
         if($("audio_"+id).paused||$("audio_"+id).ended){
             if(playing>0){
-                alert("音频正在播放中，请等待播放结束，或者手动\"停止\"播放...");
+                var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
+                flash_div.innerHTML = "<p>音频正在播放中，请等待播放结束，或者手动\"停止\"播放...</p>";
+                document.body.appendChild(flash_div);
+                show_flash_div();
                 return 0;
             }
             $("audio_"+id).setAttribute("onended","javascript:audio_end("+id+");");
@@ -722,7 +724,10 @@ function audio_play(id){
             $("practice2_audio_control_"+id).title="播放";
             $("practice2_audio_control_"+id).src="/images/paper/play_icon.png";
         }
-        alert("该录音已经播放了"+get_canplay_time()+"次！不能再播放！");
+        var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
+        flash_div.innerHTML = "<p>该录音已经播放了"+get_canplay_time()+"次！不能再播放！</p>";
+        document.body.appendChild(flash_div);
+        show_flash_div();
     }
 }
 
@@ -753,7 +758,6 @@ function get_canplay_time(){
 function drag_problem(problem_id,question_id,answer_element){
     var place_num = 1;
     var str = document.getElementById("question_"+problem_id).innerHTML;
-
     while(str.indexOf("problem_"+problem_id+"_dropplace_"+place_num)>=0){
         var store_id="problem_"+problem_id+"_dropplace_"+place_num;
         $(store_id).style.cursor='Move';
@@ -770,7 +774,6 @@ function drag_problem(problem_id,question_id,answer_element){
                 }
                 $(answer_element).value=this_answer;
                 show_que_save_button(question_id);
- //             alert($(answer_element).value);
             }
         })
         place_num ++;

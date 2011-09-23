@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
-      <exam check='0' id='50' step='4'>
+      <exam check='0' id='50' step='3'>
         <paper id='' score='0'>
-          <block></block>
-          <block></block>
-          <block></block>
-          <block></block>
-          <block></block>
+          <block/>
+          <block/>
+          <block/>
+          <block/>
+          <block/>
         </paper>
       </exam>

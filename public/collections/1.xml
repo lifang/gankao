@@ -95,11 +95,6 @@
                     <user_answer/>
                     <user_answer>规范法官</user_answer>
                     <user_answer>规范法官</user_answer>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
                 </question>
                 <question correct_type='0' error_percent='0' id='14' repeat_num='8' score='5'>
                     <answer>sfs</answer>
@@ -114,10 +109,6 @@
                     <user_answer/>
                     <user_answer>sdds</user_answer>
                     <user_answer>sfss</user_answer>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
                     <user_answer/>
                     <user_answer/>
                 </question>
@@ -152,9 +143,6 @@
                     <user_answer>65</user_answer>
                     <user_answer>wer</user_answer>
                     <user_answer>wer</user_answer>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
                 </question>
             </questions>
         </problem>
@@ -297,7 +285,6 @@ asf
                     <user_answer/>
                     <user_answer>dfddddssssdddd</user_answer>
                     <user_answer>jjjhhfffsdsasass</user_answer>
-                    <user_answer/>
                 </question>
             </questions>
         </problem>
@@ -365,7 +352,26 @@ asf
                     <user_answer>9999iii风风光光卡卡卡卡卡gggg</user_answer>
                     <user_answer>____________;|;____________;|;____________;|;____________</user_answer>
                     <user_answer>得得得得的是;|;呵呵健健康康;|;gggg;|;vvvhhy</user_answer>
-                <user_answer>得得得得的是;|;gggg;|;9999iii;|;风风光光</user_answer><user_answer>vvvhhy;|;风风光光;|;gggg;|;9999iii</user_answer><user_answer>得得得得的是;|;风风光光;|;9999iii;|;gggg</user_answer><user_answer>得得得得的是;|;风风光光;|;9999iii;|;gggg</user_answer></question>
+                    <user_answer>得得得得的是;|;gggg;|;9999iii;|;风风光光</user_answer>
+                    <user_answer>vvvhhy;|;风风光光;|;gggg;|;9999iii</user_answer>
+                    <user_answer>得得得得的是;|;风风光光;|;9999iii;|;gggg</user_answer>
+                    <user_answer>得得得得的是;|;风风光光;|;9999iii;|;gggg</user_answer>
+                </question>
+            </questions>
+        </problem>
+
+        <problem id='39' score='0' types='4'>
+            <title>测试</title>
+            <category>2</category>
+            <questions>
+                <question correct_type='6' error_percent='0' id='43' repeat_num='1' score='0'>
+                    <description>&lt;span id=&quot;problem_x_dropplace_1&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_x_dropplace_2&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_x_dropplace_3&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_x_dropplace_4&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_x_dropplace_5&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_x_dropplace_6&quot;&gt;________&lt;/span&gt;</description>
+                    <answer>111;|;222;|;333;|;444;|;555;|;666</answer>
+                    <analysis>法上发生的</analysis>
+                    <questionattrs>111;-;222;-;333;-;444;-;555;-;666</questionattrs>
+                    <tags> 手动添加</tags>
+                    <user_answer>333;|;222;|;444;|;666;|;555;|;222</user_answer>
+                </question>
             </questions>
         </problem>
     </problems>

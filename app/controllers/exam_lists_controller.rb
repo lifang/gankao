@@ -40,7 +40,7 @@ class ExamListsController < ApplicationController
     @lists = list
     if @lists
       @num = @lists.get_elements("//problems/problem").size
-      @tags=@lists.get_elements("//problems//questions//tags")
+      @tags = @lists.get_elements("//problems//questions//tags")
       @lists = Examination.get_start_element(params[:page], @lists)
       current_element = Examination.return_page_element(@lists, @has_next_page)
       @lists = current_element[0]

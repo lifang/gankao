@@ -464,7 +464,7 @@ img { border: none;}
 
 /*综合训练2*/
 
-.tb_con_list { padding: 10px; border: 1px #CCC solid; margin-top: 10px; height: 1%;}
+.tb_con_list { padding: 10px; border: 1px #CCC solid; margin-top: 10px;}
 .explain_btn { width: 60px; height:27px; display: block; overflow: hidden; text-indent: 999px; background: url(/images/paper/all_bg.png) no-repeat -127px -157px; margin-left: 400px;}
 .explain_btn_task2 { width: 60px; height:27px; float: left; background: url(/images/paper/all_bg.png) no-repeat -127px -157px; margin-left: 400px;}
 
@@ -479,7 +479,7 @@ img { border: none;}
 
 /*综合训练5---------------*/
 .task_textarea { overflow: hidden;}
-.task_textarea textarea { width: 99%; height: 100px; margin: 5px 0;}
+.task_textarea textarea { width: 99%; height: 100px; margin: 5px 2px;}
 
 
 
