@@ -15,16 +15,12 @@
       <div class="login_i_text"><label>帐号：</label><%= f.text_field :email, :value=>"",:class => "login_input" %></div>
       <div class="login_i_text"><label>密码：</label><%= f.password_field :password ,:value=>"",:class => "login_input" %></div>
       <div class="login_i_p"><a href="/sessions/get_code">忘记密码</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/users/new">立即注册</a></div>
-      <div class="login_i_p"><input name="" type="checkbox" value="" checked="checked"/>下次自动登录</div>
+      <div class="login_i_p"><%= f.check_box :is_auto_login %>下次自动登录</div>
       <div class="login_btn"><button type="submit"></button></div>
       <div class="other_login"><span class="t_o_text">使用其他帐号登录：</span>
-        <a href="#" onclick="javascript:toQzoneLogin();"><img src="/images/paper/qq.png"/></a>
-        <a href="#" onclick ="javascript:window.open('/sessions/renren_login', '_blank', 'height=500,width=800,left=200,top=100');">
-          <img src="/images/paper/renren.png"/>
-        </a>
-        <a href="#" onclick ="javascript:window.open('/sessions/sina_login', '_blank', 'height=500,width=800,left=200,top=100');">
-          <img src="/images/paper/sina.png"/>
-        </a>
+        <a href="#" onclick="javascript:toQzoneLogin();"><img alt="gankao" src="/images/paper/qq.png"/></a>
+        <a href="#" onclick ="javascript:window.open('/sessions/renren_login', '_blank', 'height=500,width=800,left=200,top=100');"><img alt="gankao" src="/images/paper/renren.png"/></a>
+        <a href="#" onclick ="javascript:window.open('/sessions/sina_login', '_blank', 'height=500,width=800,left=200,top=100');"><img alt="gankao" src="/images/paper/sina.png"/></a>
       </div>
     </div>
     <div class="foot">

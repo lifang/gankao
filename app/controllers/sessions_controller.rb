@@ -21,23 +21,20 @@ class SessionsController < ApplicationController
     if flash[:error]
       redirect_to request.referer
     else
+      if params[:session][:is_auto_login]=="1"
+        cookies[:is_auto_login] = {:value => @user.id, :expires => Time.now+30.days, :path => "/", :secure => false}
+      end
       redirect_to "/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}"
     end
   end
 
   #退出登录
   def destroy
-    #    cookies.each do |key,value|
-    #      cookies.delete(key)
-    #    end
-    #    puts "================================================"
-    #    session.each do |key,value|
-    #     session.delete(key)
-    #    end
     cookies.delete(:user_id)
     cookies.delete(:user_name)
     cookies.delete(:user_roles)
     cookies.delete(:is_vip)
+    cookies.delete(:is_auto_login)
     session.delete(:atoken)
     session.delete(:asecret)
     session.delete(:renren_access_token)
