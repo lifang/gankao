@@ -667,8 +667,3 @@ function load_local_save(paper_id, examination_id) {
         list_answer(getCookie('user_id'), paper_id, examination_id);
     }
 }
-
-
-
-//   #D1A39B      错误
-//   #96AE89      正确
