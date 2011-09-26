@@ -7,8 +7,11 @@ class UsersController < ApplicationController
   def update_info #更新用户信息以及修改密码
     @user_info = User.find(params[:id])
     @user_info.update_attributes(:name=>params[:user_info][:name],:school=>params[:user_info][:school])
-    @user_info.save
+    if @user_info.save
     str="用户信息修改成功。"
+    else
+    str="用户信息修改失败。"
+    end
     if params[:user_info][:password]!=""
       if @user_info.has_password?(params[:user_info][:old_password])
         if @user_info.update_attributes(:password=>params[:user_info][:password],:password_confirmation=>params[:user_info][:password_confirmation])
@@ -19,7 +22,7 @@ class UsersController < ApplicationController
           str += " 密码修改失败。"
         end
       else
-        str += " 密码输入不正确。"
+        str += " 密码输入错误。"
       end
     end
     flash[:notice]=str

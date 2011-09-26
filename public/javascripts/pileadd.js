@@ -1,4 +1,5 @@
 
+
 function sltall_price(checkstatus,checkbox){
     var d=document.getElementsByName(checkbox);
     var number=$("number").value;
@@ -47,6 +48,52 @@ function get_price(checkbox){
     }
 }
 
+//控制修改个人密码时的提示
+function validate_edit_password(){
+    if(document.getElementById("user_old_password").value==""&&document.getElementById("user_password").value==""&&document.getElementById("user_password_confirmation").value==""){
+        document.getElementById("user_old_password_error").innerHTML="";
+        document.getElementById("user_password_error").innerHTML="";
+        document.getElementById("user_password_confirmation_error").innerHTML="";
+        return true;
+    }
+    if(document.getElementById("user_old_password").value!=""&&document.getElementById("user_password").value!=""&&document.getElementById("user_password_confirmation").value!=""&&document.getElementById("user_password").value.length>=6&&document.getElementById("user_password").value.length<=20){
+
+        if(document.getElementById("user_password").value==document.getElementById("user_password_confirmation").value){
+            document.getElementById("user_password_error").innerHTML="";
+            document.getElementById("user_password_confirmation_error").innerHTML="";
+            return true;
+        }else{
+            document.getElementById("user_password_error").innerHTML="";
+            document.getElementById("user_password_confirmation_error").innerHTML="验证密码不一致";
+            return false;
+        }
+    }
+
+    if(document.getElementById("user_old_password").value==""){
+        document.getElementById("user_old_password_error").innerHTML="请输入当前密码";
+    }else{
+        document.getElementById("user_old_password_error").innerHTML="";
+    }
+
+    if(document.getElementById("user_password").value==""){
+        document.getElementById("user_password_error").innerHTML="请输入新密码";
+    }else{
+        document.getElementById("user_password_error").innerHTML="";
+    }
+
+    if(document.getElementById("user_password_confirmation").value==""){
+        document.getElementById("user_password_confirmation_error").innerHTML="请确认新密码";
+    }else{
+        document.getElementById("user_password_confirmation_error").innerHTML="";
+    }
+    if(document.getElementById("user_password").value!=""&&document.getElementById("user_password").value.length<6){
+        document.getElementById("user_password_error").innerHTML="密码长度太短";
+    }
+    if(document.getElementById("user_password").value.length>20){
+        document.getElementById("user_password_error").innerHTML="密码长度太长";
+    }
+    return false;
+}
 
 function show_name(first,second) {
     $(first).style.display ="block";
