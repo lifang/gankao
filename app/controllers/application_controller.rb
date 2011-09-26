@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
   include Constant
   include UserRoleHelper
   include RenrenHelper
+
+  before_filter :auto_login
+  
+
   def access?
     deny_access unless signed_in?
   end
@@ -43,6 +47,15 @@ class ApplicationController < ActionController::Base
       render(:file => "#{Rails.root}/public/404.html", :status => "404 Error")
     else Rails.logger.error("500 displayed")
       render(:file => "#{Rails.root}/public/500.html", :status => "500 Error")
+    end
+  end
+
+
+  def auto_login
+    if cookies[:user_id]==nil&&cookies[:is_auto_login]!=nil&&cookies[:is_auto_login]!=""
+      cookies[:user_id] = cookies[:is_auto_login]
+      cookies[:user_name] = User.find(cookies[:is_auto_login]).name
+      cookie_role(cookies[:user_id])
     end
   end
 

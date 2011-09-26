@@ -28,7 +28,7 @@ function load_paper(practice_type) {
 //创建综合训练
 function create_paper(practice_type) {
     $("paper_id").value = papers.paper.id;
-//    $("total_num").innerHTML = papers.paper.total_num;
+    //    $("total_num").innerHTML = papers.paper.total_num;
     if (papers.paper.blocks != undefined && papers.paper.blocks.block != undefined) {
         var blocks = papers.paper.blocks.block;
         var bocks_div = $("blocks");
@@ -58,7 +58,13 @@ function create_block(bocks_div, block,practice_type) {
     bocks_div.appendChild(ul);
     var navigation_div = create_element("div",null,"paper_navigation","task3_li",null,null);
     navigation_div.style.display="none";
+    if(practice_type=="4"||practice_type=="5"||practice_type=="6"){
+        ul.innerHTML+="<div class='space20'></div>";
+    }
     ul.appendChild(navigation_div);
+    if(practice_type=="3"){
+        ul.innerHTML+="<div class='space20'></div>";
+    }
     var block_nav_div = create_element("ul", null,null, null, null);
     navigation_div.appendChild(block_nav_div);
     var fill_blank=ul.appendChild(create_element("div", null, null, "clear", null, "innerHTML"));
@@ -254,7 +260,6 @@ function create_single_question(problem_title,problem_id, que_div_conlist, quest
         var que_attrs = question.questionattrs.split(";-;");
         if(practice_type=="4"||practice_type=="5"){
             var place_num = 1;
-            alert(problem_title);
             while(problem_title.indexOf("problem_"+problem_id+"_dropplace_"+place_num)>=0){
                 var store_id="problem_"+problem_id+"_dropplace_"+place_num;
                 $(store_id).style.cursor='Move';
@@ -668,8 +673,3 @@ function load_local_save(paper_id, examination_id) {
         list_answer(getCookie('user_id'), paper_id, examination_id);
     }
 }
-
-
-
-//   #D1A39B      错误
-//   #96AE89      正确

@@ -37,34 +37,7 @@
           <div class="member_logo"><img src="/images/paper/member_logo.png" /></div>
         </div>
       </div>
-      <div class="main">
-        <div class="main_top"></div>
-        <div class="main_middle">
-          <div class="main_left">
-            <ul>
-              <li>
-                <a href="/users/<%= cookies[:user_id] %>/edit" <% if request.path == "/users/#{cookies[:user_id]}/edit" %>class="hover"<% end %>>
-                  <img src="/images/paper/member_info_icon.png" />修改个人信息
-                </a>
-              </li>
-              <li>
-                <a href="/users/<%= cookies[:user_id] %>/edit_password" <% if request.path == "/users/#{cookies[:user_id]}/edit_password" %>class="hover"<% end %>>
-                  <img src="/images/paper/member_info_icon.png" />修改密码
-                </a>
-              </li>
-              <li>
-                <a href="/users/goto_vip" <% if request.path == "/users/goto_vip" %>class="hover"<% end %>>
-                  <img src="/images/paper/vip.png" />V I P
-                </a>
-              </li>
-            </ul>
-          </div>
           <%= yield %>
-          <div class="clear"></div>
-        </div>
-        <div class="main_bottom"></div>
-      </div>
-
       <div class="clear"></div>
       <div class="foot">
         <p><a href="#">用户协议</a>   |   <a href="#">关于我们</a>    |   <a href="#">官方微博</a></p>

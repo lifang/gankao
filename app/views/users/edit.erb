@@ -1,22 +1,46 @@
-<%= form_for :user_info,:url=>"/users/#{@user.id}/update_info",
-  :html =>{:onsubmit => 'return checkinfo()', :class => "required-validate"} do |f| %>
-  <div class="main_right">
-    <div class="member_info_div">
-      <label>昵称：</label>
-      <%= f.text_field :name , :id => "user_name",:value => @user.name,
-        :class => "required input_style", :size => "30" %>
-    </div>
-    <div class="member_info_div">
-      <label>学校：</label>
-      <%= f.text_field :school , :id => "user_school",:value => @user.school,
-        :class => "required input_style", :size => "30" %>
-    </div>
-    <div class="member_info_div">
-      <label>会员：</label>
-      &nbsp;&nbsp;<% unless is_vip? == false %>非VIP&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">开通VIP</a><% else %>VIP<% end %>
-    </div>
-    <div class="member_info_btn">
-      <button type="submit"></button>
-    </div>
+<div class="main">
+  <div class="main_top"></div>
+  <div class="main_middle">
+    <%= form_for :user_info,:url=>"/users/#{@user.id}/update_info"  do |f| %>
+      <div class="rcf_box">
+        <label>昵称：</label>
+        <div class="setting-item-main">
+          <%= f.text_field :name , :id => "user_name",:value => @user.name %>
+        </div>
+      </div>
+      <div class="rcf_box">
+        <label>密码：</label>
+        <div class="setting-item-main">
+          <%= f.password_field :old_password, :id => "user_old_password" %>
+        </div>
+      </div>
+      <div class="rcf_box">
+        <label>新密码：</label>
+        <div class="setting-item-main">
+          <%= f.password_field :password, :id => "user_password" %>
+        </div>
+      </div>
+      <div class="rcf_box">
+        <label>确认新密码：</label>
+        <div class="setting-item-main">
+          <%= f.password_field :password_confirmation, :id => "user_password_confirmation" %>
+        </div>
+      </div>
+      <div class="rcf_box">
+        <label>学校：</label>
+        <div class="setting-item-main">
+          <%= f.text_field :school , :id => "user_school" ,:value=>@user.school %>
+        </div>
+      </div>
+      <div class="rcf_box rcf_box_bottom">
+        <label>会员：</label>
+        <div class="setting-item-vip">
+          &nbsp;&nbsp;普通会员&nbsp;&nbsp;&nbsp;&nbsp;<a href="/users/goto_vip">开通VIP</a>
+        </div>
+      </div>
+      <div class="member_info_btn"><button type="submit"></button></div>
+    <% end  %>
+    <div class="clear"></div>
   </div>
-<% end  %>
+  <div class="main_bottom"></div>
+</div>
