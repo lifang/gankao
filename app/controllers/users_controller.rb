@@ -3,25 +3,27 @@ class UsersController < ApplicationController
   before_filter :access?, :only => [:show, :update, :update_info]
   layout "login", :only => ["new", "active", "re_active", "active_success", "active_false"]
 
-  def update #更新密码
-    @user =User.find(params[:id])
-    if @user.has_password?(params[:user][:old_password])
-      @user.update_attributes(:password=>params[:user][:password])
-      @user.encrypt_password
-      @user.save
-      flash[:notice] = "密码修改成功"
-      redirect_to "/users/#{params[:id]}/edit"
-    else
-      flash[:error] = "您输入的密码不正确"
-      render "edit"
-    end
-  end
 
-  def update_info #更新用户信息
+  def update_info #更新用户信息以及修改密码
     @user_info = User.find(params[:id])
-    @user_info.update_attributes(params[:user_info])
-    flash[:notice]="用户信息修改成功"
-    redirect_to "/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}"
+    @user_info.update_attributes(:name=>params[:user_info][:name],:school=>params[:user_info][:school])
+    @user_info.save
+    str="用户信息修改成功。"
+    if params[:user_info][:password]!=""
+      if @user_info.has_password?(params[:user_info][:old_password])
+        if @user_info.update_attributes(:password=>params[:user_info][:password],:password_confirmation=>params[:user_info][:password_confirmation])
+          str += " 密码修改成功。"
+          @user_info.encrypt_password
+          @user_info.save
+        else
+          str += " 密码修改失败。"
+        end
+      else
+        str += " 密码输入不正确。"
+      end
+    end
+    flash[:notice]=str
+    redirect_to "/users/#{params[:id]}/edit"
   end
   
   def new #新建用户页面
