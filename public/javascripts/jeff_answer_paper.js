@@ -254,7 +254,6 @@ function create_single_question(problem_title,problem_id, que_div_conlist, quest
         var que_attrs = question.questionattrs.split(";-;");
         if(practice_type=="4"||practice_type=="5"){
             var place_num = 1;
-            alert(problem_title);
             while(problem_title.indexOf("problem_"+problem_id+"_dropplace_"+place_num)>=0){
                 var store_id="problem_"+problem_id+"_dropplace_"+place_num;
                 $(store_id).style.cursor='Move';
