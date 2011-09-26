@@ -98,7 +98,7 @@ class Paper < ActiveRecord::Base
         problem.elements["questions"].each_element do |question|
           question.delete_element(question.elements["answer"])
           question.delete_element(question.elements["analysis"])
-        end
+        end unless problem.elements["questions"].nil?
       end
     end
     return "papers = " + Hash.from_xml(doc.to_s).to_json
