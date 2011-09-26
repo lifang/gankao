@@ -66,6 +66,7 @@ function create_paper() {
 //添加试卷块
 var question_num = 1;   //根据提点显示导航
 var block_block_flag = 0;   //记录打开的模块
+var block_comment = "";
 function create_block(bocks_div, block) {
     //添加block的div
     if ($("block_ids") != null && $("block_ids").innerHTML != "") {
@@ -276,47 +277,58 @@ function get_question_height(question_id, problem_id) {
 
 //添加problem
 function create_problem(block_div, problem, block_nav_div) {
-    var b_description_div = create_element("div", null, "b_description_" + problem.id, "part_div", null, "innerHTML");
-    block_div.appendChild(b_description_div);
-    var out_que_div = create_element("div", null, "question_" + problem.id, "part_question", null, "innerHTML");
-    var score_str = "";
-    if (problem.score != null && new Number(problem.score) != 0) {
-        score_str = "<div class='fraction_h'>" + problem.score + "分</div>";
-    }
-    if (problem.title != null && problem.title != "") {
-        out_que_div.innerHTML = "<div class='part_q_text' id='problem_title_"+ problem.id
-        +"'><div class='question_text_div' style='word-wrap:break-word; word-break:break-all;'>"
-        + is_has_audio(block_div, problem) + "</div>" + score_str +"</div>";
-    }
-    b_description_div.appendChild(out_que_div);
-    
-    var question_id_input = create_element("input", "question_ids", "question_ids_" + problem.id, null, "hidden", "value");
-    //添加question所需div
-    if (problem.questions != undefined && problem.questions.question != undefined) {
-        var questions = problem.questions.question;
-        if (tof(questions) == "array") {
-            for (var j=0; j<questions.size(); j++) {
-                create_question_navigation(block_nav_div, questions[j], problem.id);
-                create_question(problem.id, question_id_input, out_que_div, questions[j], question_num);
+    if (problem.id == null || problem.id == undefined) {
+        block_comment = "<div class='question_text_explain'><p><em>" + problem.part_description + "</em></p></div>";
+    } else {
+        var b_description_div = create_element("div", null, "b_description_" + problem.id, "part_div", null, "innerHTML");
+        block_div.appendChild(b_description_div);
+        var out_que_div = create_element("div", null, "question_" + problem.id, "part_question", null, "innerHTML");
+        var score_str = "";
+        if (problem.score != null && new Number(problem.score) != 0) {
+            score_str = "<div class='fraction_h'>" + problem.score + "分</div>";
+        }
+        if (problem.title != null && problem.title != "") {
+            out_que_div.innerHTML = "<div class='part_q_text' id='problem_title_"+ problem.id
+            +"'>"+ block_comment +"<div class='question_text_div' style='word-wrap:break-word; word-break:break-all;'>"
+            + is_has_audio(block_div, problem) + "</div>" + score_str +"</div>";
+        } else if (block_comment != "") {
+            
+            out_que_div.innerHTML = "<div class='part_q_text' id='problem_title_"+ problem.id
+            +"'>"+ block_comment +"</div>";
+        }
+        b_description_div.appendChild(out_que_div);
+
+        var question_id_input = create_element("input", "question_ids", "question_ids_" + problem.id, null, "hidden", "value");
+        //添加question所需div
+        if (problem.questions != undefined && problem.questions.question != undefined) {
+            var questions = problem.questions.question;
+            if (tof(questions) == "array") {
+                for (var j=0; j<questions.size(); j++) {
+                    create_question_navigation(block_nav_div, questions[j], problem.id);
+                    create_question(problem.id, question_id_input, out_que_div, questions[j], question_num);
+                    question_num ++ ;
+                }
+            } else {
+                create_question_navigation(block_nav_div, questions, problem.id);
+                create_question(problem.id, question_id_input, out_que_div, questions, question_num);
                 question_num ++ ;
             }
-        } else {
-            create_question_navigation(block_nav_div, questions, problem.id);
-            create_question(problem.id, question_id_input, out_que_div, questions, question_num);
-            question_num ++ ;
         }
-    }
-    out_que_div.appendChild(question_id_input);
-    var is_answer_input = create_element("input", "is_answer", "is_answer_" + problem.id, null, "hidden", "value");
-    out_que_div.appendChild(is_answer_input);
-    var is_sure_input = create_element("input", "is_sure", "is_sure_" + problem.id, null, "hidden", "value");
-    out_que_div.appendChild(is_sure_input);
-    
-    $("problem_ids").value += "" + problem.id + ",";
-    if (answer_hash != null) {
-        load_un_sure_question(problem.id);
-        is_problem_answer(problem.id);
-        alreay_answer_que_num();
+        out_que_div.appendChild(question_id_input);
+        var is_answer_input = create_element("input", "is_answer", "is_answer_" + problem.id, null, "hidden", "value");
+        out_que_div.appendChild(is_answer_input);
+        var is_sure_input = create_element("input", "is_sure", "is_sure_" + problem.id, null, "hidden", "value");
+        out_que_div.appendChild(is_sure_input);
+
+        $("problem_ids").value += "" + problem.id + ",";
+        if (answer_hash != null) {
+            load_un_sure_question(problem.id);
+            is_problem_answer(problem.id);
+            alreay_answer_que_num();
+        }
+        if (block_comment != "") {
+            block_comment = "";
+        }
     }
 }
 

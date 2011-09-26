@@ -244,7 +244,7 @@ class ExamUser < ActiveRecord::Base
     f=File.new(url,"w")
     f.write("#{str.force_encoding('UTF-8')}")
     f.close
-    return "/" + path + file_name
+    return "/" + path + "/#{self.examination_id}" + file_name
   end
 
   def update_answer_url(doc, question_ids_options = {})
