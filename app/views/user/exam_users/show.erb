@@ -17,7 +17,8 @@
 <div class="testPaper_main">
   <% block_index = 0
   problem_ids = ""
-  question_num = 1 %>
+  question_num = 1
+  block_comment = "" %>
   <% @xml.elements['blocks'].each_element do |block| %>
     <div class="tp_left" id="block_<%= block.attributes["id"] %>" <% if block_index > 0 %>style="display: none;"<% end %>>
       <div class="part_box">
@@ -37,6 +38,9 @@
         </div>
 
         <% block.elements['problems'].each_element do |problem| %>
+          <% if problem.attributes["id"].nil? %>
+            <% block_comment = problem.text %>
+          <% else %>
           <% problem_ids += problem.attributes["id"] + "," %>
           <div class="part_div">
             <div class="part_question" id="question_info_<%= problem.attributes["id"].to_i %>">
@@ -71,6 +75,7 @@
                      name="question_ids_<%= problem.attributes["id"] %>" value="<%= question_ids %>" />
             </div>
           </div>
+        <% end %>
         <% end if !block.elements['problems'].nil? %>
       </div>
     </div>
