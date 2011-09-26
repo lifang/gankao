@@ -2,14 +2,14 @@
   <div class="part_question">
     <div class="chank_yw"><a href="javascript:void(0);" onclick="openwindow(<%= question_with_answer[0].attributes["id"] %>);">查看全文</a></div>
     <div class="part_q_text part_q_sl">
-      <p style="word-wrap:break-word; word-break:break-all;">
+      <div class="question_text_div" style="word-wrap:break-word; word-break:break-all;">
         <% title = question_with_answer[1].elements["title"].text
         if title =~ /<mp3>/  %>
           <%= truncate_u(title.split("<mp3>")[2].to_s.html_safe.gsub(/<[^{><}]*>/, ""), 195, "......").to_s.html_safe %>
         <% else %>
           <%= truncate_u(title.to_s.html_safe.gsub(/<[^{><}]*>/, ""), 195, "......").to_s.html_safe %>
         <% end %>
-      </p>
+      </div>
       <div style="display:none;" id="title_<%= question_with_answer[0].attributes["id"] %>">
         <%= question_with_answer[1].elements["title"].text.to_s.html_safe %>
       </div>
@@ -30,7 +30,8 @@
       <div class="p_q_l_left"></div>
       <!--[if IE 6]></td><td><![endif]-->
       <div class="p_q_l_right_s">
-        <% if question_with_answer[0].elements["description"] %>
+        <% unless question_with_answer[0].elements["description"].nil? or question_with_answer[0].elements['description'].text.nil? or
+          question_with_answer[0].elements['description'].text == "" %>
           <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] %>
             <div class="q_drag_con" style="word-wrap:break-word; word-break:break-all;">
               <p><%= question_with_answer[0].elements["description"].text.to_s.html_safe.
@@ -65,12 +66,14 @@
             <% end if attrs_array and attrs_array.any? %>
           </ul>
         <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:JUDGE] %>
-          <div <% if answers[0].to_i==1 %>class="correctRight_bg"<% end %>>
-            <input type="radio"<% if user_answer==1.to_s %> checked="true"<% end %> disabled  /><label>对</label>
-          </div>
-          <div <% if answers[0].to_i==0 %>class="correctRight_bg"<% end %>>
-            <input type="radio"  <% if user_answer==0.to_s %> checked="true"<% end %> disabled  /><label>错</label>
-          </div>
+          <ul class="chooseQuestion">
+            <li <% if answers[0].to_i==1 %>class="correctRight_bg"<% end %>>
+              <input type="radio"<% if user_answer==1.to_s %> checked="true"<% end %> disabled  /><label>对</label>
+            </li>
+            <li <% if answers[0].to_i==0 %>class="correctRight_bg"<% end %>>
+              <input type="radio"  <% if user_answer==0.to_s %> checked="true"<% end %> disabled  /><label>错</label>
+            </li>
+          </ul>
         <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] %>
           <div class="answer_text">
             <input name="answer" type="text" disabled value="<%= user_answers[0].to_s %>" />
@@ -91,7 +94,9 @@
 
 <!--答案-->
 <div class="nb_r_daan">
-  <h3>正确答案：<span id="answer_<%= question_with_answer[0].attributes["id"] %>"><%= answers.join("<br/>").to_s.html_safe %></span></h3>
+  <h3><%= correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] ? "参考答案：" : "正确答案：" %>
+    <span id="answer_<%= question_with_answer[0].attributes["id"] %>"><%= answers.join("<br/>").to_s.html_safe %></span>
+  </h3>
   <% analysis = question_with_answer[0].elements["analysis"] %>
   <% unless analysis.nil? or analysis.text.nil? or analysis.text == "" %>
     <p>解析：<%= analysis.text.to_s.html_safe %></p>

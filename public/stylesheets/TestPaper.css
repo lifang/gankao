@@ -10,7 +10,7 @@ img { border: none;}
 .fraction_h {text-align: right;line-height: 24px; font-size: 12px; color: #666;}
 .fraction { text-align: right;line-height: 24px; font-size: 12px; color: #666; position: absolute; top: 10px; right: 15px;}
 
-.correctRight_bg { background: #96ae89;}
+.correctRight_bg { background: #d0eeff;}
 .red_bg { background: #d1a39b;}
 
 .space20 { height: 20px;}
@@ -74,7 +74,7 @@ img { border: none;}
 	background: #FFF;
 }
 .part_q_text { padding: 10px; background: #fdfeff; border-bottom:1px solid #EAEAEA;}
-.part_q_text p { line-height: 22px; text-indent: 24px; text-align: justify;}
+.question_text_div p, .question_text_div div { line-height: 18px; text-indent: 24px; text-align: justify; padding: 5px 0;}
 
 
 
@@ -108,7 +108,7 @@ img { border: none;}
 .q_drag_con { line-height: 24px;}
 .task_con p { text-indent: 24px;}
 
-.task3_li { overflow: hidden; color: #333; border-bottom: 1px #EAEAEA solid; padding: 10px 0; height: 1%;}
+.task3_li { overflow: hidden; color: #333; border-bottom: 1px #EAEAEA solid; padding: 10px 0; height: 1%; position: relative; z-index: 100;}
 .task3_li li {height: 25px; border: 1px #CCC solid; text-align: center; line-height: 25px; margin: 5px 7px; padding: 0 10px; float: left;}
 .task3_li li.dropOver { border: 1px #f0f0f0 solid; background: #f9f9f9; color: #cccccc;}
 .task_span { padding: 0 5px; border-bottom: 1px #CCC solid;}
@@ -161,8 +161,8 @@ img { border: none;}
 .tp_right_box { width: 240px; margin: 0 auto; position: fixed; _position: absolute; _top: expression(eval(documentElement.scrollTop + 50));}
 .first_title { font-size: 13px; color: #333; overflow: hidden; clear: both; cursor: pointer; background: url(/images/paper/xline.png) repeat-x center bottom; padding: 10px 0;}
 .first_title p { padding: 5px; line-height: 18px; clear: both;}
-.second_menu li { float: left; margin: 3px 8px; overflow: hidden; height: 32px;}
-.highLight { color: #164a63; font-size: 15px; font-weight:bold;}
+.second_menu li { float: left; margin: 2px 8px; overflow: hidden; height: 32px;}
+.highLight { color: #164a63; font-size: 14px; font-weight:bold;}
 .first_title ul { padding: 5px 0 0 0; overflow: hidden;}
 
 
@@ -177,7 +177,6 @@ img { border: none;}
 }
 
 .testPaper_foot { height: 100px;}
-
 
 .tishi_tab { width: 250px; padding: 10px; background: url(/images/paper/mk_b_zz_bg.png) repeat; border: 1px #fff solid; position: absolute; display: none; z-index: 999999;}
 .tishi_tab p { text-align: center; line-height: 24px; font-size: 14px; font-family:"微软雅黑"; color: #fff;}

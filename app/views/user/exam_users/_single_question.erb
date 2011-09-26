@@ -32,7 +32,7 @@ is_right = true if all_answer == answers and answers - user_answers == []
       <% end %>
     <% end %>
     <% if (correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] or
-          correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE]) %>33333333
+          correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE]) %>
       <ul class="chooseQuestion">
         <% (0..attrs_array.length-1).each do |i|
           is_answer = answers.include?(attrs_array[i])

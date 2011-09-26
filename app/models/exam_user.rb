@@ -298,7 +298,7 @@ class ExamUser < ActiveRecord::Base
               auto_score += score
             end
           end
-        end
+        end unless problem.elements["questions"].nil?
       end
     end
     answer_doc.root.elements["paper"].elements["auto_score"].text = auto_score
@@ -337,8 +337,8 @@ class ExamUser < ActiveRecord::Base
               question.add_attribute("user_answer","#{element.elements["answer"].text}")
               question.add_attribute("user_score","#{element.attributes["score"]}")
             end
-          end unless doc.nil?
-        end
+          end unless doc.nil? or doc.elements["paper"].elements["questions"].nil?
+        end unless problem.elements["questions"].nil?
       end
     end
     return @xml
@@ -349,7 +349,7 @@ class ExamUser < ActiveRecord::Base
     str="-1"
     xml.elements["blocks"].each_element do  |block|
       block.elements["problems"].each_element do |problem|
-        if (problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:CHARACTER] and
+        if problem.attributes["types"].nil? || (problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:CHARACTER] and
               problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:COLLIGATIONR])
           block.delete_element(problem.xpath)
         else
@@ -496,7 +496,7 @@ class ExamUser < ActiveRecord::Base
             end
             end
           end
-        end
+        end unless problem.elements["questions"].nil?
       end
     end unless question_hash.empty?
     self.update_attributes(:correct_percent => ((correct_num.to_f/xml.attributes["total_num"].to_f)*100).round)

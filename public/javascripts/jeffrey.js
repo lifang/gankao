@@ -764,7 +764,7 @@ function drag_problem(problem_id,question_id,answer_element){
         Droppables.add(store_id, {
             onDrop:function(element,store_id){
                 $(store_id).innerHTML=element.innerHTML;
-                $(store_id).style.color="blue";
+                $(store_id).style.color="#96AE89";
                 var this_answer="";
                 for(i=1;i<place_num;i++){
                     this_answer +=$("problem_"+problem_id+"_dropplace_"+i).innerHTML;

@@ -11,60 +11,34 @@
     <div class="clear"></div>
     <div class="errorProblem_div">
       <% @lists.elements["/collection/problems"].each_element do |problem|%>
-        <div class="part_passage" id="question_info_<%= problem.attributes["id"].to_i %>">
-          <% unless problem.elements['title'].nil? %>
-            <p style="word-wrap:break-word; word-break:break-all;">
-              <% title = problem.elements['title'].text.to_s.html_safe %>
-              <% if title =~ /<mp3>/  %>
-                <script type="text/javascript">audio_element("<%= title.split("<mp3>")[1] %>");</script>
-                <%= title.split("<mp3>")[2].to_s.html_safe.
-                  gsub("problem_x_dropplace", "problem_#{problem.attributes["id"]}_dropplace") %>
-                <script type="text/javascript">
-                  droppable_element('<%= title.split("<mp3>")[2].to_s.html_safe %>', <%= problem.attributes["id"] %>);
-                </script>
-              <% else %>
-                <%= problem.elements['title'].text.to_s.html_safe.
-                  gsub("problem_x_dropplace", "problem_#{problem.attributes["id"]}_dropplace") %>
-                <script type="text/javascript">
-                  droppable_element('<%= problem.elements['title'].text.to_s.html_safe %>', <%= problem.attributes["id"] %>);
-                </script>
-              <% end %>
-            </p>
-          <% end %>
-          <div class="fraction"><%= problem.attributes["score"] %>分</div>
-        </div>
-        <div class="space20"></div>
-        <div class="part_div">
+      <div class="part_div">
           <%= render :partial=>"/exam_lists/question_with_answer",:object=>problem %>
-        </div>
-        <div class="sabrosus"><%= handle_paginate(params[:page], @num) %></div>
       </div>
+      <div class="space20"></div>
+      <% end %>
+      <div class="sabrosus"><%= handle_paginate(params[:page], @num) %></div>
     </div>
-    <div class="errorLibrary_right" >
-      <div class="el_fenlei">
-        <ul>
-          <% tag_ids=[] %>
-          <%= form_for :tags, :url=>"/exam_lists/#{params[:id]}/search_tag_problems" ,:html=>{:id=>:tag_name} do %>
-            <input type="hidden" value="" id="tag" name="tag" />
-          <% end %>
-          <% @tags.each do |tags| %>
-            <% tags.text.split(" ").each do |tag|%>
-              <% unless   tag_ids.include?(tag) %>
-                <%  tag_ids<<tag %>
-                <li><a href="javascript:(0)" onclick="javascript:search_tag('<%= tag %>')"><%= tag %></a></li>
-              <% end
-            end unless tags.text.nil? %>
-          <% end unless @tags.nil? %>
-        </ul>
-      </div>
+  </div>
+  <div class="errorLibrary_right" >
+    <div class="el_fenlei">
+      <ul>
+        <%= form_for :tags, :url=>"/exam_lists/#{params[:id]}/search_tag_problems" ,:html=>{:id=>:tag_name} do %>
+          <input type="hidden" value="" id="tag" name="tag" />
+        <% end %>
+        <% @tags.each do |tag| %>
+          <li><a href="javascript:(0)" onclick="javascript:search_tag('<%= tag %>')"><%= tag %></a></li>
+        <% end unless @tags.nil? %>
+      </ul>
+    </div>
+    <% @lists.elements["/collection/problems"].each_element do |problem|%>
       <% problem.elements["questions"].each_element do |question|%>
-        <div class="cuoti" id="question_<%= question.attributes["id"] %>" style="display:none">
+        <div class="cuoti" id="question_<%= question.attributes["id"] %>" style="display:none;">
           <%= render :partial=>"/exam_lists/feedback",:object=>[question,problem] %>
         </div>
       <% end %>
-    </div>
-  <% end
-end %>
+    <% end %>
+  </div>
+<% end %>
 
 <div class="jiexi_tab" id="analysis_div">
   <div class="tab_t"><a href="#"><img  src="/images/paper/x.gif" /></a></div>

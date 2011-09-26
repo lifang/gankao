@@ -15,7 +15,8 @@ function sltall_price(checkstatus,checkbox){
     }
     if (n ==number){
         $("exam_getvalue").innerHTML=$("favourable").value+"(打包优惠价)";
-    }else{
+    }
+    else{
         $("exam_getvalue").innerHTML = checked_ids;
     }
 }
@@ -413,15 +414,25 @@ function question_values(question_id) {
                 }
             }
         }
-    } else {
+    } else if(correct_type == "6") {
+        var place_num = 1;
+        var problem_id = $("problem_id").value;
+        var str = document.getElementById("drag_question_" + question_id).innerHTML;
+        while(str.indexOf("problem_" + problem_id + "_dropplace_" + place_num) >= 0) {
+            if ($("answer_" + question_id).value == "") {
+                $("answer_" + question_id).value = $("problem_" + problem_id + "_dropplace_" + place_num).innerHTML;
+            } else {
+                $("answer_" + question_id).value += ";|;" + $("problem_" + problem_id + "_dropplace_" + place_num).innerHTML;
+            }
+            place_num ++ ;
+        }
+    }else{
         var answer = $("question_answer_" + question_id);
         if (answer != null && !checkspace(answer.value)) {
             $("answer_" + question_id).value = answer.value;
         }
     }
 }
-
-
 
 function question_style(id){
     $(document).ready(function(){
@@ -474,6 +485,16 @@ function search_tag(tag){
     $("tag_name").submit();
 }
 
+function show_drag_answer(question_id){
+    var li=$("question_attrs_"+question_id).getElementsByTagName('li');
+    for(var i=0;i<=li.length;i++){
+        new Draggable(li[i],{
+            revert:true
+        });
+        li[i].style.cursor='Move';
+    }
+}
+ 
 
 jQuery(function() {
     jQuery('.mokao_left > div').bind('click',function(){

@@ -76,16 +76,16 @@ class Rater::ExamRatersController < ApplicationController
     only_xml.elements["blocks"].each_element do  |block|
       block.elements["problems"].each_element do |problem|
         problem.elements["questions"].each_element do |question|
-          single_score=params["single_value_#{question.attributes["id"]}"]
+          single_score = params["single_value_#{question.attributes["id"]}"]
           result_question= doc.elements["/exam/paper/questions/question[@id=#{question.attributes["id"]}]"]
-          if question.attributes["score"] ==single_score
+          if question.attributes["score"] == single_score
             problem.delete_element(question.xpath)
           else
             @exam_user.add_collection(collection, xml, collection_xml, problem, question, result_question.elements["answer"].text) unless problem.elements["questions"].elements[1].nil?
           end
           result_question.add_attribute("score","#{single_score}")
           score += single_score.to_i
-        end
+        end unless problem.elements["questions"].nil?
       end
     end
     doc.elements["paper"].elements["rate_score"].text=score
