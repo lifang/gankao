@@ -1,7 +1,7 @@
 <div class="main">
   <div class="main_top"></div>
   <div class="main_middle">
-    <%= form_for :user_info,:url=>"/users/#{@user.id}/update_info"  do |f| %>
+    <%= form_for :user_info,:url=>"/users/#{@user.id}/update_info", :html=>{:onsubmit=>"return validate_edit_password(); "}  do |f| %>
       <div class="rcf_box">
         <label>昵称：</label>
         <div class="setting-item-main">
@@ -11,19 +11,19 @@
       <div class="rcf_box">
         <label>密码：</label>
         <div class="setting-item-main">
-          <%= f.password_field :old_password, :id => "user_old_password" %>
+          <%= f.password_field :old_password, :id => "user_old_password",:oninput=> "javascript:validate_edit_password();" %><span id="user_old_password_error" style="color:red;"></span>
         </div>
       </div>
       <div class="rcf_box">
         <label>新密码：</label>
         <div class="setting-item-main">
-          <%= f.password_field :password, :id => "user_password" %>
+          <%= f.password_field :password, :id => "user_password",:oninput=> "javascript:validate_edit_password();" %><span id="user_password_error" style="color:red;"></span>
         </div>
       </div>
       <div class="rcf_box">
         <label>确认新密码：</label>
         <div class="setting-item-main">
-          <%= f.password_field :password_confirmation, :id => "user_password_confirmation" %>
+          <%= f.password_field :password_confirmation, :id => "user_password_confirmation",:oninput=> "javascript:validate_edit_password();" %><span id="user_password_confirmation_error" style="color:red;"></span>
         </div>
       </div>
       <div class="rcf_box">
