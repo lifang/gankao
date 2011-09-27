@@ -19,7 +19,7 @@
                     <user_answer>sdds</user_answer>
                     <user_answer>sfss</user_answer>
                     <user_answer/>
-                    <note_text>哈哈11222哈ff222鹅鹅鹅22ffdd古古怪单点怪该罚的罚sdfsfsf</note_text>
+                    <note_text>哈哈112444422哈ff222鹅鹅鹅22ffdd古古怪单点怪该罚的罚sdfsfsf</note_text>
                 </question>
             </questions>
         </problem>
@@ -160,7 +160,6 @@ asf
                 </question>
             </questions>
         </problem>
-<<<<<<< HEAD
         <problem id='42' score='0' types='0'>
             <title>上的飞洒的法萨芬</title>
             <category>3</category>
@@ -219,29 +218,4 @@ asf
                 <note_text>try突然有人</note_text></question>
             </questions>
         </problem></problems>
-=======
-    <problem id='42' score='0' types='0'>
-                    <title>上的飞洒的法萨芬</title>
-                    <category>3</category>
-                    <questions>
-                        <question correct_type='0' id='45' score='0'>
-                            <answer>宋德福</answer>
-                            <analysis>发上发生法萨芬萨菲</analysis>
-                            <questionattrs>宋德福;-;宋德1;-;11;-;33</questionattrs>
-                            <tags/>
-                        <user_answer>宋德1</user_answer><note_text>test</note_text><created_at>2011-09-26 15:41</created_at></question>
-                    </questions>
-                </problem><problem id='44' score='5' types='0'><title>萨菲尔特如图一梯田</title><category>3</category><questions><question correct_type='0' id='47' score='5'><answer>额外</answer><analysis>委屈委屈</analysis><questionattrs>额外;-;557;-;909;-;121</questionattrs><tags/><user_answer/><note_text>test</note_text><created_at>2011-09-26 15:41</created_at></question></questions></problem><problem id='50' score='10' types='0'>
-                    <title>是情愿迷漫了我的双眼，是空中飞的风筝系住了你的相思。</title>
-                    <category>1</category>
-                    <questions>
-                        <question correct_type='0' id='61' score='10'>
-                            <answer>东方</answer>
-                            <analysis/>
-                            <questionattrs>东方;-;无语;-;在天下;-;蓝高中</questionattrs>
-                            <tags/>
-                        <user_answer>东方</user_answer><note_text>实施实施的发的</note_text><created_at>2011-09-27 15:26</created_at></question>
-                    </questions>
-                </problem></problems>
->>>>>>> dc646478f901e93b4d3497886aeff72577d0e492
 </note>
