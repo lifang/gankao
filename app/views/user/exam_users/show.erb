@@ -72,7 +72,7 @@
                   <% question_ids += question.attributes["id"] + "," %>
                   <%= render :partial=>"/user/exam_users/single_question", :object=> [question,question_num, problem]  %>
                   <% question_num = question_num + 1 %>
-                <% end %>
+                <% end unless problem.elements["questions"].nil?  %>
                 <input type="hidden" id="question_ids_<%= problem.attributes["id"] %>"
                        name="question_ids_<%= problem.attributes["id"] %>" value="<%= question_ids %>" />
                        <% block_comment = "" if block_comment != "" %>
@@ -89,7 +89,8 @@
   <div class="tp_right">
     <div class="tp_right_box" id="paper_navigation">
       <% block_index = 0
-      block_ids = "" %>
+      block_ids = ""
+      question_num = 1 %>
       <% @xml.elements['blocks'].each_element do |block|%>
         <% block_ids = block_ids == "" ? block.attributes["id"] : block_ids + "," + block.attributes["id"] %>
         <div class="first_title <% if block_index == 0 %>highLight<% end %>" id="block_nav_<%= block.attributes["id"] %>"  onclick="javascript:open_nav('<%= block.attributes["id"] %>');">
@@ -107,12 +108,14 @@
                 all_answer = answers | user_answers
                 is_right = true if all_answer == answers and answers - user_answers == []  %>
                 <li><% if is_right %>
-                    <a href="javascript:void(0);" onclick="javascript:get_question_height(<%= question.attributes["id"] %>, <%= problem.attributes["id"] %>);">
-                      <img src="/images/paper/dui.jpg" />
+                  <a href="javascript:void(0);" class="lvse"
+                       onclick="javascript:get_question_height(<%= question.attributes["id"] %>, <%= problem.attributes["id"] %>);">
+                      √
                     </a>
                   <% else %>
-                    <a href="javascript:void(0);" onclick="javascript:get_question_height(<%= question.attributes["id"] %>, <%= problem.attributes["id"] %>);">
-                      <img src="/images/paper/cuo.jpg" />
+                    <a href="javascript:void(0);" class="fenhong" 
+                       onclick="javascript:get_question_height(<%= question.attributes["id"] %>, <%= problem.attributes["id"] %>);">
+                      x
                     </a>
                   <% end %>
                 </li>

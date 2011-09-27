@@ -14,7 +14,7 @@ var correct_sum=0;  //统计正确的题数
 
 var answer=new Array;
 if($("show_answer")!=null&&$("show_answer").value!=""){
-    answer=$("show_answer").value.split("|-|-|");
+    answer=$("show_answer").value.replace(/(")/g, "").split("|-|-|");
 }
 var question_result_color=0; //记录题目的颜色。默认为0；1为答对；2错误;
 //加载综合训练

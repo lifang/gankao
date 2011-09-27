@@ -134,6 +134,7 @@ class ExamListsController < ApplicationController
     note.set_note_url
     note_doc = note.open_xml
     problem = note.problem_in_note(params[:problem_id], note_doc)
+
     doc=Collection.find_by_user_id(cookies[:user_id]).open_xml
     collection_problem=doc.elements["/collection/problems/problem[@id=#{params[:problem_id]}]"]
     collection_question=collection_problem.elements["questions/question[@id=#{params[:id]}]"]
@@ -151,7 +152,10 @@ class ExamListsController < ApplicationController
       note.save_xml(note_doc)
     end
     flash[:notice] = "笔记添加成功."
-    redirect_to request.referer
+    render :update do |page|
+      page.replace_html "note_div" , :partial => "/common/flash_div"
+      page.replace_html "biji_tab" , :inline => "<script>document.getElementById('note_area').style.display='none';</script>"
+    end
   end
 
   def search_tag_problems

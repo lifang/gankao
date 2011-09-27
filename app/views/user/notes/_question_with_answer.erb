@@ -31,7 +31,7 @@
       <!--[if IE 6]></td><td><![endif]-->
       <div class="p_q_l_right_s">
         <% unless question_with_answer[0].elements["description"].nil? or question_with_answer[0].elements['description'].text.nil? or
-          question_with_answer[0].elements['description'].text == "" %>
+            question_with_answer[0].elements['description'].text == "" %>
           <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] %>
             <div class="q_drag_con" style="word-wrap:break-word; word-break:break-all;">
               <p><%= question_with_answer[0].elements["description"].text.to_s.html_safe.
@@ -76,7 +76,19 @@
           </ul>
         <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] %>
           <div class="answer_text">
-            <input name="answer" type="text" disabled value="<%= user_answers[0].to_s %>" />
+            <% height = "22px"
+            width = ""
+            if user_answers[0].to_s.length > 20 and user_answers[0].to_s.length <= 28
+              width = (user_answers[0].to_s.length * 10).to_s + "px"
+            elsif user_answers[0].to_s.length > 28
+              width = "95%"
+              if user_answers[0].to_s.length > 30
+                height = (22 * (user_answers[0].to_s.length/30 + 1)).to_s + "px"
+              end
+            end
+          %>
+            <textarea disabled cols="" rows=""
+                      style="width:<%= width %>; height:<%= height %>;"><%= user_answers[0].to_s %></textarea>
           </div>
         <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] %>
           <div class="answer_textarea">

@@ -516,6 +516,14 @@ function cuoti_note(question_id, problem_id) {
     });
     return false;
 }
+
+function check_note_form(question_id) {alert(2);
+    if (checkspace($("note_text_" + question_id).value)) {alert(23);
+        return false;
+    }
+    return true;
+}
+
 function show_question(id){
     var questions=$("questions").value;
     var ids=questions.split(",");
@@ -552,3 +560,11 @@ jQuery(function() {
     });
 })
 jQuery.noConflict();
+
+
+function dd(){
+    jQuery.each({name:"john",lang:"js"},function(i){
+        alert("name:" + i + ",value:"+this );
+    });
+}
+
