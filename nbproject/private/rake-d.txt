@@ -1,6 +1,7 @@
 about=List versions of all Rails frameworks and the environment
 belief\:sums=rate paper
 charts\:create_picture=create picture
+check\:title=rate paper
 db\:abort_if_pending_migrations=
 db\:charset=
 db\:collation=
