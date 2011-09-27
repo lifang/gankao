@@ -19,7 +19,7 @@
                     <user_answer>sdds</user_answer>
                     <user_answer>sfss</user_answer>
                     <user_answer/>
-                    <note_text>哈哈哈ff222鹅鹅鹅22ffdd古古怪单点怪该罚的罚sdfsfsf</note_text>
+                    <note_text>哈哈11哈ff222鹅鹅鹅22ffdd古古怪单点怪该罚的罚sdfsfsf</note_text>
                 </question>
             </questions>
         </problem>
@@ -68,10 +68,10 @@
                     <questionattrs/>
                     <tags/>
                     <user_answer/>
-                    <note_text>2222211113333</note_text>
+                    <note_text>2222211113333宋德福</note_text>
                     <created_at>2011-09-22 10:48</created_at>
                 </question>
-            </questions>
+            <question correct_type='1' id='39' score='6'><description>sadfasssssssssssssssssss4t344555</description><answer>sdfa;|;qq2</answer><analysis>sdfasdfsafsafdsafa</analysis><questionattrs>sdfa;-;qq2;-;zxc;-;tgrt</questionattrs><tags>4</tags><user_answer/><note_text>宋德福是否</note_text><created_at>2011-09-27 15:04</created_at></question></questions>
         </problem>
         <problem id='34' score='4' types='5'>
             <title>测试简答题&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;</title>
@@ -155,21 +155,67 @@ asf
                     <questionattrs/>
                     <tags/>
                     <user_answer/>
-                    <note_text>dsfsdfsf</note_text>
+                    <note_text>dsfsdfsf啛啛喳喳111</note_text>
                     <created_at>2011-09-22 10:43</created_at>
                 </question>
             </questions>
         </problem>
-    <problem id='42' score='0' types='0'>
-                    <title>上的飞洒的法萨芬</title>
-                    <category>3</category>
-                    <questions>
-                        <question correct_type='0' id='45' score='0'>
-                            <answer>宋德福</answer>
-                            <analysis>发上发生法萨芬萨菲</analysis>
-                            <questionattrs>宋德福;-;宋德1;-;11;-;33</questionattrs>
-                            <tags/>
-                        <user_answer>宋德1</user_answer><note_text>test</note_text><created_at>2011-09-26 15:41</created_at></question>
-                    </questions>
-                </problem><problem id='44' score='5' types='0'><title>萨菲尔特如图一梯田</title><category>3</category><questions><question correct_type='0' id='47' score='5'><answer>额外</answer><analysis>委屈委屈</analysis><questionattrs>额外;-;557;-;909;-;121</questionattrs><tags/><user_answer></user_answer><note_text>test</note_text><created_at>2011-09-26 15:41</created_at></question></questions></problem></problems>
+        <problem id='42' score='0' types='0'>
+            <title>上的飞洒的法萨芬</title>
+            <category>3</category>
+            <questions>
+                <question correct_type='0' id='45' score='0'>
+                    <answer>宋德福</answer>
+                    <analysis>发上发生法萨芬萨菲</analysis>
+                    <questionattrs>宋德福;-;宋德1;-;11;-;33</questionattrs>
+                    <tags/>
+                    <user_answer>宋德1</user_answer>
+                    <note_text>test</note_text>
+                    <created_at>2011-09-26 15:41</created_at>
+                </question>
+            </questions>
+        </problem>
+        <problem id='44' score='5' types='0'>
+            <title>萨菲尔特如图一梯田</title>
+            <category>3</category>
+            <questions>
+                <question correct_type='0' id='47' score='5'>
+                    <answer>额外</answer>
+                    <analysis>委屈委屈</analysis>
+                    <questionattrs>额外;-;557;-;909;-;121</questionattrs>
+                    <tags/>
+                    <user_answer/>
+                    <note_text>test</note_text>
+                    <created_at>2011-09-26 15:41</created_at>
+                </question>
+            </questions>
+        </problem>
+        <problem id='45' score='5' types='3'>
+            <title>sdfasfsafdsfsafasfasfsafsfsfsdfsaf</title>
+            <category>3</category>
+            <questions>
+                <question correct_type='3' id='48' score='5'>
+                    <answer>asfasfasfasfasfasfsafsfdsafsfsfd</answer>
+                    <analysis>sfafsafasfasfsfdsafdasfsf</analysis>
+                    <questionattrs/>
+                    <tags/>
+                    <user_answer>sdfsddddddds</user_answer>
+                    <note_text>方法法方法</note_text>
+                    <created_at>2011-09-27 14:31</created_at>
+                </question>
+            </questions>
+        </problem>
+    <problem id='70' score='15' types='0'>
+            <title>得得得得</title>
+            <category>1</category>
+            <questions>
+                <question correct_type='0' error_percent='0' id='84' repeat_num='1' score='15'>
+                    <answer>讲讲价</answer>
+                    <analysis/>
+                    <questionattrs>等待;-;凤飞飞;-;呵呵;-;讲讲价</questionattrs>
+                    <tags> 手动添加</tags>
+                    <user_answer/>
+                <note_text>try突然有人</note_text></question>
+            </questions>
+        </problem></problems>
 </note>

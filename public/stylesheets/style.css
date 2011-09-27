@@ -248,6 +248,7 @@ img { border: none;}
 .p_question_list {border-bottom: 1px #eaeaea solid; position: relative;}
 
 .answer_text { padding: 10px;}
+.answer_text textarea {line-height: 24px; overflow-y: hidden; font-size: 12px;}
 
 .answer_textarea { }
 .answer_textarea textarea { padding: 5px; width: 95%; height: 180px; margin: 10px 0 30px 15px;}

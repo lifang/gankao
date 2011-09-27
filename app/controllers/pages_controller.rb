@@ -2,8 +2,13 @@
 class PagesController < ApplicationController
 
   def index
-    @title="首页"
-    render :layout=>"index"
+    if cookies[:user_id]
+      redirect_to "/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}"
+    else
+      @title="首页"
+      render :layout=>"index"
+    end
+    
   end
 
   def sina_index

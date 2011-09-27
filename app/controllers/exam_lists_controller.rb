@@ -134,6 +134,7 @@ class ExamListsController < ApplicationController
     note.set_note_url
     note_doc = note.open_xml
     problem = note.problem_in_note(params[:problem_id], note_doc)
+
     doc=Collection.find_by_user_id(cookies[:user_id]).open_xml
     collection_problem=doc.elements["/collection/problems/problem[@id=#{params[:problem_id]}]"]
     collection_question=collection_problem.elements["questions/question[@id=#{params[:id]}]"]
