@@ -19,7 +19,7 @@ class User::CombinePracticesController < ApplicationController
         @paper_url = "#{Constant::PAPER_CLIENT_PATH}/#{@exam_user.paper_id}.js"
         xml_url="#{Constant::BACK_PUBLIC_PATH}/papers/#{@exam_user.paper_id}.xml"
         xml=Document.new(File.open(xml_url)).root
-        @answer_array=xml.get_elements("/paper/blocks/block[#{@step[0].to_i}]/problems//questions//answer").map{|n|n=n.text}.to_s.gsub("\"","")[1..-2]
+        @answer_array=xml.get_elements("/paper/blocks/block[#{@step[0].to_i}]/problems//questions//answer").map{|n|n=n.text}.join("|-|-|").gsub("\"","")
         render :layout => "practice_layout"
       else
         flash[:warn] = "试卷加载错误。"
