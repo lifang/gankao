@@ -132,7 +132,7 @@ class ExamUser < ActiveRecord::Base
 
   #生成考生综合考试result文件
   def create_practice_result_url(str, path)
-    dir = "#{Rails.root}/public/" + path
+    dir = "#{Rails.root}/public/" + path + "/#{self.examination_id}"
     unless File.directory?(dir)
       Dir.mkdir(dir)
     end
@@ -141,7 +141,7 @@ class ExamUser < ActiveRecord::Base
     f=File.new(url,"w")
     f.write("#{str.force_encoding('UTF-8')}")
     f.close
-    return "/" + path + file_name
+    return "/" + path + "/#{self.examination_id}" + file_name
   end
 
   #下一步

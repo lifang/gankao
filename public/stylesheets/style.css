@@ -52,8 +52,8 @@ img { border: none;}
 .main_index_con { width: 960px; margin: 20px auto; overflow: hidden;}
 .pd_con_box { width: 160px; float: left; margin: 0 16px; display: inline;}
 .pd_h { width: 146px; height: 35px; text-indent: -999px; overflow: hidden;}
-.pd_text { font-size: 14px; color: #333; font-family: "微软雅黑"; line-height: 24px; padding: 10px;}
-.pd_text p { text-indent: 24px; line-height: 24px;}
+.pd_text { font-size: 13px; color: #333; font-family: "微软雅黑"; line-height: 24px; padding: 10px;}
+.pd_text p { line-height: 24px;}
 
 .pd_mn { background: url(/images/paper/all_bg.png) no-repeat 0 -721px;}
 .pd_zt { background: url(/images/paper/all_bg.png) no-repeat -227px -721px;}
@@ -411,13 +411,15 @@ img { border: none;}
 .zh_position_five { background: url(/images/paper/zh_tab_5.png) no-repeat;}
 
 
-.zh_top { height: 50px; margin: 20px 0; padding-left: 50px;}
+.zh_top { height: 50px; margin: 20px 0 10px 0; padding-left: 50px;}
 .zh_load { width: 600px; float: left; display: inline;}
 .load_bg { width: 600px; height: 40px; background: url(/images/paper/load_bg.png) no-repeat; position: relative;}
 .load_t { width: 500px; height: 40px; background: url(/images/paper/load_t.png) no-repeat;}
 .load_text { text-align: center; width: 600px; height: 40px; line-height: 40px; font-size: 14px; color: #F00; position: absolute; top: 0px; left: 0px;}
 .zh_addTo_btn { width: 160px; float: left; height: 35px; margin: 2px 0 0 30px;}
 .zh_addTo_btn a { width: 160px; height: 35px; display: block; margin: 0 auto; background: url(/images/paper/all_bg.png) no-repeat -198px -440px; text-indent: -999px; overflow: hidden;}
+
+.zh_top_text { line-height: 24px; margin-bottom: 20px; padding-left: 50px;}
 
 
 .zh_p { width: 119px; height: 23px; padding-left: 30px;}
@@ -480,7 +482,7 @@ img { border: none;}
 
 /*综合训练2*/
 
-.tb_con_list { padding: 10px; border: 1px #CCC solid; margin-top: 10px;}
+.tb_con_list { padding: 10px; border: 1px #CCC solid; margin-top: 10px; height: 1%;}
 .explain_btn { width: 60px; height:27px; display: block; overflow: hidden; text-indent: 999px; background: url(/images/paper/all_bg.png) no-repeat -127px -157px; margin-left: 400px;}
 .explain_btn_task2 { width: 60px; height:27px; float: left; background: url(/images/paper/all_bg.png) no-repeat -127px -157px; margin-left: 400px;}
 

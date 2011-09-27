@@ -83,6 +83,7 @@ img { border: none;}
 .p_question_list {border-bottom: 1px #eaeaea solid; position: relative;}
 
 .answer_text { padding: 10px;}
+.answer_text input { padding: 0 10px;}
 
 .answer_textarea { }
 .answer_textarea textarea { padding: 5px; width: 95%; height: 180px; margin: 10px 0 10px 15px;}
@@ -110,8 +111,8 @@ img { border: none;}
 .q_drag_con { line-height: 24px;}
 .task_con p { text-indent: 24px;}
 
-.task3_li { overflow: hidden; color: #333; border-bottom: 1px #EAEAEA solid; padding: 10px 0; height: 1%; position: relative; z-index: 100px;}
-.task3_li li {height: 25px; border: 1px #CCC solid; text-align: center; line-height: 25px; margin: 5px 7px; padding: 0 10px; float: left;}
+.task3_li { overflow: hidden; color: #333; border-bottom: 1px #EAEAEA solid; padding: 10px 0; height: 1%;}
+.task3_li li {height: 25px; border: 1px #CCC solid; text-align: center; line-height: 25px; margin: 5px 7px; padding: 0 10px; float: left; position: relative; z-index: 100;}
 .task3_li li.dropOver { border: 1px #f0f0f0 solid; background: #f9f9f9; color: #cccccc;}
 .task_span { padding: 0 5px; border-bottom: 1px #CCC solid;}
 
@@ -163,7 +164,10 @@ img { border: none;}
 .tp_right_box { width: 240px; margin: 0 auto; position: fixed; _position: absolute; _top: expression(eval(documentElement.scrollTop + 50));}
 .first_title { font-size: 13px; color: #333; overflow: hidden; clear: both; cursor: pointer; background: url(/images/paper/xline.png) repeat-x center bottom; padding: 10px 0;}
 .first_title p { padding: 5px; line-height: 18px; clear: both;}
-.second_menu li { float: left; margin: 2px 8px; overflow: hidden; height: 32px;}
+.second_menu li { float: left; margin: 2px 5px; overflow: hidden; height: 32px; width: 31px; border: 1px #CCC solid; font-size: 16px; font-family: "微软雅黑";}
+.second_menu li a { width: 31px; height: 32px; display: block; line-height: 32px; text-align: center; text-decoration: none; color: #333;}
+.second_menu li a.lvse { background: url(/images/paper/second_menu_bg.jpg) no-repeat -35px bottom;}
+.second_menu li a.fenhong { background: url(/images/paper/second_menu_bg.jpg) no-repeat 0 bottom;}
 .highLight { color: #164a63; font-size: 14px; font-weight:bold;}
 .first_title ul { padding: 5px 0 0 0; overflow: hidden;}
 

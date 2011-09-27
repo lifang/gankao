@@ -29,15 +29,17 @@
         <div class="head_box">
 
           <div class="member_nav">
-            <a href="/">首页</a>  |
-            <a href="/user/homes/<%= Category::TYPE_IDS[:english_fourth_level] %>">CET-4</a>  |
-            <a href="/user/homes/<%= Category::TYPE_IDS[:english_sixth_level] %>">CET-6</a>  |
+            你好，
+            <a href="/user/homes/<%= Category::TYPE_IDS[:english_fourth_level] %>">
+              <%= current_user.name if current_user %>
+            </a>
+            <a href="/users/<%= cookies[:user_id] %>/edit">会员中心</a>  |
             <a href="/signout">退出</a>
           </div>
           <div class="member_logo"><img src="/images/paper/member_logo.png" /></div>
         </div>
       </div>
-          <%= yield %>
+      <%= yield %>
       <div class="clear"></div>
       <div class="foot">
         <p><a href="#">用户协议</a>   |   <a href="#">关于我们</a>    |   <a href="#">官方微博</a></p>
