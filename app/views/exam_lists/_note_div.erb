@@ -1,11 +1,9 @@
 <%= form_remote_tag :method => "post", 
-                   :condition => "check_note_form('#{note_div[1]}')",
-                   :url => "/exam_lists/#{note_div[1]}/create_note" do -%>
-<div class="tab_m_textarea">
-  <textarea id="note_text_<%= note_div[1] %>"
-            name="note_text_<%= note_div[1] %>" cols="42" class="required"><%= note_div[0] %></textarea>
-  <input type="hidden" id="problem_id" name="problem_id" value="<%= @problem_id %>"/>
-
-</div>
-<div class="p_question_btn"><button type="submit" class="save"></button></div>
+  :condition => "check_note_form('#{note_div[1]}')",
+  :url => "/exam_lists/#{note_div[1]}/create_note" do -%>
+  <div class="tab_m_textarea">
+    <textarea id="note_text_<%= note_div[1] %>" name="note_text_<%= note_div[1] %>" cols="42" rows="" class="required"><%= note_div[0] %></textarea>
+    <input type="hidden" id="problem_id" name="problem_id" value="<%= @problem_id %>"/>
+  </div>
+  <div class="p_question_btn"><button type="submit" class="save"></button></div>
 <% end %>
