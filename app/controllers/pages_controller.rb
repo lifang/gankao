@@ -2,7 +2,7 @@
 class PagesController < ApplicationController
 
   def index
-    if cookies[:user_id]
+    if cookies[:user_id] and request.referer == "/"
       redirect_to "/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}"
     else
       @title="首页"

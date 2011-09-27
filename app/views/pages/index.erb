@@ -25,8 +25,13 @@
         <div class="top_other_zh">&nbsp;</div>
         <div class="top_loginArea">
           <div class="top_la_ks">
-            <div class="login_i_text">你好，<a href="/users/<%= cookies[:user_id] %>/edit"><%= current_user.name %></a></div>
-            <div class="login_i_text"><a href="/signout">退出</a></div>
+            <div class="login_i_text">
+              你好,<a href="/user/homes/<%= Category::TYPE_IDS[:english_fourth_level] %>">
+                <%= current_user.name if current_user %>
+              </a> <% if (is_vip?).to_s == "true" %><font color="red">(VIP)</font><% end %>
+              <a href="/users/<%= cookies[:user_id] %>/edit">会员中心</a> |
+              <a href="/signout">退出</a>
+            </div>
           </div>
         </div>
       <% end %>
