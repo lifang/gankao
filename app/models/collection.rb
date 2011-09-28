@@ -110,6 +110,7 @@ class Collection < ActiveRecord::Base
 
   #如果当前题目有题点已经收藏过，就只收藏题点
   def add_question(question, answer_text, collection_problem, collection_xml)
+    question.elements["tags"].text="#{question.elements["tags"].text} 所有分类" unless question.elements["tags"].nil?
     question.add_element("user_answer").add_text("#{answer_text}")
     question.add_attribute("repeat_num", "1")
     question.add_attribute("error_percent", "0")
@@ -127,6 +128,7 @@ class Collection < ActiveRecord::Base
       end
     end if paper_problem
     last_question = paper_problem.elements["questions"].elements["question[@id='#{question_id.to_i}']"]
+    last_question.elements["tags"].text="#{last_question.elements["tags"].text} 所有分类" unless last_question.elements["tags"].nil?
     last_question.add_element("user_answer").add_text("#{answer_text}")
     last_question.add_attribute("repeat_num", "1")
     last_question.add_attribute("error_percent", "0")
@@ -138,7 +140,7 @@ class Collection < ActiveRecord::Base
   def hand_add_question(paper_url, question_answer, question_path, problem, collection_doc)
     paper = ExamRater.open_file("#{Constant::BACK_PUBLIC_PATH}#{paper_url}")
     paper_question = paper.elements["#{question_path}"]
-    paper_question.elements["tags"].text="#{paper_question.elements["tags"].text} 手动添加" unless question.elements["tags"].nil?
+    paper_question.elements["tags"].text="#{paper_question.elements["tags"].text} 我的关注" unless paper_question.elements["tags"].nil?
     add_question(paper_question, question_answer.text, problem, collection_doc)
   end
 
@@ -147,7 +149,7 @@ class Collection < ActiveRecord::Base
     paper_xml = ExamRater.open_file("#{Constant::BACK_PUBLIC_PATH}#{paper_url}")
     paper_problem = paper_xml.elements["#{problem_path}"]
     paper_problem.elements["questions"].each_element do |question|
-      question.elements["tags"].text="#{question.elements["tags"].text} 手动添加" unless question.elements["tags"].nil?
+      question.elements["tags"].text="#{question.elements["tags"].text} 我的关注" unless question.elements["tags"].nil?
     end
     answer=question_answer.nil? ? "": question_answer.text
     auto_add_problem(paper_xml, question_id, problem_path, answer, collection_doc)
