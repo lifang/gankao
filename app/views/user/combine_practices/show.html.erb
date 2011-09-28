@@ -56,10 +56,8 @@
 <%= javascript_include_tag "#{Constant::SERVER_PATH}/javascripts/jeff_answer_paper.js" %>
 <script language="javascript" type="text/javascript">
 
-  //本地存储所需变量finish
-  var local_timer = null;
-  var local_start_time = "05:00:00";
-  var local_finish_time = "00:00:00";
+ var server_path="<%= Constant::SERVER_PATH %>";
+ var back_server_path="<%= Constant::BACK_SERVER_PATH %>";
 
   //用户保存本地存储的答案
   var answer_hash = new Hash();

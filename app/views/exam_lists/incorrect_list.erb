@@ -11,10 +11,10 @@
     <div class="clear"></div>
     <div class="errorProblem_div">
       <% @lists.elements["/collection/problems"].each_element do |problem|%>
-      <div class="part_div">
+        <div class="part_div">
           <%= render :partial=>"/exam_lists/question_with_answer",:object=>problem %>
-      </div>
-      <div class="space20"></div>
+        </div>
+        <div class="space20"></div>
       <% end %>
       <div class="sabrosus"><%= handle_paginate(params[:page], @num) %></div>
     </div>
