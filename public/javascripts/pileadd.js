@@ -517,8 +517,8 @@ function cuoti_note(question_id, problem_id) {
     return false;
 }
 
-function check_note_form(question_id) {alert(2);
-    if (checkspace($("note_text_" + question_id).value)) {alert(23);
+function check_note_form(question_id) {
+    if (checkspace($("note_text_" + question_id).value)) {
         return false;
     }
     return true;

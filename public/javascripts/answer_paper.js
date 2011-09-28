@@ -111,7 +111,6 @@ function create_block(bocks_div, block) {
     var ul = create_element("ul", null, "nav_block_" + block.id, "second_menu", null, "innerHTML");
     ul.style.display = "none";
     block_nav_div.appendChild(ul);
-    
     //判断problem的存在
     if (block.problems != undefined && block.problems.problem != undefined) {
         var problems = block.problems.problem;
@@ -124,7 +123,6 @@ function create_block(bocks_div, block) {
         }
         block_nav_div.appendChild(create_element("div", null, null, "clear", null, "innerHTML"));
     }
-    
     if (block_block_flag == 0 && (is_fix_time == false || (is_fix_time && (block_start_hash.get(block.id) == ""
         || (return_giving_time(block_start_hash.get(block.id)) >= return_giving_time(start) &&
             (block_end_hash.get(block.id) == "" ||
@@ -200,7 +198,12 @@ function hand_open_nav(block_id) {
     if (is_fix_time) {
         var fs = return_giving_time(start);
         var flash_div = null;
-        if ((block_end_hash.get(block_id) == null || block_end_hash.get(block_id) == "")) {
+        var bs = null;
+        var end_time_flag = false;
+        if (block_end_hash.get(block_id) != null && block_end_hash.get(block_id) != "") {
+            bs = return_giving_time(block_end_hash.get(block_id));
+        }
+        if (block_start_hash.get(block_id) != null && block_start_hash.get(block_id) != "") {
             var ss = return_giving_time(block_start_hash.get(block_id));
             if (ss < fs) {
                 flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
@@ -209,11 +212,13 @@ function hand_open_nav(block_id) {
                 show_flash_div();
             }
             else {
-                open_nav(block_id);
+                end_time_flag = true;
             }
         } else {
-            var bs = return_giving_time(block_end_hash.get(block_id));
-            if (bs < fs) {
+            end_time_flag = true;
+        }
+        if (end_time_flag == true) {
+            if (bs == null || bs < fs) {
                 open_nav(block_id);
             } else {
                 flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
@@ -221,7 +226,6 @@ function hand_open_nav(block_id) {
                 document.body.appendChild(flash_div);
                 show_flash_div();
             }
-
         }
     } else {
         open_nav(block_id);
@@ -965,6 +969,7 @@ function answer_xml() {
 
 //记录当前模块是否有听力
 function is_has_audio(block_div, problem) {
+    var back_server_path = $("back_server_url").value;
     var block_id = block_div.id.split("inner_block_")[1];
     var titles = problem.title.split("<mp3>");
     var final_title = "";
@@ -972,9 +977,9 @@ function is_has_audio(block_div, problem) {
         var audio_str = "";
         if (window.HTMLAudioElement) {
             audio_str = "<audio id='audio_"+ block_id +"' onended='add_audio_cookies("+ block_id +");'>" +
-            "<source src='"+ titles[1] +"' type='audio/mpeg'></audio>";
+            "<source src='"+ back_server_path + titles[1] +"' type='audio/mpeg'></audio>";
         } else {
-            audio_str = "<object><embed id='audio_"+ block_id +"' src='"+ titles[1] +
+            audio_str = "<object><embed id='audio_"+ block_id +"' src='"+ back_server_path + titles[1] +
             "' autostart='false' hidden='true' type='audio/midi'></object>";
         }
         final_title = audio_str + titles[2];

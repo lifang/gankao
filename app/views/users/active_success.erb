@@ -1,6 +1,6 @@
 <script type="text/javascript">
   function tiaozhuan(){
-    document.location.href = "/users/<%= cookies[:user_id] %>/edit";
+    document.location.href = "/user/homes/<%= Category::TYPE_IDS[:english_fourth_level] %>";
   }
   function changepage(){
     setTimeout("tiaozhuan()",3000);
@@ -17,7 +17,7 @@
       </div>
       <div class="zhuce_box">
         <p class="zhuce_cg">欢迎您使用赶考，即将自动跳转到登录页</p>
-        <p class="zhuce_cg"><a href="/users/<%= cookies[:user_id] %>/edit">如果您的浏览器没有自动跳转，请点击这里</a></p>
+        <p class="zhuce_cg"><a href="/user/homes/<%= Category::TYPE_IDS[:english_fourth_level] %>">如果您的浏览器没有自动跳转，请点击这里</a></p>
       </div>
     </div>
   </div>

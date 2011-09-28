@@ -25,7 +25,7 @@
       <h2>完成度： <span class="red"><%= "#{pro.to_i}%" %></span></h2>
       <h2>正确率： <span class="red"><%= "#{@correct.to_i}%" %></span></h2>
     </div>
-    <div class="per_btn"><a href="/exam_lists/<%= params[:id] %>/old_exam_list" target="_blank">开始练习</a></div>
+    <div class="per_btn"><a href="/exam_lists/<%= params[:id] %>/old_exam_list">开始练习</a></div>
     <div class="per_ex_p"><span class="red">*</span>新四级历年真题及丰富详实的解析，有自动搜索错题的功能。</div>
   </div>
 
@@ -46,7 +46,7 @@
     <div class="per_two_box">
       <div class="per_tb_title">信心</div>
       <div class="xx_biao">
-        <% if is_vip? %>
+        <% if (is_vip?).to_s == "true" %>
           <% if current_user.belief_url %>
             <img src="<%= current_user.belief_url %>" />
           <% else %>
@@ -54,7 +54,7 @@
           <% end %>
         <% else %>
           <img src="/images/paper/xx_biao.jpg" />
-          <a href="/users/goto_vip" target="_blank">能不能过，信心指数告诉你！</a>
+          <a href="/users/goto_vip?xinxi=1" target="_blank">能不能过，信心指数告诉你！</a>
         <% end %>
       </div>
       <div class="space20"></div>
@@ -64,7 +64,7 @@
       <div class="per_t_text">
         <% unless @incorrect_list.nil? %>
           <span class="red"><%=@incorrect_list.get_elements("//problems/problem").size %></span> 错题
-          <a href="/exam_lists/<%= params[:id] %>/incorrect_list" target="_blank">马上复习</a>
+          <a href="/exam_lists/<%= params[:id] %>/incorrect_list">马上复习</a>
         <% else %>
           您没有错题
         <% end %>
@@ -75,7 +75,7 @@
       <div class="per_t_text">
         <% unless @notes.nil? %>
           <span class="red"><%= @notes.get_elements("//problems//questions/question").size %></span> 篇
-          <a href="/user/notes/<%= params[:id] %>" target="_blank">翻阅笔记</a>
+          <a href="/user/notes/<%= params[:id] %>">翻阅笔记</a>
         <% else %>
           <h3><span class="red"><%= "您没有做笔记" %></span></h3>
         <% end %>

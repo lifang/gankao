@@ -4,7 +4,7 @@ include REXML
 namespace :check do
   desc "rate paper"
   task(:title => :environment) do
-    file_path="f:/exam_app/public/papers"
+    file_path="e:/exam_app/public/papers"
     def traverse_dir(file_path)
       if File.directory? file_path
         Dir.foreach(file_path) do |file|
@@ -26,7 +26,7 @@ namespace :check do
         question.elements["tags"].text="#{question.elements["tags"].text} #{type}" unless question.elements["tags"].text=~ /#{type}/
       end
       js_file=Hash.from_xml(doc.to_s).to_json
-      write_xml("f:/exam_app/public/paperjs/#{doc.attributes['id']}.js","papers = "+js_file)
+      write_xml("e:/exam_app/public/paperjs/#{doc.attributes['id']}.js","papers = "+js_file)
       write_xml(file_path,doc)
     end
 

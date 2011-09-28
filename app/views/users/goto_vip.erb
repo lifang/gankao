@@ -1,83 +1,91 @@
 <div class="main">
-          <div class="main_vip">
-
-               <div class="member_vip_btn">
-                    <span><img alt="gankao" src="/images/paper/35.png"/></span>
-                    <button></button>
-                    <div class="clear"></div>
-               </div>
-               <div class="vip_text">
-                    <h1>VIP特权</h1>
-                    <div class="vip_text_box">
-                        <h2>信心指数</h2>
-                        <p><img alt="gankao" src="/images/paper/xxjt.png"/>准备数月，到底状况怎么样？让信心指数告诉你。信心指数依据你在系统中完成模考和练习的状况计算出科学的结果，告诉你系统认为你有多大可能在四级考试中取得450分或以上的成绩。</p>
-                    </div>
-                    <div class="vip_text_box">
-                        <h2>模考主观题批改</h2>
-                        <p><img alt="gankao" src="/images/paper/shubi.png"/>四级考试中主观题占了1/3强的内容，主观题部分得分是否准确关系着模考结果的参考价值。所以，我们聘请有经验的老师为人工批改VIP客户的模考主观题，帮助VIP客户更好了解自己的准备情况。</p>
-                    </div>
-                    <div class="vip_text_box">
-                        <h2>综合训练</h2>
-                        <p><img alt="gankao" src="/images/paper/erji.png"/>5步综合训练是专门针对技术不够扎实的备考者，在短时间内提高听、读、写能力和掌握最常见词汇的高效方法。VIP用户拥有全部60篇综合训练的访问权限。（普通用户只能试用5篇。）</p>
-                    </div>
-                    <div class="vip_text_box">
-                        <h2>提问限时回答</h2>
-                        <p><img alt="gankao" src="/images/paper/dengpao.png"/>VIP用户通过系统提出问题，由网站聘请的专业老师在限定时间内给予专业解答。</p>
-                    </div>
-                    <div class="clear"></div>
-               </div>
-               <div class="vip_table">
-                   <h1>功能对比</h1>
-                   <div class="vip_info">
-                             <table border="0" cellspacing="1" cellpadding="0">
-                               <tbody><tr>
-                                 <td id="vip_table_head">&nbsp;</td>
-                                 <td id="vip_table_head">普通用户</td>
-                                 <td id="vip_table_head">高级用户</td>
-                               </tr>
-                               <tr>
-                                 <td><strong>模拟考试</strong></td>
-                                 <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
-                                 <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
-                               </tr>
-                               <tr>
-                                 <td><strong>模拟考试主观题批改</strong></td>
-                                 <td></td>
-                                 <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
-                               </tr>
-                               <tr>
-                                 <td><strong>真题训练</strong></td>
-                                 <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
-                                 <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
-                               </tr>
-                               <tr>
-                                 <td><strong>综合训练</strong></td>
-                                 <td>5篇试用</td>
-                                 <td>60篇</td>
-                               </tr>
-                               <tr>
-                                 <td><strong>错题库</strong></td>
-                                 <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
-                                 <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
-                               </tr>
-                               <tr>
-                                 <td><strong>错题问答</strong></td>
-                                 <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
-                                 <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
-                               </tr>
-                               <tr>
-                                 <td><strong>笔记</strong></td>
-                                 <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
-                                 <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
-                               </tr>
-                               <tr>
-                                 <td><strong>备考信心指数</strong></td>
-                                 <td></td>
-                                 <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
-                               </tr>
-                            </tbody></table>
-                        </div>
-               </div>
-               <div class=" vip_zhuyi">注：VIP用户有效期截至2011年12月18日。</div>
-            </div>
-          </div>
+  <div class="main_vip">
+    <div class="member_vip_btn">
+      <span><img alt="gankao" src="/images/paper/35.png"/></span>
+      <button></button>
+      <div class="clear"></div>
+    </div>
+    <% unless params[:xinxi].nil? %>
+    <div class="vip_xinxin">
+      <h1>信心指数</h1>
+      <p>1）信心指数是系统通过您在本平台的复习活动得出的一个动态数值，代表了您备考的成熟度；</p>
+      <p>2）信心指数达到80%以上，则通过四级考试的几率达到95%以上；</p>
+      <p>3）信心指数将在2011年12月16日冻结，如果实际参加CET4的考生分数未达到425分，赶考网将全额退款；</p>
+      <p>4）信心指数服务只有VIP用户才能享受；</p>
+    </div>
+    <% end %>
+    <div class="vip_text">
+      <h1>VIP特权</h1>
+      <div class="vip_text_box">
+        <h2>信心指数</h2>
+        <p><img alt="gankao" src="/images/paper/xxjt.png"/>准备数月，到底状况怎么样？让信心指数告诉你。信心指数依据你在系统中完成模考和练习的状况计算出科学的结果，告诉你系统认为你有多大可能在四级考试中取得450分或以上的成绩。</p>
+      </div>
+      <div class="vip_text_box">
+        <h2>模考主观题批改</h2>
+        <p><img alt="gankao" src="/images/paper/shubi.png"/>四级考试中主观题占了1/3强的内容，主观题部分得分是否准确关系着模考结果的参考价值。所以，我们聘请有经验的老师为人工批改VIP客户的模考主观题，帮助VIP客户更好了解自己的准备情况。</p>
+      </div>
+      <div class="vip_text_box">
+        <h2>综合训练</h2>
+        <p><img alt="gankao" src="/images/paper/erji.png"/>5步综合训练是专门针对技术不够扎实的备考者，在短时间内提高听、读、写能力和掌握最常见词汇的高效方法。VIP用户拥有全部60篇综合训练的访问权限。（普通用户只能试用5篇。）</p>
+      </div>
+      <div class="vip_text_box">
+        <h2>提问限时回答</h2>
+        <p><img alt="gankao" src="/images/paper/dengpao.png"/>VIP用户通过系统提出问题，由网站聘请的专业老师在限定时间内给予专业解答。</p>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div class="vip_table">
+      <h1>功能对比</h1>
+      <div class="vip_info">
+        <table border="0" cellspacing="1" cellpadding="0">
+          <tbody><tr>
+              <td id="vip_table_head">&nbsp;</td>
+              <td id="vip_table_head">普通用户</td>
+              <td id="vip_table_head">高级用户</td>
+            </tr>
+            <tr>
+              <td><strong>模拟考试</strong></td>
+              <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
+              <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
+            </tr>
+            <tr>
+              <td><strong>模拟考试主观题批改</strong></td>
+              <td></td>
+              <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
+            </tr>
+            <tr>
+              <td><strong>真题训练</strong></td>
+              <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
+              <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
+            </tr>
+            <tr>
+              <td><strong>综合训练</strong></td>
+              <td>5篇试用</td>
+              <td>60篇</td>
+            </tr>
+            <tr>
+              <td><strong>错题库</strong></td>
+              <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
+              <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
+            </tr>
+            <tr>
+              <td><strong>错题问答</strong></td>
+              <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
+              <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
+            </tr>
+            <tr>
+              <td><strong>笔记</strong></td>
+              <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
+              <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
+            </tr>
+            <tr>
+              <td><strong>备考信心指数</strong></td>
+              <td></td>
+              <td><img alt="gankao" src="/images/paper/green_dui.png"/></td>
+            </tr>
+          </tbody></table>
+      </div>
+    </div>
+    <div class=" vip_zhuyi">注：VIP用户有效期截至2011年12月18日。</div>
+  </div>
+</div>

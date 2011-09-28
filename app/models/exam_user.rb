@@ -350,7 +350,8 @@ class ExamUser < ActiveRecord::Base
     xml.elements["blocks"].each_element do  |block|
       block.elements["problems"].each_element do |problem|
         if problem.attributes["types"].nil? || (problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:CHARACTER] and
-              problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:COLLIGATIONR])
+              problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:COLLIGATIONR] and
+            problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:SINGLE_CALK])
           block.delete_element(problem.xpath)
         else
           score=0
