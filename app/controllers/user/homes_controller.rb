@@ -31,9 +31,12 @@ class User::HomesController < ApplicationController
     end
     @correct = Examination.count_correct(cookies[:user_id],params[:id].to_i)
     collection = Collection.find_by_user_id(cookies[:user_id])
-    @incorrect_list = collection.open_xml.root if collection and collection.collection_url
-    note = Note.find_by_user_id(cookies[:user_id])
-    @notes = note.open_xml.root if note and note.note_url
+    begin
+      @incorrect_list = collection.open_xml.root if collection and collection.collection_url
+      note = Note.find_by_user_id(cookies[:user_id])
+      @notes = note.open_xml.root if note and note.note_url
+    rescue
+    end
   end
   
 end

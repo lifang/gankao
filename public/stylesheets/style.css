@@ -248,6 +248,7 @@ img { border: none;}
 .p_question_list {border-bottom: 1px #eaeaea solid; position: relative;}
 
 .answer_text { padding: 10px;}
+.answer_text textarea {line-height: 24px; overflow-y: hidden; font-size: 12px;}
 
 .answer_textarea { }
 .answer_textarea textarea { padding: 5px; width: 95%; height: 180px; margin: 10px 0 30px 15px;}
@@ -482,7 +483,7 @@ img { border: none;}
 
 /*综合训练2*/
 
-.tb_con_list { padding: 10px; border: 1px #CCC solid; margin-top: 10px; height: 1%;}
+.tb_con_list { padding: 10px; border: 1px #CCC solid; margin-top: 10px;}
 .explain_btn { width: 60px; height:27px; display: block; overflow: hidden; text-indent: 999px; background: url(/images/paper/all_bg.png) no-repeat -127px -157px; margin-left: 400px;}
 .explain_btn_task2 { width: 60px; height:27px; float: left; background: url(/images/paper/all_bg.png) no-repeat -127px -157px; margin-left: 400px;}
 

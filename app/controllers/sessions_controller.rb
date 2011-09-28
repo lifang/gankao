@@ -14,9 +14,11 @@ class SessionsController < ApplicationController
     elsif @user.status == User::STATUS[:LOCK]
       flash[:error] = "您的账号还未验证，请先去您的注册邮箱进行验证"
     else
+      delete_cookies
       cookies[:user_id] = @user.id
       cookies[:user_name] = @user.name
       cookie_role(cookies[:user_id])
+      is_vip?   
     end
     if flash[:error]
       redirect_to request.referer
@@ -30,6 +32,11 @@ class SessionsController < ApplicationController
 
   #退出登录
   def destroy
+    delete_cookies
+    redirect_to root_path
+  end
+
+  def delete_cookies
     cookies.delete(:user_id)
     cookies.delete(:user_name)
     cookies.delete(:user_roles)
@@ -41,7 +48,6 @@ class SessionsController < ApplicationController
     session.delete(:renren_session_key)
     session.delete(:renren_session_secret)
     session.delete(:renren_expires_in)
-    redirect_to root_path
   end
 
   #获取更改密码的邮件
