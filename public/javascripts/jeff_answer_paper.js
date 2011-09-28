@@ -21,7 +21,25 @@ var question_result_color=0; //记录题目的颜色。默认为0；1为答对�
 function load_paper(practice_type) {
     setTimeout(function(){
         create_paper(practice_type);
-        load_switch=1;   //页面载入完成，设置load_switch=1 目前只有第五类综合训练使用到，控制程序流程有用。
+        var audios = document.getElementsByTagName("audio");
+        var audios_sum=audios.length;
+        if (!window.HTMLAudioElement) {
+            for(var i=0;i<audios_sum;i++){
+                var audio_id=audios[0].id;
+                var audio_src=audios[0].src.replace(server_path,back_server_path);
+                var audio_div = audios[0].parentNode;
+                audio_div.removeChild(audios[0]);     //removeChild之后，audios[0]被移除。所以下一个依然是audios[0]
+                if(!audio_src.indexOf("http:")>0){
+                    audio_src=back_server_path+audio_src;
+                }
+                audio_div.innerHTML+="<object><embed id='"+ audio_id +"' src='"+audio_src+"' autostart='false' hidden='true' type='audio/midi'></object>";
+            }
+        }else{
+            for(var i=0;i<audios_sum;i++){
+                audios[i].src=audios[i].src.replace(server_path,back_server_path);
+            }
+        }
+        load_switch=1;   //页面载入完成，设置load_switch=1 第五类综合训练使用到，控制程序流程有用。
     }, 500);
 }
 
