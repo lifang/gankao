@@ -485,9 +485,8 @@ img { border: none;}
 
 
 /*综合答案----------*/
-.p_question_amswer { margin-bottom: 2px;}
-.p_question_amswer a { font-size: 14px; color: #4994c9; text-decoration: none; font-weight: bold; padding-left: 20px;}
-.true_answer { padding: 10px; border: 1px #62afdb solid; line-height: 24px;}
+.true_answer { padding: 10px; margin-top: 10px; border: 1px #62afdb solid; line-height: 24px;}
+.true_answer h2 { font-size: 14px; color: #06C; border-bottom: 1px #CCC dashed;}
 
 
 
@@ -502,7 +501,7 @@ img { border: none;}
 .tb_con_list { padding: 10px; border: 1px #CCC solid; margin-top: 10px;}
 .explain_btn { width: 60px; height:27px; display: block; overflow: hidden; text-indent: 999px; background: url(/images/paper/all_bg.png) no-repeat -127px -157px; margin-left: 400px;}
 .explain_btn_task2 { width: 60px; height:27px; float: left; background: url(/images/paper/all_bg.png) no-repeat -127px -157px; margin-left: 400px;}
-.explain_btn_ex { width: 60px; height:27px; float: left; border: none; cursor: pointer; background: url(/images/paper/all_bg.png) no-repeat -282px -157px; margin-left: 430px;}
+.explain_btn_ex { width: 60px; height:27px; float: left; border: none; cursor: pointer； background: url(/images/paper/all_bg.png) no-repeat -282px -157px; margin-left: 430px;}
 .explain_btn_checknext {width: 95px; height:27px; float: left; background: url(/images/paper/all_bg.png) no-repeat -360px -157px; margin-left: 430px;}
 .explain_btn_finish { width: 60px; height:27px; float: left; background: url(/images/paper/all_bg.png) no-repeat -471px -157px; margin-left: 430px;}
 .explain_btn_next { width: 60px; height:27px; float: left; background: url(/images/paper/all_bg.png) no-repeat -535px -157px; margin-left: 430px;}
@@ -547,16 +546,22 @@ img { border: none;}
 .sabrosus span.current { border: #289FDB 1px solid;  padding: 2px 6px; font-weight: bold; color: #fff; margin-right: 4px; background: #A1E5FF;}
 .sabrosus span.disabled { border: #929292 1px solid; padding: 2px 6px; color: #929292; margin-right: 4px;}
 
+
+
+
 /*foot-------------*/
 .foot { width: 880px; margin: 0 auto; background: url(/images/paper/xline.png) repeat-x center 0px; padding: 20px 10px 10px;}
 .foot p { text-align: center; line-height: 24px; height: 24px; color: #999;}
 .foot p a { padding: 0 5px; color: #999;}
 
 
+
 /*笔记查看全文--------------*/
 .allText { width: 600px; padding: 10px; margin: 0 auto;}
 .allText h2 { font-size: 14px; color: #333; line-height: 32px; height: 32px;}
 .allText p { text-indent: 24px; line-height: 18px;}
+
+
 
 
 /*综合训练 开通vip遮罩提示----------*/

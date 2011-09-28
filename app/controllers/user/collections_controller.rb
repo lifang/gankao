@@ -46,7 +46,7 @@ class User::CollectionsController < ApplicationController
       if problem
         question = collection.question_in_collection(problem, params[:id])
         if question
-          flash[:warn] = "当前题目已经在错题库。"
+          flash[:warn] = "当前题目已经收藏成功。"
         else
           collection.hand_add_question(exam_user.paper_url, question_answer,
             params[:question_path], problem, collection_doc)

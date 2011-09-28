@@ -224,6 +224,7 @@ class ExamUser < ActiveRecord::Base
           <questions></questions>
           <auto_score></auto_score>
           <rate_score></rate_score>
+          <blocks></blocks>
         </paper>
       </exam>
     XML
@@ -247,7 +248,7 @@ class ExamUser < ActiveRecord::Base
     return "/" + path + "/#{self.examination_id}" + file_name
   end
 
-  def update_answer_url(doc, question_ids_options = {})
+  def update_answer_url(doc, question_ids_options = {}, block_id = nil)
     questions = doc.root.elements["paper/questions"]
     questions.each_element { |q| doc.delete_element(q.xpath) }if questions.children.any?
     question_ids_options.each do |key, value|
@@ -257,6 +258,16 @@ class ExamUser < ActiveRecord::Base
       question.add_element("answer").add_text("#{value[0].strip}")
       question.add_attribute("is_sure", "#{value[1].strip}")
     end unless question_ids_options == {}
+    unless block_id.nil?
+      block_ids = block_id.split(",")
+      blocks = doc.root.elements["paper/blocks"]
+      blocks.each_element { |b| doc.delete_element(b.xpath) }if blocks.children.any?
+      block_ids.each do |b_id|
+        block = blocks.add_element("block")
+        block.add_attribute("id","#{b_id}")
+        block.add_attribute("score","0")
+      end
+    end
     return doc.to_s
   end
 

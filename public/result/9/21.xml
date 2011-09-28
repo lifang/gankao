@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <exam id='4' step='1'>
-    <paper id='3' score='0'>
+    <paper id='3' score='65'>
         <questions>
             <question id='15' is_sure='1' score='0'>
                 <answer>23</answer>
             </question>
-            <question id='14' is_sure='1' score='0'>
+            <question id='14' is_sure='1' score='5'>
                 <answer>sfs</answer>
             </question>
             <question id='33' is_sure='1' score='0'>
@@ -20,10 +20,10 @@
             <question id='38' is_sure='1' score='0'>
                 <answer>awre</answer>
             </question>
-            <question id='39' is_sure='1' score='0'>
+            <question id='39' is_sure='1' score='6'>
                 <answer>sdfa;|;qq2</answer>
             </question>
-            <question id='40' is_sure='1' score='0'>
+            <question id='40' is_sure='1' score='54'>
                 <answer>1</answer>
             </question>
             <question id='41' is_sure='1' score='0'>
@@ -33,5 +33,7 @@
                 <answer>dssssffffffffffffffffffffffffffffffffffffffffffffdddffffffffffffffffffffffffffff</answer>
             </question>
         </questions>
+        <auto_score>65</auto_score>
+        <rate_score/>
     </paper>
 </exam>

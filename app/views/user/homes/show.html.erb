@@ -77,9 +77,8 @@
           <span class="red"><%= @notes.get_elements("//problems//questions/question").size %></span> 篇
           <a href="/user/notes/<%= params[:id] %>">翻阅笔记</a>
         <% else %>
-          <h3><span class="red"><%= "您没有做笔记" %></span></h3>
+          您没有做笔记
         <% end %>
-
       </div>
     </div>
   </div>

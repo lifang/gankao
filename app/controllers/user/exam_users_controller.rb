@@ -5,15 +5,15 @@ class User::ExamUsersController < ApplicationController
   include REXML
   def show
     @exam = ExamUser.find_by_id(params[:id].to_i)
-    begin
+#    begin
       @examination = Examination.find(@exam.examination_id)
       @doc = ExamRater.open_file("#{Constant::PUBLIC_PATH}/#{@exam.answer_sheet_url}")
       @xml = ExamUser.show_result(@exam.paper_id, @doc)
       render :layout=>"show_paper"
-    rescue
-      flash[:error] = "当前考试试卷不能正常打开，请检查试卷是否正常。"
-      redirect_to request.referer
-    end
+#    rescue
+#      flash[:error] = "当前考试试卷不能正常打开，请检查试卷是否正常。"
+#      redirect_to request.referer
+#    end
   end
 
   def edit_score
