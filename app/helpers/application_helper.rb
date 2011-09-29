@@ -38,9 +38,7 @@ module ApplicationHelper
     return cookies[:user_id] != nil
   end
 
-#  def has_incorrect?
-#    return Collection.find()
-#  end
+
 
   def username_used
     flash[:notice] = "用户名已经存在,请重新输入！"
