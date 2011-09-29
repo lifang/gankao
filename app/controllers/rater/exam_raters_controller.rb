@@ -90,9 +90,11 @@ class Rater::ExamRatersController < ApplicationController
           block_score += single_score.to_i
         end unless problem.elements["questions"].nil?
       end
-      answer_block=doc.elements["/exam/paper/blocks/block[@id=#{block.attributes["id"]}]"]
-      block_score=answer_block.attributes["score"].to_i-original_score+block_score
-      answer_block.attributes["score"]=block_score
+      unless doc.elements["/exam/paper/blocks"].nil?
+        answer_block=doc.elements["/exam/paper/blocks/block[@id=#{block.attributes["id"]}]"]
+        block_score=answer_block.attributes["score"].to_i-original_score+block_score
+        answer_block.attributes["score"]=block_score
+      end
     end
     doc.elements["paper"].elements["rate_score"].text=score
     @xml=ExamRater.rater(doc,params[:id],score)
