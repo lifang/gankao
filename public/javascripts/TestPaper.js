@@ -32,10 +32,10 @@ jQuery(function(){
         jQuery('#analysis').html(jQuery('#' + btn_id + '_analysis').attr("value"));
     }
     )
-    jQuery('.tab_t > a').click(function(){
-        jQuery('.jiexi_tab').css('display','none')
-    }
-    )
+//    jQuery('.tab_t > a').click(function(){
+//        jQuery('.jiexi_tab').css('display','none')
+//    }
+//    )
 })
 
 //笔记弹出层
@@ -49,10 +49,10 @@ jQuery(function(){
         });
     }
     )
-    jQuery('.tab_t > a').click(function(){
-        jQuery('.biji_tab').css('display','none')
-    }
-    )
+//    jQuery('.tab_t > a').click(function(){
+//        jQuery('.biji_tab').css('display','none')
+//    }
+//    )
 
 })
 
@@ -86,9 +86,13 @@ function show_analysis(btn_id) {
         });
         jQuery('#answer').html(jQuery('#' + btn_id + '_answer').attr("value"));
         jQuery('#analysis').html(jQuery('#' + btn_id + '_analysis').attr("value"));
-        jQuery('.tab_t > a').click(function(){
-            jQuery('.jiexi_tab').css('display','none')
-        }
-        )
+//        jQuery('.tab_t > a').click(function(){
+//            jQuery('.jiexi_tab').css('display','none')
+//        }
+//        )
     })(jQuery)
+}
+
+function close_tab(tab) {
+    tab.parentNode.parentNode.style.display = "none";
 }

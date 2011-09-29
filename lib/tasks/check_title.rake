@@ -4,7 +4,7 @@ include REXML
 namespace :check do
   desc "rate paper"
   task(:title => :environment) do
-    file_path="f:/exam_app/public/papers"
+    file_path="e:/exam_app/public/papers"
     def traverse_dir(file_path)
       if File.directory? file_path
         Dir.foreach(file_path) do |file|
