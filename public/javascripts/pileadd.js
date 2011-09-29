@@ -564,9 +564,12 @@ jQuery.noConflict();
 
 function dd(){
     jQuery(function (){
-      var arr=jQuery.grep([0,1,2,3,4],function(i){return i>2});
-        jQuery.each(arr,function(i){alert(i)});
-      
+        var arr=jQuery.grep([0,1,2,3,4],function(i){
+            return i>2
+            });
+        jQuery.each(arr,function(i){
+            alert(i)
+            });
     })
 }
 

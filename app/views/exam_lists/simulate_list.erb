@@ -1,4 +1,4 @@
-  <%= javascript_include_tag 'pileadd' %>
+<%= javascript_include_tag 'pileadd' %>
 <div class="mokao_box">
   <div class="mokao_left">
     <% if @examination_lists.blank? %>
@@ -30,59 +30,94 @@
           <div class="mk_r_div mkList_jt<%= i %>"  <%  if i!=0 %> style="display:none" <% end %> >
             <div class="cet_title"></div>
             <p class="begin_time_p">考试时间：<span class="blue"><%= examination.updated_at.strftime("%m-%d-%Y") %></span></p>
+            <h2>总分：<span class="red"> <% unless @hash["#{examination.id}"].nil? %> <%=  @hash["#{examination.id}"][0].total_score.nil? ? "阅卷中" :@hash["#{examination.id}"][0].total_score %><% end %></span></h2>
             <% unless @hash["#{examination.id}"].nil? %>
-              <h2>总分：<span class="red"><%=  @hash["#{examination.id}"][0].total_score.nil? ? "暂无" :@hash["#{examination.id}"][0].total_score %></span></h2>
-              <% if @hash["#{examination.id}"][0].total_score.nil?%>
+              <% if !@hash["#{examination.id}"] || @hash["#{examination.id}"][0].total_score.nil?%>
                 <div class="mk_table">
                   <table width="300" border="0" cellspacing="1" cellpadding="0">
-                   <%=  @hash["#{examination.id}"][1].elements["paper"] %>
                     <tr>
                       <td><strong>听力</strong>(20%)</td>
                       <td><strong>阅读</strong>(40%)</td>
                       <td><strong>综合</strong>(25%)</td>
-                      <td><strong>作文</strong>(15%)</td>
+                      <td><strong>作文&翻译</strong>(15%)</td>
                     </tr>
                     <tr>
-                      <td>暂无</td>
-                      <td>暂无</td>
-                      <td>暂无</td>
-                      <td>暂无</td>
+                      <td>阅卷中</td>
+                      <td>阅卷中</td>
+                      <td><img src="/images/paper/v.png" /></td>
+                      <td><img src="/images/paper/v.png" /></td>
                     </tr>
                   </table>
                 </div>
               <% else %>
                 <div class="mk_table">
-                   <% scores=@hash["#{examination.id}"][1].get_elements("//blocks/block") %>
+                  <% scores=@hash["#{examination.id}"][2].get_elements("//blocks/block") %>
                   <table width="300" border="0" cellspacing="1" cellpadding="0">
                     <tr>
                       <td><strong>听力</strong>(20%)</td>
                       <td><strong>阅读</strong>(40%)</td>
                       <td><strong>综合</strong>(25%)</td>
-                      <td><strong>作文</strong>(15%)</td>
+                      <td><strong>作文&翻译</strong>(15%)</td>
                     </tr>
                     <tr>
-                      <td><%= scores[0].attributes["total_score"] unless scores[0].nil?  %></td>
-                      <td><%= scores[1].attributes["total_score"] unless scores[2].nil? %></td>
-                      <td><%= scores[2].attributes["total_score"] unless scores[2].nil?  %></td>
-                      <td><%= scores[3].attributes["total_score"] unless scores[3].nil?  %></td>
+                      <td><%= scores[2].nil? ? "阅卷中" :scores[2].attributes["score"].to_i %></td>
+                      <% second_score=(scores[1].nil? ? 0 :scores[1].attributes["score"].to_i) + (scores[3].nil? ? 0 :scores[3].attributes["score"].to_i) %>
+                      <% if scores[1].nil?&&scores[3].nil? %>
+                        <td><%= "阅卷中" %></td>
+                      <% else %>
+                        <td><%= second_score %></td>
+                      <% end %>
+                      <% if is_vip? %>
+                        <td><%= scores[4].nil? ? "阅卷中" :scores[4].attributes["score"].to_i  %></td>
+                        <% forth_score= (scores[0].nil? ? 0 :scores[0].attributes["score"].to_i) + (scores[5].nil? ? 0 :scores[5].attributes["score"].to_i) %>
+                        <% if scores[0].nil?&&scores[5].nil? %>
+                          <td><%= "阅卷中" %></td>
+                        <% else %>
+                          <td><%= forth_score %></td>
+                        <% end %>
+                      <% else %>
+                        <td><img src="/images/paper/v.png" /></td>
+                        <td><img src="/images/paper/v.png" /></td>
+                      <% end %>
                     </tr>
                   </table>
                 </div>
               <% end %>
+            <% else %>
+              <div class="mk_table">
+                <table width="300" border="0" cellspacing="1" cellpadding="0">
+                  <tr>
+                    <td><strong>听力</strong>(20%)</td>
+                    <td><strong>阅读</strong>(40%)</td>
+                    <td><strong>综合</strong>(25%)</td>
+                    <td><strong>作文&翻译</strong>(15%)</td>
+                  </tr>
+                  <tr>
+                    <td>20</td>
+                    <td>20</td>
+                    <td><img src="/images/paper/v.png" /></td>
+                    <td><img src="/images/paper/v.png" /></td>
+                  </tr>
+                </table>
+              </div>
             <% end %>
-          </div>
-          <% if @hash["#{examination.id}"].nil? || !@hash["#{examination.id}"][0].is_submited ==1%>
-            <div class="mk_b_zz" id="mk_<%= i %>" >
-              <div class="mk_b_yh">做为高级用户，在您考试完毕三个工作日内，将有老师批改你的答卷，你将得到完整的成绩报告。</div>
-              <% if examination.exam_password1.nil? %>
-                <div class="per_btn"><a href="/user/examinations/<%= examination.id %>/do_exam" target="_blank">开始考试</a></div>
-              <% else %>
-                <div class="per_btn"><a href="/user/examinations/<%= examination.id %>/enter_password" target="_blank">开始考试</a></div>
-              <% end %>
+            <% unless is_vip? %>
+              <div class="mk_r_p"><span class="red">*</span> 升级为VIP账户后您可以享受主观题专业老师阅卷的服务，并进一步获取信心指数，以达到更好的备考效果。<a href="#">升级VIP</a></div>
             </div>
           <% end %>
+        </div>
+        <% if @hash["#{examination.id}"].nil? || !@hash["#{examination.id}"][0].is_submited ==1%>
+          <div class="mk_b_zz" id="mk_<%= i %>" >
+            <div class="mk_b_yh">做为高级用户，在您考试完毕三个工作日内，将有老师批改你的答卷，你将得到完整的成绩报告。</div>
+            <% if examination.exam_password1.nil? %>
+              <div class="per_btn"><a href="/user/examinations/<%= examination.id %>/do_exam" target="_blank">开始考试</a></div>
+            <% else %>
+              <div class="per_btn"><a href="/user/examinations/<%= examination.id %>/enter_password" target="_blank">开始考试</a></div>
+            <% end %>
+          </div>
         <% end %>
-      </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
+<% end %>
 </div>
