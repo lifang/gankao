@@ -63,6 +63,7 @@
                     <% if @examination.types == Examination::TYPES[:SIMULATION] %>
                       <div class="fraction_h"><%= problem.attributes["score"] %>分</div>
                     <% end %>
+                      <%= render :partial=>"/user/exam_users/more_blanks", :object=> problem  %>
                   </div>
                 <% else %>
                   <% if block_comment != "" %>
@@ -132,15 +133,15 @@
   <%  ids = block_ids.split(",")
   if ids.any?
     ids.each_with_index do |block_id, index| %>
-  <div class="testPage_btn" id="next_block_<%= block_id %>" <% if index > 0 %>style="display:none;"<% end %>>
-        <% if index > 0 %>
-        <a href="javascript:void(0);" class="tp_up_btn"
-           onclick="javascript:open_nav('<%= ids[index-1] %>');">上一部分</a>
-        <% end %>
+      <div class="testPage_btn" id="next_block_<%= block_id %>" <% if index > 0 %>style="display:none;"<% end %>>
         <% if index < ids.length - 1 %>
-        <a href="javascript:void(0);" class="tp_down_btn"
-           onclick="javascript:open_nav('<%= ids[index+1] %>');">下一部分</a>
-        <% end %>
+          <a href="javascript:void(0);" class="tp_down_btn"
+             onclick="javascript:open_nav('<%= ids[index+1] %>');">下一部分</a>
+           <% end %>
+           <% if index > 0 %>
+          <a href="javascript:void(0);" class="tp_up_btn"
+             onclick="javascript:open_nav('<%= ids[index-1] %>');">上一部分</a>
+           <% end %>
       </div>
     <% end
   end %>
