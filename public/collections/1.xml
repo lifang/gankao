@@ -1,77 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <collection id='1'>
-    <problems>
-        <problem id='33' score='44' types='3'>
-            <title>sdfasfasfasfasfsafdsaf&lt;div&gt;sdfafsafsf&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;sfdasfsaf&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;sfd&lt;/div&gt;&lt;div&gt;asfd&lt;/div&gt;&lt;div&gt;asf&lt;/div&gt;&lt;div&gt;saf&lt;/div&gt;&lt;div&gt;asf&lt;/div&gt;&lt;div&gt;asfasf&lt;/div&gt;</title>
-            <category>3</category>
-            <questions>
-                <question correct_type='3' error_percent='0' id='36' repeat_num='5' score='44'>
-                    <answer>fsafdasfsaf
+   <problems><problem id='33' score='44' types='3'><title>sdfasfasfasfasfsafdsaf&lt;div&gt;sdfafsafsf&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;sfdasfsaf&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;sfd&lt;/div&gt;&lt;div&gt;asfd&lt;/div&gt;&lt;div&gt;asf&lt;/div&gt;&lt;div&gt;saf&lt;/div&gt;&lt;div&gt;asf&lt;/div&gt;&lt;div&gt;asfasf&lt;/div&gt;</title><category>3</category><questions><question correct_type='3' error_percent='0' id='36' repeat_num='1' score='44'><answer>fsafdasfsaf
 &lt;p&gt;safd&lt;/p&gt;
 &lt;p&gt;asf&lt;/p&gt;
 asf
 asf
 saf
-asf
-                    </answer>
-                    <analysis>444ererte</analysis>
-                    <questionattrs/>
-                    <tags> 我的关注 所有分类</tags>
-                    <user_answer>cvxvxcv</user_answer>
-                    <user_answer/>
-                <user_answer/><user_answer/><user_answer>sfsfsdfsdf</user_answer></question>
-            </questions>
-        </problem>
-        <problem id='37' score='5' types='6'>
-            <title>&lt;span id=&quot;problem_37_dropplace_1&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_37_dropplace_2&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_37_dropplace_3&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_37_dropplace_4&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_37_dropplace_5&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_37_dropplace_6&quot;&gt;________&lt;/span&gt;</title>
-            <category>2</category>
-            <questions>
-                <question correct_type='6' error_percent='0' id='42' repeat_num='6' score='5'>
-                    <answer>erwrwqqr;|;23423425q;|;retewtq;|;456457q;|;dsafsfq;|;2346436q</answer>
-                    <analysis>sdfasdfasfsafdasf</analysis>
-                    <questionattrs>erwrwqqr;-;23423425q;-;retewtq;-;456457q;-;dsafsfq;-;2346436q</questionattrs>
-                    <tags/>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                <user_answer/><user_answer>sfsfsfsfd</user_answer></question>
-            </questions>
-        </problem>
-        <problem id='46' score='25' types='4'>
-            <title>啊谁发上发生法萨芬萨菲</title>
-            <category>2</category>
-            <questions>
-                <question correct_type='6' error_percent='0' id='52' repeat_num='9' score='5'>
-                    <answer>宋德福</answer>
-                    <analysis>手动阀</analysis>
-                    <questionattrs>宋德福</questionattrs>
-                    <tags/>
-                    <user_answer>地方</user_answer>
-                    <user_answer>地方</user_answer>
-                    <user_answer>地方</user_answer>
-                    <user_answer>地方</user_answer>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                <user_answer>sdfsf</user_answer></question>
-                <question correct_type='6' error_percent='0' id='53' repeat_num='9' score='5'>
-                    <answer>宋德福是否</answer>
-                    <analysis>宋德福是否</analysis>
-                    <questionattrs>宋德福是否</questionattrs>
-                    <tags/>
-                    <user_answer>让我</user_answer>
-                    <user_answer>让我</user_answer>
-                    <user_answer>让我</user_answer>
-                    <user_answer>让我</user_answer>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                    <user_answer/>
-                <user_answer>sfsdfsf</user_answer></question>
-            </questions>
-        </problem>
-    </problems>
+asf</answer><analysis>444ererte</analysis><questionattrs/><tags> 我的关注 所有分类</tags><user_answer>cvxvxcv</user_answer></question></questions></problem></problems>
 </collection>
 

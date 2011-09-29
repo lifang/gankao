@@ -39,6 +39,7 @@ module ApplicationHelper
   end
 
 
+
   def username_used
     flash[:notice] = "用户名已经存在,请重新输入！"
     redirect_to "/users/new"
