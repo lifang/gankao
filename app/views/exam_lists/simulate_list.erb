@@ -30,16 +30,15 @@
           <div class="mk_r_div mkList_jt<%= i %>"  <%  if i!=0 %> style="display:none" <% end %> >
             <div class="cet_title"></div>
             <p class="begin_time_p">考试时间：<span class="blue"><%= examination.updated_at.strftime("%m-%d-%Y") %></span></p>
-            <h2>总分：<span class="red"> <% unless @hash["#{examination.id}"].nil? %><%=  @hash["#{examination.id}"][0].total_score.nil? ? "暂无" :@hash["#{examination.id}"][0].total_score %><% end %></span></h2>
-            <% if @hash["#{examination.id}"] ||@hash["#{examination.id}"][0].total_score.nil?%>
+            <h2>总分：<span class="red"> <% unless @hash["#{examination.id}"].nil? %><%=  @hash["#{examination.id}"][0].total_score.nil? ? "阅卷中" :@hash["#{examination.id}"][0].total_score %><% end %></span></h2>
+            <% if !@hash["#{examination.id}"] || @hash["#{examination.id}"][0].total_score.nil?%>
               <div class="mk_table">
                 <table width="300" border="0" cellspacing="1" cellpadding="0">
-                  <%=  @hash["#{examination.id}"][1].elements["paper"] %>
                   <tr>
                     <td><strong>听力</strong>(20%)</td>
                     <td><strong>阅读</strong>(40%)</td>
                     <td><strong>综合</strong>(25%)</td>
-                    <td><strong>作文</strong>(15%)</td>
+                    <td><strong>作文&翻译</strong>(15%)</td>
                   </tr>
                   <tr>
                     <td>阅卷中</td>
@@ -51,19 +50,29 @@
               </div>
             <% else %>
               <div class="mk_table">
-                <% scores=@hash["#{examination.id}"][1].get_elements("//blocks/block") %>
+                <% scores=@hash["#{examination.id}"][2].get_elements("//blocks/block") %>
                 <table width="300" border="0" cellspacing="1" cellpadding="0">
                   <tr>
                     <td><strong>听力</strong>(20%)</td>
                     <td><strong>阅读</strong>(40%)</td>
                     <td><strong>综合</strong>(25%)</td>
-                    <td><strong>作文</strong>(15%)</td>
+                    <td><strong>作文&翻译</strong>(15%)</td>
                   </tr>
                   <tr>
-                    <td><%= scores[0].attributes["total_score"] unless scores[0].nil?  %></td>
-                    <td><%= scores[1].attributes["total_score"] unless scores[2].nil? %></td>
-                    <td><%= scores[2].attributes["total_score"] unless scores[2].nil?  %></td>
-                    <td><%= scores[3].attributes["total_score"] unless scores[3].nil?  %></td>
+                    <td><%= scores[2].nil? ? "阅卷中" :scores[2].attributes["score"].to_i %></td>
+                    <% second_score=(scores[1].nil? ? 0 :scores[1].attributes["score"].to_i) + (scores[3].nil? ? 0 :scores[3].attributes["score"].to_i) %>
+                    <% if scores[1].nil?&&scores[3].nil? %>
+                      <td><%= "阅卷中" %></td>
+                    <% else %>
+                      <td><%= second_score %></td>
+                    <% end %>
+                    <td><%= scores[4].nil? ? "阅卷中" :scores[4].attributes["score"].to_i  %></td>
+                    <% forth_score= (scores[0].nil? ? 0 :scores[0].attributes["score"].to_i) + (scores[5].nil? ? 0 :scores[5].attributes["score"].to_i) %>
+                    <% if scores[0].nil?&&scores[5].nil? %>
+                      <td><%= "阅卷中" %></td>
+                    <% else %>
+                      <td><%= forth_score %></td>
+                    <% end %>
                   </tr>
                 </table>
               </div>

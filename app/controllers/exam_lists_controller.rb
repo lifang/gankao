@@ -24,8 +24,6 @@ class ExamListsController < ApplicationController
       @examination_lists -=[examination] unless examinations.include?(examination.id) if examination.status == Examination::STATUS[:CLOSED]
     end
     @hash = Examination.exam_users_paper(cookies[:user_id].to_i, Examination::TYPES[:SIMULATION], params[:id].to_i)
-    url=""
-    doc=ExamRater.open_file(url)
   end
   
   def old_exam_list
