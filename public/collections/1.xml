@@ -83,7 +83,7 @@
             <title>少打</title>
             <category>1</category>
             <questions>
-                <question correct_type='0' delete_status='1' error_percent='8' id='9' repeat_num='13' score='5'>
+                <question correct_type='0' delete_status='1' error_percent='7' id='9' repeat_num='14' score='5'>
                     <answer>adsad</answer>
                     <analysis/>
                     <questionattrs>adsad;-;规范法官;-;会更好;-;很久很久</questionattrs>
@@ -101,8 +101,8 @@
                     <user_answer/>
                     <user_answer/>
                     <user_answer/>
-                </question>
-                <question correct_type='0' error_percent='21' id='14' repeat_num='14' score='5'>
+                <user_answer/></question>
+                <question correct_type='0' error_percent='20' id='14' repeat_num='15' score='5'>
                     <answer>sfs</answer>
                     <analysis>sfafwerwr2r2</analysis>
                     <questionattrs>sfs;-;sfss;-;sdds;-;sd</questionattrs>
@@ -123,7 +123,7 @@
                     <user_answer>sfs</user_answer>
                     <user_answer>sfs</user_answer>
                     <user_answer>sfs</user_answer>
-                </question>
+                <user_answer>sfss</user_answer></question>
             </questions>
         </problem>
         <problem id='10' repeat_num='6' score='5' types='0'>
@@ -446,7 +446,7 @@ asf
             <title>sdfasfsafdsfsafasfasfsafsfsfsdfsaf</title>
             <category>3</category>
             <questions>
-                <question correct_type='3' error_percent='0' id='48' repeat_num='3' score='5'>
+                <question correct_type='3' error_percent='0' id='48' repeat_num='4' score='5'>
                     <answer>asfasfasfasfasfasfsafsfdsafsfsfd</answer>
                     <analysis>sfafsafasfasfsfdsafdasfsf</analysis>
                     <questionattrs/>
@@ -454,7 +454,7 @@ asf
                     <user_answer>dssssffffffffffffffffffffffffffffffffffffffffffffdddffffffffffffffffffffffffffff</user_answer>
                     <user_answer>dssssffffffffffffffffffffffffffffffffffffffffffffdddffffffffffffffffffffffffffff</user_answer>
                     <user_answer>dssssffffffffffffffffffffffffffffffffffffffffffffdddffffffffffffffffffffffffffff</user_answer>
-                </question>
+                <user_answer></user_answer></question>
             </questions>
         </problem>
         
