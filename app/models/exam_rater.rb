@@ -49,9 +49,9 @@ class ExamRater < ActiveRecord::Base
   def self.rater(doc,id,score)
     unless doc.elements[1].elements["auto_score"].nil?
       auto_score=doc.elements[1].elements["auto_score"].text
-      if auto_score.to_i !=0
-        doc.elements[1].attributes["score"]=score+auto_score.to_i
-        ExamUser.find(id).update_attributes(:total_score=>score+auto_score.to_i)
+      if auto_score.to_f !=0.0
+        doc.elements[1].attributes["score"]=score+auto_score.to_f
+        ExamUser.find(id).update_attributes(:total_score=>score+auto_score.to_f)
       end
     end
     return doc.to_s

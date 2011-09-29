@@ -118,33 +118,26 @@ function check_password() {
 close_question_info_id=0
 function compare_value(id){
     jQuery.noConflict();
-    var check_mobile = new RegExp(/^[0-9]{1,2}$/);
     var arry=id.split("_");
     var i;
     for(i=1;i<arry.length;i++){
         var input_value=$("single_value_"+arry[i]).value;
         var fact_value=$("fact_value_"+arry[i]).value;
         var reason=document.getElementById("reason_for_"+arry[i]).value;
-        if (parseInt(fact_value) < parseInt(input_value)||parseInt(input_value)<0||input_value==""){
+        if (parseFloat(fact_value) < parseFloat(input_value)||parseFloat(input_value)<0.0||input_value==""){
             document.getElementById("if_submited_"+arry[i]).value =0;
             document.getElementById("flash_part_"+arry[i]).innerHTML="<font color = 'red'>请您输入合理的分值。</font>";
             return false;
         }
         else{
-            if (check_mobile.test(input_value)){
-                document.getElementById("flash_part_"+arry[i]).innerHTML="";
-                if(reason==""||reason.length==0){
-                    document.getElementById("flash_part_"+arry[i]).innerHTML="<font color = 'red'>请输入评分理由。</font>";
+            if(reason==""||reason.length==0){
+                document.getElementById("flash_part_"+arry[i]).innerHTML="<font color = 'red'>请输入评分理由。</font>";
 
-                }else{
-                    document.getElementById("if_submited_"+arry[i]).value =1;
-                    if (i==arry.length-1){
-                        active_button();
-                    }
+            }else{
+                document.getElementById("if_submited_"+arry[i]).value =1;
+                if (i==arry.length-1){
+                    active_button();
                 }
-            }
-            else{
-                document.getElementById("flash_part_"+arry[i]).innerHTML="<font color = 'red'>得分只能是数值。</font>";
             }
         }
     }
@@ -551,13 +544,21 @@ function show_drag_answer(question_id){
     }
 }
  
-
+var first_note = 0;
 jQuery(function() {
     jQuery('.mokao_left > div').bind('click',function(){
+        if (jQuery('#mk_'+first_note) != null) {
+            jQuery('#mk_'+first_note).css('display','block');
+             
+        }
         jQuery(this).addClass('mkl_h').siblings().removeClass('mkl_h');
         var index = jQuery('.mokao_left > div').index(this);
         jQuery('.mk_r_tab > .mk_r_div').eq(index).show().siblings().hide();
-        jQuery('#mk_'+this.id).css('display','block');
+        if (jQuery('#mk_'+this.id) != null) {
+            jQuery('#mk_'+this.id).css('display','block');
+            first_note = this.id;
+        }
+        
     });
 })
 jQuery.noConflict();

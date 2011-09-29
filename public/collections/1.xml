@@ -478,6 +478,17 @@ asf
                             <tags>dddd 凤飞飞 为鹅鹅鹅 弹弹堂 所有分类</tags>
                         <user_answer>0</user_answer></question>
                     </questions>
-                </problem><problem id='73' score='0' types='4'><title>ddddd</title><category>1</category><questions><question correct_type='1' error_percent='0' id='86' repeat_num='1' score='0'><description>但事实上</description><answer>凤飞飞;|;古古怪怪规划和</answer><questionattrs>凤飞飞dddd;-;共发放日;-;凤飞飞;-;古古怪怪规划和</questionattrs><tags>23 的地方改过 改过 所有分类</tags><user_answer>凤飞飞dddd</user_answer></question></questions></problem></problems>
+                </problem><problem id='73' score='0' types='4'><title>ddddd</title><category>1</category><questions><question correct_type='1' error_percent='0' id='86' repeat_num='1' score='0'><description>但事实上</description><answer>凤飞飞;|;古古怪怪规划和</answer><questionattrs>凤飞飞dddd;-;共发放日;-;凤飞飞;-;古古怪怪规划和</questionattrs><tags>23 的地方改过 改过 所有分类</tags><user_answer>凤飞飞dddd</user_answer></question></questions></problem><problem id='55' score='10' types='5' user_score='0'>
+                    <title>风儿告诉我，在走的时候你哭了，我知道你为什么哭泣，可我不知道为什么哭泣也要选择放弃？</title>
+                    <category>1</category>
+                    <questions>
+                        <question correct_type='5' error_percent='0' id='66' repeat_num='1' score='10' score_reason='' user_answer='dddddssdgfgg' user_score='0'>
+                            <answer>是物质的生死还是情感的共鸣，一生难道不重要/</answer>
+                            <analysis/>
+                            <questionattrs/>
+                            <tags> 所有分类</tags>
+                        <user_answer>dddddssdgfgg</user_answer></question>
+                    </questions>
+                </problem></problems>
 </collection>
 
