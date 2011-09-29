@@ -18,8 +18,10 @@
   <% block_index = 0
   problem_ids = ""
   question_num = 1
-  block_comment = "" %>
+  block_comment = ""
+  block_ids = "" %>
   <% @xml.elements['blocks'].each_element do |block| %>
+    <% block_ids = block_ids == "" ? block.attributes["id"] : block_ids + "," + block.attributes["id"] %>
     <div class="tp_left" id="block_<%= block.attributes["id"] %>" <% if block_index > 0 %>style="display: none;"<% end %>>
       <div class="part_box">
         <div class="part_passage">
@@ -89,10 +91,8 @@
   <div class="tp_right">
     <div class="tp_right_box" id="paper_navigation">
       <% block_index = 0
-      block_ids = ""
       question_num = 1 %>
       <% @xml.elements['blocks'].each_element do |block|%>
-        <% block_ids = block_ids == "" ? block.attributes["id"] : block_ids + "," + block.attributes["id"] %>
         <div class="first_title <% if block_index == 0 %>highLight<% end %>" id="block_nav_<%= block.attributes["id"] %>"  onclick="javascript:open_nav('<%= block.attributes["id"] %>');">
           <p><%= block.elements['base_info'].elements['title'].text %>
             <% if block.attributes["time"] and block.attributes["time"] != "" %>( <%= block.attributes["time"] %> minutes )<% end %>
@@ -108,12 +108,12 @@
                 all_answer = answers | user_answers
                 is_right = true if all_answer == answers and answers - user_answers == []  %>
                 <li><% if is_right %>
-                  <a href="javascript:void(0);" class="lvse"
+                    <a href="javascript:void(0);" class="lvse"
                        onclick="javascript:get_question_height(<%= question.attributes["id"] %>, <%= problem.attributes["id"] %>);">
                       √
                     </a>
                   <% else %>
-                    <a href="javascript:void(0);" class="fenhong" 
+                    <a href="javascript:void(0);" class="fenhong"
                        onclick="javascript:get_question_height(<%= question.attributes["id"] %>, <%= problem.attributes["id"] %>);">
                       x
                     </a>
@@ -129,12 +129,29 @@
     </div>
   </div>
   <div class="clear"></div>
+  <%  ids = block_ids.split(",")
+  if ids.any?
+    ids.each_with_index do |block_id, index| %>
+  <div class="testPage_btn" id="next_block_<%= block_id %>" <% if index > 0 %>style="display:none;"<% end %>>
+        <% if index > 0 %>
+        <a href="javascript:void(0);" class="tp_up_btn"
+           onclick="javascript:open_nav('<%= ids[index-1] %>');">上一部分</a>
+        <% end %>
+        <% if index < ids.length - 1 %>
+        <a href="javascript:void(0);" class="tp_down_btn"
+           onclick="javascript:open_nav('<%= ids[index+1] %>');">下一部分</a>
+        <% end %>
+      </div>
+    <% end
+  end %>
   <div class="zhijiao"></div>
 </div>
 <div class="clear"></div>
 <div class="testPaper_foot"></div>
 <div class="jiexi_tab" id="analysis_div">
-  <div class="tab_t"><a href="#"><img src="/images/paper/x.gif" /></a></div>
+  <div class="tab_t">
+    <a href="javascript:void(0);" onclick="javascript:close_tab(this);"><img src="/images/paper/x.gif" /></a>
+  </div>
   <div class="tab_m">
     <h3 id="answer"></h3>
     <p id="analysis"></p>
@@ -143,9 +160,11 @@
 </div>
 
 <div class="biji_tab" id="note_area">
-  <div class="tab_t"><a href="#"><img src="/images/paper/x.gif" /></a></div>
+  <div class="tab_t">
+    <a href="javascript:void(0);" onclick="javascript:close_tab(this);"><img src="/images/paper/x.gif" /></a>
+  </div>
   <div class="tab_m"  id="biji_tab">
-
+    <img src="/images/ajax-loader.gif"/>
   </div>
   <div class="tab_b"></div>
 </div>

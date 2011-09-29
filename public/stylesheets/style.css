@@ -1,6 +1,6 @@
 @charset "utf-8";
 * { padding: 0; margin: 0;}
-
+html {_BACKGROUND-ATTACHMENT: fixed; _BACKGROUND-IMAGE: url(about:blank);}/*IE6fixed无闪烁*/
 body { background: #FFF; font-family: Arial,"宋体", "微软雅黑"; font-size: 12px;}
 ul { list-style: none;}
 img { border: none;}
@@ -34,6 +34,12 @@ img { border: none;}
 
 .login_i_a { text-decoration: none;}
 .login_i_a0 { text-decoration: none; color: #F00;}
+
+
+.iphone_text { float: left; width: 540px; height:45px; line-height: 45px; padding: 25px 0 0 120px; font-size: 20px; font-family:"微软雅黑";}
+.iphone_text span { color:#A10000; padding: 0 5px; font-size: 24px; display: inline-block; height: 45px; background: url(/images/paper/iphone5.png) 5px 0 no-repeat; padding-left: 30px;}
+.set_in_fx { width: 134px; height: 40px; display: inline-block; text-indent: -999px; overflow: hidden; background: url(/images/paper/set_in_fx.png) no-repeat; float: right;}
+
 
 .nav_cet { float: left; width: 540px; height:45px; padding: 25px 0 0 120px;}
 .nav_cet a { width: 160px; height: 45px; float: left; margin: 0 40px; overflow: hidden; text-indent: -999px;}
@@ -322,7 +328,7 @@ img { border: none;}
 	border-left: 1px #289fdb solid;
 	border-right: 1px #289fdb solid;
 	border-bottom: 2px #289fdb solid;
-    background: #A1E5FF;
+    background: #cff2ff;
 }
 
 .nb_li_btn { padding: 10px 0 10px 350px;}
@@ -385,6 +391,9 @@ img { border: none;}
 .mk_table table { background: #CCC; margin-top: 20px;}
 .mk_table table td { background:  #FFF; height: 32px; text-align: center;}
 
+.mk_r_p { padding: 10px; line-height: 18px;}
+.mk_r_p a { color: #F00;}
+
 
 .mk_b_zz { position: absolute; top: 3px; left: 110px; width: 525px; height: 250px; padding-top: 100px; background: url(/images/paper/mk_b_zz_bg.png) repeat;}
 .mk_b_yh { line-height: 24px; padding: 10px 50px; color: #fff; font-size: 14px; font-family:"微软雅黑";}
@@ -412,7 +421,7 @@ img { border: none;}
 .zh_position_five { background: url(/images/paper/zh_tab_5.png) no-repeat;}
 
 
-.zh_top { height: 50px; margin: 20px 0 10px 0; padding-left: 50px;}
+.zh_top { height: 50px; margin: 20px 0 0px 0; padding-left: 50px;}
 .zh_load { width: 600px; float: left; display: inline;}
 .load_bg { width: 600px; height: 40px; background: url(/images/paper/load_bg.png) no-repeat; position: relative;}
 .load_t { width: 500px; height: 40px; background: url(/images/paper/load_t.png) no-repeat;}
@@ -420,7 +429,7 @@ img { border: none;}
 .zh_addTo_btn { width: 160px; float: left; height: 35px; margin: 2px 0 0 30px;}
 .zh_addTo_btn a { width: 160px; height: 35px; display: block; margin: 0 auto; background: url(/images/paper/all_bg.png) no-repeat -198px -440px; text-indent: -999px; overflow: hidden;}
 
-.zh_top_text { line-height: 24px; margin-bottom: 20px; padding-left: 50px;}
+.zh_top_text { width: 600px; line-height: 24px; margin-bottom: 20px; padding-left: 50px;}
 
 
 .zh_p { width: 119px; height: 23px; padding-left: 30px;}
@@ -475,6 +484,12 @@ img { border: none;}
 .task_con p { text-indent: 24px;}
 
 
+/*综合答案----------*/
+.true_answer { padding: 10px; margin-top: 10px; border: 1px #62afdb solid; line-height: 24px;}
+.true_answer h2 { font-size: 14px; color: #06C; border-bottom: 1px #CCC dashed;}
+
+
+
 /*综合训练1*/
 
 .question_title { line-height: 24px; padding-left: 20px; height: 1%; font-weight: bold; border-bottom: 1px #CCC dashed;}
@@ -486,14 +501,34 @@ img { border: none;}
 .tb_con_list { padding: 10px; border: 1px #CCC solid; margin-top: 10px;}
 .explain_btn { width: 60px; height:27px; display: block; overflow: hidden; text-indent: 999px; background: url(/images/paper/all_bg.png) no-repeat -127px -157px; margin-left: 400px;}
 .explain_btn_task2 { width: 60px; height:27px; float: left; background: url(/images/paper/all_bg.png) no-repeat -127px -157px; margin-left: 400px;}
+.explain_btn_ex { width: 60px; height:27px; float: left; border: none; cursor: pointer； background: url(/images/paper/all_bg.png) no-repeat -282px -157px; margin-left: 430px;}
+.explain_btn_checknext {width: 95px; height:27px; float: left; background: url(/images/paper/all_bg.png) no-repeat -360px -157px; margin-left: 430px;}
+.explain_btn_finish { width: 60px; height:27px; float: left; background: url(/images/paper/all_bg.png) no-repeat -471px -157px; margin-left: 430px;}
+.explain_btn_next { width: 60px; height:27px; float: left; background: url(/images/paper/all_bg.png) no-repeat -535px -157px; margin-left: 430px;}
 
+
+.tb_content_btn { padding: 20px 10px 10px 10px; overflow: hidden;}
 
 /*综合训练3-----------*/
 
-.task3_li { overflow: hidden; color: #333; border-bottom: 1px #EAEAEA solid; padding: 10px 0; height: 1%; position: relative; z-index: 100;}
+.task3_li { overflow: hidden; height: 99%; color: #333; padding: 5px 0;}
+.task3_li ul {
+    width: 556px;
+	display: block;
+	background: #f7f7f7;
+	border: 1px #CCCCCC solid;
+
+	position: fixed;
+	/*IE6fixed无闪烁*/
+	_position: absolute;
+    _top: expression(eval(documentElement.scrollTop)+80);
+	z-index: 1000;
+}
 .task3_li li {height: 25px; border: 1px #CCC solid; text-align: center; line-height: 25px; margin: 5px 7px; padding: 0 10px; float: left;}
-.task3_li li.dropOver { border: 1px #f0f0f0 solid; background: #f9f9f9; color: #cccccc;}
+.task3_li li.dropOver { border: 1px #CCC solid; background: #ff5252;}
 .task_span { padding: 0 5px; border-bottom: 1px #CCC solid;}
+
+.tb_tis { line-height: 18px;}
 
 
 /*综合训练5---------------*/
@@ -525,6 +560,18 @@ img { border: none;}
 .allText { width: 600px; padding: 10px; margin: 0 auto;}
 .allText h2 { font-size: 14px; color: #333; line-height: 32px; height: 32px;}
 .allText p { text-indent: 24px; line-height: 18px;}
+
+
+
+
+/*综合训练 开通vip遮罩提示----------*/
+.zhezhao { width:100%; left:0; position:absolute; z-index: 99; top:0; background:#000000; opacity:0.5; filter:alpha(opacity=50); z-index:888; display: none;}
+.service_tishi { width: 300px; padding: 10px; background: #FFF; border: 1px #333 solid; display: none; position: absolute; z-index: 1000;}
+.se_ts_x { height: 20px; padding-left: 290px;}
+.se_ts_x a {text-decoration: none; color: #333;}
+.se_ts_text { line-height: 24px; text-indent: 24px;}
+.open_vip_btn { width: 114px; height: 40px; margin: 20px auto;}
+.open_vip_btn button { width: 114px; height: 40px; background: url(/images/paper/all_bg.png) no-repeat -129px -950px; border: none; cursor: pointer;}
 
 .tishi_tab { width: 250px; padding: 10px; background: url(/images/paper/mk_b_zz_bg.png) repeat; border: 1px #fff solid; position: absolute; display: none; z-index: 9999;}
 .tishi_tab p { text-align: center; line-height: 24px; font-size: 14px; font-family:"微软雅黑"; color: #fff;}

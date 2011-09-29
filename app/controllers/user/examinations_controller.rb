@@ -73,7 +73,7 @@ class User::ExaminationsController < ApplicationController
         question_hash[question_id] = [params["answer_" + question_id], "1"]
       end if question_ids
       @exam_user.auto_add_collection(question_hash) if params[:types].to_i==Examination::TYPES[:OLD_EXAM]
-      @exam_user.generate_answer_sheet_url(@exam_user.update_answer_url(@exam_user.open_xml, question_hash), "result")
+      @exam_user.generate_answer_sheet_url(@exam_user.update_answer_url(@exam_user.open_xml, question_hash, params[:block_ids]), "result")
       @exam_user.submited!
       flash[:notice] = "您的试卷已经成功提交。"
       render :layout => "show_paper"

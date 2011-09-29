@@ -517,8 +517,8 @@ function cuoti_note(question_id, problem_id) {
     return false;
 }
 
-function check_note_form(question_id) {alert(2);
-    if (checkspace($("note_text_" + question_id).value)) {alert(23);
+function check_note_form(question_id) {
+    if (checkspace($("note_text_" + question_id).value)) {
         return false;
     }
     return true;
@@ -563,8 +563,10 @@ jQuery.noConflict();
 
 
 function dd(){
-    jQuery.each({name:"john",lang:"js"},function(i){
-        alert("name:" + i + ",value:"+this );
-    });
+    jQuery(function (){
+      var arr=jQuery.grep([0,1,2,3,4],function(i){return i>2});
+        jQuery.each(arr,function(i){alert(i)});
+      
+    })
 }
 

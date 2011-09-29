@@ -30,7 +30,7 @@
 
   <div class="testPaper_main">
     <div id="blocks">
-      <div id="block_ids" style="display:none;"></div>
+      <input type="hidden" name="block_ids" id="block_ids"/>
     </div>
     <!--试卷left-->
     <div class="tp_right">
@@ -41,6 +41,7 @@
     <input type="hidden" name="types" value="<%= @examination.types %>"/>
     <input type="hidden" name="answer_url" id="answer_url"
            value="<%= Constant::ANSWER_CLIENT_PATH %>/<%= @exam_user.answer_sheet_url %>"/>
+    <input type="hidden" name="back_server_url" id="back_server_url" value="<%= Constant::BACK_SERVER_PATH %>" />
     <div class="clear"></div>
     <div class="zhijiao"></div>
   </div>

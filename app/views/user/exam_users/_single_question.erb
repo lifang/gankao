@@ -5,9 +5,9 @@ attrs_str = question.elements["questionattrs"].text
 attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
 correct_type = question.attributes["correct_type"]
 answer = question.elements["answer"]
-answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
+answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.strip.split(";|;")
 user_answer = question.attributes["user_answer"]
-user_answers = user_answer.nil? ? [] :  user_answer.split(";|;")
+user_answers = user_answer.nil? ? [] :  user_answer.strip.split(";|;")
 is_right = false
 all_answer = answers | user_answers
 is_right = true if all_answer == answers and answers - user_answers == []
@@ -94,10 +94,7 @@ is_right = true if all_answer == answers and answers - user_answers == []
          value="<%= "解析：" + question.elements["analysis"].text.to_s.html_safe unless (question.elements["analysis"].nil? or
              question.elements["analysis"].text.nil? or question.elements["analysis"].text == "") %>"/>
   <div class="review_btn">
-    <% unless question.elements["analysis"].nil? or question.elements["analysis"].text.nil? or
-        question.elements["analysis"].text == "" %>
-      <a class="jiexi_btn" href="javascript:void(0);" id="btn_<%= question.attributes["id"] %>">解析</a>
-    <% end %>
+    <a class="jiexi_btn" href="javascript:void(0);" id="btn_<%= question.attributes["id"] %>">解析</a>
     <a class="biji_btn" href="javascript:void(0);"
        name="note_<%= question.attributes["id"] %>" id="note_<%= question.attributes["id"] %>"
        onclick="javascript:start_note(<%= question.attributes["id"] %>, <%= problem.attributes["id"] %>,

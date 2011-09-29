@@ -60,13 +60,15 @@ img { border: none;}
 #vip_table_head { width: 220px; height: 38px; background: url(/images/paper/vip_table_head.png) no-repeat; color: #FFF;}
 
 .member_vip_btn { padding: 10px 0; position: relative;}
-.member_vip_btn span { position: absolute; top: -15px; right: -25px;}
+.member_vip_btn span { position: absolute; top: -15px; right: -25px; z-index: 100;}
 .member_vip_btn h2 { width: 550px; height: 40px; line-height: 40px; float: left; font-size: 14px; color: #2875ae;}
 .member_vip_btn button { width: 114px; height: 40px; float: right; background: url(/images/paper/all_bg.png) no-repeat -129px -950px; border: none; cursor: pointer;}
 
 .vip_zhuyi { padding-left: 20px;}
 
-
+.vip_xinxin { line-height: 24px; padding: 20px 5px; border-top: 1px #CCC dashed;}
+.vip_xinxin h1 { font-size: 14px; padding-bottom: 10px;}
+.vip_xinxin p { color: #F00;}
 
 
 /*foot--------------*/

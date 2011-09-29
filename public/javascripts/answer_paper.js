@@ -47,13 +47,14 @@ function create_paper() {
     
     if (papers.paper.blocks != undefined && papers.paper.blocks.block != undefined) {
         var blocks = papers.paper.blocks.block;
+        get_block_id(blocks);
         var bocks_div = $("blocks");
         if (tof(blocks) == "array") {
             for (var i=0; i<blocks.size();i++) {
-                create_block(bocks_div, blocks[i], i);
+                create_block(bocks_div, blocks[i]);
             }
         } else {
-            create_block(bocks_div, blocks, 0);
+            create_block(bocks_div, blocks);
         }
     }
     setTimeout(function(){
@@ -63,17 +64,25 @@ function create_paper() {
 //load_scroll();
 }
 
+function get_block_id(blocks) {
+    if (tof(blocks) == "array") {
+        for (var i=0; i<blocks.size();i++) {
+            if ($("block_ids") != null && $("block_ids").value != "") {
+                $("block_ids").value = $("block_ids").value + "," + blocks[i].id;
+            } else {
+                $("block_ids").value = blocks[i].id;
+            }
+        }
+    } else {
+        $("block_ids").value = blocks.id;
+    }
+}
+
 //添加试卷块
 var question_num = 1;   //根据提点显示导航
 var block_block_flag = 0;   //记录打开的模块
 var block_comment = "";
 function create_block(bocks_div, block) {
-    //添加block的div
-    if ($("block_ids") != null && $("block_ids").innerHTML != "") {
-        $("block_ids").innerHTML = $("block_ids").innerHTML + "," + block.id;
-    } else {
-        $("block_ids").innerHTML = block.id;
-    }
     if (is_fix_time) {
         return_block_exam_time(block.id, block.start_time, block.time);
     }
@@ -111,7 +120,6 @@ function create_block(bocks_div, block) {
     var ul = create_element("ul", null, "nav_block_" + block.id, "second_menu", null, "innerHTML");
     ul.style.display = "none";
     block_nav_div.appendChild(ul);
-    
     //判断problem的存在
     if (block.problems != undefined && block.problems.problem != undefined) {
         var problems = block.problems.problem;
@@ -124,13 +132,48 @@ function create_block(bocks_div, block) {
         }
         block_nav_div.appendChild(create_element("div", null, null, "clear", null, "innerHTML"));
     }
-    
     if (block_block_flag == 0 && (is_fix_time == false || (is_fix_time && (block_start_hash.get(block.id) == ""
         || (return_giving_time(block_start_hash.get(block.id)) >= return_giving_time(start) &&
             (block_end_hash.get(block.id) == "" ||
                 return_giving_time(block_end_hash.get(block.id)) < return_giving_time(start))))))) {
         open_block_nav(block.id);
         block_block_flag = 1;
+    }
+    next_last_index(block.id, block_div);
+}
+
+function next_last_index(block_id, block_div) {
+    if ($("block_ids") != null && $("block_ids").value != "") {
+        var block_ids = $("block_ids").value.split(",");
+        if (block_ids != null) {
+            if (block_ids.length > 1) {
+                var next_div = create_element("div", null, null, "testPage_btn", null, "innerHTML");
+                var method_str = "";
+                var next_block_id = "";
+                var last_block_id = "";
+                if (is_fix_time && block_start_hash.get(block_id) != null && block_start_hash.get(block_id) != "") {
+                    method_str = "hand_open_nav";
+                } else {
+                    method_str = "open_nav";
+                }
+                if (block_ids.indexOf(block_id) == 0) {
+                    next_block_id = "" + block_ids[block_ids.indexOf(block_id) + 1];
+                    next_div.innerHTML = "<a href='javascript:void(0);' class='tp_down_btn' onclick='javascript:" + method_str
+                    + "("+ next_block_id +");'>下一部分</a>";
+                } else if (block_ids.indexOf(block_id) == block_ids.length - 1) {
+                    last_block_id = "" + block_ids[block_ids.indexOf(block_id) - 1];
+                    next_div.innerHTML = "<a href='javascript:void(0);' class='tp_up_btn' onclick='javascript:" + method_str
+                    + "("+ last_block_id +");'>上一部分</a>";
+                } else {
+                    next_block_id = "" + block_ids[block_ids.indexOf(block_id) + 1];
+                    last_block_id = "" + block_ids[block_ids.indexOf(block_id) - 1];
+                    next_div.innerHTML = "<a href='javascript:void(0);' class='tp_up_btn' onclick='javascript:" + method_str
+                    + "("+ last_block_id +");'>上一部分</a><a href='javascript:void(0);' class='tp_down_btn' onclick='javascript:"
+                    + method_str + "("+ next_block_id +");'>下一部分</a>";
+                }
+                block_div.appendChild(next_div);
+            }
+        }
     }
 }
 
@@ -161,8 +204,8 @@ function return_block_exam_time(block_id, start_time, time) {
 //打开模块
 function open_nav(block_id) {
     var block_ids = $("block_ids");
-    if (block_ids != null && block_ids.innerHTML != "") {
-        var b_ids = block_ids.innerHTML.split(",");
+    if (block_ids != null && block_ids.value != "") {
+        var b_ids = block_ids.value.split(",");
         if (b_ids != null) {
             for (var i=0; i<b_ids.length; i++) {
                 close_block_nav(b_ids[i]);
@@ -178,6 +221,7 @@ function open_block_nav(block_id) {
     $("nav_block_" + block_id).style.display = "block";
     $("block_" + block_id).style.display = "block";
     start_block_audio(block_id);
+    window.scrollTo(0, 0);
 }
 
 //关闭模块
@@ -200,7 +244,12 @@ function hand_open_nav(block_id) {
     if (is_fix_time) {
         var fs = return_giving_time(start);
         var flash_div = null;
-        if ((block_end_hash.get(block_id) == null || block_end_hash.get(block_id) == "")) {
+        var bs = null;
+        var end_time_flag = false;
+        if (block_end_hash.get(block_id) != null && block_end_hash.get(block_id) != "") {
+            bs = return_giving_time(block_end_hash.get(block_id));
+        }
+        if (block_start_hash.get(block_id) != null && block_start_hash.get(block_id) != "") {
             var ss = return_giving_time(block_start_hash.get(block_id));
             if (ss < fs) {
                 flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
@@ -209,11 +258,13 @@ function hand_open_nav(block_id) {
                 show_flash_div();
             }
             else {
-                open_nav(block_id);
+                end_time_flag = true;
             }
         } else {
-            var bs = return_giving_time(block_end_hash.get(block_id));
-            if (bs < fs) {
+            end_time_flag = true;
+        }
+        if (end_time_flag == true) {
+            if (bs == null || bs < fs) {
                 open_nav(block_id);
             } else {
                 flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
@@ -221,7 +272,6 @@ function hand_open_nav(block_id) {
                 document.body.appendChild(flash_div);
                 show_flash_div();
             }
-
         }
     } else {
         open_nav(block_id);
@@ -965,6 +1015,7 @@ function answer_xml() {
 
 //记录当前模块是否有听力
 function is_has_audio(block_div, problem) {
+    var back_server_path = $("back_server_url").value;
     var block_id = block_div.id.split("inner_block_")[1];
     var titles = problem.title.split("<mp3>");
     var final_title = "";
@@ -972,9 +1023,9 @@ function is_has_audio(block_div, problem) {
         var audio_str = "";
         if (window.HTMLAudioElement) {
             audio_str = "<audio id='audio_"+ block_id +"' onended='add_audio_cookies("+ block_id +");'>" +
-            "<source src='"+ titles[1] +"' type='audio/mpeg'></audio>";
+            "<source src='"+ back_server_path + titles[1] +"' type='audio/mpeg'></audio>";
         } else {
-            audio_str = "<object><embed id='audio_"+ block_id +"' src='"+ titles[1] +
+            audio_str = "<object><embed id='audio_"+ block_id +"' src='"+ back_server_path + titles[1] +
             "' autostart='false' hidden='true' type='audio/midi'></object>";
         }
         final_title = audio_str + titles[2];

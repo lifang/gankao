@@ -108,7 +108,9 @@
 </div>
 <input type="hidden" value="<%= params[:page].nil? ? 1:params[:page] %>" id="current_page" />
 <div class="jiexi_tab" id="analysis_div">
-  <div class="tab_t"><a href="#"><img  src="/images/paper/x.gif" /></a></div>
+  <div class="tab_t">
+    <a href="javascript:void(0);" onclick="javascript:close_tab(this);"><img  src="/images/paper/x.gif" /></a>
+  </div>
   <div class="tab_m">
     <h3 id="answer"></h3>
     <p id="analysis"></p>

@@ -19,6 +19,9 @@ function open_block_nav(block_id) {
     $("block_nav_" + block_id).className = "first_title highLight";
     $("nav_block_" + block_id).style.display = "block";
     $("block_" + block_id).style.display = "block";
+    if ($("next_block_" + block_id) != null) {
+        $("next_block_" + block_id).style.display = "block";
+    }
 }
 
 //关闭模块
@@ -26,6 +29,9 @@ function close_block_nav(block_id) {
     $("block_nav_" + block_id).className = "first_title";
     $("nav_block_" + block_id).style.display = "none";
     $("block_" + block_id).style.display = "none";
+    if ($("next_block_" + block_id) != null) {
+        $("next_block_" + block_id).style.display = "none";
+    }
 }
 
 function get_question_height(question_id, problem_id) {

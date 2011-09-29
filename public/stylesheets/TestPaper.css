@@ -89,8 +89,8 @@ img { border: none;}
 .answer_textarea textarea { padding: 5px; width: 95%; height: 180px; margin: 10px 0 10px 15px;}
 
 
-.question_yes { background: url(/images/paper/question_yesno_bg.jpg) no-repeat 0px 0px #FFF;}
-.question_no {background: url(/images/paper/question_yesno_bg.jpg) no-repeat 0px -396px #FFF;}
+.question_yes { background: url(/images/paper/question_yes_bg.png) repeat-y 0px 0px #FFF;}
+.question_no {background: url(/images/paper/question_no_bg.png) repeat-y 0px 0px #FFF;}
 
 .p_q_l_left { float: left; width: 31px;text-align: center; padding-top: 5px;}
 .p_q_l_right { float: left; padding: 10px 5px; width: 600px; border-left: 1px #EAEAEA solid;}
@@ -164,8 +164,8 @@ img { border: none;}
 .tp_right_box { width: 240px; margin: 0 auto; position: fixed; _position: absolute; _top: expression(eval(documentElement.scrollTop + 50));}
 .first_title { font-size: 13px; color: #333; overflow: hidden; clear: both; cursor: pointer; background: url(/images/paper/xline.png) repeat-x center bottom; padding: 10px 0;}
 .first_title p { padding: 5px; line-height: 18px; clear: both;}
-.second_menu li { float: left; margin: 2px 5px; overflow: hidden; height: 32px; width: 31px; border: 1px #CCC solid; font-size: 16px; font-family: "微软雅黑";}
-.second_menu li a { width: 31px; height: 32px; display: block; line-height: 32px; text-align: center; text-decoration: none; color: #333;}
+.second_menu li { float: left; margin: 2px 7px; overflow: hidden; height: 30px; width: 29px; border: 1px #CCC solid; font-size: 16px; font-family: "微软雅黑";}
+.second_menu li a { width: 29px; height: 30px; display: block; line-height: 32px; text-align: center; text-decoration: none; color: #333;}
 .second_menu li a.lvse { background: url(/images/paper/second_menu_bg.jpg) no-repeat -35px bottom;}
 .second_menu li a.fenhong { background: url(/images/paper/second_menu_bg.jpg) no-repeat 0 bottom;}
 .highLight { color: #164a63; font-size: 14px; font-weight:bold;}
@@ -183,6 +183,22 @@ img { border: none;}
 }
 
 .testPaper_foot { height: 100px;}
+
+/*testPage_btn----------------*/
+.testPage_btn { width: 224px; height: 34px; margin: 20px 0 0 430px;}
+.testPage_btn a { width: 105px; height: 34px; display: block; text-indent: -999px; overflow: hidden; float: left; margin: 0 3px;}
+.tp_up_btn { background: url(/images/paper/testPage_btn.png) no-repeat 0 0;}
+.tp_down_btn { background: url(/images/paper/testPage_btn.png) no-repeat -119px 0;}
+
+
+
+/*黄色弹出层--------------*/
+.tooltip { width: 150px; padding: 5px; position: relative; border: 1px #f2cf7a solid; background: #fcfee4;}
+.tooltip_arrow { position: absolute; top:-15px; left: 15px;}
+.tooltip_text { }
+.tooltip_x { height: 15px; text-align: right;}
+.tooltip_x a { color: #333;}
+.tooltip_p { height: 24px; line-height: 24px;}
 
 .tishi_tab { width: 250px; padding: 10px; background: url(/images/paper/mk_b_zz_bg.png) repeat; border: 1px #fff solid; position: absolute; display: none; z-index: 999999;}
 .tishi_tab p { text-align: center; line-height: 24px; font-size: 14px; font-family:"微软雅黑"; color: #fff;}
