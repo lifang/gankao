@@ -67,14 +67,14 @@
               <% end if attrs_array and attrs_array.any? %>
             </ul>
           <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:JUDGE] %>
-          <ul class="chooseQuestion">
-            <li <% if answers[0].to_i==1 %>class="correctRight_bg"<% end %>>
-              <input type="radio"<% if user_answer==1.to_s %> checked="true"<% end %> disabled/><label>对</label>
-            </li>
-            <li <% if answers[0].to_i==0 %>class="correctRight_bg"<% end %>>
-              <input type="radio"  <% if user_answer==0.to_s %> checked="true"<% end %> disabled /><label>错</label>
-            </li>
-          </ul>
+            <ul class="chooseQuestion">
+              <li <% if answers[0].to_i==1 %>class="correctRight_bg"<% end %>>
+                <input type="radio"<% if user_answer==1.to_s %> checked="true"<% end %> disabled/><label>对</label>
+              </li>
+              <li <% if answers[0].to_i==0 %>class="correctRight_bg"<% end %>>
+                <input type="radio"  <% if user_answer==0.to_s %> checked="true"<% end %> disabled /><label>错</label>
+              </li>
+            </ul>
           <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] %>
             <div class="answer_text">
               <input name="answer" type="text" value="<%= user_answers[0].to_s %>" disabled/>
@@ -82,6 +82,10 @@
           <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] %>
             <div class="answer_textarea">
               <textarea cols="" rows=""readonly><%= user_answers[0].to_s %></textarea>
+            </div>
+          <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] %>
+            <div class="answer_text">
+              <textarea disabled cols="" rows="" style="height:24px;"><%= user_answers[0].to_s %></textarea>
             </div>
           <% end %>
           <div class="space20"></div>
@@ -92,15 +96,15 @@
              onclick="javascript:show_analysis('btn_<%= question.attributes['id'] %>');">解析</a>
         </div>
         <% answer_text = correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] ? "参考答案：" : "正确答案：" %>
-        <input type="hidden" id="btn_<%= question.attributes["id"] %>_answer" type="hidden" 
+        <input type="hidden" id="btn_<%= question.attributes["id"] %>_answer" type="hidden"
                value="<%= answer_text + answers.join("<br/>").to_s.html_safe %>"/>
         <input type="hidden" id="btn_<%= question.attributes["id"] %>_analysis" type="hidden"
                value="<%= "解析：" + question.elements["analysis"].text.to_s.html_safe unless (question.elements["analysis"].nil? or
-             question.elements["analysis"].text.nil? or question.elements["analysis"].text == "") %>"/>
+                   question.elements["analysis"].text.nil? or question.elements["analysis"].text == "") %>"/>
         <div style="display:none;"
-           id="answer_<%= question_answer.attributes["id"] %>"><%= answers.join(",") %></div>
-      <div style="display:none;"
-           id="user_answers_<%= question_answer.attributes["id"] %>"><%= user_answers.join(",") %></div>
+             id="answer_<%= question_answer.attributes["id"] %>"><%= answers.join(",") %></div>
+        <div style="display:none;"
+             id="user_answers_<%= question_answer.attributes["id"] %>"><%= user_answers.join(",") %></div>
       </div>
     <% end %>
   </div>

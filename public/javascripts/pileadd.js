@@ -473,7 +473,8 @@ function question_values(question_id) {
             }
             place_num ++ ;
         }
-    }else{
+    }
+    else{
         var answer = $("question_answer_" + question_id);
         if (answer != null && !checkspace(answer.value)) {
             $("answer_" + question_id).value = answer.value;
@@ -566,10 +567,10 @@ function dd(){
     jQuery(function (){
         var arr=jQuery.grep([0,1,2,3,4],function(i){
             return i>2
-            });
+        });
         jQuery.each(arr,function(i){
             alert(i)
-            });
+        });
     })
 }
 

@@ -85,14 +85,16 @@ class Rater::ExamRatersController < ApplicationController
           else
             @exam_user.add_collection(collection, xml, collection_xml, problem, question, result_question.elements["answer"].text) unless problem.elements["questions"].elements[1].nil?
           end
-          original_score += result_question.attributes["score"].to_i
-          score += single_score.to_i
-          block_score += single_score.to_i
+          original_score += result_question.attributes["score"].to_f
+          score += single_score.to_f
+          block_score += single_score.to_f
         end unless problem.elements["questions"].nil?
       end
-      answer_block=doc.elements["/exam/paper/blocks/block[@id=#{block.attributes["id"]}]"]
-      block_score=answer_block.attributes["score"].to_i-original_score+block_score
-      answer_block.attributes["score"]=block_score
+      unless doc.elements["/exam/paper/blocks"].nil?
+        answer_block=doc.elements["/exam/paper/blocks/block[@id=#{block.attributes["id"]}]"]
+        block_score=answer_block.attributes["score"].to_i-original_score+block_score
+        answer_block.attributes["score"]=block_score
+      end
     end
     doc.elements["paper"].elements["rate_score"].text=score
     @xml=ExamRater.rater(doc,params[:id],score)
