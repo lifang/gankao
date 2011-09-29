@@ -40,12 +40,12 @@
                     <tr>
                       <td>阅卷中</td>
                       <td>阅卷中</td>
-                      <% if is_vip? %>
+                      <% if (is_vip?).to_s == "true" %>
                         <td>阅卷中</td>
                         <td>阅卷中</td>
                       <% else %>
-                        <td><img src="/images/paper/v.png" /></td>
-                        <td><img src="/images/paper/v.png" /></td>
+                        <td><img src="/images/paper/V.png" /></td>
+                        <td><img src="/images/paper/V.png" /></td>
                       <% end %>
                     </tr>
                   </table>
@@ -68,7 +68,7 @@
                       <% else %>
                         <td><%= second_score %></td>
                       <% end %>
-                      <% if is_vip? %>
+                      <% if (is_vip?).to_s == "true" %>
                         <td><%= scores[4].nil? ? "阅卷中" :scores[4].attributes["score"].to_i  %></td>
                         <% forth_score= (scores[0].nil? ? 0 :scores[0].attributes["score"].to_i) + (scores[5].nil? ? 0 :scores[5].attributes["score"].to_i) %>
                         <% if scores[0].nil?&&scores[5].nil? %>
@@ -77,8 +77,8 @@
                           <td><%= forth_score %></td>
                         <% end %>
                       <% else %>
-                        <td><img src="/images/paper/v.png" /></td>
-                        <td><img src="/images/paper/v.png" /></td>
+                        <td><img src="/images/paper/V.png" /></td>
+                        <td><img src="/images/paper/V.png" /></td>
                       <% end %>
                     </tr>
                   </table>
@@ -102,7 +102,7 @@
                 </table>
               </div>
             <% end %>
-            <% unless is_vip? %>
+            <% unless (is_vip?).to_s == "true" %>
               <div class="mk_r_p"><span class="red">*</span> 升级为VIP账户后您可以享受主观题专业老师阅卷的服务，并进一步获取信心指数，以达到更好的备考效果。<a href="#">升级VIP</a></div>
             <% end %>
           </div>
