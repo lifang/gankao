@@ -74,6 +74,7 @@ class Rater::ExamRatersController < ApplicationController
     score=0
     only_xml=ExamUser.answer_questions(xml,doc)
     only_xml.elements["blocks"].each_element do  |block|
+      block_score=0
       block.elements["problems"].each_element do |problem|
         problem.elements["questions"].each_element do |question|
           single_score = params["single_value_#{question.attributes["id"]}"]
@@ -85,7 +86,13 @@ class Rater::ExamRatersController < ApplicationController
           end
           result_question.add_attribute("score","#{single_score}")
           score += single_score.to_i
+          block_score += single_score.to_i
         end unless problem.elements["questions"].nil?
+      end
+      unless doc.elements["/exam/paper/blocks"].nil?
+        answer_block=doc.elements["/exam/paper/blocks/block[@id=#{block.attributes["id"]}]"]
+        block_score=answer_block.attributes["score"].to_i +block_score
+        answer_block.attributes["score"]=block_score
       end
     end
     doc.elements["paper"].elements["rate_score"].text=score

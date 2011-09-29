@@ -73,6 +73,9 @@ function show_flash_div() {
         setTimeout(function(){
             jQuery('.tishi_tab').fadeTo("slow",0);
         }, 1500);
+        setTimeout(function(){
+            jQuery('.tishi_tab').css('display','none');
+        }, 3000);
     })(jQuery)
 }
 
