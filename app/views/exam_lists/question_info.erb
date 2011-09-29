@@ -21,6 +21,7 @@
             <div style="display:none;" id="title_<%= @problem.attributes["id"] %>">
               <%= @problem.elements["title"].text.to_s.html_safe %>
             </div>
+            <%= render :partial=>"/exam_lists/more_blanks", :object=> @problem  %>
           </div>
           <% @problem.elements["questions"].each_element do |question| %>
             <% attr +=question.attributes["id"]+","
@@ -28,18 +29,18 @@
             attrs_array=attrs_str.split(";-;") unless attrs_str.nil?
             correct_type = question.attributes["correct_type"]
           %>
-            <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] %>
-              <div class="task3_li">
-                <ul id="question_attrs_<%= question.attributes["id"] %>">
-                  <% attrs=attrs_array.shuffle %>
-                  <% (0..attrs.length-1).each do |i| %>
-                    <li><%= attrs[i] %></li>
-                  <% end %>
+            <%# if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] %>
+            <!--  <div class="task3_li">
+                <ul id="question_attrs_<%#= question.attributes["id"] %>">
+                  <%# attrs=attrs_array.shuffle %>
+                  <%# (0..attrs.length-1).each do |i| %>
+                    <li><%#= attrs[i] %></li>
+                  <%# end %>
                 </ul>
-                <script type="text/javascript"> show_drag_answer(<%= question.attributes["id"] %>);</script>
+                <script type="text/javascript"> show_drag_answer(<%#= question.attributes["id"] %>);</script>
               </div>
-              <div class="clear"></div>
-            <% end %>
+              <div class="clear"></div> -->
+            <%# end %>
             <div class="p_question_list question_no">
               <div class="p_q_l_left"><%= question.attributes["id"] %></div>
               <div class="p_q_l_right_b" id="drag_question_<%= question.attributes["id"] %>">
@@ -77,13 +78,22 @@
                   </ul>
                 <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:JUDGE] %>
                   <ul class="chooseQuestion">
-                    <li><input type="radio"/><label>对</label></li>
-                    <li><input type="radio" /><label>错</label></li>
+                    <li><input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>"
+                                 id="question_attr_<%= 1 %>"/><label>对</label></li>
+                    <li><input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>"
+                                 id="question_attr_<%= 0 %>" /><label>错</label></li>
                   </ul>
                 <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] %>
-                  <div class="answer_text"><input name="answer" type="text" value=""/></div>
+                  <div class="answer_text">
+                    <input name="question_answer_<%= question.attributes["id"].to_i %>"
+                           id="question_answer_<%= question.attributes["id"].to_i %>" type="text" value=""/>
+                  </div>
                 <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] %>
-                  <div class="answer_textarea"><textarea cols="" rows=""></textarea></div>
+                  <div class="answer_textarea"><textarea cols="" rows="" name="question_answer_<%= question.attributes["id"].to_i %>"
+                           id="question_answer_<%= question.attributes["id"].to_i %>"></textarea></div>
+                <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] %>
+                  <div class="answer_text"><input name="answer" type="text" value="" name="question_answer_<%= question.attributes["id"].to_i %>"
+                           id="question_answer_<%= question.attributes["id"].to_i %>"/></div>
                 <% end %>
               </div>
               <div class="clear"></div>

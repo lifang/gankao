@@ -67,7 +67,9 @@
                   </div>
                 <% else %>
                   <% if block_comment != "" %>
-                    <div class="part_q_text"><%= block_comment.html_safe %></div>
+                    <div class="part_q_text"><%= block_comment.html_safe %>
+                    <%= render :partial=>"/user/exam_users/more_blanks", :object=> problem  %>
+                    </div>
                   <% end %>
                 <% end %>
                 <%= question_ids = ""

@@ -1,0 +1,16 @@
+<% if more_blanks.attributes["types"].to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] or
+    more_blanks.attributes["types"].to_i == Problem::QUESTION_TYPE[:COLLIGATION] %>
+  <div class="task_li"><ul>
+      <% more_blanks.elements["questions"].each_element do |question| %>
+        <% if question.attributes["correct_type"].to_i == Problem::QUESTION_TYPE[:MORE_BLANKS]
+          attrs_str = question.elements["questionattrs"].text
+          attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
+          (0..attrs_array.length-1).each do |i|
+        %>
+          <li><%= attrs_array[i] %></li>
+        <% end
+        end
+      end %>
+    </ul>
+  </div>
+<% end %>
