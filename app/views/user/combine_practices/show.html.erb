@@ -46,9 +46,14 @@
   <input type="hidden" name="types" value="<%= @examination.types %>"/>
   <input type="hidden" name="answer_url" id="answer_url"
          value="<%= Constant::ANSWER_CLIENT_PATH %>/<%= @exam_user.answer_sheet_url %>"/>
-  <div class="tb_checkBox">
-    <%= f.submit "",:class=>"tb_check"%>
+  <div class="tb_content_btn">
+    <% if @practice_type==3 %>
+    <%= f.submit "", :class=>"explain_btn_next" %>
+    <% else %>
+    <%= f.submit "", :class=>"explain_btn_checknext" %>
+    <% end %>
   </div>
+  <input type="button" value="显示答案" id="show_answer_button" style="display:none;" onclick="javascript:show_display_answer();"></input>
 
 <% end %>
 
