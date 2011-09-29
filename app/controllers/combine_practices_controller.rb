@@ -29,9 +29,6 @@ class CombinePracticesController < ApplicationController
         redirect_to "/combine_practices/#{params[:id]}"
       else
         examination = Examination.rand_examnation(Examination::TYPES[:PRACTICE], cookies[:user_id].to_i, params[:id].to_i)
-        puts "=============================================================================================="
-        puts examination[0].id
-        puts "==============================================================================================="
         if examination and examination[0]
           redirect_to "/user/combine_practices/#{examination[0].id}/start"
         else

@@ -78,6 +78,10 @@ is_right = true if all_answer == answers and answers - user_answers == []
       <div class="answer_textarea">
         <textarea disabled cols="" rows=""><%= user_answers[0].to_s %></textarea>
       </div>
+    <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] %>
+    <div class="answer_text">
+      <textarea disabled cols="" rows="" style="height:24px;"><%= user_answers[0].to_s %></textarea>
+    </div>
     <% end %>
     <% if @examination.types == Examination::TYPES[:SIMULATION] %>
       <div class="fraction">

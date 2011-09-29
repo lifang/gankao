@@ -85,7 +85,7 @@ img { border: none;}
 .top_loginArea {}
 
 .top_la_ks { float: right;}
-.top_loginArea a { color: #333; margin: 0 10px;}
+.top_loginArea a { color: #333; margin: 0 10px; text-decoration: none;}
 .top_loginArea a.signColor { color: #A10000;}
 
 
@@ -501,7 +501,7 @@ img { border: none;}
 .tb_con_list { padding: 10px; border: 1px #CCC solid; margin-top: 10px;}
 .explain_btn { width: 60px; height:27px; display: block; overflow: hidden; text-indent: 999px; background: url(/images/paper/all_bg.png) no-repeat -127px -157px; margin-left: 400px;}
 .explain_btn_task2 { width: 60px; height:27px; float: left; background: url(/images/paper/all_bg.png) no-repeat -127px -157px; margin-left: 400px;}
-.explain_btn_ex { width: 60px; height:27px; float: left; border: none; cursor: pointer； background: url(/images/paper/all_bg.png) no-repeat -282px -157px; margin-left: 430px;}
+.explain_btn_ex { width: 60px; height:27px; float: left; border: none; cursor: pointer; background: url(/images/paper/all_bg.png) no-repeat -282px -157px; margin-left: 430px;}
 .explain_btn_checknext {width: 95px; height:27px; float: left; background: url(/images/paper/all_bg.png) no-repeat -360px -157px; margin-left: 430px;}
 .explain_btn_finish { width: 60px; height:27px; float: left; background: url(/images/paper/all_bg.png) no-repeat -471px -157px; margin-left: 430px;}
 .explain_btn_next { width: 60px; height:27px; float: left; background: url(/images/paper/all_bg.png) no-repeat -535px -157px; margin-left: 430px;}

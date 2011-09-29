@@ -147,15 +147,15 @@ class ExamUser < ActiveRecord::Base
   #下一步
   def next_step(doc,url)
     step=doc.root.attributes['step']
-#    check=doc.root.attributes['check']
-#    if check=="1"||step=="2"
-      doc.root.attributes['step']=step.to_i+1
-#    end
-#    if check=="0"&&step!="2"
-#      doc.root.attributes['check']=1
-#    else
-#      doc.root.attributes['check']=0
-#    end
+    #    check=doc.root.attributes['check']
+    #    if check=="1"||step=="2"
+    doc.root.attributes['step']=step.to_i+1
+    #    end
+    #    if check=="0"&&step!="2"
+    #      doc.root.attributes['check']=1
+    #    else
+    #      doc.root.attributes['check']=0
+    #    end
     f=File.new("#{Rails.root}/public#{url}","w")
     f.write("#{doc.to_s.force_encoding('UTF-8')}")
     f.close
@@ -173,7 +173,7 @@ class ExamUser < ActiveRecord::Base
   #取得综合训练进度step
   def get_step(doc)
     arr=doc.root.attributes['step']
-#    arr<<doc.root.attributes['check']
+    #    arr<<doc.root.attributes['check']
     return arr
   end
 
@@ -261,11 +261,13 @@ class ExamUser < ActiveRecord::Base
     unless block_id.nil?
       block_ids = block_id.split(",")
       blocks = doc.root.elements["paper/blocks"]
-      blocks.each_element { |b| doc.delete_element(b.xpath) }if blocks.children.any?
-      block_ids.each do |b_id|
-        block = blocks.add_element("block")
-        block.add_attribute("id","#{b_id}")
-        block.add_attribute("score","0")
+      unless blocks.nil?
+        blocks.each_element { |b| doc.delete_element(b.xpath) }if blocks.children.any?
+        block_ids.each do |b_id|
+          block = blocks.add_element("block")
+          block.add_attribute("id","#{b_id}")
+          block.add_attribute("score","0")
+        end
       end
     end
     return doc.to_s
@@ -362,7 +364,7 @@ class ExamUser < ActiveRecord::Base
       block.elements["problems"].each_element do |problem|
         if problem.attributes["types"].nil? || (problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:CHARACTER] and
               problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:COLLIGATIONR] and
-            problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:SINGLE_CALK])
+              problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:SINGLE_CALK])
           block.delete_element(problem.xpath)
         else
           score=0
@@ -490,19 +492,19 @@ class ExamUser < ActiveRecord::Base
         problem.elements["questions"].each_element do |xml_question|
           if xml_question.attributes["correct_type"].to_i != Problem::QUESTION_TYPE[:CHARACTER]
             if xml_question.elements["answer"] and xml_question.elements["answer"].text
-            answer = xml_question.elements["answer"].text
-            answers = answer.split(";|;")
-            user_answer = question_hash[xml_question.attributes["id"]][0]
-            if user_answer
-              user_answers = user_answer.split(";|;")
-              all_answer = answers | user_answers
-              if all_answer == answers and (answers - user_answers == [])
-                problem.delete_element(xml_question.xpath)
-                correct_num +=1
-              else
-                self.add_collection(collection, xml, collection_xml, problem, xml_question, user_answer.strip)
+              answer = xml_question.elements["answer"].text
+              answers = answer.split(";|;")
+              user_answer = question_hash[xml_question.attributes["id"]][0]
+              if user_answer
+                user_answers = user_answer.split(";|;")
+                all_answer = answers | user_answers
+                if all_answer == answers and (answers - user_answers == [])
+                  problem.delete_element(xml_question.xpath)
+                  correct_num +=1
+                else
+                  self.add_collection(collection, xml, collection_xml, problem, xml_question, user_answer.strip)
+                end
               end
-            end
             end
           end
         end unless problem.elements["questions"].nil?

@@ -10,7 +10,7 @@
       <% if @all_practies == @practies_count %>
         <a href="javascript:void(0);" title="练习已经全部完成">开始训练</a>
       <% else %>
-        <a href="/combine_practices/<%= params[:id] %>/start" target='_blank'>开始训练</a>
+        <a href="/combine_practices/<%= params[:id] %>/start">开始训练</a>
       <% end %>
     <% else %>
       <a href="javascript:void(0);" title="尚未有练习"></a>
