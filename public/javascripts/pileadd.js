@@ -130,15 +130,15 @@ function compare_value(id){
             return false;
         }
         else{
-            if(reason==""||reason.length==0){
-                document.getElementById("flash_part_"+arry[i]).innerHTML="<font color = 'red'>请输入评分理由。</font>";
+                if(reason==""||reason.length==0){
+                    document.getElementById("flash_part_"+arry[i]).innerHTML="<font color = 'red'>请输入评分理由。</font>";
 
-            }else{
-                document.getElementById("if_submited_"+arry[i]).value =1;
-                if (i==arry.length-1){
-                    active_button();
+                }else{
+                    document.getElementById("if_submited_"+arry[i]).value =1;
+                    if (i==arry.length-1){
+                        active_button();
+                    }
                 }
-            }
         }
     }
     active_button();
@@ -544,34 +544,15 @@ function show_drag_answer(question_id){
     }
 }
  
-var first_note = 0;
+
 jQuery(function() {
     jQuery('.mokao_left > div').bind('click',function(){
-        if (jQuery('#mk_'+first_note) != null) {
-            jQuery('#mk_'+first_note).css('display','block');
-             
-        }
         jQuery(this).addClass('mkl_h').siblings().removeClass('mkl_h');
         var index = jQuery('.mokao_left > div').index(this);
         jQuery('.mk_r_tab > .mk_r_div').eq(index).show().siblings().hide();
-        if (jQuery('#mk_'+this.id) != null) {
-            jQuery('#mk_'+this.id).css('display','block');
-            first_note = this.id;
-        }
-        
+        jQuery('#mk_'+this.id).css('display','block');
     });
 })
 jQuery.noConflict();
 
-
-function dd(){
-    jQuery(function (){
-        var arr=jQuery.grep([0,1,2,3,4],function(i){
-            return i>2
-        });
-        jQuery.each(arr,function(i){
-            alert(i)
-        });
-    })
-}
 
