@@ -624,9 +624,9 @@ function generate_question_answer(question_id, problem_id, is_sure,practice_type
     $("save_button_" + question_id).style.display = "none";
     if(practice_type=="6"){
         if(display_answer_id!=question_id&&display_answer_id!=0){
-            $("display_answer_"+question_id).style.display="none";
-            display_answer_id=question_id;
-        } 
+            $("display_answer_"+display_answer_id).style.display="none";
+        }
+        display_answer_id=question_id;
         generate_result_paper(null,null,practice_type);       
     }
 }
