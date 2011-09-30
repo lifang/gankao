@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     end
     if params[:user_info][:password]!=""
       if @user_info.has_password?(params[:user_info][:old_password])
-        if @user_info.update_attributes(:password=>params[:user_info][:password],:password_confirmation=>params[:user_info][:password_confirmation])
+        if @user_info.update_attributes(:password=>params[:user_info][:password])
           str += " 密码修改成功。"
           @user_info.encrypt_password
           @user_info.save

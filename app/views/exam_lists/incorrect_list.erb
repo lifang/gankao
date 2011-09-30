@@ -27,7 +27,7 @@
         <% end %>
         <% @tags.each do |tag| %>
           <li><a href="javascript:(0)" onclick="javascript:search_tag('<%= tag %>')"><%= tag %></a></li>
-        <% end unless @tags.nil? %>
+        <% end unless @tags.blank? %>
       </ul>
     </div>
     <% @lists.elements["/collection/problems"].each_element do |problem|%>

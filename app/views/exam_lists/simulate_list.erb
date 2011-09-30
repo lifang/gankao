@@ -18,7 +18,7 @@
           <% examination = exam %>
           <div class="mk_r_div mkList_jt<%= i %>"  <%  if i > 0 %> style="display:none" <% end %> >
             <div class="cet_title"></div>
-            <p class="begin_time_p">考试时间：<span class="blue"><%= examination.updated_at.strftime("%m-%d-%Y") %></span></p>
+            <p class="begin_time_p">考试时间：<span class="blue"><%= examination.start_at_time.nil? ? "任何时间":examination.start_at_time.strftime("%m-%d-%Y") %></span></p>
             <h2>总分：<span class="red"> <% unless @hash["#{examination.id}"].nil? %> <%=  @hash["#{examination.id}"][0].total_score.nil? ? "阅卷中" :@hash["#{examination.id}"][0].total_score %><% end %></span></h2>
             <% unless @hash["#{examination.id}"].nil? %>
               <% if !@hash["#{examination.id}"] || @hash["#{examination.id}"][0].total_score.nil?%>
@@ -102,10 +102,15 @@
           <% if @hash["#{examination.id}"].nil? || !@hash["#{examination.id}"][0].is_submited ==1%>
             <div class="mk_b_zz" id="mk_<%= i %>" <%  if i > 0 %> style="display:none" <% end %>>
               <div class="mk_b_yh">做为高级用户，在您考试完毕三个工作日内，将有老师批改你的答卷，你将得到完整的成绩报告。</div>
-              <% if examination.exam_password1.nil? %>
-                <div class="per_btn"><a href="/user/examinations/<%= examination.id %>/do_exam" target="_blank">开始考试</a></div>
+              <%  if (!examination.start_at_time.nil? and !examination.exam_time.nil? and examination.exam_time !=0 and
+                    (examination.start_at_time + examination.exam_time.minutes) < Time.now) or examination.status == Examination::STATUS[:CLOSED] %>
+                <div class="per_btn"><a href="#">考试已结束</a></div>
               <% else %>
-                <div class="per_btn"><a href="/user/examinations/<%= examination.id %>/enter_password" target="_blank">开始考试</a></div>
+                <% if examination.exam_password1.nil? %>
+                  <div class="per_btn"><a href="/user/examinations/<%= examination.id %>/do_exam" target="_blank">开始考试</a></div>
+                <% else %>
+                  <div class="per_btn"><a href="/user/examinations/<%= examination.id %>/enter_password" target="_blank">开始考试</a></div>
+                <% end %>
               <% end %>
             </div>
           <% end %>

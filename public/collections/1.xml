@@ -320,14 +320,14 @@ asf
             <category>1</category>
             <questions>
                         
-                <question correct_type='1' error_percent='0' id='69' repeat_num='8' score='3'>
+                <question correct_type='1' error_percent='0' id='69' repeat_num='9' score='3'>
                     <description>11</description>
                     <answer>11;|;111111</answer>
                     <questionattrs>1;-;11;-;1111;-;111111;-;11111111</questionattrs>
                     <tags> 手动添加</tags>
                     <user_answer/>
                     <user_answer>1;|;111111</user_answer>
-                <user_answer>1</user_answer><user_answer>1</user_answer><user_answer>1</user_answer><user_answer>1</user_answer><user_answer>1</user_answer><user_answer>1</user_answer></question>
+                <user_answer>1</user_answer><user_answer>1</user_answer><user_answer>1</user_answer><user_answer>1</user_answer><user_answer>1</user_answer><user_answer>1</user_answer><user_answer>1;|;1111</user_answer></question>
                         
                 <question correct_type='2' error_percent='14' id='70' repeat_num='7' score='6'>
                     <description>1111111</description>
@@ -335,12 +335,12 @@ asf
                     <questionattrs/>
                     <tags> 手动添加</tags>
                    <user_answer>1</user_answer></question>
-                <question correct_type='0' error_percent='14' id='68' repeat_num='7' score='11'>
+                <question correct_type='0' error_percent='13' id='68' repeat_num='8' score='11'>
                     <description>11111</description>
                     <answer>111</answer>
                     <questionattrs>1;-;11;-;111;-;1111</questionattrs>
                     <tags/>
-   <user_answer>11</user_answer><user_answer>1</user_answer><user_answer>111</user_answer><user_answer>1</user_answer><user_answer>11</user_answer></question>
+   <user_answer>11</user_answer><user_answer>1</user_answer><user_answer>111</user_answer><user_answer>1</user_answer><user_answer>11</user_answer><user_answer>11</user_answer></question>
             </questions>
         </problem>
         <problem id='76' score='145' types='6'>
@@ -482,13 +482,40 @@ asf
                     <title>风儿告诉我，在走的时候你哭了，我知道你为什么哭泣，可我不知道为什么哭泣也要选择放弃？</title>
                     <category>1</category>
                     <questions>
-                        <question correct_type='5' error_percent='0' id='66' repeat_num='1' score='10' score_reason='' user_answer='dddddssdgfgg' user_score='0'>
+                        <question correct_type='5' error_percent='50' id='66' repeat_num='2' score='10' score_reason='' user_answer='dddddssdgfgg' user_score='0'>
                             <answer>是物质的生死还是情感的共鸣，一生难道不重要/</answer>
                             <analysis/>
                             <questionattrs/>
                             <tags> 所有分类</tags>
-                        <user_answer>dddddssdgfgg</user_answer></question>
+                        <user_answer>dddddssdgfgg</user_answer><user_answer>是物质的生死还是情感的共鸣，一生难道不重要/</user_answer></question>
                     </questions>
-                </problem></problems>
+                </problem><problem id='53' score='10' types='3'>
+                    <title>如果人生就像一出折子戏，把嘴璀璨的部分留给__?</title>
+                    <category>1</category>
+                    <questions>
+                        <question correct_type='3' error_percent='0' id='64' repeat_num='1' score='10'>
+                            <answer>你</answer>
+                            <analysis/>
+                            <questionattrs/>
+                            <tags> 所有分类</tags>
+                        <user_answer>ddddddddddddddd</user_answer></question>
+                    </questions>
+                </problem><problem id='54' score='5' types='4'>
+                    <title>忘记吧，我们的昨天，泪水已经将那段记忆淹没，再也拾不起</title>
+                    <category>1</category>
+                    <questions>
+                        <question correct_type='3' error_percent='0' id='65' repeat_num='2' score='5'>
+                            <description>是昨天我们包头痛苦吗？</description>
+                            <answer>在那生与死的边缘，我们忘记了</answer>
+                            <questionattrs/>
+                            <tags> 所有分类</tags>
+                        <user_answer>ssssssssssssssss</user_answer><user_answer>llllllllllllllllllllllllllllllllll</user_answer></question>
+                    </questions>
+                </problem><problem id='216' score='0' types='0'><title/><category>2</category><questions><question correct_type='0' error_percent='50' id='1055' repeat_num='4' score='0'><answer>C) He cannot get access to the assigned book.</answer><analysis>12. C) He cannot get access to the assigned book.
+由对话可知，该男士认为令他烦恼的是无论是在图书馆还是在书店他都找不到那本书，由此得出答案。get access to指“获得，走近，接近，能够利用某物”。
+
+12． W： Just imagine！ We have to finish reading 300 pages before Monday！ How can the professor expect us to do it in such a short time?
+　　M： Yeah， but what troubles me is that I can’t find the book in the library or in the university bookstore．
+　　Q： What does the man mean?</analysis><questionattrs>A) He has proved to be a better reader than the woman.;-;B) He has difficulty understanding the book.;-;C) He cannot get access to the assigned book.;-;D) He cannot finish his assignment before the deadline.</questionattrs><tags> 我的关注 所有分类</tags><user_answer/><user_answer>C) He cannot get access to the assigned book.</user_answer><user_answer>C) He cannot get access to the assigned book.</user_answer><user_answer>D) He cannot finish his assignment before the deadline.</user_answer></question></questions></problem></problems>
 </collection>
 

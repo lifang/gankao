@@ -553,6 +553,5 @@ jQuery(function() {
         jQuery('#mk_'+this.id).css('display','block');
     });
 })
-jQuery.noConflict();
 
 
