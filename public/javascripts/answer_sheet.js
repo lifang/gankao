@@ -177,7 +177,7 @@ function generate_dialog_html(id) {
     var user_answers = window.opener.document.getElementById("user_answers_" + id).innerHTML;
     var audio_title = show_title_for_note(title);
     var final_title = audio_title.replace(/problem_x_dropplace/g, "problem_"+ id +"_dropplace");
-    window.document.getElementById("content").innerHTML = final_title;
+    document.getElementById("content").innerHTML = final_title;
     replace_droppable_element(window, answers.replace(/<[^{><}]*>/g, ","), user_answers, id);
 }
 
