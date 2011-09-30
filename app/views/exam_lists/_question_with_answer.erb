@@ -10,10 +10,12 @@
         if title =~ /<mp3>/  %>
           <script type="text/javascript">audio_element("<%= title.split("<mp3>")[1] %>");</script>
           <%= title.split("<mp3>")[2].to_s.html_safe.gsub("problem_x_dropplace", "problem_#{question_with_answer.attributes["id"]}_dropplace") %>
-        <% elsif title.length>500 %>
-          <%= truncate_u(title.to_s.html_safe.gsub(/<[^{><}]*>/, ""), 195, "......").to_s.html_safe %>
-        <% else %>
-          <%= title %>
+        <% else%>
+          <%  if title.length>500 %>
+            <%= truncate_u(title.to_s.html_safe.gsub(/<[^{><}]*>/, ""), 195, "......").to_s.html_safe %>
+          <% else %>
+            <%= title %>
+          <% end %>
         <% end %>
       </div>
       <div style="display:none;" id="title_<%= question_with_answer.attributes["id"] %>">
