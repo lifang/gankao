@@ -142,10 +142,7 @@ class ExamUser < ActiveRecord::Base
 
   #下一步
   def next_step(doc,url)
-    puts doc.root
     step=doc.root.attributes['step']
-    puts step
-    puts "===================================================="
     doc.root.attributes['step']=step.to_i+1
     f=File.new("#{Rails.root}/public#{url}","w")
     f.write("#{doc.to_s.force_encoding('UTF-8')}")
