@@ -119,11 +119,7 @@ class ExamUser < ActiveRecord::Base
     content += <<-XML
       <exam id='#{self.examination_id}' step='1'>
         <paper id='#{self.paper_id}' score='0'>
-          <block></block>
-          <block></block>
-          <block></block>
-          <block></block>
-          <block></block>
+          <questions></questions>
         </paper>
       </exam>
     XML

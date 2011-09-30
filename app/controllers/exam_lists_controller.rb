@@ -132,7 +132,6 @@ class ExamListsController < ApplicationController
     note.set_note_url
     note_doc = note.open_xml
     problem = note.problem_in_note(params[:problem_id], note_doc)
-
     doc=Collection.find_by_user_id(cookies[:user_id]).open_xml
     collection_problem=doc.elements["/collection/problems/problem[@id=#{params[:problem_id]}]"]
     collection_question=collection_problem.elements["questions/question[@id=#{params[:id]}]"]
@@ -142,10 +141,13 @@ class ExamListsController < ApplicationController
       if question
         note.update_question(params["note_text_#{params[:id]}"].strip, question.xpath, note_doc)
       else
-        problem.add_element(collection_question)
+        problem.elements["questions"].add_element(collection_question)
         note.save_xml(note_doc)
       end
     else
+      collection_problem.elements["questions"].each_element do |question|
+        collection_problem.delete_element(question.xpath) if question.attributes["id"].to_i != params[:id].to_i
+      end if collection_problem
       note_doc.elements["note/problems"].add_element(collection_problem)
       note.save_xml(note_doc)
     end

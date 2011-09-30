@@ -30,13 +30,23 @@ class User::HomesController < ApplicationController
       end unless @user_exams.blank?
     end
     @correct = Examination.count_correct(cookies[:user_id],params[:id].to_i)
-    collection = Collection.find_by_user_id(cookies[:user_id])
     begin
-      @incorrect_list = collection.open_xml.root if collection and collection.collection_url
+      @incorrect_list=list
       note = Note.find_by_user_id(cookies[:user_id])
       @notes = note.open_xml.root if note and note.note_url
     rescue
     end
   end
-  
+
+  def  list
+    collection = Collection.find_by_user_id(cookies[:user_id])
+    lists = collection.open_xml if collection and collection.collection_url
+    lists.elements["/collection/problems"].each_element do |problem|
+      problem.elements["questions"].each_element do |question|
+        lists.elements["/collection/problems"].delete_element(question.xpath) unless question.attributes["delete_status"].nil?
+      end
+      lists.elements["/collection/problems"].delete_element(problem.xpath) unless  problem.attributes["delete_status"].nil?
+    end if lists
+    return lists
+  end
 end

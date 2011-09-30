@@ -59,11 +59,11 @@ module Constant
 
   #综合训练音频文件播放次数
   CANPLAYTIME={
-    "practice_2"=>3,
-    "practice_3"=>1,
-    "practice_4"=>3,
-    "practice_5"=>3,
-    "practice_6"=>3,
+    "practice_2"=>0,
+    "practice_3"=>0,
+    "practice_4"=>0,
+    "practice_5"=>0,
+    "practice_6"=>0,
   }
 
    #vip价格
