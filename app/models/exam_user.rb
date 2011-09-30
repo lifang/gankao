@@ -142,16 +142,11 @@ class ExamUser < ActiveRecord::Base
 
   #下一步
   def next_step(doc,url)
+    puts doc.root
     step=doc.root.attributes['step']
-    #    check=doc.root.attributes['check']
-    #    if check=="1"||step=="2"
+    puts step
+    puts "===================================================="
     doc.root.attributes['step']=step.to_i+1
-    #    end
-    #    if check=="0"&&step!="2"
-    #      doc.root.attributes['check']=1
-    #    else
-    #      doc.root.attributes['check']=0
-    #    end
     f=File.new("#{Rails.root}/public#{url}","w")
     f.write("#{doc.to_s.force_encoding('UTF-8')}")
     f.close
