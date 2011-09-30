@@ -369,14 +369,11 @@ class ExamUser < ActiveRecord::Base
         else
           score=0
           problem.elements["questions"].each_element do |question|
-            doc.elements["paper"].elements["questions"].each_element do |element|
-              if element.attributes["id"]==question.attributes["id"]
+            element=doc.elements["paper/questions/question[@id=#{question.attributes["id"]}]"]
                 question.add_attribute("user_answer","#{element.elements["answer"].text}")
                 score += element.attributes["score"].to_i
                 question.add_attribute("score_reason","#{element.attributes["reason"]}")
                 question.add_attribute("user_score","#{element.attributes["score"]}")
-              end
-            end
             if question.attributes["correct_type"].to_i ==Problem::QUESTION_TYPE[:CHARACTER]
               str += (","+question.attributes["id"])
             else

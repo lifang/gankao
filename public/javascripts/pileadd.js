@@ -118,21 +118,18 @@ function check_password() {
 close_question_info_id=0
 function compare_value(id){
     jQuery.noConflict();
-    var check_mobile = new RegExp(/^[0-9]{1,2}$/);
     var arry=id.split("_");
     var i;
     for(i=1;i<arry.length;i++){
         var input_value=$("single_value_"+arry[i]).value;
         var fact_value=$("fact_value_"+arry[i]).value;
         var reason=document.getElementById("reason_for_"+arry[i]).value;
-        if (parseInt(fact_value) < parseInt(input_value)||parseInt(input_value)<0||input_value==""){
+        if (parseFloat(fact_value) < parseFloat(input_value)||parseFloat(input_value)<0.0||input_value==""){
             document.getElementById("if_submited_"+arry[i]).value =0;
             document.getElementById("flash_part_"+arry[i]).innerHTML="<font color = 'red'>请您输入合理的分值。</font>";
             return false;
         }
         else{
-            if (check_mobile.test(input_value)){
-                document.getElementById("flash_part_"+arry[i]).innerHTML="";
                 if(reason==""||reason.length==0){
                     document.getElementById("flash_part_"+arry[i]).innerHTML="<font color = 'red'>请输入评分理由。</font>";
 
@@ -142,10 +139,6 @@ function compare_value(id){
                         active_button();
                     }
                 }
-            }
-            else{
-                document.getElementById("flash_part_"+arry[i]).innerHTML="<font color = 'red'>得分只能是数值。</font>";
-            }
         }
     }
     active_button();
@@ -473,7 +466,8 @@ function question_values(question_id) {
             }
             place_num ++ ;
         }
-    }else{
+    }
+    else{
         var answer = $("question_answer_" + question_id);
         if (answer != null && !checkspace(answer.value)) {
             $("answer_" + question_id).value = answer.value;
@@ -561,15 +555,4 @@ jQuery(function() {
 })
 jQuery.noConflict();
 
-
-function dd(){
-    jQuery(function (){
-        var arr=jQuery.grep([0,1,2,3,4],function(i){
-            return i>2
-            });
-        jQuery.each(arr,function(i){
-            alert(i)
-            });
-    })
-}
 

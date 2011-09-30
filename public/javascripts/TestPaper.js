@@ -75,7 +75,7 @@ function show_flash_div() {
         }, 1500);
         setTimeout(function(){
             jQuery('.tishi_tab').css('display','none');
-        }, 3000);
+        }, 2000);
     })(jQuery)
 }
 

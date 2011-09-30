@@ -71,29 +71,29 @@ class Rater::ExamRatersController < ApplicationController
     collection.set_collection_url
     collection_xml = collection.open_xml
     xml=ExamRater.open_file(Constant::BACK_PUBLIC_PATH + "/papers/#{doc.elements[1].attributes["id"]}.xml")
-    score=0
+    score=0.0
     only_xml=ExamUser.answer_questions(xml,doc)
     only_xml.elements["blocks"].each_element do  |block|
-      block_score=0
-      original_score=0
+      block_score=0.0
+      original_score=0.0
       block.elements["problems"].each_element do |problem|
         problem.elements["questions"].each_element do |question|
-          single_score = params["single_value_#{question.attributes["id"]}"]
+          single_score = params["single_value_#{question.attributes["id"]}"].to_f
           result_question= doc.elements["/exam/paper/questions/question[@id=#{question.attributes["id"]}]"]
-          if question.attributes["score"] == single_score
+          if question.attributes["score"].to_f == single_score
             problem.delete_element(question.xpath)
           else
             @exam_user.add_collection(collection, xml, collection_xml, problem, question, result_question.elements["answer"].text) unless problem.elements["questions"].elements[1].nil?
           end
-          original_score += result_question.attributes["score"].to_i
-          result_question.attibutes["score"]=single_score
-          score += single_score.to_i
-          block_score += single_score.to_i
+          original_score += result_question.attributes["score"].to_f
+          result_question.attributes["score"]=single_score
+          score += single_score
+          block_score += single_score
         end unless problem.elements["questions"].nil?
       end
       unless doc.elements["/exam/paper/blocks"].nil?
         answer_block=doc.elements["/exam/paper/blocks/block[@id=#{block.attributes["id"]}]"]
-        block_score=answer_block.attributes["score"].to_i +block_score
+        block_score=answer_block.attributes["score"].to_i-original_score+block_score
         answer_block.attributes["score"]=block_score
       end
     end
