@@ -102,7 +102,7 @@
                     <user_answer/>
                     <user_answer/>
                 </question>
-                <question correct_type='0' error_percent='21' id='14' repeat_num='14' score='5'>
+                <question correct_type='0' error_percent='20' id='14' repeat_num='15' score='5'>
                     <answer>sfs</answer>
                     <analysis>sfafwerwr2r2</analysis>
                     <questionattrs>sfs;-;sfss;-;sdds;-;sd</questionattrs>
@@ -123,7 +123,7 @@
                     <user_answer>sfs</user_answer>
                     <user_answer>sfs</user_answer>
                     <user_answer>sfs</user_answer>
-                </question>
+                <user_answer></user_answer></question>
             </questions>
         </problem>
         <problem id='10' repeat_num='6' score='5' types='0'>
@@ -144,7 +144,7 @@
                     <user_answer/>
                     <user_answer>豆腐干</user_answer>
                 </question>
-                <question correct_type='0' error_percent='0' id='15' repeat_num='11' score='5'>
+                <question correct_type='0' error_percent='0' id='15' repeat_num='12' score='5'>
                     <answer>789</answer>
                     <analysis>sdfsfasf</analysis>
                     <questionattrs>23;-;wer;-;65;-;789</questionattrs>
@@ -160,7 +160,7 @@
                     <user_answer>23</user_answer>
                     <user_answer>23</user_answer>
                     <user_answer>23</user_answer>
-                </question>
+                <user_answer></user_answer></question>
             </questions>
         </problem>
         <problem id='11' repeat_num='8' score='5' types='0'>
@@ -229,7 +229,7 @@
             <title>sdfasfasfasfasfsafdsaf&lt;div&gt;sdfafsafsf&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;sfdasfsaf&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;sfd&lt;/div&gt;&lt;div&gt;asfd&lt;/div&gt;&lt;div&gt;asf&lt;/div&gt;&lt;div&gt;saf&lt;/div&gt;&lt;div&gt;asf&lt;/div&gt;&lt;div&gt;asfasf&lt;/div&gt;</title>
             <category>3</category>
             <questions>
-                <question correct_type='3' error_percent='0' id='36' repeat_num='5' score='44'>
+                <question correct_type='3' error_percent='0' id='36' repeat_num='6' score='44'>
                     <answer>fsafdasfsaf
 &lt;p&gt;safd&lt;/p&gt;
 &lt;p&gt;asf&lt;/p&gt;
@@ -245,14 +245,14 @@ asf
                     <user_answer>ddddddddddddddddddddddddddddddddddddddddddffffffffffffffffffffffffffffffffffffffffffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee4444444444444444444444444444444444555555555555555555555555555</user_answer>
                     <user_answer>ddddddddddddddddddddddddddddddddddddddddddffffffffffffffffffffffffffffffffffffffffffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee4444444444444444444444444444444444555555555555555555555555555</user_answer>
                     <user_answer>ddddddddddddddddddddddddddddddddddddddddddffffffffffffffffffffffffffffffffffffffffffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee4444444444444444444444444444444444555555555555555555555555555</user_answer>
-                </question>
+                <user_answer></user_answer></question>
             </questions>
         </problem>
         <problem id='35' score='65' types='4'>
             <title>测试测测试测测试测测试测测试测测试测&lt;div&gt;测试测测试测测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测测试测&lt;/div&gt;</title>
             <category>3</category>
             <questions>
-                <question correct_type='0' error_percent='0' id='38' repeat_num='5' score='5'>
+                <question correct_type='0' error_percent='0' id='38' repeat_num='6' score='5'>
                     <description>单复数测试测测试测测试测测试测v</description>
                     <answer>wer</answer>
                     <analysis>sdfafsafsafsfsafaffasfsfasfsfsafsf</analysis>
@@ -264,8 +264,8 @@ asf
                     <user_answer>awre</user_answer>
                     <user_answer>awre</user_answer>
                     <user_answer>awre</user_answer>
-                </question>
-                <question correct_type='1' error_percent='0' id='39' repeat_num='2' score='6'>
+                <user_answer></user_answer></question>
+                <question correct_type='1' error_percent='0' id='39' repeat_num='3' score='6'>
                     <description>sadfasssssssssssssssssss4t344555</description>
                     <answer>sdfa;|;qq2</answer>
                     <analysis>sdfasdfsafsafdsafa</analysis>
@@ -273,8 +273,8 @@ asf
                     <tags>4</tags>
                     <user_answer/>
                     <user_answer/>
-                </question>
-                <question correct_type='2' error_percent='0' id='40' repeat_num='2' score='54'>
+                <user_answer></user_answer></question>
+                <question correct_type='2' error_percent='0' id='40' repeat_num='3' score='54'>
                     <description>safwerwetewrtewrt</description>
                     <answer>1</answer>
                     <analysis>erqetqqqtewt4333333333333</analysis>
@@ -282,8 +282,8 @@ asf
                     <tags/>
                     <user_answer/>
                     <user_answer/>
-                </question>
-                <question correct_type='3' error_percent='0' id='41' repeat_num='5' score='0'>
+                <user_answer></user_answer></question>
+                <question correct_type='3' error_percent='0' id='41' repeat_num='6' score='0'>
                     <description>asdffffffffffffffffffffffffffffffffffffffff</description>
                     <answer>fffffwrrrrrrrrrrrrrrrrrrrrr</answer>
                     <analysis>wetrwqtrwqerqtwqtwqetwqtwqt</analysis>
@@ -294,7 +294,7 @@ asf
                     <user_answer>sdsdsdsdv</user_answer>
                     <user_answer>sdsdsdsdv</user_answer>
                     <user_answer>sdsdsdsdv</user_answer>
-                </question>
+                <user_answer></user_answer></question>
             </questions>
         </problem>
         <problem id='34' score='4' types='5'>
@@ -444,7 +444,7 @@ asf
             <title>sdfasfsafdsfsafasfasfsafsfsfsdfsaf</title>
             <category>3</category>
             <questions>
-                <question correct_type='3' error_percent='0' id='48' repeat_num='3' score='5'>
+                <question correct_type='3' error_percent='0' id='48' repeat_num='4' score='5'>
                     <answer>asfasfasfasfasfasfsafsfdsafsfsfd</answer>
                     <analysis>sfafsafasfasfsfdsafdasfsf</analysis>
                     <questionattrs/>
@@ -452,7 +452,7 @@ asf
                     <user_answer>dssssffffffffffffffffffffffffffffffffffffffffffffdddffffffffffffffffffffffffffff</user_answer>
                     <user_answer>dssssffffffffffffffffffffffffffffffffffffffffffffdddffffffffffffffffffffffffffff</user_answer>
                     <user_answer>dssssffffffffffffffffffffffffffffffffffffffffffffdddffffffffffffffffffffffffffff</user_answer>
-                </question>
+                <user_answer></user_answer></question>
             </questions>
         </problem>
         

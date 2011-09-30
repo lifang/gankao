@@ -46,9 +46,14 @@ class User::ExaminationsController < ApplicationController
   end
 
   def get_exam_time
+    text = return_exam_time(params[:id].to_i, cookies[:user_id])
+    render :text => text
+  end
+
+  def return_exam_time(examnation_id, user_id)
     text = ""
-    @examination = Examination.find(params[:id].to_i)
-    @exam_user = ExamUser.find_by_examination_id_and_user_id(@examination.id, params[:user_id].to_i)
+    @examination = Examination.find(examnation_id)
+    @exam_user = ExamUser.find_by_examination_id_and_user_id(@examination.id, user_id)
     unless @exam_user
       end_time = (@examination.ended_at - Time.now) unless @examination.ended_at.nil? or @examination.ended_at == ""
     else
@@ -61,11 +66,11 @@ class User::ExaminationsController < ApplicationController
     else
       text = "00:00:02"
     end
-    render :text => text
+    return text
   end
 
   def save_result
-    @exam_user = ExamUser.find_by_examination_id_and_user_id(params[:id], cookies[:user_id])
+    @exam_user = ExamUser.find_by_examination_id_and_user_id(params[:id].to_i, cookies[:user_id].to_i)
     if @exam_user and (@exam_user.is_submited.nil? or @exam_user.is_submited == false)
       question_hash = {}
       question_ids = params[:all_quesiton_ids].split(",") if params[:all_quesiton_ids]
@@ -86,7 +91,7 @@ class User::ExaminationsController < ApplicationController
 
   def five_min_save
     unless params[:arr].nil? or params[:arr] == ""
-      @exam_user = ExamUser.find_by_examination_id_and_user_id(params[:id], cookies[:user_id])
+      @exam_user = ExamUser.find_by_examination_id_and_user_id(params[:id].to_i, cookies[:user_id].to_i)
       questions = params[:arr].split(",")
       question_hash = {}
       0.step(questions.length-1, 3) do |i|
@@ -95,7 +100,12 @@ class User::ExaminationsController < ApplicationController
       str=@exam_user.update_answer_url(@exam_user.open_xml, question_hash)
       @exam_user.generate_answer_sheet_url(str, "result")
     end
-    render :text => ""
+    text = return_exam_time(params[:id].to_i, cookies[:user_id].to_i)
+    puts text
+    render :update do |page|
+      page.replace_html "remote_div" , :text => ""
+      page.replace_html "true_exam_time" , :text => text
+    end
   end
 
   def enter_password

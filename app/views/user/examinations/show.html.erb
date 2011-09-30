@@ -20,7 +20,7 @@
         <span class="test_logo"><img src="/images/paper/test_logo.png" /></span>
         <span id="paper_title"></span>
       </div>
-      <div class="timer" id="exam_time"></div>
+      <div class="timer" id="exam_time"></div><div id="true_exam_time"></div>
       <div class="paper_info">
         <button type="submit" class="test_over_btn"></button>
         <strong><span id="leaving_num"></span></strong>题未完成
@@ -40,7 +40,7 @@
     <div id="remote_div" style="display:none;"></div>
     <input type="hidden" name="types" value="<%= @examination.types %>"/>
     <input type="hidden" name="answer_url" id="answer_url"
-           value="<%= Constant::ANSWER_CLIENT_PATH %>/<%= @exam_user.answer_sheet_url %>"/>
+           value="<%= Constant::SERVER_PATH %>/<%= @exam_user.answer_sheet_url %>"/>
     <input type="hidden" name="back_server_url" id="back_server_url" value="<%= Constant::BACK_SERVER_PATH %>" />
     <div class="clear"></div>
     <div class="zhijiao"></div>
@@ -50,7 +50,7 @@
 <script type="text/javascript">
   //考试时间定时器所需变量
   var timer = null;
-  var normalelapse = 100;
+  var normalelapse = 99;
   var nextelapse = normalelapse;
   var start = "";
   //模块定时和考试定时
@@ -61,7 +61,7 @@
 
   //本地存储所需变量finish
   var local_timer = null;
-  var local_start_time = "05:00:00";
+  var local_start_time = "04:00:00";
   var local_finish_time = "00:00:00";
 
   //根据用户的字符长度更改文本域宽度

@@ -77,7 +77,7 @@
         <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] %>
           <div class="answer_text">
             <% height = "22px"
-            width = ""
+            width = "30px"
             if user_answers[0].to_s.length > 20 and user_answers[0].to_s.length <= 28
               width = (user_answers[0].to_s.length * 10).to_s + "px"
             elsif user_answers[0].to_s.length > 28
@@ -96,7 +96,7 @@
           </div>
         <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] %>
           <div class="answer_text">
-            <textarea disabled cols="" rows="" style="height:24px;"><%= user_answers[0].to_s %></textarea>
+            <textarea disabled cols="" rows="" style="width:50%;height:24px;"><%= user_answers[0].to_s %></textarea>
           </div>
         <% end %>
       </div>

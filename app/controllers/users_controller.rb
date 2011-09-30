@@ -26,7 +26,12 @@ class UsersController < ApplicationController
       end
     end
     flash[:notice]=str
-    redirect_to "/users/#{params[:id]}/edit"
+    if str =~ /失败/ or str =~ /错误/
+      redirect_to "/users/#{params[:id]}/edit"
+    else
+      redirect_to "/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}"
+    end
+    
   end
   
   def new #新建用户页面
