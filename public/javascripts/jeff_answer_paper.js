@@ -148,9 +148,9 @@ function create_question_navigation(block_nav_div, question, innerHTML, problem_
                     block_nav_div.insertBefore(question_nav_div,null);
                     draggable_array.push(que_attrs[i]);
                 }
-                new Draggable(store_id,{
-                    revert:true
-                });
+                    new Draggable(store_id,{
+                        revert:true
+                    });
             }
         }  //创建可拖动的选项。
     }
@@ -553,6 +553,8 @@ function load_navigation_color(){
             drag_sum_array[change_index]+=1;
         }
     }
+//    alert(draggable_array);
+//    alert(drag_sum_array);
 }
 
 //用来判断获取数据的类型
@@ -704,13 +706,6 @@ function question_value(question_id,practice_type) {
 
 //提交试卷之前判断试卷是否已经全部答对
 function generate_result_paper(paper_id,examination_id,practice_type) {
-    //    if(playing>0){
-    //        var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
-    //        flash_div.innerHTML = "<p>检测到音频正在播放中...请先停止</p>";
-    //        document.body.appendChild(flash_div);
-    //        show_flash_div();
-    //        return false;
-    //    }
     var all_question_ids = $("all_question_ids");
     if (all_question_ids != null && all_question_ids.value == "") {
         return true;
@@ -732,9 +727,14 @@ function generate_result_paper(paper_id,examination_id,practice_type) {
         check_answer=1;
         correct_sum=0;
         //    load_answer(paper_id,examination_id);
+        
         $("all_question_ids").value="";
         $("problem_ids").value="";
         $("block_ids").value="";
+        var blocks_childs_sum = $("blocks").childNodes.length;
+        for(var i=0;i<blocks_childs_sum;i++){
+            $("blocks").removeChild($("blocks").childNodes[blocks_childs_sum-i-1]);
+        }
         $("blocks").innerHTML="";
         draggable_array=new Array;
         drag_sum_array=new Array;
@@ -785,7 +785,6 @@ function load_local_save(paper_id, examination_id) {
 }
 
 var fix_div_top=0;
-// alert(fix_div_top);
 function fix_top(element_id){
     if(parseInt(document.getElementById(element_id).childNodes[0].offsetTop-document.body.scrollTop)<0){
         document.getElementById(element_id).childNodes[0].style.position="fixed";
