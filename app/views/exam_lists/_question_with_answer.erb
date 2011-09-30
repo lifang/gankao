@@ -1,7 +1,7 @@
 <div class="part_question">
   <% attr="" %>
   <% unless question_with_answer.elements['title'].nil? or question_with_answer.elements['title'].text.nil? or question_with_answer.elements['title'].text == "" %>
-    <% if question_with_answer.text.length>500 %>
+    <% if question_with_answer.elements['title'].text.length>500 %>
       <div class="chank_yw"><a href="javascript:void(0);" onclick="openwindow(<%= question_with_answer.attributes["id"] %>);">查看全文</a></div>
     <% end %>
     <div class="part_q_text part_q_sl">

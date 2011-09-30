@@ -9,7 +9,7 @@
       <div class="part_div">
         <div class="part_question">
           <% unless @problem.elements['title'].nil? or @problem.elements['title'].text.nil? or @problem.elements['title'].text == "" %>
-            <% if @problem.text.length>500 %>
+            <% if @problem.elements['title'].text.length>500 %>
               <div class="chank_yw"><a href="javascript:void(0);" onclick="openwindow(<%= @problem.attributes["id"] %>);">查看全文</a></div>
             <% end %>
             <div class="part_q_text part_q_sl">
