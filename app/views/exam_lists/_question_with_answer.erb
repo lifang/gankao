@@ -1,19 +1,26 @@
 <div class="part_question">
   <% attr="" %>
-  <div class="chank_yw"><a href="javascript:void(0);" onclick="openwindow(<%= question_with_answer.attributes["id"] %>);">查看全文</a></div>
-  <div class="part_q_text part_q_sl">
-    <div class="question_text_div" style="word-wrap:break-word; word-break:break-all;">
-      <% title = question_with_answer.elements["title"].text
-      if title =~ /<mp3>/  %>
-        <%= truncate_u(title.split("<mp3>")[2].to_s.html_safe.gsub(/<[^{><}]*>/, ""), 195, "......").to_s.html_safe %>
-      <% else %>
-        <%= truncate_u(title.to_s.html_safe.gsub(/<[^{><}]*>/, ""), 195, "......").to_s.html_safe %>
-      <% end %>
+  <% unless question_with_answer.elements['title'].nil? or question_with_answer.elements['title'].text.nil? or question_with_answer.elements['title'].text == "" %>
+    <% if question_with_answer.text.length>500 %>
+      <div class="chank_yw"><a href="javascript:void(0);" onclick="openwindow(<%= question_with_answer.attributes["id"] %>);">查看全文</a></div>
+    <% end %>
+    <div class="part_q_text part_q_sl">
+      <div class="question_text_div" style="word-wrap:break-word; word-break:break-all;">
+        <%   title = question_with_answer.elements["title"].text
+        if title =~ /<mp3>/  %>
+          <script type="text/javascript">audio_element("<%= title.split("<mp3>")[1] %>");</script>
+          <%= title.split("<mp3>")[2].to_s.html_safe.gsub("problem_x_dropplace", "problem_#{question_with_answer.attributes["id"]}_dropplace") %>
+        <% elsif title.length>500 %>
+          <%= truncate_u(title.to_s.html_safe.gsub(/<[^{><}]*>/, ""), 195, "......").to_s.html_safe %>
+        <% else %>
+          <%= title %>
+        <% end %>
+      </div>
+      <div style="display:none;" id="title_<%= question_with_answer.attributes["id"] %>">
+        <%= question_with_answer.elements["title"].text.to_s.html_safe %>
+      </div>
     </div>
-    <div style="display:none;" id="title_<%= question_with_answer.attributes["id"] %>">
-      <%= question_with_answer.elements["title"].text.to_s.html_safe %>
-    </div>
-  </div>
+  <% end %>
   <% question_with_answer.elements["questions"].each_element do |question| %>
     <% attr +=question.attributes["id"]+","
     attrs_str = question.elements["questionattrs"].text

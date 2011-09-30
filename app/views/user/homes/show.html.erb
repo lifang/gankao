@@ -14,7 +14,7 @@
         <% elsif @hash1["#{@simulations[0].id}"].total_score.nil? or @hash1["#{@simulations[0].id}"].total_score == 0 %>
           <p style="font-size:70%;color:red;font-weight: bold;margin-left: 80px;">阅卷中...</p>
         <% else %>
-          <p style="font-size:80%;margin-left: 40px;">得分：<%= @hash1["#{@simulations[0].id}"].total_score %></p>
+          <p style="font-size:80%;margin-left: 70px;">得分：<%= @hash1["#{@simulations[0].id}"].total_score %></p>
         <% end %></div>
     <% end %>
     <div class="per_ex_p"><span class="red">*</span>模拟考试帮助我们了解你的水平和准备程度更好的预测你通过考试的可能性。</div>
