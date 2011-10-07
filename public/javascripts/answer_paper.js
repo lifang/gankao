@@ -626,7 +626,7 @@ function show_exam_time() {
     // nextelapse是定时时间, 初始时为100毫秒
     // 注意setInterval函数: 时间逝去nextelapse(毫秒)后, onTimer才开始执行
     if (start != "00:00:00:00") {
-        timer = window.setInterval("onTimer()", 1000);
+        timer = window.setInterval("onTimer()", 100);
     }
 }
 
@@ -672,15 +672,12 @@ function onTimer() {
     start = sh + ":" + sm + ":" + ss + ":" + mss;
     $("exam_time").innerHTML = sh + ":" + sm;
     $("true_exam_time").innerHTML = sh + ":" + sm + ":" + ss + ":" + mss;
-    if (start == sh + ":" + sm + ":00:00") {
-        alert(start);
-    }
     
     colse_or_open_block(current_time);
     // 清除上一次的定时器
-    window.clearInterval(timer);
+//    window.clearInterval(timer);
     // 启动新的定时器
-    timer = window.setInterval("onTimer()", nextelapse);
+//    timer = window.setInterval("onTimer()", nextelapse);
 }
 
 //打开模块和关闭答案
@@ -1008,11 +1005,11 @@ function reload_local_save() {
             start = "00:00:00:00";
             $("exam_time").innerHTML = "不限时";
         } else {
-            start = $("true_exam_time").innerHTML;
+            start = $("true_exam_time").innerHTML + ":00";
             var all_time = $("true_exam_time").innerHTML.toString().split(":");
             $("exam_time").innerHTML = all_time[0] + ":" + all_time[1];
         }
-        local_start_time = "04:00:00";
+        local_start_time = "02:30:00";
         local_save_start();
     }
 }
