@@ -546,6 +546,7 @@ function change_navigation_color(element,store_id){
 
 function load_navigation_color(){
     var dropplaces = document.getElementsByName("dropplace_name");
+//    alert(dropplaces.length);
     for(var i=0;i<dropplaces.length;i++){
         if(draggable_array.indexOf(dropplaces[i].innerHTML)>-1){
             var change_index=draggable_array.indexOf(dropplaces[i].innerHTML);
