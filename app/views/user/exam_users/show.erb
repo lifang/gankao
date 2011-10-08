@@ -32,7 +32,14 @@
           <% unless block.elements['base_info'].elements['description'].nil? or
               block.elements['base_info'].elements['description'].text.nil? or
               block.elements['base_info'].elements['description'].text.strip == "" %>
-            <p><%= block.elements['base_info'].elements['description'].text %></p>
+            <p><% description = block.elements['base_info'].elements['description'].text.to_s.html_safe
+              if description =~ /<mp3>/ %>
+                <%= description.split("<mp3>")[0] %>
+                <script type="text/javascript">audio_element("<%= description.split("<mp3>")[1] %>");</script>
+              <% else %>
+                <%= description %>
+              <% end %>
+            </p>
           <% end %>
           <% if @examination.types == Examination::TYPES[:SIMULATION] %>
             <div class="fraction"><%= block.attributes["total_score"] %>分</div>
@@ -50,25 +57,17 @@
                     <%= block_comment.html_safe if block_comment != "" %>
                     <div class="question_text_div" id="problem_title_<%= problem.attributes["id"] %>"
                          style="word-wrap:break-word; word-break:break-all;">
-                           <% title = problem.elements['title'].text.to_s.html_safe %>
-                           <% if title =~ /<mp3>/  %>
-                        <script type="text/javascript">audio_element("<%= title.split("<mp3>")[1] %>");</script>
-                        <%= title.split("<mp3>")[2].to_s.html_safe.
-                          gsub("problem_x_dropplace", "problem_#{problem.attributes["id"]}_dropplace") %>
-                      <% else %>
-                        <%= problem.elements['title'].text.to_s.html_safe.
-                          gsub("problem_x_dropplace", "problem_#{problem.attributes["id"]}_dropplace") %>
-                      <% end %>
+                           <%= problem.elements['title'].text.to_s.html_safe %>
                     </div>
                     <% if @examination.types == Examination::TYPES[:SIMULATION] %>
                       <div class="fraction_h"><%= problem.attributes["score"] %>分</div>
                     <% end %>
-                      <%= render :partial=>"/user/exam_users/more_blanks", :object=> problem  %>
+                    <%= render :partial=>"/user/exam_users/more_blanks", :object=> problem  %>
                   </div>
                 <% else %>
                   <% if block_comment != "" %>
                     <div class="part_q_text"><%= block_comment.html_safe %>
-                    <%= render :partial=>"/user/exam_users/more_blanks", :object=> problem  %>
+                      <%= render :partial=>"/user/exam_users/more_blanks", :object=> problem  %>
                     </div>
                   <% end %>
                 <% end %>

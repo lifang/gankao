@@ -2,7 +2,7 @@
 function load_paper() {
     setTimeout(function(){
         get_exam_time();
-    }, 500);
+    }, 100);
 }
 
 //获取考试的时间
@@ -28,9 +28,15 @@ function load_exam_tiem(time) {
         start = "00:00:00:00";
         $("exam_time").innerHTML = "不限时";
     } else {
-        var all_time = time.toString().split(":");
+//        alert(time);
+        time = new Number(time);
+        alert((time/3600) + ":" + ((time%3600)/60) + ":" + (time%3600%60));
+        var show_time = Math.floor(time/3600) + ":" + Math.floor((time%3600)/60) + ":" + Math.floor(time%3600%60);
+//        alert(show_time);
+        var all_time = show_time.toString().split(":");
         $("exam_time").innerHTML = all_time[0] + ":" + all_time[1];
-        start = time + ":00";
+        start = show_time + ":00";
+//        alert(start);
         is_fix_time = true;
         block_start_hash = $H({});
         block_end_hash = $H({});
@@ -104,7 +110,7 @@ function create_block(bocks_div, block) {
     }
     part_message.innerHTML = "<div class='part_title' id='block_show'> " + block_str + " </div>";
     if (block.base_info.description != null && block.base_info.description != "") {
-        part_message.innerHTML += "<p>" + block.base_info.description + "</p>";
+        part_message.innerHTML += "<p>" + is_has_audio(block.id, block.base_info.description) + "</p>";
     }
     if (block.total_score != null && block.total_score != 0) {
         part_message.innerHTML += "<div class='fraction_h'>" + block.total_score + "分</div>";
@@ -345,7 +351,7 @@ function create_problem(block_div, problem, block_nav_div) {
         if (problem.title != null && problem.title != "") {
             out_que_div.innerHTML = "<div class='part_q_text' id='problem_title_"+ problem.id
             +"'>"+ block_comment +"<div class='question_text_div' style='word-wrap:break-word; word-break:break-all;'>"
-            + is_has_audio(block_div, problem) + "</div>" + score_str +"</div>";
+            + replace_title_span(problem.title, problem.id) + "</div>" + score_str +"</div>";
         } else if (block_comment != "") {
             
             out_que_div.innerHTML = "<div class='part_q_text' id='problem_title_"+ problem.id
@@ -730,7 +736,7 @@ function colse_or_open_block(current_time) {
 
 //用来5分钟存储的定时器
 function local_save_start() {
-    local_timer = window.setInterval("local_save()", 99);
+    local_timer = window.setInterval("local_save()", 100);
 }
 
 //5分钟存储函数
@@ -762,9 +768,9 @@ function local_save() {
     local_start_time = sm + ":" + ss + ":" + mss;
     //$("local_time").innerHTML = local_start_time;
     // 清除上一次的定时器
-    window.clearInterval(local_timer);
+//    window.clearInterval(local_timer);
     // 启动新的定时器
-    local_timer = window.setInterval("local_save()", 99);
+//    local_timer = window.setInterval("local_save()", 99);
 }
 
 //用来判断获取数据的类型
@@ -1075,10 +1081,9 @@ function answer_xml() {
 }
 
 //记录当前模块是否有听力
-function is_has_audio(block_div, problem) {
+function is_has_audio(block_id, description) {
     var back_server_path = $("back_server_url").value;
-    var block_id = block_div.id.split("inner_block_")[1];
-    var titles = problem.title.split("<mp3>");
+    var titles = description.split("<mp3>");
     var final_title = "";
     if (titles.length > 1) {
         var audio_str = "";
@@ -1091,9 +1096,8 @@ function is_has_audio(block_div, problem) {
         }
         final_title = audio_str + titles[2];
     } else {
-        final_title = problem.title;
+        final_title = description;
     }
-    final_title = replace_title_span(final_title, problem.id);
     return final_title;
 }
 
@@ -1138,17 +1142,12 @@ function store_title_span(problem_id, question_id) {
 
 }
 
-
-
-
 //当打开的模块有音频时，播放有音频
 function start_block_audio(block_id) {
     if ($("audio_" + block_id) != null) {
-        //                setCookie("exam_audio_" + block_id, 0);
-        //                setCookie("audio_time_" + block_id, 0);
         var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
         if (getCookie("exam_audio_" + block_id) == null || getCookie("exam_audio_" + block_id) == 0) {
-            flash_div.innerHTML = "<p>您当前打开的模块为听力模块，5秒钟后播放听力，请做好准备。</p>";
+            flash_div.innerHTML = "<p>您当前打开的模块为听力模块，听力正在播放或者即将播放，请做好答题准备。</p>";
             document.body.appendChild(flash_div);
             show_flash_div();
             setTimeout(function(){
