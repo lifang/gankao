@@ -151,10 +151,14 @@ class Collection < ActiveRecord::Base
     doc=problem_path.split("/problems")[0]
     mp3=paper_xml.elements["#{doc}/base_info/description"].text
     if mp3=~ /<mp3>/
-      if paper_problem.elements["title"].nil?
-        paper_problem.elements["title"].text=mp3.split("<mp3>")
+      unless paper_problem.elements["title"].nil?
+        if paper_problem.elements["title"].text.nil?
+          paper_problem.elements["title"].text=mp3.split("<mp3>")[1]
+        else
+          paper_problem.elements["title"].text="#{paper_problem.elements["title"].text} <mp3>#{mp3.split("<mp3>")[1]}<mp3>"
+        end
       else
-        paper_problem.elements["title"].text="#{paper_problem.elements["title"].text} <mp3>#{mp3.split("<mp3>")[1]}<mp3>"
+        paper_problem.add_element("title").add_text("#{mp3.split("<mp3>")[1]}")
       end
     end
     paper_problem.elements["questions"].each_element do |question|
