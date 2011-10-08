@@ -65,6 +65,16 @@
         <%=  render :partial => "/common/footer" %>
       </div>
     </div>
+    <% practies_count = ExamUser.return_join_exam_count(Examination::TYPES[:PRACTICE], cookies[:user_id].to_i,Category::TYPE_IDS[:english_fourth_level]) %>
+    <% if !is_vip? && practies_count >= Constant::PRACTICES_COUNT %>
+      <div class="zhezhao" style="display: block; height: 100%;position:fixed; "></div>
+      <div class="service_tishi" style="top: 238.5px; left: 481.5px; display: block; ">
+        <div class="se_ts_x"><a href="javascript:void(0);">X</a></div>
+        <div class="se_ts_text">普通用户只能享受5篇综合训练内容的免费试用，升级VIP用户您将获得全部60篇的训练内容，现在就升级吧!</div>
+        <div class="open_vip_btn"><button></button></div>
+      </div>
+    <% end %>
+
     <%=  render :partial => "/common/flash_div" %>
   </body>
 </html>
