@@ -12,7 +12,6 @@ class User::CombinePracticesController < ApplicationController
       @exam_user = ExamUser.find_by_examination_id_and_user_id(@examination.id, cookies[:user_id].to_i)
       @exam_user = ExamUser.create(:user_id => cookies[:user_id],:examination_id => @examination.id,
         :password => User::DEFAULT_PASSWORD, :is_user_affiremed => ExamUser::IS_USER_AFFIREMED[:YES]) if @exam_user.nil?
-      @exam_user.set_paper(@examination) if @exam_user.paper_id.nil?
       if @exam_user and @exam_user.paper_id
         @step=@exam_user.get_step(@exam_user.open_xml)
         @practice_type=@step[0].to_i+1    #因为js中，综合训练类型1-5，分别对应2-6.而step为1..5
@@ -36,6 +35,7 @@ class User::CombinePracticesController < ApplicationController
     if @exam_user.nil?
       @exam_user = ExamUser.create(:user_id => cookies[:user_id],:examination_id => params[:id].to_i,
         :password => User::DEFAULT_PASSWORD, :is_user_affiremed => ExamUser::IS_USER_AFFIREMED[:YES])
+      @exam_user.set_paper(@examination) if @exam_user.paper_id.nil?
       @exam_user.create_practice_result
     end
     @step=@exam_user.get_step(@exam_user.open_xml)

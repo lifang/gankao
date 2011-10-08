@@ -119,11 +119,7 @@ class ExamUser < ActiveRecord::Base
     content += <<-XML
       <exam id='#{self.examination_id}' step='1'>
         <paper id='#{self.paper_id}' score='0'>
-          <block></block>
-          <block></block>
-          <block></block>
-          <block></block>
-          <block></block>
+          <questions></questions>
         </paper>
       </exam>
     XML
@@ -147,15 +143,7 @@ class ExamUser < ActiveRecord::Base
   #下一步
   def next_step(doc,url)
     step=doc.root.attributes['step']
-    #    check=doc.root.attributes['check']
-    #    if check=="1"||step=="2"
     doc.root.attributes['step']=step.to_i+1
-    #    end
-    #    if check=="0"&&step!="2"
-    #      doc.root.attributes['check']=1
-    #    else
-    #      doc.root.attributes['check']=0
-    #    end
     f=File.new("#{Rails.root}/public#{url}","w")
     f.write("#{doc.to_s.force_encoding('UTF-8')}")
     f.close

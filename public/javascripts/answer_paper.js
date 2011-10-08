@@ -9,13 +9,13 @@ function load_paper() {
 function get_exam_time(){
     var examination_id = $("examination_id").value;
     var user_id = $("user_id").value;
-    new Ajax.Updater("exam_time", "/user/examinations/"+ examination_id +"/get_exam_time",
+    new Ajax.Updater("true_exam_time", "/user/examinations/"+ examination_id +"/get_exam_time",
     {
         asynchronous:true,
         evalScripts:true,
         method:"post",
         onComplete:function(request){
-            load_exam_tiem()
+            load_exam_tiem(request.responseText);
         },
         parameters:"user_id="+ user_id +"&authenticity_token=" + encodeURIComponent('BgLpQ3SADBr4tuiYZOJeoOvY4VOHogJvqQEpMwYVBM4=')
     });
@@ -23,11 +23,14 @@ function get_exam_time(){
 }
 
 //加载是否是定时考试
-function load_exam_tiem() {
-    if ($("exam_time").innerHTML == "不限时") {
+function load_exam_tiem(time) {
+    if (time == "不限时") {
         start = "00:00:00:00";
+        $("exam_time").innerHTML = "不限时";
     } else {
-        start = $("exam_time").innerHTML + ":00";
+        var all_time = time.toString().split(":");
+        $("exam_time").innerHTML = all_time[0] + ":" + all_time[1];
+        start = time + ":00";
         is_fix_time = true;
         block_start_hash = $H({});
         block_end_hash = $H({});
@@ -485,7 +488,9 @@ function create_words_div(problem_id, drag_li_arr) {
                 var drag_attr = create_element("li", null, null, "", null, "innerHTML");
                 drag_attr.innerHTML = que_attrs[m];
                 drop_ul.appendChild(drag_attr);
-                drag_attr.onclick = function(){change_word_color(this)};
+                drag_attr.onclick = function(){
+                    change_word_color(this)
+                };
             }
         }
     }
@@ -621,7 +626,7 @@ function show_exam_time() {
     // nextelapse是定时时间, 初始时为100毫秒
     // 注意setInterval函数: 时间逝去nextelapse(毫秒)后, onTimer才开始执行
     if (start != "00:00:00:00") {
-        timer = window.setInterval("onTimer()", 1000);
+        timer = window.setInterval("onTimer()", 100);
     }
 }
 
@@ -665,13 +670,14 @@ function onTimer() {
     var sh = h < 10 ? ("0" + h) : h;
 
     start = sh + ":" + sm + ":" + ss + ":" + mss;
-    $("exam_time").innerHTML = sh + ":" + sm + ":" + ss;
+    $("exam_time").innerHTML = sh + ":" + sm;
+    $("true_exam_time").innerHTML = sh + ":" + sm + ":" + ss + ":" + mss;
     
     colse_or_open_block(current_time);
     // 清除上一次的定时器
-    window.clearInterval(timer);
+//    window.clearInterval(timer);
     // 启动新的定时器
-    timer = window.setInterval("onTimer()", nextelapse);
+//    timer = window.setInterval("onTimer()", nextelapse);
 }
 
 //打开模块和关闭答案
@@ -724,7 +730,7 @@ function colse_or_open_block(current_time) {
 
 //用来5分钟存储的定时器
 function local_save_start() {
-    local_timer = window.setInterval("local_save()", 100);
+    local_timer = window.setInterval("local_save()", 99);
 }
 
 //5分钟存储函数
@@ -758,7 +764,7 @@ function local_save() {
     // 清除上一次的定时器
     window.clearInterval(local_timer);
     // 启动新的定时器
-    local_timer = window.setInterval("local_save()", 100);
+    local_timer = window.setInterval("local_save()", 99);
 }
 
 //用来判断获取数据的类型
@@ -895,18 +901,18 @@ function question_value(question_id, problem_id) {
             $("answer_" + question_id).value = answer.value;
         }
     }// else {
-//        var place_num = 1;
-//        var str = document.getElementById("question_" + problem_id).innerHTML;
-//        while(str.indexOf("problem_" + problem_id + "_dropplace_" + place_num) >= 0) {
-//            if ($("answer_" + question_id).value == "") {
-//                $("answer_" + question_id).value = $("problem_" + problem_id + "_dropplace_" + place_num).innerHTML;
-//            } else {
-//                $("answer_" + question_id).value += ";|;" + $("problem_" + problem_id + "_dropplace_" + place_num).innerHTML;
-//            }
-//            is_answer = true;
-//            place_num ++ ;
-//        }
-//    }
+    //        var place_num = 1;
+    //        var str = document.getElementById("question_" + problem_id).innerHTML;
+    //        while(str.indexOf("problem_" + problem_id + "_dropplace_" + place_num) >= 0) {
+    //            if ($("answer_" + question_id).value == "") {
+    //                $("answer_" + question_id).value = $("problem_" + problem_id + "_dropplace_" + place_num).innerHTML;
+    //            } else {
+    //                $("answer_" + question_id).value += ";|;" + $("problem_" + problem_id + "_dropplace_" + place_num).innerHTML;
+    //            }
+    //            is_answer = true;
+    //            place_num ++ ;
+    //        }
+    //    }
     return is_answer;
 }
 
@@ -979,13 +985,13 @@ function local_storage_answer() {
 //每隔5分钟自动存储答卷内容
 function add_to_db(arr) {
     var examination_id = $("examination_id").value;
-    new Ajax.Updater("remote_div", "/user/examinations/"+ examination_id +"/five_min_save",
+    new Ajax.Request("/user/examinations/"+ examination_id +"/five_min_save",
     {
         asynchronous:true,
         evalScripts:true,
         method:"post",
         onComplete:function(request){
-            reload_local_save()
+            reload_local_save();
         },
         parameters:"arr="+ arr +"&authenticity_token=" + encodeURIComponent('BgLpQ3SADBr4tuiYZOJeoOvY4VOHogJvqQEpMwYVBM4=')
     });
@@ -995,7 +1001,15 @@ function add_to_db(arr) {
 //重新执行5分钟倒计时
 function reload_local_save() {
     if (start != finish) {
-        local_start_time = "05:00:00";
+        if ($("true_exam_time").innerHTML == "不限时") {
+            start = "00:00:00:00";
+            $("exam_time").innerHTML = "不限时";
+        } else {
+            start = $("true_exam_time").innerHTML + ":00";
+            var all_time = $("true_exam_time").innerHTML.toString().split(":");
+            $("exam_time").innerHTML = all_time[0] + ":" + all_time[1];
+        }
+        local_start_time = "02:30:00";
         local_save_start();
     }
 }

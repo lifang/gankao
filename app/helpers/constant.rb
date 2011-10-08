@@ -28,7 +28,7 @@ module Constant
   BACK_SERVER_PATH = "http://localhost:3000"
   #项目文件目录
   PUBLIC_PATH = "#{Rails.root}/public"
-  BACK_PUBLIC_PATH = "f:/exam_app/public"
+  BACK_PUBLIC_PATH = "e:/exam_app/public"
   #试卷生成路径
   PAPER_PATH = BACK_SERVER_PATH+"/papers"
   #试卷服务器访问路径
@@ -59,11 +59,11 @@ module Constant
 
   #综合训练音频文件播放次数
   CANPLAYTIME={
-    "practice_2"=>3,
-    "practice_3"=>1,
-    "practice_4"=>3,
-    "practice_5"=>3,
-    "practice_6"=>3,
+    "practice_2"=>0,
+    "practice_3"=>0,
+    "practice_4"=>0,
+    "practice_5"=>0,
+    "practice_6"=>0,
   }
 
    #vip价格
@@ -72,6 +72,8 @@ module Constant
   #非vip能做综合训练的次数
   PRACTICES_COUNT = 5
 
+  #weibo账号
+  WEIBO_ID = 2359288352
   
   
 end

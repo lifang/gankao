@@ -1,3 +1,4 @@
+var ie_answer_hash=new Hash();    //在不支持本地存储的浏览器中，记录答案  if(!window.openDatabase){}使用
 
 var step=parseInt($("practice_type").value)-2;       //记录用户当前的进度
 var last_choose_question_id=0;   //记录当前选中的小题id
@@ -21,24 +22,7 @@ var question_result_color=0; //记录题目的颜色。默认为0；1为答对�
 function load_paper(practice_type) {
     setTimeout(function(){
         create_paper(practice_type);
-        var audios = document.getElementsByTagName("audio");
-        var audios_sum=audios.length;
-        if (!window.HTMLAudioElement) {
-            for(var i=0;i<audios_sum;i++){
-                var audio_id=audios[0].id;
-                var audio_src=audios[0].src.replace(server_path,back_server_path);
-                var audio_div = audios[0].parentNode;
-                audio_div.removeChild(audios[0]);     //removeChild之后，audios[0]被移除。所以下一个依然是audios[0]
-                if(!audio_src.indexOf("http:")>0){
-                    audio_src=back_server_path+audio_src;
-                }
-                audio_div.innerHTML+="<object><embed id='"+ audio_id +"' src='"+audio_src+"' autostart='false' hidden='true' type='audio/midi'></object>";
-            }
-        }else{
-            for(var i=0;i<audios_sum;i++){
-                audios[i].src=audios[i].src.replace(server_path,back_server_path);
-            }
-        }
+        fix_div_top=parseInt(document.getElementById("paper_navigation").childNodes[0].offsetTop);    // fix_top方法用，记录div初始的top。第三、第四类综合训练用
         load_switch=1;   //页面载入完成，设置load_switch=1 第五类综合训练使用到，控制程序流程有用。
     }, 500);
 
@@ -46,6 +30,9 @@ function load_paper(practice_type) {
 
 //创建综合训练
 function create_paper(practice_type) {
+    if(!window.openDatabase){
+        answer_hash=ie_answer_hash;
+    }
     $("paper_id").value = papers.paper.id;
     //    $("total_num").innerHTML = papers.paper.total_num;
     if (papers.paper.blocks != undefined && papers.paper.blocks.block != undefined) {
@@ -60,6 +47,27 @@ function create_paper(practice_type) {
     if(practice_type=="4"||practice_type=="5"){
         jQuery('.task3_li').height(jQuery('.task3_li > ul').height());
         load_navigation_color();
+        window.onscroll=function(){
+            fix_top("paper_navigation");
+        };
+    }
+    var audios = document.getElementsByTagName("audio");
+    var audios_sum=audios.length;
+    if (!window.HTMLAudioElement) {
+        for(var i=0;i<audios_sum;i++){
+            var audio_id=audios[0].id;
+            var audio_src=audios[0].src.replace(server_path,back_server_path);
+            var audio_div = audios[0].parentNode;
+            audio_div.removeChild(audios[0]);     //removeChild之后，audios[0]被移除。所以下一个依然是audios[0]
+            if(!audio_src.indexOf("http:")>0){
+                audio_src=back_server_path+audio_src;
+            }
+            audio_div.innerHTML+="<object><embed id='"+ audio_id +"' src='"+audio_src+"' autostart='false' hidden='true' type='audio/midi'></object>";
+        }
+    }else{
+        for(var i=0;i<audios_sum;i++){
+            audios[i].src=audios[i].src.replace(server_path,back_server_path);
+        }
     }
 }
 
@@ -140,9 +148,9 @@ function create_question_navigation(block_nav_div, question, innerHTML, problem_
                     block_nav_div.insertBefore(question_nav_div,null);
                     draggable_array.push(que_attrs[i]);
                 }
-                new Draggable(store_id,{
-                    revert:true
-                });
+                    new Draggable(store_id,{
+                        revert:true
+                    });
             }
         }  //创建可拖动的选项。
     }
@@ -545,6 +553,8 @@ function load_navigation_color(){
             drag_sum_array[change_index]+=1;
         }
     }
+//    alert(draggable_array);
+//    alert(drag_sum_array);
 }
 
 //用来判断获取数据的类型
@@ -620,7 +630,11 @@ display_answer_id=0;     //综合训练6用于设置显示答案的题号
 function generate_question_answer(question_id, problem_id, is_sure,practice_type) {
     $("question_sure_" + question_id).value = "" + is_sure;
     is_problem_answer(problem_id,practice_type);
-    save_question(question_id, is_sure);
+    if(window.openDatabase){
+        save_question(question_id, is_sure);
+    }else{
+        ie_answer_hash[question_id]=[$("answer_" + question_id).value,1];
+    }
     $("save_button_" + question_id).style.display = "none";
     if(practice_type=="6"){
         if(display_answer_id!=question_id&&display_answer_id!=0){
@@ -692,13 +706,6 @@ function question_value(question_id,practice_type) {
 
 //提交试卷之前判断试卷是否已经全部答对
 function generate_result_paper(paper_id,examination_id,practice_type) {
-    //    if(playing>0){
-    //        var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
-    //        flash_div.innerHTML = "<p>检测到音频正在播放中...请先停止</p>";
-    //        document.body.appendChild(flash_div);
-    //        show_flash_div();
-    //        return false;
-    //    }
     var all_question_ids = $("all_question_ids");
     if (all_question_ids != null && all_question_ids.value == "") {
         return true;
@@ -720,9 +727,14 @@ function generate_result_paper(paper_id,examination_id,practice_type) {
         check_answer=1;
         correct_sum=0;
         //    load_answer(paper_id,examination_id);
+        
         $("all_question_ids").value="";
         $("problem_ids").value="";
         $("block_ids").value="";
+        var blocks_childs_sum = $("blocks").childNodes.length;
+        for(var i=0;i<blocks_childs_sum;i++){
+            $("blocks").removeChild($("blocks").childNodes[blocks_childs_sum-i-1]);
+        }
         $("blocks").innerHTML="";
         draggable_array=new Array;
         drag_sum_array=new Array;
@@ -769,5 +781,17 @@ function load_answer(paper_id, examination_id) {
 function load_local_save(paper_id, examination_id) {
     if (paper_id != "" && examination_id != "" && getCookie('user_id') != "") {
         list_answer(getCookie('user_id'), paper_id, examination_id);
+    }
+}
+
+var fix_div_top=0;
+function fix_top(element_id){
+    if(parseInt(document.getElementById(element_id).childNodes[0].offsetTop-document.body.scrollTop)<0){
+        document.getElementById(element_id).childNodes[0].style.position="fixed";
+        document.getElementById(element_id).childNodes[0].style.top="0px";
+    }
+    if(document.body.scrollTop<fix_div_top){
+        document.getElementById(element_id).childNodes[0].style.position=document.getElementById(element_id).style.position;
+        document.getElementById(element_id).childNodes[0].style.top="";
     }
 }
