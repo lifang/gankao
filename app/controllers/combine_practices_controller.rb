@@ -19,10 +19,10 @@ class CombinePracticesController < ApplicationController
     if user_examinations.any?
       redirect_to "/user/combine_practices/#{user_examinations[0].examination_id}/start"
     else
-    can_practies = true
+#    can_practies = true
     practies_count = ExamUser.return_join_exam_count(Examination::TYPES[:PRACTICE], cookies[:user_id].to_i, params[:id].to_i)
-    can_practies = false unless is_vip? and practies_count < Constant::PRACTICES_COUNT
-    if can_practies
+#    can_practies = false unless is_vip? and practies_count < Constant::PRACTICES_COUNT
+#    if can_practies
       all_practies = Examination.return_exam_count(Examination::TYPES[:PRACTICE], params[:id].to_i)
       if all_practies <= practies_count
         flash[:notice] = "您的综合训练已经全部做完。"
@@ -36,10 +36,10 @@ class CombinePracticesController < ApplicationController
           redirect_to "/combine_practices/#{params[:id]}"
         end
       end
-    else
-      flash[:error] = "您只能参与#{Constant::PRACTICES_COUNT}次综合训练，如果您想参与更多，请升级为VIP"
-      redirect_to "/combine_practices/#{params[:id]}"
-    end
+#    else
+#      flash[:error] = "您只能参与#{Constant::PRACTICES_COUNT}次综合训练，如果您想参与更多，请升级为VIP"
+#      redirect_to "/combine_practices/#{params[:id]}"
+#    end
     end
   end
 

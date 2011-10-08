@@ -7,7 +7,11 @@ module UserRoleHelper
     else
       cookies[:is_vip] = false
     end if cookies[:is_vip].nil?
-    return cookies[:is_vip]
+    if cookies[:is_vip]=="true"
+      return true
+    else
+      return false
+    end
   end
 
   

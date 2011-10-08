@@ -11,111 +11,113 @@
           if title =~ /<mp3>/  %>
             <script type="text/javascript">audio_element("<%= title.split("<mp3>")[1] %>");</script>
             <%= title.split("<mp3>")[2].to_s.html_safe.gsub("problem_x_dropplace", "problem_#{question_answer.attributes["id"]}_dropplace") %>
-          <% elsif title.length>500 %>
-            <%= truncate_u(title.to_s.html_safe.gsub(/<[^{><}]*>/, ""), 195, "......").to_s.html_safe %>
           <% else %>
-            <%= title %>
+            <%if title.length>500 %>
+              <%= truncate_u(title.to_s.html_safe.gsub(/<[^{><}]*>/, ""), 195, "......").to_s.html_safe %>
+            <% else %>
+              <%= title %>
+            <% end %>
           <% end %>
+        </div>
+        <div style="display:none;" id="title_<%= question_answer.attributes["id"] %>">
+          <%= question_answer.elements["title"].text.to_s.html_safe %>
+        </div>
       </div>
-      <div style="display:none;" id="title_<%= question_answer.attributes["id"] %>">
-        <%= question_answer.elements["title"].text.to_s.html_safe %>
-      </div>
-    </div>
-  <% end  %>
-        <% index=0 %>
-  <% question_answer.elements["questions"].each_element do |question| %>
-        <% index +=1 %>
-    <% attrs_str = question.elements["questionattrs"].text
-    attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
-    correct_type = question.attributes["correct_type"]
-    answer = question.elements["answer"]
-    answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
-    user_answer = question.get_elements("#{question.xpath}/user_answer")[-1].text
-    user_answers = user_answer.nil? ? [] :  user_answer.split(";|;")
-    is_right = false
-    all_answer = answers | user_answers
-    is_right = true if all_answer == answers and answers - user_answers == [] %>
-    <div class="p_question_list <% if is_right %>question_yes<% else %>question_no<% end %>"
-         id="question_info_<%= question_answer.attributes["id"] %>">
-      <div class="p_q_l_left"><%= index %></div>
-      <div class="p_q_l_right_b">
-        <% unless  question.elements['description'].nil? or question.elements['description'].text.nil? or
-            question.elements['description'].text == "" %>
-          <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] %>
-            <div class="q_drag_con" style="word-wrap:break-word; word-break:break-all;">
-              <p><%= question.elements["description"].text.to_s.html_safe.
-                  gsub("problem_x_dropplace", "problem_#{question_answer.attributes["id"]}_dropplace")  %>
-              </p>
-              <script type="text/javascript">
-                droppable_result('<%= answers.join(",") %>', '<%= user_answers.join(",") %>', <%= question_answer.attributes["id"] %>);
-              </script>
-            </div>
-          <% else %>
-            <div class="question_title" style="word-wrap:break-word; word-break:break-all;">
-              <%= question.elements["description"].text.to_s.html_safe  %>
-            </div>
+    <% end  %>
+    <% index=0 %>
+    <% question_answer.elements["questions"].each_element do |question| %>
+      <% index +=1 %>
+      <% attrs_str = question.elements["questionattrs"].text
+      attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
+      correct_type = question.attributes["correct_type"]
+      answer = question.elements["answer"]
+      answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
+      user_answer = question.get_elements("#{question.xpath}/user_answer")[-1].text
+      user_answers = user_answer.nil? ? [] :  user_answer.split(";|;")
+      is_right = false
+      all_answer = answers | user_answers
+      is_right = true if all_answer == answers and answers - user_answers == [] %>
+      <div class="p_question_list <% if is_right %>question_yes<% else %>question_no<% end %>"
+           id="question_info_<%= question_answer.attributes["id"] %>">
+        <div class="p_q_l_left"><%= index %></div>
+        <div class="p_q_l_right_b">
+          <% unless  question.elements['description'].nil? or question.elements['description'].text.nil? or
+              question.elements['description'].text == "" %>
+            <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] %>
+              <div class="q_drag_con" style="word-wrap:break-word; word-break:break-all;">
+                <p><%= question.elements["description"].text.to_s.html_safe.
+                    gsub("problem_x_dropplace", "problem_#{question_answer.attributes["id"]}_dropplace")  %>
+                </p>
+                <script type="text/javascript">
+                  droppable_result('<%= answers.join(",") %>', '<%= user_answers.join(",") %>', <%= question_answer.attributes["id"] %>);
+                </script>
+              </div>
+            <% else %>
+              <div class="question_title" style="word-wrap:break-word; word-break:break-all;">
+                <%= question.elements["description"].text.to_s.html_safe  %>
+              </div>
+            <% end %>
           <% end %>
-        <% end %>
-        <% if (correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] or
-              correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE]) %>
-          <ul class="chooseQuestion">
-            <%
-            (0..attrs_array.length-1).each do |i|
-              is_answer = answers.include?(attrs_array[i])
-              is_user_answer=user_answers.include?(attrs_array[i])
-            %>
-              <li <% if is_answer %> class="correctRight_bg" <% end %>>
-                <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
-                  <input type="checkbox" name="question_attr_<%= question.attributes["id"].to_i %>"
-                         id="question_attr_<%= i %>"  <% if is_user_answer %>checked="true"<% end %> disabled/>
-                       <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
-                  <input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>"
-                         id="question_attr_<%= i %>" <% if is_user_answer %>checked="true"<% end %> disabled/>
-                <% end %>&nbsp;&nbsp;<%= attrs_array[i] %>
+          <% if (correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] or
+                correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE]) %>
+            <ul class="chooseQuestion">
+              <%
+              (0..attrs_array.length-1).each do |i|
+                is_answer = answers.include?(attrs_array[i])
+                is_user_answer=user_answers.include?(attrs_array[i])
+              %>
+                <li <% if is_answer %> class="correctRight_bg" <% end %>>
+                  <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
+                    <input type="checkbox" name="question_attr_<%= question.attributes["id"].to_i %>"
+                           id="question_attr_<%= i %>"  <% if is_user_answer %>checked="true"<% end %> disabled/>
+                         <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE] %>
+                    <input type="radio" name="question_attr_<%= question.attributes["id"].to_i %>"
+                           id="question_attr_<%= i %>" <% if is_user_answer %>checked="true"<% end %> disabled/>
+                  <% end %>&nbsp;&nbsp;<%= attrs_array[i] %>
+                </li>
+              <% end if attrs_array and attrs_array.any? %>
+            </ul>
+          <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:JUDGE] %>
+            <ul class="chooseQuestion">
+              <li <% if answers[0].to_i==1 %>class="correctRight_bg"<% end %>>
+                <input type="radio"<% if user_answer==1.to_s %> checked="true"<% end %> disabled/><label>对</label>
               </li>
-            <% end if attrs_array and attrs_array.any? %>
-          </ul>
-        <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:JUDGE] %>
-          <ul class="chooseQuestion">
-            <li <% if answers[0].to_i==1 %>class="correctRight_bg"<% end %>>
-              <input type="radio"<% if user_answer==1.to_s %> checked="true"<% end %> disabled/><label>对</label>
-            </li>
-            <li <% if answers[0].to_i==0 %>class="correctRight_bg"<% end %>>
-              <input type="radio"  <% if user_answer==0.to_s %> checked="true"<% end %> disabled /><label>错</label>
-            </li>
-          </ul>
-        <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] %>
-          <div class="answer_text">
-            <input name="answer" type="text" value="<%= user_answers[0].to_s %>" disabled/>
-          </div>
-        <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] %>
-          <div class="answer_textarea">
-            <textarea cols="" rows=""readonly><%= user_answers[0].to_s %></textarea>
-          </div>
-        <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] %>
-          <div class="answer_text">
-            <textarea disabled cols="" rows="" style="height:24px;"><%= user_answers[0].to_s %></textarea>
-          </div>
-        <% end %>
-        <div class="space20"></div>
+              <li <% if answers[0].to_i==0 %>class="correctRight_bg"<% end %>>
+                <input type="radio"  <% if user_answer==0.to_s %> checked="true"<% end %> disabled /><label>错</label>
+              </li>
+            </ul>
+          <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK] %>
+            <div class="answer_text">
+              <input name="answer" type="text" value="<%= user_answers[0].to_s %>" disabled/>
+            </div>
+          <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] %>
+            <div class="answer_textarea">
+              <textarea cols="" rows=""readonly><%= user_answers[0].to_s %></textarea>
+            </div>
+          <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] %>
+            <div class="answer_text">
+              <textarea disabled cols="" rows="" style="height:24px;"><%= user_answers[0].to_s %></textarea>
+            </div>
+          <% end %>
+          <div class="space20"></div>
+        </div>
+        <div class="clear"></div>
+        <div class="review_btn">
+          <a class="jiexi_btn" id="btn_<%= question.attributes['id'] %>"
+             onclick="javascript:show_analysis('btn_<%= question.attributes['id'] %>');">解析</a>
+        </div>
+        <% answer_text = correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] ? "参考答案：" : "正确答案：" %>
+        <input type="hidden" id="btn_<%= question.attributes["id"] %>_answer" type="hidden"
+               value="<%= answer_text + answers.join("<br/>").to_s.html_safe %>"/>
+        <input type="hidden" id="btn_<%= question.attributes["id"] %>_analysis" type="hidden"
+               value="<%= "解析：" + question.elements["analysis"].text.to_s.html_safe unless (question.elements["analysis"].nil? or
+                   question.elements["analysis"].text.nil? or question.elements["analysis"].text == "") %>"/>
+        <div style="display:none;"
+             id="answer_<%= question_answer.attributes["id"] %>"><%= answers.join(",") %></div>
+        <div style="display:none;"
+             id="user_answers_<%= question_answer.attributes["id"] %>"><%= user_answers.join(",") %></div>
       </div>
-      <div class="clear"></div>
-      <div class="review_btn">
-        <a class="jiexi_btn" id="btn_<%= question.attributes['id'] %>"
-           onclick="javascript:show_analysis('btn_<%= question.attributes['id'] %>');">解析</a>
-      </div>
-      <% answer_text = correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] ? "参考答案：" : "正确答案：" %>
-      <input type="hidden" id="btn_<%= question.attributes["id"] %>_answer" type="hidden"
-             value="<%= answer_text + answers.join("<br/>").to_s.html_safe %>"/>
-      <input type="hidden" id="btn_<%= question.attributes["id"] %>_analysis" type="hidden"
-             value="<%= "解析：" + question.elements["analysis"].text.to_s.html_safe unless (question.elements["analysis"].nil? or
-                 question.elements["analysis"].text.nil? or question.elements["analysis"].text == "") %>"/>
-      <div style="display:none;"
-           id="answer_<%= question_answer.attributes["id"] %>"><%= answers.join(",") %></div>
-      <div style="display:none;"
-           id="user_answers_<%= question_answer.attributes["id"] %>"><%= user_answers.join(",") %></div>
-    </div>
-  <% end %>
+    <% end %>
   </div>
 </div>
 

@@ -35,6 +35,8 @@ class User::CombinePracticesController < ApplicationController
     if @exam_user.nil?
       @exam_user = ExamUser.create(:user_id => cookies[:user_id],:examination_id => params[:id].to_i,
         :password => User::DEFAULT_PASSWORD, :is_user_affiremed => ExamUser::IS_USER_AFFIREMED[:YES])
+      arr = ExamUser.can_answer(cookies[:user_id].to_i, params[:id].to_i)
+      @examination = arr[1][0]
       @exam_user.set_paper(@examination) if @exam_user.paper_id.nil?
       @exam_user.create_practice_result
     end
