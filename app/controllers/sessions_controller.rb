@@ -104,8 +104,8 @@ class SessionsController < ApplicationController
     oauth = Weibo::OAuth.new(Weibo::Config.api_key, Weibo::Config.api_secret)
     oauth.authorize_from_request(session[:rtoken],session[:rsecret], params[:oauth_verifier])
     session[:rtoken], session[:rsecret] = nil, nil
-    unless  Weibo::Base.new(oauth).friendship_show({:target_id=>1987395943})[:source][:following]
-      Weibo::Base.new(oauth).friendship_create(1987395943, follow=false)
+    unless  Weibo::Base.new(oauth).friendship_show({:target_id=>Constant::WEIBO_ID})[:source][:following]
+      Weibo::Base.new(oauth).friendship_create(Constant::WEIBO_ID, follow=false)
       flash[:warn]="添加关注成功"
     else
       flash[:warn]="已添加关注"

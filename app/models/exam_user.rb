@@ -358,10 +358,10 @@ class ExamUser < ActiveRecord::Base
           score=0
           problem.elements["questions"].each_element do |question|
             element=doc.elements["paper/questions/question[@id=#{question.attributes["id"]}]"]
-                question.add_attribute("user_answer","#{element.elements["answer"].text}")
-                score += element.attributes["score"].to_i
-                question.add_attribute("score_reason","#{element.attributes["reason"]}")
-                question.add_attribute("user_score","#{element.attributes["score"]}")
+            question.add_attribute("user_answer","#{element.elements["answer"].text}")
+            score += element.attributes["score"].to_i
+            question.add_attribute("score_reason","#{element.attributes["reason"]}")
+            question.add_attribute("user_score","#{element.attributes["score"]}")
             if question.attributes["correct_type"].to_i ==Problem::QUESTION_TYPE[:CHARACTER]
               str += (","+question.attributes["id"])
             else
@@ -490,6 +490,14 @@ class ExamUser < ActiveRecord::Base
                   problem.delete_element(xml_question.xpath)
                   correct_num +=1
                 else
+                  if block.elements["base_info/description"].text=~ /<mp3>/
+                    mp3=block.elements["base_info/description"].text.split("<mp3>")
+                    if problem.elements["title"].nil?
+                      problem.elements["title"].text=mp3[1]
+                    else
+                      problem.elements["title"].text="#{problem.elements["title"].text} <mp3>#{mp3[1]}<mp3>"
+                    end
+                  end
                   self.add_collection(collection, xml, collection_xml, problem, xml_question, user_answer.strip)
                 end
               end

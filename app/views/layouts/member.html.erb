@@ -29,12 +29,11 @@
         <div class="head_box">
 
           <div class="member_nav">
-            你好，
-            <a href="/user/homes/<%= Category::TYPE_IDS[:english_fourth_level] %>">
+            Welcome,<a href="/user/homes/<%= Category::TYPE_IDS[:english_fourth_level] %>" class="signColor">
               <%= current_user.name if current_user %>
               <% if (is_vip?).to_s == "true" %><img src="/images/paper/V.png" /><% else %><img src="/images/paper/v0.png" /><% end %>
-            </a>
-            <a href="/users/<%= cookies[:user_id] %>/edit">会员中心</a>  |
+            </a>|
+            <a href="/users/<%= cookies[:user_id] %>/edit">个人中心</a>|
             <a href="/signout">退出</a>
           </div>
           <div class="member_logo"><img src="/images/paper/member_logo.png" /></div>

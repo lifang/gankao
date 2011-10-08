@@ -136,6 +136,7 @@ class ExamListsController < ApplicationController
     collection_problem=doc.elements["/collection/problems/problem[@id=#{params[:problem_id]}]"]
     collection_question=collection_problem.elements["questions/question[@id=#{params[:id]}]"]
     collection_question.add_element("note_text").add_text("#{params["note_text_#{params[:id]}"].strip}")
+    collection_question.add_element("created_at").add_text("#{Time.now.strftime("%Y-%m-%d %H:%M")}")
     if problem
       question = note.question_in_note(problem, params[:id])
       if question
