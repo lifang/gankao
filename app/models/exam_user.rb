@@ -490,18 +490,6 @@ class ExamUser < ActiveRecord::Base
                   problem.delete_element(xml_question.xpath)
                   correct_num +=1
                 else
-                  if block.elements["base_info/description"].text=~ /<mp3>/
-                    mp3=block.elements["base_info/description"].text.split("<mp3>")
-                    unless problem.elements["title"].nil?
-                      if problem.elements["title"].text.nil?
-                        problem.elements["title"].text=mp3[1]
-                      else
-                        problem.elements["title"].text="#{problem.elements["title"].text} <mp3>#{mp3[1]}<mp3>"
-                      end
-                    else
-                       problem.add_element("title").add_text("#{mp3[1]}")
-                    end
-                  end
                   self.add_collection(collection, xml, collection_xml, problem, xml_question, user_answer.strip)
                 end
               end
