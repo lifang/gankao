@@ -5,11 +5,10 @@ class User::HomesController < ApplicationController
 
   def show
     @simulations = Examination.find_by_sql("select * from examinations where types = #{Examination::TYPES[:SIMULATION]}
-      and is_published = #{Examination::IS_PUBLISHED[:ALREADY]} and category_id = #{params[:id].to_i} order by created_at")
+      and is_published = #{Examination::IS_PUBLISHED[:ALREADY]} and category_id = #{params[:id].to_i} order by created_at desc")
     @hash1 = Examination.exam_users_hash(cookies[:user_id], Examination::TYPES[:SIMULATION], params[:id].to_i)
     @simulations.each do |simulation|
-      @simulations = @simulations - [simulation] if (!@hash1.keys.include?(simulation.id.to_s) and
-          simulation.status == Examination::STATUS[:CLOSED])
+      @simulations = @simulations - [simulation] if !@hash1.include?(simulation.id) and simulation.status == Examination::STATUS[:CLOSED]
     end unless @hash1.empty?
     @all_examinations = Examination.find_by_sql("select count(types) sums, types from examinations
       where is_published = #{Examination::IS_PUBLISHED[:ALREADY]} and category_id = #{params[:id].to_i}

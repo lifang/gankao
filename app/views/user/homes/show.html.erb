@@ -10,7 +10,12 @@
       </div>
       <div class="per_btn">
         <% if @hash1["#{@simulations[0].id}"].nil? %>
-          <a href="/user/examinations/<%= @simulations[0].id %>/do_exam" target="_blank">进入考场</a>
+          <% if (!@simulations[0].start_at_time.nil? and !@simulations[0].exam_time.nil? and @simulations[0].exam_time !=0 and
+                (@simulations[0].start_at_time + @simulations[0].exam_time.minutes) < Time.now) or @simulations[0].status == Examination::STATUS[:CLOSED] %>
+            <a>考试已结束</a>
+          <% else %>
+            <a href="/user/examinations/<%= @simulations[0].id %>/do_exam" target="_blank">进入考场</a>
+          <%end%>
         <% elsif @hash1["#{@simulations[0].id}"].total_score.nil? %>
           <p style="font-size:70%;color:red;font-weight: bold;margin-left: 80px;">阅卷中...</p>
         <% else %>
