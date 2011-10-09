@@ -298,7 +298,7 @@ img { border: none;}
 
 
 /*选择题-------*/
-.chooseQuestion { line-height: 24px; font-size: 12px;}
+.chooseQuestion { font-size: 12px;}
 .chooseQuestion li { height: 24px;}
 
 .correctRight_bg { background: #d0eeff;}
@@ -496,8 +496,6 @@ img { border: none;}
 /*综合训练1*/
 
 .question_title { line-height: 24px; padding-left: 20px; height: 1%; font-weight: bold; border-bottom: 1px #CCC dashed;}
-.chooseQuestion { line-height: 24px; font-size: 12px;}
-.chooseQuestion li { height: 24px;}
 
 /*综合训练2*/
 

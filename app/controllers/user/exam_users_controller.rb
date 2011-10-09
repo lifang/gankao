@@ -7,7 +7,7 @@ class User::ExamUsersController < ApplicationController
     @exam = ExamUser.find_by_id(params[:id].to_i)
 #    begin
       @examination = Examination.find(@exam.examination_id)
-      @doc = ExamRater.open_file("#{Constant::PUBLIC_PATH}/#{self.answer_sheet_url}")
+      @doc = ExamRater.open_file("#{Constant::PUBLIC_PATH}/#{@exam.answer_sheet_url}")
       @xml = ExamUser.show_result(@exam.paper_id, @doc)
       render :layout=>"show_paper"
 #    rescue
