@@ -22,7 +22,7 @@
                   <%if title.length>500 %>
                     <%= truncate_u(title.to_s.html_safe.gsub(/<[^{><}]*>/, ""), 195, "......").to_s.html_safe %>
                   <% else %>
-                    <%= title %>
+                    <%= title.to_s.html_safe %>
                   <% end %>
                 <% end %>
               </div>

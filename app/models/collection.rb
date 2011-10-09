@@ -127,6 +127,18 @@ class Collection < ActiveRecord::Base
         paper_xml.delete_element(question.xpath)
       end
     end if paper_problem
+    mp3 = paper_xml.elements["#{problem_path.split("/problems")[0]}/base_info/description"].text
+    if mp3 =~ /<mp3>/
+      unless paper_problem.elements["title"].nil?
+        if paper_problem.elements["title"].text.nil?
+          paper_problem.elements["title"].text="<mp3>#{mp3.split("<mp3>")[1]}<mp3>"
+        else
+          paper_problem.elements["title"].text="#{paper_problem.elements["title"].text} <mp3>#{mp3.split("<mp3>")[1]}<mp3>"
+        end
+      else
+        paper_problem.add_element("title").add_text("<mp3>#{mp3.split("<mp3>")[1]}<mp3>")
+      end
+    end
     last_question = paper_problem.elements["questions"].elements["question[@id='#{question_id.to_i}']"]
     last_question.elements["tags"].text="#{last_question.elements["tags"].text} 所有分类" unless last_question.elements["tags"].nil?
     last_question.add_element("user_answer").add_text("#{answer_text}")
@@ -148,19 +160,6 @@ class Collection < ActiveRecord::Base
   def hand_add_problem(question_id, paper_url, question_answer, problem_path, collection_doc)
     paper_xml = ExamRater.open_file("#{Constant::BACK_PUBLIC_PATH}#{paper_url}")
     paper_problem = paper_xml.elements["#{problem_path}"]
-    doc=problem_path.split("/problems")[0]
-    mp3=paper_xml.elements["#{doc}/base_info/description"].text
-    if mp3=~ /<mp3>/
-      unless paper_problem.elements["title"].nil?
-        if paper_problem.elements["title"].text.nil?
-          paper_problem.elements["title"].text = "<mp3>#{mp3.split("<mp3>")[1]}<mp3>"
-        else
-          paper_problem.elements["title"].text="#{paper_problem.elements["title"].text} <mp3>#{mp3.split("<mp3>")[1]}<mp3>"
-        end
-      else
-        paper_problem.add_element("title").add_text("<mp3>#{mp3.split("<mp3>")[1]}<mp3>")
-      end
-    end
     paper_problem.elements["questions"].each_element do |question|
       question.elements["tags"].text="#{question.elements["tags"].text} 我的关注" unless question.elements["tags"].nil?
     end
