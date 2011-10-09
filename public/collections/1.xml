@@ -329,7 +329,7 @@ asf
             <category>1</category>
             <questions>
                         
-                <question correct_type='1' error_percent='0' id='69' repeat_num='9' score='3'>
+                <question correct_type='1' error_percent='0' id='69' repeat_num='10' score='3'>
                     <description>11</description>
                     <answer>11;|;111111</answer>
                     <questionattrs>1;-;11;-;1111;-;111111;-;11111111</questionattrs>
@@ -343,16 +343,16 @@ asf
                     <user_answer>1</user_answer>
                     <user_answer>1</user_answer>
                     <user_answer>1;|;1111</user_answer>
-                </question>
+                <user_answer/></question>
                         
-                <question correct_type='2' error_percent='14' id='70' repeat_num='7' score='6'>
+                <question correct_type='2' error_percent='13' id='70' repeat_num='8' score='6'>
                     <description>1111111</description>
                     <answer>1</answer>
                     <questionattrs/>
                     <tags> 手动添加</tags>
                     <user_answer>1</user_answer>
-                </question>
-                <question correct_type='0' error_percent='13' id='68' repeat_num='8' score='11'>
+                <user_answer/></question>
+                <question correct_type='0' error_percent='11' id='68' repeat_num='9' score='11'>
                     <description>11111</description>
                     <answer>111</answer>
                     <questionattrs>1;-;11;-;111;-;1111</questionattrs>
@@ -363,7 +363,7 @@ asf
                     <user_answer>1</user_answer>
                     <user_answer>11</user_answer>
                     <user_answer>11</user_answer>
-                </question>
+                <user_answer/></question>
             </questions>
         </problem>
         <problem id='76' score='145' types='6'>
@@ -540,27 +540,27 @@ asf
             <title>如果人生就像一出折子戏，把嘴璀璨的部分留给__?</title>
             <category>1</category>
             <questions>
-                <question correct_type='3' error_percent='0' id='64' repeat_num='1' score='10'>
+                <question correct_type='3' error_percent='0' id='64' repeat_num='2' score='10'>
                     <answer>你</answer>
                     <analysis/>
                     <questionattrs/>
                     <tags> 所有分类</tags>
                     <user_answer>ddddddddddddddd</user_answer>
-                </question>
+                <user_answer/></question>
             </questions>
         </problem>
         <problem id='54' score='5' types='4'>
             <title>忘记吧，我们的昨天，泪水已经将那段记忆淹没，再也拾不起</title>
             <category>1</category>
             <questions>
-                <question correct_type='3' error_percent='0' id='65' repeat_num='2' score='5'>
+                <question correct_type='3' error_percent='0' id='65' repeat_num='3' score='5'>
                     <description>是昨天我们包头痛苦吗？</description>
                     <answer>在那生与死的边缘，我们忘记了</answer>
                     <questionattrs/>
                     <tags> 所有分类</tags>
                     <user_answer>ssssssssssssssss</user_answer>
                     <user_answer>llllllllllllllllllllllllllllllllll</user_answer>
-                </question>
+                <user_answer/></question>
             </questions>
         </problem>
         
@@ -1549,7 +1549,66 @@ mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA&quot;
                             </analysis>
                             <questionattrs>A) It allows him to make a lot of friends.;-;B) It requires him to work long hours.;-;C) It enables him to apply theory to practice.;-;D) It helps him understand people better.</questionattrs>
                             <tags> 我的关注 所有分类</tags>
-                        <user_answer></user_answer></question></questions>
+                        <user_answer/></question></questions>
+                </problem><problem id='50' score='10' types='0'>
+                    <title>是情愿迷漫了我的双眼，是空中飞的风筝系住了你的相思。</title>
+                    <category>1</category>
+                    <questions>
+                        <question correct_type='0' error_percent='0' id='61' repeat_num='1' score='10'>
+                            <answer>东方</answer>
+                            <analysis/>
+                            <questionattrs>东方;-;无语;-;在天下;-;蓝高中</questionattrs>
+                            <tags> 所有分类</tags>
+                        <user_answer/></question>
+                    </questions>
+                </problem><problem id='51' score='10' types='1'>
+                    <title>把这段感情故事拍成电影</title>
+                    <category>1</category>
+                    <questions>
+                        <question correct_type='1' error_percent='0' id='62' repeat_num='1' score='10'>
+                            <answer>白;|;黑</answer>
+                            <analysis/>
+                            <questionattrs>白;-;不白;-;黑;-;真黑</questionattrs>
+                            <tags> 所有分类</tags>
+                        <user_answer/></question>
+                    </questions>
+                </problem><problem id='52' score='10' types='2'>
+                    <title>上演的苦与痛，悲与累都能让旁观的人暗自落泪</title>
+                    <category>1</category>
+                    <questions>
+                        <question correct_type='2' error_percent='0' id='63' repeat_num='1' score='10'>
+                            <answer>1</answer>
+                            <analysis/>
+                            <questionattrs/>
+                            <tags> 所有分类</tags>
+                        <user_answer/></question>
+                    </questions>
+                </problem><problem id='56' score='20' types='4'>
+                    <title>不要忘记那个清晨</title>
+                    <category>1</category>
+                    <questions>
+                        <question correct_type='1' error_percent='0' id='67' repeat_num='1' score='20'>
+                            <description>我曾陪你日出到黄昏，可泪水流下的却是创伤的妩媚？</description>
+                            <answer>得到;|;忘记</answer>
+                            <questionattrs>得到;-;还是;-;忘记;-;我同意</questionattrs>
+                            <tags> 所有分类</tags>
+                        <user_answer/></question>
+                    </questions>
+                </problem><problem id='113' score='0' types='5'>
+                    <title>Directions： For this part， you are allowed 30 minutes to write a short essay on the topic of Due Attention Should Be Given To Spelling. You should write at least 120 words following the outline given below：
+　&lt;div&gt;　1. 如今不少学生在英语学习中不重视拼写
+　&lt;/div&gt;&lt;div&gt;　2. 出现这种情况的原因
+　&lt;/div&gt;&lt;div&gt;　3. 为了改变这种状况，我认为…&lt;/div&gt;
+                    </title>
+                    <category>2</category>
+                    <questions>
+                        <question correct_type='5' error_percent='0' id='713' repeat_num='1' score='0'>
+                            <answer>范文：Correct spelling is a basic skill in English study. However， nowadays many students do not pay much attention to it. They have their own reasons for misspelling. First of all， they like an easy way of studying， which causes some omissions and changes in spelling. Second， the teachers might not be very strict in students&apos; spelling. In China， teachers seem to be more concerned with grammar and vocabulary but not spelling. To change this situation， in my opinion， the teachers and the students should work together. On one hand， the teachers should give more attention to students&apos; spelling， asking the students to be conscious of the importance of correct spelling from the very beginning of their English study. On the other hand， the students themselves are supposed to be aware that correct spelling is a must in English study. To sum up， correct spelling is so important that both students and the teachers should spare no efforts to achieve correct spelling.</answer>
+                            <analysis/>
+                            <questionattrs/>
+                            <tags> 我的关注 所有分类</tags>
+                        <user_answer></user_answer></question>
+                    </questions>
                 </problem></problems>
 </collection>
 
