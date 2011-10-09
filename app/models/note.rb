@@ -104,6 +104,7 @@ class Note < ActiveRecord::Base
     paper_problem.elements["questions"].each_element do |question|
       paper.delete_element(question.xpath) if question.attributes["id"].to_i != question_id.to_i
     end if paper_problem
+    add_audio_to_title(paper, paper_problem)
     last_question = paper_problem.elements["questions"].elements["question[@id='#{question_id.to_i}']"]
     user_answer = (question_answer and question_answer.text) ? question_answer.text : ""
     last_question.add_element("user_answer").add_text("#{user_answer}")
@@ -111,6 +112,22 @@ class Note < ActiveRecord::Base
     last_question.add_element("created_at").add_text("#{Time.now.strftime("%Y-%m-%d %H:%M")}")
     note_doc.elements["/note/problems"].elements.add(paper_problem)
     self.save_xml(note_doc)
+  end
+
+  #根据问题的路径取出block中的音频文件
+  def add_audio_to_title(paper_xml, problem)
+    block_audio = ""
+    block_path = problem.xpath.split("/problems")[0]
+    block = paper_xml.elements["#{block_path}"]
+    if !block.nil? and !block.elements["base_info"].elements["description"].nil? and
+        block.elements["base_info"].elements["description"].text.to_s.html_safe =~ /<mp3>/
+      block_audio = block.elements["base_info"].elements["description"].text.to_s.html_safe.split("<mp3>")[1]
+      unless problem.elements["title"].nil?
+        problem.elements["title"].text = problem.elements["title"].text + "<mp3>" + block_audio + "<mp3>"
+      else
+        problem.add_element("title").add_text("<mp3>#{block_audio}<mp3>")
+      end
+    end
   end
 
   #查询试题

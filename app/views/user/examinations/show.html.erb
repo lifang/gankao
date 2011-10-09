@@ -50,19 +50,15 @@
 <script type="text/javascript">
   //考试时间定时器所需变量
   var timer = null;
-  var normalelapse = 99;
-  var nextelapse = normalelapse;
-  var start = "";
+  var start = null;
   //模块定时和考试定时
   var is_fix_time = false;
   var block_start_hash = null;
   var block_end_hash = null;
-  var finish = "00:00:00:00";
 
-  //本地存储所需变量finish
+  //本地存储所需变量
   var local_timer = null;
-  var local_start_time = "02:30:00";
-  var local_finish_time = "00:00:00";
+  var local_start_time = 300;
 
   //根据用户的字符长度更改文本域宽度
   var change_length = null;
@@ -71,9 +67,6 @@
   var answer_hash = null;
   //load已有的答案
   load_answer('<%= @exam_user.paper_id %>', '<%= @examination.id %>');
-
-  //定时模块完成定时器
-  var load_fix_time = null;
 
   //页面load成功之后加载试卷
   window.onload(load_paper());

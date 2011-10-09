@@ -127,8 +127,8 @@ class Collection < ActiveRecord::Base
         paper_xml.delete_element(question.xpath)
       end
     end if paper_problem
-    mp3=paper_xml.elements["#{problem_path.split("/problems")[0]}/base_info/description"].text
-    if mp3=~ /<mp3>/
+    mp3 = paper_xml.elements["#{problem_path.split("/problems")[0]}/base_info/description"].text
+    if mp3 =~ /<mp3>/
       unless paper_problem.elements["title"].nil?
         if paper_problem.elements["title"].text.nil?
           paper_problem.elements["title"].text="<mp3>#{mp3.split("<mp3>")[1]}<mp3>"
