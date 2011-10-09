@@ -3,16 +3,34 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>笔记---弹出框</title>
+    <script type="text/javascript" src="/javascripts/jquery-1.5.2.js"></script>
+    <script type="text/javascript">
+      jQuery.noConflict();
+    </script>
     <link href="/stylesheets/style.css" rel="stylesheet" type="text/css" />
     <%= javascript_include_tag "/javascripts/answer_sheet.js" %>
+    <link href="/stylesheets/jplayer/jplayer.blue.monday.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/javascripts/jplayer/jquery.jplayer.min.js"></script>
   </head>
   <body>
     <div class="allText">
       <h2>问题全文</h2>
-        <p id="content"></p>
+      <input type="hidden" id="problem_title" value=""/>
+      <p id="content"></p>
     </div>
   </body>
 </html>
 <script type="text/javascript">
-  window.onload(generate_dialog_html(<%= params[:id] %>));
+  function create_element() {
+    var date_start = new Date();
+    generate_dialog_html(<%= params[:id] %>);
+    var date_end = new Date();
+    var problem_title = "<%= Constant::BACK_SERVER_PATH %>" + document.getElementById("problem_title").value;
+    
+    setTimeout(function(){
+      generate_jplayer(problem_title, <%= params[:id] %>);
+    }, date_end - date_start + 10);
+  }
+  
+  window.onload(create_element());
 </script>

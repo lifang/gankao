@@ -445,7 +445,7 @@ function question_values(question_id) {
         var attr = document.getElementsByName("question_attr_" + question_id);
         if (attr != null) {
             for (var i=0; i<attr.length; i++) {
-                if (attr[i].checked == true) {
+                if (attr[i] != null && attr[i].checked == true) {
                     if ($("answer_" + question_id).value == "") {
                         $("answer_" + question_id).value = attr[i].value;
                     } else {

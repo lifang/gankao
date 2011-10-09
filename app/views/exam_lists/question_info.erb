@@ -17,9 +17,9 @@
                 <%  title = @problem.elements["title"].text
                 if title.length > 500
                   if title =~ /<mp3>/  %>
-                    <%= truncate_u(title.split("<mp3>")[2].to_s.html_safe.gsub(/<[^{><}]*>/, ""), 195, "......").to_s.html_safe %>
+                    <%= truncate_u(title.split("<mp3>")[2].to_s.html_safe.gsub(/<[^{><}]*>/, ""), 395, "......").to_s.html_safe %>
                   <% else %>
-                    <%= truncate_u(title.to_s.html_safe.gsub(/<[^{><}]*>/, ""), 195, "......").to_s.html_safe %>
+                    <%= truncate_u(title.to_s.html_safe.gsub(/<[^{><}]*>/, ""), 395, "......").to_s.html_safe %>
                   <% end
                 else
                   if title =~ /<mp3>/  %>

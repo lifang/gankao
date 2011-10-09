@@ -80,15 +80,26 @@ function check_note_form(question_id) {
 
 note_question_info_id = 0;
 //显示题目
-function note_question_info(id){
+function note_question_info(id){ 
     if(note_question_info_id != 0 && note_question_info_id != id){
         document.getElementById("question_info_" + note_question_info_id).style.display = "none";
         document.getElementById("show_note_" + note_question_info_id).style.display = "block";
         document.getElementById("hidden_note_" + note_question_info_id).style.display = "none";
+        if($("mp3_" + note_question_info_id) != null) {
+            $("mp3_" + note_question_info_id).removeChild($("ele_" + note_question_info_id));
+        }
     }
     document.getElementById("question_info_" + id).style.display = "block";
     document.getElementById("show_note_" + id).style.display = "none";
     document.getElementById("hidden_note_" + id).style.display = "block";
+    if ($("mp3_" + id) != null) {
+        var problem_title = $("mp3_value_" + id).value;
+        var ele = document.createElement("div");
+        ele.id = "ele_" + id;
+        ele.innerHTML = generate_audio_element(id);
+        $("mp3_" + id).appendChild(ele);
+        generate_jplayer(problem_title, id);
+    }
     note_question_info_id = id;
 }
 
@@ -102,21 +113,40 @@ function update_note(question_id) {
     $("note_" + question_id).style.display = "none";
 }
 
-function audio_element(problem_title) {
-    var final_title = generate_audio_element(problem_title);
+function audio_element(problem_title, flag_id) {
+    var final_title = generate_audio_element(flag_id);
     document.write(final_title);
+    generate_jplayer(problem_title, flag_id);
 }
 
-function generate_audio_element(problem_title) {
-    var final_title = "";
-    if (window.HTMLAudioElement) {
-        final_title = "<audio id='audio' controls='controls'><source src='"+ problem_title +
-        "' type='audio/mpeg'></audio>";
-    } else {
-        final_title = "<object><embed id='audio' src='"+ problem_title +
-        "' autostart='false' type='audio/midi'></object>";
-    }
+
+function generate_audio_element(flag_id) {
+    var final_title = "<div id='jquery_jplayer_"+flag_id+"' class='jp-jplayer'></div>"
+    + "<div id='jp_container_1' class='jp-audio'><div class='jp-type-single'><div class='jp-gui jp-interface'>"
+    + "<ul class='jp-controls'><li><a href='javascript:;' class='jp-play' tabindex='1'>play</a></li>"
+    + "<li><a href='javascript:;' class='jp-pause' tabindex='1'>pause</a></li>"
+    + "<li><a href='javascript:;' class='jp-stop' tabindex='1'>stop</a></li>"
+    + "<li><a href='javascript:;' class='jp-mute' tabindex='1' title='mute'>mute</a></li>"
+    + "<li><a href='javascript:;' class='jp-unmute' tabindex='1' title='unmute'>unmute</a></li>"
+    + "<li><a href='javascript:;' class='jp-volume-max' tabindex='1' title='max volume'>max volume</a></li></ul>"
+    + "<div class='jp-progress'><div class='jp-seek-bar'><div class='jp-play-bar'></div></div></div>"
+    + "<div class='jp-volume-bar'><div class='jp-volume-bar-value'></div></div></div></div></div>";
     return final_title;
+}
+
+function generate_jplayer(problem_title, flag_id) {
+    (function(){
+        jQuery("#jquery_jplayer_"+flag_id).jPlayer({
+            ready: function (event) {
+                jQuery(this).jPlayer("setMedia", {
+                    mp3:""+problem_title
+                });
+            },
+            swfPath: "/javascripts/jplayer",
+            supplied: "mp3",
+            wmode: "window"
+        });
+    })(jQuery)
 }
 
 function droppable_element(problem_title, problem_id) {
@@ -175,7 +205,7 @@ function generate_dialog_html(id) {
     var title = window.opener.document.getElementById("title_"+id).innerHTML;
     var answers = window.opener.document.getElementById("answer_" + id).innerHTML;
     var user_answers = window.opener.document.getElementById("user_answers_" + id).innerHTML;
-    var audio_title = show_title_for_note(title);
+    var audio_title = show_title_for_note(title, id);
     var final_title = audio_title.replace(/problem_x_dropplace/g, "problem_"+ id +"_dropplace");
     document.getElementById("content").innerHTML = final_title;
     replace_droppable_element(window, answers.replace(/<[^{><}]*>/g, ","), user_answers, id);
@@ -183,17 +213,18 @@ function generate_dialog_html(id) {
 
 
 
-function show_title_for_note(title) {
+function show_title_for_note(title, id) {
     var titles = title.replace(/<\/mp3>/g, "").split("<mp3>");
     var audio_title = "";
     var leving_title = "";
     if (titles.length > 1) {
-        audio_title = generate_audio_element(titles[1]);
-        leving_title = titles[2];
+        audio_title = generate_audio_element(id);
+        document.getElementById("problem_title").value = titles[1];
+        leving_title = titles[0];
     } else {
         leving_title = titles;
     }
-    return audio_title + leving_title;
+    return leving_title + audio_title;
 }
 
 function replace_droppable_element(this_window, answers, user_answers, problem_id) {

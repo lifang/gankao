@@ -4,7 +4,7 @@ include REXML
 namespace :check do
   desc "rate paper"
   task(:title => :environment) do
-    file_path="e:/exam_app/public/papers"
+    file_path="#{Constant::BACK_PUBLIC_PATH}/papers"
     def traverse_dir(file_path)
       if File.directory? file_path
         Dir.foreach(file_path) do |file|
@@ -24,7 +24,7 @@ namespace :check do
     def modify_tag(block,type)
       block.get_elements("problems//questions/question").each do |question|
         question.elements["tags"].text="#{question.elements["tags"].text} #{type}" unless question.elements["tags"].text=~ /#{type}/
-      end
+      end unless block.get_elements("problems//questions/question").nil?
     end
 
     traverse_dir(file_path){|f|
