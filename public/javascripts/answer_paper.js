@@ -25,18 +25,14 @@ function get_exam_time(){
 //加载是否是定时考试
 function load_exam_tiem(time) {
     if (time == "不限时") {
-        start = "00:00:00:00";
+        start = 0;
         $("exam_time").innerHTML = "不限时";
     } else {
-//        alert(time);
-        time = new Number(time);
-        alert((time/3600) + ":" + ((time%3600)/60) + ":" + (time%3600%60));
-        var show_time = Math.floor(time/3600) + ":" + Math.floor((time%3600)/60) + ":" + Math.floor(time%3600%60);
-//        alert(show_time);
-        var all_time = show_time.toString().split(":");
-        $("exam_time").innerHTML = all_time[0] + ":" + all_time[1];
-        start = show_time + ":00";
-//        alert(start);
+        time = Math.round(time*10)/10;
+        var h = Math.floor(time/3600) < 10 ? ("0" + Math.floor(time/3600)) : Math.floor(time/3600);
+        var m = Math.floor((time%3600)/60) < 10 ? ("0" + Math.floor((time%3600)/60)) : Math.floor((time%3600)/60);
+        $("exam_time").innerHTML = h + ":" + m;
+        start = time;
         is_fix_time = true;
         block_start_hash = $H({});
         block_end_hash = $H({});
@@ -142,15 +138,16 @@ function create_block(bocks_div, block) {
         block_nav_div.appendChild(create_element("div", null, null, "clear", null, "innerHTML"));
     }
     if (block_block_flag == 0 && (is_fix_time == false || (is_fix_time && (block_start_hash.get(block.id) == ""
-        || (return_giving_time(block_start_hash.get(block.id)) >= return_giving_time(start) &&
+        || (return_giving_time(block_start_hash.get(block.id)) >= start &&
             (block_end_hash.get(block.id) == "" ||
-                return_giving_time(block_end_hash.get(block.id)) < return_giving_time(start))))))) {
+                return_giving_time(block_end_hash.get(block.id)) < start)))))) {
         open_block_nav(block.id);
         block_block_flag = 1;
     }
     next_last_index(block.id, block_div);
 }
 
+//上一部分、下一部分
 function next_last_index(block_id, block_div) {
     if ($("block_ids") != null && $("block_ids").value != "") {
         var block_ids = $("block_ids").value.split(",");
@@ -196,14 +193,14 @@ function return_block_exam_time(block_id, start_time, time) {
         var m = new Number(t[1]);
         var sh = h < 10 ? ("0" + h) : h;
         var sm = m < 10 ? ("0" + m) : m;
-        b_start_time = sh + ":" + sm + ":00:00";
+        b_start_time = sh + ":" + sm + ":00";
         if (time != "" && time != "0") {
             var total_m = h * 60 + m - new Number(time);
             h = (total_m >= 60) ? Math.floor(total_m/60) : 0;
             m = (total_m >= 60) ? new Number(total_m%60) : total_m;
             var eh = h < 10 ? ("0" + h) : h;
             var em = m < 10 ? ("0" + m) : m;
-            end_time = eh + ":" + em + ":00:00";
+            end_time = eh + ":" + em + ":00";
         }
     }
     block_start_hash.set(block_id, b_start_time);
@@ -244,14 +241,14 @@ function close_block_nav(block_id) {
 function return_giving_time(time) {
     var times =  time.split(":");
     var ss = new Number(times[2]) + (new Number(times[1])) * 60 + (new Number(times[0])) * 3600;
-    var sms = new Number(times[3]);
-    return ss * 100 + sms;
+    return ss;
 }
 
 //手动打开模块
 function hand_open_nav(block_id) {
     if (is_fix_time) {
-        var fs = return_giving_time(start);
+        //        var fs = return_giving_time(start);
+        var fs = start;
         var flash_div = null;
         var bs = null;
         var end_time_flag = false;
@@ -594,8 +591,6 @@ function create_single_question(que_div, question, drag_li_arr) {
         }
         que_div.appendChild(attr1);
     }
-    
-    
 }
 
 //创建按钮已经答案区域
@@ -629,16 +624,16 @@ function create_element(element, name, id, class_name, type, ele_flag) {
 
 //显示考试倒计时
 function show_exam_time() {
-    // nextelapse是定时时间, 初始时为100毫秒
-    // 注意setInterval函数: 时间逝去nextelapse(毫秒)后, onTimer才开始执行
-    if (start != "00:00:00:00") {
-        timer = window.setInterval("onTimer()", 100);
+    // 注意setInterval函数: 时间逝去100(毫秒)后, onTimer才开始执行
+    if (start != 0) {
+        timer = self.setInterval(function(){ onTimer(); }, 100);
     }
 }
 
 // 倒计时函数
 function onTimer() {
-    if (start == finish) {
+    var date_start = new Date();
+    if (start == 0) {
         window.clearInterval(timer);
         $("paper_form").submit();
         setTimeout(function(){
@@ -648,42 +643,22 @@ function onTimer() {
             show_flash_div();
         }, 100);
         return;
-    }
+    }  
     var current_time = start;
-    var hms = new String(start).split(":");
-    var ms = new Number(hms[3]);
-    var s = new Number(hms[2]);
-    var m = new Number(hms[1]);
-    var h = new Number(hms[0]);
 
-    ms -= 10;
-    if (ms < 0) {
-        ms = 90;
-        s -= 1;
-        if (s < 0) {
-            s = 59;
-            m -= 1;
-        }
-        if (m < 0) {
-            m = 59;
-            h -= 1;
-        }
-    }
-
-    var mss = ms < 10 ? ("0" + ms) : ms;
-    var ss = s < 10 ? ("0" + s) : s;
+    var m = Math.floor((current_time%3600)/60);
+    var h = Math.floor(current_time/3600);
     var sm = m < 10 ? ("0" + m) : m;
     var sh = h < 10 ? ("0" + h) : h;
-
-    start = sh + ":" + sm + ":" + ss + ":" + mss;
-    $("exam_time").innerHTML = sh + ":" + sm;
-    $("true_exam_time").innerHTML = sh + ":" + sm + ":" + ss + ":" + mss;
     
+    $("exam_time").innerHTML = sh + ":" + sm;
+    $("true_exam_time").innerHTML = start;
+
     colse_or_open_block(current_time);
-    // 清除上一次的定时器
-//    window.clearInterval(timer);
-    // 启动新的定时器
-//    timer = window.setInterval("onTimer()", nextelapse);
+    var date_end = new Date();
+    if (start != 0) {
+       start = Math.round((start - 0.1 - (date_end - date_start)/1000)*10)/10;
+    }
 }
 
 //打开模块和关闭答案
@@ -693,7 +668,7 @@ function colse_or_open_block(current_time) {
         var all_block_end_time = block_end_hash.values();
         for (var j=0; j<all_block_end_time.length; j++) {
             var block_title = $("b_title_" + block_end_hash.index(all_block_end_time[j])).innerHTML;
-            if (all_block_end_time[j] == current_time) {
+            if (return_giving_time(all_block_end_time[j]) == current_time) {
                 var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
                 flash_div.innerHTML = "<p> "+ block_title + " 部分答题时间已到，您的答案将自动被提交，请您继续做其它部分的题。</p>";
                 document.body.appendChild(flash_div);
@@ -702,9 +677,10 @@ function colse_or_open_block(current_time) {
                 local_storage_answer();
                 has_close_block = true;
                 break;
-            } else if ((return_giving_time(current_time) - return_giving_time(all_block_end_time[j])) == 100*60) {
-                flash_div.innerHTML = "<p>当前 "+block_title+" 部分剩余答题时间为1分钟，请您尽快答题，并提交答案。</p>";
-                document.body.appendChild(flash_div);
+            } else if (Math.floor(current_time - return_giving_time(all_block_end_time[j])) == 60) {
+                var flash_div1 = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
+                flash_div1.innerHTML = "<p>当前 "+block_title+" 部分剩余答题时间为1分钟，请您尽快答题，并提交答案。</p>";
+                document.body.appendChild(flash_div1);
                 show_flash_div();
             }
         }
@@ -722,9 +698,9 @@ function colse_or_open_block(current_time) {
                 for (var k=0; k<all_block_start_time.length; k++) {
                     var block_id = block_start_hash.index(all_block_start_time[k]);
                     if (all_block_start_time[k] == ""
-                        || (return_giving_time(all_block_start_time[k]) >= return_giving_time(current_time) &&
+                        || (return_giving_time(all_block_start_time[k]) >= current_time &&
                             (block_end_hash.get(block_id) == "" ||
-                                return_giving_time(block_end_hash.get(block_id)) < return_giving_time(current_time)))) {
+                                return_giving_time(block_end_hash.get(block_id)) < current_time))) {
                         open_nav(block_id);
                         break;
                     }
@@ -736,41 +712,17 @@ function colse_or_open_block(current_time) {
 
 //用来5分钟存储的定时器
 function local_save_start() {
-    local_timer = window.setInterval("local_save()", 100);
+    local_timer = self.setInterval(function(){ local_save(); }, 100);
 }
 
 //5分钟存储函数
 function local_save() {
-    if (local_start_time == local_finish_time) {
+    if (local_start_time == 0) {
         window.clearInterval(local_timer);
         local_storage_answer();
         return;
     }
-    var hms = new String(local_start_time).split(":");
-    var ms = new Number(hms[2]);
-    var s = new Number(hms[1]);
-    var m = new Number(hms[0]);
-    ms -= 10;
-    if (ms < 0) {
-        ms = 90;
-        s -= 1;
-        if (s < 0) {
-            s = 59;
-            m -= 1;
-        }
-        if (m < 0) {
-            m = 59;
-        }
-    }
-    var mss = ms < 10 ? ("0" + ms) : ms;
-    var ss = s < 10 ? ("0" + s) : s;
-    var sm = m < 10 ? ("0" + m) : m;
-    local_start_time = sm + ":" + ss + ":" + mss;
-    //$("local_time").innerHTML = local_start_time;
-    // 清除上一次的定时器
-//    window.clearInterval(local_timer);
-    // 启动新的定时器
-//    local_timer = window.setInterval("local_save()", 99);
+    local_start_time = Math.round((local_start_time - 0.1)*10)/10;
 }
 
 //用来判断获取数据的类型
@@ -1006,16 +958,17 @@ function add_to_db(arr) {
 
 //重新执行5分钟倒计时
 function reload_local_save() {
-    if (start != finish) {
+    if (start != 0) {
         if ($("true_exam_time").innerHTML == "不限时") {
-            start = "00:00:00:00";
+            start = 0;
             $("exam_time").innerHTML = "不限时";
         } else {
-            start = $("true_exam_time").innerHTML + ":00";
-            var all_time = $("true_exam_time").innerHTML.toString().split(":");
-            $("exam_time").innerHTML = all_time[0] + ":" + all_time[1];
+            start = Math.round(new Number($("true_exam_time").innerHTML)*10)/10;
+            var h = Math.floor(start/3600) < 10 ? ("0" + Math.floor(start/3600)) : Math.floor(start/3600);
+            var m = Math.floor((start%3600)/60) < 10 ? ("0" + Math.floor((start%3600)/60)) : Math.floor((start%3600)/60);
+            $("exam_time").innerHTML = h + ":" + m;
         }
-        local_start_time = "02:30:00";
+        local_start_time = 300;
         local_save_start();
     }
 }
@@ -1257,10 +1210,11 @@ function add_audio_cookies(audio_id) {
 
 //更改文本域的长度
 function start_change_length(id) {
-    javascript:show_que_save_button(id);
-change_length = window.setInterval("call_me(48, " + id + ")", 1);
-
+    show_que_save_button(id);
+    change_length = window.setInterval("call_me(48, " + id + ")", 1);
 }
+
+//根据字符长度改变文本域的长和宽
 function call_me(max_length, id) {
     if(($("question_answer_" + id).value != null ) || ($("question_answer_" + id).value != "" )) {
         if(($("question_answer_" + id).value.length >= 20) && ($("question_answer_" + id).value.length < max_length)) {

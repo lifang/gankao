@@ -62,9 +62,9 @@ class User::ExaminationsController < ApplicationController
     if end_time.nil? or end_time == ""
       text = "不限时"
     elsif end_time > 0
-      text = (end_time/3600).to_i.to_s + ":" + ((end_time%3600)/60).to_i.to_s + ":" + (end_time%3600%60).to_i.to_s#end_time
+      text = end_time
     else
-      text = "00:00:00"
+      text = 0.1
     end
     return text
   end
