@@ -57,11 +57,13 @@ function create_paper() {
         if (tof(blocks) == "array") {
             for (var i=0; i<blocks.size();i++) {
                 create_block(bocks_div, blocks[i]);
+
             }
         } else {
             create_block(bocks_div, blocks);
         }
     }
+    next_last_index();
     setTimeout(function(){
         show_exam_time();
     }, 500);
@@ -77,6 +79,7 @@ function get_block_id(blocks) {
             } else {
                 $("block_ids").value = blocks[i].id;
             }
+
         }
     } else {
         $("block_ids").value = blocks.id;
@@ -108,11 +111,15 @@ function create_block(bocks_div, block) {
     if (block.base_info.description != null && block.base_info.description != "") {
         part_message.innerHTML += "<p>" + is_has_audio(block.id, block.base_info.description) + "</p>";
     }
+    
     if (block.total_score != null && block.total_score != 0) {
         part_message.innerHTML += "<div class='fraction_h'>" + block.total_score + "分</div>";
     }
     b_div.appendChild(part_message);
-
+    if ($("jquery_jplayer_" + block.id) != null) {
+        generate_jplayer(block.base_info.description, block.id);
+    }
+    
     //试卷导航展开部分
     var navigation_div = $("paper_navigation");
     var block_nav_div = create_element("div", null, "block_nav_"+block.id, "first_title", null, "innerHTML");
@@ -144,40 +151,47 @@ function create_block(bocks_div, block) {
         open_block_nav(block.id);
         block_block_flag = 1;
     }
-    next_last_index(block.id, block_div);
 }
 
+
+
 //上一部分、下一部分
-function next_last_index(block_id, block_div) {
+function next_last_index() {
     if ($("block_ids") != null && $("block_ids").value != "") {
         var block_ids = $("block_ids").value.split(",");
         if (block_ids != null) {
             if (block_ids.length > 1) {
-                var next_div = create_element("div", null, null, "testPage_btn", null, "innerHTML");
-                var method_str = "";
-                var next_block_id = "";
-                var last_block_id = "";
-                if (is_fix_time && block_start_hash.get(block_id) != null && block_start_hash.get(block_id) != "") {
-                    method_str = "hand_open_nav";
-                } else {
-                    method_str = "open_nav";
+                for (var i=0; i<block_ids.length; i++) {
+                    var next_div = create_element("div", null, null, "testPage_btn", null, "innerHTML");
+                    var method_str = "";
+                    var next_method = "";
+                    var next_block_id = "";
+                    var last_block_id = "";
+                    if (block_ids.indexOf(block_ids[i]) == 0) {
+                        next_block_id = "" + block_ids[block_ids.indexOf(block_ids[i]) + 1];
+                        method_str = (is_fix_time && block_start_hash.get(next_block_id) != null && block_start_hash.get(next_block_id) != "")
+                        ? "hand_open_nav" : "open_nav";
+                        next_div.innerHTML = "<a href='javascript:void(0);' class='tp_down_btn' onclick='javascript:" + method_str
+                        + "("+ next_block_id +");'>下一部分</a>";
+                    } else if (block_ids.indexOf(block_ids[i]) == block_ids.length - 1) {
+                        last_block_id = "" + block_ids[block_ids.indexOf(block_ids[i]) - 1];
+                        method_str = (is_fix_time && block_start_hash.get(last_block_id) != null && block_start_hash.get(last_block_id) != "")
+                        ? "hand_open_nav" : "open_nav";
+                        next_div.innerHTML = "<a href='javascript:void(0);' class='tp_up_btn' onclick='javascript:" + method_str
+                        + "("+ last_block_id +");'>上一部分</a>";
+                    } else {
+                        next_block_id = "" + block_ids[block_ids.indexOf(block_ids[i]) + 1];
+                        method_str = (is_fix_time && block_start_hash.get(next_block_id) != null && block_start_hash.get(next_block_id) != "")
+                        ? "hand_open_nav" : "open_nav";
+                        last_block_id = "" + block_ids[block_ids.indexOf(block_ids[i]) - 1];
+                        next_method = (is_fix_time && block_start_hash.get(last_block_id) != null && block_start_hash.get(last_block_id) != "")
+                        ? "hand_open_nav" : "open_nav";
+                        next_div.innerHTML = "<a href='javascript:void(0);' class='tp_down_btn' onclick='javascript:"
+                        + method_str + "("+ next_block_id +");'>下一部分</a><a href='javascript:void(0);' class='tp_up_btn' onclick='javascript:" + next_method
+                        + "("+ last_block_id +");'>上一部分</a>";
+                    }
+                    $("block_" + block_ids[i]).appendChild(next_div);
                 }
-                if (block_ids.indexOf(block_id) == 0) {
-                    next_block_id = "" + block_ids[block_ids.indexOf(block_id) + 1];
-                    next_div.innerHTML = "<a href='javascript:void(0);' class='tp_down_btn' onclick='javascript:" + method_str
-                    + "("+ next_block_id +");'>下一部分</a>";
-                } else if (block_ids.indexOf(block_id) == block_ids.length - 1) {
-                    last_block_id = "" + block_ids[block_ids.indexOf(block_id) - 1];
-                    next_div.innerHTML = "<a href='javascript:void(0);' class='tp_up_btn' onclick='javascript:" + method_str
-                    + "("+ last_block_id +");'>上一部分</a>";
-                } else {
-                    next_block_id = "" + block_ids[block_ids.indexOf(block_id) + 1];
-                    last_block_id = "" + block_ids[block_ids.indexOf(block_id) - 1];
-                    next_div.innerHTML = "<a href='javascript:void(0);' class='tp_down_btn' onclick='javascript:"
-                    + method_str + "("+ next_block_id +");'>下一部分</a><a href='javascript:void(0);' class='tp_up_btn' onclick='javascript:" + method_str
-                    + "("+ last_block_id +");'>上一部分</a>";
-                }
-                block_div.appendChild(next_div);
             }
         }
     }
@@ -247,7 +261,6 @@ function return_giving_time(time) {
 //手动打开模块
 function hand_open_nav(block_id) {
     if (is_fix_time) {
-        //        var fs = return_giving_time(start);
         var fs = start;
         var flash_div = null;
         var bs = null;
@@ -514,6 +527,14 @@ function create_single_question(que_div, question, drag_li_arr) {
         var que_attrs = question.questionattrs.split(";-;");
         if (question.correct_type == "6") {
             var drag_div = create_element("div", null, null, "answer_text", null, "innerHTML");
+            if (answer_hash != null && answer_hash[question.id] != null) {
+                que_div.innerHTML += "<br/><textarea id='question_answer_"+ question.id +"' name='question_answer_"
+                + question.id +"' style='height: 24px;' onclick='javascript:show_que_save_button(\""+question.id+"\")'>"
+                + answer_hash[question.id][0] +"</textarea>";
+            } else {
+                que_div.innerHTML += "<br/><textarea id='question_answer_"+ question.id +"' name='question_answer_"
+                + question.id +"' style='height: 24px;' onclick='javascript:show_que_save_button(\""+question.id+"\")'></textarea>";
+            }
             que_div.appendChild(drag_div);
         } else {
             var ul = create_element("ul", null, null, "chooseQuestion", null, "innerHTML");
@@ -523,14 +544,7 @@ function create_single_question(que_div, question, drag_li_arr) {
             if (que_attrs[i] != null && que_attrs[i] != "") {
                 if (question.correct_type == "6") {
                     drag_li_arr.push(que_attrs[i]);
-                    if (answer_hash != null && answer_hash[question.id] != null) {
-                        que_div.innerHTML += "<br/><textarea id='question_answer_"+ question.id +"' name='question_answer_"
-                        + question.id +"' style='height: 24px;' onclick='javascript:show_que_save_button(\""+question.id+"\")'>"
-                        + answer_hash[question.id][0] +"</textarea>";
-                    } else {
-                        que_div.innerHTML += "<br/><textarea id='question_answer_"+ question.id +"' name='question_answer_"
-                        + question.id +"' style='height: 24px;' onclick='javascript:show_que_save_button(\""+question.id+"\")'></textarea>";
-                    }
+                    
                 } else {
                     var attr = create_element("li", null, null, null, null, "innerHTML");
                     ul.appendChild(attr);
@@ -626,7 +640,9 @@ function create_element(element, name, id, class_name, type, ele_flag) {
 function show_exam_time() {
     // 注意setInterval函数: 时间逝去100(毫秒)后, onTimer才开始执行
     if (start != 0) {
-        timer = self.setInterval(function(){ onTimer(); }, 100);
+        timer = self.setInterval(function(){
+            onTimer();
+        }, 100);
     }
 }
 
@@ -657,7 +673,7 @@ function onTimer() {
     colse_or_open_block(current_time);
     var date_end = new Date();
     if (start != 0) {
-       start = Math.round((start - 0.1 - (date_end - date_start)/1000)*10)/10;
+        start = Math.round((start - 0.1 - (date_end - date_start)/1000)*10)/10;
     }
 }
 
@@ -712,7 +728,9 @@ function colse_or_open_block(current_time) {
 
 //用来5分钟存储的定时器
 function local_save_start() {
-    local_timer = self.setInterval(function(){ local_save(); }, 100);
+    local_timer = self.setInterval(function(){
+        local_save();
+    }, 100);
 }
 
 //5分钟存储函数
@@ -1035,23 +1053,35 @@ function answer_xml() {
 
 //记录当前模块是否有听力
 function is_has_audio(block_id, description) {
-    var back_server_path = $("back_server_url").value;
     var titles = description.split("<mp3>");
     var final_title = "";
     if (titles.length > 1) {
-        var audio_str = "";
-        if (window.HTMLAudioElement) {
-            audio_str = "<audio id='audio_"+ block_id +"' onended='add_audio_cookies("+ block_id +");'>" +
-            "<source src='"+ back_server_path + titles[1] +"' type='audio/mpeg'></audio>";
-        } else {
-            audio_str = "<object><embed id='audio_"+ block_id +"' src='"+ back_server_path + titles[1] +
-            "' autostart='false' hidden='true' type='audio/midi'></object>";
-        }
-        final_title = audio_str + titles[2];
+        var audio_str = "<div id='jquery_jplayer_"+ block_id +"' class='jp-jplayer' style='width:0px;height:1px;'></div>";
+        final_title = titles[0] + audio_str;
     } else {
         final_title = description;
     }
     return final_title;
+}
+
+function generate_jplayer(description, block_id) {
+    (function(){
+        var back_server_path = $("back_server_url").value;
+        var titles = description.split("<mp3>");
+        jQuery("#jquery_jplayer_"+block_id).jPlayer({
+            ready: function (event) {
+                jQuery(this).jPlayer("setMedia", {
+                    mp3:""+back_server_path + titles[1]
+                });
+            },
+            ended: function(){
+                add_audio_cookies(block_id);
+            },
+            swfPath: "/javascripts/jplayer",
+            supplied: "mp3",
+            wmode: "window"
+        });
+    })(jQuery)
 }
 
 //替换问题中隐藏的span，变为可拖动
@@ -1097,14 +1127,14 @@ function store_title_span(problem_id, question_id) {
 
 //当打开的模块有音频时，播放有音频
 function start_block_audio(block_id) {
-    if ($("audio_" + block_id) != null) {
+    if ($("jquery_jplayer_" + block_id) != null) {
         var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
         if (getCookie("exam_audio_" + block_id) == null || getCookie("exam_audio_" + block_id) == 0) {
             flash_div.innerHTML = "<p>您当前打开的模块为听力模块，听力正在播放或者即将播放，请做好答题准备。</p>";
             document.body.appendChild(flash_div);
             show_flash_div();
             setTimeout(function(){
-                control_audio(block_id);
+                control_media(block_id);
             }, 10000);
         } else {
             flash_div.innerHTML = "<p>听力播放结束，请抓紧时间答题。</p>";
@@ -1115,28 +1145,23 @@ function start_block_audio(block_id) {
 }
 
 //控制音频内容
-var is_first_in = true;
-function control_media(audio_id, types) {
+function control_media(audio_id) {
     try {
-        var audio = $("audio_" + audio_id);
+        var audio = jQuery("#jquery_jplayer_"+audio_id);
         if (getCookie("audio_time_" + audio_id) != "end") {
             if(getCookie("exam_audio_" + audio_id) == null){
                 setCookie("exam_audio_" + audio_id, 0);
             }
             if(new Number(getCookie("exam_audio_" + audio_id)) < 1){
-                audio_timer = window.setInterval("audio_current_time('"+ audio_id +"', '"+ types +"')", 100);
-                if (types == "audio") {
-                    if(audio.paused){
-                        if (getCookie("audio_time_" + audio_id) != null && new Number(getCookie("audio_time_" + audio_id)) != 0) {
-                            audio.currentTime += getCookie("audio_time_" + audio_id);
-                        }
-                    }
-                } else {
-                    if (getCookie("audio_time_" + audio_id) != null) {
-                        audio.currentPosition += getCookie("audio_time_" + audio_id);
-                    }
+                if (getCookie("audio_time_" + audio_id) != null) {
+                    audio.jPlayer("play", parseFloat(getCookie("audio_time_" + audio_id)));
                 }
-                audio.play();
+                audio.bind(jQuery.jPlayer.event.timeupdate, function(event) {
+                    if (event.jPlayer.status.currentTime != null) {
+                        setCookie("audio_time_" + audio_id, event.jPlayer.status.currentTime);
+                    }
+                });
+                
             }
         }
     }catch (e) {
@@ -1145,54 +1170,6 @@ function control_media(audio_id, types) {
         document.body.appendChild(flash_div);
         show_flash_div();
     }
-}
-
-//音频控制
-var audio_timer = null;
-function control_audio(audio_id) {
-    if (window.HTMLAudioElement) {
-        control_media(audio_id, "audio");
-    } else {
-        load_object_audio(audio_id);
-    }
-}
-
-//不支持html5的浏览器使用
-function load_object_audio(audio_id) {
-    control_media(audio_id, "media");
-}
-
-//记录当前播放时间
-function audio_current_time(audio_id, types) {
-    if (new Number(getCookie("exam_audio_" + audio_id)) == 1) {
-        window.clearInterval(audio_timer);
-    } else {
-        add_time_to_cookies(audio_id, types);
-    }
-    if (types == "media") {
-        if (new Number(getCookie("audio_time_" + audio_id)) == 0 && is_first_in == false) {
-            window.clearInterval(audio_timer);
-            add_audio_cookies(audio_id);
-        }
-    }
-}
-
-//将音频播放的时间记录到cookie
-function add_time_to_cookies(audio_id, types) {
-    if (types == "audio") {
-        if ($("audio_" + audio_id).currentTime != null) {
-            setCookie("audio_time_" + audio_id, $("audio_" + audio_id).currentTime);
-        }
-    } else {
-        if ($("audio_" + audio_id).currentPosition != null) {
-            setCookie("audio_time_" + audio_id, $("audio_" + audio_id).currentPosition);
-            if (new Number(getCookie("audio_time_" + audio_id)) > 0 && is_first_in) {
-                is_first_in = false;
-            }
-        }
-    }
-    window.clearInterval(audio_timer);
-    audio_timer = window.setInterval("audio_current_time('"+ audio_id +"', '"+ types +"')", 100);
 }
 
 //记录听力已经播放

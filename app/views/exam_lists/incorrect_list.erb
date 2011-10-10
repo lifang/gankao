@@ -1,7 +1,7 @@
 <%= javascript_include_tag "/javascripts/answer_sheet.js" %>
 <link href="/stylesheets/jplayer/jplayer.blue.monday.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/javascripts/jplayer/jquery.jplayer.min.js"></script>
-<% if @lists.nil? or @lists.elements["/collection/problems"].blank? %>
+<% if @lists.nil? or @lists.elements["/collection/problems"].nil? or @lists.elements["/collection/problems/problem"].nil? %>
   <div class="errorLibrary_left">
     <%= "您目前没有错题" %>
   </div>

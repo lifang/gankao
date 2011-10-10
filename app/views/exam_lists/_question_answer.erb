@@ -1,3 +1,5 @@
+<link href="/stylesheets/jplayer/jplayer.blue.monday.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/javascripts/jplayer/jquery.jplayer.min.js"></script>
 <div class="part_div">
   <div class="part_question">
     <%   %>
@@ -6,23 +8,27 @@
         <div class="chank_yw"><a href="javascript:void(0);" onclick="openwindow(<%= question_answer.attributes["id"] %>);">查看全文</a></div>
       <% end %>
       <div class="part_q_text part_q_sl">
-        <div class="question_text_div" style="word-wrap:break-word; word-break:break-all;">
           <% title = question_answer.elements["title"].text
-          if title.length > 500
+          if title.length > 500 %>
+            <div class="question_text_div" style="word-wrap:break-word; word-break:break-all;">
+              <% if title =~ /<mp3>/  %>
+                <%= truncate_u(title.split("<mp3>")[0].to_s.html_safe.gsub(/<[^{><}]*>/, ""), 395, "......").to_s.html_safe %>
+              <% else %>
+                <%= truncate_u(title.to_s.html_safe.gsub(/<[^{><}]*>/, ""), 395, "......").to_s.html_safe %>
+              <% end %>
+            </div>
+          <% else
             if title =~ /<mp3>/  %>
-              <%= truncate_u(title.split("<mp3>")[2].to_s.html_safe.gsub(/<[^{><}]*>/, ""), 395, "......").to_s.html_safe %>
+              <div class="question_text_div" style="word-wrap:break-word; word-break:break-all;">
+                <%= title.split("<mp3>")[0].to_s.html_safe %>
+              </div>
+              <div id="mp3_<%= question_answer.attributes["id"] %>"></div>
             <% else %>
-              <%= truncate_u(title.to_s.html_safe.gsub(/<[^{><}]*>/, ""), 395, "......").to_s.html_safe %>
-            <% end
-          else
-            if title =~ /<mp3>/  %>
-              <script type="text/javascript">audio_element("<%= title.split("<mp3>")[1] %>");</script>
-              <%= title.split("<mp3>")[2].to_s.html_safe %>
-            <% else %>
-              <%= title.to_s.html_safe %>
+              <div class="question_text_div" style="word-wrap:break-word; word-break:break-all;">
+                <%= title.to_s.html_safe %>
+              </div>
             <% end %>
           <% end %>
-        </div>
         <div style="display:none;" id="title_<%= question_answer.attributes["id"] %>">
           <%= question_answer.elements["title"].text.to_s.html_safe %>
         </div>
