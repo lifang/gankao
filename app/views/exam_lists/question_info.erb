@@ -57,18 +57,6 @@
               attrs_array=attrs_str.split(";-;") unless attrs_str.nil?
               correct_type = question.attributes["correct_type"]
             %>
-    <%# if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] %>
-              <!--  <div class="task3_li">
-                  <ul id="question_attrs_<%#= question.attributes["id"] %>">
-    <%# attrs=attrs_array.shuffle %>
-    <%# (0..attrs.length-1).each do |i| %>
-                      <li><%#= attrs[i] %></li>
-    <%# end %>
-                  </ul>
-                  <script type="text/javascript"> show_drag_answer(<%#= question.attributes["id"] %>);</script>
-                </div>
-                <div class="clear"></div> -->
-    <%# end %>
               <div class="p_question_list question_no">
                 <div class="p_q_l_left"><%= index  %></div>
                 <div class="p_q_l_right_b" id="drag_question_<%= question.attributes["id"] %>">
@@ -146,9 +134,9 @@
 <% end %>
 <input type="hidden" value="<%= params[:page].nil? ? 1:params[:page] %>" id="current_page" />
 <div class="jiexi_tab" id="analysis_div">
-<%#*<div class="tab_t">%>
-<%#*<a href="javascript:void(0);" onclick="javascript:close_tab(this);"><img  src="/images/paper/x.gif" /></a>%>
-<%#*</div>%>
+  <div class="tab_t">
+    <a href="javascript:void(0);" onclick="javascript:close_tab(this);"><img  src="/images/paper/x.gif" /></a>
+  </div>
   <div class="tab_m">
     <h3 id="answer"></h3>
     <p id="analysis"></p>
