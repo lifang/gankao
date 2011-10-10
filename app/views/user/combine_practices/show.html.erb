@@ -39,6 +39,7 @@
     <input type="hidden" name="examination_id" id="examination_id" value="<%= @examination.id %>"/>
     <input type="hidden" name="show_answer" id="show_answer" value="<%= @answer_array %>"/>
   </div>
+  <div id="jquery_jplayer"></div>
   <div id="block_ids" style="display:none;"></div>
   <div id="blocks">
   </div>
@@ -61,9 +62,26 @@
 <%= javascript_include_tag "#{Constant::SERVER_PATH}/javascripts/jeff_answer_paper.js" %>
 <script language="javascript" type="text/javascript">
 
+  jQuery("#jquery_jplayer").jPlayer({
+    ended: function(){
+      playing=0;
+      if($("audio_control_"+last_audio)!=null){
+        $("audio_control_"+last_audio).title="播放";
+        $("audio_control_"+last_audio).src="/images/paper/play_icon.png";
+      }
+      if($("practice2_audio_control_"+last_audio)!=null){
+        $("practice2_audio_control_"+last_audio).title="播放";
+        $("practice2_audio_control_"+last_audio).src="/images/paper/play_icon.png";
+      }
+      last_audio=0;
+    },
+    swfPath: "/javascripts/jplayer",
+    supplied: "mp3",
+    preload:"auto"
+  });
+
   var server_path="<%= Constant::SERVER_PATH %>";
   var back_server_path="<%= Constant::BACK_SERVER_PATH %>";
-
   //用户保存本地存储的答案
   var answer_hash = new Hash();
   //load已有的答案
