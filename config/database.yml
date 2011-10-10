@@ -4,7 +4,7 @@ development:
   adapter: mysql2
   database: exam_app
   username: root
-  password: qianjun
+  password: lifang
   encoding: utf8
   pool: 5
   timeout: 5000
@@ -17,7 +17,7 @@ test:
   adapter: mysql2
   database: gankao_test
   username: root
-  password: qianjun
+  password: lifang
   encoding: utf8
   pool: 5
   timeout: 5000
@@ -26,7 +26,7 @@ production:
   adapter: mysql2
   database: gankao
   username: root
-  password: qianjun
+  password: lifang
   encoding: utf8
   pool: 5
   timeout: 5000

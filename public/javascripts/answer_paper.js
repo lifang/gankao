@@ -62,8 +62,8 @@ function create_paper() {
         } else {
             create_block(bocks_div, blocks);
         }
+        next_last_index();
     }
-    next_last_index();
     setTimeout(function(){
         show_exam_time();
     }, 500);
@@ -79,7 +79,6 @@ function get_block_id(blocks) {
             } else {
                 $("block_ids").value = blocks[i].id;
             }
-
         }
     } else {
         $("block_ids").value = blocks.id;
@@ -153,8 +152,6 @@ function create_block(bocks_div, block) {
     }
 }
 
-
-
 //上一部分、下一部分
 function next_last_index() {
     if ($("block_ids") != null && $("block_ids").value != "") {
@@ -162,7 +159,12 @@ function next_last_index() {
         if (block_ids != null) {
             if (block_ids.length > 1) {
                 for (var i=0; i<block_ids.length; i++) {
-                    var next_div = create_element("div", null, null, "testPage_btn", null, "innerHTML");
+                    var next_div = null;
+                    if ($("testPage_btn_" + block_ids[i]) == null) {
+                        next_div = create_element("div", null, "testPage_btn_" + block_ids[i], "testPage_btn", null, "innerHTML");
+                    } else {
+                        next_div = $("testPage_btn_" + block_ids[i]);
+                    }
                     var method_str = "";
                     var next_method = "";
                     var next_block_id = "";
@@ -735,12 +737,42 @@ function local_save_start() {
 
 //5分钟存储函数
 function local_save() {
+    var start_date = new Date();
     if (local_start_time == 0) {
         window.clearInterval(local_timer);
         local_storage_answer();
         return;
     }
-    local_start_time = Math.round((local_start_time - 0.1)*10)/10;
+    if (local_start_time!=300 && local_start_time%60 == 0) {
+        get_sever_time();
+    }
+    var end_date = new Date();
+    local_start_time = Math.round((local_start_time - 0.1 - (end_date - start_date))*10)/10;
+}
+
+//用来1分钟取一下服务器时间
+function get_sever_time() {
+    var examination_id = $("examination_id").value;
+    var user_id = $("user_id").value;
+    new Ajax.Updater("true_exam_time", "/user/examinations/"+ examination_id +"/get_exam_time",
+    {
+        asynchronous:true,
+        evalScripts:true,
+        method:"post",
+        onComplete:function(request){
+            if ($("true_exam_time").innerHTML == "不限时") {
+                start = 0;
+                $("exam_time").innerHTML = "不限时";
+            } else {
+                start = Math.round(new Number(request.responseText)*10)/10;
+                var h = Math.floor(start/3600) < 10 ? ("0" + Math.floor(start/3600)) : Math.floor(start/3600);
+                var m = Math.floor((start%3600)/60) < 10 ? ("0" + Math.floor((start%3600)/60)) : Math.floor((start%3600)/60);
+                $("exam_time").innerHTML = h + ":" + m;
+            }
+        },
+        parameters:"user_id="+ user_id +"&authenticity_token=" + encodeURIComponent('BgLpQ3SADBr4tuiYZOJeoOvY4VOHogJvqQEpMwYVBM4=')
+    });
+    return false;
 }
 
 //用来判断获取数据的类型
@@ -977,15 +1009,6 @@ function add_to_db(arr) {
 //重新执行5分钟倒计时
 function reload_local_save() {
     if (start != 0) {
-        if ($("true_exam_time").innerHTML == "不限时") {
-            start = 0;
-            $("exam_time").innerHTML = "不限时";
-        } else {
-            start = Math.round(new Number($("true_exam_time").innerHTML)*10)/10;
-            var h = Math.floor(start/3600) < 10 ? ("0" + Math.floor(start/3600)) : Math.floor(start/3600);
-            var m = Math.floor((start%3600)/60) < 10 ? ("0" + Math.floor((start%3600)/60)) : Math.floor((start%3600)/60);
-            $("exam_time").innerHTML = h + ":" + m;
-        }
         local_start_time = 300;
         local_save_start();
     }
@@ -1155,6 +1178,8 @@ function control_media(audio_id) {
             if(new Number(getCookie("exam_audio_" + audio_id)) < 1){
                 if (getCookie("audio_time_" + audio_id) != null) {
                     audio.jPlayer("play", parseFloat(getCookie("audio_time_" + audio_id)));
+                } else {
+                    audio.jPlayer("play");
                 }
                 audio.bind(jQuery.jPlayer.event.timeupdate, function(event) {
                     if (event.jPlayer.status.currentTime != null) {

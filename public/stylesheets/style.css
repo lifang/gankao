@@ -38,9 +38,9 @@ img { border: none;}
 
 
 .iphone_text { float: left; width: 540px; height:45px; line-height: 45px; padding: 25px 0 0 120px; font-size: 20px; font-family:"微软雅黑";}
-.iphone_text span { color:#A10000; padding: 0 5px; font-size: 24px; display: inline-block; height: 45px; background: url(/images/paper/iphone5.png) 5px 0 no-repeat; padding-left: 30px;}
+.iphone_text span { color:#A10000; font-size: 24px; display: inline-block; height: 45px; background: url(/images/paper/iphone4s.png) 5px 0 no-repeat; padding: 0 5px 0 60px;}
 .set_in_fx { width: 134px; height: 40px; display: inline-block; text-indent: -999px; overflow: hidden; background: url(/images/paper/set_in_fx.png) no-repeat; float: right;}
-
+.iphone_text em { padding: 0 10px; width: 50px; display: inline-block; text-align: center;}
 
 .nav_cet { float: left; width: 540px; height:45px; padding: 25px 0 0 120px;}
 .nav_cet a { width: 160px; height: 45px; float: left; margin: 0 40px; overflow: hidden; text-indent: -999px;}
