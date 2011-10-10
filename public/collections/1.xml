@@ -10,7 +10,7 @@
                     ffffffffffffffffffffffffffffffffdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss&lt;mp3&gt;/media/music.mp3&lt;mp3&gt;</title>
                     <category>2</category>
                     <questions>
-                        <question correct_type='0' error_percent='0' id='1055' repeat_num='1' score='0'>
+                        <question correct_type='0' error_percent='67' id='1055' repeat_num='3' score='0'>
                             <answer>C) He cannot get access to the assigned book.</answer>
                             <analysis>12. C) He cannot get access to the assigned book.
 由对话可知，该男士认为令他烦恼的是无论是在图书馆还是在书店他都找不到那本书，由此得出答案。get access to指“获得，走近，接近，能够利用某物”。
@@ -21,7 +21,7 @@
                             </analysis>
                             <questionattrs>A) He has proved to be a better reader than the woman.;-;B) He has difficulty understanding the book.;-;C) He cannot get access to the assigned book.;-;D) He cannot finish his assignment before the deadline.</questionattrs>
                             <tags> 我的关注 所有分类</tags>
-                        <user_answer></user_answer></question>
+                        <user_answer/><user_answer>C) He cannot get access to the assigned book.</user_answer><user_answer>C) He cannot get access to the assigned book.</user_answer></question>
                     </questions>
                 </problem></problems>
 </collection>
