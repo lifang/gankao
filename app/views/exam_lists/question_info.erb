@@ -1,4 +1,6 @@
 <%= javascript_include_tag "/javascripts/answer_sheet.js" %>
+<link href="/stylesheets/jplayer/jplayer.blue.monday.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/javascripts/jplayer/jquery.jplayer.min.js"></script>
 <div class="errorLibrary_left">
   <div class="pattern"><a href="/exam_lists/<%= params[:id] %>/incorrect_list" class="chay_pat">查阅</a><div class="moveBlock_bg">
       <div class="moveBlock" style="left: 49px; "><img alt="moveBlock" src="/images/paper/moveBlock.png" /></div></div><a href="/exam_lists/<%= params[:id] %>/question_info" class="lianx_pat">练习</a></div>
@@ -13,23 +15,29 @@
               <div class="chank_yw"><a href="javascript:void(0);" onclick="openwindow(<%= @problem.attributes["id"] %>);">查看全文</a></div>
             <% end %>
             <div class="part_q_text part_q_sl">
-              <div class="question_text_div" style="word-wrap:break-word; word-break:break-all;">
                 <%  title = @problem.elements["title"].text
-                if title.length > 500
+                if title.length > 500 %>
+                  <div class="question_text_div" style="word-wrap:break-word; word-break:break-all;">
+                    <% if title =~ /<mp3>/  %>
+                      <%= truncate_u(title.split("<mp3>")[2].to_s.html_safe.gsub(/<[^{><}]*>/, ""), 395, "......").to_s.html_safe %>
+                    <% else %>
+                      <%= truncate_u(title.to_s.html_safe.gsub(/<[^{><}]*>/, ""), 395, "......").to_s.html_safe %>
+                    <% end %>
+                  </div>
+                <% else
                   if title =~ /<mp3>/  %>
-                    <%= truncate_u(title.split("<mp3>")[2].to_s.html_safe.gsub(/<[^{><}]*>/, ""), 395, "......").to_s.html_safe %>
+                    <div class="question_text_div" style="word-wrap:break-word; word-break:break-all;">
+                      <%= title.split("<mp3>")[0].to_s.html_safe %>
+                    </div>
+                    <script type="text/javascript">
+                      audio_element("<%= Constant::BACK_SERVER_PATH %><%= title.split("<mp3>")[1] %>", <%= @problem.attributes["id"] %>);
+                    </script>
                   <% else %>
-                    <%= truncate_u(title.to_s.html_safe.gsub(/<[^{><}]*>/, ""), 395, "......").to_s.html_safe %>
-                  <% end
-                else
-                  if title =~ /<mp3>/  %>
-                    <script type="text/javascript">audio_element("<%= title.split("<mp3>")[1] %>");</script>
-                    <%= title.split("<mp3>")[2].to_s.html_safe %>
-                  <% else %>
-                    <%= title.to_s.html_safe %>
+                    <div class="question_text_div" style="word-wrap:break-word; word-break:break-all;">
+                      <%= title.to_s.html_safe %>
+                    </div>
                   <% end %>
                 <% end %>
-              </div>
               <div style="display:none;" id="title_<%= @problem.attributes["id"] %>">
                 <%= @problem.elements["title"].text.to_s.html_safe %>
               </div>
@@ -120,11 +128,10 @@
                    id="user_answers_<%= @problem.attributes["id"] %>"></div>
             </div>
           <% end %>
-          <input type="hidden" value="<%= @problem.attributes["id"] %>" id="problem_id" />
         </div>
       </div>
       <div class="tb_checkBox">
-        <a class="tb_check" href="javascript:void(0);" onclick="javascript:problem_values();"></a>
+        <a class="tb_check" href="javascript:void(0);" onclick="javascript:problem_values('<%= Constant::BACK_SERVER_PATH %><%= title.split("<mp3>")[1] %>', <%= @problem.attributes["id"] %>);"></a>
       </div>
     </div>
   </div>
@@ -133,9 +140,9 @@
 </div>
 <input type="hidden" value="<%= params[:page].nil? ? 1:params[:page] %>" id="current_page" />
 <div class="jiexi_tab" id="analysis_div">
-  <div class="tab_t">
-    <a href="javascript:void(0);" onclick="javascript:close_tab(this);"><img  src="/images/paper/x.gif" /></a>
-  </div>
+<%#*<div class="tab_t">%>
+<%#*<a href="javascript:void(0);" onclick="javascript:close_tab(this);"><img  src="/images/paper/x.gif" /></a>%>
+<%#*</div>%>
   <div class="tab_m">
     <h3 id="answer"></h3>
     <p id="analysis"></p>
