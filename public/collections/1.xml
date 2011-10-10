@@ -1,17 +1,79 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <collection id='1'>
     <problems>
-    <problem id='10' score='5' types='0'>
-                    <title>fsdafafsfsaf &lt;mp3&gt;/media/music.mp3&lt;mp3&gt;</title>
-                    <category>3</category>
+   <problem delete_status='1' id='216' score='0' types='0'>
+                    <title>&lt;mp3&gt;/media/music.mp3&lt;mp3&gt;</title>
+                    <category>2</category>
                     <questions>
-                        <question correct_type='0' error_percent='0' id='15' repeat_num='1' score='5'>
-                            <answer>789</answer>
-                            <analysis>sdfsfasf</analysis>
-                            <questionattrs>23;-;wer;-;65;-;789</questionattrs>
-                            <tags>ew 我的关注 所有分类</tags>
+                        <question correct_type='0' delete_status='1' error_percent='0' id='1055' repeat_num='1' score='0'>
+                            <answer>C) He cannot get access to the assigned book.</answer>
+                            <analysis>12. C) He cannot get access to the assigned book.
+由对话可知，该男士认为令他烦恼的是无论是在图书馆还是在书店他都找不到那本书，由此得出答案。get access to指“获得，走近，接近，能够利用某物”。
+
+12． W： Just imagine！ We have to finish reading 300 pages before Monday！ How can the professor expect us to do it in such a short time?
+　　M： Yeah， but what troubles me is that I can’t find the book in the library or in the university bookstore．
+　　Q： What does the man mean?
+                            </analysis>
+                            <questionattrs>A) He has proved to be a better reader than the woman.;-;B) He has difficulty understanding the book.;-;C) He cannot get access to the assigned book.;-;D) He cannot finish his assignment before the deadline.</questionattrs>
+                            <tags> 我的关注 所有分类</tags>
                         <user_answer/></question>
                     </questions>
-                </problem><problem id='9' score='5.0' types='0'><title>我撒的飞洒 &lt;mp3&gt;/media/music.mp3&lt;mp3&gt;</title><category>3</category><questions><question correct_type='0' error_percent='0' id='14' repeat_num='1' score='5.0'><answer>sfs</answer><analysis>sfafwerwr2r2</analysis><questionattrs>sfs;-;sfss;-;sdds;-;sd</questionattrs><tags>wrwr 我的关注 所有分类</tags><user_answer></user_answer></question></questions></problem></problems>
+                </problem><problem id='217' score='0' types='0'>
+                    <title>&lt;mp3&gt;/media/music.mp3&lt;mp3&gt;</title>
+                    <category>2</category>
+                    <questions>
+                        <question correct_type='0' error_percent='6' id='1056' repeat_num='32' score='0'>
+                            <answer>A) She will drive the man to the supermarket.</answer>
+                            <analysis>13. A) She will drive the man to the supermarket.
+由文中女士说她不喜欢别人开她的车以及” why don’t we go together?”可得知女士将开车与男士一同去超市。
+13． M： Do you think I could borrow your car to go grocery shopping? The supermarkets outside the city are so much cheaper． I’d also be happy to pick up anything you need．
+　　W： Well， I don’t like to let anyone else drive my car． Tell you what， why don’t we go together?
+　　Q： What does the woman mean?
+                            </analysis>
+                            <questionattrs>A) She will drive the man to the supermarket.;-;B) The man should buy a car of his own.;-;C) The man needn&apos;t go shopping every week.;-;D) She can pick the man up at the grocery store.</questionattrs>
+                            <tags> 我的关注 所有分类</tags>
+                        <user_answer/><user_answer/><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer/><user_answer>D) She can pick the man up at the grocery store.</user_answer><user_answer>D) She can pick the man up at the grocery store.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>D) She can pick the man up at the grocery store.</user_answer><user_answer>D) She can pick the man up at the grocery store.</user_answer><user_answer>D) She can pick the man up at the grocery store.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>B) The man should buy a car of his own.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>D) She can pick the man up at the grocery store.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>D) She can pick the man up at the grocery store.</user_answer><user_answer>B) The man should buy a car of his own.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>D) She can pick the man up at the grocery store.</user_answer><user_answer>A) She will drive the man to the supermarket.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>A) She will drive the man to the supermarket.</user_answer></question>
+                    </questions>
+                </problem><problem id='123' score='0' types='4'>
+                    <title>　Section A
+　&lt;div&gt;　Directions: In this section, there is a passage with ten blanks. You are required to select one word for each blank from a list of choices given in a word bank following the passage. Read the passage through carefully before making your choices. Each choice in the bank is identified by a letter. Please mark the corresponding letter for each item on Answer Sheet 2 with a single line through the centre. You may not use any of the words in the bank more than once.
+　&lt;/div&gt;&lt;div&gt;　Questions 48 to 57 are based on the following passage.
+　&lt;/div&gt;&lt;div&gt;　When we think of green buildings, we tend to think of new ones – the kind of high-tech, solar-paneled masterpieces that make the covers of architecture magazines. But the U.S. has more than 100 million existing homes, and it would be __48__ wasteful to tear them all down and __49__ them with greener versions. An enormous amount of energy and resources went into the construction of those houses. And it would take an average of 65 years for the __50__ carbon emissions from a new energy-efficient home to make up for the resources lost by destroying an old one. So in the broadest __51__, the greenest home is the one that has already been built. But at the same time, nearly half of U. S. carbon emissions come from heating, cooling and __52__ our homes, offices and other buildings. &quot;You can&apos;t deal with climate change without dealing with existing buildings,&quot; says Richard Moe, the president of the National Trust.
+　&lt;/div&gt;&lt;div&gt;　With some __53__, the oldest homes tend to be the least energy-efficient. Houses built before 1939 use about 50% more energy per square foot than those built after 2000, mainly due to the tiny cracks and gaps that __54__ over time and let in more outside air.
+　&lt;/div&gt;&lt;div&gt;　Fortunately, there are a __55__ number of relatively simple changes that can green older homes, from __56__ ones like Lincoln&apos;s Cottage to your own postwar home. And efficiency upgrades (升级) can save more than just the earth; they can help __57__ property owners from rising power costs.
+　&lt;/div&gt;&lt;div&gt;　　&lt;/div&gt;&lt;div&gt;A) accommodations
+　B) clumsy
+　　C) doubtful
+　　 &amp;nbsp;D) exceptions&amp;nbsp;&lt;/div&gt;&lt;div&gt;E) expand
+　　 &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; F) historic
+　　G) incredibly
+　 &amp;nbsp; H) powering
+　&lt;/div&gt;&lt;div&gt;I) protect
+　　 &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; J) reduced
+　　K) replace
+　　 &amp;nbsp;L) sense
+　　&lt;/div&gt;&lt;div&gt;M) shifted
+　　 &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; N) supplying
+　O) vast&lt;/div&gt;
+                    </title>
+                    <category>2</category>
+                    <questions>
+                        
+                        <question correct_type='3' error_percent='0' id='762' repeat_num='2' score='0'>
+                            <answer>K replace </answer>
+                            <analysis>replace A with B, 意思是用B 替换A. 这里是用绿色建筑取代现存房屋。</analysis>
+                            <questionattrs/>
+                            <tags> 我的关注 所有分类</tags>
+                        <user_answer/><user_answer>ggggggg</user_answer></question>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    </questions>
+                </problem></problems>
 </collection>
 

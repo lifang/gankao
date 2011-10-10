@@ -130,15 +130,15 @@ function compare_value(id){
             return false;
         }
         else{
-                if(reason==""||reason.length==0){
-                    document.getElementById("flash_part_"+arry[i]).innerHTML="<font color = 'red'>请输入评分理由。</font>";
+            if(reason==""||reason.length==0){
+                document.getElementById("flash_part_"+arry[i]).innerHTML="<font color = 'red'>请输入评分理由。</font>";
 
-                }else{
-                    document.getElementById("if_submited_"+arry[i]).value =1;
-                    if (i==arry.length-1){
-                        active_button();
-                    }
+            }else{
+                document.getElementById("if_submited_"+arry[i]).value =1;
+                if (i==arry.length-1){
+                    active_button();
                 }
+            }
         }
     }
     active_button();
@@ -383,9 +383,8 @@ function feedback(id){
     return false;
 }
 
-function problem_values(){
+function problem_values(problem_title, flag_id){
     var page=$("current_page").value;
-    var problem_num=$("problem_id").value;
     var ids=$("all_question").value.split(",");
     var  str=""
     for(var i=0;i<ids.length;i++){
@@ -397,7 +396,12 @@ function problem_values(){
         asynchronous:true,
         evalScripts:true,
         method:"post",
-        parameters: str+'problem_id='+problem_num+'&page='+page+'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+        onComplete:function mp3_element() {
+            var final_title = generate_audio_element(flag_id);
+            $("mp3_"+flag_id).innerHTML=final_title;
+            generate_jplayer(problem_title, flag_id);
+        },
+        parameters: str+'problem_id='+flag_id+'&page='+page+'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
     });
     return false;
 }
