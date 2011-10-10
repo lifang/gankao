@@ -18,11 +18,11 @@
                             <tags> 我的关注 所有分类</tags>
                         <user_answer/></question>
                     </questions>
-                </problem><problem id='217' score='0' types='0'>
+                </problem><problem delete_status='1' id='217' score='0' types='0'>
                     <title>&lt;mp3&gt;/media/music.mp3&lt;mp3&gt;</title>
                     <category>2</category>
                     <questions>
-                        <question correct_type='0' error_percent='6' id='1056' repeat_num='32' score='0'>
+                        <question correct_type='0' delete_status='1' error_percent='6' id='1056' repeat_num='32' score='0'>
                             <answer>A) She will drive the man to the supermarket.</answer>
                             <analysis>13. A) She will drive the man to the supermarket.
 由文中女士说她不喜欢别人开她的车以及” why don’t we go together?”可得知女士将开车与男士一同去超市。
@@ -34,7 +34,7 @@
                             <tags> 我的关注 所有分类</tags>
                         <user_answer/><user_answer/><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer/><user_answer>D) She can pick the man up at the grocery store.</user_answer><user_answer>D) She can pick the man up at the grocery store.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>D) She can pick the man up at the grocery store.</user_answer><user_answer>D) She can pick the man up at the grocery store.</user_answer><user_answer>D) She can pick the man up at the grocery store.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>B) The man should buy a car of his own.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>D) She can pick the man up at the grocery store.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>D) She can pick the man up at the grocery store.</user_answer><user_answer>B) The man should buy a car of his own.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>D) She can pick the man up at the grocery store.</user_answer><user_answer>A) She will drive the man to the supermarket.</user_answer><user_answer>C) The man needn&apos;t go shopping every week.</user_answer><user_answer>A) She will drive the man to the supermarket.</user_answer></question>
                     </questions>
-                </problem><problem id='123' score='0' types='4'>
+                </problem><problem delete_status='1' id='123' score='0' types='4'>
                     <title>　Section A
 　&lt;div&gt;　Directions: In this section, there is a passage with ten blanks. You are required to select one word for each blank from a list of choices given in a word bank following the passage. Read the passage through carefully before making your choices. Each choice in the bank is identified by a letter. Please mark the corresponding letter for each item on Answer Sheet 2 with a single line through the centre. You may not use any of the words in the bank more than once.
 　&lt;/div&gt;&lt;div&gt;　Questions 48 to 57 are based on the following passage.
@@ -59,7 +59,7 @@
                     <category>2</category>
                     <questions>
                         
-                        <question correct_type='3' error_percent='0' id='762' repeat_num='2' score='0'>
+                        <question correct_type='3' delete_status='1' error_percent='0' id='762' repeat_num='2' score='0'>
                             <answer>K replace </answer>
                             <analysis>replace A with B, 意思是用B 替换A. 这里是用绿色建筑取代现存房屋。</analysis>
                             <questionattrs/>
