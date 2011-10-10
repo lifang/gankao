@@ -47,9 +47,10 @@ function create_paper(practice_type) {
     if(practice_type=="4"||practice_type=="5"){
         jQuery('.task3_li').height(jQuery('.task3_li > ul').height());
         load_navigation_color();
-        window.onscroll=function(){
-            fix_top("paper_navigation");
-        };
+//        window.onscroll=function(){          // IE、火狐不支持，弃用
+//            fix_top('paper_navigation');
+//        };
+        setInterval("fix_top('paper_navigation');",100);
     }
 //    var audios = document.getElementsByTagName("audio");
 //    var audios_sum=audios.length;
@@ -183,7 +184,7 @@ function create_problem(ul, problem, block_nav_div,practice_type) {
     ul.appendChild(parent_div);
     var question_id_input = create_element("input", "question_ids", "question_ids_" + problem.id, null, "hidden", "value");
     var parent_div_str = "<input type='hidden' name='problem_"+ problem.id +"' id='problem_"+ problem.id +"' value='"+ problem.id +"'/>";
-    var problem_title=problem.title.replace("audio_play('x'","audio_play("+problem.id+"").replace("id=\"audio_x\"","id='audio_"+problem.id+"'").replace("id=\"audio_control_x\"","id='audio_control_"+problem.id+"'").replace(/problem_x_dropplace/g,"problem_"+problem.id+"_dropplace").replace(/problem_x_writefont/g,"problem_"+problem.id+"_writefont")
+    var problem_title=problem.title.replace("audio_play('x'","audio_play("+problem.id+"").replace("id=\"audio_x\"","id='audio_"+problem.id+"'").replace("id=\"audio_control_x\"","id='audio_control_"+problem.id+"'").replace(/problem_x_dropplace/g,"problem_"+problem.id+"_dropplace").replace(/problem_x_writefont/g,"problem_"+problem.id+"_writefont").replace("~http://back_server_path~",back_server_path);
     if(practice_type=="3"){
         parent_div_str += "<div class='task_con'>";
         parent_div_str += "<div class='play'><div class='play_btn'><a href='javascript:void(0);' onclick=\"javascript:document.getElementById('audio_control_"+problem.id+"').onclick();\"><img id='practice2_audio_control_"+problem.id+"' src='/images/paper/play_icon.png'></a></div><input type='button'  class='explain_btn_ex' onclick=\"this.disabled='true';practice2_list("+problem.id+");var button=this;setTimeout(function(){button.disabled=false;},1000);\" ></button></div>";
@@ -786,12 +787,14 @@ function load_local_save(paper_id, examination_id) {
 
 var fix_div_top=0;
 function fix_top(element_id){
-    if(parseInt(document.getElementById(element_id).childNodes[0].offsetTop-document.body.scrollTop)<0){
+
+    var body_scrollTop=document.body.scrollTop|document.documentElement.scrollTop;
+    if(parseInt(document.getElementById(element_id).childNodes[0].offsetTop-body_scrollTop)<0){
         document.getElementById(element_id).childNodes[0].style.position="fixed";
         document.getElementById(element_id).childNodes[0].style.top="0px";
     }
-    if(document.body.scrollTop<fix_div_top){
-        document.getElementById(element_id).childNodes[0].style.position=document.getElementById(element_id).style.position;
+    if(body_scrollTop<fix_div_top){
+        document.getElementById(element_id).childNodes[0].style.position="";
         document.getElementById(element_id).childNodes[0].style.top="";
     }
 }
