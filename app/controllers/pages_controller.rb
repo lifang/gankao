@@ -23,7 +23,7 @@ class PagesController < ApplicationController
     end
     cookies[:user_name] = user_info[:name]
     cookies[:user_id]=@user.id
-    render :inline => "<script>window.opener.refresh();window.close();</script>"
+    render :inline => "<script>window.opener.location.href='/user/homes/#{cookies[:user_id]}';window.close();</script>"
 
   end
 
@@ -42,7 +42,7 @@ class PagesController < ApplicationController
     session.each do |key,value|
       puts key.to_s+"   "+value.to_s
     end
-    render :inline => "<script>window.opener.refresh();window.close();</script>"
+    render :inline => "<script>window.opener.location.href='/user/homes/#{cookies[:user_id]}';window.close();</script>"
 
   end
 
