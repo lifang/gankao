@@ -92,7 +92,7 @@ function create_block(bocks_div, block,practice_type) {
         ul.innerHTML+="<div class='space20'></div>";
     }
     if(practice_type=="4"||practice_type=="5"){
-        ul.innerHTML+="<div class='tb_tis'><span class='red'>*</span>拖选下面的单词到对应的答案位置。已经使用过的单词会给出标记。</div>";
+        ul.innerHTML+="<div class='tb_tis'><span class='red'>*</span>拖选下面的单词到相应的答案位置。已经拖选过的单词会给出标记。</div>";
     }
     ul.appendChild(navigation_div);
     if(practice_type=="3"){
