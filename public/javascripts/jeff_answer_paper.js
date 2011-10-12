@@ -47,9 +47,9 @@ function create_paper(practice_type) {
     if(practice_type=="4"||practice_type=="5"){
         jQuery('.task3_li').height(jQuery('.task3_li > ul').height());
         load_navigation_color();
-//        window.onscroll=function(){          // IE、火狐不支持，弃用
-//            fix_top('paper_navigation');
-//        };
+        //        window.onscroll=function(){          // IE、火狐不支持，弃用
+        //            fix_top('paper_navigation');
+        //        };
         setInterval("fix_top('paper_navigation');",100);
     }
 //    var audios = document.getElementsByTagName("audio");
@@ -740,6 +740,9 @@ function generate_result_paper(paper_id,examination_id,practice_type) {
         create_paper(practice_type);
         if(correct_sum==question_sum){
             return true;
+        }else{
+            document.getElementById('ajax_gif').style.display='none';
+            document.getElementById('practice_submit').style.display='block';
         }
         if(practice_type!="6"){
             var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
