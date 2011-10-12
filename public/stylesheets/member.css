@@ -6,6 +6,7 @@ a { text-decoration: none;}
 img { border: none;}
 .clear { clear: both;}
 .red { color: #F00;}
+.space20 { height: 20px;}
 
 
 
@@ -69,6 +70,52 @@ img { border: none;}
 .vip_xinxin { line-height: 24px; padding: 20px 5px; border-top: 1px #CCC dashed;}
 .vip_xinxin h1 { font-size: 14px; padding-bottom: 10px;}
 .vip_xinxin p { color: #F00;}
+
+
+
+
+/*vip--充值------------------*/
+.vip_title { height: 20px; margin: 10px 0 20px 0;}
+
+.vip_czhi_title { height: 20px; padding-left: 45px; padding-top: 8px; font-size: 14px; font-family: "微软雅黑"; color: #fb8726; margin-bottom: 8px;}
+
+.vip_czhi_box { padding: 20px; overflow: hidden;}
+.vip_czhi_box0 { padding: 0px 20px 5px; _padding: 0px 20px 0px; overflow: hidden;}
+
+.zfb_pic { width: 239px; height: 63px; float: left; display: inline;}
+.vip_czhi_input { width: 250px; float: left; padding:  20px 0 0 50px;}
+.vip_czhi_btn { width: 100px; float: left; padding: 15px 0 0 0;}
+.vip_czhi_btn button { width: 100px; height: 28px; line-height: 28px; background: url(/images/vip_czhi_btn.png) no-repeat; border: none; color: #FFF; font-weight: bold;}
+
+.vip_czhi_p { padding-left: 20px; line-height: 24px; color: #333;}
+
+.vip_zfu { width: 700px; height: 176px; background: url(/images/vip_bg.png) no-repeat 0 0;}
+.vip_squan {width: 700px; height: 122px; background: url(/images/vip_bg.png) no-repeat 0 -189px;}
+.vip_fenx { width: 700px; height: 279px; background: url(/images/vip_bg.png) no-repeat 0 -324px;}
+
+
+.vip_fx_p { height: 24px; line-height: 24px;}
+.vip_fenx_area { padding: 10px 10px 20px 10px; overflow: hidden;}
+.vip_fenx_area a { height: 16px; float: left; padding-left: 20px; margin: 0 8px; color: #06C;}
+.fenx_qq { background: url(/images/fenx_icon.png) 0 0 no-repeat;}
+.fenx_renren { background: url(/images/fenx_icon.png) 0 -18px no-repeat;}
+.fenx_sina { background: url(/images/fenx_icon.png) 0 -36px no-repeat;}
+
+.vip_fx_textarea { position: relative;}
+.v_f_info { position: absolute; top: 0px; left: 480px;}
+.v_f_info p { line-height: 24px; height: 24px;}
+.v_f_info p a { color:#0066CC;}
+.v_f_info p a:hover { text-decoration: underline;}
+.vip_fx_textarea textarea { width: 460px; height: 70px; color: #333; line-height: 24px; font-size: 12px;}
+.vip_sh_tis { float: left; color: #666; margin-top: 20px; padding-left: 20px;}
+
+/*解析笔记弹出层----*/
+.fx_ex_content { display: none;}
+.fx_ex_tab { width: 377px; height: 600px; padding: 0 0 0 20px; display: none; position: absolute; z-index: 100; background: url(/images/fx_ex_bg.png) no-repeat; _background: url(/images/fx_ex_bg.gif) no-repeat;}
+.fx_ex_t { height: 27px;}
+.fx_ex_t a { float: right; margin: 15px 10px 0 0;}
+
+
 
 
 /*foot--------------*/

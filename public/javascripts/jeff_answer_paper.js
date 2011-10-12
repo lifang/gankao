@@ -22,7 +22,9 @@ var question_result_color=0; //记录题目的颜色。默认为0；1为答对�
 function load_paper(practice_type) {
     setTimeout(function(){
         create_paper(practice_type);
-        fix_div_top=parseInt(document.getElementById("paper_navigation").childNodes[0].offsetTop);    // fix_top方法用，记录div初始的top。第三、第四类综合训练用
+        if(practice_type=="4"||practice_type=="5"){
+            fix_div_top=parseInt(document.getElementById("paper_navigation").childNodes[0].offsetTop);    // fix_top方法用，记录div初始的top。第三、第四类综合训练用
+        }
         load_switch=1;   //页面载入完成，设置load_switch=1 第五类综合训练使用到，控制程序流程有用。
     }, 500);
 
@@ -90,7 +92,7 @@ function create_block(bocks_div, block,practice_type) {
         ul.innerHTML+="<div class='space20'></div>";
     }
     if(practice_type=="4"||practice_type=="5"){
-        ul.innerHTML+="<div class='tb_tis'><span class='red'>*</span>点击单词块可改变背景颜色，做为标记。</div>";
+        ul.innerHTML+="<div class='tb_tis'><span class='red'>*</span>拖选下面的单词到相应的答案位置。已经拖选过的单词会给出标记。</div>";
     }
     ul.appendChild(navigation_div);
     if(practice_type=="3"){
@@ -194,7 +196,7 @@ function create_problem(ul, problem, block_nav_div,practice_type) {
     }else{
         if(practice_type=="6"){
             var task_con_div = create_element("div", null, "task_con_" + problem.id, "task_con", null, "innerHTML");
-            parent_div_str += "<div class='play'><div class='play_btn'><a href='javascript:void(0);' onclick=\"javascript:document.getElementById('audio_control_"+problem.id+"').onclick();\"><img id='practice2_audio_control_"+problem.id+"' src='/images/paper/play_icon.png'></a></div></div>";
+            parent_div_str += "<div class='play'><div class='play_btn'><a href='javascript:void(0);' onclick=\"javascript:document.getElementById('audio_control_"+problem.id+"').onclick();\"><img id='practice2_audio_control_"+problem.id+"' src='/images/paper/play_icon.png'></a></div><span class='red'>*</span> 点击图标开始播放，可重复播放。</div>";
             parent_div_str += "<div  style='display:none;'>"+problem_title+"</div>";
             parent_div_str += "<input type='hidden' id='practice5_list_"+problem.id+"' value=\""+problem_title.replace(/<[^{><}]*>/g, "")+"\" />";
         }else{
@@ -202,7 +204,7 @@ function create_problem(ul, problem, block_nav_div,practice_type) {
                 parent_div_str += "<div class='task_con'><p>"+ problem_title + "   </p></div>";
             }else{
                 parent_div_str += "<div class='play'>";
-                parent_div_str += "<div class='tishi'>"+ problem_title + "<span class='red'>*</span> 点击开始播放，可重复播放。</div><div class='clear'></div></div>"
+                parent_div_str += "<div class='tishi'>"+ problem_title + "<span class='red'>*</span> 点击图标开始播放，可重复播放。</div><div class='clear'></div></div>"
             }
         }
     }
@@ -705,11 +707,18 @@ function question_value(question_id,practice_type) {
 
 //提交试卷之前判断试卷是否已经全部答对
 function generate_result_paper(paper_id,examination_id,practice_type) {
+
     var all_question_ids = $("all_question_ids");
     if (all_question_ids != null && all_question_ids.value == "") {
         return true;
     }  //没有任何小题，第二类题型触发
-    
+
+    if(practice_type!="6"){
+        var submit_buttons = document.getElementsByName("question_submit");
+        for(var i=0;i<submit_buttons.length;i++){
+            submit_buttons[i].onclick();
+        }   //保存所有答案
+    }   //第五类不经过，有冲突
     if (all_question_ids != null && all_question_ids.value != "") {
         var question_id_array=all_question_ids.value.split(",");
         var question_sum = question_id_array.length-1;
@@ -723,7 +732,6 @@ function generate_result_paper(paper_id,examination_id,practice_type) {
         check_answer=1;
         correct_sum=0;
         //    load_answer(paper_id,examination_id);
-        
         $("all_question_ids").value="";
         $("problem_ids").value="";
         $("block_ids").value="";
