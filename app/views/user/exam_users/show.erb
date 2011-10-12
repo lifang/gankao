@@ -50,15 +50,16 @@
           <% end %>
         </div>
         <% block.elements['problems'].each_element do |problem|
-          if problem.attributes["id"].nil?
-            block_comment = "<div class='question_text_explain'><p><em>" + problem.elements["part_description"].text + "</em></p></div>"
-          else
+          if problem.attributes["id"].nil? %>
+            <div class='question_text_explain'>
+              <p><em><%= problem.elements["part_description"].text.to_s.html_safe %></em></p>
+            </div>
+         <% else
             problem_ids += problem.attributes["id"] + "," %>
             <div class="part_div">
               <div class="part_question" id="question_info_<%= problem.attributes["id"].to_i %>">
                 <% unless problem.elements['title'].nil? or problem.elements['title'].text.nil? or problem.elements['title'].text == "" %>
                   <div class="part_q_text">
-                    <%= block_comment.html_safe if block_comment != "" %>
                     <div class="question_text_div" id="problem_title_<%= problem.attributes["id"] %>"
                          style="word-wrap:break-word; word-break:break-all;">
                            <%= problem.elements['title'].text.to_s.html_safe %>
@@ -68,12 +69,6 @@
                     <% end %>
                     <%= render :partial=>"/user/exam_users/more_blanks", :object=> problem  %>
                   </div>
-                <% else %>
-                  <% if block_comment != "" %>
-                    <div class="part_q_text"><%= block_comment.html_safe %>
-                      <%= render :partial=>"/user/exam_users/more_blanks", :object=> problem  %>
-                    </div>
-                  <% end %>
                 <% end %>
                 <%= question_ids = ""
                 problem.elements["questions"].each_element do |question| %>

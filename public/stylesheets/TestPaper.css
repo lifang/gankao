@@ -64,7 +64,7 @@ img { border: none;}
 
 
 /*答题样式-----*/
-.part_div { margin-top: 20px;}
+.part_div { margin-bottom: 20px;}
 
 .part_question {
     border-top: 1px #eaeaea solid;
@@ -76,7 +76,7 @@ img { border: none;}
 .part_q_text { padding: 10px; background: #fdfeff; border-bottom:1px solid #EAEAEA;}
 .question_text_div p, .question_text_div div { line-height: 18px; text-indent: 24px; text-align: justify; padding: 5px 0;}
 
-.question_text_explain { border-bottom: 1px #666 dashed; padding: 10px; line-height: 24px; font-family: Georgia, "Times New Roman", Times, serif; color: #999;}
+.question_text_explain {padding: 10px; line-height: 24px; font-family: Georgia, "Times New Roman", Times, serif; color: #999;}
 
 
 

@@ -542,7 +542,9 @@ function colse_or_open_block(current_time) {
         var has_close_block = false;
         var all_block_end_time = block_end_hash.values();
         for (var j=0; j<all_block_end_time.length; j++) {
-            var block_title = $("b_title_" + block_end_hash.index(all_block_end_time[j])).innerHTML;
+            var b_id = block_end_hash.index(all_block_end_time[j]);
+            var block_title = $("b_title_" + b_id).innerHTML;
+
             if (all_block_end_time[j] == current_time) {
                 $("show_flash").innerHTML = block_title + " 部分答题时间已到，您的答案将自动被提交，请您继续做其它部分的题。";
                 window.clearInterval(local_timer);
