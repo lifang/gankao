@@ -126,8 +126,8 @@ DEPENDENCIES
   gchartrb (= 0.8)
   gravatar_image_tag (= 0.1.0)
   mysql2 (= 0.2.6)
-  oauth
-  oauth2
+  oauth (= 0.4.5)
+  oauth2 (= 0.4.1)
   rails (= 3.0.5)
   rake (= 0.8.7)
   rspec (= 2.0.0)
@@ -135,5 +135,5 @@ DEPENDENCIES
   sinatra
   spreadsheet (= 0.6.5.5)
   webrat (= 0.7.1)
-  weibo
+  weibo (= 0.0.4)
   will_paginate (= 3.0.pre2)

@@ -69,8 +69,8 @@ Gankao::Application.routes.draw do
   end
   resources :users do
     collection do
-      get "get_proof_code", "get_register_code", "re_active", "active_success", "active_false", "roles_manage","goto_vip"
-      post "load_set_right","set_right"
+      get "get_proof_code", "get_register_code", "re_active", "active_success", "active_false", "roles_manage","goto_vip","get_vip"
+      post "load_set_right","set_right","create_proof"
     end
     member do
       get "active", "user_active", "edit_password"

@@ -1,0 +1,115 @@
+
+<title>升级VIP</title>
+
+<div class="main">
+  <div class="main_vip">
+    <div class="vip_title"><img alt="gankao" src="/images/kt_vip.png"/></div>
+    <div class="vip_zfu">
+      <div class="vip_czhi_title">支付宝</div>
+      <div class="vip_czhi_box">
+        <div class="zfb_pic"><img alt="gankao" src="/images/zfb_pic.png"/></div>
+        <div class="vip_czhi_input"><label>充值金额：</label><input name="" type="text"/></div>
+        <div class="vip_czhi_btn"><button>确认支付</button></div>
+        <div class="clear"></div>
+      </div>
+
+      <div class="vip_czhi_p"><span class="red">*</span> 温馨提示：支付宝充值免手续费。</div>
+    </div>
+    <div class="space20"></div>
+    <div class="vip_squan">
+      <div class="vip_czhi_title">授权码</div>
+      <div class="vip_czhi_box0">
+        <div class="vip_czhi_input"><label>授权码：</label><input name="" type="text"/></div>
+        <div class="vip_czhi_btn"><button>确  认</button></div>
+        <div class="clear"></div>
+      </div>
+
+      <div class="vip_czhi_p"><span class="red">*</span> 温馨提示：支付宝充值免手续费。</div>
+    </div>
+    <div class="space20"></div>
+    <div class="vip_fenx">
+      <div class="vip_czhi_title">分享好友</div>
+      <div class="vip_czhi_box">
+        <p class="vip_fx_p">1.用以下方式分享给你的好友</p>
+        <div class="vip_fenx_area">
+          <!-- JiaThis Button BEGIN -->
+          <div id="ckepop">
+            <a class="jiathis_button_qzone">QQ空间</a>
+            <a class="jiathis_button_renren">人人网</a>
+            <a class="jiathis_button_tsina">新浪微博</a>
+            <!--                 <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>   -->
+            <!--                     <a class="jiathis_counter_style"></a>             -->
+          </div>
+          <script type="text/javascript" >
+            var jiathis_config={
+              url:"<%= Constant::SERVER_PATH %>",
+              title:"哇，我发现了一个很好的英语四级备考网站--赶考网。赶考网是完全免费、题库权威、测评最专业的在线英语四级备考网，提供英语四级在线做题、模拟考试、信心指数和真题训练，并设有在线错题库和笔记本功能，为考生提供全面的服务。",
+              hideMore:false
+            }
+          </script>
+          <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+          <!-- JiaThis Button END -->
+
+          <div class="clear"></div>
+        </div>
+        <p class="vip_fx_p">2.提供分享后的凭证</p>
+        <% form_for :proof,:url=>"/users/create_proof",:html=>{:onsubmit=>"return validate_form_proof();"} do |f|%>
+          <div class="vip_fx_textarea">
+            <%= f.text_area :proof_text,:id=>"form_textarea",:cols=>"",:row=>"" %>
+            <div class="v_f_info">
+              <p><a href="javascript:void(0);">提供QQ空间分享凭证方法</a></p>
+              <p><a href="javascript:void(0);">提供人人网分享凭证方法</a></p>
+              <p><a href="javascript:void(0);">提供新浪微博分享凭证方法</a></p>
+            </div>
+          </div>
+          <div class="vip_czhi_btn"><button type="submit">确  认</button></div>
+        <% end %>
+        <span class="vip_sh_tis">审核需10分钟左右，请耐心等待....</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="fx_ex_content" style="display: block; ">
+  <div class="fx_ex_tab" style="top: 23px; left: 719px; display: none; ">
+    <div class="fx_ex_t"><a href="javascript:void(0);"><img  alt="gankao" src="/images/x.gif"/></a></div>
+    <div><img  alt="gankao" src="/images/qq_fx.png"/><p class="red">分享QQ空间后，复制显示分享内容的网址，粘贴到左边的文本框中，确定提交。</p></div>
+  </div>
+  <div class="fx_ex_tab" style="top: 51px; left: 735px; display: none; ">
+    <div class="fx_ex_t"><a href="javascript:void(0);"><img  alt="gankao" src="/images/x.gif"/></a></div>
+    <div><img  alt="gankao" src="/images/renren_fx.png"/><p class="red">分享人人网后，复制显示分享内容的网址，粘贴到左边的文本框中，确定提交。</p></div>
+  </div>
+  <div class="fx_ex_tab" style="display: none; top: 71px; left: 735px; ">
+    <div class="fx_ex_t"><a href="javascript:void(0);"><img  alt="gankao" src="/images/x.gif"/></a></div>
+    <div><img alt="gankao" src="/images/sina_fx.png"/><p class="red">分享新浪微博后，点击微博内容下的时间，选择复制，把复制的内容粘贴到左边的文本框中，确定提交。</p></div>
+  </div>
+</div>
+
+
+<script>
+  //解析弹出层
+  jQuery(function(){
+    jQuery('.v_f_info a').click(function(e){
+      var index = jQuery('.v_f_info a').index(this);
+
+      jQuery('.fx_ex_content').css('display','block');
+      jQuery('.fx_ex_content > div').eq(index).css('display','block');
+      jQuery('.fx_ex_content > div').eq(index).css({
+        'top':(e.pageY-600)+'px',
+        'left':(e.pageX-80)+'px'
+      }).siblings().hide();
+
+    })
+    jQuery('.fx_ex_t > a').click(function(){
+      jQuery('.fx_ex_content').css('display','none')
+      jQuery('.fx_ex_content > div').css('display','none');
+    })
+
+  })
+
+  function validate_form_proof(){
+    if(document.getElementById("form_textarea").value.replace(/ /g,"")!=""){
+      return true;
+    }
+    return false;
+  }
+</script>
