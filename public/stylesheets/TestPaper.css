@@ -190,6 +190,10 @@ img { border: none;}
 .tp_up_btn { background: url(/images/paper/testPage_btn.png) no-repeat 0 0;}
 .tp_down_btn { background: url(/images/paper/testPage_btn.png) no-repeat -119px 0;}
 
+/*鎻愪氦閿欒寮瑰嚭灞�----*/
+.upErrorTo_tab { width: 91px; height: 82px; padding: 14px 10px 0 5px; background: url(../images/upErrorTo_bg.png) no-repeat; display: none; position: absolute; z-index:100;}
+.upErrorTo_tab a { height: 24px; line-height: 24px; text-align: center; color: #333; display: block; text-decoration: none;}
+.upErrorTo_tab a:hover { color:#0099FF; text-decoration: underline;}
 
 
 /*黄色弹出层--------------*/
