@@ -8,9 +8,9 @@ class UsersController < ApplicationController
     @user_info = User.find(params[:id])
     @user_info.update_attributes(:name=>params[:user_info][:name],:school=>params[:user_info][:school])
     if @user_info.save
-    str="用户信息修改成功。"
+      str="用户信息修改成功。"
     else
-    str="用户信息修改失败。"
+      str="用户信息修改失败。"
     end
     if params[:user_info][:password]!=""
       if @user_info.has_password?(params[:user_info][:old_password])
@@ -112,11 +112,13 @@ class UsersController < ApplicationController
 
   def edit
     @user= User.find(params[:id])
+    @title="个人中心"
     render :layout => "member"
   end
 
   def edit_password
     @user= User.find(params[:id])
+    @title="密码修改"
     render :layout => "member"
   end
 
@@ -155,8 +157,24 @@ class UsersController < ApplicationController
   end
 
   def goto_vip
+    @title="VIP特权"
     render :layout => "member"
   end
 
+  def get_vip
+    @title="升级VIP"
+    render :layout=>"member"
+  end
+  
+  def create_proof
+    Proof.create(:text=>params[:proof][:proof_text],:user_id=>cookies[:user_id],:checked=>false)
+    flash[:notice]="凭证提交成功，请等待审核。"
+    redirect_to "/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}"
+  end
+
 end
+
+
+
+
 

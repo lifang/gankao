@@ -67,7 +67,5 @@ class User::CombinePracticesController < ApplicationController
   end
 end
 
-def save_result
-  
-end
+
 

@@ -57,11 +57,13 @@ module RenrenHelper
   end
 
   def api_key
-    "7f4d7bacf5b144d8940d5a8177b592b0"
+#    "7f4d7bacf5b144d8940d5a8177b592b0"           # 苏州协创-赶考网
+   "05983c17a2fd4b81a2f8032b4cd8d4f2"             # 10-11 赶考网
   end
 
   def api_secret
-    "fe0430b144ff4cb48f1060933e1f68b0"
+#    "fe0430b144ff4cb48f1060933e1f68b0"           # 苏州协创-赶考网
+   "106a4639bd1e4288ad90cd3d27235623"             # 10-11 赶考网
   end
 
   def access_token_url(code)

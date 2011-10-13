@@ -86,7 +86,7 @@ function get_block_id(blocks) {
 }
 
 //添加试卷块
-var question_num = 1;   //根据提点显示导航
+var question_num = 0;   //根据提点显示导航
 var block_block_flag = 0;   //记录打开的模块
 var block_comment = "";
 function create_block(bocks_div, block) {
@@ -174,13 +174,13 @@ function next_last_index() {
                         method_str = (is_fix_time && block_start_hash.get(next_block_id) != null && block_start_hash.get(next_block_id) != "")
                         ? "hand_open_nav" : "open_nav";
                         next_div.innerHTML = "<a href='javascript:void(0);' class='tp_down_btn' onclick='javascript:" + method_str
-                        + "("+ next_block_id +");'>下一部分</a>";
+                        + "(\""+ next_block_id +"\");'>下一部分</a>";
                     } else if (block_ids.indexOf(block_ids[i]) == block_ids.length - 1) {
                         last_block_id = "" + block_ids[block_ids.indexOf(block_ids[i]) - 1];
                         method_str = (is_fix_time && block_start_hash.get(last_block_id) != null && block_start_hash.get(last_block_id) != "")
                         ? "hand_open_nav" : "open_nav";
                         next_div.innerHTML = "<a href='javascript:void(0);' class='tp_up_btn' onclick='javascript:" + method_str
-                        + "("+ last_block_id +");'>上一部分</a>";
+                        + "(\""+ last_block_id +"\");'>上一部分</a>";
                     } else {
                         next_block_id = "" + block_ids[block_ids.indexOf(block_ids[i]) + 1];
                         method_str = (is_fix_time && block_start_hash.get(next_block_id) != null && block_start_hash.get(next_block_id) != "")
@@ -189,8 +189,8 @@ function next_last_index() {
                         next_method = (is_fix_time && block_start_hash.get(last_block_id) != null && block_start_hash.get(last_block_id) != "")
                         ? "hand_open_nav" : "open_nav";
                         next_div.innerHTML = "<a href='javascript:void(0);' class='tp_down_btn' onclick='javascript:"
-                        + method_str + "("+ next_block_id +");'>下一部分</a><a href='javascript:void(0);' class='tp_up_btn' onclick='javascript:" + next_method
-                        + "("+ last_block_id +");'>上一部分</a>";
+                        + method_str + "(\""+ next_block_id +"\");'>下一部分</a><a href='javascript:void(0);' class='tp_up_btn' onclick='javascript:" + next_method
+                        + "(\""+ last_block_id +"\");'>上一部分</a>";
                     }
                     $("block_" + block_ids[i]).appendChild(next_div);
                 }
@@ -242,8 +242,8 @@ function open_block_nav(block_id) {
     $("block_nav_" + block_id).className = "first_title highLight";
     $("nav_block_" + block_id).style.display = "block";
     $("block_" + block_id).style.display = "block";
-    start_block_audio(block_id);
     window.scrollTo(0, 0);
+    start_block_audio(block_id);
 }
 
 //关闭模块
@@ -361,11 +361,20 @@ function create_problem(block_div, problem, block_nav_div) {
             score_str = "<div class='fraction_h'>" + problem.score + "分</div>";
         }
         if (problem.title != null && problem.title != "") {
-            out_que_div.innerHTML = "<div class='part_q_text' id='problem_title_"+ problem.id
-            +"'>"+ block_comment +"<div class='question_text_div' style='word-wrap:break-word; word-break:break-all;'>"
-            + replace_title_span(problem.title, problem.id) + "</div>" + score_str +"</div>";
+            var titles = problem.title.split("<time>");
+            if (titles[0] != "" || titles[2] != "") {
+                var complete_title = "";
+                if (titles[0] != null && titles[0] != "") {
+                    complete_title += replace_title_span(titles[0], problem.id);
+                }
+                if (titles[2] != null && titles[2] != "") {
+                    complete_title += replace_title_span(titles[2], problem.id);
+                }
+                out_que_div.innerHTML = "<div class='part_q_text' id='problem_title_"+ problem.id
+                +"'>"+ block_comment +"<div class='question_text_div' style='word-wrap:break-word; word-break:break-all;'>"
+                + complete_title + "</div>" + score_str +"</div>";
+            }
         } else if (block_comment != "") {
-            
             out_que_div.innerHTML = "<div class='part_q_text' id='problem_title_"+ problem.id
             +"'>"+ block_comment +"</div>";
         }
@@ -1152,7 +1161,7 @@ function store_title_span(problem_id, question_id) {
 function start_block_audio(block_id) {
     if ($("jquery_jplayer_" + block_id) != null) {
         var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
-        if (getCookie("exam_audio_" + block_id) == null || getCookie("exam_audio_" + block_id) == 0) {
+        if (getCookie("exam_audio_" + block_id) == null || new Number(getCookie("exam_audio_" + block_id)) == 0) {
             flash_div.innerHTML = "<p>您当前打开的模块为听力模块，听力正在播放或者即将播放，请做好答题准备。</p>";
             document.body.appendChild(flash_div);
             show_flash_div();
@@ -1179,7 +1188,7 @@ function control_media(audio_id) {
                 if (getCookie("audio_time_" + audio_id) != null) {
                     audio.jPlayer("play", parseFloat(getCookie("audio_time_" + audio_id)));
                 } else {
-                    audio.jPlayer("play");
+                    audio.jPlayer("play", 0);
                 }
                 audio.bind(jQuery.jPlayer.event.timeupdate, function(event) {
                     if (event.jPlayer.status.currentTime != null) {
