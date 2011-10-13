@@ -167,7 +167,7 @@ class UsersController < ApplicationController
   end
   
   def create_proof
-    Proof.create(:text=>params[:proof][:proof_text],:user_id=>cookies[:user_id],:checked=>false)
+    Proof.create(:text=>params[:proof][:proof_text],:user_id=>cookies[:user_id],:checked=>0)
     flash[:notice]="凭证提交成功，请等待审核。"
     redirect_to "/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}"
   end

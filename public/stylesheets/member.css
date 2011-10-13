@@ -16,7 +16,7 @@ img { border: none;}
 .head_box { width: 900px; margin: 0 auto;}
 .member_logo { width: 140px; height: 41px;}
 .member_nav { height: 41px; line-height: 41px; float: right;}
-.member_nav a { color: #333; margin: 0 5px;}
+.member_nav a { margin: 0 5px;color: #A10000;}
 
 .main { width: 810px; margin: 20px auto;}
 
