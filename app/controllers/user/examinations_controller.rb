@@ -161,7 +161,6 @@ class User::ExaminationsController < ApplicationController
     f=File.new("e:/gankao/public/javascripts/word.js","w")
     f.write("#{"word="+hash.to_json.force_encoding('UTF-8')}")
     f.close
-    puts "========================"
     render :text => "添加成功！"
   end
     

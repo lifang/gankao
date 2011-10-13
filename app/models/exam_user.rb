@@ -478,7 +478,8 @@ class ExamUser < ActiveRecord::Base
     xml.elements["blocks"].each_element do |block|
       block.elements["problems"].each_element do |problem|
         problem.elements["questions"].each_element do |xml_question|
-          if xml_question.attributes["correct_type"].to_i != Problem::QUESTION_TYPE[:CHARACTER]
+          if xml_question.attributes["correct_type"].to_i != Problem::QUESTION_TYPE[:CHARACTER] &&
+              xml_question.attributes["correct_type"].to_i != Problem::QUESTION_TYPE[:SINGLE_CALK]
             if xml_question.elements["answer"] and xml_question.elements["answer"].text
               answer = xml_question.elements["answer"].text
               answers = answer.split(";|;")
