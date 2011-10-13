@@ -16,19 +16,21 @@
           <label>密码：</label>
           <div class="setting-item-main">
             <%= f.password_field :password, :class => "required input_style" %>
-            <p class="rcf_p">密码长度在6到20位之间</p>
+            <p class="rcf_p">密码长度在6到20位之间</p> <p class="rcf_p red" id="passwordErr"></p>
           </div>
         </div>
         <div class="rcf_box">
           <label>确认密码：</label>
           <div class="setting-item-main">
             <%= f.password_field :password_confirmation, :class => "required input_style" %>
+            <p class="rcf_p red" id="confirmationErr"></p>
           </div>
         </div>
         <div class="rcf_box">
           <label>昵称：</label>
           <div class="setting-item-main">
             <%= f.text_field :name, :class => "required input_style" %>
+            <div class="rcf_p red" id="usernameErr"></div>
           </div>
         </div>
         <div class="rcf_box rcf_box_bottom">
