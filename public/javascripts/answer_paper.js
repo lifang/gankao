@@ -1195,15 +1195,19 @@ function control_media(audio_id) {
                         remember_time_flag = 1;
                         if (block_end_hash.get(audio_id) != null && block_end_hash.get(audio_id) != "") {
                             var time = return_giving_time(block_start_hash.get(audio_id)) - return_giving_time(block_end_hash.get(audio_id)) ;
-                            alert(time);
                             if (time < parseFloat(event.jPlayer.status.duration)) {
                                 var total_time = return_giving_time(block_end_hash.get(audio_id)) + time
-                                    - Math.ceil(parseFloat(event.jPlayer.status.duration));
-                                alert(total_time);
-                                alert((Math.floor(total_time/3600) + ":" + Math.floor(total_time%3600/60) + ":" + total_time%3600%60));
+                                - Math.ceil(parseFloat(event.jPlayer.status.duration));
                                 block_end_hash.set(audio_id,
                                     (Math.floor(total_time/3600) + ":" + Math.floor(total_time%3600/60) + ":" + total_time%3600%60));
-
+                                var block_ids = $("block_ids").value.split(",");
+                                var next_block_id = "" + block_ids[block_ids.indexOf(audio_id) + 1];
+                                if (block_start_hash.get(next_block_id) != null){
+                                    var next_start_time = return_giving_time(block_start_hash.get(next_block_id))
+                                    - (Math.ceil(parseFloat(event.jPlayer.status.duration)) - time);
+                                    block_start_hash.set(next_block_id,
+                                        (Math.floor(next_start_time/3600) + ":" + Math.floor(next_start_time%3600/60) + ":" + next_start_time%3600%60));
+                                }
                             }
                         }
                     }
