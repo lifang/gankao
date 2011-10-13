@@ -32,7 +32,7 @@ div.jp-video {
 }
 div.jp-audio {
 	width:330px;
-        padding: 0px;
+	padding: 0;
 }
 div.jp-video-270p {
 	width:480px;
@@ -240,7 +240,7 @@ a.jp-volume-max {
 
 div.jp-audio div.jp-type-single a.jp-mute,
 div.jp-audio div.jp-type-single a.jp-unmute {
-	margin-left: 165px;	
+	margin-left: 165px;
 }
 
 div.jp-audio div.jp-type-playlist a.jp-mute,
@@ -249,7 +249,7 @@ div.jp-audio div.jp-type-playlist a.jp-unmute {
 }
 
 div.jp-audio a.jp-volume-max {
-	margin-left: 58px;	
+	margin-left: 58px;
 }
 
 div.jp-video a.jp-mute,
@@ -319,11 +319,11 @@ div.jp-volume-bar-value {
 
 div.jp-audio div.jp-time-holder {
 	position:absolute;
-	top:50px;
+	top:30px;
 }
 div.jp-audio div.jp-type-single div.jp-time-holder {
-	left:110px;
-	width:186px;
+	left:75px;
+	width:145px;
 }
 div.jp-audio div.jp-type-playlist div.jp-time-holder {
 	left:166px;
@@ -333,7 +333,7 @@ div.jp-audio div.jp-type-playlist div.jp-time-holder {
 div.jp-current-time,
 div.jp-duration {
 	width:60px;
-	font-size:.64em;
+	font-size:6px;
 	font-style:oblique;
 }
 div.jp-current-time {

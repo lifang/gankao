@@ -57,7 +57,7 @@
               attrs_array=attrs_str.split(";-;") unless attrs_str.nil?
               correct_type = question.attributes["correct_type"]
             %>
-              <div class="p_question_list question_no">
+              <div class="p_question_list">
                 <div class="p_q_l_left"><%= index  %></div>
                 <div class="p_q_l_right_b" id="drag_question_<%= question.attributes["id"] %>">
                   <% unless  question.elements['description'].nil? or question.elements['description'].text.nil? or

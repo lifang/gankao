@@ -130,7 +130,8 @@ function generate_audio_element(flag_id) {
     + "<li><a href='javascript:;' class='jp-unmute' tabindex='1' title='unmute'>unmute</a></li>"
     + "<li><a href='javascript:;' class='jp-volume-max' tabindex='1' title='max volume'>max volume</a></li></ul>"
     + "<div class='jp-progress'><div class='jp-seek-bar'><div class='jp-play-bar'></div></div></div>"
-    + "<div class='jp-volume-bar'><div class='jp-volume-bar-value'></div></div></div></div></div>";
+    + "<div class='jp-volume-bar'><div class='jp-volume-bar-value'></div></div>"
+    + "<div class='jp-time-holder'><div class='jp-current-time'></div><div class='jp-duration'></div></div></div></div></div>";
     return final_title;
 }
 

@@ -11,7 +11,18 @@ Gankao::Application.configure do
 
   # Specifies the header that your server uses for sending files
   config.action_dispatch.x_sendfile_header = "X-Sendfile"
-
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    #:location       => '/usr/sbin/sendmail',
+    #:arguments      => '-i -t'
+    :address => "http://mail.gankao.co/",
+    :port => 587,
+    :domain => "gankao.co",
+    :authentication => :plain,
+    :user_name => "robot@gankao.co",
+    :password => "comdo2010"
+  }
+  config.action_mailer.raise_delivery_errors = false
   # For nginx:
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
 

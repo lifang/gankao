@@ -47,9 +47,10 @@ function create_paper(practice_type) {
     if(practice_type=="4"||practice_type=="5"){
         jQuery('.task3_li').height(jQuery('.task3_li > ul').height());
         load_navigation_color();
-        window.onscroll=function(){
-            fix_top("paper_navigation");
-        };
+//        window.onscroll=function(){          // IE、火狐不支持，弃用
+//            fix_top('paper_navigation');
+//        };
+        setInterval("fix_top('paper_navigation');",100);
     }
 //    var audios = document.getElementsByTagName("audio");
 //    var audios_sum=audios.length;
@@ -786,12 +787,14 @@ function load_local_save(paper_id, examination_id) {
 
 var fix_div_top=0;
 function fix_top(element_id){
-    if(parseInt(document.getElementById(element_id).childNodes[0].offsetTop-document.body.scrollTop)<0){
+
+    var body_scrollTop=document.body.scrollTop|document.documentElement.scrollTop;
+    if(parseInt(document.getElementById(element_id).childNodes[0].offsetTop-body_scrollTop)<0){
         document.getElementById(element_id).childNodes[0].style.position="fixed";
         document.getElementById(element_id).childNodes[0].style.top="0px";
     }
-    if(document.body.scrollTop<fix_div_top){
-        document.getElementById(element_id).childNodes[0].style.position=document.getElementById(element_id).style.position;
+    if(body_scrollTop<fix_div_top){
+        document.getElementById(element_id).childNodes[0].style.position="";
         document.getElementById(element_id).childNodes[0].style.top="";
     }
 }

@@ -164,6 +164,13 @@ class Examination < ActiveRecord::Base
           and status != #{Examination::STATUS[:CLOSED]} and category_id=#{category_id} and types = #{types}")
   end
 
+  #返回综合训练的总数（包括关闭的）
+  def self.return_all_exam_count(types,category_id)
+    return Examination.count(:id,
+      :conditions => "is_published = #{Examination::IS_PUBLISHED[:ALREADY]}
+          and category_id=#{category_id} and types = #{types}")
+  end
+
   #随机返回用户一条试卷记录
 
   def self.rand_examnation(types, user_id, category_id)

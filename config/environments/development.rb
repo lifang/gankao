@@ -25,12 +25,12 @@ Gankao::Application.configure do
   ActionMailer::Base.smtp_settings = {
     #:location       => '/usr/sbin/sendmail',
     #:arguments      => '-i -t'
-    :address => "smtp.gmail.com",
+    :address => "http://mail.gankao.co/",
     :port => 587,
-    :domain => "gmail.com",
+    :domain => "gankao.co",
     :authentication => :plain,
-    :user_name => "lifang@comdosoft.com",
-    :password => "139li860808fang"
+    :user_name => "robot@gankao.co",
+    :password => "comdo2010"
   }
   config.action_mailer.raise_delivery_errors = false
 
