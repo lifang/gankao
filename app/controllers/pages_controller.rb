@@ -5,7 +5,7 @@ class PagesController < ApplicationController
     if cookies[:user_id] and request.referer == "/"
       redirect_to "/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}"
     else
-      @title="首页"
+      @title="赶考"
       render :layout=>"index"
     end
     
