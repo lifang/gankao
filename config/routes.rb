@@ -11,7 +11,7 @@ Gankao::Application.routes.draw do
   resources :pages do
     collection do
       get "sina_index"
-      get "renren_index","follow_me"
+      get "renren_index","follow_me","login_from_qq","qq_index"
     end
   end
   resources :exam_lists do
@@ -60,7 +60,7 @@ Gankao::Application.routes.draw do
       get "get_code"
       post "user_code"
       get "sina_login","friend_add_request","friend_add"
-      get "renren_login"
+      get "renren_login","qq_weibo"
     end
     member do
       get "new_code","active"

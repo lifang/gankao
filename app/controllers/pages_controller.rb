@@ -1,6 +1,6 @@
 #encoding: utf-8
 class PagesController < ApplicationController
-
+  require 'oauth/oauth'
   def index
     if cookies[:user_id] and request.referer == "/"
       redirect_to "/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}"
@@ -51,6 +51,34 @@ class PagesController < ApplicationController
       render :inline => "<script>window.opener.location.reload();window.close();</script>"
     end
   end
+  
 
+  def login_from_qq
+    consumer = OAuth::Consumer.new(app_id, app_key, CONSUMER_OPTIONS)
+    request_token = consumer.get_request_token()
+    session[:qqtoken] = request_token.token
+    session[:qqsecret] = request_token.secret
+    redirect_to request_token.authorize_url + "&oauth_consumer_key=#{app_id}&oauth_callback=http://localhost:3000/pages/qq_index"
+  end
+
+
+  def qq_index
+    begin
+      consumer = OAuth::Consumer.new(app_id, app_key, CONSUMER_OPTIONS)
+      request_token = ::OAuth::RequestToken.new(consumer, session[:qqtoken], session[:qqsecret])
+      access_token = request_token.get_access_token(:oauth_vericode => params[:oauth_vericode])
+      response = access_token.get("/user/get_user_info?openid=#{params[:openid]}")
+      return_hash = ActiveSupport::JSON.decode(response.body)
+      nickname  = User.find_by_open_id(params[:openid])
+      if nickname.nil?
+        return_hash["nickname"]="qq用户" if return_hash["nickname"].nil?||return_hash["nickname"]==""
+        @user=User.create(:code_type=>'qq',:name=>return_hash["nickname"],:username=>return_hash["nickname"],:open_id=>params[:openid])
+      end
+      cookies[:user_id] = @user.id
+      render :inline => "<script>window.opener.location.href='/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}';window.close();</script>"
+    rescue
+      render :inline => "<script>window.opener.location.reload();window.close();</script>"
+    end
+  end
 
 end

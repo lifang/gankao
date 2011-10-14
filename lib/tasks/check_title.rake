@@ -28,6 +28,7 @@ namespace :check do
     end
 
     traverse_dir(file_path){|f|
+      puts f
       if f.to_s() =~ /\.xml$/
         doc= REXML::Document.new(File.new(f)).root
         NUM=0
@@ -49,7 +50,7 @@ namespace :check do
           end
         end
         js_file=Hash.from_xml(doc.to_s).to_json
-        write_xml("f:/exam_app/public/paperjs/#{doc.attributes['id']}.js","papers = "+js_file)
+        write_xml("#{Constant::BACK_PUBLIC_PATH}/paperjs/#{doc.attributes['id']}.js","papers = "+js_file)
         write_xml(file_path,doc)
       end
     }
