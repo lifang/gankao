@@ -110,7 +110,7 @@ class Collection < ActiveRecord::Base
 
   #如果当前题目有题点已经收藏过，就只收藏题点
   def add_question(question, answer_text, collection_problem, collection_xml)
-    question.elements["tags"].text="#{question.elements["tags"].text} 所有分类" unless question.elements["tags"].nil?
+    question.elements["tags"].text="#{question.elements["tags"].text}" unless question.elements["tags"].nil?
     question.add_element("user_answer").add_text("#{answer_text}")
     question.add_attribute("repeat_num", "1")
     question.add_attribute("error_percent", "0")
@@ -140,7 +140,7 @@ class Collection < ActiveRecord::Base
       end
     end
     last_question = paper_problem.elements["questions"].elements["question[@id='#{question_id.to_i}']"]
-    last_question.elements["tags"].text="#{last_question.elements["tags"].text} 所有分类" unless last_question.elements["tags"].nil?
+    last_question.elements["tags"].text="#{last_question.elements["tags"].text}" unless last_question.elements["tags"].nil?
     last_question.add_element("user_answer").add_text("#{answer_text}")
     last_question.add_attribute("repeat_num", "1")
     last_question.add_attribute("error_percent", "0")

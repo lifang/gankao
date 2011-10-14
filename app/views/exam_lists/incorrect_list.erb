@@ -27,6 +27,7 @@
         <%= form_for :tags, :url=>"/exam_lists/#{params[:id]}/search_tag_problems" ,:html=>{:id=>:tag_name} do %>
           <input type="hidden" value="" id="tag" name="tag" />
         <% end %>
+          <li><a href="/exam_lists/<%= Category::TYPE_IDS[:english_fourth_level] %>/incorrect_list">所有分类</a></li>
         <% @tags.each do |tag| %>
           <li><a href="javascript:void(0);" onclick="javascript:search_tag('<%= tag %>')"><%= tag %></a></li>
         <% end unless @tags.blank? %>
