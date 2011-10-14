@@ -8,7 +8,7 @@
       <% exam_lists.each_with_index do |exam, i|  %>
         <% examination = exam %>
         <div class="mokaoList  <%  if i==0 %> mkl_h  <% end %>" id="<%= i %>"><h3><%= examination.title %></h3><p>
-            <%= examination.start_at_time.nil? ? "任何时候" : examination.start_at_time.strftime("%Y-%m-%d %H:%M:%S") %></p>
+            <%= examination.start_at_time.nil? ? "任何时候" : examination.start_at_time.strftime("%Y-%m-%d") %></p>
         </div>
       <% end %>
     </div>
@@ -105,6 +105,9 @@
               <%  if (!examination.start_at_time.nil? and !examination.exam_time.nil? and examination.exam_time !=0 and
                     (examination.start_at_time + examination.exam_time.minutes) < Time.now) or examination.status == Examination::STATUS[:CLOSED] %>
                 <div class="per_btn"><a href="#">考试已结束</a></div>
+                <% elsif !examination.start_at_time.nil? and !examination.exam_time.nil? and examination.exam_time !=0 and
+                    examination.start_at_time  > Time.now %>
+                <div class="per_btn"><a href="#">尚未开始</a></div>
               <% else %>
                 <% if examination.exam_password1.nil? %>
                   <div class="per_btn"><a href="/user/examinations/<%= examination.id %>/do_exam" target="_blank">开始考试</a></div>

@@ -5,7 +5,7 @@ class User::HomesController < ApplicationController
 
   def show
     @simulations = Examination.find_by_sql("select * from examinations where types = #{Examination::TYPES[:SIMULATION]}
-      and is_published = #{Examination::IS_PUBLISHED[:ALREADY]} and category_id = #{params[:id].to_i} order by created_at desc")
+      and is_published = #{Examination::IS_PUBLISHED[:ALREADY]} and category_id = #{params[:id].to_i} order by created_at")
     @hash1 = Examination.exam_users_hash(cookies[:user_id], Examination::TYPES[:SIMULATION], params[:id].to_i)
     @simulations.each do |simulation|
       @simulations = @simulations - [simulation] if !@hash1.include?(simulation.id) and simulation.status == Examination::STATUS[:CLOSED]

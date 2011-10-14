@@ -4,29 +4,7 @@
 <div class="main">
   <div class="main_vip">
     <div class="vip_title"><img alt="gankao" src="/images/kt_vip.png"/></div>
-    <div class="vip_zfu">
-      <div class="vip_czhi_title">支付宝</div>
-      <div class="vip_czhi_box">
-        <div class="zfb_pic"><img alt="gankao" src="/images/zfb_pic.png"/></div>
-        <div class="vip_czhi_input"><label>充值金额：</label><input name="" type="text"/></div>
-        <div class="vip_czhi_btn"><button>确认支付</button></div>
-        <div class="clear"></div>
-      </div>
-
-      <div class="vip_czhi_p"><span class="red">*</span> 温馨提示：支付宝充值免手续费。</div>
-    </div>
-    <div class="space20"></div>
-    <div class="vip_squan">
-      <div class="vip_czhi_title">授权码</div>
-      <div class="vip_czhi_box0">
-        <div class="vip_czhi_input"><label>授权码：</label><input name="" type="text"/></div>
-        <div class="vip_czhi_btn"><button>确  认</button></div>
-        <div class="clear"></div>
-      </div>
-
-      <div class="vip_czhi_p"><span class="red">*</span> 温馨提示：支付宝充值免手续费。</div>
-    </div>
-    <div class="space20"></div>
+    <div class="vip_h">开通方法一：</div>
     <div class="vip_fenx">
       <div class="vip_czhi_title">分享好友</div>
       <div class="vip_czhi_box">
@@ -43,7 +21,7 @@
           <script type="text/javascript" >
             var jiathis_config={
               url:"<%= Constant::SERVER_PATH %>",
-              title:"哇，我发现了一个很好的英语四级备考网站--赶考网。赶考网是完全免费、题库权威、测评最专业的在线英语四级备考网，提供英语四级在线做题、模拟考试、信心指数和真题训练，并设有在线错题库和笔记本功能，为考生提供全面的服务。",
+              title:"12月要考四级的ggmm可以看看这个网站www.gankao.co，有在线模拟考试和新四级的全部真题，直接在线复习的，听力部分有录音，所有试题有解析，错题库可以让你更加针对性的复习，不用再到处找资料啦，全部一次搞定。对了，是免费的，有机会抽取iphone 4s哦！",
               hideMore:false
             }
           </script>
@@ -67,6 +45,28 @@
         <span class="vip_sh_tis">审核需10分钟左右，请耐心等待....</span>
       </div>
     </div>
+    <div class="space20"></div>
+    <div class="vip_h">开通方法二：</div>
+    <div class="vip_zfu">
+      <div class="vip_czhi_title">支付宝</div>
+      <div class="vip_czhi_box">
+        <div class="zfb_pic"><img alt="gankao" src="/images/zfb_pic.png"/><span><img src="/images/paper/35.png" /></span></div>
+        <div class="vip_czhi_input"><label>充值金额：</label><input name="" type="text"/></div>
+        <div class="vip_czhi_btn"><button>确认支付</button></div>
+        <div class="clear"></div>
+      </div>
+      <div class="vip_czhi_p"><span class="red">*</span> 温馨提示：支付宝充值免手续费。</div>
+    </div>
+    <div class="space20"></div>
+    <div class="vip_squan">
+      <div class="vip_czhi_title">授权码</div>
+      <div class="vip_czhi_box0">
+        <div class="vip_czhi_input"><label>授权码：</label><input name="" type="text"/></div>
+        <div class="vip_czhi_btn"><button>确  认</button></div>
+        <div class="clear"></div>
+      </div>
+      <div class="vip_czhi_p"><span class="red">*</span> 温馨提示：支付宝充值免手续费。</div>
+    </div>
   </div>
 </div>
 <div class="fx_ex_content" style="display: block; ">
@@ -84,8 +84,7 @@
   </div>
 </div>
 
-
-<script>
+<script type="text/javascript">
   //解析弹出层
   jQuery(function(){
     jQuery('.v_f_info a').click(function(e){
@@ -94,7 +93,7 @@
       jQuery('.fx_ex_content').css('display','block');
       jQuery('.fx_ex_content > div').eq(index).css('display','block');
       jQuery('.fx_ex_content > div').eq(index).css({
-        'top':(e.pageY-600)+'px',
+        'top':(e.pageY+5)+'px',
         'left':(e.pageX-80)+'px'
       }).siblings().hide();
 

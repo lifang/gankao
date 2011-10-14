@@ -13,7 +13,7 @@ class Examination < ActiveRecord::Base
   TYPES = {:SIMULATION => 0, :OLD_EXAM => 1, :PRACTICE => 2} #考试的类型： 0 模拟考试  1 真题练习  2 综合训练
 
   TYPE_NAMES = {:SIMULATION => [0, "模拟考试"], :OLD_EXAM => [1, "真题练习"], :PRACTICE => [2, "综合训练"]}
-  default_scope :order => "examinations.created_at desc"
+  default_scope :order => "examinations.created_at"
 
   #创建考试
   def update_examination(attr_hash)
