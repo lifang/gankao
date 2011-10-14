@@ -102,7 +102,7 @@
                     <user_answer/>
                     <user_answer/>
                 </question>
-                <question correct_type='0' delete_status='1' error_percent='17' id='14' repeat_num='18' score='5'>
+                <question correct_type='0' delete_status='1' error_percent='16' id='14' repeat_num='19' score='5'>
                     <answer>sfs</answer>
                     <analysis>sfafwerwr2r2</analysis>
                     <questionattrs>sfs;-;sfss;-;sdds;-;sd</questionattrs>
@@ -123,7 +123,7 @@
                     <user_answer>sfs</user_answer>
                     <user_answer>sfs</user_answer>
                     <user_answer>sfs</user_answer>
-                <user_answer/><user_answer/><user_answer/><user_answer/></question>
+                <user_answer/><user_answer/><user_answer/><user_answer/><user_answer></user_answer></question>
             </questions>
         </problem>
         <problem id='10' repeat_num='6' score='5' types='0'>
@@ -144,7 +144,7 @@
                     <user_answer/>
                     <user_answer>豆腐干</user_answer>
                 </question>
-                <question correct_type='0' error_percent='0' id='15' repeat_num='15' score='5'>
+                <question correct_type='0' error_percent='0' id='15' repeat_num='16' score='5'>
                     <answer>789</answer>
                     <analysis>sdfsfasf</analysis>
                     <questionattrs>23;-;wer;-;65;-;789</questionattrs>
@@ -160,7 +160,7 @@
                     <user_answer>23</user_answer>
                     <user_answer>23</user_answer>
                     <user_answer>23</user_answer>
-                <user_answer/><user_answer/><user_answer/><user_answer/></question>
+                <user_answer/><user_answer/><user_answer/><user_answer/><user_answer></user_answer></question>
             </questions>
         </problem>
         <problem id='11' repeat_num='8' score='5' types='0'>
@@ -252,7 +252,7 @@ asf
             <title>测试测测试测测试测测试测测试测测试测&lt;div&gt;测试测测试测测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测&lt;/div&gt;&lt;div&gt;测试测测试测&lt;/div&gt;</title>
             <category>3</category>
             <questions>
-                <question correct_type='0' error_percent='0' id='38' repeat_num='9' score='5'>
+                <question correct_type='0' error_percent='0' id='38' repeat_num='10' score='5'>
                     <description>单复数测试测测试测测试测测试测v</description>
                     <answer>wer</answer>
                     <analysis>sdfafsafsafsfsafaffasfsfasfsfsafsf</analysis>
@@ -264,8 +264,8 @@ asf
                     <user_answer>awre</user_answer>
                     <user_answer>awre</user_answer>
                     <user_answer>awre</user_answer>
-                <user_answer/><user_answer/><user_answer/><user_answer/></question>
-                <question correct_type='1' error_percent='0' id='39' repeat_num='6' score='6'>
+                <user_answer/><user_answer/><user_answer/><user_answer/><user_answer></user_answer></question>
+                <question correct_type='1' error_percent='0' id='39' repeat_num='7' score='6'>
                     <description>sadfasssssssssssssssssss4t344555</description>
                     <answer>sdfa;|;qq2</answer>
                     <analysis>sdfasdfsafsafdsafa</analysis>
@@ -273,8 +273,8 @@ asf
                     <tags>4</tags>
                     <user_answer/>
                     <user_answer/>
-                <user_answer/><user_answer/><user_answer/><user_answer/></question>
-                <question correct_type='2' error_percent='0' id='40' repeat_num='6' score='54'>
+                <user_answer/><user_answer/><user_answer/><user_answer/><user_answer></user_answer></question>
+                <question correct_type='2' error_percent='0' id='40' repeat_num='7' score='54'>
                     <description>safwerwetewrtewrt</description>
                     <answer>1</answer>
                     <analysis>erqetqqqtewt4333333333333</analysis>
@@ -282,7 +282,7 @@ asf
                     <tags/>
                     <user_answer/>
                     <user_answer/>
-                <user_answer/><user_answer/><user_answer/><user_answer/></question>
+                <user_answer/><user_answer/><user_answer/><user_answer/><user_answer></user_answer></question>
                 <question correct_type='3' error_percent='0' id='41' repeat_num='8' score='0'>
                     <description>asdffffffffffffffffffffffffffffffffffffffff</description>
                     <answer>fffffwrrrrrrrrrrrrrrrrrrrrr</answer>
@@ -341,7 +341,7 @@ asf
                     <questionattrs>1;-;11;-;111;-;1111</questionattrs>
                     <tags/>
    <user_answer>11</user_answer><user_answer>1</user_answer><user_answer>111</user_answer><user_answer>1</user_answer><user_answer>11</user_answer><user_answer>11</user_answer></question>
-            <question correct_type='3' error_percent='0' id='59' repeat_num='1' score='3.0'><answer>erweter</answer><analysis/><questionattrs/><tags> 所有分类</tags><user_answer></user_answer></question></questions>
+            <question correct_type='3' error_percent='0' id='59' repeat_num='1' score='3.0'><answer>erweter</answer><analysis/><questionattrs/><tags> 所有分类</tags><user_answer/></question></questions>
         </problem>
         <problem id='76' score='145' types='6'>
             <title>jidikdolldoiqioj实际的差距扩大 反了佛 快乐风口付款了佛了 看飞 </title>
@@ -488,7 +488,7 @@ asf
                             <questionattrs/>
                             <tags> 所有分类</tags>
                         <user_answer>dddddssdgfgg</user_answer><user_answer>是物质的生死还是情感的共鸣，一生难道不重要/</user_answer></question>
-                    <question correct_type='0' error_percent='0' id='57' repeat_num='1' score='5.0'><answer>rewe</answer><analysis/><questionattrs>rehtr;-;rewe;-;ytru;-;rterte</questionattrs><tags> 所有分类</tags><user_answer></user_answer></question></questions>
+                    <question correct_type='0' error_percent='0' id='57' repeat_num='1' score='5.0'><answer>rewe</answer><analysis/><questionattrs>rehtr;-;rewe;-;ytru;-;rterte</questionattrs><tags> 所有分类</tags><user_answer/></question></questions>
                 </problem><problem id='53' score='10' types='3'>
                     <title>如果人生就像一出折子戏，把嘴璀璨的部分留给__?</title>
                     <category>1</category>

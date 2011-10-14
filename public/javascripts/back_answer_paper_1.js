@@ -49,7 +49,7 @@ function create_paper() {
     $("paper_title").innerHTML = papers.paper.base_info.title;
     $("paper_id").value = papers.paper.id;
     $("leaving_num").innerHTML = papers.paper.total_num;
-    
+
     if (papers.paper.blocks != undefined && papers.paper.blocks.block != undefined) {
         var blocks = papers.paper.blocks.block;
         get_block_id(blocks);
@@ -93,8 +93,8 @@ function create_block(bocks_div, block) {
         return_block_exam_time(block.id, block.start_time, block.time);
     }
     var block_title = "<span id='b_title_"+ block.id +"'>" + block.base_info.title + "</span>";
-  
-    var block_div = create_element("div", null, "block_" + block.id, "tp_left", null, "innerHTML");    
+
+    var block_div = create_element("div", null, "block_" + block.id, "tp_left", null, "innerHTML");
     block_div.style.display = "none";
     bocks_div.appendChild(block_div);
     var b_div = create_element("div", null, "inner_block_" + block.id, "part_box", null, "innerHTML");
@@ -109,7 +109,7 @@ function create_block(bocks_div, block) {
     if (block.base_info.description != null && block.base_info.description != "") {
         part_message.innerHTML += "<p>" + is_has_audio(block.id, block.base_info.description) + "</p>";
     }
-    
+
     if (block.total_score != null && block.total_score != 0) {
         part_message.innerHTML += "<div class='fraction_h'>" + block.total_score + "分</div>";
     }
@@ -117,7 +117,7 @@ function create_block(bocks_div, block) {
     if ($("jquery_jplayer_" + block.id) != null) {
         generate_jplayer(block.base_info.description, block.id);
     }
-    
+
     //试卷导航展开部分
     var navigation_div = $("paper_navigation");
     var block_nav_div = create_element("div", null, "block_nav_"+block.id, "first_title", null, "innerHTML");
@@ -301,7 +301,7 @@ function hand_open_nav(block_id) {
 //生成试卷提点导航
 function create_question_navigation(block_nav_div, question, problem_id, question_num) {
     var question_nav_li = create_element("li", null, "question_nav_"+question.id, null, null, "innerHTML");
-    question_nav_li.innerHTML = "<a href='javascript:void(0);' id='a_que_nav_"+ question.id 
+    question_nav_li.innerHTML = "<a href='javascript:void(0);' id='a_que_nav_"+ question.id
     +"' onclick='javascript:get_question_height(\""+question.id+"\", \""+problem_id+"\");'>"+ question_num +"</a>";
     block_nav_div.appendChild(question_nav_li);
 }
@@ -374,7 +374,7 @@ function create_problem(block_div, problem, block_nav_div) {
                 out_que_div.innerHTML = "<div class='part_q_text' id='problem_title_"+ problem.id
                 +"'><div class='question_text_div' style='word-wrap:break-word; word-break:break-all;'>"
                 + complete_title + "</div>" + score_str +"</div>";
-            } 
+            }
         }
         b_description_div.appendChild(out_que_div);
 
@@ -433,7 +433,7 @@ function show_que_save_button(question_id) {
 //添加question所需div
 function create_question(problem_id, question_id_input, parent_div, question, innerHTML, drag_li_arr) {
     $("all_question_ids").value += "" + question.id + ",";
-    question_id_input.value += "" + question.id + ",";   
+    question_id_input.value += "" + question.id + ",";
     parent_div.innerHTML += "<input type='hidden' name='question_type' id='question_type_"+ question.id +"' value='"+ question.correct_type +"'/>";
     //根据problem是否确定来判断question是否确定
     var question_is_sure = create_element("input", "question_sure", "question_sure_" + question.id, null, "hidden", "value");
@@ -550,7 +550,7 @@ function create_single_question(que_div, question, drag_li_arr) {
             if (que_attrs[i] != null && que_attrs[i] != "") {
                 if (question.correct_type == "6") {
                     drag_li_arr.push(que_attrs[i]);
-                    
+
                 } else {
                     var attr = create_element("li", null, null, null, null, "innerHTML");
                     ul.appendChild(attr);
@@ -580,7 +580,7 @@ function create_single_question(que_div, question, drag_li_arr) {
             } else {
                 attr1.innerHTML = "<br/><input type='radio' id='question_attr_1' name='question_attr_"+ question.id +"' value='1' onclick='javascript:show_que_save_button(\""+question.id+"\")' />对/是&nbsp;&nbsp;";
             }
-            
+
             if (answer_hash != null && answer_hash[question.id] != null && answer_hash[question.id][0] == "0") {
                 attr1.innerHTML += "<input type='radio' id='question_attr_0' name='question_attr_"+ question.id +"' value='0' checked='true' onclick='javascript:show_que_save_button(\""+question.id+"\")' />错/否&nbsp;&nbsp;";
             } else {
@@ -607,7 +607,7 @@ function create_single_question(que_div, question, drag_li_arr) {
                     attr1.innerHTML += "<br/><textarea cols='35' rows='3' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")'></textarea>";
                 }
             }
-            
+
         }
         que_div.appendChild(attr1);
     }
@@ -665,14 +665,14 @@ function onTimer() {
             show_flash_div();
         }, 100);
         return;
-    }  
+    }
     var current_time = start;
 
     var m = Math.floor((current_time%3600)/60);
     var h = Math.floor(current_time/3600);
     var sm = m < 10 ? ("0" + m) : m;
     var sh = h < 10 ? ("0" + h) : h;
-    
+
     $("exam_time").innerHTML = sh + ":" + sm;
     $("true_exam_time").innerHTML = start;
 
@@ -749,7 +749,7 @@ function local_save() {
         local_storage_answer();
         return;
     }
-    if (local_start_time!=300 && local_start_time%150 == 0) {
+    if (local_start_time!=300 && local_start_time%60 == 0) {
         get_sever_time();
     }
     var end_date = new Date();
@@ -966,7 +966,7 @@ function generate_result_paper(paper_id) {
                 if (is_answer.value == "1") {
                     answer_length++ ;
                 }
-            }            
+            }
         }
         if (answer_length < (problem_ids.length-1)) {
             if(!confirm('您还有题尚未答完，确定要交卷么?')) {
@@ -1098,7 +1098,7 @@ function generate_jplayer(description, block_id) {
         var back_server_path = $("back_server_url").value;
         var titles = description.split("<mp3>");
         jQuery("#jquery_jplayer_"+block_id).jPlayer({
-            ready: function() {
+            ready: function (event) {
                 jQuery(this).jPlayer("setMedia", {
                     mp3:""+back_server_path + titles[1]
                 });
@@ -1174,7 +1174,6 @@ function start_block_audio(block_id) {
 }
 
 //控制音频内容
-var remember_time_flag = 0;
 function control_media(audio_id) {
     try {
         var audio = jQuery("#jquery_jplayer_"+audio_id);
@@ -1192,28 +1191,8 @@ function control_media(audio_id) {
                     if (event.jPlayer.status.currentTime != null) {
                         setCookie("audio_time_" + audio_id, event.jPlayer.status.currentTime);
                     }
-                    if (remember_time_flag == 0) {
-                        remember_time_flag = 1;
-                        if (block_end_hash.get(audio_id) != null && block_end_hash.get(audio_id) != "") {
-                            var time = return_giving_time(block_start_hash.get(audio_id)) - return_giving_time(block_end_hash.get(audio_id)) ;
-                            if (time < parseFloat(event.jPlayer.status.duration)) {
-                                var total_time = return_giving_time(block_end_hash.get(audio_id)) + time
-                                - Math.ceil(parseFloat(event.jPlayer.status.duration));
-                                block_end_hash.set(audio_id,
-                                    (Math.floor(total_time/3600) + ":" + Math.floor(total_time%3600/60) + ":" + total_time%3600%60));
-                                var block_ids = $("block_ids").value.split(",");
-                                var next_block_id = "" + block_ids[block_ids.indexOf(audio_id) + 1];
-                                if (block_start_hash.get(next_block_id) != null){
-                                    var next_start_time = return_giving_time(block_start_hash.get(next_block_id))
-                                    - (Math.ceil(parseFloat(event.jPlayer.status.duration)) - time);
-                                    block_start_hash.set(next_block_id,
-                                        (Math.floor(next_start_time/3600) + ":" + Math.floor(next_start_time%3600/60) + ":" + next_start_time%3600%60));
-                                }
-                            }
-                        }
-                    }
                 });
-                
+
             }
         }
     }catch (e) {

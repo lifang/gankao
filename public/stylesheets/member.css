@@ -16,7 +16,7 @@ img { border: none;}
 .head_box { width: 900px; margin: 0 auto;}
 .member_logo { width: 140px; height: 41px;}
 .member_nav { height: 41px; line-height: 41px; float: right;}
-.member_nav a { margin: 0 5px;color: #A10000;}
+.member_nav a { color: #333; margin: 0 5px;}
 
 .main { width: 810px; margin: 20px auto;}
 
@@ -61,7 +61,7 @@ img { border: none;}
 #vip_table_head { width: 220px; height: 38px; background: url(/images/paper/vip_table_head.png) no-repeat; color: #FFF;}
 
 .member_vip_btn { padding: 10px 0; position: relative;}
-.member_vip_btn span { position: absolute; top: -15px; right: -25px; z-index: 100;}
+
 .member_vip_btn h2 { width: 550px; height: 40px; line-height: 40px; float: left; font-size: 14px; color: #2875ae;}
 .member_vip_btn button { width: 114px; height: 40px; float: right; background: url(/images/paper/all_bg.png) no-repeat -129px -950px; border: none; cursor: pointer;}
 
@@ -75,31 +75,33 @@ img { border: none;}
 
 
 /*vip--充值------------------*/
-.vip_title { height: 20px; margin: 10px 0 20px 0;}
+.vip_title {}
 
 .vip_czhi_title { height: 20px; padding-left: 45px; padding-top: 8px; font-size: 14px; font-family: "微软雅黑"; color: #fb8726; margin-bottom: 8px;}
+.vip_h { height: 34px; line-height: 34px; color: #1489c5; font-weight: bold;font-family: "微软雅黑";}
 
 .vip_czhi_box { padding: 20px; overflow: hidden;}
 .vip_czhi_box0 { padding: 0px 20px 5px; _padding: 0px 20px 0px; overflow: hidden;}
 
-.zfb_pic { width: 239px; height: 63px; float: left; display: inline;}
+.zfb_pic { width: 239px; height: 63px; float: left; display: inline; position: relative;}
+.zfb_pic span { position: absolute; top: -15px; right: -25px; z-index: 100;}
 .vip_czhi_input { width: 250px; float: left; padding:  20px 0 0 50px;}
 .vip_czhi_btn { width: 100px; float: left; padding: 15px 0 0 0;}
-.vip_czhi_btn button { width: 100px; height: 28px; line-height: 28px; background: url(/images/vip_czhi_btn.png) no-repeat; border: none; color: #FFF; font-weight: bold;}
+.vip_czhi_btn button { width: 100px; height: 28px; line-height: 28px; cursor: pointer; background: url(/images/paper/vip_czhi_btn.png) no-repeat; border: none; color: #FFF; font-weight: bold;}
 
 .vip_czhi_p { padding-left: 20px; line-height: 24px; color: #333;}
 
-.vip_zfu { width: 700px; height: 176px; background: url(/images/vip_bg.png) no-repeat 0 0;}
-.vip_squan {width: 700px; height: 122px; background: url(/images/vip_bg.png) no-repeat 0 -189px;}
-.vip_fenx { width: 700px; height: 279px; background: url(/images/vip_bg.png) no-repeat 0 -324px;}
+.vip_zfu { width: 700px; height: 176px; background: url(/images/paper/vip_bg.png) no-repeat 0 0;}
+.vip_squan {width: 700px; height: 122px; background: url(/images/paper/vip_bg.png) no-repeat 0 -189px;}
+.vip_fenx { width: 700px; height: 279px; background: url(/images/paper/vip_bg.png) no-repeat 0 -324px;}
 
 
 .vip_fx_p { height: 24px; line-height: 24px;}
 .vip_fenx_area { padding: 10px 10px 20px 10px; overflow: hidden;}
 .vip_fenx_area a { height: 16px; float: left; padding-left: 20px; margin: 0 8px; color: #06C;}
-.fenx_qq { background: url(/images/fenx_icon.png) 0 0 no-repeat;}
-.fenx_renren { background: url(/images/fenx_icon.png) 0 -18px no-repeat;}
-.fenx_sina { background: url(/images/fenx_icon.png) 0 -36px no-repeat;}
+.fenx_qq { background: url(/images/paper/fenx_icon.png) 0 0 no-repeat;}
+.fenx_renren { background: url(/images/paper/fenx_icon.png) 0 -18px no-repeat;}
+.fenx_sina { background: url(/images/paper/fenx_icon.png) 0 -36px no-repeat;}
 
 .vip_fx_textarea { position: relative;}
 .v_f_info { position: absolute; top: 0px; left: 480px;}
@@ -111,7 +113,7 @@ img { border: none;}
 
 /*解析笔记弹出层----*/
 .fx_ex_content { display: none;}
-.fx_ex_tab { width: 377px; height: 600px; padding: 0 0 0 20px; display: none; position: absolute; z-index: 100; background: url(/images/fx_ex_bg.png) no-repeat; _background: url(/images/fx_ex_bg.gif) no-repeat;}
+.fx_ex_tab { width: 377px; height: 600px; padding: 0 0 0 20px; display: none; position: absolute; z-index: 100; background: url(/images/paper/fx_ex_bg0.png) no-repeat; _background: url(/images/paper/fx_ex_bg0.gif) no-repeat;}
 .fx_ex_t { height: 27px;}
 .fx_ex_t a { float: right; margin: 15px 10px 0 0;}
 
