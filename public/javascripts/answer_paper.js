@@ -748,7 +748,7 @@ function local_save() {
         local_storage_answer();
         return;
     }
-    if (local_start_time!=300 && local_start_time%60 == 0) {
+    if (local_start_time!=300 && local_start_time%150 == 0) {
         get_sever_time();
     }
     var end_date = new Date();
