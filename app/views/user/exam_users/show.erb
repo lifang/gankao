@@ -50,15 +50,16 @@
           <% end %>
         </div>
         <% block.elements['problems'].each_element do |problem|
-          if problem.attributes["id"].nil?
-            block_comment = "<div class='question_text_explain'><p><em>" + problem.elements["part_description"].text + "</em></p></div>"
-          else
+          if problem.attributes["id"].nil? %>
+            <div class='question_text_explain'>
+              <p><em><%= problem.elements["part_description"].text.to_s.html_safe %></em></p>
+            </div>
+         <% else
             problem_ids += problem.attributes["id"] + "," %>
             <div class="part_div">
               <div class="part_question" id="question_info_<%= problem.attributes["id"].to_i %>">
                 <% unless problem.elements['title'].nil? or problem.elements['title'].text.nil? or problem.elements['title'].text == "" %>
                   <div class="part_q_text">
-                    <%= block_comment.html_safe if block_comment != "" %>
                     <div class="question_text_div" id="problem_title_<%= problem.attributes["id"] %>"
                          style="word-wrap:break-word; word-break:break-all;">
                            <%= problem.elements['title'].text.to_s.html_safe %>
@@ -68,12 +69,6 @@
                     <% end %>
                     <%= render :partial=>"/user/exam_users/more_blanks", :object=> problem  %>
                   </div>
-                <% else %>
-                  <% if block_comment != "" %>
-                    <div class="part_q_text"><%= block_comment.html_safe %>
-                      <%= render :partial=>"/user/exam_users/more_blanks", :object=> problem  %>
-                    </div>
-                  <% end %>
                 <% end %>
                 <%= question_ids = ""
                 problem.elements["questions"].each_element do |question| %>
@@ -176,48 +171,10 @@
 </div>
 <div id="note_div"></div>
 
-<script type="text/javascript">
-  //<![CDATA[
-  <%#*jQuery(document).ready(function(){%>
-
-    <%#*jQuery("#jquery_jplayer_2").jPlayer({%>
-      <%#*ready: function (event) {%>
-        <%#*jQuery(this).jPlayer("setMedia", {%>
-          <%#*mp3:"http://localhost:3001/media/music.mp3"%>
-        <%#*});%>
-      <%#*},%>
-      <%#*swfPath: "/javascripts/jplayer",%>
-      <%#*supplied: "mp3",%>
-      <%#*wmode: "window"%>
-    <%#*});%>
-  <%#*});%>
-  //]]>
-</script>
-
 <div id="jquery_jplayer_2" class="jp-jplayer"></div>
 
-<%#*<div id="jp_container_1" class="jp-audio">%>
-  <%#*<div class="jp-type-single">%>
-    <%#*<div class="jp-gui jp-interface">%>
-      <%#*<ul class="jp-controls">%>
-        <%#*<li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>%>
-        <%#*<li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>%>
-        <%#*<li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>%>
-        <%#*<li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>%>
-        <%#*<li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>%>
-        <%#*<li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>%>
-      <%#*</ul>%>
-      <%#*<div class="jp-progress">%>
-        <%#*<div class="jp-seek-bar">%>
-          <%#*<div class="jp-play-bar"></div>%>
-        <%#*</div>%>
-      <%#*</div>%>
-      <%#*<div class="jp-volume-bar">%>
-        <%#*<div class="jp-volume-bar-value"></div>%>
-      <%#*</div>%>
-
-    <%#*</div>%>
-
-  <%#*</div>%>
-<%#*</div>%>
-
+  <div class="upErrorTo_tab" id="upErrorTo_tab">
+    <a href="javascript:send_ajax_report_error(1);">题目错误</a>
+    <a href="javascript:send_ajax_report_error(2);">答案错误</a>
+    <a href="javascript:send_ajax_report_error(3);">解析错误</a>
+  </div>

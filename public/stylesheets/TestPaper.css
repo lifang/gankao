@@ -64,7 +64,7 @@ img { border: none;}
 
 
 /*答题样式-----*/
-.part_div { margin-top: 20px;}
+.part_div { margin-bottom: 20px;}
 
 .part_question {
     border-top: 1px #eaeaea solid;
@@ -76,7 +76,7 @@ img { border: none;}
 .part_q_text { padding: 10px; background: #fdfeff; border-bottom:1px solid #EAEAEA;}
 .question_text_div p, .question_text_div div { line-height: 18px; text-indent: 24px; text-align: justify; padding: 5px 0;}
 
-.question_text_explain { border-bottom: 1px #666 dashed; padding: 10px; line-height: 24px; font-family: Georgia, "Times New Roman", Times, serif; color: #999;}
+.question_text_explain {padding: 10px; line-height: 24px; font-family: Georgia, "Times New Roman", Times, serif; color: #999;}
 
 
 
@@ -190,6 +190,10 @@ img { border: none;}
 .tp_up_btn { background: url(/images/paper/testPage_btn.png) no-repeat 0 0;}
 .tp_down_btn { background: url(/images/paper/testPage_btn.png) no-repeat -119px 0;}
 
+/*鎻愪氦閿欒寮瑰嚭灞�----*/
+.upErrorTo_tab { width: 91px; height: 82px; padding: 14px 10px 0 5px; background: url(../images/upErrorTo_bg.png) no-repeat; display: none; position: absolute; z-index:100;}
+.upErrorTo_tab a { height: 24px; line-height: 24px; text-align: center; color: #333; display: block; text-decoration: none;}
+.upErrorTo_tab a:hover { color:#0099FF; text-decoration: underline;}
 
 
 /*黄色弹出层--------------*/

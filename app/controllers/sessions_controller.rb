@@ -117,5 +117,23 @@ class SessionsController < ApplicationController
       window.close();}, 2000)</script>"
   end
 
+#  #腾讯微博登录
+#  def qq_weibo
+#     consumer= {
+#    :site => "http://open.t.qq.com/oauth_html/login.php?",
+#    :request_token_path =>"/cgi-bin/request_token",
+#    :access_token_path =>"/oauth_html/login.php?",
+#    :authorize_path => "/oauth_html/login.php?",
+#    :http_method => :get,
+#    :scheme => :query_string,
+#    :nonce => Base64.encode64(OpenSSL::Random.random_bytes(32)).gsub(/\W/, '')[0, 32] }
+#   consumer = OAuth::Consumer.new(weibo_app_key, weibo_app_secret, consumer)
+#    request_token = consumer.get_request_token()
+#    session[:qqtoken] = request_token.token
+#    session[:qqsecret] = request_token.secret
+#    redirect_to request_token.authorize_url + "&oauth_callback=http://#{request.env["HTTP_HOST"]}/sessions/friend_add"
+#  end
+
+
 end
 

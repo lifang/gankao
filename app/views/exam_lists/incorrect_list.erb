@@ -28,7 +28,7 @@
           <input type="hidden" value="" id="tag" name="tag" />
         <% end %>
         <% @tags.each do |tag| %>
-          <li><a href="javascript:(0)" onclick="javascript:search_tag('<%= tag %>')"><%= tag %></a></li>
+          <li><a href="javascript:void(0);" onclick="javascript:search_tag('<%= tag %>')"><%= tag %></a></li>
         <% end unless @tags.blank? %>
       </ul>
     </div>

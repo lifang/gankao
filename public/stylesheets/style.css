@@ -248,7 +248,7 @@ img { border: none;}
 .part_q_text { padding: 10px; background: #fdfeff; border-bottom:1px solid #EAEAEA;}
 .question_text_div p, .question_text_div div { line-height: 18px; text-indent: 24px; text-align: justify; padding: 5px 0;}
 
-.question_text_explain { border-bottom: 1px #666 dashed; padding: 10px; line-height: 24px; font-family: Georgia, "Times New Roman", Times, serif; color: #999;}
+.question_text_explain {padding: 10px; line-height: 24px; font-family: Georgia, "Times New Roman", Times, serif; color: #999;}
 
 .part_q_sl { height: 150px; overflow: hidden;text-overflow:ellipsis;}
 
@@ -257,7 +257,7 @@ img { border: none;}
 .p_question_list {border-bottom: 1px #eaeaea solid; position: relative;}
 
 .answer_text { padding: 10px;}
-.answer_text textarea {line-height: 24px; overflow-y: hidden; font-size: 12px;}
+.answer_text textarea {line-height: 24px; overflow-y: hidden; font-size: 12px; width: 35%;}
 
 .answer_textarea { }
 .answer_textarea textarea { padding: 5px; width: 95%; height: 180px; margin: 10px 0 30px 15px;}
@@ -553,7 +553,7 @@ img { border: none;}
 
 
 /*笔记查看全文--------------*/
-.allText { width: 600px; padding: 10px; margin: 0 auto;}
+.allText { margin: 0 auto; padding: 0 30px; height: 400px;}
 .allText h2 { font-size: 14px; color: #333; line-height: 32px; height: 32px;}
 .allText p { text-indent: 24px; line-height: 18px;}
 

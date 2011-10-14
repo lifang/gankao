@@ -27,7 +27,8 @@ function load_exam_tiem(time) {
     if (time == "不限时") {
         start = 0;
         $("exam_time").innerHTML = "不限时";
-    } else {
+    }
+    else {
         time = Math.round(time*10)/10;
         var h = Math.floor(time/3600) < 10 ? ("0" + Math.floor(time/3600)) : Math.floor(time/3600);
         var m = Math.floor((time%3600)/60) < 10 ? ("0" + Math.floor((time%3600)/60)) : Math.floor((time%3600)/60);
@@ -88,7 +89,6 @@ function get_block_id(blocks) {
 //添加试卷块
 var question_num = 0;   //根据提点显示导航
 var block_block_flag = 0;   //记录打开的模块
-var block_comment = "";
 function create_block(bocks_div, block) {
     if (is_fix_time) {
         return_block_exam_time(block.id, block.start_time, block.time);
@@ -349,10 +349,10 @@ function get_question_height(question_id, problem_id) {
 
 //添加problem
 function create_problem(block_div, problem, block_nav_div) {
-    //block_comment 表示块之间的描述
     if (problem.id == null || problem.id == undefined) {
-        block_comment = "<div class='question_text_explain'><p><em>" + problem.part_description + "</em></p></div>";
-    } else {
+        block_div.innerHTML += "<div class='question_text_explain'><p><em>" + problem.part_description + "</em></p></div>";
+    }
+    else {
         var b_description_div = create_element("div", null, "b_description_" + problem.id, "part_div", null, "innerHTML");
         block_div.appendChild(b_description_div);
         var out_que_div = create_element("div", null, "question_" + problem.id, "part_question", null, "innerHTML");
@@ -371,12 +371,9 @@ function create_problem(block_div, problem, block_nav_div) {
                     complete_title += replace_title_span(titles[2], problem.id);
                 }
                 out_que_div.innerHTML = "<div class='part_q_text' id='problem_title_"+ problem.id
-                +"'>"+ block_comment +"<div class='question_text_div' style='word-wrap:break-word; word-break:break-all;'>"
+                +"'><div class='question_text_div' style='word-wrap:break-word; word-break:break-all;'>"
                 + complete_title + "</div>" + score_str +"</div>";
-            }
-        } else if (block_comment != "") {
-            out_que_div.innerHTML = "<div class='part_q_text' id='problem_title_"+ problem.id
-            +"'>"+ block_comment +"</div>";
+            } 
         }
         b_description_div.appendChild(out_que_div);
 
@@ -411,9 +408,6 @@ function create_problem(block_div, problem, block_nav_div) {
             load_un_sure_question(problem.id);
             is_problem_answer(problem.id);
             alreay_answer_que_num();
-        }
-        if (block_comment != "") {
-            block_comment = "";
         }
     }
 }
@@ -694,8 +688,10 @@ function colse_or_open_block(current_time) {
         var has_close_block = false;
         var all_block_end_time = block_end_hash.values();
         for (var j=0; j<all_block_end_time.length; j++) {
-            var block_title = $("b_title_" + block_end_hash.index(all_block_end_time[j])).innerHTML;
-            if (return_giving_time(all_block_end_time[j]) == current_time) {
+            var b_id = block_end_hash.index(all_block_end_time[j]);
+            var block_title = $("b_title_" + b_id).innerHTML;
+            var block_time = return_giving_time(all_block_end_time[j]);
+            if (block_time == current_time) {
                 var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
                 flash_div.innerHTML = "<p> "+ block_title + " 部分答题时间已到，您的答案将自动被提交，请您继续做其它部分的题。</p>";
                 document.body.appendChild(flash_div);
@@ -704,7 +700,7 @@ function colse_or_open_block(current_time) {
                 local_storage_answer();
                 has_close_block = true;
                 break;
-            } else if (Math.floor(current_time - return_giving_time(all_block_end_time[j])) == 60) {
+            } else if (Math.floor(current_time - block_time) == 60) {
                 var flash_div1 = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
                 flash_div1.innerHTML = "<p>当前 "+block_title+" 部分剩余答题时间为1分钟，请您尽快答题，并提交答案。</p>";
                 document.body.appendChild(flash_div1);
@@ -752,7 +748,7 @@ function local_save() {
         local_storage_answer();
         return;
     }
-    if (local_start_time!=300 && local_start_time%60 == 0) {
+    if (local_start_time!=300 && local_start_time%150 == 0) {
         get_sever_time();
     }
     var end_date = new Date();
@@ -1177,6 +1173,7 @@ function start_block_audio(block_id) {
 }
 
 //控制音频内容
+var remember_time_flag = 0;
 function control_media(audio_id) {
     try {
         var audio = jQuery("#jquery_jplayer_"+audio_id);
@@ -1193,6 +1190,26 @@ function control_media(audio_id) {
                 audio.bind(jQuery.jPlayer.event.timeupdate, function(event) {
                     if (event.jPlayer.status.currentTime != null) {
                         setCookie("audio_time_" + audio_id, event.jPlayer.status.currentTime);
+                    }
+                    if (remember_time_flag == 0) {
+                        remember_time_flag = 1;
+                        if (block_end_hash.get(audio_id) != null && block_end_hash.get(audio_id) != "") {
+                            var time = return_giving_time(block_start_hash.get(audio_id)) - return_giving_time(block_end_hash.get(audio_id)) ;
+                            if (time < parseFloat(event.jPlayer.status.duration)) {
+                                var total_time = return_giving_time(block_end_hash.get(audio_id)) + time
+                                - Math.ceil(parseFloat(event.jPlayer.status.duration));
+                                block_end_hash.set(audio_id,
+                                    (Math.floor(total_time/3600) + ":" + Math.floor(total_time%3600/60) + ":" + total_time%3600%60));
+                                var block_ids = $("block_ids").value.split(",");
+                                var next_block_id = "" + block_ids[block_ids.indexOf(audio_id) + 1];
+                                if (block_start_hash.get(next_block_id) != null){
+                                    var next_start_time = return_giving_time(block_start_hash.get(next_block_id))
+                                    - (Math.ceil(parseFloat(event.jPlayer.status.duration)) - time);
+                                    block_start_hash.set(next_block_id,
+                                        (Math.floor(next_start_time/3600) + ":" + Math.floor(next_start_time%3600/60) + ":" + next_start_time%3600%60));
+                                }
+                            }
+                        }
                     }
                 });
                 

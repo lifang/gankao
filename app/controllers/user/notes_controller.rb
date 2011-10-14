@@ -86,6 +86,23 @@ class User::NotesController < ApplicationController
     render "show"
   end
 
+  def report_error
+    exam_user=ExamUser.find(params["exam_user_id"])
+    error_type=params["error_type"]
+    question_index=params["question_index"]
+    paper_id=exam_user.paper_id
+    user_id=exam_user.user_id
+    if(ReportError.find_by_sql("select id from report_errors where paper_id=#{paper_id} and user_id=#{user_id} and error_type=#{error_type} and question_index=#{question_index}").count==0)
+      ReportError.create(:paper_id=>paper_id,:paper_title=>Paper.find(paper_id).title,:user_id=>user_id,:user_name=>User.find(user_id).name,:question_index=>question_index,:error_type=>error_type)
+    else
+      flash[:notice] = "已经报告，请不要重复报告."
+      render  :partial => "/common/flash_div"
+      return 0
+    end
+    flash[:notice] = "错误报告成功."
+    render  :partial => "/common/flash_div"
+  end
+
   
 
 end

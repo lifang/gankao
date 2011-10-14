@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
   include UserRoleHelper
   include RenrenHelper
   include QqHelper
-  
   before_filter :auto_login
   
 

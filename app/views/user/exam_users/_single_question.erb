@@ -79,9 +79,9 @@ is_right = true if all_answer == answers and answers - user_answers == []
         <textarea disabled cols="" rows=""><%= user_answers[0].to_s %></textarea>
       </div>
     <% elsif correct_type.to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] %>
-    <div class="answer_text">
-      <textarea disabled cols="" rows="" style="height:24px;"><%= user_answers[0].to_s %></textarea>
-    </div>
+      <div class="answer_text">
+        <textarea disabled cols="" rows="" style="height:24px;"><%= user_answers[0].to_s %></textarea>
+      </div>
     <% end %>
     <% if @examination.types == Examination::TYPES[:SIMULATION] %>
       <div class="fraction">
@@ -109,6 +109,8 @@ is_right = true if all_answer == answers and answers - user_answers == []
        onclick="javascript:start_collection(<%= question.attributes["id"] %>,
        <%= problem.attributes["id"] %>, <%= @doc.elements["paper"].attributes["id"] %>,
        <%= @doc.attributes["id"] %>, '<%= problem.xpath %>', '<%= question.xpath %>');">加入关注</a>
+    <a href="javascript:void(0);" class="upErrorTo_btn" onclick="javascript:report_error(<%= question_num %>,<%= params[:id] %>);">报告错误</a>
+
   </div>
   <div class="clear"></div>
 </div>

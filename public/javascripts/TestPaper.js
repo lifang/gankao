@@ -68,10 +68,10 @@ function show_flash_div() {
         jQuery('.tishi_tab').css('display','block');
         setTimeout(function(){
             jQuery('.tishi_tab').fadeTo("slow",0);
-        }, 1500);
+        }, 2500);
         setTimeout(function(){
             jQuery('.tishi_tab').css('display','none');
-        }, 2000);
+        }, 3000);
     })(jQuery)
 }
 
@@ -91,3 +91,56 @@ function show_analysis(btn_id) {
 function close_tab(tab) {
     tab.parentNode.parentNode.style.display = "none";
 }
+
+
+//function report_error(paper_id,paper_title,user_id,user_name,description){
+//    jQuery('.upErrorTo_tab').css('display','block');
+//    jQuery('.upErrorTo_btn').click(function(e){
+//    jQuery('.upErrorTo_tab').css({
+//        'top':(e.pageY+10)+'px',
+//        'left':(e.pageX-30)+'px'
+//    });
+//}
+
+
+//function report_error(question_id, problem_id, examination_id, paper_id, problem_path, question_path) {
+//    new Ajax.Updater("biji_tab", "/user/notes/"+question_id+"/load_note",
+//    {
+//        asynchronous:true,
+//        evalScripts:true,
+//        method:"post",
+//        onComplete:function(request){
+//            prepare_params(problem_id, examination_id, paper_id, problem_path, question_path)
+//        },
+//        parameters:'problem_id='+problem_id+'&examination_id='+examination_id+'&paper_id='+paper_id+'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+//    });
+//    return false;
+//}
+
+
+function report_error(question_index,exam_user_id){
+    (function(){
+        jQuery('.upErrorTo_tab').css('display','block');
+        jQuery('.upErrorTo_tab').css({
+            'top':(this.event.pageY+20)+'px',
+            'left':(this.event.pageX-30)+'px'
+        });
+    })(jQuery)
+    var str="<a href=\"javascript:send_ajax_report_error(1,"+question_index+","+exam_user_id+");\">题目错误</a><a href=\"javascript:send_ajax_report_error(2,"+question_index+","+exam_user_id+");\">答案错误</a><a href=\"javascript:send_ajax_report_error(3,"+question_index+","+exam_user_id+");\">解析错误</a>"
+    document.getElementById("upErrorTo_tab").innerHTML=str;
+}
+
+function send_ajax_report_error(error_type,question_index,exam_user_id){
+    new Ajax.Updater("note_div", "/user/notes/"+exam_user_id+"/report_error",
+    {
+        asynchronous:true,
+        evalScripts:true,
+        method:"post",
+        onComplete:function(request){
+            jQuery('.upErrorTo_tab').css('display','none');
+        },
+        parameters:'error_type='+error_type+'&question_index='+question_index+'&exam_user_id='+exam_user_id+'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+    });
+    return false;
+}
+
