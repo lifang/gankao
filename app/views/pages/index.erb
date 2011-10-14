@@ -6,7 +6,7 @@
           :html => {:onsubmit => "return signin_page()", :class => "required-validate"} ) do |f| %>
           <div class="top_other_zh">
             <span class="t_o_text">使用其他帐号登录：</span>
-            <a href="#"  onclick="javascript:toQzoneLogin();"><img src="/images/paper/qq.png" /></a>
+            <a href="#" onclick ="javascript:window.open('/pages/login_from_qq', '_blank', 'height=500,width=800,left=200,top=100');"><img src="/images/paper/qq.png" /></a>
             <a href="#" onclick ="javascript:window.open('/sessions/renren_login', '_blank', 'height=500,width=800,left=200,top=100');">
               <img src="/images/paper/renren.png" />
             </a>
@@ -28,7 +28,7 @@
             <div class="login_i_text">
               Welcome,<a href="/user/homes/<%= Category::TYPE_IDS[:english_fourth_level] %>" class="signColor">
                 <%= current_user.name if current_user %></a>
-                <% if (is_vip?).to_s == "true" %><img src="/images/paper/V.png" /><% else %><a href="/users/goto_vip"><img src="/images/paper/v0.png" /></a><% end %>
+              <% if (is_vip?).to_s == "true" %><img src="/images/paper/V.png" /><% else %><a href="/users/goto_vip"><img src="/images/paper/v0.png" /></a><% end %>
               |
               <a href="/users/<%= cookies[:user_id] %>/edit">个人中心</a>|
               <a href="/signout">退出</a>

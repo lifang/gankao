@@ -11,7 +11,7 @@ Gankao::Application.routes.draw do
   resources :pages do
     collection do
       get "sina_index"
-      get "renren_index","follow_me"
+      get "renren_index","follow_me","login_from_qq","qq_index"
     end
   end
   resources :exam_lists do
