@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   require 'oauth2'
   require 'oauth'
   require 'openssl'
-
+  include QqHelper
 
   def new
     session[:signin_code] = proof_code(4)
@@ -128,7 +128,11 @@ class SessionsController < ApplicationController
     request_token = consumer.get_request_token()
     session[:qqtoken] = request_token.token
     session[:qqsecret] = request_token.secret
-    redirect_to "https://open.t.qq.com/cgi-bin/authorize?oauth_callback=http://www.gankao.co&oauth_token=#{session[:qqtoken]}"
+    redirect_torequest_token.authorize_url(:oauth_callback=>"http://www.gankao.co/sessions/qq_add_friend")
+  end
+
+  def qq_add_friend
+      redirect_to "/"
   end
 
 
