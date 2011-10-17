@@ -22,6 +22,7 @@
 jQuery(function(){
     jQuery('.jiexi_btn').click(function(e){
         jQuery('.biji_tab').css('display','none');
+        jQuery('.upErrorTo_tab').css('display','none');
         var btn_id = this.id;
         jQuery('.jiexi_tab').css('display','block');
         jQuery('.jiexi_tab').css({
@@ -41,7 +42,8 @@ jQuery(function(){
 //笔记弹出层
 jQuery(function(){
     jQuery('.biji_btn').click(function(e){
-        jQuery('.jiexi_tab').css('display','none');
+        jQuery('.jiexi_tab').css('display','none');       
+        jQuery('.upErrorTo_tab').css('display','none');
         jQuery('.biji_tab').css('display','block');
         jQuery('.biji_tab').css({
             'top':(e.pageY+20)+'px',
@@ -118,19 +120,28 @@ function close_tab(tab) {
 //}
 
 
-function report_error(question_index,exam_user_id){
-    (function(){
+//报告错误弹出层
+jQuery(function(){
+    jQuery('.upErrorTo_btn').click(function(e){
+        jQuery('.biji_tab').css('display','none');
+        jQuery('.jiexi_tab').css('display','none');
         jQuery('.upErrorTo_tab').css('display','block');
         jQuery('.upErrorTo_tab').css({
-            'top':(this.event.pageY+20)+'px',
-            'left':(this.event.pageX-30)+'px'
+            'top':(e.pageY+20)+'px',
+            'left':(e.pageX-30)+'px'
         });
-    })(jQuery)
+    }
+    )
+
+})
+
+function report_error(question_index,exam_user_id){
     var str="<a href=\"javascript:send_ajax_report_error(1,"+question_index+","+exam_user_id+");\">题目错误</a><a href=\"javascript:send_ajax_report_error(2,"+question_index+","+exam_user_id+");\">答案错误</a><a href=\"javascript:send_ajax_report_error(3,"+question_index+","+exam_user_id+");\">解析错误</a>"
     document.getElementById("upErrorTo_tab").innerHTML=str;
 }
 
 function send_ajax_report_error(error_type,question_index,exam_user_id){
+    document.getElementById("upErrorTo_tab").innerHTML="<br/><center><img src='/images/ajax-loader.gif'/></center>";
     new Ajax.Updater("note_div", "/user/notes/"+exam_user_id+"/report_error",
     {
         asynchronous:true,
@@ -141,6 +152,5 @@ function send_ajax_report_error(error_type,question_index,exam_user_id){
         },
         parameters:'error_type='+error_type+'&question_index='+question_index+'&exam_user_id='+exam_user_id+'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
     });
-    return false;
 }
 
