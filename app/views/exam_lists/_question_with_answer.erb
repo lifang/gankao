@@ -7,7 +7,7 @@
     <div class="part_q_text part_q_sl">
       <%   title = question_with_answer.elements["title"].text
       if title.length > 500 %>
-        <div class="question_text_div" style="word-wrap:break-word; word-break:break-all;">
+        <div class="question_text_div">
           <% if title =~ /<mp3>/  %>
             <%= truncate_u(title.split("<mp3>")[0].to_s.html_safe.gsub(/<[^{><}]*>/, ""), 395, "......").to_s.html_safe %>
           <% else %>
@@ -16,14 +16,14 @@
         </div>
       <% else
         if title =~ /<mp3>/  %>
-          <div class="question_text_div" style="word-wrap:break-word; word-break:break-all;">
+          <div class="question_text_div">
             <%= title.split("<mp3>")[0].to_s.html_safe %>
           </div>
           <script type="text/javascript">
             audio_element("<%= Constant::BACK_SERVER_PATH %><%= title.split("<mp3>")[1] %>", <%= question_with_answer.attributes["id"] %>);
           </script>
         <% else %>
-          <div class="question_text_div" style="word-wrap:break-word; word-break:break-all;">
+          <div class="question_text_div">
             <%= title.to_s.html_safe %>
           </div>
         <% end %>

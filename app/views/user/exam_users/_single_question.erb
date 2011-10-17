@@ -17,7 +17,7 @@ is_right = true if all_answer == answers and answers - user_answers == []
   <div class="p_q_l_right">
     <% if question.elements["description"] %>
       <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_BLANKS] %>
-        <div class="q_drag_con" style="word-wrap:break-word; word-break:break-all;">
+        <div class="q_drag_con">
           <p><%= question.elements["description"].text.to_s.html_safe.
               gsub("problem_x_dropplace", "problem_#{problem.attributes["id"]}_dropplace") %>
           </p>
@@ -26,7 +26,7 @@ is_right = true if all_answer == answers and answers - user_answers == []
           droppable_result('<%= answers.join(",") %>', '<%= user_answers.join(",") %>', <%= problem.attributes["id"] %>);
         </script>
       <% else %>
-        <div class="question_title" style="word-wrap:break-word; word-break:break-all;">
+        <div class="question_title">
           <%= question.elements["description"].text.to_s.html_safe %>
         </div>
       <% end %>

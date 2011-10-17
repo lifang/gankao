@@ -33,6 +33,7 @@ class ExamListsController < ApplicationController
   end
   
   def incorrect_list
+    session[:tag] = nil
     @hash_list = {}
     @has_next_page = false
     @lists = list

@@ -7,6 +7,7 @@
   </div>
 <% else %>
   <div class="errorLibrary_left">
+    <div class="patternText">模式切换</div>
     <div class="pattern"><a href="/exam_lists/<%= params[:id] %>/incorrect_list" class="chay_pat">查阅</a>
       <a href="/exam_lists/<%= params[:id] %>/question_info" class="lianx_pat">练习</a><div class="moveBlock">
         <img src="/images/paper/moveBlock.png" /></div></div>
@@ -27,10 +28,27 @@
         <%= form_for :tags, :url=>"/exam_lists/#{params[:id]}/search_tag_problems" ,:html=>{:id=>:tag_name} do %>
           <input type="hidden" value="" id="tag" name="tag" />
         <% end %>
-          <li><a href="/exam_lists/<%= Category::TYPE_IDS[:english_fourth_level] %>/incorrect_list">所有分类</a></li>
-        <% @tags.each do |tag| %>
-          <li><a href="javascript:void(0);" onclick="javascript:search_tag('<%= tag %>')"><%= tag %></a></li>
-        <% end unless @tags.blank? %>
+        <li>
+          <a href="/exam_lists/<%= Category::TYPE_IDS[:english_fourth_level] %>/incorrect_list"
+             <% if @controller.action_name == "incorrect_list" %>class="el_hover"<% end %>>所有分类</a>
+        </li>
+        <% my_tag = nil
+        @tags.each do |tag|
+          if tag.strip =~ /我的关注/
+            my_tag = tag
+          else %>
+            <li>
+              <a href="javascript:void(0);" onclick="javascript:search_tag('<%= tag %>')"
+                 <% if session[:tag] == tag %>class="el_hover"<% end %>><%= tag %></a>
+            </li>
+          <% end
+        end unless @tags.blank? %>
+        <% unless my_tag.nil? %>
+          <li>
+            <a href="javascript:void(0);" onclick="javascript:search_tag('<%= my_tag %>')"
+               <% if session[:tag] == my_tag %>class="el_hover"<% end %>><%= my_tag %></a>
+          </li>
+        <% end %>
       </ul>
     </div>
     <% @lists.elements["/collection/problems"].each_element do |problem|%>
@@ -59,6 +77,13 @@
   </div>
   <div class="tab_m"  id="biji_tab">
     <img src="/images/ajax-loader.gif"/>
+  </div>
+  <div class="tab_b"></div>
+</div>
+<div class="pattern_tab">
+  <div class="tab_t"></div>
+  <div class="tab_m">
+    <p>错题库有两种使用方式，第一种是查看模式，用来查看自己的错题或收藏的试题；另一种是练习模式，可以用来重做错题。</p>
   </div>
   <div class="tab_b"></div>
 </div>

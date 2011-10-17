@@ -31,7 +31,7 @@ function load_exam_tiem(time) {
         time = Math.round(time*10)/10;
         var h = Math.floor(time/3600) < 10 ? ("0" + Math.floor(time/3600)) : Math.floor(time/3600);
         var m = Math.floor((time%3600)/60) < 10 ? ("0" + Math.floor((time%3600)/60)) : Math.floor((time%3600)/60);
-        $("exam_time").innerHTML = h + ":" + m;
+        $("exam_time").innerHTML = "剩余时间  " + h + ":" + m;
         start = time;
         is_fix_time = true;
         block_start_hash = $H({});
@@ -110,9 +110,6 @@ function create_block(bocks_div, block) {
         part_message.innerHTML += "<p>" + is_has_audio(block.id, block.base_info.description) + "</p>";
     }
     
-    if (block.total_score != null && block.total_score != 0) {
-        part_message.innerHTML += "<div class='fraction_h'>" + block.total_score + "分</div>";
-    }
     b_div.appendChild(part_message);
     if ($("jquery_jplayer_" + block.id) != null) {
         generate_jplayer(block.base_info.description, block.id);
@@ -242,7 +239,9 @@ function open_block_nav(block_id) {
     $("nav_block_" + block_id).style.display = "block";
     $("block_" + block_id).style.display = "block";
     window.scrollTo(0, 0);
-    start_block_audio(block_id);
+    if (is_fix_time) {
+        start_block_audio(block_id);
+    }
 }
 
 //关闭模块
@@ -357,10 +356,6 @@ function create_problem(block_div, problem, block_nav_div) {
         var b_description_div = create_element("div", null, "b_description_" + problem.id, "part_div", null, "innerHTML");
         block_div.appendChild(b_description_div);
         var out_que_div = create_element("div", null, "question_" + problem.id, "part_question", null, "innerHTML");
-        var score_str = "";
-        if (problem.score != null && new Number(problem.score) != 0) {
-            score_str = "<div class='fraction_h'>" + problem.score + "分</div>";
-        }
         if (problem.title != null && problem.title != "") {
             var titles = problem.title.split("<time>");
             if (titles[0] != "" || titles[2] != "") {
@@ -372,8 +367,8 @@ function create_problem(block_div, problem, block_nav_div) {
                     complete_title += replace_title_span(titles[2], problem.id);
                 }
                 out_que_div.innerHTML = "<div class='part_q_text' id='problem_title_"+ problem.id
-                +"'><div class='question_text_div' style='word-wrap:break-word; word-break:break-all;'>"
-                + complete_title + "</div>" + score_str +"</div>";
+                +"'><div class='question_text_div'>"
+                + complete_title + "</div></div>";
             } 
         }
         b_description_div.appendChild(out_que_div);
@@ -395,7 +390,7 @@ function create_problem(block_div, problem, block_nav_div) {
                 question_num ++ ;
             }
         }
-        if (drag_li_arr != []) {
+        if (drag_li_arr.length > 0) {
             create_words_div(problem.id, drag_li_arr);
         }
         out_que_div.appendChild(question_id_input);
@@ -448,20 +443,14 @@ function create_question(problem_id, question_id_input, parent_div, question, in
     if (question.description != undefined && question.description != null && question.description != "") {
         var final_description = replace_title_span(question.description, problem_id);
         if (question.correct_type == "6") {
-            single_question_div.innerHTML += "<div class='q_drag_con' style='word-wrap:break-word; word-break:break-all;'><p>" +
+            single_question_div.innerHTML += "<div class='q_drag_con'><p>" +
             final_description + "</p></div>";
         } else {
-            single_question_div.innerHTML += "<div class='question_title' style='word-wrap:break-word; word-break:break-all;'>" +
+            single_question_div.innerHTML += "<div class='question_title'>" +
             final_description + "</div>";
         }
     }
     que_out_div.appendChild(single_question_div);
-
-    if (question.score != undefined && question.score != null && new Number(question.score) != 0) {
-        var score_div = create_element("div", null, null, "fraction", null, "innerHTML");
-        score_div.innerHTML = question.score + "分";
-        que_out_div.appendChild(score_div);
-    }
     que_out_div.appendChild(create_element("div", null, null, "clear", null, "innerHTML"));
     //    if (question.correct_type == "6") {
     //        store_title_span(problem_id, question.id);
@@ -503,6 +492,9 @@ function create_words_div(problem_id, drag_li_arr) {
         });
         var drop_div = create_element("div", null, null, "task3_li", null, "innerHTML");
         $("problem_title_" + problem_id).appendChild(drop_div);
+        var tip_div = create_element("div", null, null, null, null, "innerHTML");
+        tip_div.innerHTML = "<font color='red'>*</font>点击单词，可以标记单词被选中。";
+        drop_div.appendChild(tip_div);
         var drop_ul = create_element("ul", null, null, null, null, "innerHTML");
         drop_div.appendChild(drop_ul);
         for (var m=0; m<que_attrs.length; m++) {
@@ -534,11 +526,11 @@ function create_single_question(que_div, question, drag_li_arr) {
         if (question.correct_type == "6") {
             var drag_div = create_element("div", null, null, "answer_text", null, "innerHTML");
             if (answer_hash != null && answer_hash[question.id] != null) {
-                que_div.innerHTML += "<br/><textarea id='question_answer_"+ question.id +"' name='question_answer_"
+                que_div.innerHTML += "<textarea id='question_answer_"+ question.id +"' name='question_answer_"
                 + question.id +"' style='height: 24px;' onclick='javascript:show_que_save_button(\""+question.id+"\")'>"
                 + answer_hash[question.id][0] +"</textarea>";
             } else {
-                que_div.innerHTML += "<br/><textarea id='question_answer_"+ question.id +"' name='question_answer_"
+                que_div.innerHTML += "<textarea id='question_answer_"+ question.id +"' name='question_answer_"
                 + question.id +"' style='height: 24px;' onclick='javascript:show_que_save_button(\""+question.id+"\")'></textarea>";
             }
             que_div.appendChild(drag_div);
@@ -576,9 +568,9 @@ function create_single_question(que_div, question, drag_li_arr) {
         if (question.correct_type == "2") {
             attr1 = create_element("div", null, null, "answer_textarea", null, "innerHTML");
             if (answer_hash != null && answer_hash[question.id] != null && answer_hash[question.id][0] == "1") {
-                attr1.innerHTML = "<br/><input type='radio' id='question_attr_1' name='question_attr_"+ question.id +"' value='1' checked='true' onclick='javascript:show_que_save_button(\""+question.id+"\")' />对/是&nbsp;&nbsp;";
+                attr1.innerHTML = "<input type='radio' id='question_attr_1' name='question_attr_"+ question.id +"' value='1' checked='true' onclick='javascript:show_que_save_button(\""+question.id+"\")' />对/是&nbsp;&nbsp;";
             } else {
-                attr1.innerHTML = "<br/><input type='radio' id='question_attr_1' name='question_attr_"+ question.id +"' value='1' onclick='javascript:show_que_save_button(\""+question.id+"\")' />对/是&nbsp;&nbsp;";
+                attr1.innerHTML = "<input type='radio' id='question_attr_1' name='question_attr_"+ question.id +"' value='1' onclick='javascript:show_que_save_button(\""+question.id+"\")' />对/是&nbsp;&nbsp;";
             }
             
             if (answer_hash != null && answer_hash[question.id] != null && answer_hash[question.id][0] == "0") {
@@ -590,21 +582,21 @@ function create_single_question(que_div, question, drag_li_arr) {
             if (question.correct_type == "3") {
                 attr1 = create_element("div", null, null, "answer_text", null, "innerHTML");
                 if (answer_hash != null && answer_hash[question.id] != null) {
-                    attr1.innerHTML += "<br/><textarea id='question_answer_"+ question.id +"' name='question_answer_"
+                    attr1.innerHTML += "<textarea id='question_answer_"+ question.id +"' name='question_answer_"
                     + question.id +"' onfocus='javascript:start_change_length(\""+ question.id
                     +"\")' onblur='javascript:window.clearInterval(change_length);' style='height: 24px;'>"
                     + answer_hash[question.id][0] +"</textarea>";
                 } else {
-                    attr1.innerHTML += "<br/><textarea id='question_answer_"+ question.id +"' name='question_answer_"
+                    attr1.innerHTML += "<textarea id='question_answer_"+ question.id +"' name='question_answer_"
                     + question.id +"' onfocus='javascript:start_change_length(\""+ question.id
                     +"\")' onblur='javascript:window.clearInterval(change_length);' style='height: 24px;'></textarea>";
                 }
             } else {
                 attr1 = create_element("div", null, null, "answer_textarea", null, "innerHTML");
                 if (answer_hash != null && answer_hash[question.id] != null) {
-                    attr1.innerHTML += "<br/><textarea cols='35' rows='3' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")'>"+ answer_hash[question.id][0] +"</textarea>";
+                    attr1.innerHTML += "<textarea cols='35' rows='3' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")'>"+ answer_hash[question.id][0] +"</textarea>";
                 } else {
-                    attr1.innerHTML += "<br/><textarea cols='35' rows='3' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")'></textarea>";
+                    attr1.innerHTML += "<textarea cols='35' rows='3' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")'></textarea>";
                 }
             }
             
@@ -643,9 +635,11 @@ function create_element(element, name, id, class_name, type, ele_flag) {
 }
 
 //显示考试倒计时
+var exam_time_start = null;
 function show_exam_time() {
     // 注意setInterval函数: 时间逝去100(毫秒)后, onTimer才开始执行
     if (start != 0) {
+        exam_time_start = new Date();
         timer = self.setInterval(function(){
             onTimer();
         }, 100);
@@ -655,7 +649,7 @@ function show_exam_time() {
 // 倒计时函数
 function onTimer() {
     var date_start = new Date();
-    if (start == 0) {
+    if (start <= 0) {
         window.clearInterval(timer);
         $("paper_form").submit();
         setTimeout(function(){
@@ -673,14 +667,22 @@ function onTimer() {
     var sm = m < 10 ? ("0" + m) : m;
     var sh = h < 10 ? ("0" + h) : h;
     
-    $("exam_time").innerHTML = sh + ":" + sm;
+    $("exam_time").innerHTML = "剩余时间  " + sh + ":" + sm;
     $("true_exam_time").innerHTML = start;
 
     colse_or_open_block(current_time);
+    if (start%150 == 0) {
+        get_sever_time();
+    }
     var date_end = new Date();
     if (start != 0) {
-        start = Math.round((start - 0.1 - (date_end - date_start)/1000)*10)/10;
+        if ((date_end - exam_time_start) > 500 && (date_end - exam_time_start) < 5000) {
+            start = Math.round((start - (date_end - exam_time_start)/1000)*10)/10;
+        } else {
+            start = Math.round((start - 0.1 - (date_end - date_start)/1000)*10)/10;
+        }
     }
+    exam_time_start = date_end;
 }
 
 //打开模块和关闭答案
@@ -692,11 +694,13 @@ function colse_or_open_block(current_time) {
             var b_id = block_end_hash.index(all_block_end_time[j]);
             var block_title = $("b_title_" + b_id).innerHTML;
             var block_time = return_giving_time(all_block_end_time[j]);
-            if (block_time == current_time) {
-                var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
-                flash_div.innerHTML = "<p> "+ block_title + " 部分答题时间已到，您的答案将自动被提交，请您继续做其它部分的题。</p>";
+            if (block_time == current_time || (block_time > current_time && $("block_" + b_id).style.display != "none")) {
+                var flash_div = create_element("div", null, "flash_notice", "white_box", null, "innerHTML");
+                flash_div.innerHTML = "<div class='white_box_x'><a href='javascript:void(0);' onclick='javascript:flash_remove(this);'><img src='/images/paper/x.gif'></a></div>"
+                + "<div class='clear'></div><div class='white_box_text'>"
+                + block_title + " 部分答题时间已到，您的答案将自动被提交，请您继续做其它部分的题。</div>";
                 document.body.appendChild(flash_div);
-                show_flash_div();
+                show_flash_not_close();
                 window.clearInterval(local_timer);
                 local_storage_answer();
                 has_close_block = true;
@@ -735,25 +739,35 @@ function colse_or_open_block(current_time) {
 }
 
 //用来5分钟存储的定时器
+var local_save_time = null;
 function local_save_start() {
     local_timer = self.setInterval(function(){
+        local_save_time = null;
         local_save();
     }, 100);
+//    local_timer = self.setTimeout(function(){
+//        local_save();
+//    }, 100);
 }
 
 //5分钟存储函数
 function local_save() {
     var start_date = new Date();
-    if (local_start_time == 0) {
+    if (local_start_time <= 0) {
         window.clearInterval(local_timer);
         local_storage_answer();
         return;
     }
-    if (local_start_time!=300 && local_start_time%150 == 0) {
-        get_sever_time();
-    }
+    
     var end_date = new Date();
-    local_start_time = Math.round((local_start_time - 0.1 - (end_date - start_date))*10)/10;
+    if ((end_date - local_save_time) > 500 && (end_date - local_save_time) < 5000) {
+        local_start_time = Math.round((local_start_time - (end_date - local_save_time)/1000)*10)/10;
+    } else {
+        local_start_time = Math.round((local_start_time - 0.1 - (end_date - start_date)/1000)*10)/10;
+    }
+    local_save_time = end_date;
+//    window.clearTimeout(local_start_time);
+//    local_start_time = self.setTimeout(function(){local_save();}, 100);
 }
 
 //用来1分钟取一下服务器时间
@@ -773,7 +787,7 @@ function get_sever_time() {
                 start = Math.round(new Number(request.responseText)*10)/10;
                 var h = Math.floor(start/3600) < 10 ? ("0" + Math.floor(start/3600)) : Math.floor(start/3600);
                 var m = Math.floor((start%3600)/60) < 10 ? ("0" + Math.floor((start%3600)/60)) : Math.floor((start%3600)/60);
-                $("exam_time").innerHTML = h + ":" + m;
+                $("exam_time").innerHTML = "剩余时间  " + h + ":" + m;
             }
         },
         parameters:"user_id="+ user_id +"&authenticity_token=" + encodeURIComponent('BgLpQ3SADBr4tuiYZOJeoOvY4VOHogJvqQEpMwYVBM4=')
@@ -1085,11 +1099,31 @@ function is_has_audio(block_id, description) {
     var titles = description.split("<mp3>");
     var final_title = "";
     if (titles.length > 1) {
-        var audio_str = "<div id='jquery_jplayer_"+ block_id +"' class='jp-jplayer' style='width:0px;height:1px;'></div>";
+        var audio_str = "";
+        if (is_fix_time) {
+            audio_str = "<div id='jquery_jplayer_"+ block_id +"' class='jp-jplayer' style='width:0px;height:1px;'></div>";
+        } else {
+            audio_str = generate_jplayer_div(block_id);
+        }
         final_title = titles[0] + audio_str;
     } else {
         final_title = description;
     }
+    return final_title;
+}
+
+function generate_jplayer_div(block_id) {
+    var final_title = "<div id='jquery_jplayer_" + block_id + "' class='jp-jplayer'></div>"
+    + "<div id='jp_container_1' class='jp-audio'><div class='jp-type-single'><div class='jp-gui jp-interface'>"
+    + "<ul class='jp-controls'><li><a href='javascript:;' class='jp-play' tabindex='1'>play</a></li>"
+    + "<li><a href='javascript:;' class='jp-pause' tabindex='1'>pause</a></li>"
+    + "<li><a href='javascript:;' class='jp-stop' tabindex='1'>stop</a></li>"
+    + "<li><a href='javascript:;' class='jp-mute' tabindex='1' title='mute'>mute</a></li>"
+    + "<li><a href='javascript:;' class='jp-unmute' tabindex='1' title='unmute'>unmute</a></li>"
+    + "<li><a href='javascript:;' class='jp-volume-max' tabindex='1' title='max volume'>max volume</a></li></ul>"
+    + "<div class='jp-progress'><div class='jp-seek-bar'><div class='jp-play-bar'></div></div></div>"
+    + "<div class='jp-volume-bar'><div class='jp-volume-bar-value'></div></div>"
+    + "<div class='jp-time-holder'><div class='jp-current-time'></div><div class='jp-duration'></div></div></div></div></div>";
     return final_title;
 }
 
@@ -1164,7 +1198,7 @@ function start_block_audio(block_id) {
             show_flash_div();
             setTimeout(function(){
                 control_media(block_id);
-            }, 10000);
+            }, 5000);
         } else {
             flash_div.innerHTML = "<p>听力播放结束，请抓紧时间答题。</p>";
             document.body.appendChild(flash_div);
@@ -1198,7 +1232,7 @@ function control_media(audio_id) {
                             var time = return_giving_time(block_start_hash.get(audio_id)) - return_giving_time(block_end_hash.get(audio_id)) ;
                             if (time < parseFloat(event.jPlayer.status.duration)) {
                                 var total_time = return_giving_time(block_end_hash.get(audio_id)) + time
-                                - Math.ceil(parseFloat(event.jPlayer.status.duration));
+                                - Math.ceil(parseFloat(event.jPlayer.status.duration)) ;
                                 block_end_hash.set(audio_id,
                                     (Math.floor(total_time/3600) + ":" + Math.floor(total_time%3600/60) + ":" + total_time%3600%60));
                                 var block_ids = $("block_ids").value.split(",");
@@ -1209,6 +1243,7 @@ function control_media(audio_id) {
                                     block_start_hash.set(next_block_id,
                                         (Math.floor(next_start_time/3600) + ":" + Math.floor(next_start_time%3600/60) + ":" + next_start_time%3600%60));
                                 }
+
                             }
                         }
                     }
