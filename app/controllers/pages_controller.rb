@@ -1,6 +1,7 @@
 #encoding: utf-8
 class PagesController < ApplicationController
   require 'oauth/oauth'
+  include QqHelper
   def index
     if cookies[:user_id] and request.referer == "/"
       redirect_to "/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}"
@@ -58,12 +59,12 @@ class PagesController < ApplicationController
     request_token = consumer.get_request_token()
     session[:qqtoken] = request_token.token
     session[:qqsecret] = request_token.secret
-    redirect_to request_token.authorize_url + "&oauth_consumer_key=#{app_id}&oauth_callback=http://localhost:3000/pages/qq_index"
+    redirect_to request_token.authorize_url({:oauth_consumer_key=>"#{app_id}",:oauth_callback=>"#{Constant::SERVER_PATH}/pages/qq_index"})
   end
 
 
   def qq_index
-    begin
+#    begin
       consumer = OAuth::Consumer.new(app_id, app_key, CONSUMER_OPTIONS)
       request_token = ::OAuth::RequestToken.new(consumer, session[:qqtoken], session[:qqsecret])
       access_token = request_token.get_access_token(:oauth_vericode => params[:oauth_vericode])
@@ -76,9 +77,9 @@ class PagesController < ApplicationController
       end
       cookies[:user_id] = @user.id
       render :inline => "<script>window.opener.location.href='/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}';window.close();</script>"
-    rescue
-      render :inline => "<script>window.opener.location.reload();window.close();</script>"
-    end
+#    rescue
+#      render :inline => "<script>window.opener.location.reload();window.close();</script>"
+#    end
   end
 
 end

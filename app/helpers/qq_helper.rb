@@ -9,10 +9,26 @@ module QqHelper
     :authorize_path => "/oauth/qzoneoauth_authorize",
     :http_method => :get,
     :scheme => :query_string,
-    :nonce => Base64.encode64(OpenSSL::Random.random_bytes(32)).gsub(/\W/, '')[0, 32] }
+    :nonce => Base64.encode64(OpenSSL::Random.random_bytes(32)).gsub(/\W/, '')[0, 32]
+  }
+
+  OAUTH_CON=(Time.new.to_i + 100).to_s
+  OAUTH_TIMESTAMP=(Time.new.to_i + 100).to_s
+  HTTP_URL="https://open.t.qq.com"
+  OPTIONS={
+    :site =>HTTP_URL ,
+    :request_token_path => "/cgi-bin/request_token",
+    :access_token_path => "/cgi-bin/access_token",
+    :authorize_path => "/cgi-bin/authorize",
+    :oauth_callback=>"#{Constant::SERVER_PATH}/sessions/qq_add_friend",
+    :http_method => :get,
+    :scheme => :query_string,
+    :nonce => Base64.encode64(OpenSSL::Random.random_bytes(32)).gsub(/\W/, '')[0, 32],
+    :realm =>"#{Constant::SERVER_PATH}/sessions/qq_add_friend",
+  }
 
 
-
+  
   #qq登录
   def app_id
     223448
@@ -34,7 +50,6 @@ module QqHelper
     "40ee1e5183af2fbef676cc273d220da4"
   end
 
-  
 
 
 end
