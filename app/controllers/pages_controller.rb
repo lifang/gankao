@@ -59,7 +59,7 @@ class PagesController < ApplicationController
     request_token = consumer.get_request_token()
     session[:qqtoken] = request_token.token
     session[:qqsecret] = request_token.secret
-    redirect_to request_token.authorize_url + "&oauth_consumer_key=#{app_id}&oauth_callback=http://localhost:3000/pages/qq_index"
+    redirect_to request_token.authorize_url + "&oauth_consumer_key=#{app_id}&oauth_callback=#{Constant::SERVER_PATH}pages/qq_index"
   end
 
 

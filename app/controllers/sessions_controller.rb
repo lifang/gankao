@@ -128,11 +128,11 @@ class SessionsController < ApplicationController
     request_token = consumer.get_request_token()
     session[:qqtoken] = request_token.token
     session[:qqsecret] = request_token.secret
-    redirect_torequest_token.authorize_url(:oauth_callback=>"http://www.gankao.co/sessions/qq_add_friend")
+    redirect_torequest_token.authorize_url(:oauth_callback=>"#{Constant::SERVER_PATH}/sessions/qq_add_friend")
   end
 
   def qq_add_friend
-      redirect_to "/"
+      redirect_to "/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}"
   end
 
 

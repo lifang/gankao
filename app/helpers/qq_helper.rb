@@ -9,7 +9,8 @@ module QqHelper
     :authorize_path => "/oauth/qzoneoauth_authorize",
     :http_method => :get,
     :scheme => :query_string,
-    :nonce => Base64.encode64(OpenSSL::Random.random_bytes(32)).gsub(/\W/, '')[0, 32] }
+    :nonce => Base64.encode64(OpenSSL::Random.random_bytes(32)).gsub(/\W/, '')[0, 32]
+  }
 
   OAUTH_CON=(Time.new.to_i + 100).to_s
   OAUTH_TIMESTAMP=(Time.new.to_i + 100).to_s
