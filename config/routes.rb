@@ -60,7 +60,7 @@ Gankao::Application.routes.draw do
       get "get_code"
       post "user_code"
       get "sina_login","friend_add_request","friend_add"
-      get "renren_login","qq_weibo"
+      get "renren_login","qq_weibo","qq_add_friend"
     end
     member do
       get "new_code","active"

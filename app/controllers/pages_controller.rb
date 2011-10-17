@@ -1,6 +1,7 @@
 #encoding: utf-8
 class PagesController < ApplicationController
   require 'oauth/oauth'
+  include QqHelper
   def index
     if cookies[:user_id] and request.referer == "/"
       redirect_to "/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}"
