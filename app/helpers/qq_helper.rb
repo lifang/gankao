@@ -20,11 +20,11 @@ module QqHelper
     :request_token_path => "/cgi-bin/request_token",
     :access_token_path => "/cgi-bin/access_token",
     :authorize_path => "/cgi-bin/authorize",
-    :oauth_callback=>"http://www.baidu.com",
+    :oauth_callback=>"#{Constant::SERVER_PATH}/sessions/qq_add_friend",
     :http_method => :get,
     :scheme => :query_string,
     :nonce => Base64.encode64(OpenSSL::Random.random_bytes(32)).gsub(/\W/, '')[0, 32],
-    :realm => "http://www.baidu.com",
+    :realm =>"#{Constant::SERVER_PATH}/sessions/qq_add_friend",
   }
 
 
