@@ -9,7 +9,6 @@ class PagesController < ApplicationController
       @title="赶考"
       render :layout=>"index"
     end
-    
   end
 
   def sina_index

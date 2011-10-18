@@ -460,6 +460,8 @@ img { border: none;}
 
 .zh_test_middle { width: 558px; padding: 0 30px; background: url(/images/paper/zhTest_m_bg.png) repeat-y;}
 
+
+.tb_text { color: #2875ae; padding-left: 24px; line-height: 24px; font-size: 14px; font-weight: bold;}
 .tb_loading { width: 464px; height: 18px; background: url(/images/paper/all_bg.png) no-repeat -125px -114px; margin: 0 auto;}
 .tb_loading_t { width: 464px; height: 18px; background: url(/images/paper/all_bg.png) no-repeat -125px -136px;}
 .width_8 { width: 8px;}

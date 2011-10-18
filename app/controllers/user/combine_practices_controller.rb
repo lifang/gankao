@@ -19,6 +19,7 @@ class User::CombinePracticesController < ApplicationController
         xml_url="#{Constant::BACK_PUBLIC_PATH}/papers/#{@exam_user.paper_id}.xml"
         xml=Document.new(File.open(xml_url)).root
         @answer_array=xml.get_elements("/paper/blocks/block[#{@step[0].to_i}]/problems//questions//answer").map{|n|n=n.text}.join("|-|-|").gsub("\"","")
+        @practies_count = ExamUser.return_join_exam_count(Examination::TYPES[:PRACTICE], cookies[:user_id].to_i,Category::TYPE_IDS[:english_fourth_level])
         render :layout => "practice_layout"
       else
         flash[:warn] = "试卷加载错误。"

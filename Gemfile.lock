@@ -96,7 +96,6 @@ GEM
       rspec-expectations (= 2.0.0)
     rspec-rails (2.0.0)
       rspec (= 2.0.0)
-    ruby-hmac (0.4.0)
     ruby-ole (1.2.11.1)
     sinatra (1.2.6)
       rack (~> 1.1)
@@ -133,7 +132,6 @@ DEPENDENCIES
   rake (= 0.8.7)
   rspec (= 2.0.0)
   rspec-rails (= 2.0.0)
-  ruby-hmac (= 0.4.0)
   sinatra
   spreadsheet (= 0.6.5.5)
   webrat (= 0.7.1)
