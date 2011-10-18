@@ -13,7 +13,6 @@ gem 'faker', '0.3.1'
 gem 'spreadsheet', '0.6.5.5'
 gem 'gchartrb', '0.8'
 
-
 gem 'sinatra'     
 gem 'oauth', '0.4.5'  #新浪微博使用oauth
 gem 'oauth2', '0.4.1' #人人使用oauth2
