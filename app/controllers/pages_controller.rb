@@ -66,8 +66,8 @@ class PagesController < ApplicationController
     #    begin
     url="#{GRAPY_URL}?access_token=#{params[:oauth_token]}&openid=#{params[:openid]}&#{PARAMS}&format=json&oauth_signature=#{signature_params} "
     request_token=JSON OAuth2::Client.new(app_id, app_key,{}).request(:get, url,{},{})
-    nickname  = User.find_by_open_id(params[:openid])
-    if nickname.nil?
+    @user= User.find_by_open_id(params[:openid])
+    if @user.nil?
       request_token["nickname"]="qq用户" if request_token["nickname"].nil?||request_token["nickname"]==""
       @user=User.create(:code_type=>'qq',:name=>request_token["nickname"],:username=>request_token["nickname"],:open_id=>params[:openid])
     end
