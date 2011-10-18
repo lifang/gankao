@@ -80,8 +80,7 @@
         <%=  render :partial => "/common/footer" %>
       </div>
     </div>
-    <% practies_count = ExamUser.return_join_exam_count(Examination::TYPES[:PRACTICE], cookies[:user_id].to_i,Category::TYPE_IDS[:english_fourth_level]) %>
-    <% if !is_vip? && practies_count >= Constant::PRACTICES_COUNT %>
+    <% if !is_vip? && @practies_count >= Constant::PRACTICES_COUNT %>
       <div class="zhezhao" style="display: block; height: 100%;position:fixed; "></div>
       <div class="service_tishi" style="top: 238.5px; left: 481.5px; display: block; ">
         <div class="se_ts_x"><a href="/user/homes/<%= Category::TYPE_IDS[:english_fourth_level] %>">X</a></div>
