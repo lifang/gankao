@@ -6,7 +6,7 @@
     <%else%>
       <div class="per_con">
         <h2><%= @simulations[0].title %></h2>
-        <p><%= @simulations[0].start_at_time.nil? ? "不限制时间":@simulations[0].start_at_time.strftime("%Y-%m-%d") %></p>
+        <p>2011-10-17<%#= @simulations[0].start_at_time.nil? ? "不限制时间":@simulations[0].start_at_time.strftime("%Y-%m-%d") %></p>
       </div>
       <div class="per_btn">
         <% if @hash1["#{@simulations[0].id}"].nil? %>

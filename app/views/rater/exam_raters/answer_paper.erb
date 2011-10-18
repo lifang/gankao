@@ -1,4 +1,4 @@
-<%= javascript_include_tag 'jquery' %>
+<%#= javascript_include_tag 'jquery' %>
 <div id="paper_show_info">
   <ul class="tab_biz">
     <li class="actived"><a href="javascript:void(0);"><%= @xml.elements['base_info'].elements['title'].text %></a></li>
@@ -14,10 +14,12 @@
     </center>
   </div>
   <% @xml.elements['blocks'].each_element do |block|%>
-    <h1 class="biz_art_title" id="block_show"><%= block.elements['base_info'].elements['title'].text %> (共<%= block.attributes['total_num'] %>题，总分:<%= block.attributes['total_score'] %>分)
+    <h1 class="biz_art_title" id="block_show">
+      <%= block.elements['base_info'].elements['title'].text.to_s.html_safe %>
+      (共<%= block.attributes['total_num'] %>题，总分:<%= block.attributes['total_score'] %>分)
     </h1>
     <div class="biz_art_list_box">
-      <%= block.elements["base_info"].elements["description"].text %>
+      <%= block.elements["base_info"].elements["description"].text.to_s.html_safe %>
       <ul>
         <% if !block.elements['problems'].nil? %>
           <% block.elements['problems'].each_element do |problem| %>
