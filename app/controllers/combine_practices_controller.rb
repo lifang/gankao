@@ -6,7 +6,7 @@ class CombinePracticesController < ApplicationController
   def show
     @all_practies = Examination.return_all_exam_count(Examination::TYPES[:PRACTICE], params[:id].to_i)
     @practies_count = ExamUser.return_join_exam_count(Examination::TYPES[:PRACTICE], cookies[:user_id].to_i, params[:id].to_i)
-    @practies_precent = @all_practies != 0 ? ((@practies_count.to_f/@all_practies)*100).round : 0
+    @practies_precent = @all_practies != 0 ? ((@practies_count.to_f/60)*100).round : 0
 
   end
 
