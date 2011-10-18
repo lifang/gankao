@@ -39,23 +39,26 @@
     <div class="wrap">
       <div class="head">
         <div class="head_box">
-
+          <div class="top_qq"><span>在线客服</span><a href="tencent://message/?uin=2568830556&amp;Site=赶考网&amp;Menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=1:2568830556:7" alt="有事点这里"></a></div>
           <div class="member_nav">
             Welcome,<a href="/user/homes/<%= Category::TYPE_IDS[:english_fourth_level] %>" class="signColor">
-                <%= current_user.name if current_user %></a>
-                <% if (is_vip?).to_s == "true" %><img src="/images/paper/V.png" /><% else %><a href="/users/goto_vip"><img src="/images/paper/v0.png" /></a><% end %>
-              |
+              <%= current_user.name if current_user %></a>
+            <% if (is_vip?).to_s == "true" %><img src="/images/paper/V.png" /><% else %><a href="/users/goto_vip"><img src="/images/paper/v0.png" /></a><% end %>
+            |
             <a href="/users/<%= cookies[:user_id] %>/edit">个人中心</a>|
-            <a href="/signout">退出</a>
+            <a href="/signout" class="signColor">退出</a>
           </div>
           <div class="member_logo"><img src="/images/paper/member_logo.png" /></div>
         </div>
       </div>
       <%= yield %>
       <div class="clear"></div>
-      <div class="foot">
-        <p><a href="#">用户协议</a>   |   <a href="#">关于我们</a>    |   <a href="#">官方微博</a></p>
-        <p>Copyright © 2011 gankao.co 版权所有 苏ICP备11074394号-1</p>
+      <div class="foot_index">
+        <div class="foot_index_box">
+          <p><a href="http://www.comdosoft.com/" target="_blank">公司信息</a> |   <a href="#">官方微博</a>   |   <a href="http://www.comdosoft.com/pages/aboutcon.html" target="_blank">联系我们</a>    |   <a href="#">用户协议</a></p>
+          <p>Copyright © 2011-2012 &nbsp;&nbsp;苏州协创软件有限公司&nbsp;&nbsp;版权所有&nbsp;&nbsp;苏ICP备11024201</p>
+
+        </div>
       </div>
     </div>
     <%= render :partial => "/common/flash_div" %>

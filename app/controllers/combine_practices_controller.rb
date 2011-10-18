@@ -7,7 +7,6 @@ class CombinePracticesController < ApplicationController
     @all_practies = Examination.return_all_exam_count(Examination::TYPES[:PRACTICE], params[:id].to_i)
     @practies_count = ExamUser.return_join_exam_count(Examination::TYPES[:PRACTICE], cookies[:user_id].to_i, params[:id].to_i)
     @practies_precent = @all_practies != 0 ? ((@practies_count.to_f/60)*100).round : 0
-
   end
 
   def start
@@ -36,10 +35,6 @@ class CombinePracticesController < ApplicationController
           redirect_to "/combine_practices/#{params[:id]}"
         end
       end
-#    else
-#      flash[:error] = "您只能参与#{Constant::PRACTICES_COUNT}次综合训练，如果您想参与更多，请升级为VIP"
-#      redirect_to "/combine_practices/#{params[:id]}"
-#    end
     end
   end
 
