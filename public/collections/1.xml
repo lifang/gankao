@@ -123,7 +123,7 @@
                     <user_answer>sfs</user_answer>
                     <user_answer>sfs</user_answer>
                     <user_answer>sfs</user_answer>
-                <user_answer/><user_answer/><user_answer/><user_answer/><user_answer/></question>
+                <user_answer/><user_answer/><user_answer/><user_answer/><user_answer></user_answer></question>
             </questions>
         </problem>
         <problem id='10' repeat_num='6' score='5' types='0'>
@@ -160,7 +160,7 @@
                     <user_answer>23</user_answer>
                     <user_answer>23</user_answer>
                     <user_answer>23</user_answer>
-                <user_answer/><user_answer/><user_answer/><user_answer/><user_answer/></question>
+                <user_answer/><user_answer/><user_answer/><user_answer/><user_answer></user_answer></question>
             </questions>
         </problem>
         <problem id='11' repeat_num='8' score='5' types='0'>
@@ -223,13 +223,13 @@
                     <user_answer>豆腐干风格</user_answer>
                     <user_answer>阿斯达岁的大幅度</user_answer>
                 </question>
-            <question correct_type='0' error_percent='0' id='17' repeat_num='1' score='7.1'><answer>what</answer><analysis>12312313</analysis><questionattrs>what;-;where;-;when;-;why</questionattrs><tags>名词</tags><user_answer></user_answer></question></questions>
+            </questions>
         </problem>
         <problem id='33' score='44' types='3'>
             <title>sdfasfasfasfasfsafdsaf&lt;div&gt;sdfafsafsf&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;sfdasfsaf&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;sfd&lt;/div&gt;&lt;div&gt;asfd&lt;/div&gt;&lt;div&gt;asf&lt;/div&gt;&lt;div&gt;saf&lt;/div&gt;&lt;div&gt;asf&lt;/div&gt;&lt;div&gt;asfasf&lt;/div&gt;</title>
             <category>3</category>
             <questions>
-                <question correct_type='3' error_percent='0' id='36' repeat_num='15' score='44'>
+                <question correct_type='3' error_percent='0' id='36' repeat_num='9' score='44'>
                     <answer>fsafdasfsaf
 &lt;p&gt;safd&lt;/p&gt;
 &lt;p&gt;asf&lt;/p&gt;
@@ -245,7 +245,7 @@ asf
                     <user_answer>ddddddddddddddddddddddddddddddddddddddddddffffffffffffffffffffffffffffffffffffffffffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee4444444444444444444444444444444444555555555555555555555555555</user_answer>
                     <user_answer>ddddddddddddddddddddddddddddddddddddddddddffffffffffffffffffffffffffffffffffffffffffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee4444444444444444444444444444444444555555555555555555555555555</user_answer>
                     <user_answer>ddddddddddddddddddddddddddddddddddddddddddffffffffffffffffffffffffffffffffffffffffffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee4444444444444444444444444444444444555555555555555555555555555</user_answer>
-                <user_answer/><user_answer/><user_answer/><user_answer/><user_answer/><user_answer/><user_answer/><user_answer/><user_answer/><user_answer/></question>
+                <user_answer/><user_answer/><user_answer/><user_answer/></question>
             </questions>
         </problem>
         <problem id='35' score='65' types='4'>
@@ -264,7 +264,7 @@ asf
                     <user_answer>awre</user_answer>
                     <user_answer>awre</user_answer>
                     <user_answer>awre</user_answer>
-                <user_answer/><user_answer/><user_answer/><user_answer/><user_answer/></question>
+                <user_answer/><user_answer/><user_answer/><user_answer/><user_answer></user_answer></question>
                 <question correct_type='1' error_percent='0' id='39' repeat_num='7' score='6'>
                     <description>sadfasssssssssssssssssss4t344555</description>
                     <answer>sdfa;|;qq2</answer>
@@ -273,7 +273,7 @@ asf
                     <tags>4</tags>
                     <user_answer/>
                     <user_answer/>
-                <user_answer/><user_answer/><user_answer/><user_answer/><user_answer/></question>
+                <user_answer/><user_answer/><user_answer/><user_answer/><user_answer></user_answer></question>
                 <question correct_type='2' error_percent='0' id='40' repeat_num='7' score='54'>
                     <description>safwerwetewrtewrt</description>
                     <answer>1</answer>
@@ -282,7 +282,7 @@ asf
                     <tags/>
                     <user_answer/>
                     <user_answer/>
-                <user_answer/><user_answer/><user_answer/><user_answer/><user_answer/></question>
+                <user_answer/><user_answer/><user_answer/><user_answer/><user_answer></user_answer></question>
                 <question correct_type='3' error_percent='0' id='41' repeat_num='8' score='0'>
                     <description>asdffffffffffffffffffffffffffffffffffffffff</description>
                     <answer>fffffwrrrrrrrrrrrrrrrrrrrrr</answer>
@@ -301,7 +301,7 @@ asf
             <title>测试简答题&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;</title>
             <category>3</category>
             <questions>
-                <question correct_type='5' error_percent='0' id='37' repeat_num='16' score='4'>
+                <question correct_type='5' error_percent='0' id='37' repeat_num='11' score='4'>
                     <answer>测试简答题&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;&lt;div&gt;测试简答题&lt;/div&gt;&lt;div&gt;测试简答题测试简答题测试简答题&lt;/div&gt;</answer>
                     <analysis>gdsfgdsgdsg</analysis>
                     <questionattrs/>
@@ -312,7 +312,7 @@ asf
                     <user_answer/>
                     <user_answer>dfddddssssdddd</user_answer>
                     <user_answer>jjjhhfffsdsasass</user_answer>
-                <user_answer/><user_answer>ddddsssss</user_answer><user_answer/><user_answer/><user_answer/><user_answer/><user_answer/></question>
+                <user_answer/><user_answer>ddddsssss</user_answer></question>
             </questions>
         </problem>
         <problem id='57' score='20' types='4'>
@@ -444,7 +444,7 @@ asf
             <title>sdfasfsafdsfsafasfasfsafsfsfsdfsaf</title>
             <category>3</category>
             <questions>
-                <question correct_type='3' error_percent='0' id='48' repeat_num='12' score='5'>
+                <question correct_type='3' error_percent='0' id='48' repeat_num='7' score='5'>
                     <answer>asfasfasfasfasfasfsafsfdsafsfsfd</answer>
                     <analysis>sfafsafasfasfsfdsafdasfsf</analysis>
                     <questionattrs/>
@@ -452,7 +452,7 @@ asf
                     <user_answer>dssssffffffffffffffffffffffffffffffffffffffffffffdddffffffffffffffffffffffffffff</user_answer>
                     <user_answer>dssssffffffffffffffffffffffffffffffffffffffffffffdddffffffffffffffffffffffffffff</user_answer>
                     <user_answer>dssssffffffffffffffffffffffffffffffffffffffffffffdddffffffffffffffffffffffffffff</user_answer>
-                <user_answer/><user_answer/><user_answer/><user_answer/><user_answer/><user_answer/><user_answer/><user_answer/><user_answer/></question>
+                <user_answer/><user_answer/><user_answer/><user_answer/></question>
             </questions>
         </problem>
         
@@ -499,7 +499,7 @@ asf
                             <questionattrs/>
                             <tags> 所有分类</tags>
                         <user_answer>ddddddddddddddd</user_answer></question>
-                    <question correct_type='0' error_percent='0' id='60' repeat_num='1' score='7.1'><answer>454</answer><analysis/><questionattrs>454;-;232;-;1455;-;678568</questionattrs><tags/><user_answer></user_answer></question></questions>
+                    </questions>
                 </problem><problem id='54' score='5' types='4'>
                     <title>忘记吧，我们的昨天，泪水已经将那段记忆淹没，再也拾不起</title>
                     <category>1</category>
@@ -510,7 +510,7 @@ asf
                             <questionattrs/>
                             <tags> 所有分类</tags>
                         <user_answer>ssssssssssssssss</user_answer><user_answer>llllllllllllllllllllllllllllllllll</user_answer></question>
-                    <question correct_type='0' error_percent='0' id='56' repeat_num='1' score='3.0'><answer>hytjytj</answer><analysis/><questionattrs>regthr;-;rtger;-;hytjytj;-;kuykuilui</questionattrs><tags> 所有分类</tags><user_answer>regthr</user_answer></question><question correct_type='0' error_percent='0' id='61' repeat_num='1' score='7.1'><answer>657576</answer><analysis/><questionattrs>657576;-;786;-;324242;-;4566</questionattrs><tags/><user_answer></user_answer></question></questions>
+                    <question correct_type='0' error_percent='0' id='56' repeat_num='1' score='3.0'><answer>hytjytj</answer><analysis/><questionattrs>regthr;-;rtger;-;hytjytj;-;kuykuilui</questionattrs><tags> 所有分类</tags><user_answer>regthr</user_answer></question></questions>
                 </problem><problem id='216' score='0' types='0'><title/><category>2</category><questions><question correct_type='0' error_percent='50' id='1055' repeat_num='4' score='0'><answer>C) He cannot get access to the assigned book.</answer><analysis>12. C) He cannot get access to the assigned book.
 由对话可知，该男士认为令他烦恼的是无论是在图书馆还是在书店他都找不到那本书，由此得出答案。get access to指“获得，走近，接近，能够利用某物”。
 
@@ -522,6 +522,6 @@ asf
                             <tags> 我的关注 所有分类</tags>
                         <user_answer/><user_answer>C) He cannot get access to the assigned book.</user_answer><user_answer>C) He cannot get access to the assigned book.</user_answer><user_answer>D) He cannot finish his assignment before the deadline.</user_answer></question>
                     </questions>
-                </problem><problem id='30' score='15.0' types='4'><title>&lt;img title=&quot;播放&quot; src=&quot;/images/paper/play_icon.png&quot; id=&apos;audio_control_30&apos; onclick=&quot;javascript:audio_play(30,&apos;~http://back_server_path~/media/music.mp3&apos;);&quot;&gt;根据所听到的内容，回答以下问题。</title><category>2</category><questions><question correct_type='1' error_percent='0' id='29' repeat_num='1' score='4.0'><description>以下哪几首歌是该歌手的作品？</description><answer>tomorrow;|;girlfriend</answer><questionattrs>tomorrow;-;yesterday;-;国歌;-;girlfriend</questionattrs><tags> 所有分类</tags><user_answer/></question><question correct_type='0' error_percent='0' id='30' repeat_num='1' score='3.0'><description>这首歌的原唱是谁？</description><answer>艾薇儿</answer><questionattrs>艾薇儿;-;刘德华;-;孙燕姿;-;钱俊</questionattrs><tags> 所有分类</tags><user_answer/></question><question correct_type='2' error_percent='0' id='31' repeat_num='1' score='4.0'><description>该歌手是钱俊的女朋友？</description><answer>0</answer><questionattrs/><tags> 所有分类</tags><user_answer/></question><question correct_type='3' error_percent='0' id='32' repeat_num='1' score='4.0'><description>这首歌叫什么名字？</description><answer>my happy ending</answer><questionattrs/><tags> 所有分类</tags><user_answer/></question></questions></problem><problem id='52' score='18.0' types='4'><title>&lt;img title=&quot;播放&quot; src=&quot;/images/paper/play_icon.png&quot; id=&apos;audio_control_52&apos; onclick=&quot;javascript:audio_play(52,&apos;~http://back_server_path~/media/music.mp3&apos;);&quot;&gt;听一段录音，回答下列问题。</title><category>2</category><questions><question correct_type='0' error_percent='0' id='51' repeat_num='1' score='5.0'><description>他们在讨论什么事情？</description><answer>电话</answer><questionattrs>房租;-;电话;-;旅游;-;小明的女朋友</questionattrs><tags> 所有分类</tags><user_answer/></question><question correct_type='1' error_percent='0' id='52' repeat_num='1' score='3.0'><description>根据所听到的内容，以下哪些选项是正确的。</description><answer>小明是男的;|;小红是女的;|;小明喜欢小红</answer><questionattrs>小明是男的;-;小红是女的;-;小明喜欢小红;-;小明讨厌小红</questionattrs><tags> 所有分类</tags><user_answer/></question><question correct_type='2' error_percent='0' id='53' repeat_num='1' score='3.0'><description>你觉得小明和小红可以在一起吗？</description><answer>1</answer><questionattrs/><tags> 所有分类</tags><user_answer/></question><question correct_type='3' error_percent='0' id='54' repeat_num='1' score='7.0'><description>小明家开的什么车？</description><answer>兰博基尼</answer><questionattrs/><tags> 所有分类</tags><user_answer/></question><question correct_type='0' error_percent='0' id='59' repeat_num='1' score='7.1'><answer>2323</answer><analysis/><questionattrs>2323;-;3434;-;687;-;789980</questionattrs><tags/><user_answer></user_answer></question></questions></problem><problem id='47' score='4' types='4'><title>The motivation for  &lt;font  id=&quot;problem_x_dropplace_1&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt; starting Project Euler, and its continuation, is to provide a platform for  &lt;font  id=&quot;problem_x_dropplace_2&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt;  the inquiring mind  &lt;font  id=&quot;problem_x_dropplace_3&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt;  to delve into unfamiliar areas and  &lt;font  id=&quot;problem_x_dropplace_4&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt;   learn new concepts in a fun and recreational context.</title><category>2</category><questions><question correct_type='1' error_percent='0' id='46' repeat_num='1' score='4'><description>ergrhjyukyukyukyu</description><answer>1;|;2;|;3;|;4</answer><questionattrs>1;-;2;-;3;-;4;-;5;-;6</questionattrs><tags> 所有分类</tags><user_answer>1</user_answer></question></questions></problem><problem id='48' score='7' types='4'><title>The motivation for  &lt;font  id=&quot;problem_x_dropplace_1&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt; starting Project Euler, and its continuation, is to provide a platform for  &lt;font  id=&quot;problem_x_dropplace_2&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt;  the inquiring mind  &lt;font  id=&quot;problem_x_dropplace_3&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt;  to delve into unfamiliar areas and  &lt;font  id=&quot;problem_x_dropplace_4&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt;   learn new concepts in a fun and recreational context.</title><category>2</category><questions><question correct_type='1' error_percent='0' id='47' repeat_num='1' score='7'><description>fergergrthjyujyukykuiliuliuloikukyukuyjytjtyjty</description><answer>111;|;2222;|;333;|;44444</answer><questionattrs>111;-;2222;-;333;-;44444;-;5555;-;66;-;7;-;888</questionattrs><tags> 所有分类</tags><user_answer>333</user_answer></question></questions></problem><problem id='46' score='3' types='4'><title>The motivation for  &lt;font  id=&quot;problem_x_dropplace_1&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt; starting Project Euler, and its continuation, is to provide a platform for  &lt;font  id=&quot;problem_x_dropplace_2&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt;  the inquiring mind  &lt;font  id=&quot;problem_x_dropplace_3&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt;  to delve into unfamiliar areas and  &lt;font  id=&quot;problem_x_dropplace_4&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt;   learn new concepts in a fun and recreational context.</title><category>2</category><questions><question correct_type='1' error_percent='0' id='45' repeat_num='1' score='3'><description>fefewfwger</description><answer>111;|;222;|;333;|;444</answer><questionattrs>111;-;222;-;333;-;444;-;wertert;-;ewrerg;-;rtrthty;-;jytjytjhty</questionattrs><tags> 所有分类</tags><user_answer/></question></questions></problem><problem id='50' score='4.0' types='3'><title>&lt;img title=&quot;播放&quot; src=&quot;/images/paper/play_icon.png&quot; id=&apos;audio_control_50&apos; onclick=&quot;javascript:audio_play(50,&apos;~http://back_server_path~/media/music.mp3&apos;);&quot;&gt;正确的答案。</title><category>2</category><questions><question correct_type='3' error_percent='0' id='49' repeat_num='1' score='4.0'><answer>0987654321</answer><analysis/><questionattrs/><tags> 所有分类</tags><user_answer/></question><question correct_type='0' error_percent='0' id='57' repeat_num='1' score='7.1'><answer>4545</answer><analysis>沙发发发</analysis><questionattrs>4545;-;56;-;34345;-;123</questionattrs><tags/><user_answer></user_answer></question></questions></problem><problem id='49' score='4.0' types='3'><title>&lt;img title=&quot;播放&quot; src=&quot;/images/paper/play_icon.png&quot; id=&apos;audio_control_49&apos; onclick=&quot;javascript:audio_play(49,&apos;~http://back_server_path~/media/music.mp3&apos;);&quot;&gt;请将你认为正确的答案填入此空行中。</title><category>2</category><questions><question correct_type='3' error_percent='0' id='48' repeat_num='1' score='4.0'><answer>1234567890</answer><analysis/><questionattrs/><tags> 所有分类</tags><user_answer/></question><question correct_type='0' error_percent='0' id='56' repeat_num='1' score='7.1'><answer>地方</answer><analysis/><questionattrs>地方;-;353;-;2323;-;768</questionattrs><tags/><user_answer></user_answer></question></questions></problem><problem id='51' score='7.1' types='0'><title>上大发送方的</title><category>3</category><questions><question correct_type='0' error_percent='0' id='58' repeat_num='1' score='7.1'><answer>32424</answer><analysis>是发达撒发生法</analysis><questionattrs>32424;-;454;-;89869;-;4545</questionattrs><tags/><user_answer></user_answer></question></questions></problem><problem id='56' score='7.1' types='0'><title>sfasfasfsafasfsafdsafsfdsfsaf</title><category>3</category><questions><question correct_type='0' error_percent='0' id='63' repeat_num='1' score='7.1'><answer>etetet</answer><analysis>sfsf</analysis><questionattrs>etetet;-;ert456;-;4655464;-;6786</questionattrs><tags/><user_answer></user_answer></question></questions></problem></problems>
+                </problem><problem id='30' score='15.0' types='4'><title>&lt;img title=&quot;播放&quot; src=&quot;/images/paper/play_icon.png&quot; id=&apos;audio_control_30&apos; onclick=&quot;javascript:audio_play(30,&apos;~http://back_server_path~/media/music.mp3&apos;);&quot;&gt;根据所听到的内容，回答以下问题。</title><category>2</category><questions><question correct_type='1' error_percent='0' id='29' repeat_num='1' score='4.0'><description>以下哪几首歌是该歌手的作品？</description><answer>tomorrow;|;girlfriend</answer><questionattrs>tomorrow;-;yesterday;-;国歌;-;girlfriend</questionattrs><tags> 所有分类</tags><user_answer/></question><question correct_type='0' error_percent='0' id='30' repeat_num='1' score='3.0'><description>这首歌的原唱是谁？</description><answer>艾薇儿</answer><questionattrs>艾薇儿;-;刘德华;-;孙燕姿;-;钱俊</questionattrs><tags> 所有分类</tags><user_answer/></question><question correct_type='2' error_percent='0' id='31' repeat_num='1' score='4.0'><description>该歌手是钱俊的女朋友？</description><answer>0</answer><questionattrs/><tags> 所有分类</tags><user_answer/></question><question correct_type='3' error_percent='0' id='32' repeat_num='1' score='4.0'><description>这首歌叫什么名字？</description><answer>my happy ending</answer><questionattrs/><tags> 所有分类</tags><user_answer/></question></questions></problem><problem id='52' score='18.0' types='4'><title>&lt;img title=&quot;播放&quot; src=&quot;/images/paper/play_icon.png&quot; id=&apos;audio_control_52&apos; onclick=&quot;javascript:audio_play(52,&apos;~http://back_server_path~/media/music.mp3&apos;);&quot;&gt;听一段录音，回答下列问题。</title><category>2</category><questions><question correct_type='0' error_percent='0' id='51' repeat_num='1' score='5.0'><description>他们在讨论什么事情？</description><answer>电话</answer><questionattrs>房租;-;电话;-;旅游;-;小明的女朋友</questionattrs><tags> 所有分类</tags><user_answer/></question><question correct_type='1' error_percent='0' id='52' repeat_num='1' score='3.0'><description>根据所听到的内容，以下哪些选项是正确的。</description><answer>小明是男的;|;小红是女的;|;小明喜欢小红</answer><questionattrs>小明是男的;-;小红是女的;-;小明喜欢小红;-;小明讨厌小红</questionattrs><tags> 所有分类</tags><user_answer/></question><question correct_type='2' error_percent='0' id='53' repeat_num='1' score='3.0'><description>你觉得小明和小红可以在一起吗？</description><answer>1</answer><questionattrs/><tags> 所有分类</tags><user_answer/></question><question correct_type='3' error_percent='0' id='54' repeat_num='1' score='7.0'><description>小明家开的什么车？</description><answer>兰博基尼</answer><questionattrs/><tags> 所有分类</tags><user_answer/></question></questions></problem><problem id='47' score='4' types='4'><title>The motivation for  &lt;font  id=&quot;problem_x_dropplace_1&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt; starting Project Euler, and its continuation, is to provide a platform for  &lt;font  id=&quot;problem_x_dropplace_2&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt;  the inquiring mind  &lt;font  id=&quot;problem_x_dropplace_3&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt;  to delve into unfamiliar areas and  &lt;font  id=&quot;problem_x_dropplace_4&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt;   learn new concepts in a fun and recreational context.</title><category>2</category><questions><question correct_type='1' error_percent='0' id='46' repeat_num='1' score='4'><description>ergrhjyukyukyukyu</description><answer>1;|;2;|;3;|;4</answer><questionattrs>1;-;2;-;3;-;4;-;5;-;6</questionattrs><tags> 所有分类</tags><user_answer>1</user_answer></question></questions></problem><problem id='48' score='7' types='4'><title>The motivation for  &lt;font  id=&quot;problem_x_dropplace_1&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt; starting Project Euler, and its continuation, is to provide a platform for  &lt;font  id=&quot;problem_x_dropplace_2&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt;  the inquiring mind  &lt;font  id=&quot;problem_x_dropplace_3&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt;  to delve into unfamiliar areas and  &lt;font  id=&quot;problem_x_dropplace_4&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt;   learn new concepts in a fun and recreational context.</title><category>2</category><questions><question correct_type='1' error_percent='0' id='47' repeat_num='1' score='7'><description>fergergrthjyujyukykuiliuliuloikukyukuyjytjtyjty</description><answer>111;|;2222;|;333;|;44444</answer><questionattrs>111;-;2222;-;333;-;44444;-;5555;-;66;-;7;-;888</questionattrs><tags> 所有分类</tags><user_answer>333</user_answer></question></questions></problem><problem id='46' score='3' types='4'><title>The motivation for  &lt;font  id=&quot;problem_x_dropplace_1&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt; starting Project Euler, and its continuation, is to provide a platform for  &lt;font  id=&quot;problem_x_dropplace_2&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt;  the inquiring mind  &lt;font  id=&quot;problem_x_dropplace_3&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt;  to delve into unfamiliar areas and  &lt;font  id=&quot;problem_x_dropplace_4&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/font&gt;   learn new concepts in a fun and recreational context.</title><category>2</category><questions><question correct_type='1' error_percent='0' id='45' repeat_num='1' score='3'><description>fefewfwger</description><answer>111;|;222;|;333;|;444</answer><questionattrs>111;-;222;-;333;-;444;-;wertert;-;ewrerg;-;rtrthty;-;jytjytjhty</questionattrs><tags> 所有分类</tags><user_answer/></question></questions></problem><problem id='50' score='4.0' types='3'><title>&lt;img title=&quot;播放&quot; src=&quot;/images/paper/play_icon.png&quot; id=&apos;audio_control_50&apos; onclick=&quot;javascript:audio_play(50,&apos;~http://back_server_path~/media/music.mp3&apos;);&quot;&gt;正确的答案。</title><category>2</category><questions><question correct_type='3' error_percent='0' id='49' repeat_num='1' score='4.0'><answer>0987654321</answer><analysis/><questionattrs/><tags> 所有分类</tags><user_answer/></question></questions></problem><problem id='49' score='4.0' types='3'><title>&lt;img title=&quot;播放&quot; src=&quot;/images/paper/play_icon.png&quot; id=&apos;audio_control_49&apos; onclick=&quot;javascript:audio_play(49,&apos;~http://back_server_path~/media/music.mp3&apos;);&quot;&gt;请将你认为正确的答案填入此空行中。</title><category>2</category><questions><question correct_type='3' error_percent='0' id='48' repeat_num='1' score='4.0'><answer>1234567890</answer><analysis/><questionattrs/><tags> 所有分类</tags><user_answer/></question></questions></problem></problems>
 </collection>
 

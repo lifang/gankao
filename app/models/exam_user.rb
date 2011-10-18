@@ -351,16 +351,18 @@ class ExamUser < ActiveRecord::Base
     str="-1"
     xml.elements["blocks"].each_element do  |block|
       block.elements["problems"].each_element do |problem|
-          if problem.attributes["id"].nil? or problem.attributes["types"].nil? or
-              (problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:CHARACTER] and
-                problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:COLLIGATIONR] and
-                problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:SINGLE_CALK])
-            block.delete_element(problem.xpath)
-          else
-            score=0
-            problem.elements["questions"].each_element do |question|
-              element=doc.elements["paper/questions/question[@id=#{question.attributes["id"]}]"]
-              question.add_attribute("user_answer","#{element.elements["answer"].text}")
+        if problem.attributes["id"].nil? or problem.attributes["types"].nil? or
+            (problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:CHARACTER] and
+              problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:COLLIGATIONR] and
+              problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:SINGLE_CALK])
+          block.delete_element(problem.xpath)
+        else
+          score=0
+          problem.elements["questions"].each_element do |question|
+            element=doc.elements["paper/questions/question[@id=#{question.attributes["id"]}]"]
+            unless element.nil?
+              answer = (element.elements["answer"].nil? or element.elements["answer"].text.nil?) ? "" : element.elements["answer"].text
+              question.add_attribute("user_answer","#{answer}")
               score += element.attributes["score"].to_i
               question.add_attribute("score_reason","#{element.attributes["reason"]}")
               question.add_attribute("user_score","#{element.attributes["score"]}")
@@ -370,10 +372,12 @@ class ExamUser < ActiveRecord::Base
               else
                 problem.delete_element(question.xpath)
               end
-            end unless problem.elements["questions"].nil?
-            problem.add_attribute("user_score","#{score}")
-          end
-          block.delete_element(problem.xpath) if problem.elements["questions"].nil?
+            end
+              
+          end unless problem.elements["questions"].nil?
+          problem.add_attribute("user_score","#{score}")
+        end
+        block.delete_element(problem.xpath) if problem.elements["questions"].nil?
       end unless block.elements["problems"].nil?
       if block.elements["problems"].nil? or block.elements["problems"].elements[1].nil?
         xml.delete_element(block.xpath)
