@@ -1,8 +1,7 @@
 module QqHelper
   require 'oauth2'
   require 'oauth'
-  require 'hmac'
-  require 'digest/sha1'
+
   #qq登录
   GRAPY_URL="http://graph.qq.com/user/get_user_info"
   REQUEST_URL="http://openapi.qzone.qq.com"
