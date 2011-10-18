@@ -673,16 +673,16 @@ function   openNew()
 //                $("audio_"+id).load();
 //                $("audio_"+id).play();
 //                playing=1;
-//                $("audio_control_"+id).src="/images/paper/zanting_icon.png";
+//                $("audio_control_"+id).src="/images/paper/tingzhi_icon.png";
 //                if(id!="x"){
 //                    setCookie(("audio_"+id),parseInt(getCookie("audio_"+id))+1);
 //                    if($("audio_control_"+id)!=null){
 //                        $("audio_control_"+id).title="停止";
-//                        $("audio_control_"+id).src="/images/paper/zanting_icon.png";
+//                        $("audio_control_"+id).src="/images/paper/tingzhi_icon.png";
 //                    }
 //                    if($("practice2_audio_control_"+id)!=null){
 //                        $("practice2_audio_control_"+id).title="停止";
-//                        $("practice2_audio_control_"+id).src="/images/paper/zanting_icon.png";
+//                        $("practice2_audio_control_"+id).src="/images/paper/tingzhi_icon.png";
 //                    }
 //                }
 //            }
@@ -747,17 +747,17 @@ function   openNew()
 //                }
 //                $("audio_"+id).play();
 //                playing=1;
-//                $("audio_control_"+id).src="/images/paper/zanting_icon.png";
+//                $("audio_control_"+id).src="/images/paper/tingzhi_icon.png";
 //                if(id!="x"){
 //                    $("audio_"+id).title="play";
 //                    setCookie(("audio_"+id),parseInt(getCookie("audio_"+id))+1);
 //                    if($("audio_control_"+id)!=null){
 //                        $("audio_control_"+id).title="停止";
-//                        $("audio_control_"+id).src="/images/paper/zanting_icon.png";
+//                        $("audio_control_"+id).src="/images/paper/tingzhi_icon.png";
 //                    }
 //                    if($("practice2_audio_control_"+id)!=null){
 //                        $("practice2_audio_control_"+id).title="停止";
-//                        $("practice2_audio_control_"+id).src="/images/paper/zanting_icon.png";
+//                        $("practice2_audio_control_"+id).src="/images/paper/tingzhi_icon.png";
 //                    }
 //                }
 //            }
@@ -900,16 +900,16 @@ function audio_play(id,src){
             jQuery("#jquery_jplayer").jPlayer("play");
             last_audio=id;
             playing=1;
-            $("audio_control_"+id).src="/images/paper/zanting_icon.png";
+            $("audio_control_"+id).src="/images/paper/tingzhi_icon.png";
             if(id!="x"){
                 setCookie(("audio_"+id),parseInt(getCookie("audio_"+id))+1);
                 if($("audio_control_"+id)!=null){
                     $("audio_control_"+id).title="停止";
-                    $("audio_control_"+id).src="/images/paper/zanting_icon.png";
+                    $("audio_control_"+id).src="/images/paper/tingzhi_icon.png";
                 }
                 if($("practice2_audio_control_"+id)!=null){
                     $("practice2_audio_control_"+id).title="停止";
-                    $("practice2_audio_control_"+id).src="/images/paper/zanting_icon.png";
+                    $("practice2_audio_control_"+id).src="/images/paper/tingzhi_icon.png";
                 }
             }
         }

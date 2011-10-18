@@ -7,6 +7,7 @@
   </div>
 <% else %>
   <div class="errorLibrary_left">
+    <div class="patternText">模式切换</div>
     <div class="pattern"><a href="/exam_lists/<%= params[:id] %>/incorrect_list" class="chay_pat">查阅</a><div class="moveBlock_bg">
         <div class="moveBlock" style="left: 49px; "><img alt="moveBlock" src="/images/paper/moveBlock.png" /></div></div><a href="/exam_lists/<%= params[:id] %>/question_info" class="lianx_pat">练习</a></div>
     <div class="clear"></div>
@@ -140,6 +141,13 @@
   <div class="tab_m">
     <h3 id="answer"></h3>
     <p id="analysis"></p>
+  </div>
+  <div class="tab_b"></div>
+</div>
+<div class="pattern_tab">
+  <div class="tab_t"></div>
+  <div class="tab_m">
+    <p>错题库有两种使用方式，第一种是查看模式，用来查看自己的错题或收藏的试题；另一种是练习模式，可以用来重做错题。</p>
   </div>
   <div class="tab_b"></div>
 </div>

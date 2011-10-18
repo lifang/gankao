@@ -46,6 +46,13 @@ class User::CollectionsController < ApplicationController
       if problem
         question = collection.question_in_collection(problem, params[:id])
         if question
+          if question.elements["tags"].nil?
+            question.add_element("tags").add_text("我的关注")
+            collection.generate_collection_url(collection_doc.to_s)
+          else
+            question.elements["tags"].text="#{question.elements["tags"].text} 我的关注" unless question.elements["tags"].text =~ /我的关注/
+            collection.generate_collection_url(collection_doc.to_s)
+          end
           flash[:warn] = "当前题目已经收藏成功。"
         else
           collection.hand_add_question(exam_user.paper_url, question_answer,

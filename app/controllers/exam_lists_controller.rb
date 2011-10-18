@@ -33,13 +33,14 @@ class ExamListsController < ApplicationController
   end
   
   def incorrect_list
+    session[:tag] = nil
     @hash_list = {}
     @has_next_page = false
     @lists = list
     if @lists
       @num = @lists.get_elements("//problems/problem").size
       tags = @lists.get_elements("//problems//questions//tags")
-      @tags = ["所有分类"]
+      @tags = []
       tags.each do |tag|
         @tags = @tags | tag.text.split(" ") unless tag.nil? or tag.text.nil? or tag.text == ""
       end
@@ -170,7 +171,7 @@ class ExamListsController < ApplicationController
     @lists =list
     if @lists
       tags = @lists.get_elements("//problems//questions//tags")
-      @tags = ["所有分类"]
+      @tags = []
       tags.each do |tag|
         @tags = @tags | tag.text.split(" ") unless tag.nil? or tag.text.nil? or tag.text == ""
       end

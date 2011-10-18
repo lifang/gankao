@@ -63,7 +63,7 @@
               question.elements["note_text"].text == "")
               first_question = question.attributes["id"] if first_question == nil %>
           <div class="nb_r_box" id="question_info_<%= question.attributes["id"] %>" style="display:none;">
-            <div class="nb_r_title">原题</div>
+            <div class="nb_r_title">相关试题</div>
             <div class="nb_r_con">
               <!--原题-->
               <%= render :partial => "/user/notes/question_with_answer", :object => [question, problem] %>
