@@ -37,10 +37,9 @@ img { border: none;}
 .login_i_a0 { text-decoration: none; color: #F00;}
 
 
-.iphone_text { float: left; width: 560px; height:45px; line-height: 45px; padding: 25px 0 0 100px; font-size: 20px; font-family:"微软雅黑";}
-.iphone_text span { color:#A10000; font-size: 24px; display: inline-block; height: 45px; background: url(/images/paper/iphone4s.png) 5px 0 no-repeat; padding: 0 5px 0 60px;}
-.iphone_text em { padding: 0 10px; width: 50px; display: inline-block; text-align: center;}
-.set_in_fx { width: 134px; height: 40px; display: inline-block; text-indent: -999px; overflow: hidden; background: url(/images/paper/set_in_fx.png) no-repeat; float: right;}
+.iphone_text { width: 460px; float: left; height:50px; padding: 20px 0 0 40px; font-size: 16px; font-family:"微软雅黑"; background: url(/images/paper/iphone4s.png) 280px 20px no-repeat;line-height: 24px;}
+.set_in_fx {width: 134px; height: 40px; float:  left; margin: 20px 0 0 0px;}
+.set_in_fx a { width: 134px; height: 40px; display: block; background: url(/images/paper/set_in_fx.png) no-repeat;}
 
 
 .nav_cet { float: left; width: 540px; height:45px; padding: 25px 0 0 120px;}
