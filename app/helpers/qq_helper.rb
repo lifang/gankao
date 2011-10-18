@@ -3,7 +3,7 @@ module QqHelper
   require 'oauth'
 
   #qq登录
-  GRAPY_URL="http://graph.qq.com/user/get_user_info"
+  GRAPY_URL="http://openapi.qzone.qq.com/user/get_user_info"
   REQUEST_URL="http://openapi.qzone.qq.com"
   OAUTH_CON=(Time.new.to_i + 100).to_s
   OAUTH_TIMESTAMP=(Time.new.to_i).to_s
