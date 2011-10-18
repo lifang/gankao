@@ -65,7 +65,7 @@ class PagesController < ApplicationController
   def qq_index
     #    begin
     url="#{GRAPY_URL}?access_token=#{params[:oauth_token]}&openid=#{params[:openid]}&#{PARAMS}&format=json&oauth_signature=#{signature_params} "
-    request_token=OAuth2::Client.new(app_id, app_key,{}).request(:get, url,{},{})
+    request_token=JSON OAuth2::Client.new(app_id, app_key,{}).request(:get, url,{},{})
     nickname  = User.find_by_open_id(params[:openid])
     if nickname.nil?
       request_token["nickname"]="qq用户" if request_token["nickname"].nil?||request_token["nickname"]==""
