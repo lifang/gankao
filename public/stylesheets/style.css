@@ -304,8 +304,6 @@ img { border: none;}
 .chak_daan { width: 63px;  background: url(/images/paper/all_bg.png) no-repeat -384px -413px;}
 
 
-
-
 /*选择题-------*/
 .chooseQuestion {font-size: 12px;}
 .chooseQuestion li { line-height: 24px;}
@@ -512,10 +510,12 @@ img { border: none;}
 .tb_con_list { padding: 10px; border: 1px #CCC solid; margin-top: 10px; height: 1%;}
 .explain_btn { width: 60px; height:27px; display: block; overflow: hidden; text-indent: 999px; background: url(/images/paper/all_bg.png) no-repeat -127px -157px; margin-left: 400px;}
 .explain_btn_task2 { width: 60px; height:27px; float: left; background: url(/images/paper/all_bg.png) no-repeat -127px -157px; margin-left: 400px;}
-.explain_btn_ex { width: 60px; height:27px; float: left; border: none; cursor: pointer; background: url(/images/paper/all_bg.png) no-repeat -282px -157px; margin-left: 430px;}
-.explain_btn_checknext {width: 95px; height:27px; float: left; background: url(/images/paper/all_bg.png) no-repeat -360px -157px; margin-left: 430px;}
-.explain_btn_finish { width: 60px; height:27px; float: left; background: url(/images/paper/all_bg.png) no-repeat -471px -157px; margin-left: 430px;}
-.explain_btn_next { width: 60px; height:27px; float: left; background: url(/images/paper/all_bg.png) no-repeat -535px -157px; margin-left: 430px;}
+
+.explain_btn_ex { width: 60px; height:27px; float: left; border: none; cursor: pointer; background: url(/images/paper/all_bg.png) no-repeat -282px -157px; margin-left: 300px;}
+.explain_btn_checknext { border: none; width: 95px; height:27px; float: left; background: url(/images/paper/all_bg.png) no-repeat -360px -157px; margin-left: 430px;}
+.explain_btn_finish { border: none; width: 60px; height:27px; float: left; background: url(/images/paper/all_bg.png) no-repeat -471px -157px; margin-left: 430px;}
+.explain_btn_next {  border: none;width: 60px; height:27px; float: left; background: url(/images/paper/all_bg.png) no-repeat -535px -157px; margin-left: 430px;}
+.play_btn_span { float: right; margin-left: 10px;}
 
 
 .tb_content_btn { padding: 20px 10px 10px 10px; overflow: hidden;}

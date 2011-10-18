@@ -39,7 +39,9 @@
     <input type="hidden" name="examination_id" id="examination_id" value="<%= @examination.id %>"/>
     <input type="hidden" name="show_answer" id="show_answer" value="<%= @answer_array %>"/>
   </div>
+  <div id="jplayer_div">
   <div id="jquery_jplayer" style="height:0px;width:0px;"></div>
+  </div>
   <div id="block_ids" style="display:none;"></div>
   <div id="blocks">
   </div>
@@ -63,23 +65,26 @@
 <%= javascript_include_tag "#{Constant::SERVER_PATH}/javascripts/jeff_answer_paper.js" %>
 <script language="javascript" type="text/javascript">
 
-  jQuery("#jquery_jplayer").jPlayer({
-    ended: function(){
-      playing=0;
-      if($("audio_control_"+last_audio)!=null){
-        $("audio_control_"+last_audio).title="播放";
-        $("audio_control_"+last_audio).src="/images/paper/play_icon.png";
-      }
-      if($("practice2_audio_control_"+last_audio)!=null){
-        $("practice2_audio_control_"+last_audio).title="播放";
-        $("practice2_audio_control_"+last_audio).src="/images/paper/play_icon.png";
-      }
-      last_audio=0;
-    },
-    swfPath: "/javascripts/jplayer",
-    supplied: "mp3",
-    preload:"auto"
-  });
+ // var get_practice_type = <%=  @practice_type %>;
+<% if @practice_type!=2 %>
+    jQuery("#jquery_jplayer").jPlayer({
+      ended: function(){
+        playing=0;
+        if($("audio_control_"+last_audio)!=null){
+          $("audio_control_"+last_audio).title="播放";
+          $("audio_control_"+last_audio).src="/images/paper/play_icon.png";
+        }
+        if($("practice2_audio_control_"+last_audio)!=null){
+          $("practice2_audio_control_"+last_audio).title="播放";
+          $("practice2_audio_control_"+last_audio).src="/images/paper/play_icon.png";
+        }
+        last_audio=0;
+      },
+      swfPath: "/javascripts/jplayer",
+      supplied: "mp3",
+      preload:"auto"
+    });
+<% end %>
 
   var server_path="<%= Constant::SERVER_PATH %>";
   var back_server_path="<%= Constant::BACK_SERVER_PATH %>";
@@ -90,10 +95,7 @@
 
   //定时模块完成定时器
   var load_fix_time = null;
-
   //页面load成功之后加载试卷
   load_paper(<%= @practice_type %>);
-  answer_hash = new Hash();
-
 
 </script>
