@@ -373,7 +373,6 @@ class ExamUser < ActiveRecord::Base
                 problem.delete_element(question.xpath)
               end
             end
-              
           end unless problem.elements["questions"].nil?
           problem.add_attribute("user_score","#{score}")
         end
