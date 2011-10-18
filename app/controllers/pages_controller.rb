@@ -63,7 +63,7 @@ class PagesController < ApplicationController
 
 
   def qq_index
-    begin
+#    begin
       url="#{GRAPY_URL}?access_token=#{params[:oauth_token]}&oauth_consumer_key=223448&openid=#{params[:openid]}&format=json "
       request_token=OAuth2::Client.new(app_id, app_key,{}).request(:get, url,{},{})
       nickname  = User.find_by_open_id(params[:openid])
@@ -73,9 +73,9 @@ class PagesController < ApplicationController
       end
       cookies[:user_id] = @user.id
       render :inline => "<script>window.opener.location.href='/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}';window.close();</script>"
-    rescue
-      render :inline => "<script>window.opener.location.reload();window.close();</script>"
-    end
+#    rescue
+#      render :inline => "<script>window.opener.location.reload();window.close();</script>"
+#    end
   end
 
 end
