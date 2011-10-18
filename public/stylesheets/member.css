@@ -8,7 +8,9 @@ img { border: none;}
 .red { color: #F00;}
 .space20 { height: 20px;}
 
-
+.top_qq { float: right; height: 38px; line-height: 34px; padding-top: 6px;}
+.top_qq span { float: left; margin-left: 5px;}
+.top_qq a { padding-top: 6px; margin: 0 5px;}
 
 .wrap { }
 .head { height: 44px; background: url(/images/paper/top_bg.png) repeat-x center 0;}
@@ -18,12 +20,22 @@ img { border: none;}
 .member_nav { height: 41px; line-height: 41px; float: right;}
 .member_nav a { color: #333; margin: 0 5px;}
 
+.head_top { height: 44px; line-height: 44px}
+.member_nav a:hover {color: #A10000; text-decoration: underline;}
+.member_nav a.signColor { color: #A10000;}
+
+.foot_index { padding-top: 40px;background: url(/images/paper/foot_index_bg.png) repeat-x center 0px;}
+.foot_index_box { width: 960px; margin: 0 auto;}
+.foot_index p { text-align: center; line-height: 32px; height: 32px; color: #999;}
+.foot_index p a { padding: 0 5px; color: #999;}
+
 .main { width: 810px; margin: 20px auto;}
 
 
 .main_middle { width: 500px; padding: 10px; margin: 0 auto;}
 .main_vip { width: 700px; padding: 10px; margin: 0 auto;}
 
+.iphone_text { width: 460px; float: left; height:50px; padding: 20px 0 0 40px; font-size: 16px; font-family:"微软雅黑"; background: url(/images/paper/iphone4s.png) 280px 20px no-repeat;line-height: 24px;}
 
 .member_info_btn { width: 114px; height: 40px; margin: 20px auto;}
 .member_info_btn button { width: 114px; height: 40px; background: url(/images/paper/all_bg.png) no-repeat 0 -950px; border: none; cursor: pointer;}
