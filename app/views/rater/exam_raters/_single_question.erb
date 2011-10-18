@@ -1,6 +1,6 @@
 
 <div class="in">
-  <div class="title"><%= single_question.elements["title"].text %></div>
+  <div class="title"><%= single_question.elements["title"].text.to_s.html_safe %></div>
   <% problem_ids="-1" %>
   <% single_question.elements["questions"].each_element do |question| %>
     <%= render :partial => "/common/show_single_question", :object => question %>

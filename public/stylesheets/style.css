@@ -584,6 +584,7 @@ img { border: none;}
 .open_vip_btn { width: 114px; height: 40px; margin: 20px auto;}
 .open_vip_btn button { width: 114px; height: 40px; background: url(/images/paper/all_bg.png) no-repeat -129px -950px; border: none; cursor: pointer;}
 
+
 .tishi_tab { width: 250px; padding: 10px; background: url(/images/paper/mk_b_zz_bg.png) repeat; border: 1px #fff solid; position: absolute; display: none; z-index: 9999;}
 .tishi_tab p { text-align: center; line-height: 24px; font-size: 14px; font-family:"微软雅黑"; color: #F00;}
 

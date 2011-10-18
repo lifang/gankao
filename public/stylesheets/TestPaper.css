@@ -187,7 +187,7 @@ img { border: none;}
 .testPaper_foot { height: 100px;}
 
 /*操作提示弹出层---*/
-.tishi_tab { width: 250px; padding: 10px; background: url(/images/paper/tishi_tab_bg.png) repeat; border: 1px #f2cf7a solid; position: absolute; display: none; z-index: 9999;}
+.tishi_tab { width: 250px; padding: 10px; background: url(/images/paper/mk_b_zz_bg.png) repeat; border: 1px #ffffff solid; position: absolute; display: none;z-index: 9999;}
 .tishi_tab p { text-align: center; line-height: 24px; font-size: 14px; font-family:"微软雅黑"; color: #F00;}
 
 /*提交错误弹出层-----*/
@@ -213,19 +213,6 @@ img { border: none;}
 .tooltip_p { height: 24px; line-height: 24px;}
 
 /*白色弹出层---------*/
-
-.White_jiao1, .White_jiao2, .White_jiao3, .White_jiao4 { width: 15px; height: 15px;}
-.White_jiao1 {background: url(/images/paper/White_jiao.png) no-repeat 0 0;}
-.White_jiao2 {background: url(/images/paper/White_jiao.png) no-repeat -15px 0;}
-.White_jiao3 {background: url(/images/paper/White_jiao.png) no-repeat 0 -15px;}
-.White_jiao4 {background: url(/images/paper/White_jiao.png) no-repeat -15px -15px;}
-
-.White_bian1 { height: 15px; background: url(/images/paper/White_tb_bian.png) repeat-x 0 0;}
-.White_bian2 { width: 15px; height: 100%; background: url(/images/paper/White_lr_bian.png) repeat-y -15px -15px;}
-.White_bian3 { height: 15px; background: url(/images/paper/White_tb_bian.png) repeat-x 0 -15px;}
-.White_bian4 { width: 15px; background: url(/images/paper/White_lr_bian.png) repeat-y 0 0;}
-
-.White_bg { background: url(/images/paper/White_bg.png) repeat;}
-.white_box { width: 250px;}
-.white_box_x a { float: right;}
-.white_box_text { line-height: 24px;}
+.white_tab_box { width: 300px; border: 1px #005eac solid; background: url(/images/paper/White_tab_bg.png) repeat 0 0; position: absolute;}
+.white_box_x { float: right; margin: 5px;}
+.white_box_text { line-height: 24px; padding: 0 5px;}

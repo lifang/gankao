@@ -55,10 +55,16 @@ class PagesController < ApplicationController
   
 
   def login_from_qq
-    consumer = OAuth::Consumer.new(app_id, app_key, CONSUMER_OPTIONS)
-    request_token = consumer.get_request_token()
+    consumer = OAuth::Consumer.new(app_id, app_key, QqHelper::CONSUMER_OPTIONS)
+    request_token = consumer.get_request_token
+    puts "-----------------------------------------------------"
+    puts request_token
     session[:qqtoken] = request_token.token
+    puts request_token.token
     session[:qqsecret] = request_token.secret
+    puts request_token.secret
+    puts request_token.authorize_url({})
+    puts "==================================================="
     redirect_to request_token.authorize_url({:oauth_consumer_key=>"#{app_id}",:oauth_callback=>"#{Constant::SERVER_PATH}/pages/qq_index"})
   end
 

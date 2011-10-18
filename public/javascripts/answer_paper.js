@@ -695,8 +695,8 @@ function colse_or_open_block(current_time) {
             var block_title = $("b_title_" + b_id).innerHTML;
             var block_time = return_giving_time(all_block_end_time[j]);
             if (block_time == current_time || (block_time > current_time && $("block_" + b_id).style.display != "none")) {
-                var flash_div = create_element("div", null, "flash_notice", "white_box", null, "innerHTML");
-                flash_div.innerHTML = "<div class='white_box_x'><a href='javascript:void(0);' onclick='javascript:flash_remove(this);'><img src='/images/paper/x.gif'></a></div>"
+                var flash_div = create_element("div", null, "flash_notice", "white_tab_box", null, "innerHTML");
+                flash_div.innerHTML = "<a href='javascript:void(0);' class='white_box_x' onclick='javascript:flash_remove(this);'><img src='/images/paper/x.gif'></a>"
                 + "<div class='clear'></div><div class='white_box_text'>"
                 + block_title + " 部分答题时间已到，您的答案将自动被提交，请您继续做其它部分的题。</div>";
                 document.body.appendChild(flash_div);

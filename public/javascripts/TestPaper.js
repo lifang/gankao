@@ -35,8 +35,6 @@ function generate_flash_div(style) {
     var win_width = jQuery(window).width();
     var z_layer_height = jQuery(style).height();
     var z_layer_width = jQuery(style).width();
-    alert((win_height-z_layer_height)/2 + scolltop);
-    alert((win_width-z_layer_width)/2);
     jQuery(style).css('top',(win_height-z_layer_height)/2 + scolltop);
     jQuery(style).css('left',(win_width-z_layer_width)/2);
     jQuery(style).css('display','block');
@@ -58,7 +56,7 @@ function show_flash_div() {
 //弹出不自动关闭的提示框
 function show_flash_not_close() {
     (function(){
-        generate_flash_div(".white_box");
+        generate_flash_div(".white_tab_box");
     })(jQuery)
 }
 
@@ -80,7 +78,7 @@ function close_tab(tab) {
 }
 
 function flash_remove(tab) {
-    tab.parentNode.parentNode.parentNode.removeChild(tab.parentNode.parentNode);
+    tab.parentNode.parentNode.removeChild(tab.parentNode);
 }
 
 function report_error(question_index,exam_user_id){
