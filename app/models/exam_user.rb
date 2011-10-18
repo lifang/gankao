@@ -351,8 +351,8 @@ class ExamUser < ActiveRecord::Base
     str="-1"
     xml.elements["blocks"].each_element do  |block|
       block.elements["problems"].each_element do |problem|
-        unless problem.attributes["id"].nil?
-          if problem.attributes["types"].nil? || (problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:CHARACTER] and
+          if problem.attributes["id"].nil? or problem.attributes["types"].nil? or
+              (problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:CHARACTER] and
                 problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:COLLIGATIONR] and
                 problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:SINGLE_CALK])
             block.delete_element(problem.xpath)
@@ -364,7 +364,8 @@ class ExamUser < ActiveRecord::Base
               score += element.attributes["score"].to_i
               question.add_attribute("score_reason","#{element.attributes["reason"]}")
               question.add_attribute("user_score","#{element.attributes["score"]}")
-              if question.attributes["correct_type"].to_i ==Problem::QUESTION_TYPE[:CHARACTER]
+              if question.attributes["correct_type"].to_i == Problem::QUESTION_TYPE[:CHARACTER] or
+                  question.attributes["correct_type"].to_i == Problem::QUESTION_TYPE[:SINGLE_CALK]
                 str += (","+question.attributes["id"])
               else
                 problem.delete_element(question.xpath)
@@ -373,14 +374,11 @@ class ExamUser < ActiveRecord::Base
             problem.add_attribute("user_score","#{score}")
           end
           block.delete_element(problem.xpath) if problem.elements["questions"].nil?
-        end        
       end unless block.elements["problems"].nil?
       if block.elements["problems"].nil? or block.elements["problems"].elements[1].nil?
         xml.delete_element(block.xpath)
       end
     end unless xml.elements["blocks"].nil?
-    puts "============================"
-    puts str
     xml.add_attribute("ids","#{str}")
     return xml
   end

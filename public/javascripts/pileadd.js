@@ -126,7 +126,7 @@ function compare_value(id){
         var reason=document.getElementById("reason_for_"+arry[i]).value;
         if (parseFloat(fact_value) < parseFloat(input_value)||parseFloat(input_value)<0.0||input_value==""){
             document.getElementById("if_submited_"+arry[i]).value =0;
-            document.getElementById("flash_part_"+arry[i]).innerHTML="<font color = 'red'>请您输入合理的分值。</font>";
+            document.getElementById("flash_part_"+arry[i]).innerHTML="<font color = 'red'>请您输入合理的分值，不能大于题目的分值，不能小于0。</font>";
             return false;
         }
         else{
@@ -136,6 +136,7 @@ function compare_value(id){
             }else{
                 document.getElementById("if_submited_"+arry[i]).value =1;
                 if (i==arry.length-1){
+                    document.getElementById("flash_part_"+arry[i]).innerHTML="<font color = 'red'>给出得分成功。</font>";
                     active_button();
                 }
             }
@@ -149,7 +150,7 @@ function active_button(){
     var flag=0;
     var str=document.getElementById("problem_id").value;
     var n=str.split(",");
-    for(i=1;i<n.length;i++){
+    for(var i=1;i<n.length;i++){
         var value=document.getElementById("single_value_"+n[i]).value;
         var reason=document.getElementById("reason_for_"+n[i]).value;
         flag=1;
@@ -480,8 +481,8 @@ function question_values(question_id) {
 }
 
 function question_style(id){
-    $(document).ready(function(){
-        $("#"+id).slideToggle("slow");
+    jQuery(document).ready(function(){
+        jQuery("#"+id).slideToggle("slow");
     });
 }
 
@@ -550,12 +551,14 @@ function show_drag_answer(question_id){
  
 
 jQuery(function() {
-    jQuery('.mokao_left > div').bind('click',function(){
-        jQuery(this).addClass('mkl_h').siblings().removeClass('mkl_h');
-        var index = jQuery('.mokao_left > div').index(this);
-        jQuery('.mk_r_tab > .mk_r_div').eq(index).show().siblings().hide();
-        jQuery('#mk_'+this.id).css('display','block');
-    });
+    if (jQuery('.mokao_left') != null) {
+        jQuery('.mokao_left > div').bind('click',function(){
+            jQuery(this).addClass('mkl_h').siblings().removeClass('mkl_h');
+            var index = jQuery('.mokao_left > div').index(this);
+            jQuery('.mk_r_tab > .mk_r_div').eq(index).show().siblings().hide();
+            jQuery('#mk_'+this.id).css('display','block');
+        });
+    } 
 })
 
 

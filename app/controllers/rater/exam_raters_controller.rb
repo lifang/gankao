@@ -52,8 +52,6 @@ class Rater::ExamRatersController < ApplicationController
     doc=ExamRater.open_file(Constant::PUBLIC_PATH + @exam_user.answer_sheet_url)
     xml=ExamRater.open_file(Constant::BACK_PUBLIC_PATH + "/papers/#{doc.elements[1].attributes["id"]}.xml")
     @xml=ExamUser.answer_questions(xml,doc)
-    puts "-----------------------"
-    puts xml.attributes["ids"].to_s == "-1"
     if @xml.attributes["ids"].to_s == "-1"
       flash[:notice] = "感谢您的参与，当前试卷没有需要批改的试卷。"
     else

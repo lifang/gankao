@@ -1,7 +1,7 @@
 <div class="question">
   小题描述：
-  <%= show_single_question.elements["description"].text if show_single_question.elements["description"] %>
-  [<%= show_single_question.attributes["score"] %>分]
+  <%= show_single_question.elements["description"].text.to_s.html_safe if show_single_question.elements["description"] %>
+  [<font color="red"><%= show_single_question.attributes["score"] %>分</font>]
   <% attrs_str = show_single_question.elements["questionattrs"].text
   attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
   correct_type = show_single_question.attributes["correct_type"]
