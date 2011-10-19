@@ -39,9 +39,11 @@
     attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
     correct_type = question.attributes["correct_type"]
     answer = question.elements["answer"]
-    answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
-    user_answer = question.get_elements("#{question.xpath}/user_answer")[0].text
-    user_answers = user_answer.nil? ? [] :  user_answer.split(";|;") %>
+    answers = []
+    answer.text.split(";|;").collect { |item| answers << item.strip } unless answer.nil? or answer.text.nil?
+    user_answer = question.get_elements("#{question.xpath}/user_answer")[0]
+    user_answers = []
+    user_answer.text.split(";|;").collect {|item| user_answers << item.strip } unless user_answer.nil? or user_answer.text.nil? %>
     <div class="p_question_list question_no" id="question_info_<%= question_with_answer.attributes["id"] %>">
       <div class="p_q_l_left"></div>
       <div class="p_q_l_right_b" onmouseover="javascript:show_question('<%= question.attributes["id"] %>')" >
@@ -67,8 +69,8 @@
           <ul class="chooseQuestion">
             <%
             (0..attrs_array.length-1).each do |i|
-              is_answer = answers.include?(attrs_array[i])
-              is_user_answer=user_answers.include?(attrs_array[i])
+              is_answer = answers.include?(attrs_array[i].strip)
+              is_user_answer=user_answers.include?(attrs_array[i].strip)
             %>
               <li <% if is_answer %> class="correctRight_bg" <% end %>>
                 <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
