@@ -5,6 +5,7 @@ module QqHelper
   #qq登录
   GRAPY_URL="http://openapi.qzone.qq.com/user/get_user_info"
   REQUEST_URL="http://openapi.qzone.qq.com"
+  CALLBACK_URL="http://www.gankao.co/pages/qq_index"
   OAUTH_CON=(Time.new.to_i + 100).to_s
   OAUTH_TIMESTAMP=(Time.new.to_i).to_s
   PARAMS="oauth_client_ip=116.255.140.79&oauth_consumer_key=223448&oauth_nonce=#{OAUTH_CON}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{OAUTH_TIMESTAMP}&oauth_version=1.0"

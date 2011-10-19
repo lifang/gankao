@@ -58,7 +58,7 @@ class PagesController < ApplicationController
     puts url
     request_token=OAuth2::Client.new(app_id, app_key,{}).request(:get, url,{},{})
     puts request_token
-    redirect_to "#{REQUEST_URL}/oauth/qzoneoauth_authorize?oauth_consumer_key=223448&oauth_token=#{request_token.split("=")[1].split("&")[0]}&oauth_callback=http://www.gankao.co/pages/qq_index"
+    redirect_to "#{REQUEST_URL}/oauth/qzoneoauth_authorize?oauth_consumer_key=223448&oauth_token=#{request_token.split("=")[1].split("&")[0]}&oauth_callback=#{url_encoding(CALLBACK_URL)}"
   end
 
 
@@ -69,7 +69,7 @@ class PagesController < ApplicationController
     @user= User.find_by_open_id(params[:openid])
     if @user.nil?
       request_token["nickname"]="qq用户" if request_token["nickname"].nil?||request_token["nickname"]==""
-      @user=User.create(:code_type=>'qq',:name=>request_token["nickname"],:username=>request_token["nickname"],:open_id=>params[:openid])
+#      @user=User.create(:code_type=>'qq',:name=>request_token["nickname"],:username=>request_token["nickname"],:open_id=>params[:openid])
     end
     cookies[:user_id] = @user.id
     render :inline => "<script>window.opener.location.href='/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}?url=#{url}&request=#{request_token}';window.close();</script>"
