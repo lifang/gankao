@@ -127,16 +127,19 @@ class Collection < ActiveRecord::Base
         paper_xml.delete_element(question.xpath)
       end
     end if paper_problem
-    mp3 = paper_xml.elements["#{problem_path.split("/problems")[0]}/base_info/description"].text
-    if mp3 =~ /<mp3>/
-      unless paper_problem.elements["title"].nil?
-        if paper_problem.elements["title"].text.nil?
-          paper_problem.elements["title"].text="<mp3>#{mp3.split("<mp3>")[1]}<mp3>"
+    block = paper_xml.elements["#{problem_path.split("/problems")[0]}/base_info/description"]
+    unless block.nil?
+      mp3 = block.text
+      if mp3 != nil and mp3 =~ /<mp3>/
+        unless paper_problem.elements["title"].nil?
+          if paper_problem.elements["title"].text.nil?
+            paper_problem.elements["title"].text="<mp3>#{mp3.split("<mp3>")[1]}<mp3>"
+          else
+            paper_problem.elements["title"].text="#{paper_problem.elements["title"].text} <mp3>#{mp3.split("<mp3>")[1]}<mp3>"
+          end
         else
-          paper_problem.elements["title"].text="#{paper_problem.elements["title"].text} <mp3>#{mp3.split("<mp3>")[1]}<mp3>"
+          paper_problem.add_element("title").add_text("<mp3>#{mp3.split("<mp3>")[1]}<mp3>")
         end
-      else
-        paper_problem.add_element("title").add_text("<mp3>#{mp3.split("<mp3>")[1]}<mp3>")
       end
     end
     last_question = paper_problem.elements["questions"].elements["question[@id='#{question_id.to_i}']"]

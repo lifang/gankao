@@ -1,19 +1,15 @@
 <%= javascript_include_tag 'jquery' %>
+<script type="text/javascript">jQuery.noConflict();</script>
 <div id="paper_show_info">
   <ul class="tab_biz">
     <li class="actived"><a href="javascript:void(0);"><%= @xml.elements['base_info'].elements['title'].text %></a></li>
   </ul>
 </div>
 <%= form_for :over,:url=>"/rater/exam_raters/#{@exam_user.id}/over_answer"  do |f| %>
-  <div class="biz_art_list_box">
-    <center>
-      <input type="hidden" id="problem_id" name="problem_id" value="<%=@xml.attributes["ids"]  %>" />
-      <input type="hidden" name="rater_id" value="<%= @reading.id%>" />
-      <input type="hidden" name="examination_id" id="examination_id" value="<%=@exam_user.examination_id  %>" />
-      <%=f.submit value="批阅完毕" ,:disabled=>"disabled",:id=>"button_id"  %>
-      <div id="flash_notice"></div>
-    </center>
-  </div>
+  <input type="hidden" id="problem_id" name="problem_id" value="<%=@xml.attributes["ids"]  %>" />
+  <input type="hidden" name="examination_id" id="examination_id" value="<%=@exam_user.examination_id  %>" />
+  <input type="hidden" name="rater_id" value="<%= @reading.id %>" />
+  <div id="flash_notice"></div>
   <% @xml.elements['blocks'].each_element do |block|%>
     <h1 class="biz_art_title" id="block_show">
       <%= block.elements['base_info'].elements['title'].text.to_s.html_safe %>
@@ -26,23 +22,26 @@
           <% block.elements['problems'].each_element do |problem| %>
             <% if !problem.elements['title'].nil? %>
               <li>
-                <h2><a href="javascript:void(0)" onclick="javascript:question_style(<%= problem.attributes["id"].to_i %>)"><%= problem.elements['title'].text.html_safe.to_s %></a></h2>
+                <h2>
+                  <a href="javascript:void(0)" onclick="javascript:question_style(<%= problem.attributes["id"].to_i %>)">
+                    <%= truncate_u(problem.elements['title'].text.to_s.html_safe.gsub(/<[^{><}]*>/, ""), 40, "......") %>
+                  </a>
+                </h2>
                 <div id="<%= problem.attributes["id"].to_i %>" style="display:none">
                   <%= render :partial=>"/rater/exam_raters/single_question",:object=>problem %>
                 </div>
-
               </li>
-              <div class="links">
-                <%= form_for :delete,:html => {:name=>"delete_form_#{problem.attributes['id']}", :id =>"delete_form_#{problem.attributes['id']}"}, :url=>"/papers/problem_destroy" do |f|%>
-                  <%= f.hidden_field :xpath,:value=>problem.xpath %><%= f.hidden_field :paper_id,:value=>@xml.root.attributes["id"] %>
-                <% end %>
-              </div>
             <% end %>
           <% end %>
         <% end %>
       </ul>
     </div>
   <% end %>
+  <div class="biz_art_list_box">
+    <center>
+      <%=f.submit value="批阅完毕" ,:disabled=>"disabled",:id=>"button_id"  %>
+    </center>
+  </div>
 <% end %>
 <div class="clear"></div>
 <script type="text/javascript">active_button()</script>

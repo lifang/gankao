@@ -702,7 +702,7 @@ function colse_or_open_block(current_time) {
                 document.body.appendChild(flash_div);
                 show_flash_not_close();
                 window.clearInterval(local_timer);
-                local_storage_answer();
+                local_storage_answer("open");
                 has_close_block = true;
                 break;
             } else if (Math.floor(current_time - block_time) == 60) {
@@ -741,8 +741,8 @@ function colse_or_open_block(current_time) {
 //用来5分钟存储的定时器
 var local_save_time = null;
 function local_save_start() {
+    local_save_time = new Date();
     local_timer = self.setInterval(function(){
-        local_save_time = null;
         local_save();
     }, 100);
 //    local_timer = self.setTimeout(function(){
@@ -755,7 +755,7 @@ function local_save() {
     var start_date = new Date();
     if (local_start_time <= 0) {
         window.clearInterval(local_timer);
-        local_storage_answer();
+        local_storage_answer("open");
         return;
     }
     
@@ -766,8 +766,6 @@ function local_save() {
         local_start_time = Math.round((local_start_time - 0.1 - (end_date - start_date)/1000)*10)/10;
     }
     local_save_time = end_date;
-//    window.clearTimeout(local_start_time);
-//    local_start_time = self.setTimeout(function(){local_save();}, 100);
 }
 
 //用来1分钟取一下服务器时间
@@ -991,7 +989,7 @@ function generate_result_paper(paper_id) {
     return flag;
 }
 
-function local_storage_answer() {
+function local_storage_answer(flag) {
     var all_question_ids = $("all_question_ids").value;
     if (all_question_ids != null && all_question_ids != "") {
         var question_ids = all_question_ids.split(",");
@@ -1005,13 +1003,13 @@ function local_storage_answer() {
                     arr.push($("question_sure_" + question_ids[j]).value);
                 }
             }
-            add_to_db(arr);
+            add_to_db(arr, flag);
         }
     }
 }
 
 //每隔5分钟自动存储答卷内容
-function add_to_db(arr) {
+function add_to_db(arr, flag) {
     var examination_id = $("examination_id").value;
     new Ajax.Request("/user/examinations/"+ examination_id +"/five_min_save",
     {
@@ -1019,7 +1017,11 @@ function add_to_db(arr) {
         evalScripts:true,
         method:"post",
         onComplete:function(request){
-            reload_local_save();
+            if (flag == "open") {
+                reload_local_save();
+            } else {
+                window.close();
+            }
         },
         parameters:"arr="+ arr +"&authenticity_token=" + encodeURIComponent('BgLpQ3SADBr4tuiYZOJeoOvY4VOHogJvqQEpMwYVBM4=')
     });
@@ -1028,10 +1030,8 @@ function add_to_db(arr) {
 
 //重新执行5分钟倒计时
 function reload_local_save() {
-    if (start != 0) {
         local_start_time = 300;
         local_save_start();
-    }
 }
 
 //load用户已经答完的答案
@@ -1296,4 +1296,9 @@ function call_me(max_length, id) {
             }
         }
     }
+}
+
+//退出考试
+function out_exam() {
+    local_storage_answer("close");
 }

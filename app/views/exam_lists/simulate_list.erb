@@ -9,11 +9,11 @@
         <% examination = exam %>
         <div class="mokaoList  <%  if i==0 %> mkl_h  <% end %>" id="<%= i %>"><h3><%= examination.title %></h3><p>
             <% if i == 0 %>
-              2011-10-17
+              2011-10-17开放
             <% elsif i == 1 %>
-              2011-10-24
+              2011-10-24开放
             <% elsif i == 2 %>
-              2011-11-21
+              2011-11-21开放
             <% else %>
               <%= examination.start_at_time.nil? ? "任何时候" : examination.start_at_time.strftime("%Y-%m-%d") %></p>
           <% end %>
@@ -27,6 +27,7 @@
           <div class="mk_r_div mkList_jt<%= i %>"  <%  if i > 0 %> style="display:none" <% end %> >
             <div class="cet_title"></div>
             <p class="begin_time_p">考试时间：<span class="blue"><%= examination.start_at_time.nil? ? "任何时间":examination.start_at_time.strftime("%m-%d-%Y") %></span></p>
+            <div class="chak_dj_d"><button class="chak_dajuan">查看答卷</button></div>
             <h2>总分：<span class="red"> <% unless @hash["#{examination.id}"].nil? %> <%=  @hash["#{examination.id}"][0].total_score.nil? ? "阅卷中" :@hash["#{examination.id}"][0].total_score %><% end %></span></h2>
             <% unless @hash["#{examination.id}"].nil? %>
               <% if !@hash["#{examination.id}"] || @hash["#{examination.id}"][0].total_score.nil?%>

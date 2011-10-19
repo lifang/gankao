@@ -40,9 +40,11 @@
     attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
     correct_type = question_with_answer[0].attributes["correct_type"]
     answer = question_with_answer[0].elements["answer"]
-    answers = (answer.nil? or answer.text.nil?) ? [] : answer.text.split(";|;")
+    answers = []
+    answer.text.split(";|;").collect { |item| answers << item.strip } unless answer.nil? or answer.text.nil?
     user_answer = question_with_answer[0].elements["user_answer"]
-    user_answers = user_answer.text.nil? ? [] :  user_answer.text.split(";|;")
+    user_answers = []
+    user_answer.text.split(";|;").collect {|item| user_answers << item.strip } unless user_answer.nil? or user_answer.text.nil?
     is_right = false
     all_answer = answers | user_answers
     is_right = true if all_answer == answers and answers - user_answers == [] %>
@@ -72,8 +74,8 @@
               correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CHOSE]) %>
           <ul class="chooseQuestion">
             <% (0..attrs_array.length-1).each do |i|
-              is_answer = answers.include?(attrs_array[i])
-              is_user_answer=user_answers.include?(attrs_array[i]) %>
+              is_answer = answers.include?(attrs_array[i].strip)
+              is_user_answer=user_answers.include?(attrs_array[i].strip) %>
               <li <% if is_answer %> class="correctRight_bg" <% end %>>
                 <% if correct_type.to_i == Problem::QUESTION_TYPE[:MORE_CHOSE] %>
                   <input type="checkbox" disabled name="question_attr_<%= question_with_answer[0].attributes["id"].to_i %>"
