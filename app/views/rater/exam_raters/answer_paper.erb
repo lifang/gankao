@@ -1,4 +1,4 @@
-<%#= javascript_include_tag 'jquery' %>
+<%= javascript_include_tag 'jquery' %>
 <div id="paper_show_info">
   <ul class="tab_biz">
     <li class="actived"><a href="javascript:void(0);"><%= @xml.elements['base_info'].elements['title'].text %></a></li>
@@ -8,6 +8,7 @@
   <div class="biz_art_list_box">
     <center>
       <input type="hidden" id="problem_id" name="problem_id" value="<%=@xml.attributes["ids"]  %>" />
+      <input type="hidden" name="rater_id" value="<%= @reading.id%>" />
       <input type="hidden" name="examination_id" id="examination_id" value="<%=@exam_user.examination_id  %>" />
       <%=f.submit value="批阅完毕" ,:disabled=>"disabled",:id=>"button_id"  %>
       <div id="flash_notice"></div>
@@ -25,7 +26,7 @@
           <% block.elements['problems'].each_element do |problem| %>
             <% if !problem.elements['title'].nil? %>
               <li>
-                <h2><a href="javascript:void(0)" onclick="javascript:question_style(<%= problem.attributes["id"].to_i %>)"><%= problem.elements['title'].text %></a></h2>
+                <h2><a href="javascript:void(0)" onclick="javascript:question_style(<%= problem.attributes["id"].to_i %>)"><%= problem.elements['title'].text.html_safe.to_s %></a></h2>
                 <div id="<%= problem.attributes["id"].to_i %>" style="display:none">
                   <%= render :partial=>"/rater/exam_raters/single_question",:object=>problem %>
                 </div>

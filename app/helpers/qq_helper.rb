@@ -38,13 +38,16 @@ module QqHelper
   
   def signature_params
     signature="GET&http%3A%2F%2Fopenapi.qzone.qq.com%2Foauth%2Fqzoneoauth_request_token&#{url_encoding(PARAMS)}"
-    return url_encoding(Base64.encode64(OpenSSL::HMAC.digest("sha1","64d7ddfe7e483dd51b2b14cf2ec0ec27&",signature))).to_s
+    return url_encoding(Base64.encode64(OpenSSL::HMAC.digest("sha1","64d7ddfe7e483dd51b2b14cf2ec0ec27&",signature)))
   end
 
   def url_encoding(str)
-    str.gsub("=", "%3D").gsub("/","%2F").gsub(":","%3A").gsub("&","%26")
+    str.gsub("=", "%3D").gsub("/","%2F").gsub(":","%3A").gsub("&","%26").gsub("+","%2B")
   end
-  
+
+
+
+
   #腾讯微博
 
   def weibo_app_key

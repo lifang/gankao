@@ -72,7 +72,7 @@ class PagesController < ApplicationController
       @user=User.create(:code_type=>'qq',:name=>request_token["nickname"],:username=>request_token["nickname"],:open_id=>params[:openid])
     end
     cookies[:user_id] = @user.id
-    render :inline => "<script>window.opener.location.href='/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}';window.close();</script>"
+    render :inline => "<script>window.opener.location.href='/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}?url=#{url}&request=#{request_token}';window.close();</script>"
     #    rescue
     #      render :inline => "<script>window.opener.location.reload();window.close();</script>"
     #    end
