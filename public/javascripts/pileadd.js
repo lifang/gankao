@@ -132,8 +132,7 @@ function compare_value(id){
         else{
             if(reason==""||reason.length==0){
                 document.getElementById("flash_part_"+arry[i]).innerHTML="<font color = 'red'>请输入评分理由。</font>";
-
-            }else{
+            }else{document.getElementById("flash_part_"+arry[i]).innerHTML="";
                 document.getElementById("if_submited_"+arry[i]).value =1;
                 if (i==arry.length-1){
                     active_button();
@@ -480,8 +479,8 @@ function question_values(question_id) {
 }
 
 function question_style(id){
-    $(document).ready(function(){
-        $("#"+id).slideToggle("slow");
+    jQuery(document).ready(function(){
+        jQuery("#"+id).slideToggle("slow");
     });
 }
 

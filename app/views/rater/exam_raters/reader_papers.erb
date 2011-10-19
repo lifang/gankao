@@ -19,8 +19,8 @@
   <table border="1" >
     <tr>
       <td>
-        <% if @exam_score_total >0  %>
-          <font color="blue" size="5"><%= link_to "开始批阅","/rater/exam_raters/check_paper?examination_id=#{@examination.id}" %></font>
+        <% if (@exam_score_total+@marked_now)>0  %>
+          <font color="blue" size="5"><%= link_to "开始批阅","/rater/exam_raters/check_paper?examination_id=#{@examination.id}&rater_id=#{@rater_id }" %></font>
         <% else %>
           <font color="red" size="5">所有试卷已批阅</font>
         <% end %>
@@ -37,9 +37,11 @@
     <td width="60"><font color="red"><%= @exam_paper_total.size   %>&nbsp;&nbsp;份</font></td><td width="50" ><font color="red">
         <%= @exam_paper_marked %>&nbsp;&nbsp;份</font></td><td width="50"><font color="red">
         <%= @exam_score_total %>&nbsp;&nbsp;份</font></td>
+   <td width="50"><font color="red">
+        <%=  @marked_now %>&nbsp;&nbsp;份</font></td>
   </tr>
   <tr>
-    <th width="60">试卷总数</th>&nbsp;&nbsp;&nbsp;<th width="50">已批阅</th>&nbsp;&nbsp;&nbsp;<th width="50">未批阅</th>
+    <th width="60">试卷总数</th>&nbsp;&nbsp;&nbsp;<th width="50">已批阅</th>&nbsp;&nbsp;&nbsp;<th width="50">未批阅</th><th width="50">正批阅</th>
   </tr>
 </table>
 </p>
