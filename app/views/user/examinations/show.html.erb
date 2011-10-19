@@ -22,6 +22,7 @@
       </div>
       <div class="timer" id="exam_time"></div><div id="true_exam_time" style="display: none;"></div>
       <div class="paper_info">
+        <button class="test_out_btn" type="button" onclick="javascript:out_exam();"></button>
         <button type="submit" class="test_over_btn"></button>
         <strong><span id="leaving_num"></span></strong>题未完成
       </div>
@@ -43,7 +44,6 @@
            value="<%= Constant::SERVER_PATH %><%= @exam_user.answer_sheet_url %>"/>
     <input type="hidden" name="back_server_url" id="back_server_url" value="<%= Constant::BACK_SERVER_PATH %>" />
     <div class="clear"></div>
-    <div class="zhijiao"></div>
   </div>
 <% end %>
 <script type="text/javascript" src="/javascripts/local_save/answer.js" charset="utf-8"></script>

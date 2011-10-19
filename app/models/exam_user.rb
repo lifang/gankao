@@ -356,7 +356,8 @@ class ExamUser < ActiveRecord::Base
         else       
           problem.elements["questions"].each_element do |question|
             element=doc.elements["paper/questions/question[@id=#{question.attributes["id"]}]"]         
-            if question.attributes["correct_type"].to_i ==Problem::QUESTION_TYPE[:CHARACTER]
+            if question.attributes["correct_type"].to_i ==Problem::QUESTION_TYPE[:CHARACTER] or
+                  question.attributes["correct_type"].to_i == Problem::QUESTION_TYPE[:SINGLE_CALK]
               str += (","+question.attributes["id"])
               question.add_attribute("user_answer","#{element.elements["answer"].text}")
             else

@@ -5,5 +5,5 @@
     <textarea id="note_text_<%= note_div[1] %>" name="note_text_<%= note_div[1] %>" cols="42" rows="" class="required"><%= note_div[0] %></textarea>
     <input type="hidden" id="problem_id" name="problem_id" value="<%= @problem_id %>"/>
   </div>
-  <div class="p_question_btn"><button type="submit" class="save"></button></div>
+<div class="p_question_btn"><button type="submit" class="save" onclick="javascript:if(!checkspace(document.getElementById('note_text_<%= note_div[1] %>').value)){this.style.display='none';document.getElementById('spinner_user_<%= note_div[1] %>').style.display='block';}"></button><%= image_tag "ajax-loader.gif", :id => "spinner_user_#{note_div[1]}", :style => "display:none" %></div>
 <% end %>

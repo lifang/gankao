@@ -33,14 +33,14 @@
         <p class="vip_fx_p">2.提供分享后的凭证</p>
         <% form_for :proof,:url=>"/users/create_proof",:html=>{:onsubmit=>"return validate_form_proof();"} do |f|%>
           <div class="vip_fx_textarea">
-            <%= f.text_area :proof_text,:id=>"form_textarea",:cols=>"",:row=>"" %>
+            <%= f.text_area :proof_text,:id=>"form_textarea_pingzheng",:cols=>"",:row=>"" %>
             <div class="v_f_info">
               <p><a href="javascript:void(0);">提供QQ空间分享凭证方法</a></p>
               <p><a href="javascript:void(0);">提供人人网分享凭证方法</a></p>
               <p><a href="javascript:void(0);">提供新浪微博分享凭证方法</a></p>
             </div>
           </div>
-          <div class="vip_czhi_btn"><button type="submit">确  认</button></div>
+          <div class="vip_czhi_btn"><button type="submit" onclick="javascript:if(!checkspace(document.getElementById('form_textarea_pingzheng').value)){this.style.display='none';document.getElementById('spinner_user_pingzheng').style.display='block';}" >确  认</button><%= image_tag "ajax-loader.gif", :id => "spinner_user_pingzheng", :style => "display:none" %></div>
         <% end %>
         <span class="vip_sh_tis">审核需10分钟左右，请耐心等待....</span>
       </div>
@@ -58,6 +58,7 @@
       <div class="vip_czhi_p"><span class="red">*</span> 温馨提示：支付宝充值免手续费。</div>
     </div>
     <div class="space20"></div>
+    <div class="vip_h">开通方法三：</div>
     <div class="vip_squan">
       <div class="vip_czhi_title">授权码</div>
       <div class="vip_czhi_box0">

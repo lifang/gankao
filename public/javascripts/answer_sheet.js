@@ -73,6 +73,7 @@ function get_question_height(question_id, problem_id) {
 
 function check_note_form(question_id) {
     if (checkspace($("note_text_" + question_id).value)) {
+        $("note_text_" + question_id).className='required validation-failed';
         return false;
     }
     return true;
@@ -85,6 +86,7 @@ function note_question_info(id){
         document.getElementById("question_info_" + note_question_info_id).style.display = "none";
         document.getElementById("show_note_" + note_question_info_id).style.display = "block";
         document.getElementById("hidden_note_" + note_question_info_id).style.display = "none";
+        cancel_note(note_question_info_id);
         if($("mp3_" + note_question_info_id) != null) {
             $("mp3_" + note_question_info_id).removeChild($("ele_" + note_question_info_id));
         }

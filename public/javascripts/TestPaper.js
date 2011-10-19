@@ -65,15 +65,11 @@ function show_flash_not_close() {
 
 function show_analysis(btn_id) {
     (function(){
-        jQuery('.jiexi_tab').css('display','block');
-        jQuery('.jiexi_tab').css({
-            'top':(this.event.pageY+20)+'px',
-            'left':(this.event.pageX-30)+'px'
-        });
         jQuery('#answer').html(jQuery('#' + btn_id + '_answer').attr("value"));
         jQuery('#analysis').html(jQuery('#' + btn_id + '_analysis').attr("value"));
     })(jQuery)
 }
+
 
 function close_tab(tab) {
     tab.parentNode.parentNode.style.display = "none";

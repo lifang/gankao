@@ -56,14 +56,41 @@ module RenrenHelper
     return JSON Net::HTTP.post_form(URI.parse(URI.encode("http://api.renren.com/restserver.do")), query).body
   end
 
+  def share_gankao(session_key)
+    str = "api_key=#{api_key}"
+    str << "call_id=#{Time.now.to_i}"
+    str << "comment=欢迎来到赶考网"
+    str << "format=JSON"
+    str << "method=share.share"
+    str << "session_key=#{session_key}"
+    str << "type=6"
+    str << "url=www.gankao.co"
+    str << "v=1.0"
+    str << "#{api_secret}"
+    sig = Digest::MD5.hexdigest(str)
+
+    query = {:api_key => api_key,
+      :call_id => Time.now.to_i,
+      :comment => "欢迎来到赶考网",
+      :format => 'JSON',
+      :method => 'share.share',
+      :session_key => session_key,
+      :type => 6 ,
+      :url => "www.gankao.co",
+      :v => '1.0',
+      :sig => sig
+    }
+    return JSON Net::HTTP.post_form(URI.parse(URI.encode("http://api.renren.com/restserver.do")), query).body
+  end
+
   def api_key
-#    "7f4d7bacf5b144d8940d5a8177b592b0"           # 苏州协创-赶考网
-   "05983c17a2fd4b81a2f8032b4cd8d4f2"             # 10-11 赶考网
+   "05983c17a2fd4b81a2f8032b4cd8d4f2"             #  赶考网
+ #   "5c499242c95f4d79b5e2ba1a36a808c8"            # localhost测试
   end
 
   def api_secret
-#    "fe0430b144ff4cb48f1060933e1f68b0"           # 苏州协创-赶考网
-   "106a4639bd1e4288ad90cd3d27235623"             # 10-11 赶考网
+   "106a4639bd1e4288ad90cd3d27235623"             #  赶考网
+ #   "bb52103339444300bd4d4bc2af84ec9e"            # localhost测试
   end
 
   def access_token_url(code)
