@@ -54,17 +54,17 @@ class PagesController < ApplicationController
   
 
   def login_from_qq
-    url="#{REQUEST_URL}/oauth/qzoneoauth_request_token?#{PARAMS}&oauth_signature=#{signature_params}"
+    url="#{REQUEST_URL}?#{PARAMS}&oauth_signature=#{signature_params(app_key,PARAMS,REQUEST_URL)}"
     puts url
     request_token=OAuth2::Client.new(app_id, app_key,{}).request(:get, url,{},{})
     puts request_token
-    redirect_to "#{REQUEST_URL}/oauth/qzoneoauth_authorize?oauth_consumer_key=223448&oauth_token=#{request_token.split("=")[1].split("&")[0]}&oauth_callback=#{url_encoding(CALLBACK_URL)}"
+    redirect_to "#{AUTHOTIZE_URL}?oauth_consumer_key=223448&oauth_token=#{request_token.split("=")[1].split("&")[0]}&oauth_callback=#{CALLBACK_URL}"
   end
 
 
   def qq_index
     #    begin
-    url="#{GRAPY_URL}?access_token=#{params[:oauth_token]}&openid=#{params[:openid]}&#{PARAMS}&format=json&oauth_signature=#{signature_params} "
+    url="#{GRAPY_URL}?access_token=#{params[:oauth_token]}&openid=#{params[:openid]}&#{PARAMS}&format=json&oauth_signature=#{signature_params(app_key,PARAMS,GRAPY_URL)} "
     request_token=JSON OAuth2::Client.new(app_id, app_key,{}).request(:get, url,{},{})
     @user= User.find_by_open_id(params[:openid])
     if @user.nil?
@@ -77,5 +77,9 @@ class PagesController < ApplicationController
     #      render :inline => "<script>window.opener.location.reload();window.close();</script>"
     #    end
   end
+
+  
+
+
 
 end
