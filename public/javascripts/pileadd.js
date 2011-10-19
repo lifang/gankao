@@ -514,12 +514,6 @@ function cuoti_note(question_id, problem_id) {
     return false;
 }
 
-function check_note_form(question_id) {
-    if (checkspace($("note_text_" + question_id).value)) {
-        return false;
-    }
-    return true;
-}
 
 function show_question(id){
     var questions=$("questions").value;

@@ -11,7 +11,7 @@
                     <questionattrs>sfs;-;sfss;-;sdds;-;sd</questionattrs>
                     <tags>wrwr</tags>
                     <user_answer/>
-                    <note_text>gsdgdgdsgsdg</note_text>
+                    <note_text/>
                     <created_at>2011-10-09 15:40</created_at>
                 </question>
             </questions>
@@ -25,8 +25,21 @@
                             <analysis>sdfsfasf</analysis>
                             <questionattrs>23;-;wer;-;65;-;789</questionattrs>
                             <tags>ew</tags>
-                        <user_answer/><note_text>sdfasfasfdsaf</note_text><created_at>2011-10-09 16:04</created_at></question>
-                    </questions>
+                        <user_answer/><note_text>rw</note_text><created_at>2011-10-09 16:04</created_at></question>
+                    <question correct_type='0' error_percent='8' id='10' repeat_num='12' score='5'>
+                    <answer>豆腐干</answer>
+                    <analysis/>
+                    <questionattrs>豆腐干;-;哥哥;-;塞维尔v;-;东方饭店个</questionattrs>
+                    <tags>ew</tags>
+                    <user_answer>哥哥</user_answer>
+                    <user_answer>哥哥</user_answer>
+                    <user_answer>东方饭店个</user_answer>
+                    <user_answer>东方饭店个</user_answer>
+                    <user_answer/>
+                    <user_answer/>
+                    <user_answer/>
+                    <user_answer>豆腐干</user_answer>
+                <user_answer/><user_answer/><user_answer/><user_answer/><user_answer/><user_answer/><user_answer/><note_text/><created_at>2011-10-19 13:29</created_at></question></questions>
                 </problem><problem id='37' score='5' types='6'>
                     <title>&lt;span id=&quot;problem_37_dropplace_1&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_37_dropplace_2&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_37_dropplace_3&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_37_dropplace_4&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_37_dropplace_5&quot;&gt;________&lt;/span&gt;testtesttest&lt;span id=&quot;problem_37_dropplace_6&quot;&gt;________&lt;/span&gt;</title>
                     <category>2</category>
@@ -64,5 +77,38 @@ asf</answer><analysis>444ererte</analysis><questionattrs/><tags/><user_answer/><
                     <user_answer>sdsdsdsdv</user_answer>
                 <user_answer/><user_answer/><note_text>反反复复的</note_text><created_at>2011-10-12 11:45</created_at></question>
             </questions>
-        </problem><problem id='54' score='3.0' types='0'><title>grehtrhtrhr</title><category>2</category><questions><question correct_type='0' id='56' score='3.0'><answer>hytjytj</answer><analysis/><questionattrs>regthr;-;rtger;-;hytjytj;-;kuykuilui</questionattrs><tags/><user_answer>regthr</user_answer><note_text>12321323423</note_text><created_at>2011-10-13 16:43</created_at></question></questions></problem></problems>
+        </problem><problem id='54' score='3.0' types='0'><title>grehtrhtrhr</title><category>2</category><questions><question correct_type='0' id='56' score='3.0'><answer>hytjytj</answer><analysis/><questionattrs>regthr;-;rtger;-;hytjytj;-;kuykuilui</questionattrs><tags/><user_answer>regthr</user_answer><note_text>1111</note_text><created_at>2011-10-13 16:43</created_at></question></questions></problem><problem id='57' score='3.0' types='3'>
+                    <title>444444444</title>
+                    <category>2</category>
+                    <questions>
+                        <question correct_type='3' id='59' score='3.0'>
+                            <answer>erweter</answer>
+                            <analysis/>
+                            <questionattrs/>
+                            <tags/>
+                        <user_answer/><note_text>fwefew</note_text><created_at>2011-10-19 14:08</created_at></question>
+                    </questions>
+                </problem><problem id='55' score='5.0' types='0'>
+                    <title>2222222</title>
+                    <category>2</category>
+                    <questions>
+                        <question correct_type='0' id='57' score='5.0'>
+                            <answer>rewe</answer>
+                            <analysis/>
+                            <questionattrs>rehtr;-;rewe;-;ytru;-;rterte</questionattrs>
+                            <tags/>
+                        <user_answer/><note_text>12312</note_text><created_at>2011-10-19 14:09</created_at></question>
+                    </questions>
+                </problem><problem id='56' score='34.0' types='2'>
+                    <title>333333333</title>
+                    <category>2</category>
+                    <questions>
+                        <question correct_type='2' id='58' score='34.0'>
+                            <answer>1</answer>
+                            <analysis/>
+                            <questionattrs/>
+                            <tags/>
+                        <user_answer/><note_text>fe2222</note_text><created_at>2011-10-19 14:24</created_at></question>
+                    </questions>
+                </problem></problems>
 </note>

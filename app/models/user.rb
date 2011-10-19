@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   #	attr_accessible :name,:username,:mobilephone,:address,:email,:password,:password_confirmation,:status
   #	validates:name,  :presence=>true,:format=>{:with=>name_regex},:length=>{:maximum=>30}
   #	validates:email,  :presence=>true,:uniqueness =>true,:format=>{:with=>email_regex},:length=>{:maximum=>50}
-   validates:password, :confirmation=>true,:length=>{:within=>6..20}
+   validates:password, :confirmation=>true,:length=>{:within=>6..20}, :allow_nil => true
   STATUS = {:LOCK => 0, :NORMAL => 1} #0 未激活用户  1 已激活用户
 
   DEFAULT_PASSWORD = "123456"

@@ -44,7 +44,9 @@
                            name="q_xpath_<%= question.attributes["id"] %>" value="<%= question.xpath %>"/>
                     <textarea cols="" rows="" id="note_text_<%= question.attributes["id"] %>"
                               name="note_text_<%= question.attributes["id"] %>"><%= question.elements["note_text"].text %></textarea>
-                    <div class="nb_li_btn"><button type="submit" class="baocun_btn">保存</button></div>
+                    <div class="nb_li_btn"><button type="submit" class="baocun_btn" onclick="javascript:this.style.display='none';document.getElementById('spinner_user_<%= question.attributes["id"] %>').style.display='block';">保存</button>
+                      <%= image_tag "ajax-loader.gif", :id => "spinner_user_#{question.attributes["id"]}", :style => "display:none" %>
+                    </div>
                   <% end %>
                 </div>
               </li>
