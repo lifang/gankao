@@ -33,7 +33,9 @@ class PagesController < ApplicationController
   
   def renren_index
     begin
-      user_info = return_user(return_session_key(return_access_token(params[:code])))[0]
+      session_key = return_session_key(return_access_token(params[:code]))
+      user_info = return_user(session_key)[0]
+   
       @user=User.where("code_id=#{user_info["uid"].to_s} and code_type='renren'").first
       if @user.nil?
         @user=User.create(:code_id=>user_info["uid"],:code_type=>'renren',:name=>user_info["name"],:username=>user_info["name"])

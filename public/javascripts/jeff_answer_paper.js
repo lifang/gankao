@@ -189,7 +189,7 @@ function create_problem(ul, problem, block_nav_div,practice_type) {
         parent_div_str += "<div class='task_con'>";
         parent_div_str += "<div class='play'><div class='play_btn'><span class='play_btn_span'><<<点击按钮开始播放</span><a href='javascript:void(0);' onclick=\"javascript:document.getElementById('audio_control_"+problem.id+"').onclick();\"><img id='practice2_audio_control_"+problem.id+"' src='/images/paper/play_icon.png'></a></div><input type='button'  class='explain_btn_ex' onclick=\"this.disabled='true';practice2_list("+problem.id+");var button=this;setTimeout(function(){button.disabled=false;},1000);\" ></button></div>";
         parent_div_str += "<div  style='display:none;'>"+problem_title+"</div>";
-        parent_div_str += "<div class='tb_con_list' id='practice2_list_"+problem.id+"'>"+problem_title.replace(/<[^{><}]*>/g, "")+"<br/></div>";
+        parent_div_str += "<div class='tb_con_list' id='practice2_list_"+problem.id+"'>"+problem_title.replace("id='audio_control_", "style=\"display:none\" id='audio_control_").replace("id=\"audio_control_", "style=\"display:none\" id=\"audio_control_")+"<br/></div>";
         parent_div_str +="</div>";
     }else{
         if(practice_type=="6"){
@@ -218,8 +218,6 @@ function create_problem(ul, problem, block_nav_div,practice_type) {
         if(practice_type=="2"){
             jQuery("#jquery_jplayer").jPlayer({
                 ready: function () {
-                    //                            alert($("jquery_jplayer").innerHTML);
-                    //                            alert($("jp_container_1").innerHTML);
                     jQuery(this).jPlayer("setMedia", {
                         mp3: document.getElementById("audio_control_"+problem.id).alt.replace("~http://back_server_path~",back_server_path)
                     });
@@ -340,7 +338,6 @@ function create_single_question(problem_title,problem_id, que_div_conlist, quest
                     onDrop:function(element,store_id){
                         change_navigation_color(element,store_id);
                         $(store_id).innerHTML=element.innerHTML;
-                        //                 show_que_save_button(question.id);  不显示保存按钮
                         var this_answer=""
                         for(i=1;i<place_num;i++){
                             this_answer +=$("problem_"+problem_id+"_dropplace_"+i).innerHTML;
