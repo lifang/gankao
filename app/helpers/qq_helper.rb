@@ -5,6 +5,7 @@ module QqHelper
   #qq登录
   GRAPY_URL="http://openapi.qzone.qq.com/user/get_user_info"
   REQUEST_URL="http://openapi.qzone.qq.com"
+  CALLBACK_URL="http://www.gankao.co/pages/qq_index"
   OAUTH_CON=(Time.new.to_i + 100).to_s
   OAUTH_TIMESTAMP=(Time.new.to_i).to_s
   PARAMS="oauth_client_ip=116.255.140.79&oauth_consumer_key=223448&oauth_nonce=#{OAUTH_CON}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{OAUTH_TIMESTAMP}&oauth_version=1.0"
@@ -38,13 +39,16 @@ module QqHelper
   
   def signature_params
     signature="GET&http%3A%2F%2Fopenapi.qzone.qq.com%2Foauth%2Fqzoneoauth_request_token&#{url_encoding(PARAMS)}"
-    return url_encoding(Base64.encode64(OpenSSL::HMAC.digest("sha1","64d7ddfe7e483dd51b2b14cf2ec0ec27&",signature))).to_s
+    return url_encoding(Base64.encode64(OpenSSL::HMAC.digest("sha1","64d7ddfe7e483dd51b2b14cf2ec0ec27&",signature)))
   end
 
   def url_encoding(str)
-    str.gsub("=", "%3D").gsub("/","%2F").gsub(":","%3A").gsub("&","%26")
+    str.gsub("=", "%3D").gsub("/","%2F").gsub(":","%3A").gsub("&","%26").gsub("+","%2B")
   end
-  
+
+
+
+
   #腾讯微博
 
   def weibo_app_key

@@ -8,6 +8,7 @@
 <%= form_for :over,:url=>"/rater/exam_raters/#{@exam_user.id}/over_answer"  do |f| %>
   <input type="hidden" id="problem_id" name="problem_id" value="<%=@xml.attributes["ids"]  %>" />
   <input type="hidden" name="examination_id" id="examination_id" value="<%=@exam_user.examination_id  %>" />
+  <input type="hidden" name="rater_id" value="<%= @reading.id %>" />
   <div id="flash_notice"></div>
   <% @xml.elements['blocks'].each_element do |block|%>
     <h1 class="biz_art_title" id="block_show">

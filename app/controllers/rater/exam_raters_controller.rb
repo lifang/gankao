@@ -14,7 +14,7 @@ class Rater::ExamRatersController < ApplicationController
     if @rater.author_code==params[:author_code]
       cookies[:rater_id]=@rater.id
       flash[:success]="登陆成功"
-      redirect_to  "/rater/exam_raters/#{@examination.id}/reader_papers"
+      redirect_to  "/rater/exam_raters/#{@examination.id}/reader_papers?rater_id=#{@rater.id}"
     else
       flash[:error]="阅卷码不正确，请核对！"
       render "/rater/exam_raters/session"
@@ -23,24 +23,33 @@ class Rater::ExamRatersController < ApplicationController
   
   def reader_papers  #答卷批阅状态显示
     @examination=Examination.find(params[:id])
-    @exam_paper_total =ExamUser.get_paper(params[:id])
     @user=User.find(@examination.creater_id)
-    @exam_score_total = 0
-    @exam_paper_marked = 0
+    @exam_paper_total =ExamUser.get_paper(params[:id])
+    @exam_score_total =0
+    @exam_paper_marked =0
+    @marked_now=0
+    @rater_id=params[:rater_id]
     @exam_paper_total.each do |e|
+      @marked_now +=1 if e.exam_rater_id==@rater_id.to_i and e.is_marked!=1
       @exam_score_total +=1 unless e.relation_id
       @exam_paper_marked +=1 if e.is_marked==1
     end unless @exam_paper_total.blank?
   end
   
   def check_paper  #选择要批阅的答卷
-    @exam_user= ExamUser.find_by_sql("select eu.id from exam_users eu
+    @exam_user=RaterUserRelation.find_all_by_exam_rater_id(params[:rater_id].to_i) 
+    if @exam_user.blank?||@exam_user.size<=0
+      @exam_user= ExamUser.find_by_sql("select eu.id from exam_users eu
       left join rater_user_relations r on r.exam_user_id = eu.id
       inner join orders o on o.user_id = eu.user_id
       where eu.answer_sheet_url is not null and eu.examination_id = #{params[:examination_id].to_i}
       and r.exam_user_id is null order by rand() limit 1")
+      id=@exam_user[0].id
+    else
+      id=@exam_user[0].exam_user_id
+    end
     unless @exam_user.blank?
-      redirect_to "/rater/exam_raters/#{@exam_user[0].id}/answer_paper"
+      redirect_to "/rater/exam_raters/#{id}/answer_paper?rater_id=#{params[:rater_id]}"
     else
       flash[:notice] = "当场考试试卷已经全部阅完。"
       redirect_to request.referer
@@ -52,16 +61,19 @@ class Rater::ExamRatersController < ApplicationController
     doc=ExamRater.open_file(Constant::PUBLIC_PATH + @exam_user.answer_sheet_url)
     xml=ExamRater.open_file(Constant::BACK_PUBLIC_PATH + "/papers/#{doc.elements[1].attributes["id"]}.xml")
     @xml=ExamUser.answer_questions(xml,doc)
+    @reading=RaterUserRelation.find_by_exam_rater_id(params[:rater_id].to_i)
     if @xml.attributes["ids"].to_s == "-1"
       flash[:notice] = "感谢您的参与，当前试卷没有需要批改的试卷。"
     else
-      RaterUserRelation.create(:exam_rater_id => cookies[:rater_id],
-        :exam_user_id => @exam_user.id, :started_at => Time.now)
+      if @reading.nil?
+        RaterUserRelation.create(:exam_rater_id => cookies[:rater_id],
+          :exam_user_id => @exam_user.id, :started_at => Time.now)
+      end
     end
   end
 
   def over_answer #批阅完成，给答卷添加成绩
-    @exam_relation=RaterUserRelation.find_by_exam_user_id(params[:id])
+    @exam_relation=RaterUserRelation.find(params[:rater_id])
     @exam_relation.toggle!(:is_marked)
     @exam_relation.update_attributes(:rate_time=>((Time.now-@exam_relation.started_at)/60+1).to_i)
     @exam_user=ExamUser.find(params[:id])
@@ -79,6 +91,7 @@ class Rater::ExamRatersController < ApplicationController
       block.elements["problems"].each_element do |problem|
         problem.elements["questions"].each_element do |question|
           single_score = params["single_value_#{question.attributes["id"]}"].to_f
+          reason=params["reason_for_#{question.attributes["id"]}"]
           result_question= doc.elements["/exam/paper/questions/question[@id=#{question.attributes["id"]}]"]
           if question.attributes["score"].to_f == single_score
             problem.delete_element(question.xpath)
@@ -89,6 +102,9 @@ class Rater::ExamRatersController < ApplicationController
           result_question.attributes["score"]=single_score
           score += single_score
           block_score += single_score
+          question.add_attribute("user_answer","#{result_question.elements["answer"].text}")
+          result_question.add_attribute("user_score","#{single_score}")
+          result_question.add_attribute("score_reason","#{reason}")
         end unless problem.elements["questions"].nil?
       end
       unless doc.elements["/exam/paper/blocks"].nil?
@@ -100,7 +116,7 @@ class Rater::ExamRatersController < ApplicationController
     doc.elements["paper"].elements["rate_score"].text=score
     @xml=ExamRater.rater(doc,params[:id],score)
     self.write_xml(url, doc)
-    redirect_to "/rater/exam_raters/#{ @exam_user.examination_id}/reader_papers"
+    redirect_to "/rater/exam_raters/#{ @exam_user.examination_id}/reader_papers?rater_id=#{@exam_relation.exam_rater_id}"
   end
 
   def destroy #退出

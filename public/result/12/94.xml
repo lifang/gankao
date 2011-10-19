@@ -4,16 +4,10 @@
         <questions>
             
             
-            <question id='15' is_sure='1' score='0'>
-                <answer>23</answer>
-            </question>
-            <question id='14' is_sure='1' score='0'>
-                <answer>sfss</answer>
-            </question>
-            <question id='33' is_sure='1' score='0'>
-                <answer>sdfsafsafdsafdsafsadfsdfsadfsadfsdfsdfsfd</answer>
-            </question>
-        </questions>
+            
+            
+            
+        <question id='15' is_sure='1' score='0'><answer>23</answer></question><question id='14' is_sure='1' score='0'><answer>sfss</answer></question><question id='33' is_sure='1' score='0'><answer>qqqqqqqqqqqqqqqqqqqqqqqqqqq</answer></question></questions>
         <auto_score/>
         <rate_score/>
         <blocks/>

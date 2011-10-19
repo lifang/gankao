@@ -1,5 +1,18 @@
 <link href="/stylesheets/jplayer/jplayer.blue.monday.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/javascripts/jplayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="/javascripts/jplayer/jquery.jplayer.min.js">
+  //解析弹出层
+  jQuery(function(){
+    jQuery('.jiexi_btn').click(function(e){
+      jQuery('.jiexi_tab').css('display','block');
+      jQuery('.jiexi_tab').css({
+        'top':(e.pageY+20)+'px',
+        'left':(e.pageX-30)+'px'
+      });
+    }
+  )
+  })
+</script>
+
 <div class="part_div">
   <div class="part_question">
     <%   %>
@@ -115,7 +128,7 @@
         </div>
         <div class="clear"></div>
         <div class="review_btn">
-          <a class="jiexi_btn" id="btn_<%= question.attributes['id'] %>"
+          <a class="jiexi_btn" style="cursor:pointer;" id="btn_<%= question.attributes['id'] %>"
              onclick="javascript:show_analysis('btn_<%= question.attributes['id'] %>');">解析</a>
         </div>
         <% answer_text = correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] ? "参考答案：" : "正确答案：" %>

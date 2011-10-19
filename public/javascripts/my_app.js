@@ -57,6 +57,9 @@ function check_new(){
             return false;
         }
     }
+    document.getElementById("submit_button").style.display='none';
+    document.getElementById("spinner_user").style.display='block';
+
 }
 
 function signin_page(){
