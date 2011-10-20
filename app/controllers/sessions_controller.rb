@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
   layout "login"
   require 'oauth2'
   require 'oauth'
+  #  require  'net/http'
   include QqHelper
 
   def new
@@ -123,29 +124,31 @@ class SessionsController < ApplicationController
 
   #腾讯微博登录
   def qq_weibo
-    http = Net::HTTP.new(WEIBO, 443)
-    puts http
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    url= "#{WEIBO_URL}?#{OPTIONS}&oauth_signature=#{signature_params1(weibo_app_secret,OPTIONS,"https://open.t.qq.com/cgi-bin/request_token")}"
-    puts url
-#    redirect_to url
-    http.get(url).body
-#    puts res_json
-#    request_token=OAuth2::Client.new(weibo_app_key, weibo_app_secret,{}).request(:get, url,{},{})
-#    #    request_token=OAuth::Consumer.new(weibo_app_key, weibo_app_secret).request(:get, url,{},{})
-#    puts request_token
-#    redirect_to "#{WEIBO_AUTHORIZE}?oauth_token="
-    #    redirect_to "#{WEIBO_AUTHORIZE}?oauth_token=ssss"
-    #    consumer = OAuth::Consumer.new(weibo_app_key, weibo_app_secret, OPTIONS)
-    #    request_token = consumer.get_request_token()
-    #    session[:qqtoken] = request_token.token
-    #    session[:qqsecret] = request_token.secret
-    #    redirect_to request_token.authorize_url(:oauth_callback=>"#{Constant::SERVER_PATH}/sessions/qq_add_friend")
+    consumer = OAuth::Consumer.new(weibo_app_key, weibo_app_secret, OPTIONS)
+    request_token = consumer.get_request_token(:oauth_callback => "http://localhost:3000/sessions/access_token")
+    session[:token]=request_token
+    session[:qqtoken] = request_token.token
+    puts session[:qqtoken]
+    session[:qqsecret] = request_token.secret
+    redirect_to request_token.authorize_url
+  end
+
+  def access_token
+    timestamp=(Time.new.to_i).to_s
+    #    consumer = OAuth::Consumer.new(weibo_app_key, weibo_app_secret,OPTIONS)
+    #    access_token=consumer.get_access_token(session[:token],{:oauth_verifier=>params[:oauth_verifier]},{},{})
+    oauth_token=params[:oauth_token]
+    params="name=gankao2011&oauth_consumer_key=801003611&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{oauth_token}&oauth_version=1.0"
+    url="#{ACCESS_TOKEN_URL}?#{params}&oauth_signature=#{signature_params(weibo_app_secret,params,ACCESS_TOKEN_URL,"GET")}"
+    access_token=OAuth2::Client.new(weibo_app_key, weibo_app_secret,{}).request(:get, url,{},{})
+    puts  access_token
+    #    puts url
+    #    redirect_to url
   end
 
   def qq_add_friend
-    redirect_to "/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}"
+    puts params[:oauth_token]
+    redirect_to "https://open.t.qq.com/cgi-bin/access_token?oauth_token=#{params[:oauth_token]}"
   end
 
 
