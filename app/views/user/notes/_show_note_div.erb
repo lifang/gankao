@@ -10,5 +10,5 @@
   <input type="hidden" name="problem_path" id="problem_path" value="4" />
   <input type="hidden" name="question_path" id="question_path" value="5" />
 </div>
-<div class="p_question_btn"><button type="submit" class="save"></button></div>
+<div class="p_question_btn"><button type="submit" class="save" onclick="javascript:if(!checkspace(document.getElementById('note_text_<%= show_note_div[1] %>').value)){this.style.display='none';document.getElementById('spinner_user_<%= show_note_div[1] %>').style.display='block';}"></button><%= image_tag "ajax-loader.gif", :id => "spinner_user_#{show_note_div[1]}", :style => "display:none" %></div>
 <% end %>

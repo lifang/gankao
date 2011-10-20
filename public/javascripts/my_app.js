@@ -39,7 +39,7 @@ function check_new(){
         return false;
     } else	{
         $("passwordErr").innerHTML="";
-        if (confirmation != password &&  password.length!=confirmation.length){
+        if (confirmation != password){
            $("confirmationErr").innerHTML="<font color = 'red'>两次输入的密码不一致，请重新输入</font>";
             return false;
         }else{
