@@ -353,7 +353,7 @@ class ExamUser < ActiveRecord::Base
               problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:COLLIGATIONR] and
               problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:SINGLE_CALK])
           block.delete_element(problem.xpath)
-        else       
+        else
           problem.elements["questions"].each_element do |question|
             element=doc.elements["paper/questions/question[@id=#{question.attributes["id"]}]"]         
             if question.attributes["correct_type"].to_i ==Problem::QUESTION_TYPE[:CHARACTER] or

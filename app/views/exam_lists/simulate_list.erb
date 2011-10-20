@@ -27,7 +27,9 @@
           <div class="mk_r_div mkList_jt<%= i %>"  <%  if i > 0 %> style="display:none" <% end %> >
             <div class="cet_title"></div>
             <p class="begin_time_p">考试时间：<span class="blue"><%= examination.start_at_time.nil? ? "任何时间":examination.start_at_time.strftime("%m-%d-%Y") %></span></p>
-            <div class="chak_dj_d"><button class="chak_dajuan">查看答卷</button></div>
+            <% unless @hash["#{examination.id}"].nil? or @hash["#{examination.id}"][0].total_score.nil? %>
+              <div class="chak_dj_d"><a class="chak_dajuan" href="/user/exam_users/<%= @hash["#{examination.id}"][0].id %>" target="_blank">查看答卷</a></div>
+            <% end %>
             <h2>总分：<span class="red"> <% unless @hash["#{examination.id}"].nil? %> <%=  @hash["#{examination.id}"][0].total_score.nil? ? "阅卷中" :@hash["#{examination.id}"][0].total_score %><% end %></span></h2>
             <% unless @hash["#{examination.id}"].nil? %>
               <% if !@hash["#{examination.id}"] || @hash["#{examination.id}"][0].total_score.nil?%>
