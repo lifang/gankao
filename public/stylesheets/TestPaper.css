@@ -96,7 +96,7 @@ img { border: none;}
 .question_no {background: url(/images/paper/question_no_bg.png) repeat-y 0px 0px #FFF;}
 
 .p_q_l_left { float: left; width: 31px;text-align: center; padding-top: 5px;}
-.p_q_l_right { float: left; padding: 10px 5px; width: 600px; border-left: 1px #EAEAEA solid;}
+.p_q_l_right { float: left; padding: 10px 5px; width: 580px; border-left: 1px #EAEAEA solid;}
 
 .question_title { line-height: 24px; padding-left: 20px; font-weight: bold; border-bottom: 1px #CCC dashed;}
 

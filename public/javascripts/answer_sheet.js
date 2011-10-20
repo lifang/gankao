@@ -1,5 +1,26 @@
+
+// onmouseout则关闭
+function mouseout_x( ae ){
+    var e = window.event || ae;
+    var s = e.toElement || e.relatedTarget;
+    if(document.all){
+        if( !this.contains(s) ){
+            d1.style.display='none';
+        }
+    }else{
+        var res= this.compareDocumentPosition(s) ;
+        if( ! ( res == 20 || res == 0) ){
+            d1.style.display='none';
+        }
+    }
+}
+
+
 //打开模块
 function open_nav(block_id) {
+    if(document.getElementById("upErrorTo_tab")!=null){
+        document.getElementById("upErrorTo_tab").style.display='none';
+    }
     jQuery('.biji_tab').css('display','none');
     jQuery('.jiexi_tab').css('display','none');
     var block_ids = $("block_ids");

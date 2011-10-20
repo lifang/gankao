@@ -349,25 +349,28 @@ class ExamUser < ActiveRecord::Base
     str="-1"
     xml.elements["blocks"].each_element do  |block|
       block.elements["problems"].each_element do |problem|
-        if problem.attributes["types"].nil? || (problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:CHARACTER] and
-              problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:COLLIGATIONR] and
-              problem.attributes["types"].to_i !=Problem::QUESTION_TYPE[:SINGLE_CALK])
-          block.delete_element(problem.xpath)
-        else       
+         block.delete_element(problem.xpath) if problem.attributes["types"].nil?
+        if problem.attributes["types"] != nil and 
+            (problem.attributes["types"].to_i == Problem::QUESTION_TYPE[:CHARACTER] or
+              problem.attributes["types"].to_i == Problem::QUESTION_TYPE[:COLLIGATION] or
+              problem.attributes["types"].to_i == Problem::QUESTION_TYPE[:SINGLE_CALK])
           problem.elements["questions"].each_element do |question|
-            element=doc.elements["paper/questions/question[@id=#{question.attributes["id"]}]"]         
+            element=doc.elements["paper/questions/question[@id=#{question.attributes["id"]}]"]
             if question.attributes["correct_type"].to_i ==Problem::QUESTION_TYPE[:CHARACTER] or
                   question.attributes["correct_type"].to_i == Problem::QUESTION_TYPE[:SINGLE_CALK]
+
               str += (","+question.attributes["id"])
               question.add_attribute("user_answer","#{element.elements["answer"].text}")
             else
               problem.delete_element(question.xpath)
             end
           end unless problem.elements["questions"].nil?
-        end
-        block.delete_element(problem.xpath) if problem.elements["questions"].nil?
+          block.delete_element(problem.xpath) if problem.elements["questions"].nil?||problem.elements["questions"].elements.size<=0
+        else       
+          block.delete_element(problem.xpath)
+        end       
       end unless block.elements["problems"].nil?
-      if block.elements["problems"].nil? or block.elements["problems"].elements[1].nil?
+      if block.elements["problems"].nil? or block.elements["problems"].elements.size<=0
         xml.delete_element(block.xpath)
       end
     end unless xml.elements["blocks"].nil?
