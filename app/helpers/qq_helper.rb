@@ -42,6 +42,7 @@ module QqHelper
 
  def signature_params1(key,sign,url)
     signature="GET&#{url_encoding(url)}&#{url_encoding(sign)}"
+    puts signature
     return Base64.encode64(OpenSSL::HMAC.digest("sha1","#{key}&",signature))
   end
 
