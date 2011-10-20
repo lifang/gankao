@@ -12,8 +12,9 @@ module QqHelper
   PARAMS="oauth_client_ip=116.255.140.79&oauth_consumer_key=223448&oauth_nonce=#{OAUTH_CON}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{OAUTH_TIMESTAMP}&oauth_version=1.0"
 
   #腾讯微博登录参数：
-  WEIBO_URL="https://open.t.qq.com/cgi-bin/request_token"
-  OPTIONS="oauth_callback=http://localhost:3000&oauth_consumer_key=801003611&oauth_nonce=#{OAUTH_CON}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{OAUTH_TIMESTAMP}&oauth_version=1.0"
+  WEIBO="open.t.qq.com"
+  WEIBO_URL="/cgi-bin/request_token"
+  OPTIONS="oauth_callback=localhost:3000&oauth_consumer_key=801003611&oauth_nonce=#{OAUTH_CON}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{OAUTH_TIMESTAMP}&oauth_version=1.0"
   WEIBO_AUTHORIZE="https://open.t.qq.com/cgi-bin/authorize"
   ADD_FRIEND="http://open.t.qq.com/api/friends/add"
   ACCESS_TOKEN_URL="https://open.t.qq.com/cgi-bin/access_token"
@@ -39,7 +40,11 @@ module QqHelper
     "40ee1e5183af2fbef676cc273d220da4"
   end
 
-
+ def signature_params1(key,sign,url)
+    signature="GET&#{url_encoding(url)}&#{url_encoding(sign)}"
+    puts signature
+    return Base64.encode64(OpenSSL::HMAC.digest("sha1","#{key}&",signature))
+  end
 
   #公共方法加密url及生成签名：
   def signature_params(key,sign,url)

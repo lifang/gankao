@@ -115,7 +115,7 @@ class Examination < ActiveRecord::Base
     hash ={}
     ExamUser.find_by_sql("select eu.id eu_id, eu.total_score,eu.is_submited,eu.examination_id,eu.created_at
         correct_percent from exam_users eu inner join examinations e on e.id = eu.examination_id
-        where e.types =#{types} and e.status = #{Examination::STATUS[:CLOSED]} and eu.user_id = #{user_id} and e.category_id=#{category_id} and eu.is_submited = #{ExamUser::IS_SUBMITED[:YES]}
+        where e.types =#{types} and eu.user_id = #{user_id} and e.category_id=#{category_id} and eu.is_submited = #{ExamUser::IS_SUBMITED[:YES]}
         and is_published = #{Examination::IS_PUBLISHED[:ALREADY]}").each do |exam_user|
       hash["#{exam_user.examination_id}"] = exam_user
     end unless user_id.nil? or user_id == ""
