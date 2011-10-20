@@ -7,7 +7,7 @@
       <%= @xml.elements['base_info'].elements['title'].text if @xml!=nil %>
     </div>
     <div class="timer"><% if @examination.types == Examination::TYPES[:SIMULATION] %>
-        <%= @doc.elements["paper"].attributes["score"].nil? ? "分数暂未公布":" 得  分:"+ @doc.elements["paper"].attributes["score"].to_i %>
+        <%= @doc.elements["paper"].attributes["score"].nil? ? "分数暂未公布":" 得  分:"+ @doc.elements["paper"].attributes["score"].to_i.to_s %>
       <% else %>不限时
       <% end %></div>
     <div class="paper_info">

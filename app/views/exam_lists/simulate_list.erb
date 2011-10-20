@@ -78,20 +78,42 @@
                     </tr>
                     <tr>
                       <% if (is_vip?).to_s == "true" %>
-                        <td><%= scores[2].nil? ? "阅卷中" :scores[2].attributes["score"].to_i %></td>
-                        <% second_score=(scores[1].nil? ? 0 :scores[1].attributes["score"].to_i) + (scores[3].nil? ? 0 :scores[3].attributes["score"].to_i) %>
-                        <% if scores[1].nil? && scores[3].nil? %>
-                          <td><%= "阅卷中" %></td>
-                        <% else %>
-                          <td><%= second_score %></td>
-                        <% end %>
-                        <td><%= scores[4].nil? ? "阅卷中" :scores[4].attributes["score"].to_i  %></td>
-                        <% forth_score= (scores[0].nil? ? 0 :scores[0].attributes["score"].to_i) + (scores[5].nil? ? 0 :scores[5].attributes["score"].to_i) %>
-                        <% if scores[0].nil? && scores[5].nil? %>
-                          <td><%= "阅卷中" %></td>
-                        <% else %>
-                          <td><%= forth_score %></td>
-                        <% end %>
+                        <td>
+                          <% if scores[2].nil? or scores[2].attributes["score"].nil? or scores[2].attributes["score"].to_i == 0 %>0
+                          <% elsif scores[2].attributes["score"].to_f*10%10 == 0 %>
+                            <%= scores[2].attributes["score"].to_i %>
+                          <% elsif scores[2].attributes["score"].to_f*10%10 <= 5 %>
+                            <%= (scores[2].attributes["score"].to_f*10/10).to_i %>.5
+                          <% else %>
+                            <%= (scores[2].attributes["score"].to_f*10/10).round %>
+                          <% end %>
+                        </td>
+                        <% second_score = (scores[1].nil? ? 0 :scores[1].attributes["score"].to_f) +
+                          (scores[3].nil? ? 0 :scores[3].attributes["score"].to_f) %>
+                        <td><% if second_score.to_f*10%10 == 0 %><%= second_score.to_i %>
+                          <% elsif second_score.to_f*10%10 <= 5 %>
+                            <%= (second_score.to_f*10/10).to_i %>.5
+                          <% else %>
+                            <%= (second_score.to_f*10/10).round %>
+                          <% end %></td>
+                        <td>
+                          <% if scores[4].nil? or scores[4].attributes["score"].nil? or scores[4].attributes["score"].to_i == 0 %>0
+                          <% elsif scores[4].attributes["score"].to_f*10%10 == 0 %>
+                            <%= scores[4].attributes["score"].to_i %>
+                          <% elsif scores[4].attributes["score"].to_f*10%10 <= 5 %>
+                            <%= (scores[4].attributes["score"].to_f*10/10).to_i %>.5
+                          <% else %>
+                            <%= (scores[4].attributes["score"].to_f*10/10).round %>
+                          <% end %>
+                        </td>
+                        <% forth_score = (scores[0].nil? ? 0 :scores[0].attributes["score"].to_f) +
+                          (scores[5].nil? ? 0 :scores[5].attributes["score"].to_f) %>
+                        <td><% if forth_score.to_f*10%10 == 0 %><%= forth_score.to_i %>
+                          <% elsif forth_score.to_f*10%10 <= 5 %>
+                            <%= (forth_score.to_f*10/10).to_i %>.5
+                          <% else %>
+                            <%= (forth_score.to_f*10/10).round %>
+                          <% end %></td>
                       <% else %>
                         <td><img src="/images/paper/V.png" /></td>
                         <td><img src="/images/paper/V.png" /></td>
