@@ -1,6 +1,6 @@
 <center>
 <% if cookies[:rater_id].to_i==@rater.id %>
- 您已经登录，是否<%= link_to "批卷","/rater/exam_raters/#{@examination.id}/reader_papers" %>
+ 您已经登录，是否<%= link_to "批卷","/rater/exam_raters/#{@examination.id}/reader_papers?rater_id=#{@rater.id}" %>
 <% else %>
 
   <p><%= flash[:success] %></p>

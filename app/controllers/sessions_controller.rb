@@ -123,13 +123,14 @@ class SessionsController < ApplicationController
 
   #腾讯微博登录
   def qq_weibo
-#    http = Net::HTTP.new(WEIBO_URL, 443)
-#    http.use_ssl = true
-#    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    url= "#{WEIBO_URL}?#{OPTIONS}&oauth_signature=#{signature_params(weibo_app_secret,OPTIONS,WEIBO_URL)}"
+    http = Net::HTTP.new(WEIBO, 443)
+    puts http
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    url= "#{WEIBO_URL}?#{OPTIONS}&oauth_signature=#{signature_params1(weibo_app_secret,OPTIONS,"https://open.t.qq.com/cgi-bin/request_token")}"
     puts url
-    redirect_to url
-#    res_json = JSON http.get(url).body
+#    redirect_to url
+    http.get(url).body
 #    puts res_json
 #    request_token=OAuth2::Client.new(weibo_app_key, weibo_app_secret,{}).request(:get, url,{},{})
 #    #    request_token=OAuth::Consumer.new(weibo_app_key, weibo_app_secret).request(:get, url,{},{})
