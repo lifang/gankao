@@ -56,7 +56,9 @@ class PagesController < ApplicationController
   
 
   def login_from_qq
-    url="#{REQUEST_URL}?#{PARAMS}&oauth_signature=#{signature_params(app_key,PARAMS,REQUEST_URL)}"
+    timestamp=(Time.new.to_i).to_s
+    params="oauth_client_ip=116.255.140.79&oauth_consumer_key=223448&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_version=1.0"
+    url="#{REQUEST_URL}?#{params}&oauth_signature=#{signature_params(app_key,params,REQUEST_URL,"GET")}"
     puts url
     request_token=OAuth2::Client.new(app_id, app_key,{}).request(:get, url,{},{})
     puts request_token
@@ -65,13 +67,15 @@ class PagesController < ApplicationController
 
 
   def qq_index
+    timestamp=(Time.new.to_i).to_s
+    params="oauth_client_ip=116.255.140.79&oauth_consumer_key=223448&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_version=1.0"
     #    begin
-    url="#{GRAPY_URL}?access_token=#{params[:oauth_token]}&openid=#{params[:openid]}&#{PARAMS}&format=json&oauth_signature=#{signature_params(app_key,PARAMS,GRAPY_URL)} "
+    url="#{GRAPY_URL}?access_token=#{params[:oauth_token]}&openid=#{params[:openid]}&#{ params}&format=json&oauth_signature=#{signature_params(app_key,params,GRAPY_URL,"GET")} "
     request_token=JSON OAuth2::Client.new(app_id, app_key,{}).request(:get, url,{},{})
     @user= User.find_by_open_id(params[:openid])
     if @user.nil?
       request_token["nickname"]="qq用户" if request_token["nickname"].nil?||request_token["nickname"]==""
-#      @user=User.create(:code_type=>'qq',:name=>request_token["nickname"],:username=>request_token["nickname"],:open_id=>params[:openid])
+      #      @user=User.create(:code_type=>'qq',:name=>request_token["nickname"],:username=>request_token["nickname"],:open_id=>params[:openid])
     end
     cookies[:user_id] = @user.id
     render :inline => "<script>window.opener.location.href='/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}?url=#{url}&request=#{request_token}';window.close();</script>"
