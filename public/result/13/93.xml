@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <exam id='13'>
-    <paper id='9' score='0'>
+    <paper id='9' score='5.0'>
         <questions>
-            <question id='47' is_sure='1' score='0'>
+            <question id='47' is_sure='1' score='5'>
                 <answer>额外</answer>
             </question>
             <question id='45' is_sure='1' score='0'>
@@ -15,11 +15,11 @@
                 <answer>sdfsfsffsff</answer>
             </question>
         </questions>
-        <auto_score/>
+        <auto_score>5.0</auto_score>
         <rate_score/>
         <blocks>
-            <block id='21' score='0'/>
-            <block id='22' score='0'/>
+            <block id='21' score='5.0'/>
+            <block id='22' score='0.0'/>
         </blocks>
     </paper>
 </exam>
