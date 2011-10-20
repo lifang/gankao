@@ -22,7 +22,9 @@
       </div>
       <div class="timer" id="exam_time"></div><div id="true_exam_time" style="display: none;"></div>
       <div class="paper_info">
-        <button class="test_out_btn" type="button" onclick="javascript:out_exam();"></button>
+        <% if @examination.types == Examination::TYPES[:OLD_EXAM] %>
+          <button class="test_out_btn" type="button" onclick="javascript:out_exam();"></button>
+        <% end %>
         <button type="submit" class="test_over_btn"></button>
         <strong><span id="leaving_num"></span></strong>题未完成
       </div>

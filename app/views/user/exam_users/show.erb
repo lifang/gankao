@@ -7,7 +7,7 @@
       <%= @xml.elements['base_info'].elements['title'].text if @xml!=nil %>
     </div>
     <div class="timer"><% if @examination.types == Examination::TYPES[:SIMULATION] %>
-        <%= @doc.elements["paper"].attributes["score"].nil? ? "分数暂未公布":" 得  分:"+ @doc.elements["paper"].attributes["score"] %>
+        <%= @doc.elements["paper"].attributes["score"].nil? ? "分数暂未公布":" 得  分:"+ @doc.elements["paper"].attributes["score"].to_i %>
       <% else %>不限时
       <% end %></div>
     <div class="paper_info">
@@ -46,9 +46,6 @@
               <% end %>
             </p>
           <% end %>
-          <% if @examination.types == Examination::TYPES[:SIMULATION] %>
-            <div class="fraction"><%= block.attributes["total_score"] %>分</div>
-          <% end %>
         </div>
         <% block.elements['problems'].each_element do |problem|
           if problem.attributes["id"].nil? %>
@@ -64,9 +61,6 @@
                     <div class="question_text_div" id="problem_title_<%= problem.attributes["id"] %>">
                       <%= problem.elements['title'].text.to_s.html_safe %>
                     </div>
-                    <% if @examination.types == Examination::TYPES[:SIMULATION] %>
-                      <div class="fraction_h"><%= problem.attributes["score"] %>分</div>
-                    <% end %>
                     <%= render :partial=>"/user/exam_users/more_blanks", :object=> problem  %>
                   </div>
                 <% end %>
