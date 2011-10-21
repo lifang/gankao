@@ -31,6 +31,7 @@
       <div style="display:none;" id="title_<%= question_with_answer.attributes["id"] %>">
         <%= question_with_answer.elements["title"].text.to_s.html_safe %>
       </div>
+      <%= render :partial=>"/common/more_blanks", :object=> question_with_answer %>
     </div>
   <% end %>
   <% question_with_answer.elements["questions"].each_element do |question| %>

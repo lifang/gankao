@@ -45,6 +45,7 @@
         <div style="display:none;" id="title_<%= question_answer.attributes["id"] %>">
           <%= question_answer.elements["title"].text.to_s.html_safe %>
         </div>
+        <%= render :partial=>"/common/more_blanks", :object=> question_answer %>
       </div>
     <% end  %>
     <% index=0 %>

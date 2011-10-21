@@ -33,6 +33,7 @@
         <div style="display:none;" id="title_<%= question_with_answer[0].attributes["id"] %>">
           <%= question_with_answer[1].elements["title"].text.to_s.html_safe %>
         </div>
+        <%= render :partial=>"/common/more_blanks", :object=> question_with_answer[1]  %>
       </div>
     <% end %>
     <!--题目内容-->
