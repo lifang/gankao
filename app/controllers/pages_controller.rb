@@ -74,7 +74,6 @@ class PagesController < ApplicationController
     oauth_token=params[:oauth_token]
     oauth_vericode=params[:oauth_vericode]
     params="oauth_client_ip=116.255.140.79&oauth_consumer_key=223448&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{oauth_token}&oauth_vericode=#{oauth_vericode}&oauth_version=1.0"
-    puts "-----------------------------"
     puts session[:secret]
     puts "#{QQ_ACCESS_URL}?#{ params}&format=json&oauth_signature=#{signature_params(app_key,params,QQ_ACCESS_URL,"GET",session[:secret])}"
     begin

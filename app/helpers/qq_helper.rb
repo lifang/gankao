@@ -43,11 +43,11 @@ module QqHelper
 
   #腾讯微博
   def weibo_app_key
-    801003611
+    801004949
   end
 
   def weibo_app_secret
-    "40ee1e5183af2fbef676cc273d220da4"
+    "b5ab55615ee5261fcadf2f50128edb51"
   end
 
 
