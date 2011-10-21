@@ -1,8 +1,17 @@
 //加载试卷
 function load_paper() {
+    //load已有的答案
+    var paper_id = $("paper_id").value;
+    var examination_id = $("examination_id").value;
+    load_answer(paper_id, examination_id);
     setTimeout(function(){
         get_exam_time();
     }, 100);
+}
+if (window.onbeforeunload == undefined || window.onbeforeunload == null) {
+    window.onbeforeunload = function() {
+        return "您的试卷尚未提交，确定要离开么?";
+    }
 }
 
 //获取考试的时间
@@ -47,7 +56,6 @@ function create_paper() {
     //显示基本信息部分
     $("problem_ids").value = "";
     $("paper_title").innerHTML = papers.paper.base_info.title;
-    $("paper_id").value = papers.paper.id;
     $("leaving_num").innerHTML = papers.paper.total_num;
     
     if (papers.paper.blocks != undefined && papers.paper.blocks.block != undefined) {
@@ -76,7 +84,7 @@ function get_block_id(blocks) {
         for (var i=0; i<blocks.size();i++) {
             if ($("block_ids") != null && $("block_ids").value != "") {
                 $("block_ids").value = $("block_ids").value + "," + blocks[i].id;
-            } else {
+            }else {
                 $("block_ids").value = blocks[i].id;
             }
         }
@@ -547,16 +555,28 @@ function create_single_question(que_div, question, drag_li_arr) {
                     var attr = create_element("li", null, null, null, null, "innerHTML");
                     ul.appendChild(attr);
                     if (question.correct_type == "0") {
-                        if (answer_hash != null && answer_hash[question.id] != null && answer_hash[question.id][0] == que_attrs[i]) {
-                            attr.innerHTML += "<input type='radio' name='question_attr_"+ question.id +"' id='question_attr_"+ i +"' value='"+ que_attrs[i] +"' checked='true' onclick='javascript:show_que_save_button(\""+question.id+"\")' />";
+                        if (answer_hash != null && answer_hash[question.id] != null && answer_hash[question.id][0].strip() == que_attrs[i].strip()) {
+                            attr.innerHTML += "<input type='radio' name='question_attr_"+ question.id +"' id='question_attr_"+ i +"' value=\""+ que_attrs[i] +"\" checked='true' onclick='javascript:show_que_save_button(\""+question.id+"\")' />";
                         } else {
-                            attr.innerHTML += "<input type='radio' name='question_attr_"+ question.id +"' id='question_attr_"+ i +"' value='"+ que_attrs[i] +"' onclick='javascript:show_que_save_button(\""+question.id+"\")'/>";
+                            attr.innerHTML += "<input type='radio' name='question_attr_"+ question.id +"' id='question_attr_"+ i +"' value=\""+ que_attrs[i] +"\" onclick='javascript:show_que_save_button(\""+question.id+"\")'/>";
                         }
                     } else if (question.correct_type == "1") {
-                        if (answer_hash != null &&  answer_hash[question.id] != null && answer_hash[question.id][0].split(";|;").include(que_attrs[i])) {
-                            attr.innerHTML += "<input type='checkbox' name='question_attr_"+ question.id +"' id='question_attr_"+ i +"' value='"+ que_attrs[i] +"' checked='true' onclick='javascript:show_que_save_button(\""+question.id+"\")'/>";
+                        var has_answer = false;
+                        if (answer_hash != null &&  answer_hash[question.id] != null) {
+                            var all_attr = answer_hash[question.id][0].split(";|;");
+                            if (all_attr != null && all_attr.size > 0) {
+                                for (var a = 0; a<all_attr.length; a ++) {
+                                    if (all_attr[a].strip() == que_attrs[i].strip()) {
+                                        has_answer = true;
+                                    }
+                                    if (has_answer) {break;}
+                                }
+                            }
+                        }
+                        if (has_answer) {
+                            attr.innerHTML += "<input type='checkbox' name='question_attr_"+ question.id +"' id='question_attr_"+ i +"' value=\""+ que_attrs[i] +"\" checked='true' onclick='javascript:show_que_save_button(\""+question.id+"\")'/>";
                         } else {
-                            attr.innerHTML += "<input type='checkbox' name='question_attr_"+ question.id +"' id='question_attr_"+ i +"' value='"+ que_attrs[i] +"' onclick='javascript:show_que_save_button(\""+question.id+"\")'/>";
+                            attr.innerHTML += "<input type='checkbox' name='question_attr_"+ question.id +"' id='question_attr_"+ i +"' value=\""+ que_attrs[i] +"\" onclick='javascript:show_que_save_button(\""+question.id+"\")'/>";
                         }
                     }
                     attr.innerHTML += "&nbsp;&nbsp;"+ que_attrs[i];
@@ -745,9 +765,6 @@ function local_save_start() {
     local_timer = self.setInterval(function(){
         local_save();
     }, 100);
-//    local_timer = self.setTimeout(function(){
-//        local_save();
-//    }, 100);
 }
 
 //5分钟存储函数
@@ -926,19 +943,7 @@ function question_value(question_id, problem_id) {
             is_answer = true;
             $("answer_" + question_id).value = answer.value;
         }
-    }// else {
-    //        var place_num = 1;
-    //        var str = document.getElementById("question_" + problem_id).innerHTML;
-    //        while(str.indexOf("problem_" + problem_id + "_dropplace_" + place_num) >= 0) {
-    //            if ($("answer_" + question_id).value == "") {
-    //                $("answer_" + question_id).value = $("problem_" + problem_id + "_dropplace_" + place_num).innerHTML;
-    //            } else {
-    //                $("answer_" + question_id).value += ";|;" + $("problem_" + problem_id + "_dropplace_" + place_num).innerHTML;
-    //            }
-    //            is_answer = true;
-    //            place_num ++ ;
-    //        }
-    //    }
+    }
     return is_answer;
 }
 
@@ -983,6 +988,8 @@ function generate_result_paper(paper_id) {
         if (answer_length < (problem_ids.length-1)) {
             if(!confirm('您还有题尚未答完，确定要交卷么?')) {
                 flag = false;
+            } else {
+                window.onbeforeunload = null;
             }
         }
     }
@@ -1030,8 +1037,8 @@ function add_to_db(arr, flag) {
 
 //重新执行5分钟倒计时
 function reload_local_save() {
-        local_start_time = 300;
-        local_save_start();
+    local_start_time = 300;
+    local_save_start();
 }
 
 //load用户已经答完的答案
@@ -1300,5 +1307,6 @@ function call_me(max_length, id) {
 
 //退出考试
 function out_exam() {
+    window.onbeforeunload = null;
     local_storage_answer("close");
 }

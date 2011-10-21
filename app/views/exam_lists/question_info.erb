@@ -125,7 +125,7 @@
           </div>
         </div>
         <div class="tb_checkBox">
-          <a class="tb_check" href="javascript:void(0);" onclick="javascript:problem_values('<%= Constant::BACK_SERVER_PATH %><%= title.split("<mp3>")[1] %>', <%= @problem.attributes["id"] %>);"></a>
+          <a class="tb_check" href="javascript:void(0);" onclick="javascript:problem_values('<%= Constant::BACK_SERVER_PATH %><%= title.split("<mp3>")[1] unless title.nil? %>', <%= @problem.attributes["id"] %>);"></a>
         </div>
       </div>
     </div>

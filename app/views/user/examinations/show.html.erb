@@ -11,7 +11,7 @@
   <div id="show_flash"></div>
   <div class="testPaper_top" id="paper_show_info">
     <div class="tp_top_box" id="float_test">
-      <input type="hidden" name="paper_id" id="paper_id" value=""/>
+      <input type="hidden" name="paper_id" id="paper_id" value="<%= @exam_user.paper_id %>"/>
       <input type="hidden" name="all_quesiton_ids" id="all_question_ids" value=""/>
       <input type="hidden" name="problem_ids" id="problem_ids" value=""/>
       <input type="hidden" name="examination_id" id="examination_id" value="<%= @examination.id %>"/>
@@ -22,7 +22,9 @@
       </div>
       <div class="timer" id="exam_time"></div><div id="true_exam_time" style="display: none;"></div>
       <div class="paper_info">
-        <button class="test_out_btn" type="button" onclick="javascript:out_exam();"></button>
+        <% if @examination.types == Examination::TYPES[:OLD_EXAM] %>
+          <button class="test_out_btn" type="button" onclick="javascript:out_exam();"></button>
+        <% end %>
         <button type="submit" class="test_over_btn"></button>
         <strong><span id="leaving_num"></span></strong>题未完成
       </div>
@@ -64,9 +66,7 @@
   var change_length = null;
 
   //用户保存本地存储的答案
-  var answer_hash = null;
-  //load已有的答案
-  load_answer('<%= @exam_user.paper_id %>', '<%= @examination.id %>');
+  var answer_hash = null;  
 
   //页面load成功之后加载试卷
   window.onload(load_paper());

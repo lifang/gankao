@@ -17,13 +17,24 @@ class User::CombinePracticesController < ApplicationController
         @practice_type=@step[0].to_i+1    #因为js中，综合训练类型1-5，分别对应2-6.而step为1..5
         @paper_url = "#{Constant::PAPER_CLIENT_PATH}/#{@exam_user.paper_id}.js"
         xml_url="#{Constant::BACK_PUBLIC_PATH}/papers/#{@exam_user.paper_id}.xml"
-        xml=Document.new(File.open(xml_url)).root
-        @answer_array=xml.get_elements("/paper/blocks/block[#{@step[0].to_i}]/problems//questions//answer").map{|n|n=n.text}.join("|-|-|").gsub("\"","")
+        begin
+          xml=Document.new(File.open(xml_url)).root
+        rescue
+          flash[:warn] = "试卷（#{@exam_user.paper_id}）文件加载错误"
+          redirect_to "/combine_practices/#{Examination::TYPES[:PRACTICE]}"
+          return 0
+        end
+        if xml.nil?
+          flash[:warn] = "试卷（#{@exam_user.paper_id}）文件加载错误"
+          redirect_to "/combine_practices/#{Examination::TYPES[:PRACTICE]}"
+          return 0
+        end
         @practies_count = ExamUser.return_join_exam_count(Examination::TYPES[:PRACTICE], cookies[:user_id].to_i,Category::TYPE_IDS[:english_fourth_level])
+        @answer_array=xml.get_elements("/paper/blocks/block[#{@step[0].to_i}]/problems//questions//answer").map{|n|n=n.text}.join("|-|-|").gsub("\"","")
         render :layout => "practice_layout"
       else
         flash[:warn] = "试卷加载错误。"
-        redirect_to "/user/examinations"
+        redirect_to "/combine_practices/#{Examination::TYPES[:PRACTICE]}"
       end
     else
       flash[:warn] = arr[0]

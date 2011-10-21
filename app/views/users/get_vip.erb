@@ -40,7 +40,7 @@
               <p><a href="javascript:void(0);">提供新浪微博分享凭证方法</a></p>
             </div>
           </div>
-          <div class="vip_czhi_btn"><button type="submit" onclick="javascript:if(!checkspace(document.getElementById('form_textarea_pingzheng').value)){this.style.display='none';document.getElementById('spinner_user_pingzheng').style.display='block';}" >确  认</button><%= image_tag "ajax-loader.gif", :id => "spinner_user_pingzheng", :style => "display:none" %></div>
+          <div class="vip_czhi_btn"><button type="submit" id="form_submit_pingzheng">确  认</button><%= image_tag "ajax-loader.gif", :id => "spinner_user_pingzheng", :style => "display:none" %></div>
         <% end %>
         <span class="vip_sh_tis">审核需10分钟左右，请耐心等待....</span>
       </div>
@@ -107,7 +107,9 @@
   })
 
   function validate_form_proof(){
-    if(document.getElementById("form_textarea").value.replace(/ /g,"")!=""){
+    if(!checkspace(document.getElementById('form_textarea_pingzheng').value)){
+      document.getElementById("form_submit_pingzheng").style.display='none';
+      document.getElementById('spinner_user_pingzheng').style.display='block';
       return true;
     }
     return false;

@@ -458,20 +458,7 @@ function question_values(question_id) {
                 }
             }
         }
-    } else if(correct_type == "6") {
-        var place_num = 1;
-        var problem_id = $("problem_id").value;
-        var str = document.getElementById("drag_question_" + question_id).innerHTML;
-        while(str.indexOf("problem_" + problem_id + "_dropplace_" + place_num) >= 0) {
-            if ($("answer_" + question_id).value == "") {
-                $("answer_" + question_id).value = $("problem_" + problem_id + "_dropplace_" + place_num).innerHTML;
-            } else {
-                $("answer_" + question_id).value += ";|;" + $("problem_" + problem_id + "_dropplace_" + place_num).innerHTML;
-            }
-            place_num ++ ;
-        }
-    }
-    else{
+    } else{
         var answer = $("question_answer_" + question_id);
         if (answer != null && !checkspace(answer.value)) {
             $("answer_" + question_id).value = answer.value;
