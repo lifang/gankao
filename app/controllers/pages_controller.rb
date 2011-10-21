@@ -69,7 +69,7 @@ class PagesController < ApplicationController
   def qq_index
     timestamp=(Time.new.to_i).to_s
     params="oauth_client_ip=116.255.140.79&oauth_consumer_key=223448&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_version=1.0"
-    begin
+#    begin
       url="#{GRAPY_URL}?access_token=#{params[:oauth_token]}&openid=#{params[:openid]}&#{ params}&format=json&oauth_signature=#{signature_params(app_key,params,GRAPY_URL,"GET")} "
       request_token=JSON OAuth2::Client.new(app_id, app_key,{}).request(:get, url,{},{})
       @user= User.find_by_open_id(params[:openid])
@@ -79,9 +79,9 @@ class PagesController < ApplicationController
       end
       cookies[:user_id] = @user.id
       render :inline => "<script>window.opener.location.href='/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}?url=#{url}&request=#{request_token}';window.close();</script>"
-    rescue
-      render :inline => "<script>window.opener.location.reload();window.close();</script>"
-    end
+#    rescue
+#      render :inline => "<script>window.opener.location.reload();window.close();</script>"
+#    end
   end
 
   
