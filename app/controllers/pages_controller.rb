@@ -84,7 +84,7 @@ class PagesController < ApplicationController
 
   def add_user
     timestamp=(Time.new.to_i).to_s
-    begin
+    begin  
       user_params="format=json&oauth_client_ip=116.255.140.79&oauth_consumer_key=223448&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{session[:qqtoken]}&oauth_version=1.0&open_id=#{session[:qqopen_id]}"
       user_url="#{GRAPY_URL}?#{user_params}&oauth_signature=#{signature_params(app_key,user_params,GRAPY_URL,"GET",session[:qqsecret])}"
       user_info=Net::HTTP.get(URI.parse(user_url))
