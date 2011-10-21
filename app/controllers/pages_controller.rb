@@ -69,17 +69,28 @@ class PagesController < ApplicationController
 
 
   def qq_index
+
     timestamp=(Time.new.to_i).to_s
     oauth_token=params[:oauth_token]
     oauth_vericode=params[:oauth_vericode]
     params="oauth_client_ip=116.255.140.79&oauth_consumer_key=223448&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{oauth_token}&oauth_vericode=#{oauth_vericode}&oauth_version=1.0"
-    url="#{QQ_ACCESS_URL}?#{ params}&format=json&oauth_signature=#{signature_params(app_key,params,QQ_ACCESS_URL,"GET",session[:secret])}"
-    access=Net::HTTP.get(URI.parse(url))
-    session[:secret]=nil
-    session[:qqtoken]=access.split("=")[2].split("&")[0]
-    session[:qqsecret]=access.split("=")[3].split("&")[0]
-    session[:qqopen_id]=access.split("=")[4].split("&")[0]
-    redirect_to add_user_pages_path
+    puts "-----------------------------"
+    puts session[:secret]
+    puts "#{QQ_ACCESS_URL}?#{ params}&format=json&oauth_signature=#{signature_params(app_key,params,QQ_ACCESS_URL,"GET",session[:secret])}"
+    begin
+      
+      url="#{QQ_ACCESS_URL}?#{ params}&format=json&oauth_signature=#{signature_params(app_key,params,QQ_ACCESS_URL,"GET",session[:secret])}"
+      access=Net::HTTP.get(URI.parse(url))
+      puts "----------------------"
+      
+      session[:secret]=nil
+      session[:qqtoken]=access.split("=")[2].split("&")[0]
+      session[:qqsecret]=access.split("=")[3].split("&")[0]
+      session[:qqopen_id]=access.split("=")[4].split("&")[0]
+      redirect_to add_user_pages_path
+    rescue
+      render :inline => "<script>window.opener.location.reload();window.close();</script>"
+    end
   end
 
   def add_user
