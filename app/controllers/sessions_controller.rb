@@ -144,7 +144,7 @@ class SessionsController < ApplicationController
     session[:weibosecret]=nil
     session[:weibo_access_token]=request_value[1].split("&")[0]
     session[:weibo_access_secret]= request_value[2].split("&")[0]
-    session[:name]=request_value[2].split("&")[1]
+    session[:name]=request_value[3]
     redirect_to qq_add_friend_sessions_path
   end
 
@@ -154,11 +154,11 @@ class SessionsController < ApplicationController
 
   def qq_add_friend
     timestamp=(Time.new.to_i).to_s
-    friend_params="format=json&name=#{session[:name]}&oauth_consumer_key=#{weibo_app_key}&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibo_access_token]}&oauth_version=1.0"
-    url="#{ADD_FRIEND}?#{friend_params}&oauth_signature=#{signature_params(weibo_app_secret,friend_params,ADD_FRIEND,"POST",session[:weibo_access_secret])}"
-    #    content="url_encoding"
-    #    add_params="content=#{url_encoding(content)}&oauth_consumer_key=801003611&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibo_access_token]}&oauth_version=1.0"
-    #    url="#{ADD_WEIBO}?format=json&#{add_params}&oauth_signature=#{signature_params(weibo_app_secret,add_params,ADD_WEIBO,"POST",session[:weibo_access_secret])}"
+    #    friend_params="format=json&name=#{session[:name]}&oauth_consumer_key=#{weibo_app_key}&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibo_access_token]}&oauth_version=1.0"
+    #    url="#{ADD_FRIEND}?#{friend_params}&oauth_signature=#{signature_params(weibo_app_secret,friend_params,ADD_FRIEND,"POST","")}"
+    content="url_encoding"
+    add_params="content=#{url_encoding(content)}&oauth_consumer_key=801003611&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibo_access_token]}&oauth_version=1.0"
+    url="#{ADD_WEIBO}?format=json&#{add_params}&oauth_signature=#{signature_params(weibo_app_secret,add_params,ADD_WEIBO,"POST",session[:weibo_access_secret])}"
     puts url
     session[:weibo_access_token]=nil
     session[:weibo_access_secret]=nil
