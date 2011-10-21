@@ -123,32 +123,47 @@ class SessionsController < ApplicationController
   end
 
   #腾讯微博登录
-  def qq_weibo
+  def qq_weibo 
     consumer = OAuth::Consumer.new(weibo_app_key, weibo_app_secret, OPTIONS)
     request_token = consumer.get_request_token(:oauth_callback => "http://localhost:3000/sessions/access_token")
-    session[:token]=request_token
-    session[:qqtoken] = request_token.token
-    puts session[:qqtoken]
-    session[:qqsecret] = request_token.secret
+    session[:weibotoken] = request_token.token
+    session[:weibosecret] = request_token.secret
     redirect_to request_token.authorize_url
   end
 
   def access_token
     timestamp=(Time.new.to_i).to_s
-    #    consumer = OAuth::Consumer.new(weibo_app_key, weibo_app_secret,OPTIONS)
-    #    access_token=consumer.get_access_token(session[:token],{:oauth_verifier=>params[:oauth_verifier]},{},{})
-    oauth_token=params[:oauth_token]
-    params="name=gankao2011&oauth_consumer_key=801003611&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{oauth_token}&oauth_version=1.0"
-    url="#{ACCESS_TOKEN_URL}?#{params}&oauth_signature=#{signature_params(weibo_app_secret,params,ACCESS_TOKEN_URL,"GET")}"
-    access_token=OAuth2::Client.new(weibo_app_key, weibo_app_secret,{}).request(:get, url,{},{})
-    puts  access_token
-    #    puts url
-    #    redirect_to url
+    oauth_verifier=params[:oauth_verifier]
+    params="oauth_consumer_key=#{weibo_app_key}&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibotoken]}&oauth_verifier=#{oauth_verifier}&oauth_version=1.0"
+    url="#{ACCESS_TOKEN_URL}?#{params}&oauth_signature=#{signature_params(weibo_app_secret,params,ACCESS_TOKEN_URL,"GET",session[:weibosecret])} "
+    response=Net::HTTP.get(URI.parse(url))
+    puts response
+    request_value=response.split("=")
+    session[:secret]=request_value[2]
+    session[:weibotoken]=nil
+    session[:weibosecret]=nil
+    session[:weibo_access_token]=request_value[1].split("&")[0]
+    session[:weibo_access_secret]= request_value[2].split("&")[0]
+    session[:name]=request_value[2].split("&")[1]
+    redirect_to qq_add_friend_sessions_path
   end
 
+
+
+
+
   def qq_add_friend
-    puts params[:oauth_token]
-    redirect_to "https://open.t.qq.com/cgi-bin/access_token?oauth_token=#{params[:oauth_token]}"
+    timestamp=(Time.new.to_i).to_s
+    friend_params="format=json&name=#{session[:name]}&oauth_consumer_key=#{weibo_app_key}&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibo_access_token]}&oauth_version=1.0"
+    url="#{ADD_FRIEND}?#{friend_params}&oauth_signature=#{signature_params(weibo_app_secret,friend_params,ADD_FRIEND,"POST",session[:weibo_access_secret])}"
+    #    content="url_encoding"
+    #    add_params="content=#{url_encoding(content)}&oauth_consumer_key=801003611&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibo_access_token]}&oauth_version=1.0"
+    #    url="#{ADD_WEIBO}?format=json&#{add_params}&oauth_signature=#{signature_params(weibo_app_secret,add_params,ADD_WEIBO,"POST",session[:weibo_access_secret])}"
+    puts url
+    session[:weibo_access_token]=nil
+    session[:weibo_access_secret]=nil
+    weibo_user=Net::HTTP.get(URI.parse(url))
+    puts weibo_user
   end
 
 

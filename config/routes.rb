@@ -10,7 +10,7 @@ Gankao::Application.routes.draw do
   post "/sessions/create"
   resources :pages do
     collection do
-      get "sina_index"
+      get "sina_index","add_user"
       get "renren_index","follow_me","login_from_qq","qq_index"
     end
   end

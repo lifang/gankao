@@ -7,21 +7,15 @@ module QqHelper
   REQUEST_URL="http://openapi.qzone.qq.com/oauth/qzoneoauth_request_token"
   AUTHOTIZE_URL="http://openapi.qzone.qq.com/oauth/qzoneoauth_authorize"
   CALLBACK_URL="http://www.gankao.co/pages/qq_index"
+  QQ_ACCESS_URL="http://openapi.qzone.qq.com/oauth/qzoneoauth_access_token"
  
 
   #腾讯微博登录参数:
-  #  WEIBO="open.t.qq.com"
-  #  REQUEST_WEIBO="https://open.t.qq.com/cgi-bin/request_token"
-  #  WEIBO_URL="/cgi-bin/request_token"
-  #  OPTIONS="oauth_callback=localhost:3000&oauth_consumer_key=801003611&oauth_nonce=#{OAUTH_CON}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{OAUTH_TIMESTAMP}&oauth_version=1.0"
-  #  WEIBO_AUTHORIZE="https://open.t.qq.com/cgi-bin/authorize"
-  #  ADD_FRIEND="http://open.t.qq.com/api/friends/add"
-
-
- ACCESS_TOKEN_URL="http://open.t.qq.com/cgi-bin/access_token"
+  REQUEST_WEIBO="https://open.t.qq.com/cgi-bin/request_token"
+  ADD_FRIEND="http://open.t.qq.com/api/friends/add"
+  ACCESS_TOKEN_URL="http://open.t.qq.com/cgi-bin/access_token"
   FRIEND_URL="http://open.t.qq.com/api"
-  ADD_URL="http://open.t.qq.com/api/friends/add"
-
+  ADD_WEIBO="http://open.t.qq.com/api/t/add"
   OPTIONS={
     :site               => "https://open.t.qq.com",
     :scheme             => :query_string,
@@ -33,15 +27,6 @@ module QqHelper
     :authorize_path     => "/cgi-bin/authorize",
     :nonce => Base64.encode64(OpenSSL::Random.random_bytes(32)).gsub(/\W/, '')[0, 32]
   }
-
-  #  ADD_FRIEND={
-  #    :name=>"gankao2011",
-  #    :oauth_consumer_key=>801003611,
-  #    :oauth_nonce=>OAUTH_CON,
-  #    :oauth_signature_method=>"HMAC-SHA1",
-  #    :oauth_timestamp=>OAUTH_CON,
-  #    :oauth_version=>"1.0"
-  #  }
 
 
   
@@ -67,9 +52,9 @@ module QqHelper
 
 
   #公共方法加密url及生成签名：
-  def signature_params(key,sign,url,method)
+  def signature_params(key,sign,url,method,secret)
     signature="#{method}&#{url_encoding(url)}&#{url_encoding(sign)}"
-    return url_encoding(Base64.encode64(OpenSSL::HMAC.digest("sha1","#{key}&",signature)))
+    return url_encoding(Base64.encode64(OpenSSL::HMAC.digest("sha1","#{key}&#{secret}",signature)))
   end
 
   def url_encoding(str)
