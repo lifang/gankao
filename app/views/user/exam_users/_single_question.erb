@@ -85,12 +85,6 @@ is_right = true if all_answer == answers and answers - user_answers == []
         <textarea disabled cols="" rows="" style="height:24px;"><%= user_answers[0].to_s %></textarea>
       </div>
     <% end %>
-    <% if @examination.types == Examination::TYPES[:SIMULATION] %>
-      <div class="fraction">
-        <font color="red"><% if question.attributes["user_score"] %>
-            <%= question.attributes["user_score"] %><% else %>0<% end %></font>/<%= question.attributes["score"] %>分
-      </div>
-    <% end %>
     <div class="space20"></div>
   </div>
   <% answer_text = correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] ? "参考答案：" : "正确答案：" %>

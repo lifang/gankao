@@ -4,6 +4,11 @@ function load_paper() {
         get_exam_time();
     }, 100);
 }
+if (window.onbeforeunload == undefined || window.onbeforeunload == null) {
+    window.onbeforeunload = function() {
+        return "您的试卷尚未提交，确定要离开么?";
+    }
+}
 
 //获取考试的时间
 function get_exam_time(){
@@ -983,6 +988,8 @@ function generate_result_paper(paper_id) {
         if (answer_length < (problem_ids.length-1)) {
             if(!confirm('您还有题尚未答完，确定要交卷么?')) {
                 flag = false;
+            } else {
+                window.onbeforeunload = null;
             }
         }
     }
@@ -1030,8 +1037,8 @@ function add_to_db(arr, flag) {
 
 //重新执行5分钟倒计时
 function reload_local_save() {
-        local_start_time = 300;
-        local_save_start();
+    local_start_time = 300;
+    local_save_start();
 }
 
 //load用户已经答完的答案
@@ -1300,5 +1307,6 @@ function call_me(max_length, id) {
 
 //退出考试
 function out_exam() {
+    window.onbeforeunload = null;
     local_storage_answer("close");
 }

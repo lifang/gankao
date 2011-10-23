@@ -22,9 +22,9 @@ class Rater::ExamRatersController < ApplicationController
   end
   
   def reader_papers  #答卷批阅状态显示
-    @examination=Examination.find(params[:id])
+    @examination=Examination.find(params[:id].to_i)
     @user=User.find(@examination.creater_id)
-    @exam_paper_total =ExamUser.get_paper(params[:id])
+    @exam_paper_total =ExamUser.get_paper(params[:id].to_i)
     @exam_score_total =0
     @exam_paper_marked =0
     @marked_now=0
@@ -37,10 +37,14 @@ class Rater::ExamRatersController < ApplicationController
   end
   
   def check_paper  #选择要批阅的答卷
-    @exam_user=RaterUserRelation.find_by_sql("select * from rater_user_relations where exam_rater_id=#{params[:rater_id].to_i} and is_marked=0")
+    @exam_user=RaterUserRelation.find_by_sql("select * from rater_user_relations
+      where exam_rater_id=#{params[:rater_id].to_i} and is_marked=0")
     if @exam_user.blank?||@exam_user==[]
-      @exam_user= ExamUser.find_by_sql("select eu.id from exam_users eu left join rater_user_relations r on r.exam_user_id = eu.id inner join orders o on o.user_id = eu.user_id
-      where eu.answer_sheet_url is not null and eu.examination_id = #{params[:examination_id].to_i} and r.exam_user_id is null order by rand() limit 1")
+      @exam_user= ExamUser.find_by_sql("select eu.id from exam_users eu 
+        left join rater_user_relations r on r.exam_user_id = eu.id
+        inner join orders o on o.user_id = eu.user_id
+        where eu.answer_sheet_url is not null
+        and eu.examination_id = #{params[:examination_id].to_i} and r.exam_user_id is null order by rand() limit 1")
       id=@exam_user[0].id
     else
       id=@exam_user[0].exam_user_id
@@ -58,12 +62,12 @@ class Rater::ExamRatersController < ApplicationController
     doc=ExamRater.open_file(Constant::PUBLIC_PATH + @exam_user.answer_sheet_url)
     xml=ExamRater.open_file(Constant::BACK_PUBLIC_PATH + "/papers/#{doc.elements[1].attributes["id"]}.xml")
     @xml=ExamUser.answer_questions(xml,doc)
-    @reading=RaterUserRelation.first("exam_rater_id=#{params[:rater_id].to_i} and is_marked=0")
+    @reading= RaterUserRelation.find(:first, :conditions => ["exam_rater_id=#{params[:rater_id].to_i} and is_marked=0"])
     if @xml.attributes["ids"].to_s == "-1"
       flash[:notice] = "感谢您的参与，当前试卷没有需要批改的试卷。"
     else
       if @reading.nil?
-         @reading=RaterUserRelation.create(:exam_rater_id => cookies[:rater_id],
+        @reading=RaterUserRelation.create(:exam_rater_id => cookies[:rater_id],
           :exam_user_id => @exam_user.id, :started_at => Time.now,:is_marked=>0)
       end
     end
@@ -83,34 +87,36 @@ class Rater::ExamRatersController < ApplicationController
     score=0.0
     only_xml=ExamUser.answer_questions(xml,doc)
     only_xml.elements["blocks"].each_element do  |block|
-      block_score=0.0
-      original_score=0.0
+      block_score = 0.0
+      original_score = 0.0
       block.elements["problems"].each_element do |problem|
         problem.elements["questions"].each_element do |question|
           single_score = params["single_value_#{question.attributes["id"]}"].to_f
-          reason=params["reason_for_#{question.attributes["id"]}"]
-          result_question= doc.elements["/exam/paper/questions/question[@id=#{question.attributes["id"]}]"]
+          reason = params["reason_for_#{question.attributes["id"]}"]
+          result_question = doc.elements["/exam/paper/questions/question[@id=#{question.attributes["id"]}]"]
+          answer = (result_question.elements["answer"].nil? or result_question.elements["answer"].text.nil?) ? ""
+                : result_question.elements["answer"].text
           if question.attributes["score"].to_f == single_score
             problem.delete_element(question.xpath)
           else
-            @exam_user.add_collection(collection, xml, collection_xml, problem, question, result_question.elements["answer"].text) unless problem.elements["questions"].elements[1].nil?
+            @exam_user.add_collection(collection, xml, collection_xml, problem,
+              question, answer) unless problem.elements["questions"].elements[1].nil?
           end
           original_score += result_question.attributes["score"].to_f
-          result_question.attributes["score"]=single_score
+          result_question.attributes["score"] = single_score
           score += single_score
           block_score += single_score
-          question.add_attribute("user_answer","#{result_question.elements["answer"].text}")
-          result_question.add_attribute("user_score","#{single_score}")
+          question.add_attribute("user_answer","#{answer}")
           result_question.add_attribute("score_reason","#{reason}")
         end unless problem.elements["questions"].nil?
       end
       unless doc.elements["/exam/paper/blocks"].nil?
-        answer_block=doc.elements["/exam/paper/blocks/block[@id=#{block.attributes["id"]}]"]
-        block_score=answer_block.attributes["score"].to_i-original_score+block_score
-        answer_block.attributes["score"]=block_score
+        answer_block = doc.elements["/exam/paper/blocks/block[@id=#{block.attributes["id"]}]"]
+        block_score = answer_block.attributes["score"].to_f - original_score + block_score
+        answer_block.attributes["score"] = block_score
       end
     end
-    doc.elements["paper"].elements["rate_score"].text=score
+    doc.elements["paper"].elements["rate_score"].text = score
     @xml=ExamRater.rater(doc,params[:id],score)
     self.write_xml(url, doc)
     redirect_to "/rater/exam_raters/#{ @exam_user.examination_id}/reader_papers?rater_id=#{@exam_relation.exam_rater_id}"
