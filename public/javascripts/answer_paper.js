@@ -569,7 +569,9 @@ function create_single_question(que_div, question, drag_li_arr) {
                                     if (all_attr[a].strip() == que_attrs[i].strip()) {
                                         has_answer = true;
                                     }
-                                    if (has_answer) {break;}
+                                    if (has_answer) {
+                                        break;
+                                    }
                                 }
                             }
                         }
@@ -1068,17 +1070,24 @@ function load_local_save(paper_id, examination_id) {
 //loadxml文件
 function loadxml(xmlFile) {
     var xmlDoc;
-    if(window.ActiveXObject) {
-        xmlDoc = new ActiveXObject('MSXML2.DOMDocument');
-        xmlDoc.async = false;
-        xmlDoc.load(xmlFile);
-    }else if (document.implementation&&document.implementation.createDocument) {
-        var xmlhttp = new window.XMLHttpRequest();
-        xmlhttp.open("GET", xmlFile, false);
-        xmlhttp.send(null);
-        xmlDoc = xmlhttp.responseXML;
-    }else{
-        return null;
+    try {
+        if(window.ActiveXObject) {
+            xmlDoc = new ActiveXObject('MSXML2.DOMDocument');
+            xmlDoc.async = false;
+            xmlDoc.load(xmlFile);
+        }else if (document.implementation&&document.implementation.createDocument) {
+            var xmlhttp = new window.XMLHttpRequest();
+            xmlhttp.open("GET", xmlFile, false);
+            xmlhttp.send(null);
+            xmlDoc = xmlhttp.responseXML;
+        }else{
+            return null;
+        }
+    } catch (e) {
+        var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
+        flash_div.innerHTML = "<p>您的浏览器安全级别设置过高，屏蔽了一些功能，请您重新设置您的浏览器安全级别。</p>";
+        document.body.appendChild(flash_div);
+        show_flash_div();
     }
     return xmlDoc;
 }

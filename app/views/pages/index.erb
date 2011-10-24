@@ -40,7 +40,7 @@
     <div class="logo"><a href="/"><img src="/images/paper/logo.png" /></a></div>
     <div class="iphone_text">
       <p> 升级VIP，参加<span class="red">Iphone4s</span>抽奖</p>
-      <p>距离下次抽奖还有<em class="red">1000</em>人</p>
+      <p>距离下次抽奖还有<em class="red"><%=  1000 - Order.count(:id) %></em>人</p>
     </div>
     <div class="set_in_fx"><a href="/user/homes/<%= Category::TYPE_IDS[:english_fourth_level] %>"></a></div>
     <div class="nav_cet" style="display:none;">
