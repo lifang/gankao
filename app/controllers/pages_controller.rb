@@ -56,39 +56,27 @@ class PagesController < ApplicationController
   
 
   def login_from_qq
-    timestamp=(Time.new.to_i).to_s
-    url_params = "oauth_client_ip=116.255.140.79&oauth_consumer_key=#{app_id}&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_version=1.0"
-    url="#{REQUEST_URL}?#{url_params}&oauth_signature=#{signature_params(app_key,url_params,REQUEST_URL,"GET","")}"
+    url= produce_url(REQUEST_URL,login_qq_params,"")
     request_token=Net::HTTP.get(URI.parse(url))
     request_value=request_token.split("=")
     session[:secret]=request_value[2]
-    redirect_to "#{AUTHOTIZE_URL}?oauth_consumer_key=#{app_id}&oauth_token=#{request_value[1].split("&")[0]}&oauth_callback=http://demo.gankao.co/pages/qq_index"
+    redirect_to "#{AUTHOTIZE_URL}?#{COMSUMER_KEY}&oauth_token=#{request_value[1].split("&")[0]}&oauth_callback=#{CALLBACK_URL}"
   end
 
-
-  def qq_index
-
-    timestamp=(Time.new.to_i).to_s
+  def qq_index 
     oauth_token=params[:oauth_token]
     oauth_vericode=params[:oauth_vericode]
-    url_params = "format=json&oauth_client_ip=116.255.140.79&oauth_consumer_key=#{app_id}&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{oauth_token}&oauth_vericode=#{oauth_vericode}&oauth_version=1.0"
-    begin
-      
-      url="#{QQ_ACCESS_URL}?#{url_params}&oauth_signature=#{signature_params(app_key,url_params,QQ_ACCESS_URL,"GET",session[:secret])}"
+    begin   
+      url= produce_url(QQ_ACCESS_URL,access_url_params(oauth_token,oauth_vericode),session[:secret])
       access=Net::HTTP.get(URI.parse(url))
       session[:secret]=nil
       session[:qqtoken]=access.split("oauth_token=")[1].split("&")[0]
       session[:qqsecret]=access.split("oauth_token_secret=")[1].split("&")[0]
       session[:qqopen_id]=access.split("openid=")[1].split("&")[0]
-
-      user_params="oauth_consumer_key=#{app_id}&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{session[:qqtoken]}&oauth_version=1.0&openid=#{session[:qqopen_id]}"
-      user_url="#{GRAPY_URL}?#{user_params}&oauth_signature=#{signature_params(app_key,user_params,GRAPY_URL,"GET",session[:qqsecret])}"
-
+      user_url= produce_url(GRAPY_URL,get_user_info_params(session[:qqtoken],session[:qqopen_id]),session[:qqsecret])
       user_info=JSON Net::HTTP.get(URI.parse(user_url))
-
       @user= User.find_by_open_id(session[:qqopen_id])
       if @user.nil?
-        
         user_info["nickname"]="qq用户" if user_info["nickname"].nil?||user_info["nickname"]==""
         @user=User.create(:code_type=>'qq',:name=>user_info["nickname"],:username=>user_info["nickname"],:open_id=>session[:qqopen_id])
       end
