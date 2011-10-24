@@ -6,7 +6,7 @@ module QqHelper
   GRAPY_URL="http://openapi.qzone.qq.com/user/get_user_info"
   REQUEST_URL="http://openapi.qzone.qq.com/oauth/qzoneoauth_request_token"
   AUTHOTIZE_URL="http://openapi.qzone.qq.com/oauth/qzoneoauth_authorize"
-  CALLBACK_URL="http://www.gankao.co/pages/qq_index"
+  CALLBACK_URL="http://demo.gankao.co/pages/qq_index"
   QQ_ACCESS_URL="http://openapi.qzone.qq.com/oauth/qzoneoauth_access_token"
  
 
@@ -32,11 +32,11 @@ module QqHelper
   
   #qq登录
   def app_id
-    223448
+    100224363
   end
 
   def app_key
-    "64d7ddfe7e483dd51b2b14cf2ec0ec27"
+    "d8d1e69aa3842e863849fab0cef4ca06"
   end
   
 

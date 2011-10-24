@@ -57,14 +57,14 @@ class PagesController < ApplicationController
 
   def login_from_qq
     timestamp=(Time.new.to_i).to_s
-    params="oauth_client_ip=116.255.140.79&oauth_consumer_key=223448&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_version=1.0"
+    params="oauth_client_ip=116.255.140.79&oauth_consumer_key=100224363&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_version=1.0"
     url="#{REQUEST_URL}?#{params}&oauth_signature=#{signature_params(app_key,params,REQUEST_URL,"GET","")}"
     puts url
     request_token=Net::HTTP.get(URI.parse(url))
     puts request_token
     request_value=request_token.split("=")
     session[:secret]=request_value[2]
-    redirect_to "#{AUTHOTIZE_URL}?oauth_consumer_key=223448&oauth_token=#{request_value[1].split("&")[0]}&oauth_callback=#{CALLBACK_URL}"
+    redirect_to "#{AUTHOTIZE_URL}?oauth_consumer_key=100224363&oauth_token=#{request_value[1].split("&")[0]}&oauth_callback=#{CALLBACK_URL}"
   end
 
 
@@ -72,8 +72,8 @@ class PagesController < ApplicationController
     timestamp=(Time.new.to_i).to_s
     oauth_token=params[:oauth_token]
     oauth_vericode=params[:oauth_vericode]
-    params="oauth_consumer_key=223448&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{oauth_token}&oauth_vericode=#{oauth_vericode}&oauth_version=1.0"
-    url="#{QQ_ACCESS_URL}?#{ params}&oauth_signature=#{signature_params(app_key,params,QQ_ACCESS_URL,"GET",session[:secret])}"
+    params="oauth_consumer_key=100224363&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{oauth_token}&oauth_vericode=#{oauth_vericode}&oauth_version=1.0"
+    url="#{QQ_ACCESS_URL}?#{params}&oauth_signature=#{signature_params(app_key,params,QQ_ACCESS_URL,"GET",session[:secret])}"
     access=Net::HTTP.get(URI.parse(url))
     session[:secret]=nil
     session[:qqtoken]=access.split("=")[2].split("&")[0]
