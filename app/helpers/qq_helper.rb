@@ -31,12 +31,6 @@ module QqHelper
     :nonce => Base64.encode64(OpenSSL::Random.random_bytes(32)).gsub(/\W/, '')[0, 32]
   }
 
-
-  
-  
-
-
-  #腾讯微博
   def weibo_app_key
     801004949
   end
@@ -46,6 +40,10 @@ module QqHelper
   end
 
 
+
+
+
+  
   #公共方法加密url及生成签名：
   def signature_params(key,sign,url,method,secret)
     signature="#{method}&#{url_encoding(url)}&#{url_encoding(sign)}"

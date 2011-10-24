@@ -69,8 +69,8 @@ class PagesController < ApplicationController
     timestamp=(Time.new.to_i).to_s
     oauth_token=params[:oauth_token]
     oauth_vericode=params[:oauth_vericode]
-    url_params = "#{COMSUMER_KEY}&oauth_nonce=#{timestamp}&#{SIGNATRUE_METHOD}&oauth_timestamp=#{timestamp}&oauth_token=#{oauth_token}&oauth_vericode=#{oauth_vericode}&#{VESION}"
     begin
+      url_params = "#{COMSUMER_KEY}&oauth_nonce=#{timestamp}&#{SIGNATRUE_METHOD}&oauth_timestamp=#{timestamp}&oauth_token=#{oauth_token}&oauth_vericode=#{oauth_vericode}&#{VESION}"
       url="#{QQ_ACCESS_URL}?#{url_params}&oauth_signature=#{signature_params(COMSUMER_SECRECT,url_params,QQ_ACCESS_URL,"GET",session[:secret])}"
       access=Net::HTTP.get(URI.parse(url))
       session[:secret]=nil
