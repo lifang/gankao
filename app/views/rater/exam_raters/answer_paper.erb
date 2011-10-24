@@ -24,7 +24,11 @@
               <li>
                 <h2>
                   <a href="javascript:void(0)" onclick="javascript:question_style(<%= problem.attributes["id"].to_i %>)">
-                    <%= truncate_u(problem.elements['title'].text.to_s.html_safe.gsub(/<[^{><}]*>/, ""), 40, "......") %>
+                    <% if problem.elements['title'].nil? or problem.elements['title'].text.nil? or problem.elements['title'].text == "" %>
+                      暂无标题
+                    <% else %>
+                      <%= truncate_u(problem.elements['title'].text.to_s.html_safe.gsub(/<[^{><}]*>/, ""), 40, "......") %>
+                    <% end %>
                   </a>
                 </h2>
                 <div id="<%= problem.attributes["id"].to_i %>" style="display:none">

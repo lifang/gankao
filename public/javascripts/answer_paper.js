@@ -971,6 +971,7 @@ function alreay_answer_que_num() {
 
 //提交试卷之前判断试卷是否已经全部答完
 function generate_result_paper(paper_id) {
+    window.onbeforeunload = null;
     var flag = true;
     //var all_question_ids = $("all_question_ids").value;
     var all_problem_ids = $("problem_ids");
@@ -988,8 +989,6 @@ function generate_result_paper(paper_id) {
         if (answer_length < (problem_ids.length-1)) {
             if(!confirm('您还有题尚未答完，确定要交卷么?')) {
                 flag = false;
-            } else {
-                window.onbeforeunload = null;
             }
         }
     }

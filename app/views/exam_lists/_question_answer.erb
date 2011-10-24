@@ -25,9 +25,9 @@
         if title.length > 500 %>
           <div class="question_text_div">
             <% if title =~ /<mp3>/  %>
-              <%= truncate_u(title.split("<mp3>")[0].to_s.html_safe.gsub(/<[^{><}]*>/, ""), 395, "......").to_s.html_safe %>
+              <%= truncate_u(title.split("<mp3>")[0].to_s.html_safe.gsub(/<[^{><}]*>/, ""), 220, "......").to_s.html_safe %>
             <% else %>
-              <%= truncate_u(title.to_s.html_safe.gsub(/<[^{><}]*>/, ""), 395, "......").to_s.html_safe %>
+              <%= truncate_u(title.to_s.html_safe.gsub(/<[^{><}]*>/, ""), 220, "......").to_s.html_safe %>
             <% end %>
           </div>
         <% else

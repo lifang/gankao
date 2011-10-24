@@ -32,11 +32,11 @@ module QqHelper
   
   #qq登录
   def app_id
-    100224363
+    100224552
   end
 
   def app_key
-    "d8d1e69aa3842e863849fab0cef4ca06"
+    "748a38039061788ba974ecb47538815a"
   end
   
 
