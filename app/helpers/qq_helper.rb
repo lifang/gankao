@@ -20,8 +20,8 @@ module QqHelper
   end
 
   def access_url_params(oauth_token,oauth_vericode)
-     timestamp=(Time.new.to_i).to_s
-   return "#{COMSUMER_KEY}&oauth_nonce=#{timestamp}&#{SIGNATRUE_METHOD}&oauth_timestamp=#{timestamp}&oauth_token=#{oauth_token}&oauth_vericode=#{oauth_vericode}&#{VESION}"
+    timestamp=(Time.new.to_i).to_s
+    return "#{COMSUMER_KEY}&oauth_nonce=#{timestamp}&#{SIGNATRUE_METHOD}&oauth_timestamp=#{timestamp}&oauth_token=#{oauth_token}&oauth_vericode=#{oauth_vericode}&#{VESION}"
   end
 
   def get_user_info_params(qqtoken,openid)
@@ -33,14 +33,24 @@ module QqHelper
     return "#{url}?#{url_params}&oauth_signature=#{signature_params(COMSUMER_SECRECT,url_params,url,"GET",secrect)}"
   end
 
-
-
   #腾讯微博登录参数:
+  def weibo_app_key
+    801004949
+  end
+
+  def weibo_app_secret
+    "b5ab55615ee5261fcadf2f50128edb51"
+  end
+
   REQUEST_WEIBO="https://open.t.qq.com/cgi-bin/request_token"
   ADD_FRIEND="http://open.t.qq.com/api/friends/add"
   ACCESS_TOKEN_URL="http://open.t.qq.com/cgi-bin/access_token"
   FRIEND_URL="http://open.t.qq.com/api"
   ADD_WEIBO="http://open.t.qq.com/api/t/add"
+  WEIBO_COMSUMER_KEY="oauth_consumer_key=801004949"
+  JSON_FORMAT="format=json"
+  SIGNATRUE_METHOD="oauth_signature_method=HMAC-SHA1"
+  VESION="oauth_version=1.0"
   OPTIONS={
     :site               => "https://open.t.qq.com",
     :scheme             => :query_string,
@@ -53,15 +63,11 @@ module QqHelper
     :nonce => Base64.encode64(OpenSSL::Random.random_bytes(32)).gsub(/\W/, '')[0, 32]
   }
 
-  def weibo_app_key
-    801004949
+
+  def add_friend_params
+    timestamp=(Time.new.to_i).to_s
+    "#{JSON_FORMAT}&name=#{Constant::TENCENT_WEIBO_NAME}&oauth_consumer_key=#{weibo_app_key}&oauth_nonce=#{timestamp}&#{SIGNATRUE_METHOD}&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibo_access_token]}&#{VESION}"
   end
-
-  def weibo_app_secret
-    "b5ab55615ee5261fcadf2f50128edb51"
-  end
-
-
 
 
 
