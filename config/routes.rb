@@ -92,7 +92,7 @@ Gankao::Application.routes.draw do
     resources :homes
     resources :examinations do
       member do
-        post "save_result", "five_min_save", "check_exam_pwd", "start_fixup_time", "get_exam_time"
+        post "save_result", "five_min_save", "check_exam_pwd", "start_fixup_time", "get_exam_time", "cancel_exam"
         get "do_exam", "enter_password"
       end
       collection do

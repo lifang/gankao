@@ -611,7 +611,8 @@ function create_single_question(que_div, question, drag_li_arr) {
                     + question.id +"' onfocus='javascript:start_change_length(\""+ question.id
                     +"\")' onblur='javascript:window.clearInterval(change_length);' style='height: 24px;'></textarea>";
                 }
-            } else {
+            }
+            else {
                 attr1 = create_element("div", null, null, "answer_textarea", null, "innerHTML");
                 if (answer_hash != null && answer_hash[question.id] != null) {
                     attr1.innerHTML += "<textarea cols='35' rows='3' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")'>"+ answer_hash[question.id][0] +"</textarea>";
@@ -1081,13 +1082,15 @@ function loadxml(xmlFile) {
         }else{
             return null;
         }
+        return xmlDoc;
     } catch (e) {
         var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
         flash_div.innerHTML = "<p>您的浏览器安全级别设置过高，屏蔽了一些功能，请您重新设置您的浏览器安全级别。</p>";
         document.body.appendChild(flash_div);
         show_flash_div();
+        return null;
     }
-    return xmlDoc;
+    
 }
 
 //load答案的xml文件
@@ -1315,4 +1318,21 @@ function call_me(max_length, id) {
 function out_exam() {
     window.onbeforeunload = null;
     local_storage_answer("close");
+}
+
+//模拟考试下次再考
+function to_next() {
+    window.onbeforeunload = null;
+    var examination_id = $("examination_id").value;
+    new Ajax.Request("/user/examinations/"+ examination_id +"/cancel_exam",
+    {
+        asynchronous:true,
+        evalScripts:true,
+        method:"post",
+        onComplete:function(request){
+            window.close();
+        },
+        parameters:"authenticity_token=" + encodeURIComponent('BgLpQ3SADBr4tuiYZOJeoOvY4VOHogJvqQEpMwYVBM4=')
+    });
+    return false;
 }
