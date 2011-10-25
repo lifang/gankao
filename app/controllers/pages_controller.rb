@@ -56,11 +56,15 @@ class PagesController < ApplicationController
   
 
   def login_from_qq
-    url= produce_url(REQUEST_URL,login_qq_params,"")
-    request_token=Net::HTTP.get(URI.parse(url))
-    request_value=request_token.split("=")
-    session[:secret]=request_value[2]
-    redirect_to "#{AUTHOTIZE_URL}?#{COMSUMER_KEY}&oauth_token=#{request_value[1].split("&")[0]}&oauth_callback=#{CALLBACK_URL}"
+    begin
+      url= produce_url(REQUEST_URL,login_qq_params,"")
+      request_token=Net::HTTP.get(URI.parse(url))
+      request_value=request_token.split("=")
+      session[:secret]=request_value[2]
+      redirect_to "#{AUTHOTIZE_URL}?#{COMSUMER_KEY}&oauth_token=#{request_value[1].split("&")[0]}&oauth_callback=#{CALLBACK_URL}"
+    rescue
+      render :inline => "<script>window.opener.location.reload();window.close();</script>"
+    end
   end
 
   def qq_index 

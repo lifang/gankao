@@ -74,6 +74,7 @@ module Constant
 
   #weibo账号
   WEIBO_ID = 2359288352
-  
-  
+
+  #腾讯微博名字-- 赶考网官方微博
+  TENCENT_WEIBO_NAME = "gankao2011"
 end
