@@ -8,7 +8,32 @@ module QqHelper
   AUTHOTIZE_URL="http://openapi.qzone.qq.com/oauth/qzoneoauth_authorize"
   CALLBACK_URL="http://www.gankao.co/pages/qq_index"
   QQ_ACCESS_URL="http://openapi.qzone.qq.com/oauth/qzoneoauth_access_token"
- 
+  COMSUMER_KEY="oauth_consumer_key=223448"
+  COMSUMER_SECRECT="64d7ddfe7e483dd51b2b14cf2ec0ec27"
+  SIGNATRUE_METHOD="oauth_signature_method=HMAC-SHA1"
+  VESION="oauth_version=1.0"
+
+  #生成qq参数串
+  def login_qq_params
+    timestamp=(Time.new.to_i).to_s
+    return "#{COMSUMER_KEY}&oauth_nonce=#{timestamp}&#{SIGNATRUE_METHOD}&oauth_timestamp=#{timestamp}&#{VESION}"
+  end
+
+  def access_url_params(oauth_token,oauth_vericode)
+     timestamp=(Time.new.to_i).to_s
+   return "#{COMSUMER_KEY}&oauth_nonce=#{timestamp}&#{SIGNATRUE_METHOD}&oauth_timestamp=#{timestamp}&oauth_token=#{oauth_token}&oauth_vericode=#{oauth_vericode}&#{VESION}"
+  end
+
+  def get_user_info_params(qqtoken,openid)
+    timestamp=(Time.new.to_i).to_s
+    return "#{COMSUMER_KEY}&oauth_nonce=#{timestamp}&#{SIGNATRUE_METHOD}&oauth_timestamp=#{timestamp}&oauth_token=#{qqtoken}&#{VESION}&openid=#{openid}"
+  end
+
+  def produce_url(url,url_params,secrect)
+    return "#{url}?#{url_params}&oauth_signature=#{signature_params(COMSUMER_SECRECT,url_params,url,"GET",secrect)}"
+  end
+
+
 
   #腾讯微博登录参数:
   REQUEST_WEIBO="https://open.t.qq.com/cgi-bin/request_token"
@@ -28,20 +53,6 @@ module QqHelper
     :nonce => Base64.encode64(OpenSSL::Random.random_bytes(32)).gsub(/\W/, '')[0, 32]
   }
 
-
-  
-  #qq登录
-  def app_id
-    223448
-  end
-
-  def app_key
-    "64d7ddfe7e483dd51b2b14cf2ec0ec27"
-  end
-  
-
-
-  #腾讯微博
   def weibo_app_key
     801004949
   end
@@ -51,6 +62,10 @@ module QqHelper
   end
 
 
+
+
+
+  
   #公共方法加密url及生成签名：
   def signature_params(key,sign,url,method,secret)
     signature="#{method}&#{url_encoding(url)}&#{url_encoding(sign)}"
