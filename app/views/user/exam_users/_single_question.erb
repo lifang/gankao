@@ -4,17 +4,23 @@ problem = single_question[2]
 attrs_str = question.elements["questionattrs"].text
 attrs_array = attrs_str.split(";-;") unless attrs_str.nil?
 correct_type = question.attributes["correct_type"]
+is_right = nil
 answer = question.elements["answer"]
+user_answer = question.attributes["user_answer"]
 answers = []
 answer.text.split(";|;").collect { |item| answers << item.strip } unless answer.nil? or answer.text.nil?
-user_answer = question.attributes["user_answer"]
 user_answers = []
 user_answer.split(";|;").collect {|item| user_answers << item.strip } unless user_answer.nil?
-is_right = false
-all_answer = answers | user_answers
-is_right = true if all_answer == answers and answers - user_answers == []
-%>
-<div class="p_question_list <% if is_right %>question_yes<% else %>question_no<% end %>" id="que_out_<%= question.attributes['id'] %>">
+if correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] or
+    correct_type.to_i == Problem::QUESTION_TYPE[:SINGLE_CALK]
+  if @examination.types == Examination::TYPES[:SIMULATION] and (is_vip?).to_s == "true"
+    is_right = (question.attributes["user_score"].to_f == question.attributes["score"].to_f) ? true : false
+  end
+else
+  all_answer = answers | user_answers
+  is_right = (all_answer == answers and answers - user_answers == []) ? true : false
+end %>
+<div class="p_question_list <% if is_right == true %>question_yes<% elsif is_right == false %>question_no<% end %>" id="que_out_<%= question.attributes['id'] %>">
   <div class="p_q_l_left"><%= question_num %></div>
   <div class="p_q_l_right">
     <% if question.elements["description"] %>
@@ -90,7 +96,7 @@ is_right = true if all_answer == answers and answers - user_answers == []
   <% answer_text = correct_type.to_i == Problem::QUESTION_TYPE[:CHARACTER] ? "参考答案：" : "正确答案：" %>
   <input type="hidden" id="btn_<%= question.attributes["id"] %>_answer" type="hidden"
          value="<%= answer_text + answers.join("<br/>").to_s.html_safe %>"/>
-  <input type="hidden" id="btn_<%= question.attributes["id"] %>_analysis" type="hidden" 
+  <input type="hidden" id="btn_<%= question.attributes["id"] %>_analysis" type="hidden"
          value="<%= "解析：" + question.elements["analysis"].text.to_s.html_safe unless (question.elements["analysis"].nil? or
              question.elements["analysis"].text.nil? or question.elements["analysis"].text == "") %>"/>
   <div class="review_btn">

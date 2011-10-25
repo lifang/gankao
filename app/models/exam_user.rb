@@ -19,7 +19,7 @@ class ExamUser < ActiveRecord::Base
     exam_users=ExamUser.find_by_sql("select e.id exam_user_id, r.id relation_id, r.is_marked ,
         r.exam_rater_id from exam_users e inner join orders o on o.user_id = e.user_id
         left join rater_user_relations r   on r.exam_user_id= e.id
-        where e.examination_id=#{examination} and e.answer_sheet_url is not null ")
+        where e.examination_id=#{examination} and e.answer_sheet_url is not null and e.is_submited=1")
     return exam_users
   end
   #分页显示单场考试的所有成绩
@@ -361,7 +361,7 @@ class ExamUser < ActiveRecord::Base
             if question.attributes["correct_type"].to_i ==Problem::QUESTION_TYPE[:CHARACTER] or
                 question.attributes["correct_type"].to_i == Problem::QUESTION_TYPE[:SINGLE_CALK]
               str += (","+question.attributes["id"])
-              answer = (element.elements["answer"].nil? or element.elements["answer"].text.nil?) ? ""
+              answer = (element.nil? or element.elements["answer"].nil? or element.elements["answer"].text.nil?) ? ""
                 : element.elements["answer"].text
               question.add_attribute("user_answer","#{answer}")
             else

@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
   layout "login"
   require 'oauth2'
   require 'oauth'
+
   #  require  'net/http'
   include QqHelper
 
@@ -13,11 +14,11 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by_email(params[:session][:email])
     if @user.nil?
-      flash[:error] = "用户不存在"
+      flash[:echeckor] = "用户不存在"
     elsif !@user.has_password?(params[:session][:password])
-      flash[:error] = "密码输入有误"
+      flash[:echeckor] = "密码输入有误"
     elsif @user.status == User::STATUS[:LOCK]
-      flash[:error] = "您的账号还未验证，请先去您的注册邮箱进行验证"
+      flash[:echeckor] = "您的账号还未验证，请先去您的注册邮箱进行验证"
     else
       delete_cookies
       cookies[:user_id] = @user.id
@@ -25,7 +26,7 @@ class SessionsController < ApplicationController
       cookie_role(cookies[:user_id])
       is_vip?   
     end
-    if flash[:error]
+    if flash[:echeckor]
       redirect_to request.referer
     else
       if params[:session][:is_auto_login]=="1"
@@ -62,7 +63,7 @@ class SessionsController < ApplicationController
       UserMailer.update_code(user).deliver
       redirect_to "/sessions/#{user.id}/active"
     else
-      flash[:error]="密码有误，请重新输入"
+      flash[:echeckor]="密码有误，请重新输入"
       render "/sessions/get_code"
     end
   end
@@ -125,7 +126,7 @@ class SessionsController < ApplicationController
   #腾讯微博登录
   def qq_weibo 
     consumer = OAuth::Consumer.new(weibo_app_key, weibo_app_secret, OPTIONS)
-    request_token = consumer.get_request_token(:oauth_callback => "http://localhost:3001/sessions/access_token")
+    request_token = consumer.get_request_token(:oauth_callback => "#{Constant::SERVER_PATH}/sessions/access_token")
     session[:weibotoken] = request_token.token
     session[:weibosecret] = request_token.secret
     redirect_to request_token.authorize_url
@@ -138,7 +139,6 @@ class SessionsController < ApplicationController
     url="#{ACCESS_TOKEN_URL}?#{params}&oauth_signature=#{signature_params(weibo_app_secret,params,ACCESS_TOKEN_URL,"GET",session[:weibosecret])} "
     response=Net::HTTP.get(URI.parse(url))
     request_value=response.split("=")
-    session[:secret]=request_value[2]
     session[:weibotoken]=nil
     session[:weibosecret]=nil
     session[:weibo_access_token]=request_value[1].split("&")[0]

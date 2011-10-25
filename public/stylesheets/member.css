@@ -95,10 +95,10 @@ img { border: none;}
 .vip_czhi_box { padding: 20px; overflow: hidden;}
 .vip_czhi_box0 { padding: 0px 20px 5px; _padding: 0px 20px 0px; overflow: hidden;}
 
-.zfb_pic { width: 239px; height: 63px; float: left; display: inline; position: relative;}
+.zfb_pic { width: 239px; height: 63px; float: left; display: inline; position: relative; padding-left: 50px;}
 .zfb_pic span { position: absolute; top: -15px; right: -25px; z-index: 100;}
 .vip_czhi_input { width: 250px; float: left; padding:  20px 0 0 50px;}
-.vip_czhi_btn { width: 100px; float: left; padding: 15px 0 0 0;}
+.vip_czhi_btn { width: 100px; float: left; padding: 15px 0 0 50px;}
 .vip_czhi_btn button { width: 100px; height: 28px; line-height: 28px; cursor: pointer; background: url(/images/paper/vip_czhi_btn.png) no-repeat; border: none; color: #FFF; font-weight: bold;}
 
 .vip_czhi_p { padding-left: 20px; line-height: 24px; color: #333;}
