@@ -120,7 +120,7 @@ class SessionsController < ApplicationController
     <script type='text/javascript' src='/javascripts/jquery-1.5.2.js'></script>
     <script type='text/javascript' src='/javascripts/TestPaper.js'></script><div id='flash_notice' class='tishi_tab'><p><%= flash[:warn] %></p></div>
     <script type='text/javascript'>show_flash_div();</script><script> setTimeout(function(){
-      window.close();}, 2000)</script>"
+      window.close();}, 2000)</script><% flash[:warn]=nil %>"
   end
 
   #腾讯微博登录
@@ -148,30 +148,25 @@ class SessionsController < ApplicationController
   end
 
 
-
-
-
   def qq_add_friend
     timestamp=(Time.new.to_i).to_s
-    check_params="flag=0&format=json&names=#{session[:name]}&oauth_consumer_key=#{weibo_app_key}&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibo_access_token]}&oauth_version=1.0"
-    check_url="#{CHECK_URL}?#{check_params}&oauth_signature=#{signature_params(weibo_app_secret,check_params,CHECK_URL,"GET",session[:weibo_access_secret])}"
-    check_info=JSON Net::HTTP.get(URI.parse(check_url))
-    unless check_info["data"].values[0]
-    
-    end
-    friend_params="format=json&name=#{session[:name]}&oauth_consumer_key=#{weibo_app_key}&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibo_access_token]}&oauth_version=1.0"
-    url="#{ADD_FRIEND}?#{friend_params}&oauth_signature=#{signature_params(weibo_app_secret,friend_params,ADD_FRIEND,"POST",session[:weibo_access_secret])}"
-    puts url
-    res=Net::HTTP.post_form(URI.parse(url),
-      {:format=>"json",:name=>session[:name]})
-    puts res.body
-    add_params="clientip=127.0.0.1&content=sssssssssssss&format=json&jing=&oauth_consumer_key=#{weibo_app_key}&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibo_access_token]}&oauth_version=1.0&wei="
-    send_url="#{ADD_WEIBO}?#{add_params}&oauth_signature=#{signature_params(weibo_app_secret,add_params,ADD_WEIBO,"POST",session[:weibo_access_secret])}"
-    send=Net::HTTP.post_form(URI.parse(send_url),
-      {:format=>"json",:content=>"sssssssssssss",:clientip=>"127.0.0.1",:jing=>'',:wei=>''})
-    puts send.body
+    define_name=Constant::TENCENT_WEIBO_NAME   #赶考网默认name
+    check_params="format=json&name=#{define_name}&oauth_consumer_key=#{weibo_app_key}&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibo_access_token]}&oauth_version=1.0"
+    oauth_signature = signature_params(weibo_app_secret,check_params,ADD_FRIEND,"POST",session[:weibo_access_secret])
+    uri = URI.parse("#{ADD_FRIEND}?#{check_params}&oauth_signature=#{oauth_signature}")
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Post.new(uri.request_uri)
+    request.set_form_data({:format=>"json",:name=>define_name})
+    response = http.request(request)
+    session[:weibo_access_token]=nil
+    session[:weibo_access_secret]=nil
+    flash[:warn]="添加关注成功"
+    render :inline => " <link href='/stylesheets/style.css' rel='stylesheet' type='text/css' />
+    <script type='text/javascript' src='/javascripts/jquery-1.5.2.js'></script>
+    <script type='text/javascript' src='/javascripts/TestPaper.js'></script><div id='flash_notice' class='tishi_tab'><p><%= flash[:warn] %></p></div>
+    <script type='text/javascript'>show_flash_div();</script><script> setTimeout(function(){
+      window.close();}, 2000)</script><% flash[:warn]=nil %>"
   end
-
 
 end
 

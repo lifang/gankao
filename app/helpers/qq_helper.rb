@@ -72,14 +72,12 @@ module QqHelper
     return url_encoding(Base64.encode64(OpenSSL::HMAC.digest("sha1","#{key}&#{secret}",signature)))
   end
 
+
   def url_encoding(str)
     str.gsub("=", "%3D").gsub("/","%2F").gsub(":","%3A").gsub("&","%26").gsub("+","%2B")
   end
 
 
-
-
- 
 
 
 
