@@ -119,13 +119,13 @@ class SessionsController < ApplicationController
     <script type='text/javascript' src='/javascripts/jquery-1.5.2.js'></script>
     <script type='text/javascript' src='/javascripts/TestPaper.js'></script><div id='flash_notice' class='tishi_tab'><p><%= flash[:warn] %></p></div>
     <script type='text/javascript'>show_flash_div();</script><script> setTimeout(function(){
-      window.close();}, 2000)</script>"
+      window.close();}, 2000)</script><% flash[:warn]=nil %>"
   end
 
   #腾讯微博登录
   def qq_weibo 
     consumer = OAuth::Consumer.new(weibo_app_key, weibo_app_secret, OPTIONS)
-    request_token = consumer.get_request_token(:oauth_callback => "http://localhost:3000/sessions/access_token")
+    request_token = consumer.get_request_token(:oauth_callback => "http://localhost:3001/sessions/access_token")
     session[:weibotoken] = request_token.token
     session[:weibosecret] = request_token.secret
     redirect_to request_token.authorize_url
@@ -137,7 +137,6 @@ class SessionsController < ApplicationController
     params="oauth_consumer_key=#{weibo_app_key}&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibotoken]}&oauth_verifier=#{oauth_verifier}&oauth_version=1.0"
     url="#{ACCESS_TOKEN_URL}?#{params}&oauth_signature=#{signature_params(weibo_app_secret,params,ACCESS_TOKEN_URL,"GET",session[:weibosecret])} "
     response=Net::HTTP.get(URI.parse(url))
-    puts response
     request_value=response.split("=")
     session[:secret]=request_value[2]
     session[:weibotoken]=nil
@@ -149,23 +148,25 @@ class SessionsController < ApplicationController
   end
 
 
-
-
-
   def qq_add_friend
     timestamp=(Time.new.to_i).to_s
-    #    friend_params="format=json&name=#{session[:name]}&oauth_consumer_key=#{weibo_app_key}&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibo_access_token]}&oauth_version=1.0"
-    #    url="#{ADD_FRIEND}?#{friend_params}&oauth_signature=#{signature_params(weibo_app_secret,friend_params,ADD_FRIEND,"POST","")}"
-    content="url_encoding"
-    add_params="content=#{url_encoding(content)}&oauth_consumer_key=801003611&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibo_access_token]}&oauth_version=1.0"
-    url="#{ADD_WEIBO}?format=json&#{add_params}&oauth_signature=#{signature_params(weibo_app_secret,add_params,ADD_WEIBO,"POST",session[:weibo_access_secret])}"
-    puts url
+    define_name=Constant::TENCENT_WEIBO_NAME   #赶考网默认name
+    check_params="format=json&name=#{define_name}&oauth_consumer_key=#{weibo_app_key}&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibo_access_token]}&oauth_version=1.0"
+    oauth_signature = signature_params(weibo_app_secret,check_params,ADD_FRIEND,"POST",session[:weibo_access_secret])
+    uri = URI.parse("#{ADD_FRIEND}?#{check_params}&oauth_signature=#{oauth_signature}")
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Post.new(uri.request_uri)
+    request.set_form_data({:format=>"json",:name=>define_name})
+    response = http.request(request)
     session[:weibo_access_token]=nil
     session[:weibo_access_secret]=nil
-    weibo_user=Net::HTTP.get(URI.parse(url))
-    puts weibo_user
+    flash[:warn]="添加关注成功"
+    render :inline => " <link href='/stylesheets/style.css' rel='stylesheet' type='text/css' />
+    <script type='text/javascript' src='/javascripts/jquery-1.5.2.js'></script>
+    <script type='text/javascript' src='/javascripts/TestPaper.js'></script><div id='flash_notice' class='tishi_tab'><p><%= flash[:warn] %></p></div>
+    <script type='text/javascript'>show_flash_div();</script><script> setTimeout(function(){
+      window.close();}, 2000)</script><% flash[:warn]=nil %>"
   end
-
 
 end
 
