@@ -30,16 +30,21 @@
             <% unless @hash["#{examination.id}"].nil? or @hash["#{examination.id}"][0].total_score.nil? %>
               <div class="chak_dj_d"><a class="chak_dajuan" href="/user/exam_users/<%= @hash["#{examination.id}"][0].id %>" target="_blank">查看答卷</a></div>
             <% end %>
-            <h2>总分：
-              <span class="red">
-                <% if (is_vip?).to_s == "true" %>
-                  <% unless @hash["#{examination.id}"].nil? %>
-                    <%=  @hash["#{examination.id}"][0].total_score.nil? ? "阅卷中" :@hash["#{examination.id}"][0].total_score %>
-                  <% end %>
-                <% else %>
-                  <img src="/images/paper/V.png" />
+            <h2>
+              <% if (is_vip?).to_s == "true" %>
+                <% unless @hash["#{examination.id}"].nil? %>
+                  总分：<span class="red">
+                    <%= @hash["#{examination.id}"][0].total_score.nil? ? "阅卷中" :@hash["#{examination.id}"][0].total_score %>
+                  </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  排名：<span class="red">
+                    <%= @hash["#{examination.id}"][0].rank.nil? ? "等待排名中" :@hash["#{examination.id}"][0].rank + "%" %>
+                  </span>
                 <% end %>
-              </span>
+              <% else %>
+                总分：<span class="red"><img src="/images/paper/V.png" /></span>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                排名：<span class="red"><img src="/images/paper/V.png" /></span>
+              <% end %>
             </h2>
             <% unless @hash["#{examination.id}"].nil? %>
               <% if !@hash["#{examination.id}"] || @hash["#{examination.id}"][0].total_score.nil?%>

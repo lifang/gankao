@@ -184,7 +184,7 @@ class Examination < ActiveRecord::Base
 
   def self.exam_users_paper(user_id,types,category_id)
     hash ={}
-    ExamUser.find_by_sql("select eu.id,eu.total_score,eu.is_submited,eu.examination_id,eu.paper_id,eu.created_at,
+    ExamUser.find_by_sql("select eu.id,eu.total_score,eu.rank,eu.is_submited,eu.examination_id,eu.paper_id,eu.created_at,
         eu.correct_percent from exam_users eu inner join examinations e on e.id = eu.examination_id
         where e.types =#{types} and eu.user_id = #{user_id} and e.category_id=#{category_id} and eu.is_submited=1
         and is_published=#{Examination::IS_PUBLISHED[:ALREADY]}").each do |exam_user|

@@ -54,7 +54,7 @@
             </div>
           <% else
             problem_ids += problem.attributes["id"] + "," %>
-            <div class="part_div">
+            <div class="part_div" id="q_info_<%= problem.attributes["id"].to_i %>">
               <div class="part_question" id="question_info_<%= problem.attributes["id"].to_i %>">
                 <% unless problem.elements['title'].nil? or problem.elements['title'].text.nil? or problem.elements['title'].text == "" %>
                   <div class="part_q_text">
@@ -95,24 +95,35 @@
           <ul class="second_menu" <% if block_index > 0 %>style="display: none;"<% end %> id="nav_block_<%= block.attributes["id"] %>">
             <% block.elements['problems'].each_element do |problem| %>
               <% problem.elements["questions"].each_element do |question| %>
-                <% answer = question.elements["answer"]
-                answers = []
-                answer.text.split(";|;").collect { |item| answers << item.strip } unless answer.nil? or answer.text.nil?
-                user_answer = question.attributes["user_answer"]
-                user_answers = []
-                user_answer.split(";|;").collect {|item| user_answers << item.strip } unless user_answer.nil?
-                is_right = false
-                all_answer = answers | user_answers
-                is_right = true if all_answer == answers and answers - user_answers == []  %>
-                <li><% if is_right %>
-                    <a href="javascript:void(0);" class="lvse"
-                       onclick="javascript:get_question_height(<%= question.attributes["id"] %>, <%= problem.attributes["id"] %>);">
-                      √
-                    </a>
+                <li>
+                  <% if question.attributes["correct_type"].to_i == Problem::QUESTION_TYPE[:CHARACTER] or
+                      question.attributes["correct_type"].to_i == Problem::QUESTION_TYPE[:SINGLE_CALK]
+                    if @examination.types == Examination::TYPES[:SIMULATION] and (is_vip?).to_s == "true"
+                      is_rate_right = (question.attributes["user_score"].to_f == question.attributes["score"].to_f) ? true : false %>
+                      <a href="javascript:void(0);" <% if is_rate_right %>class="lvse"<% else %>class="fenhong"<% end %>
+                         onclick="javascript:get_question_height(<%= question.attributes["id"] %>, <%= problem.attributes["id"] %>);">
+                        <% if is_rate_right %>√<% else %>X<% end %>
+                      </a>
+                    <% else %>
+                      <a href="javascript:void(0);"
+                         onclick="javascript:get_question_height(<%= question.attributes["id"] %>, <%= problem.attributes["id"] %>);">
+                        !
+                      </a>
+                    <% end %>
                   <% else %>
-                    <a href="javascript:void(0);" class="fenhong"
+                    <% answer = question.elements["answer"]
+                    answers = []
+                    answer.text.split(";|;").collect { |item| answers << item.strip } unless answer.nil? or answer.text.nil?
+                    user_answer = question.attributes["user_answer"]
+                    user_answers = []
+                    user_answer.split(";|;").collect {|item| user_answers << item.strip } unless user_answer.nil?
+                    all_answer = answers | user_answers
+                    is_right = false
+                    is_right = true if all_answer == answers and answers - user_answers == []
+                  %>
+                    <a href="javascript:void(0);" <% if is_right %>class="lvse"<% else %>class="fenhong"<% end %>
                        onclick="javascript:get_question_height(<%= question.attributes["id"] %>, <%= problem.attributes["id"] %>);">
-                      x
+                      <% if is_right %>√<% else %>X<% end %>
                     </a>
                   <% end %>
                 </li>
