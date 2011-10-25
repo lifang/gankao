@@ -20,8 +20,8 @@ module QqHelper
   end
 
   def access_url_params(oauth_token,oauth_vericode)
-     timestamp=(Time.new.to_i).to_s
-   return "#{COMSUMER_KEY}&oauth_nonce=#{timestamp}&#{SIGNATRUE_METHOD}&oauth_timestamp=#{timestamp}&oauth_token=#{oauth_token}&oauth_vericode=#{oauth_vericode}&#{VESION}"
+    timestamp=(Time.new.to_i).to_s
+    return "#{COMSUMER_KEY}&oauth_nonce=#{timestamp}&#{SIGNATRUE_METHOD}&oauth_timestamp=#{timestamp}&oauth_token=#{oauth_token}&oauth_vericode=#{oauth_vericode}&#{VESION}"
   end
 
   def get_user_info_params(qqtoken,openid)
@@ -29,6 +29,7 @@ module QqHelper
     return "#{COMSUMER_KEY}&oauth_nonce=#{timestamp}&#{SIGNATRUE_METHOD}&oauth_timestamp=#{timestamp}&oauth_token=#{qqtoken}&#{VESION}&openid=#{openid}"
   end
 
+  #生成请求路径
   def produce_url(url,url_params,secrect)
     return "#{url}?#{url_params}&oauth_signature=#{signature_params(COMSUMER_SECRECT,url_params,url,"GET",secrect)}"
   end
@@ -39,14 +40,13 @@ module QqHelper
   REQUEST_WEIBO="https://open.t.qq.com/cgi-bin/request_token"
   ADD_FRIEND="http://open.t.qq.com/api/friends/add"
   ACCESS_TOKEN_URL="http://open.t.qq.com/cgi-bin/access_token"
-  FRIEND_URL="http://open.t.qq.com/api"
   ADD_WEIBO="http://open.t.qq.com/api/t/add"
+  CHECK_URL="http://open.t.qq.com/api/friends/check"
   OPTIONS={
     :site               => "https://open.t.qq.com",
     :scheme             => :query_string,
     :http_method        => :get,
     :signature_method => "HMAC-SHA1",
-    :oauth_callback => "http://localhost:3000",
     :request_token_path => "/cgi-bin/request_token",
     :access_token_path  => "/cgi-bin/access_token",
     :authorize_path     => "/cgi-bin/authorize",

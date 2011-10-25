@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
   layout "login"
   require 'oauth2'
   require 'oauth'
+
   #  require  'net/http'
   include QqHelper
 
@@ -13,11 +14,11 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by_email(params[:session][:email])
     if @user.nil?
-      flash[:error] = "用户不存在"
+      flash[:echeckor] = "用户不存在"
     elsif !@user.has_password?(params[:session][:password])
-      flash[:error] = "密码输入有误"
+      flash[:echeckor] = "密码输入有误"
     elsif @user.status == User::STATUS[:LOCK]
-      flash[:error] = "您的账号还未验证，请先去您的注册邮箱进行验证"
+      flash[:echeckor] = "您的账号还未验证，请先去您的注册邮箱进行验证"
     else
       delete_cookies
       cookies[:user_id] = @user.id
@@ -25,7 +26,7 @@ class SessionsController < ApplicationController
       cookie_role(cookies[:user_id])
       is_vip?   
     end
-    if flash[:error]
+    if flash[:echeckor]
       redirect_to request.referer
     else
       if params[:session][:is_auto_login]=="1"
@@ -62,7 +63,7 @@ class SessionsController < ApplicationController
       UserMailer.update_code(user).deliver
       redirect_to "/sessions/#{user.id}/active"
     else
-      flash[:error]="密码有误，请重新输入"
+      flash[:echeckor]="密码有误，请重新输入"
       render "/sessions/get_code"
     end
   end
@@ -137,9 +138,7 @@ class SessionsController < ApplicationController
     params="oauth_consumer_key=#{weibo_app_key}&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibotoken]}&oauth_verifier=#{oauth_verifier}&oauth_version=1.0"
     url="#{ACCESS_TOKEN_URL}?#{params}&oauth_signature=#{signature_params(weibo_app_secret,params,ACCESS_TOKEN_URL,"GET",session[:weibosecret])} "
     response=Net::HTTP.get(URI.parse(url))
-    puts response
     request_value=response.split("=")
-    session[:secret]=request_value[2]
     session[:weibotoken]=nil
     session[:weibosecret]=nil
     session[:weibo_access_token]=request_value[1].split("&")[0]
@@ -154,16 +153,23 @@ class SessionsController < ApplicationController
 
   def qq_add_friend
     timestamp=(Time.new.to_i).to_s
-    #    friend_params="format=json&name=#{session[:name]}&oauth_consumer_key=#{weibo_app_key}&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibo_access_token]}&oauth_version=1.0"
-    #    url="#{ADD_FRIEND}?#{friend_params}&oauth_signature=#{signature_params(weibo_app_secret,friend_params,ADD_FRIEND,"POST","")}"
-    content="url_encoding"
-    add_params="content=#{url_encoding(content)}&oauth_consumer_key=801003611&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibo_access_token]}&oauth_version=1.0"
-    url="#{ADD_WEIBO}?format=json&#{add_params}&oauth_signature=#{signature_params(weibo_app_secret,add_params,ADD_WEIBO,"POST",session[:weibo_access_secret])}"
+    check_params="flag=0&format=json&names=#{session[:name]}&oauth_consumer_key=#{weibo_app_key}&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibo_access_token]}&oauth_version=1.0"
+    check_url="#{CHECK_URL}?#{check_params}&oauth_signature=#{signature_params(weibo_app_secret,check_params,CHECK_URL,"GET",session[:weibo_access_secret])}"
+    check_info=JSON Net::HTTP.get(URI.parse(check_url))
+    unless check_info["data"].values[0]
+    
+    end
+    friend_params="format=json&name=#{session[:name]}&oauth_consumer_key=#{weibo_app_key}&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibo_access_token]}&oauth_version=1.0"
+    url="#{ADD_FRIEND}?#{friend_params}&oauth_signature=#{signature_params(weibo_app_secret,friend_params,ADD_FRIEND,"POST",session[:weibo_access_secret])}"
     puts url
-    session[:weibo_access_token]=nil
-    session[:weibo_access_secret]=nil
-    weibo_user=Net::HTTP.get(URI.parse(url))
-    puts weibo_user
+    res=Net::HTTP.post_form(URI.parse(url),
+      {:format=>"json",:name=>session[:name]})
+    puts res.body
+    add_params="clientip=127.0.0.1&content=sssssssssssss&format=json&jing=&oauth_consumer_key=#{weibo_app_key}&oauth_nonce=#{timestamp}&oauth_signature_method=HMAC-SHA1&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibo_access_token]}&oauth_version=1.0&wei="
+    send_url="#{ADD_WEIBO}?#{add_params}&oauth_signature=#{signature_params(weibo_app_secret,add_params,ADD_WEIBO,"POST",session[:weibo_access_secret])}"
+    send=Net::HTTP.post_form(URI.parse(send_url),
+      {:format=>"json",:content=>"sssssssssssss",:clientip=>"127.0.0.1",:jing=>'',:wei=>''})
+    puts send.body
   end
 
 
