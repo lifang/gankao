@@ -94,7 +94,7 @@ Gankao::Application.routes.draw do
         
       end
       collection do
-        get "alipay_request","take_over_return"
+        get "alipay_request","take_over_return","over_pay"
       end
     end
     resources :examinations do
