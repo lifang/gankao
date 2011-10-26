@@ -31,7 +31,7 @@ img { border: none;}
 .login_input { width: 121px; height: 21px; vertical-align: middle; padding: 0 5px; line-height: 21px; background: url(/images/paper/i_text_input_bg.png) repeat-x; border: 1px #c1c1c1 solid;}
 
 .login_i_padding { padding-left: 10px;}
-.login_i_btn { width: 52px; height: 27px; margin-top: 7px; background: url(/images/paper/all_bg.png) no-repeat 0 -918px; border:none;}
+.login_i_btn { width: 52px; height: 27px; margin-top: 7px; background: url(/images/paper/all_bg.png) no-repeat 0 -918px; border:none; cursor:pointer;}
 
 .login_i_a { text-decoration: none;}
 .login_i_a0 { text-decoration: none; color: #F00;}
@@ -278,7 +278,7 @@ img { border: none;}
 
 /*审查-----*/
 .review_btn { position: absolute; bottom: 2px; right: 10px; font-family: "微软雅黑";}
-.review_btn a { margin: 0 10px; line-height: 28px; border: none; color:#0099ff; text-decoration: none;}
+.review_btn a { margin: 0 10px; line-height: 28px; border: none; color:#0099ff; text-decoration: none; cursor: pointer;}
 
 /*解析笔记弹出层----*/
 .jiexi_tab { display: none; position: absolute; z-index: 100;}

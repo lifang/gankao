@@ -7,7 +7,7 @@
 <%= javascript_include_tag "#{Constant::SERVER_PATH}/javascripts/answer_paper.js" %>
 <%= form_for :paper , :url => "/user/examinations/#{@examination.id}/save_result",
   :html => {:name => "paper_form", :id => "paper_form",
-  :onsubmit => "return generate_result_paper('#{@examination.paper_id}')"} do |f| %>
+  :onsubmit => "return generate_result_paper('#{@exam_user.paper_id}')"} do |f| %>
   <div id="show_flash"></div>
   <div class="testPaper_top" id="paper_show_info">
     <div class="tp_top_box" id="float_test">
@@ -24,6 +24,8 @@
       <div class="paper_info">
         <% if @examination.types == Examination::TYPES[:OLD_EXAM] %>
           <button class="test_out_btn" type="button" onclick="javascript:out_exam();"></button>
+        <% elsif @examination.types == Examination::TYPES[:SIMULATION] %>
+          <button class="test_fq_btn" type="button" onclick="javascript:to_next();"></button>
         <% end %>
         <button type="submit" class="test_over_btn"></button>
         <strong><span id="leaving_num"></span></strong>题未完成
@@ -71,6 +73,4 @@
   //页面load成功之后加载试卷
   window.onload(load_paper());
   answer_hash = null;
-
-
 </script>

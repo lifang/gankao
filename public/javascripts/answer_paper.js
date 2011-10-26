@@ -316,17 +316,15 @@ function create_question_navigation(block_nav_div, question, problem_id, questio
 //取得点击的题点的高度
 function get_question_height(question_id, problem_id) {
     var p_height = 0;
-    var problem_ids = $("problem_ids").value;
-    if (problem_ids != null) {
-        var p_ids = problem_ids.split(",");
-        if (p_ids != null) {
-            for (var i=0; i<p_ids.length; i++) {
-                if (p_ids[i] == problem_id) {
+    var block_div = $("b_description_" + problem_id).parentNode;
+    var all_divs = block_div.getElementsByTagName("div");
+    if (all_divs != null) {
+        for (var i=0; i<all_divs.length; i++) {
+            if (all_divs[i].className == "part_div" || all_divs[i].className == "question_text_explain") {
+                if (all_divs[i].id == "b_description_"+problem_id) {
                     break;
                 } else {
-                    if ($("question_" + p_ids[i]) != null) {
-                        p_height += $("question_" + p_ids[i]).offsetHeight;
-                    }
+                    p_height += all_divs[i].offsetHeight;
                 }
             }
         }
@@ -569,7 +567,9 @@ function create_single_question(que_div, question, drag_li_arr) {
                                     if (all_attr[a].strip() == que_attrs[i].strip()) {
                                         has_answer = true;
                                     }
-                                    if (has_answer) {break;}
+                                    if (has_answer) {
+                                        break;
+                                    }
                                 }
                             }
                         }
@@ -611,7 +611,8 @@ function create_single_question(que_div, question, drag_li_arr) {
                     + question.id +"' onfocus='javascript:start_change_length(\""+ question.id
                     +"\")' onblur='javascript:window.clearInterval(change_length);' style='height: 24px;'></textarea>";
                 }
-            } else {
+            }
+            else {
                 attr1 = create_element("div", null, null, "answer_textarea", null, "innerHTML");
                 if (answer_hash != null && answer_hash[question.id] != null) {
                     attr1.innerHTML += "<textarea cols='35' rows='3' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")'>"+ answer_hash[question.id][0] +"</textarea>";
@@ -1068,19 +1069,28 @@ function load_local_save(paper_id, examination_id) {
 //loadxml文件
 function loadxml(xmlFile) {
     var xmlDoc;
-    if(window.ActiveXObject) {
-        xmlDoc = new ActiveXObject('MSXML2.DOMDocument');
-        xmlDoc.async = false;
-        xmlDoc.load(xmlFile);
-    }else if (document.implementation&&document.implementation.createDocument) {
-        var xmlhttp = new window.XMLHttpRequest();
-        xmlhttp.open("GET", xmlFile, false);
-        xmlhttp.send(null);
-        xmlDoc = xmlhttp.responseXML;
-    }else{
+    try {
+        if(window.ActiveXObject) {
+            xmlDoc = new ActiveXObject('MSXML2.DOMDocument');
+            xmlDoc.async = false;
+            xmlDoc.load(xmlFile);
+        }else if (document.implementation&&document.implementation.createDocument) {
+            var xmlhttp = new window.XMLHttpRequest();
+            xmlhttp.open("GET", xmlFile, false);
+            xmlhttp.send(null);
+            xmlDoc = xmlhttp.responseXML;
+        }else{
+            return null;
+        }
+        return xmlDoc;
+    } catch (e) {
+        var flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
+        flash_div.innerHTML = "<p>您的浏览器安全级别设置过高，屏蔽了一些功能，请您重新设置您的浏览器安全级别。</p>";
+        document.body.appendChild(flash_div);
+        show_flash_div();
         return null;
     }
-    return xmlDoc;
+    
 }
 
 //load答案的xml文件
@@ -1308,4 +1318,21 @@ function call_me(max_length, id) {
 function out_exam() {
     window.onbeforeunload = null;
     local_storage_answer("close");
+}
+
+//模拟考试下次再考
+function to_next() {
+    window.onbeforeunload = null;
+    var examination_id = $("examination_id").value;
+    new Ajax.Request("/user/examinations/"+ examination_id +"/cancel_exam",
+    {
+        asynchronous:true,
+        evalScripts:true,
+        method:"post",
+        onComplete:function(request){
+            window.close();
+        },
+        parameters:"authenticity_token=" + encodeURIComponent('BgLpQ3SADBr4tuiYZOJeoOvY4VOHogJvqQEpMwYVBM4=')
+    });
+    return false;
 }

@@ -40,7 +40,7 @@
     <div class="logo"><a href="/"><img src="/images/paper/logo.png" /></a></div>
     <div class="iphone_text">
       <p> 升级VIP，参加<span class="red">Iphone4s</span>抽奖</p>
-      <p>距离下次抽奖还有<em class="red">1000</em>人</p>
+      <p>距离下次抽奖还有<em class="red"><%= 1000 - Order.count(:id) %></em>人</p>
     </div>
     <div class="set_in_fx"><a href="/user/homes/<%= Category::TYPE_IDS[:english_fourth_level] %>"></a></div>
     <div class="nav_cet" style="display:none;">
@@ -62,7 +62,8 @@
           </ul>
         </div>
         <div class="weibo"><a href="#" onclick ="javascript:window.open('/sessions/friend_add_request', '_blank', 'height=400,width=600,left=300,top=150');" ><img src="/images/paper/sina_weibo.png" /></a>
-          <a href="#"  onclick ="javascript:window.open('/sessions/qq_weibo', '_blank', 'height=650,width=750,left=300,top=5');" ><img src="/images/paper/qq_weibo.png" /></a></div>
+
+          <a href="#" onclick ="javascript:window.open('/sessions/qq_weibo', '_blank', 'height=650,width=750,left=300,top=5');" ><img src="/images/paper/qq_weibo.png" /></a></div>
         <div class="index_qq"><span>在线客服:</span><a href="tencent://message/?uin=2568830556&amp;Site=赶考网&amp;Menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=1:2568830556:7" alt="有事点这里"></a></div>
       </div>
 

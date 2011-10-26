@@ -15,8 +15,6 @@
             <a class="jiathis_button_qzone">QQ空间</a>
             <a class="jiathis_button_renren">人人网</a>
             <a class="jiathis_button_tsina">新浪微博</a>
-            <!--                 <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>   -->
-            <!--                     <a class="jiathis_counter_style"></a>             -->
           </div>
           <script type="text/javascript" >
             var jiathis_config={
@@ -31,7 +29,7 @@
           <div class="clear"></div>
         </div>
         <p class="vip_fx_p">2.提供分享后的凭证</p>
-        <% form_for :proof,:url=>"/users/create_proof",:html=>{:onsubmit=>"return validate_form_proof();"} do |f|%>
+        <%= form_for :proof,:url=>"/users/create_proof",:html=>{:onsubmit=>"return validate_form_proof();"} do |f|%>
           <div class="vip_fx_textarea">
             <%= f.text_area :proof_text,:id=>"form_textarea_pingzheng",:cols=>"",:row=>"" %>
             <div class="v_f_info">
@@ -42,7 +40,7 @@
           </div>
           <div class="vip_czhi_btn"><button type="submit" id="form_submit_pingzheng">确  认</button><%= image_tag "ajax-loader.gif", :id => "spinner_user_pingzheng", :style => "display:none" %></div>
         <% end %>
-        <span class="vip_sh_tis">审核需10分钟左右，请耐心等待....</span>
+        <span class="vip_sh_tis">需人工审核激活，大约1小时左右，请耐心等待....</span>
       </div>
     </div>
     <div class="space20"></div>
@@ -51,7 +49,6 @@
       <div class="vip_czhi_title">支付宝</div>
       <div class="vip_czhi_box">
         <div class="zfb_pic"><img alt="gankao" src="/images/zfb_pic.png"/><span><img src="/images/paper/35.png" /></span></div>
-        <div class="vip_czhi_input"><label>充值金额：</label><input name="" type="text"/></div>
         <div class="vip_czhi_btn"><a onclick="javascript:void(0)" class="vip_czhi_btn_a" href="/user/alipays/alipay_request" target="_blank">确认支付</a></div>
         <div class="clear"></div>
       </div>

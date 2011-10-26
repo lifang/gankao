@@ -361,7 +361,7 @@ class ExamUser < ActiveRecord::Base
             if question.attributes["correct_type"].to_i ==Problem::QUESTION_TYPE[:CHARACTER] or
                 question.attributes["correct_type"].to_i == Problem::QUESTION_TYPE[:SINGLE_CALK]
               str += (","+question.attributes["id"])
-              answer = (element.elements["answer"].nil? or element.elements["answer"].text.nil?) ? ""
+              answer = (element.nil? or element.elements["answer"].nil? or element.elements["answer"].text.nil?) ? ""
                 : element.elements["answer"].text
               question.add_attribute("user_answer","#{answer}")
             else

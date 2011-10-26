@@ -57,17 +57,15 @@ function close_block_nav(block_id) {
 
 function get_question_height(question_id, problem_id) {
     var p_height = 0;
-    var problem_ids = $("problem_ids").value;
-    if (problem_ids != null) {
-        var p_ids = problem_ids.split(",");
-        if (p_ids != null) {
-            for (var i=0; i<p_ids.length; i++) {
-                if (p_ids[i] == problem_id) {
+    var block_div = $("q_info_" + problem_id).parentNode;
+    var all_divs = block_div.getElementsByTagName("div");
+    if (all_divs != null) {
+        for (var i=0; i<all_divs.length; i++) {
+            if (all_divs[i].className == "part_div" || all_divs[i].className == "question_text_explain") {
+                if (all_divs[i].id == "q_info_"+problem_id) {
                     break;
                 } else {
-                    if ($("question_info_" + p_ids[i]) != null) {
-                        p_height += $("question_info_" + p_ids[i]).offsetHeight;
-                    }
+                    p_height += all_divs[i].offsetHeight;
                 }
             }
         }
