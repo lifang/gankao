@@ -73,7 +73,13 @@ class User::AlipaysController < ApplicationController
   end
 
   def over_pay
-    flash[:warn]="充值成功，恭喜您成为vip"
+    out_trade_no=params[:out_trade_no]
+    order=Order.find(:first, :conditions => ["out_trade_no=#{out_trade_no}"])
+    if order.nil?
+       flash[:warn]="充值不成功"
+    else
+        flash[:warn]="充值成功，恭喜您成为vip"
+    end
     render :inline => " <link href='/stylesheets/style.css' rel='stylesheet' type='text/css' />
     <script type='text/javascript' src='/javascripts/jquery-1.5.2.js'></script>
     <script type='text/javascript' src='/javascripts/TestPaper.js'></script><div id='flash_notice' class='tishi_tab'><p><%= flash[:warn] %></p></div>
