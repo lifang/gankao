@@ -25,19 +25,14 @@ class User::AlipaysController < ApplicationController
 
   def take_over_return
     alipay_notify_url = "#{User::AlipaysHelper::NOTIFY_URL}?partner=#{User::AlipaysHelper::PARTNER}&notify_id=#{params[:notify_id]}"
-    puts alipay_notify_url
     response_txt =Net::HTTP.get(URI.parse(alipay_notify_url))
-    puts response_txt
     my_params = Hash.new
     request.parameters.each {|key,value|my_params[key.to_s]=value}
     my_params.delete("action")
     my_params.delete("controller")
     my_params.delete("sign")
     my_params.delete("sign_type")
-    puts  my_params
     mysign = Digest::MD5.hexdigest(my_params.sort.map{|k,v|"#{k}=#{v}"}.join("&")+User::AlipaysHelper::PARTNER_KEY)
-    puts  mysign
-    puts request.parameters
     dir = "#{Rails.root}/public/apliay"
     unless File.directory?(dir)
       Dir.mkdir(dir)
@@ -54,9 +49,6 @@ class User::AlipaysController < ApplicationController
         render :text=>"success"
       elsif params[:trade_status]=="TRADE_FINISHED" or params[:trade_status]=="TRADE_SUCCESS"
         out_trade_no=params[:out_trade_no]
-        puts out_trade_no
-        puts params
-        puts "trade_status success"
         @@m.synchronize {
           trade_nu =out_trade_no.to_s.split("_")
           begin
@@ -66,10 +58,8 @@ class User::AlipaysController < ApplicationController
               Order.create(:user_id=>trade_nu[0],:types=>Order::TYPES[:english_fourth_level],:remark=>"支付宝充值",
                 :total_price=>Constant::VIP_FEE,:out_trade_no=>out_trade_no,:status=>Order::STATUS[:payed])
             end
-            puts "render success"
             render :text=>"success"
           rescue
-            puts "flash fail"
             render :text=>"success"
           end
         }
@@ -81,5 +71,17 @@ class User::AlipaysController < ApplicationController
       redirect_to "/users/get_vip"
     end
   end
+
+  def over_pay
+    flash[:warn]="充值成功，恭喜您成为vip"
+    render :inline => " <link href='/stylesheets/style.css' rel='stylesheet' type='text/css' />
+    <script type='text/javascript' src='/javascripts/jquery-1.5.2.js'></script>
+    <script type='text/javascript' src='/javascripts/TestPaper.js'></script><div id='flash_notice' class='tishi_tab'><p><%= flash[:warn] %></p></div>
+    <script type='text/javascript'>show_flash_div();</script><script> setTimeout(function(){
+      window.close();}, 2000)</script><% flash[:warn]=nil %>"
+  end
+
+
+
 
 end
