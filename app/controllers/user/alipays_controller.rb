@@ -1,9 +1,8 @@
 #encoding: utf-8
 class User::AlipaysController < ApplicationController
+  before_filter :access?
   include User::AlipaysHelper
   @@m = Mutex.new
-
-
   
   def alipay_request
     is_vip_user=Order.find_by_user_id(cookies[:user_id])
@@ -24,51 +23,57 @@ class User::AlipaysController < ApplicationController
 
 
   def take_over_return
-    alipay_notify_url = "#{User::AlipaysHelper::NOTIFY_URL}?partner=#{User::AlipaysHelper::PARTNER}&notify_id=#{params[:notify_id]}"
-    response_txt =Net::HTTP.get(URI.parse(alipay_notify_url))
-    my_params = Hash.new
-    request.parameters.each {|key,value|my_params[key.to_s]=value}
-    my_params.delete("action")
-    my_params.delete("controller")
-    my_params.delete("sign")
-    my_params.delete("sign_type")
-    mysign = Digest::MD5.hexdigest(my_params.sort.map{|k,v|"#{k}=#{v}"}.join("&")+User::AlipaysHelper::PARTNER_KEY)
-    dir = "#{Rails.root}/public/apliay"
-    unless File.directory?(dir)
-      Dir.mkdir(dir)
-    end
-    file_path = dir+"#{Time.now.strftime("%Y%m%d")}.log"
-    if File.exists? file_path
-      file = File.open( file_path,"a")
-    else
-      file = File.new( file_path,"w")
-    end
-    file.puts Time.now.strftime("%Y%m%d %H:%M:%S")+"  "+request.parameters.to_s+"\r\n"
-    if mysign==params[:sign] and response_txt=="true"
-      if params[:trade_status]=="WAIT_BUYER_PAY"
-        render :text=>"success"
-      elsif params[:trade_status]=="TRADE_FINISHED" or params[:trade_status]=="TRADE_SUCCESS"
-        out_trade_no=params[:out_trade_no]
-        @@m.synchronize {
-          trade_nu =out_trade_no.to_s.split("_")
-          begin
-            puts trade_nu[0]
-            puts trade_nu[1]
-            Order.transaction do
-              Order.create(:user_id=>trade_nu[0],:types=>Order::TYPES[:english_fourth_level],:remark=>"支付宝充值",
-                :total_price=>Constant::VIP_FEE,:out_trade_no=>out_trade_no,:status=>Order::STATUS[:payed])
-            end
-            render :text=>"success"
-          rescue
-            render :text=>"success"
-          end
-        }
+    out_trade_no=params[:out_trade_no]
+    order=Order.find(:first, :conditions => ["out_trade_no=?",out_trade_no])
+    if order.nil?
+      alipay_notify_url = "#{User::AlipaysHelper::NOTIFY_URL}?partner=#{User::AlipaysHelper::PARTNER}&notify_id=#{params[:notify_id]}"
+      response_txt =Net::HTTP.get(URI.parse(alipay_notify_url))
+      my_params = Hash.new
+      request.parameters.each {|key,value|my_params[key.to_s]=value}
+      my_params.delete("action")
+      my_params.delete("controller")
+      my_params.delete("sign")
+      my_params.delete("sign_type")
+      mysign = Digest::MD5.hexdigest(my_params.sort.map{|k,v|"#{k}=#{v}"}.join("&")+User::AlipaysHelper::PARTNER_KEY)
+      dir = "#{Rails.root}/public/apliay"
+      unless File.directory?(dir)
+        Dir.mkdir(dir)
+      end
+      file_path = dir+"#{Time.now.strftime("%Y%m%d")}.log"
+      if File.exists? file_path
+        file = File.open( file_path,"a")
       else
-        render :text=>"fail" + "<br>"
-        puts mysign + "-----------"+ params[:sign] + "<br>"
+        file = File.new( file_path,"w")
+      end
+      file.puts Time.now.strftime("%Y%m%d %H:%M:%S")+"  "+request.parameters.to_s+"\r\n"
+      if mysign==params[:sign] and response_txt=="true"
+        if params[:trade_status]=="WAIT_BUYER_PAY"
+          render :text=>"success"
+        elsif params[:trade_status]=="TRADE_FINISHED" or params[:trade_status]=="TRADE_SUCCESS"
+       
+          @@m.synchronize {
+            trade_nu =out_trade_no.to_s.split("_")
+            begin
+              puts trade_nu[0]
+              puts trade_nu[1]
+              Order.transaction do
+                Order.create(:user_id=>trade_nu[0],:types=>Order::TYPES[:english_fourth_level],:remark=>"支付宝充值",
+                  :total_price=>Constant::VIP_FEE,:out_trade_no=>out_trade_no,:status=>Order::STATUS[:payed])
+              end
+              render :text=>"success"
+            rescue
+              render :text=>"success"
+            end
+          }
+        else
+          render :text=>"fail" + "<br>"
+          puts mysign + "-----------"+ params[:sign] + "<br>"
+        end
+      else
+        redirect_to "/users/get_vip"
       end
     else
-      redirect_to "/users/get_vip"
+      render :text=>"success"
     end
   end
 
