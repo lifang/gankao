@@ -48,6 +48,7 @@ class User::AlipaysController < ApplicationController
       if params[:trade_status]=="WAIT_BUYER_PAY"
         render :text=>"success"
       elsif params[:trade_status]=="TRADE_FINISHED" or params[:trade_status]=="TRADE_SUCCESS"
+        out_trade_no=params[:out_trade_no]
         puts out_trade_no
         puts params
         puts "trade_status success"
