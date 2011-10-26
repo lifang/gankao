@@ -1,6 +1,6 @@
 #encoding: utf-8
 class User::AlipaysController < ApplicationController
-  before_filter :access?
+  before_filter :access? , :only => [:alipay_request]
   include User::AlipaysHelper
   @@m = Mutex.new
   
