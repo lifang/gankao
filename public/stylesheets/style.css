@@ -163,7 +163,8 @@ img { border: none;}
 
 
 /*真题训练--------------*/
-.zhenti_box { width: 790px; margin: 30px auto 0; overflow: hidden;}
+.zhenti_box { width: 790px; margin: 10px auto 0; overflow: hidden;}
+.zhenti_box p { line-height: 24px; padding-left: 10px;}
 .zhenti_box li { width: 117px; height: 144px; position: relative; float: left; margin: 20px; display: inline;}
 .zhenti_box li a { width: 117px; height: 144px; display: block; text-decoration: none; background: url(/images/paper/zhenti_bg.png) no-repeat;}
 .paper_time { position: absolute; top: 5px; left: 5px; font-family: "微软雅黑"; color: #b8c1d2; font-size: 14px; width: 70px; display: block; font-weight: bold;}

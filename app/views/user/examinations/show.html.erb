@@ -4,7 +4,7 @@
   var papers = new Object();
 </script>
 <%= javascript_include_tag "#{@paper_url}" %>
-<%= javascript_include_tag "#{Constant::SERVER_PATH}/javascripts/answer_paper.js" %>
+<%= javascript_include_tag "http://#{request.host_with_port}/javascripts/answer_paper.js" %>
 <%= form_for :paper , :url => "/user/examinations/#{@examination.id}/save_result",
   :html => {:name => "paper_form", :id => "paper_form",
   :onsubmit => "return generate_result_paper('#{@exam_user.paper_id}')"} do |f| %>
@@ -45,7 +45,7 @@
     <div id="remote_div" style="display:none;"></div>
     <input type="hidden" name="types" value="<%= @examination.types %>"/>
     <input type="hidden" name="answer_url" id="answer_url"
-           value="<%= Constant::SERVER_PATH %><%= @exam_user.answer_sheet_url %>"/>
+           value="http://<%= request.host_with_port %><%= @exam_user.answer_sheet_url %>"/>
     <input type="hidden" name="back_server_url" id="back_server_url" value="<%= Constant::BACK_SERVER_PATH %>" />
     <div class="clear"></div>
   </div>

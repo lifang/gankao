@@ -100,7 +100,7 @@ img { border: none;}
 .vip_czhi_input { width: 250px; float: left; padding:  20px 0 0 50px;}
 .vip_czhi_btn { width: 100px; float: left; padding: 15px 0 0 50px;}
 .vip_czhi_btn button { width: 100px; height: 28px; line-height: 28px; cursor: pointer; background: url(/images/paper/vip_czhi_btn.png) no-repeat; border: none; color: #FFF; font-weight: bold;}
-
+.vip_czhi_btn_a { width: 100px; height: 28px; display: block; line-height: 28px; text-align: center; background: url(/images/paper/vip_czhi_btn.png) no-repeat; border: none; color: #FFF; font-weight: bold;}
 .vip_czhi_p { padding-left: 20px; line-height: 24px; color: #333;}
 
 .vip_zfu { width: 700px; height: 176px; background: url(/images/paper/vip_bg.png) no-repeat 0 0;}
