@@ -30,10 +30,11 @@ class User::AlipaysController < ApplicationController
     puts response_txt
     my_params = Hash.new
     request.parameters.each {|key,value|my_params[key.to_s]=value}
-    my_params["action"]=""
-    my_params["controller"]=""
-    my_params["sign"]=""
-    my_params["sign_type"]=""
+    my_params.delete("action")
+    my_params.delete("controller")
+    my_params.delete("sign")
+    my_params.delete("sign_type")
+    puts  my_params
     mysign = Digest::MD5.hexdigest(my_params.sort.map{|k,v|"#{k}=#{v}"}.join("&")+User::AlipaysHelper::PARTNER_KEY)
     puts  mysign
     puts request.parameters
