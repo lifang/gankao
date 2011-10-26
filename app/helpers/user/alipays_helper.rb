@@ -8,9 +8,10 @@ module User::AlipaysHelper
   PARTNER="2088002153002681"
   SELLER_EMAIL="yesen@yahoo.cn"
   CALLBACK_URL="http://demo.gankao.co/user/alipays/take_over_return"
+  NONSYNCH_URL="http://demo.gankao.co/user/alipays/over_pay"
   OPTIONS={
     :service=>"create_direct_pay_by_user",
-    :notice_url=>CALLBACK_URL,
+    :notify_url=>NONSYNCH_URL,
     :return_url=>CALLBACK_URL,
     :subject=>"赶考网英语四级vip",
     :payment_type=>Constant::VIP_TYPE[:good],
