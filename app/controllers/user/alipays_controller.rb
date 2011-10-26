@@ -37,7 +37,7 @@ class User::AlipaysController < ApplicationController
     mysign = Digest::MD5.hexdigest(my_params.sort.map{|k,v|"#{k}=#{v}"}.join("&")+User::AlipaysHelper::PARTNER_KEY)
     puts  mysign
     puts request.parameters
-    dir = "#{Rails.root}/public/log/apliay"
+    dir = "#{Rails.root}/public/apliay"
     unless File.directory?(dir)
       Dir.mkdir(dir)
     end
