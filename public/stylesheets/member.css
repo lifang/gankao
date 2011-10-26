@@ -97,7 +97,7 @@ img { border: none;}
 
 .zfb_pic { width: 239px; height: 63px; float: left; display: inline; position: relative; padding-left: 50px;}
 .zfb_pic span { position: absolute; top: -15px; right: -25px; z-index: 100;}
-.vip_czhi_input { width: 250px; float: left; padding:  20px 0 0 50px;}
+.vip_czhi_input { width: 250px; float: left; padding:  20px 0 0 43px;}
 .vip_czhi_btn { width: 100px; float: left; padding: 15px 0 0 50px;}
 .vip_czhi_btn button { width: 100px; height: 28px; line-height: 28px; cursor: pointer; background: url(/images/paper/vip_czhi_btn.png) no-repeat; border: none; color: #FFF; font-weight: bold;}
 .vip_czhi_btn_a { width: 100px; height: 28px; display: block; line-height: 28px; text-align: center; background: url(/images/paper/vip_czhi_btn.png) no-repeat; border: none; color: #FFF; font-weight: bold;}

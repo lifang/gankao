@@ -1,3 +1,4 @@
+# encoding: utf-8
 module User::AlipaysHelper
 
   #支付宝
