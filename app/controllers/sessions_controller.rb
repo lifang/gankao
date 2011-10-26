@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
   require 'oauth'
   #  require  'net/http'
   include QqHelper
+  include RenrenHelper
 
   def new
     session[:signin_code] = proof_code(4)
