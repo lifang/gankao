@@ -37,7 +37,7 @@ class User::AlipaysController < ApplicationController
     mysign = Digest::MD5.hexdigest(my_params.sort.map{|k,v|"#{k}=#{v}"}.join("&")+User::AlipaysHelper::PARTNER_KEY)
     puts  mysign
     puts request.parameters
-    file_path = "#{Rails.root}/log/apliay/#{Time.now.strftime("%Y%m%d")}.log"
+    file_path = "#{Rails.root}/public/log/apliay/#{Time.now.strftime("%Y%m%d")}.log"
     if File.exists? file_path
       file = File.open( file_path,"a")
     else
