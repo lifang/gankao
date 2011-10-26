@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   include Constant
   include UserRoleHelper
   include RenrenHelper
-
   before_filter :auto_login
   
 

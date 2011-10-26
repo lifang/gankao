@@ -3,7 +3,6 @@ class SessionsController < ApplicationController
   layout "login"
   require 'oauth2'
   require 'oauth'
-
   #  require  'net/http'
   include QqHelper
 

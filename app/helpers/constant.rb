@@ -43,7 +43,7 @@ module Constant
   COLLECTION_PATH = "/collections"
 
   #代理权限
-   RIGHTS = {
+  RIGHTS = {
     "english_fourth_level" => ["英语四级",1],
     "english_sixth_level" => ["英语六级",2]
   }
@@ -52,7 +52,7 @@ module Constant
   FREE_NUM=1000
 
   
-   #优惠价格
+  #优惠价格
   FAVOURABLE=50
   #代理支付
   AGENCY_COST=2
@@ -66,8 +66,10 @@ module Constant
     "practice_6"=>0,
   }
 
-   #vip价格
-   VIP=10
+  #vip价格
+  VIP_FEE=0.01
+ 
+  VIP_TYPE={:good=>1,:donate=>4}   #vip支付类型
 
   #非vip能做综合训练的次数
   PRACTICES_COUNT = 5
