@@ -6,7 +6,7 @@ module User::AlipaysHelper
   PARTNER_KEY="y8wpddg38lpu0ks66uluaj8506sw7tks"
   PARTNER="2088002153002681"
   SELLER_EMAIL="yesen@yahoo.cn"
-  CALLBACK_URL="http://localhost:3000/user/alipay/take_over_return"
+  CALLBACK_URL="http://demo.gankao.co/user/alipays/take_over_return"
   OPTIONS={
     :service=>"create_direct_pay_by_user",
     :notice_url=>CALLBACK_URL,
