@@ -37,7 +37,7 @@ class User::AlipaysController < ApplicationController
     mysign = Digest::MD5.hexdigest(my_params.sort.map{|k,v|"#{k}=#{v}"}.join("&")+User::AlipaysHelper::PARTNER_KEY)
     puts  mysign
     puts request.parameters
-    file_path = "#{Rails.root}/log/apliay/#{Time.now.strftime("%Y%m%d")}.log"
+    file_path = "#{Rails.root}/public/log/apliay/#{Time.now.strftime("%Y%m%d")}.log"
     if File.exists? file_path
       file = File.open( file_path,"a")
     else
@@ -48,6 +48,7 @@ class User::AlipaysController < ApplicationController
       if params[:trade_status]=="WAIT_BUYER_PAY"
         render :text=>"success"
       elsif params[:trade_status]=="TRADE_FINISHED" or params[:trade_status]=="TRADE_SUCCESS"
+        out_trade_no=params[:out_trade_no]
         puts out_trade_no
         puts params
         puts "trade_status success"
