@@ -12,7 +12,7 @@ class Rater::ExamRatersController < ApplicationController
     @rater=ExamRater.find(params[:id])
     @examination=Examination.find(params[:examination_id])
     if @rater.author_code==params[:author_code]
-      cookies[:rater_id]=@rater.id
+      cookies[:rater_id]={:value =>@rater.id, :path => "/", :secure  => false}
       flash[:success]="登陆成功"
       redirect_to  "/rater/exam_raters/#{@examination.id}/reader_papers?rater_id=#{@rater.id}"
     else
