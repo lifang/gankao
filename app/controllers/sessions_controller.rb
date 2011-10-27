@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
       flash[:error] = "用户不存在"
     elsif !@user.has_password?(params[:session][:password])
       flash[:error] = "密码输入有误"
-    elsif @user.status == User::STATUS[:LOCK]
+    elsif @user.status != User::STATUS[:NORMAL]
       flash[:error] = "您的账号还未验证，请先去您的注册邮箱进行验证"
     else
       delete_cookies
@@ -126,7 +126,7 @@ class SessionsController < ApplicationController
   #腾讯微博登录
   def qq_weibo
     consumer = OAuth::Consumer.new(weibo_app_key, weibo_app_secret, OPTIONS)
-    request_token = consumer.get_request_token(:oauth_callback=>"#{Constant::SERVER_PATH}/sessions/access_token")
+    request_token = consumer.get_request_token(:oauth_callback=>"http://#{request.env["HTTP_HOST"]}/sessions/access_token")
     session[:weibotoken] = request_token.token
     session[:weibosecret] = request_token.secret
     redirect_to request_token.authorize_url
@@ -156,15 +156,14 @@ class SessionsController < ApplicationController
     http = Net::HTTP.new(uri.host, uri.port)
     request = Net::HTTP::Post.new(uri.request_uri)
     request.set_form_data({:format=>"json",:content=>define_test,:jing=>"",:wei=>""})
-    response = http.request(request)
-    puts response
+    http.request(request)
     #以下添加收听
     oauth_signature = signature_params(weibo_app_secret,add_friend_params,QqHelper::ADD_FRIEND,"POST",session[:weibo_access_secret])
     uri = URI.parse("#{QqHelper::ADD_FRIEND}?#{add_friend_params}&oauth_signature=#{oauth_signature}")
     http = Net::HTTP.new(uri.host, uri.port)
     request = Net::HTTP::Post.new(uri.request_uri)
     request.set_form_data({:format=>"json",:name=>Constant::TENCENT_WEIBO_NAME})
-    response = http.request(request)
+    http.request(request)
     session[:weibo_access_token]=nil
     session[:weibo_access_secret]=nil
     flash[:warn]="添加关注成功"

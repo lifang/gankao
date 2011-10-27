@@ -16,8 +16,7 @@ class User::HomesController < ApplicationController
     @user_exams = Examination.find_by_sql("select count(types) sums,e.types from examinations e
       inner join exam_users u on u.examination_id = e.id
       where e.types != #{Examination::TYPES[:SIMULATION]} and category_id = #{params[:id].to_i}
-      and u.is_submited = #{ExamUser::IS_SUBMITED[:YES]}
-      and u.user_id = #{cookies[:user_id]} group by types")
+      and u.is_submited = #{ExamUser::IS_SUBMITED[:YES]} and u.user_id = #{cookies[:user_id]} group by types")
     @type_hash = {}
     @all_examinations.each do |examination|
       @type_hash["#{examination.types}"]=[examination.sums, 0]
