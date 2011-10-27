@@ -23,8 +23,8 @@ class PagesController < ApplicationController
       if @user.nil?
         @user=User.create(:code_id=>user_info[:id],:code_type=>'sina',:name=>user_info[:name],:username=>user_info[:name])
       end
-      cookies[:user_name] = user_info[:name]
-      cookies[:user_id]=@user.id
+      cookies[:user_name] ={:value =>user_info[:name], :path => "/", :secure  => false}
+      cookies[:user_id]={:value =>@user.id, :path => "/", :secure  => false}
       render :inline => "<script>window.opener.location.href='/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}';window.close();</script>"
     rescue
       render :inline => "<script>window.opener.location.reload();window.close();</script>"
@@ -41,8 +41,8 @@ class PagesController < ApplicationController
       if @user.nil?
         @user=User.create(:code_id=>user_info["uid"],:code_type=>'renren',:name=>user_info["name"],:username=>user_info["name"])
       end
-      cookies[:user_name] = @user.name
-      cookies[:user_id] = @user.id
+      cookies[:user_name] ={:value =>@user.name, :path => "/", :secure  => false}
+      cookies[:user_id] ={:value =>@user.id, :path => "/", :secure  => false}
       cookies.each do |key,value|
         puts key.to_s+"   "+value.to_s
       end
@@ -84,7 +84,7 @@ class PagesController < ApplicationController
       session[:qqtoken]=nil
       session[:qqsecret]=nil
       session[:qqopen_id]=nil
-      cookies[:user_id] = @user.id
+      cookies[:user_id] ={:value =>@user.id, :path => "/", :secure  => false}
       render :inline => "<script>window.opener.location.href='/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}';window.close();</script>"
     rescue
       render :inline => "<script>window.opener.location.reload();window.close();</script>"

@@ -21,8 +21,8 @@ class SessionsController < ApplicationController
       flash[:echeckor] = "您的账号还未验证，请先去您的注册邮箱进行验证"
     else
       delete_cookies
-      cookies[:user_id] = @user.id
-      cookies[:user_name] = @user.name
+      cookies[:user_id] ={:value =>@user.id, :path => "/", :secure  => false}
+      cookies[:user_name] ={:value =>@user.name, :path => "/", :secure  => false}
       cookie_role(cookies[:user_id])
       is_vip?   
     end
@@ -126,7 +126,7 @@ class SessionsController < ApplicationController
   #腾讯微博登录
   def qq_weibo 
     consumer = OAuth::Consumer.new(weibo_app_key, weibo_app_secret, OPTIONS)
-    request_token = consumer.get_request_token(:oauth_callback => "#{Constant::SERVER_PATH}/sessions/access_token")
+    request_token = consumer.get_request_token(:oauth_callback => "http://localhost:3000/sessions/access_token")
     session[:weibotoken] = request_token.token
     session[:weibosecret] = request_token.secret
     redirect_to request_token.authorize_url

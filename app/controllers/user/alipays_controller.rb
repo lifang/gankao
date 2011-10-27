@@ -35,27 +35,22 @@ class User::AlipaysController < ApplicationController
       my_params.delete("sign")
       my_params.delete("sign_type")
       mysign = Digest::MD5.hexdigest(my_params.sort.map{|k,v|"#{k}=#{v}"}.join("&")+User::AlipaysHelper::PARTNER_KEY)
-      dir = "#{Rails.root}/public/apliay"
-      unless File.directory?(dir)
-        Dir.mkdir(dir)
-      end
+      dir = "#{Rails.root}/public/apliay" 
+      Dir.mkdir(dir)  unless File.directory?(dir)
       file_path = dir+"#{Time.now.strftime("%Y%m%d")}.log"
       if File.exists? file_path
         file = File.open( file_path,"a")
       else
         file = File.new( file_path,"w")
       end
-      file.puts Time.now.strftime("%Y%m%d %H:%M:%S")+"  "+request.parameters.to_s+"\r\n"
+      file.puts "#{Time.now.strftime('%Y%m%d %H:%M:%S')}   #{request.parameters.to_s}\r\n"
       if mysign==params[:sign] and response_txt=="true"
         if params[:trade_status]=="WAIT_BUYER_PAY"
           render :text=>"success"
-        elsif params[:trade_status]=="TRADE_FINISHED" or params[:trade_status]=="TRADE_SUCCESS"
-       
+        elsif params[:trade_status]=="TRADE_FINISHED" or params[:trade_status]=="TRADE_SUCCESS"     
           @@m.synchronize {
             trade_nu =out_trade_no.to_s.split("_")
             begin
-              puts trade_nu[0]
-              puts trade_nu[1]
               Order.transaction do
                 Order.create(:user_id=>trade_nu[0],:types=>Order::TYPES[:english_fourth_level],:remark=>"支付宝充值",
                   :total_price=>Constant::VIP_FEE,:out_trade_no=>out_trade_no,:status=>Order::STATUS[:payed])
@@ -67,7 +62,6 @@ class User::AlipaysController < ApplicationController
           }
         else
           render :text=>"fail" + "<br>"
-          puts mysign + "-----------"+ params[:sign] + "<br>"
         end
       else
         redirect_to "/users/get_vip"
@@ -89,7 +83,7 @@ class User::AlipaysController < ApplicationController
     <script type='text/javascript' src='/javascripts/jquery-1.5.2.js'></script>
     <script type='text/javascript' src='/javascripts/TestPaper.js'></script><div id='flash_notice' class='tishi_tab'><p><%= flash[:warn] %></p></div>
     <script type='text/javascript'>show_flash_div();</script><script> setTimeout(function(){
-      window.close();}, 2000)</script><% flash[:warn]=nil %>"
+      window.close();}, 1000)</script><% flash[:warn]=nil %>"
   end
 
 

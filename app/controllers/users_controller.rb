@@ -84,9 +84,8 @@ class UsersController < ApplicationController
         @user.active_code = ""
         @user.status = true
         @user.save!
-
-        cookies[:user_id] = @user.id
-        cookies[:user_name] = @user.name
+        cookies[:user_id] ={:value =>@user.id, :path => "/", :secure  => false}
+        cookies[:user_name] ={:value =>@user.name, :path => "/", :secure  => false}
         redirect_to "/users/active_success"
       else
         redirect_to "/users/active_false"
