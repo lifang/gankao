@@ -32,7 +32,11 @@ class SessionsController < ApplicationController
       if params[:session][:is_auto_login]=="1"
         cookies[:is_auto_login] = {:value => @user.id, :expires => Time.now+30.days, :path => "/", :secure => false}
       end
+      if params[:last_url] == "" or params[:last_url] == "/"
       redirect_to "/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}"
+      else
+        redirect_to params[:last_url]
+      end
     end
   end
 

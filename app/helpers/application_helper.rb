@@ -31,7 +31,7 @@ module ApplicationHelper
   end
 
   def deny_access
-    redirect_to "/sessions/new"
+    redirect_to "/sessions/new?last_url=#{request.url}"
   end
 
   def signed_in?
