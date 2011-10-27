@@ -672,6 +672,7 @@ function show_exam_time() {
 function onTimer() {
     var date_start = new Date();
     if (start <= 0) {
+        window.onbeforeunload = null;
         window.clearInterval(timer);
         $("paper_form").submit();
         setTimeout(function(){

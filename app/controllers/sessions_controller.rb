@@ -14,11 +14,11 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by_email(params[:session][:email])
     if @user.nil?
-      flash[:echeckor] = "用户不存在"
+      flash[:error] = "用户不存在"
     elsif !@user.has_password?(params[:session][:password])
-      flash[:echeckor] = "密码输入有误"
+      flash[:error] = "密码输入有误"
     elsif @user.status == User::STATUS[:LOCK]
-      flash[:echeckor] = "您的账号还未验证，请先去您的注册邮箱进行验证"
+      flash[:error] = "您的账号还未验证，请先去您的注册邮箱进行验证"
     else
       delete_cookies
       cookies[:user_id] ={:value =>@user.id, :path => "/", :secure  => false}
@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
       cookie_role(cookies[:user_id])
       is_vip?   
     end
-    if flash[:echeckor]
+    if flash[:error]
       redirect_to request.referer
     else
       if params[:session][:is_auto_login]=="1"
