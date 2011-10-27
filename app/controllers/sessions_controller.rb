@@ -124,13 +124,14 @@ class SessionsController < ApplicationController
   end
 
   #腾讯微博登录
-  def qq_weibo 
+  def qq_weibo
     consumer = OAuth::Consumer.new(weibo_app_key, weibo_app_secret, OPTIONS)
-    request_token = consumer.get_request_token(:oauth_callback => "http://localhost:3000/sessions/access_token")
+    request_token = consumer.get_request_token(:oauth_callback=>"#{Constant::SERVER_PATH}/sessions/access_token")
     session[:weibotoken] = request_token.token
     session[:weibosecret] = request_token.secret
     redirect_to request_token.authorize_url
   end
+
 
   def access_token
     timestamp=(Time.new.to_i).to_s
@@ -149,6 +150,15 @@ class SessionsController < ApplicationController
 
 
   def qq_add_friend
+    #以下发送微博
+    oauth_signature = signature_params(weibo_app_secret,add_weibo_params,QqHelper::ADD_WEIBO,"POST",session[:weibo_access_secret])
+    uri = URI.parse("#{QqHelper::ADD_WEIBO}?#{add_weibo_params}&oauth_signature=#{oauth_signature}")
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Post.new(uri.request_uri)
+    request.set_form_data({:format=>"json",:content=>define_test,:jing=>"",:wei=>""})
+    response = http.request(request)
+    puts response
+    #以下添加收听
     oauth_signature = signature_params(weibo_app_secret,add_friend_params,QqHelper::ADD_FRIEND,"POST",session[:weibo_access_secret])
     uri = URI.parse("#{QqHelper::ADD_FRIEND}?#{add_friend_params}&oauth_signature=#{oauth_signature}")
     http = Net::HTTP.new(uri.host, uri.port)

@@ -60,29 +60,30 @@ module QqHelper
     :nonce => Base64.encode64(OpenSSL::Random.random_bytes(32)).gsub(/\W/, '')[0, 32]
   }
 
-
   def add_friend_params
     timestamp=(Time.new.to_i).to_s
     "#{JSON_FORMAT}&name=#{Constant::TENCENT_WEIBO_NAME}&oauth_consumer_key=#{weibo_app_key}&oauth_nonce=#{timestamp}&#{SIGNATRUE_METHOD}&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibo_access_token]}&#{VESION}"
   end
 
-
-
-  
-  #公共方法加密url及生成签名：
-  def signature_params(key,sign,url,method,secret)
-    signature="#{method}&#{url_encoding(url)}&#{url_encoding(sign)}"
-    puts signature
-    return url_encoding(Base64.encode64(OpenSSL::HMAC.digest("sha1","#{key}&#{secret}",signature)))
+  def define_test
+    "12月要考四级的ggmm可以看看这个网站http://www.gankao.co，有在线模拟考试和新四级的全部真题，直接在线复习的，听力部分有录音，所有试题有解析，错题库可以让你更加针对性的复习，不用再到处找资料啦，全部一次搞定。"
   end
 
+  def add_weibo_params
+    timestamp = (Time.new.to_i).to_s
+    return "clientip=127.0.0.1&content=#{CGI.escape(define_test)}&#{JSON_FORMAT}&jing=&oauth_consumer_key=#{weibo_app_key}&oauth_nonce=#{timestamp}&#{SIGNATRUE_METHOD}&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibo_access_token]}&#{VESION}&wei="
+    
+  end
+
+
+  #公共方法加密url及生成签名：
+  def signature_params(key,sign,url,method,secret)
+    signature="#{method}&#{url_encoding(url)}&#{CGI.escape(sign)}"
+    return url_encoding(Base64.encode64(OpenSSL::HMAC.digest("sha1","#{key}&#{secret}",signature)))
+  end
 
   def url_encoding(str)
     str.gsub("=", "%3D").gsub("/","%2F").gsub(":","%3A").gsub("&","%26").gsub("+","%2B")
   end
-
-
-
-
 
 end
