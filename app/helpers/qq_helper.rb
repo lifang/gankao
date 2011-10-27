@@ -1,3 +1,4 @@
+# encoding: utf-8
 module QqHelper
   require 'oauth2'
   require 'oauth'
