@@ -1,5 +1,4 @@
 Gankao::Application.routes.draw do
-
   resources :combine_practices do
     member do
       get :start
@@ -90,6 +89,14 @@ Gankao::Application.routes.draw do
   end
   namespace :user do
     resources :homes
+    resources :alipays do
+      member do
+        
+      end
+      collection do
+        get "alipay_request","take_over_return"
+      end
+    end
     resources :examinations do
       member do
         post "save_result", "five_min_save", "check_exam_pwd", "start_fixup_time", "get_exam_time", "cancel_exam"

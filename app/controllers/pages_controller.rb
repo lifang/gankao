@@ -2,6 +2,7 @@
 class PagesController < ApplicationController
   require 'oauth/oauth'
   include QqHelper
+  include RenrenHelper
   def index
     if cookies[:user_id] and request.referer == "/"
       redirect_to "/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}"
@@ -56,28 +57,24 @@ class PagesController < ApplicationController
   
 
   def login_from_qq
-    begin
-      url= produce_url(REQUEST_URL,login_qq_params,"")
-      request_token=Net::HTTP.get(URI.parse(url))
-      request_value=request_token.split("=")
-      session[:secret]=request_value[2]
-      redirect_to "#{AUTHOTIZE_URL}?#{COMSUMER_KEY}&oauth_token=#{request_value[1].split("&")[0]}&oauth_callback=#{CALLBACK_URL}"
-    rescue
-      render :inline => "<script>window.opener.location.reload();window.close();</script>"
-    end
+    url= produce_url(QqHelper::REQUEST_URL,login_qq_params,"")
+    request_token=Net::HTTP.get(URI.parse(url))
+    request_value=request_token.split("=")
+    session[:secret]=request_value[2]
+    redirect_to "#{QqHelper::AUTHOTIZE_URL}?#{QqHelper::COMSUMER_KEY}&oauth_token=#{request_value[1].split("&")[0]}&oauth_callback=#{QqHelper::CALLBACK_URL}"
   end
 
   def qq_index 
     oauth_token=params[:oauth_token]
     oauth_vericode=params[:oauth_vericode]
     begin   
-      url= produce_url(QQ_ACCESS_URL,access_url_params(oauth_token,oauth_vericode),session[:secret])
+      url= produce_url(QqHelper::QQ_ACCESS_URL,access_url_params(oauth_token,oauth_vericode),session[:secret])
       access=Net::HTTP.get(URI.parse(url))
       session[:secret]=nil
       session[:qqtoken]=access.split("oauth_token=")[1].split("&")[0]
       session[:qqsecret]=access.split("oauth_token_secret=")[1].split("&")[0]
       session[:qqopen_id]=access.split("openid=")[1].split("&")[0]
-      user_url= produce_url(GRAPY_URL,get_user_info_params(session[:qqtoken],session[:qqopen_id]),session[:qqsecret])
+      user_url= produce_url(QqHelper::GRAPY_URL,get_user_info_params(session[:qqtoken],session[:qqopen_id]),session[:qqsecret])
       user_info=JSON Net::HTTP.get(URI.parse(user_url))
       @user= User.find_by_open_id(session[:qqopen_id])
       if @user.nil?

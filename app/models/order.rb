@@ -2,8 +2,8 @@
 class Order< ActiveRecord::Base
   belongs_to :user
 
-
-
+  TYPES={:english_fourth_level=>1,:english_sixth_level=>2}
+  STATUS={:payed=>1}
   def self.serarch_tags(lists,tag)
     lists.elements["/collection/problems"].each_element do |problem|
       problem.elements["questions"].each_element do |question|

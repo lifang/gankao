@@ -3,9 +3,9 @@ class SessionsController < ApplicationController
   layout "login"
   require 'oauth2'
   require 'oauth'
-
   #  require  'net/http'
   include QqHelper
+  include RenrenHelper
 
   def new
     session[:signin_code] = proof_code(4)
@@ -135,8 +135,8 @@ class SessionsController < ApplicationController
   def access_token
     timestamp=(Time.new.to_i).to_s
     oauth_verifier=params[:oauth_verifier]
-    params="#{WEIBO_COMSUMER_KEY}&oauth_nonce=#{timestamp}&#{SIGNATRUE_METHOD}&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibotoken]}&oauth_verifier=#{oauth_verifier}&#{VESION}"
-    url="#{ACCESS_TOKEN_URL}?#{params}&oauth_signature=#{signature_params(weibo_app_secret,params,ACCESS_TOKEN_URL,"GET",session[:weibosecret])} "
+    params="#{QqHelper::WEIBO_COMSUMER_KEY}&oauth_nonce=#{timestamp}&#{QqHelper::SIGNATRUE_METHOD}&oauth_timestamp=#{timestamp}&oauth_token=#{session[:weibotoken]}&oauth_verifier=#{oauth_verifier}&#{QqHelper::VESION}"
+    url="#{QqHelper::ACCESS_TOKEN_URL}?#{params}&oauth_signature=#{signature_params(weibo_app_secret,params,QqHelper::ACCESS_TOKEN_URL,"GET",session[:weibosecret])} "
     response=Net::HTTP.get(URI.parse(url))
     request_value=response.split("=")
     session[:weibotoken]=nil
@@ -149,8 +149,8 @@ class SessionsController < ApplicationController
 
 
   def qq_add_friend
-    oauth_signature = signature_params(weibo_app_secret,add_friend_params,ADD_FRIEND,"POST",session[:weibo_access_secret])
-    uri = URI.parse("#{ADD_FRIEND}?#{add_friend_params}&oauth_signature=#{oauth_signature}")
+    oauth_signature = signature_params(weibo_app_secret,add_friend_params,QqHelper::ADD_FRIEND,"POST",session[:weibo_access_secret])
+    uri = URI.parse("#{QqHelper::ADD_FRIEND}?#{add_friend_params}&oauth_signature=#{oauth_signature}")
     http = Net::HTTP.new(uri.host, uri.port)
     request = Net::HTTP::Post.new(uri.request_uri)
     request.set_form_data({:format=>"json",:name=>Constant::TENCENT_WEIBO_NAME})

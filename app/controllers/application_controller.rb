@@ -5,8 +5,6 @@ class ApplicationController < ActionController::Base
   include RemotePaginateHelper
   include Constant
   include UserRoleHelper
-  include RenrenHelper
-
   before_filter :auto_login
   
 

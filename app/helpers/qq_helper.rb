@@ -49,8 +49,6 @@ module QqHelper
   ADD_WEIBO="http://open.t.qq.com/api/t/add"
   WEIBO_COMSUMER_KEY="oauth_consumer_key=801004949"
   JSON_FORMAT="format=json"
-  SIGNATRUE_METHOD="oauth_signature_method=HMAC-SHA1"
-  VESION="oauth_version=1.0"
   OPTIONS={
     :site               => "https://open.t.qq.com",
     :scheme             => :query_string,
