@@ -30,7 +30,7 @@
         <% end %>
         <li>
           <a href="/exam_lists/<%= Category::TYPE_IDS[:english_fourth_level] %>/incorrect_list"
-             <% if @controller.action_name == "incorrect_list" %>class="el_hover"<% end %>>所有分类</a>
+             <% if controller.action_name == "incorrect_list" %>class="el_hover"<% end %>>所有分类</a>
         </li>
         <% my_tag = nil
         @tags.each do |tag|
