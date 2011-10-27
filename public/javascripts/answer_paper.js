@@ -315,6 +315,7 @@ function create_question_navigation(block_nav_div, question, problem_id, questio
 
 //取得点击的题点的高度
 function get_question_height(question_id, problem_id) {
+    window.onbeforeunload = null;
     var p_height = 0;
     var block_div = $("b_description_" + problem_id).parentNode;
     var all_divs = block_div.getElementsByTagName("div");
@@ -1096,7 +1097,7 @@ function loadxml(xmlFile) {
 //load答案的xml文件
 function answer_xml() {
     var answer_url = $("answer_url").value;
-    var xmlDom = loadxml(answer_url);
+    var xmlDom = loadxml(answer_url+"?"+Math.random());
     if (xmlDom != null) {
         var questions = xmlDom.getElementsByTagName("question");
         if (questions.length > 0) {
