@@ -1047,9 +1047,6 @@ function reload_local_save() {
 function load_answer(paper_id, examination_id) {
     if(window.openDatabase){
         load_local_save(paper_id, examination_id);
-        setTimeout(function(){
-            read_answer_xml();
-        }, 1000);
     } else {
         read_answer_xml();
     }

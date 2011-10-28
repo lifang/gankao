@@ -7,8 +7,8 @@ module User::AlipaysHelper
   PARTNER_KEY="y8wpddg38lpu0ks66uluaj8506sw7tks"
   PARTNER="2088002153002681"
   SELLER_EMAIL="yesen@yahoo.cn"
-  CALLBACK_URL="http://demo.gankao.co/user/alipays/take_over_return"
-  NONSYNCH_URL="http://demo.gankao.co/user/alipays/over_pay"
+  CALLBACK_URL="http://www.gankao.co/user/alipays/take_over_return"
+  NONSYNCH_URL="http://www.gankao.co/user/alipays/over_pay"
   OPTIONS={
     :service=>"create_direct_pay_by_user",
     :notify_url=>CALLBACK_URL,

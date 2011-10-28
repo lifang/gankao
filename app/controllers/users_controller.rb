@@ -1,6 +1,6 @@
 #encoding: utf-8
 class UsersController < ApplicationController
-  before_filter :access?, :only => [:show, :update, :update_info]
+  before_filter :access?, :only => [:show, :update, :update_info, :goto_vip, :get_vip, :create_proof]
   layout "login", :only => ["new", "active", "re_active", "active_success", "active_false"]
 
 
