@@ -74,6 +74,11 @@ function dataHandler(transaction, results){
             answer_hash[row['question_id']] = new Array(row['answer'], row['is_sure']);
         }
     }
+    if (answer_hash == null || answer_hash.length == 0) {
+        setTimeout(function(){
+            read_answer_xml();
+        }, 100);
+    }
 }
 
 

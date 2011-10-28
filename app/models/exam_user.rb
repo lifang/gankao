@@ -244,8 +244,10 @@ class ExamUser < ActiveRecord::Base
       question = questions.add_element("question")
       question.add_attribute("id","#{key}")
       question.add_attribute("score","0")
-      question.add_element("answer").add_text("#{value[0].strip}")
-      question.add_attribute("is_sure", "#{value[1].strip}")
+      answer = value[0].nil? ? "" : value[0].strip
+      is_sure = value[1].nil? ? "" : value[1].strip
+      question.add_element("answer").add_text("#{answer}")
+      question.add_attribute("is_sure", "#{is_sure}")
     end unless question_ids_options == {}
     unless block_id.nil?
       block_ids = block_id.split(",")
