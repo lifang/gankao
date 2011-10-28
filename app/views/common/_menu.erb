@@ -1,9 +1,7 @@
 <div class="head_top">
-  <div class="top_myGankao">    
-  </div>
   <div class="top_loginArea">
     <div class="top_qq"><span>在线客服</span><a href="tencent://message/?uin=2568830556&amp;Site=赶考网&amp;Menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=1:2568830556:7" alt="有事点这里"></a></div>
-    <div class="top_la_ks">
+    <div class="member_nav">
       <% if cookies[:user_id] %>
         Welcome,<a href="/user/homes/<%= Category::TYPE_IDS[:english_fourth_level] %>" class="signColor">
                 <%= current_user.name if current_user %></a>
