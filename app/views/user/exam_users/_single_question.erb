@@ -100,6 +100,10 @@ end %>
          value="<%= "解析：" + question.elements["analysis"].text.to_s.html_safe unless (question.elements["analysis"].nil? or
              question.elements["analysis"].text.nil? or question.elements["analysis"].text == "") %>"/>
   <div class="review_btn">
+    <% unless question.attributes["score_reason"].nil? or question.attributes["score_reason"] == "" %>
+    <input type="hidden" id="btn_reason_<%= question.attributes["id"] %>" value="<%= question.attributes["score_reason"] %>" />
+      <a class="reason_btn" href="javascript:void(0);" id="reason_<%= question.attributes["id"] %>">得分理由</a>
+    <% end %>
     <a class="jiexi_btn" href="javascript:void(0);" id="btn_<%= question.attributes["id"] %>">解析</a>
     <a class="biji_btn" href="javascript:void(0);"
        name="note_<%= question.attributes["id"] %>" id="note_<%= question.attributes["id"] %>"

@@ -16,7 +16,7 @@
       jQuery.noConflict();
     </script>
     <!--[if IE 6]>
-    <script src="js/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script src="/javascripts/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>
       /* EXAMPLE */
       DD_belatedPNG.fix('*');
@@ -42,5 +42,10 @@
   <body>
     <%= yield %>
     <%=  render :partial => "/common/flash_div" %>
+    <script src="http://app.baidu.com/static/appstore/monitor.st"></script>
+    <script>
+      baidu.app.autoHeight();
+      baidu.app.setHeight(600);
+    </script>
   </body>
 </html>

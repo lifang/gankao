@@ -140,6 +140,8 @@ img { border: none;}
 .biji_tab {display: none; position: absolute; z-index: 100; top: 25px; right: 70px;}
 .tab_m_textarea textarea { width: 370px; margin-top: 5px;}
 
+.reason_tab { display: none; position: absolute; z-index: 100;}
+
 
 
 

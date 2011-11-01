@@ -8,7 +8,7 @@
     <script type="text/javascript" src="/javascripts/TestPaper.js"></script>
     <script type="text/javascript">jQuery.noConflict();</script>
     <!--[if IE 6]>
-    <script src="js/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script src="/javascripts/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>
       /* EXAMPLE */
       DD_belatedPNG.fix('*');
@@ -37,5 +37,10 @@
     <div class="head"><div class="logo"><img src="/images/paper/logo.png" onclick="window.location.href='http://www.gankao.co'" /></div></div>
     <%= yield %>
     <%= render :partial => "/common/flash_div" %>
+    <script src="http://app.baidu.com/static/appstore/monitor.st"></script>
+    <script>
+      baidu.app.autoHeight();
+      baidu.app.setHeight(600);
+    </script>
   </body>
 </html>
