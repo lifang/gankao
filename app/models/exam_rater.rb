@@ -15,11 +15,13 @@ class ExamRater < ActiveRecord::Base
   #打开xml文件
   def ExamRater.open_file(url)
     file=File.open(url)
-    return Document.new(file).root
+    doc=Document.new(file).root
+    file.close
+    return doc
   end
 
 
- #批量检查阅卷老师信息
+  #批量检查阅卷老师信息
   def self.check_rater(info,id)
     rater_info=""
     hash =ExamUser.get_email(info)

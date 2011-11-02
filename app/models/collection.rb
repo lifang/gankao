@@ -20,7 +20,7 @@ class Collection < ActiveRecord::Base
     end
     file_name = "/#{self.id}.xml"
     url = dir + file_name
-    f=File.new(url,"w")
+    f=File.new(url,"w+")
     f.write("#{str.force_encoding('UTF-8')}")
     f.close
     return COLLECTION_PATH + file_name
@@ -39,7 +39,10 @@ class Collection < ActiveRecord::Base
 
   def open_xml
     dir = "#{Rails.root}/public"
-    return Document.new(File.open(dir + self.collection_url))
+    file=File.open(dir + self.collection_url)
+    doc=Document.new(file)
+    file.close
+    return doc
   end
 
   #添加题目xml

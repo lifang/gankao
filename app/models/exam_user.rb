@@ -135,7 +135,7 @@ class ExamUser < ActiveRecord::Base
     end
     file_name = "/#{self.id}.xml"
     url = dir + file_name
-    f=File.new(url,"w")
+    f=File.new(url,"w+")
     f.write("#{str.force_encoding('UTF-8')}")
     f.close
     return "/" + path + "/#{self.examination_id}" + file_name
@@ -145,7 +145,7 @@ class ExamUser < ActiveRecord::Base
   def next_step(doc,url)
     step=doc.root.attributes['step']
     doc.root.attributes['step']=step.to_i+1
-    f=File.new("#{Rails.root}/public#{url}","w")
+    f=File.new("#{Rails.root}/public#{url}","w+")
     f.write("#{doc.to_s.force_encoding('UTF-8')}")
     f.close
   end
@@ -154,7 +154,7 @@ class ExamUser < ActiveRecord::Base
   def set_step(doc,url,step=nil,check=nil)
     doc.root.attributes['check']=check if check
     doc.root.attributes['step']=step if step
-    f=File.new("#{Rails.root}/public#{url}","w")
+    f=File.new("#{Rails.root}/public#{url}","w+")
     f.write("#{doc.to_s.force_encoding('UTF-8')}")
     f.close
   end
@@ -174,7 +174,7 @@ class ExamUser < ActiveRecord::Base
         question=block.add_element("question")
         question.add_text(single_answer)
       end
-      f=File.new("#{Rails.root}/public#{url}","w")
+      f=File.new("#{Rails.root}/public#{url}","w+")
       f.write("#{doc.to_s.force_encoding('UTF-8')}")
       f.close
     end
@@ -231,7 +231,7 @@ class ExamUser < ActiveRecord::Base
     end
     file_name = "/#{self.id}.xml"
     url = dir + file_name
-    f=File.new(url,"w")
+    f=File.new(url,"w+")
     f.write("#{str.force_encoding('UTF-8')}")
     f.close
     return "/" + path + "/#{self.examination_id}" + file_name
@@ -267,7 +267,9 @@ class ExamUser < ActiveRecord::Base
   def open_xml
     dir = "#{Rails.root}/public"
     url = File.open(dir + self.answer_sheet_url)
-    return Document.new(url)
+    doc=Document.new(url)
+    url.close
+    return doc
   end
 
   #自动统计考试的分数
@@ -369,7 +371,7 @@ class ExamUser < ActiveRecord::Base
                 question.attributes["correct_type"].to_i == Problem::QUESTION_TYPE[:SINGLE_CALK]
               str += (","+question.attributes["id"])
               answer = (element.nil? or element.elements["answer"].nil? or element.elements["answer"].text.nil?) ? ""
-                : element.elements["answer"].text
+              : element.elements["answer"].text
               question.add_attribute("user_answer","#{answer}")
             else
               problem.delete_element(question.xpath)

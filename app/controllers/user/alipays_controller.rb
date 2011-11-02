@@ -44,6 +44,7 @@ class User::AlipaysController < ApplicationController
         file = File.new( file_path,"w")
       end
       file.puts "#{Time.now.strftime('%Y%m%d %H:%M:%S')}   #{request.parameters.to_s}\r\n"
+      file.close
       if mysign==params[:sign] and response_txt=="true"
         if params[:trade_status]=="WAIT_BUYER_PAY"
           render :text=>"success"

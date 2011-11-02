@@ -10,7 +10,7 @@ class PaymentsController < ApplicationController
   def packed_payoff
     @examination=Examination.where("category_id=#{params[:id]}")
   end
-
+   
   #代理充值
   def agency_recharge
     @categories=Category.all
