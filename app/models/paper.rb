@@ -35,7 +35,7 @@ class Paper < ActiveRecord::Base
     end
     file_name = "/" + path + "/#{self.id}." + file_type
     url = dir + file_name
-    f=File.new(url,"w")
+    f=File.new(url, File::CREAT|File::TRUNC|File::RDWR, 0777)
     f.write("#{str.force_encoding('UTF-8')}")
     f.close
     if file_type == "xml"
@@ -92,7 +92,9 @@ class Paper < ActiveRecord::Base
 
   #生成试卷的json
   def create_paper_js
-    doc = Document.new(File.open "#{Constant::PUBLIC_PATH}/#{self.paper_url}")
+    file=File.open "#{Constant::PUBLIC_PATH}/#{self.paper_url}"
+    doc = Document.new(file)
+    file.close
     doc.root.elements["blocks"].each_element do |block|
       block.elements["problems"].each_element do |problem|
         problem.elements["questions"].each_element do |question|
@@ -106,7 +108,9 @@ class Paper < ActiveRecord::Base
 
   #更新试卷的题目数和总分
   def update_num_score
-    doc = Document.new(File.open "#{Constant::PUBLIC_PATH}/#{self.paper_url}")
+    file=File.open "#{Constant::PUBLIC_PATH}/#{self.paper_url}"
+    doc = Document.new(file)
+    file.close
     self.total_score = doc.root.attributes["total_score"].to_i
     self.total_question_num = doc.root.attributes["total_num"].to_i
     self.save
