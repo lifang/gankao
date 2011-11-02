@@ -510,7 +510,7 @@ class ExamUser < ActiveRecord::Base
                   problem.delete_element(xml_question.xpath)
                   correct_num +=1
                 else
-                  self.add_collection(collection, xml, collection_xml, problem, xml_question, user_answer.strip)
+                  collection_xml = self.add_collection(collection, xml, collection_xml, problem, xml_question, user_answer.strip)
                 end
               end
             end
@@ -518,6 +518,7 @@ class ExamUser < ActiveRecord::Base
         end unless problem.elements["questions"].nil?
       end
     end unless question_hash.empty?
+    collection.generate_collection_url(collection_xml.to_s)
     self.update_attributes(:correct_percent => ((correct_num.to_f/xml.attributes["total_num"].to_f)*100).round)
   end
 
@@ -527,13 +528,14 @@ class ExamUser < ActiveRecord::Base
     if collection_problem
       collection_question = collection.question_in_collection(collection_problem, question.attributes["id"])
       if collection_question
-        collection.update_question(user_answer, collection_question.xpath, collection_xml)
+        collection_xml = collection.update_question(user_answer, collection_question.xpath, collection_xml)
       else
-        collection.add_question(question, user_answer, collection_problem, collection_xml)
+        collection_xml = collection.add_question(question, user_answer, collection_problem, collection_xml)
       end
     else
-      collection.auto_add_problem(paper_xml, question.attributes["id"], problem.xpath, user_answer, collection_xml)
+      collection_xml = collection.auto_add_problem(paper_xml, question.attributes["id"], problem.xpath, user_answer, collection_xml)
     end
+    return collection_xml
   end
 
   #返回用户当前提点的答案

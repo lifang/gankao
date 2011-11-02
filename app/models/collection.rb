@@ -109,7 +109,8 @@ class Collection < ActiveRecord::Base
       que.add_attribute("error_percent", "0")
     end
     que.add_element("user_answer").add_text("#{answer_text}")
-    self.generate_collection_url(collection_xml.to_s)
+    return collection_xml
+#    self.generate_collection_url(collection_xml.to_s)
   end
 
   #如果当前题目有题点已经收藏过，就只收藏题点
@@ -120,7 +121,8 @@ class Collection < ActiveRecord::Base
     question.add_attribute("error_percent", "0")
     questions = collection_xml.elements["#{collection_problem.xpath}/questions"]
     questions.elements.add(question)
-    self.generate_collection_url(collection_xml.to_s)
+    return collection_xml
+#    self.generate_collection_url(collection_xml.to_s)
   end
 
   #如果当前题目没有做过笔记，则将题目加入到笔记
@@ -152,7 +154,8 @@ class Collection < ActiveRecord::Base
     last_question.add_attribute("repeat_num", "1")
     last_question.add_attribute("error_percent", "0")
     collection_xml.elements["/collection/problems"].elements.add(paper_problem)
-    self.generate_collection_url(collection_xml.to_s)
+    return collection_xml
+#    self.generate_collection_url(collection_xml.to_s)
   end
 
   #手动添加收藏提点
@@ -160,7 +163,8 @@ class Collection < ActiveRecord::Base
     paper = ExamRater.open_file("#{Constant::BACK_PUBLIC_PATH}#{paper_url}")
     paper_question = paper.elements["#{question_path}"]
     paper_question.elements["tags"].text="#{paper_question.elements["tags"].text} 我的关注" unless paper_question.elements["tags"].nil?
-    add_question(paper_question, question_answer.text, problem, collection_doc)
+    collection_xml = add_question(paper_question, question_answer.text, problem, collection_doc)
+    self.generate_collection_url(collection_xml.to_s)
   end
 
   #手动添加收藏提点
@@ -171,7 +175,8 @@ class Collection < ActiveRecord::Base
       question.elements["tags"].text="#{question.elements["tags"].text} 我的关注" unless question.elements["tags"].nil?
     end
     answer=question_answer.nil? ? "": question_answer.text
-    auto_add_problem(paper_xml, question_id, problem_path, answer, collection_doc)
+    collection_xml = auto_add_problem(paper_xml, question_id, problem_path, answer, collection_doc)
+    self.generate_collection_url(collection_xml.to_s)
   end
 
 end

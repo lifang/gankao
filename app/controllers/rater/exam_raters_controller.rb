@@ -97,7 +97,7 @@ class Rater::ExamRatersController < ApplicationController
           if question.attributes["score"].to_f == single_score
             problem.delete_element(question.xpath)
           else
-            @exam_user.add_collection(collection, xml, collection_xml, problem,
+            collection_xml = @exam_user.add_collection(collection, xml, collection_xml, problem,
               question, answer) unless problem.elements["questions"].elements[1].nil?
           end
           original_score += result_question.attributes["score"].to_f
@@ -114,6 +114,7 @@ class Rater::ExamRatersController < ApplicationController
         answer_block.attributes["score"] = block_score
       end
     end
+    collection.generate_collection_url(collection_xml.to_s)
     doc.elements["paper"].elements["rate_score"].text = score
     @xml=ExamRater.rater(doc,params[:id],score)
     self.write_xml(url, doc)
