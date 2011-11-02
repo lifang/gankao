@@ -5,7 +5,9 @@
       <button onclick="window.location.href='/users/get_vip'"></button>
       <div class="iphone_text">
         <p> 升级VIP，参加<span class="red">Iphone4s</span>抽奖</p>
-        <p>距离下次抽奖还有<em class="red">1000</em>人</p>
+        <p>
+          距离下次抽奖还有<em class="red"><%= 1000 - Order.count(:id, :conditions => "pay_type = #{Order::PAY_TYPE[:PAYMENT]}") %></em>人
+        </p>
       </div>
       <div class="clear"></div>
     </div>

@@ -1,8 +1,15 @@
 //解析弹出层
 jQuery(function(){
     jQuery('.jiexi_btn').click(function(e){
-        jQuery('.biji_tab').css('display','none');
-        jQuery('.upErrorTo_tab').css('display','none');
+        if (jQuery('.biji_tab') != null) {
+         jQuery('.biji_tab').css('display','none');
+        }
+        if (jQuery('.upErrorTo_tab') != null) {
+            jQuery('.upErrorTo_tab').css('display','none');
+        }
+        if (jQuery('.reason_tab') != null) {
+            jQuery('.reason_tab').css('display','none');
+        }
         var btn_id = this.id;
         jQuery('.jiexi_tab').css('display','block');
         jQuery('.jiexi_tab').css({
@@ -18,8 +25,15 @@ jQuery(function(){
 //笔记弹出层
 jQuery(function(){
     jQuery('.biji_btn').click(function(e){
-        jQuery('.jiexi_tab').css('display','none');       
-        jQuery('.upErrorTo_tab').css('display','none');
+        if (jQuery('.jiexi_tab') != null) {
+            jQuery('.jiexi_tab').css('display','none');
+        }
+        if (jQuery('.upErrorTo_tab') != null) {
+            jQuery('.upErrorTo_tab').css('display','none');
+        }
+        if (jQuery('.reason_tab') != null) {
+            jQuery('.reason_tab').css('display','none');
+        }
         jQuery('.biji_tab').css('display','block');
         jQuery('.biji_tab').css({
             'top':(e.pageY+20)+'px',
@@ -82,16 +96,21 @@ function flash_remove(tab) {
 //报告错误弹出层
 jQuery(function(){
     jQuery('.upErrorTo_btn').click(function(e){
-        jQuery('.biji_tab').css('display','none');
-        jQuery('.jiexi_tab').css('display','none');
+        if (jQuery('.biji_tab') != null) {
+         jQuery('.biji_tab').css('display','none');
+        }
+        if (jQuery('.reason_tab') != null) {
+            jQuery('.reason_tab').css('display','none');
+        }
+        if (jQuery('.jiexi_tab') != null) {
+            jQuery('.jiexi_tab').css('display','none');
+        }
         jQuery('.upErrorTo_tab').css('display','block');
         jQuery('.upErrorTo_tab').css({
             'top':(e.pageY+20)+'px',
             'left':(e.pageX-30)+'px'
         });
-    }
-    )
-
+    })
 })
 
 function report_error(question_index,exam_user_id){
@@ -126,5 +145,28 @@ jQuery(function(){
         jQuery('.pattern_tab').css('display','none')
     })
 
+})
+
+
+//得分理由弹出层
+jQuery(function(){
+    jQuery('.reason_btn').click(function(e){
+        if (jQuery('.biji_tab') != null) {
+         jQuery('.biji_tab').css('display','none');
+        }
+        if (jQuery('.upErrorTo_tab') != null) {
+            jQuery('.upErrorTo_tab').css('display','none');
+        }
+        if (jQuery('.jiexi_tab') != null) {
+            jQuery('.jiexi_tab').css('display','none');
+        }
+        var btn_id = this.id;
+        jQuery('.reason_tab').css('display','block');
+        jQuery('.reason_tab').css({
+            'top':(e.pageY+20)+'px',
+            'left':(e.pageX-30)+'px'
+        });
+        jQuery('#reason').html(jQuery('#btn_' + btn_id).attr("value"));
+    })
 })
 

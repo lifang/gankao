@@ -21,8 +21,18 @@ function open_nav(block_id) {
     if(document.getElementById("upErrorTo_tab")!=null){
         document.getElementById("upErrorTo_tab").style.display='none';
     }
-    jQuery('.biji_tab').css('display','none');
-    jQuery('.jiexi_tab').css('display','none');
+    if (jQuery('.biji_tab') != null) {
+        jQuery('.biji_tab').css('display','none');
+    }
+    if (jQuery('.upErrorTo_tab') != null) {
+        jQuery('.upErrorTo_tab').css('display','none');
+    }
+    if (jQuery('.jiexi_tab') != null) {
+        jQuery('.jiexi_tab').css('display','none');
+    }
+    if (jQuery('.reason_tab') != null) {
+        jQuery('.reason_tab').css('display','none');
+    }
     var block_ids = $("block_ids");
     if (block_ids != null && block_ids.innerHTML != "") {
         var b_ids = block_ids.innerHTML.split(",");

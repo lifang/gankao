@@ -343,12 +343,17 @@ class ExamUser < ActiveRecord::Base
     @xml.elements["blocks"].each_element do  |block|
       block.elements["problems"].each_element do |problem|
         problem.elements["questions"].each_element do |question|
-          doc.elements["paper"].elements["questions"].each_element do |element|
-            if element.attributes["id"]==question.attributes["id"]
-              question.add_attribute("user_answer","#{element.elements["answer"].text}")
+          unless doc.nil? or doc.elements["paper"].elements["questions"].nil?
+            element = doc.elements["paper/questions/question[@id=#{question.attributes["id"]}]"]
+            unless element.nil?
+              answer = (element.elements["answer"].nil? or element.elements["answer"].text.nil?) ? "" :
+                element.elements["answer"].text
+              question.add_attribute("user_answer","#{answer}")
               question.add_attribute("user_score","#{element.attributes["score"]}")
+              reason = element.attributes["score_reason"].nil? ? "" : element.attributes["score_reason"]
+              question.add_attribute("score_reason","#{reason}")
             end
-          end unless doc.nil? or doc.elements["paper"].elements["questions"].nil?
+          end
         end unless problem.elements["questions"].nil?
       end
     end

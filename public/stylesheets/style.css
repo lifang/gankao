@@ -125,7 +125,8 @@ img { border: none;}
 .per_con { padding-top: 160px; height: 55px; font-family: "微软雅黑"; color: #333; }
 .per_con h2 { font-size: 14px; line-height: 24px; text-align: center;}
 .per_con p { font-size: 12px; line-height: 24px; text-align: center;}
-.per_btn { height: 28px; margin-top: 20px;}
+.per_ex_p0 { margin-top: 16px; line-height: 24px; padding: 2px;}
+.per_btn { height: 28px; margin-top: 15px;}
 .per_btn a {
     font-family: "微软雅黑";
     height: 28px;
@@ -138,6 +139,8 @@ img { border: none;}
     text-decoration: none;
     background: url(/images/paper/all_bg.png) no-repeat -7px -83px;
 }
+.per_next_ks { text-align: center; height: 24px; line-height: 24px;}
+.per_next_ks a { text-decoration: underline;}
 .per_load_bg { width: 183px; height: 20px; background: url(/images/paper/per_load_bg.png) no-repeat; padding: 5px 0 0 6px; margin: 0 auto;}
 .per_load_t { width: 110px; height: 17px; background: url(/images/paper/per_load_t.png) no-repeat;}
 
