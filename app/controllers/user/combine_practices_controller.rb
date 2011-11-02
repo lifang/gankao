@@ -19,7 +19,7 @@ class User::CombinePracticesController < ApplicationController
         xml_url="#{Constant::BACK_PUBLIC_PATH}/papers/#{@exam_user.paper_id}.xml"
         begin
           file=File.open(xml_url)
-          xml=Document.new().root
+          xml=Document.new(file).root
           file.close
         rescue
           flash[:warn] = "试卷（#{@exam_user.paper_id}）文件加载错误"
