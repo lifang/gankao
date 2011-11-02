@@ -82,5 +82,5 @@ img { border: none;}
 .foot p { height: 24px; line-height: 24px; text-align: center; color: #999;}
 .foot p a { color: #999;}
 
-.tishi_tab { width: 250px; padding: 10px; background: url(/images/paper/mk_b_zz_bg.png) repeat; border: 1px #fff solid; position: absolute; display: none; z-index: 9999;}
-.tishi_tab p { text-align: center; line-height: 24px; font-size: 14px; font-family:"微软雅黑"; color: #fff;}
+.tishi_tab {width: 288px; height: 82px; padding:30px 10px 10px 10px; background: url(/images/paper/tishi_tab_bg.png) no-repeat; position: absolute; display: none;z-index: 9999;}
+.tishi_tab p  { text-align: center; line-height: 24px; font-size: 14px; font-family:"微软雅黑"; color: #ffffff;}
