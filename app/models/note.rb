@@ -38,7 +38,10 @@ class Note < ActiveRecord::Base
 
   def open_xml
     dir = "#{Rails.root}/public"
-    return Document.new(File.open(dir + self.note_url))
+    file=File.open(dir + self.note_url)
+    doc=Document.new(file)
+    file.close
+    return doc
   end
 
   def save_xml(doc)

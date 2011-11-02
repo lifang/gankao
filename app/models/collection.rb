@@ -39,7 +39,10 @@ class Collection < ActiveRecord::Base
 
   def open_xml
     dir = "#{Rails.root}/public"
-    return Document.new(File.open(dir + self.collection_url))
+    file=File.open(dir + self.collection_url)
+    doc=Document.new(file)
+    file.close
+    return doc
   end
 
   #添加题目xml

@@ -267,7 +267,9 @@ class ExamUser < ActiveRecord::Base
   def open_xml
     dir = "#{Rails.root}/public"
     url = File.open(dir + self.answer_sheet_url)
-    return Document.new(url)
+    doc=Document.new(url)
+    url.close
+    return doc
   end
 
   #自动统计考试的分数
@@ -364,7 +366,7 @@ class ExamUser < ActiveRecord::Base
                 question.attributes["correct_type"].to_i == Problem::QUESTION_TYPE[:SINGLE_CALK]
               str += (","+question.attributes["id"])
               answer = (element.nil? or element.elements["answer"].nil? or element.elements["answer"].text.nil?) ? ""
-                : element.elements["answer"].text
+              : element.elements["answer"].text
               question.add_attribute("user_answer","#{answer}")
             else
               problem.delete_element(question.xpath)

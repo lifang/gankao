@@ -43,12 +43,6 @@ class PagesController < ApplicationController
       end
       cookies[:user_name] ={:value =>@user.name, :path => "/", :secure  => false}
       cookies[:user_id] ={:value =>@user.id, :path => "/", :secure  => false}
-      cookies.each do |key,value|
-        puts key.to_s+"   "+value.to_s
-      end
-      session.each do |key,value|
-        puts key.to_s+"   "+value.to_s
-      end
       render :inline => "<script>window.opener.location.href='/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}';window.close();</script>"
     rescue
       render :inline => "<script>window.opener.location.reload();window.close();</script>"

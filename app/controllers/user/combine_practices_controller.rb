@@ -18,7 +18,9 @@ class User::CombinePracticesController < ApplicationController
         @paper_url = "#{Constant::PAPER_CLIENT_PATH}/#{@exam_user.paper_id}.js"
         xml_url="#{Constant::BACK_PUBLIC_PATH}/papers/#{@exam_user.paper_id}.xml"
         begin
-          xml=Document.new(File.open(xml_url)).root
+          file=File.open(xml_url)
+          xml=Document.new().root
+          file.close
         rescue
           flash[:warn] = "试卷（#{@exam_user.paper_id}）文件加载错误"
           redirect_to "/combine_practices/#{Examination::TYPES[:PRACTICE]}"

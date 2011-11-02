@@ -12,8 +12,8 @@ class ApplicationController < ActionController::Base
     deny_access unless signed_in?
   end
 
-  def write_xml(url,doc)
-    file = File.new(url, "w+")
+   def write_xml(url,doc)
+    file = File.new(url, File::CREAT|File::TRUNC|File::RDWR, 0777)
     file.write(doc)
     file.close
   end
