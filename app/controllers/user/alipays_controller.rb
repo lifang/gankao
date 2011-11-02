@@ -12,7 +12,7 @@ class User::AlipaysController < ApplicationController
       OPTIONS.merge!(:sign_type => 'MD5', :sign =>Digest::MD5.hexdigest(OPTIONS.sort.map{|k,v|"#{k}=#{v}"}.join("&")+User::AlipaysHelper::PARTNER_KEY))
       redirect_to "#{User::AlipaysHelper::PAGE_WAY}?#{OPTIONS.sort.map{|k, v| "#{CGI::escape(k.to_s)}=#{CGI::escape(v.to_s)}"}.join('&')}"
     else
-      flash[:warn]="用户已充值"
+      flash[:warn]="您已经是vip用户"
       render :inline => " <link href='/stylesheets/style.css' rel='stylesheet' type='text/css' />
     <script type='text/javascript' src='/javascripts/jquery-1.5.2.js'></script>
     <script type='text/javascript' src='/javascripts/TestPaper.js'></script><div id='flash_notice' class='tishi_tab'><p><%= flash[:warn] %></p></div>
@@ -52,8 +52,9 @@ class User::AlipaysController < ApplicationController
             trade_nu =out_trade_no.to_s.split("_")
             begin
               Order.transaction do
-                Order.create(:user_id=>trade_nu[0],:types=>Order::TYPES[:english_fourth_level],:remark=>"支付宝充值",
-                  :total_price=>Constant::VIP_FEE,:out_trade_no=>out_trade_no,:status=>Order::STATUS[:payed])
+                Order.create(:user_id => trade_nu[0], :types => Order::TYPES[:english_fourth_level], :remark => "支付宝充值",
+                  :total_price => Constant::VIP_FEE, :out_trade_no => out_trade_no,
+                  :status => Order::STATUS[:payed], :pay_type => Order::PAY_TYPE[:PAYMENT])
               end
               render :text=>"success"
             rescue
