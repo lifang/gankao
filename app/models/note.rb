@@ -19,7 +19,7 @@ class Note < ActiveRecord::Base
     end
     file_name = "/#{self.id}.xml"
     url = dir + file_name
-    f=File.new(url, File::CREAT|File::TRUNC|File::RDWR, 0777)
+    f=File.new(url,"w+")
     f.write("#{str.force_encoding('UTF-8')}")
     f.close
     return NOTE_PATH + file_name
@@ -46,7 +46,7 @@ class Note < ActiveRecord::Base
 
   def save_xml(doc)
     url = Constant::PUBLIC_PATH + self.note_url
-    f=File.new(url, File::CREAT|File::TRUNC|File::RDWR, 0777)
+    f=File.new(url,"w+")
     f.write("#{doc.to_s.force_encoding('UTF-8')}")
     f.close
   end
