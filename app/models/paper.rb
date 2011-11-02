@@ -36,6 +36,7 @@ class Paper < ActiveRecord::Base
     file_name = "/" + path + "/#{self.id}." + file_type
     url = dir + file_name
     f=File.new(url,"w+")
+    f.chmod(0777)
     f.write("#{str.force_encoding('UTF-8')}")
     f.close
     if file_type == "xml"

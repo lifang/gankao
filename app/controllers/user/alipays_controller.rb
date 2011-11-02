@@ -43,6 +43,7 @@ class User::AlipaysController < ApplicationController
       else
         file = File.new( file_path,"w")
       end
+      file.chmod(0777)
       file.puts "#{Time.now.strftime('%Y%m%d %H:%M:%S')}   #{request.parameters.to_s}\r\n"
       file.close
       if mysign==params[:sign] and response_txt=="true"
