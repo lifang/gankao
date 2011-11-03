@@ -48,11 +48,12 @@ class User::CollectionsController < ApplicationController
         if question
           if question.elements["tags"].nil?
             question.add_element("tags").add_text("我的关注")
-            collection.generate_collection_url(collection_doc.to_s)
           else
-            question.elements["tags"].text="#{question.elements["tags"].text} 我的关注" unless question.elements["tags"].text =~ /我的关注/
-            collection.generate_collection_url(collection_doc.to_s)
+            question.elements["tags"].text="#{question.elements["tags"].text} 我的关注" unless question.elements["tags"].text =~ /我的关注/     
           end
+          question.delete_attribute("delete_status") unless question.attributes["delete_status"].nil?
+          problem.delete_attribute("delete_status") unless problem.attributes["delete_status"].nil?
+          collection.generate_collection_url(collection_doc.to_s)
           flash[:warn] = "当前题目已经收藏成功。"
         else
           collection.hand_add_question(exam_user.paper_url, question_answer,
