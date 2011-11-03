@@ -1,21 +1,26 @@
-<?xml version='1.0' encoding='UTF-8'?>      <collection id='3'>
-        <problems><problem id='113' score='0' types='5'>
-                    <title>Directions： For this part， you are allowed 30 minutes to write a short essay on the topic of Due Attention Should Be Given To Spelling. You should write at least 120 words following the outline given below：
+<?xml version='1.0' encoding='UTF-8'?>
+<collection id='3'>
+    <problems>
+        <problem id='113' score='0' types='5'>
+            <title>Directions： For this part， you are allowed 30 minutes to write a short essay on the topic of Due Attention Should Be Given To Spelling. You should write at least 120 words following the outline given below：
 　&lt;div&gt;　1. 如今不少学生在英语学习中不重视拼写
 　&lt;/div&gt;&lt;div&gt;　2. 出现这种情况的原因
 　&lt;/div&gt;&lt;div&gt;　3. 为了改变这种状况，我认为…&lt;/div&gt;
-                    </title>
-                    <category>2</category>
-                    <questions>
-                        <question correct_type='5' error_percent='0' id='713' repeat_num='2' score='0'>
-                            <answer>范文：Correct spelling is a basic skill in English study. However， nowadays many students do not pay much attention to it. They have their own reasons for misspelling. First of all， they like an easy way of studying， which causes some omissions and changes in spelling. Second， the teachers might not be very strict in students&apos; spelling. In China， teachers seem to be more concerned with grammar and vocabulary but not spelling. To change this situation， in my opinion， the teachers and the students should work together. On one hand， the teachers should give more attention to students&apos; spelling， asking the students to be conscious of the importance of correct spelling from the very beginning of their English study. On the other hand， the students themselves are supposed to be aware that correct spelling is a must in English study. To sum up， correct spelling is so important that both students and the teachers should spare no efforts to achieve correct spelling.</answer>
-                            <analysis/>
-                            <questionattrs/>
-                            <tags> 我的关注</tags>
-                        <user_answer/><user_answer>wangzhe tianxia</user_answer></question>
-                    </questions>
-                </problem><problem id='114' score='0' types='4'>
-                    <title>&lt;div&gt;　 &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; Caught in the Web
+            </title>
+            <category>2</category>
+            <questions>
+                <question correct_type='5' error_percent='0' id='713' repeat_num='2' score='0'>
+                    <answer>范文：Correct spelling is a basic skill in English study. However， nowadays many students do not pay much attention to it. They have their own reasons for misspelling. First of all， they like an easy way of studying， which causes some omissions and changes in spelling. Second， the teachers might not be very strict in students&apos; spelling. In China， teachers seem to be more concerned with grammar and vocabulary but not spelling. To change this situation， in my opinion， the teachers and the students should work together. On one hand， the teachers should give more attention to students&apos; spelling， asking the students to be conscious of the importance of correct spelling from the very beginning of their English study. On the other hand， the students themselves are supposed to be aware that correct spelling is a must in English study. To sum up， correct spelling is so important that both students and the teachers should spare no efforts to achieve correct spelling.</answer>
+                    <analysis/>
+                    <questionattrs/>
+                    <tags> 我的关注</tags>
+                    <user_answer/>
+                    <user_answer>wangzhe tianxia</user_answer>
+                </question>
+            </questions>
+        </problem>
+        <problem id='114' score='0' types='4'>
+            <title>&lt;div&gt;　 &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; Caught in the Web
 　&lt;/div&gt;&lt;div&gt;　A few months ago， it wasn&apos;t unusual for 47-year-old Carla Toebe to spend 15 hours per day online. She&apos;d wake up early， turn on her laptop and chat on Internet dating sites and instant-messaging programs – leaving her bed for only brief intervals. Her household bills piled up， along with the dishes and dirty laundry， but it took near-constant complaints from her four daughters before she realized she had a problem.
 　&lt;/div&gt;&lt;div&gt;　&quot;I was starting to feel like my whole world was falling apart – kind of slipping into a depression，&quot; said Carla. &quot;I knew that if I didn&apos;t get off the dating sites， I&apos;d just keep going，&quot; detaching （使脱离） herself further from the outside world.
 　&lt;/div&gt;&lt;div&gt;　Toebe&apos;s conclusion： She felt like she was &quot;addicted&quot; to the Internet. She&apos;s not alone.
@@ -44,18 +49,20 @@
 　&lt;/div&gt;&lt;div&gt;　Toebe also regularly visits a site where posters discuss Internet overuse. In August， when she first realized she had a problem， she posted a message on a Yahoo Internet addiction group with the subject line： &quot;I have an Internet Addiction.&quot;
 　&lt;/div&gt;&lt;div&gt;　&quot;I&apos;m self-employed and need the Internet for my work， but I&apos;m failing to accomplish my work，to take care of my home， to give attention to my children，&quot; she wrote in a message sent to the group.&quot;I have no money or insurance to get professional help； I can&apos;t even pay my mortgage （抵押贷款） and face losing everything.&quot;
 　&lt;/div&gt;&lt;div&gt;　Since then， Toebe said， she has kept her promise to herself to cut back on her Internet use. &quot;I have a boyfriend now， and I&apos;m not interested in online dating，&quot; she said by phone last week. &quot;It&apos;s a lot better now.&quot;&lt;/div&gt;
-                    </title>
-                    <category>2</category>
-                    <questions>
-                        <question correct_type='0' error_percent='0' id='714' repeat_num='2' score='0'>
-                            <description>What eventually made Carla Toebe realize she was spending too much time on the Internet？</description>
-                            <answer>A） Her daughter&apos;s repeated complaints.</answer>
-                            <analysis>2. A) her daughers&apos; repeated complains
+            </title>
+            <category>2</category>
+            <questions>
+                <question correct_type='0' error_percent='0' id='714' repeat_num='2' score='0'>
+                    <description>What eventually made Carla Toebe realize she was spending too much time on the Internet？</description>
+                    <answer>A） Her daughter&apos;s repeated complaints.</answer>
+                    <analysis>2. A) her daughers&apos; repeated complains
 根据第一段最后一句”but it took near-constant complaints from her four daughters before she realized she had a problem.” 直到她的四个女儿不停的抱怨，她才意识到自己出了问题。
-                            </analysis>
-                            <questionattrs>A） Her daughter&apos;s repeated complaints.;-;B） Fatigue resulting from lack of sleep.;-;C）The poorly managed state of her house.;-;D） The high financial costs adding up.</questionattrs>
-                            <tags> 我的关注</tags>
-                        <user_answer/><user_answer>C）The poorly managed state of her house.</user_answer></question>
+                    </analysis>
+                    <questionattrs>A） Her daughter&apos;s repeated complaints.;-;B） Fatigue resulting from lack of sleep.;-;C）The poorly managed state of her house.;-;D） The high financial costs adding up.</questionattrs>
+                    <tags> 我的关注</tags>
+                    <user_answer/>
+                    <user_answer>C）The poorly managed state of her house.</user_answer>
+                </question>
                         
                         
                         
@@ -65,6 +72,33 @@
                         
                         
                         
-                    </questions>
-                </problem></problems>
-      </collection>
+            </questions>
+        </problem>
+        <problem id='70' score='15' types='0'>
+            <title>得得得得</title>
+            <category>1</category>
+            <questions>
+                <question correct_type='0' error_percent='0' id='84' repeat_num='1' score='15'>
+                    <answer>讲讲价</answer>
+                    <analysis/>
+                    <questionattrs>等待;-;凤飞飞;-;呵呵;-;讲讲价</questionattrs>
+                    <tags> 我的关注</tags>
+                    <user_answer/>
+                </question>
+            </questions>
+        </problem>
+        <problem id='71' score='16' types='2'>
+            <title>飞飞蜂蝶多</title>
+            <category>1</category>
+            <questions>
+                <question correct_type='2' error_percent='0' id='85' repeat_num='1' score='16'>
+                    <answer>1</answer>
+                    <analysis>试试撒</analysis>
+                    <questionattrs/>
+                    <tags>dddd 凤飞飞 为鹅鹅鹅 弹弹堂 我的关注</tags>
+                    <user_answer/>
+                </question>
+            </questions>
+        </problem>
+    </problems>
+</collection>

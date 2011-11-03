@@ -55,7 +55,7 @@
                             </analysis>
                             <questionattrs>A） Her daughter&apos;s repeated complaints.;-;B） Fatigue resulting from lack of sleep.;-;C）The poorly managed state of her house.;-;D） The high financial costs adding up.</questionattrs>
                             <tags/>
-                        <user_answer></user_answer><note_text>tianxia</note_text><created_at>2011-11-02 16:00</created_at></question>
+                        <user_answer/><note_text>tianxia</note_text><created_at>2011-11-02 16:00</created_at></question>
                         
                         
                         
@@ -65,6 +65,17 @@
                         
                         
                         
+                    </questions>
+                </problem><problem id='70' score='15' types='0'>
+                    <title>得得得得</title>
+                    <category>1</category>
+                    <questions>
+                        <question correct_type='0' error_percent='0' id='84' repeat_num='1' score='15'>
+                            <answer>讲讲价</answer>
+                            <analysis/>
+                            <questionattrs>等待;-;凤飞飞;-;呵呵;-;讲讲价</questionattrs>
+                            <tags> 我的关注</tags>
+                        <user_answer/><note_text>kahaoni ao</note_text><created_at>2011-11-03 09:31</created_at></question>
                     </questions>
                 </problem></problems>
       </note>
