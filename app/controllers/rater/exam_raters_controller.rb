@@ -1,7 +1,7 @@
 #encoding: utf-8
 class Rater::ExamRatersController < ApplicationController
   layout "rater"
-
+   before_filter :rater_access? ,:only=>[:reader_papers,:index]
   def rater_session #阅卷老师登陆页面
     @rater=ExamRater.find(params[:id])
     @examination=Examination.find(params[:examination])
@@ -13,6 +13,7 @@ class Rater::ExamRatersController < ApplicationController
     @examination=Examination.find(params[:examination_id])
     if @rater.author_code==params[:author_code]
       cookies[:rater_id]={:value =>@rater.id, :path => "/", :secure  => false}
+      cookies[:examination_id]={:value =>@examination.id, :path => "/", :secure  => false}
       flash[:success]="登陆成功"
       redirect_to  "/rater/exam_raters/#{@examination.id}/reader_papers?rater_id=#{@rater.id}"
     else

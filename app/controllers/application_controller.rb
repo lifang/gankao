@@ -57,4 +57,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+
+
+  def rater_access?
+   redirect_to "/rater/exam_raters/#{cookies[:examination_id]}/reader_papers?rater_id=#{cookies[:rater_id]}"  unless params[:id]==cookies[:examination_id]
+  end
+
 end

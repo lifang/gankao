@@ -1,25 +1,174 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <collection id='1'>
     <problems>
-    <problem id='46' score='25' types='4'><title>啊谁发上发生法萨芬萨菲</title><category>2</category><questions><question correct_type='6' error_percent='0' id='49' repeat_num='2' score='5'><answer>说的</answer><analysis>手动阀</analysis><questionattrs>说的</questionattrs><tags> 我的关注</tags><user_answer/><user_answer>sdfsfsfsf</user_answer></question></questions></problem><problem id='10' score='5.0' types='0'><title>fsdafafsfsaf &lt;mp3&gt;/media/music.mp3&lt;mp3&gt;</title><category>3</category><questions><question correct_type='0' error_percent='0' id='15' repeat_num='7' score='5.0'><answer>789</answer><analysis>sdfsfasf</analysis><questionattrs>23;-;wer;-;65;-;789</questionattrs><tags>ew 我的关注</tags><user_answer>23</user_answer><user_answer/><user_answer>23</user_answer><user_answer/><user_answer>23</user_answer><user_answer>wer</user_answer><user_answer>23</user_answer></question></questions></problem><problem id='33' score='44' types='3'>
-                    <title>sdfasfasfasfasfsafdsaf&lt;div&gt;sdfafsafsf&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;sfdasfsaf&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;sfd&lt;/div&gt;&lt;div&gt;asfd&lt;/div&gt;&lt;div&gt;asf&lt;/div&gt;&lt;div&gt;saf&lt;/div&gt;&lt;div&gt;asf&lt;/div&gt;&lt;div&gt;asfasf&lt;/div&gt;</title>
-                    <category>3</category>
-                    <questions>
-                        <question correct_type='3' error_percent='0' id='36' repeat_num='2' score='44'>
-                            <answer>fsafdasfsaf
-&lt;p&gt;safd&lt;/p&gt;
-&lt;p&gt;asf&lt;/p&gt;
-asf
-asf
-saf
-asf
-                            </answer>
-                            <analysis>444ererte</analysis>
-                            <questionattrs/>
-                            <tags> 我的关注</tags>
-                        <user_answer/><user_answer>sdfsfsfsf</user_answer></question>
-                    </questions>
-                </problem><problem id='49' score='7.1' types='0'><title>上的发法上发生的</title><category>3</category><questions><question correct_type='0' error_percent='0' id='56' repeat_num='1' score='7.1'><answer>地方</answer><analysis/><questionattrs>地方;-;353;-;2323;-;768</questionattrs><tags/><user_answer/></question></questions></problem><problem id='50' score='7.1' types='0'><title>啊谁发达撒发生法</title><category>3</category><questions><question correct_type='0' error_percent='0' id='57' repeat_num='1' score='7.1'><answer>4545</answer><analysis>沙发发发</analysis><questionattrs>4545;-;56;-;34345;-;123</questionattrs><tags/><user_answer/></question></questions></problem><problem id='51' score='7.1' types='0'><title>上大发送方的</title><category>3</category><questions><question correct_type='0' error_percent='0' id='58' repeat_num='1' score='7.1'><answer>32424</answer><analysis>是发达撒发生法</analysis><questionattrs>32424;-;454;-;89869;-;4545</questionattrs><tags/><user_answer/></question></questions></problem><problem id='52' score='7.1' types='0'><title>额外人听闻特温特</title><category>3</category><questions><question correct_type='0' error_percent='0' id='59' repeat_num='1' score='7.1'><answer>2323</answer><analysis/><questionattrs>2323;-;3434;-;687;-;789980</questionattrs><tags/><user_answer/></question></questions></problem><problem id='53' score='7.1' types='0'><title>阿飞撒发生法</title><category>3</category><questions><question correct_type='0' error_percent='0' id='60' repeat_num='1' score='7.1'><answer>454</answer><analysis/><questionattrs>454;-;232;-;1455;-;678568</questionattrs><tags/><user_answer/></question></questions></problem><problem id='12' score='7.1' types='0'><title>______ is your name?</title><category>3</category><complete_title>[[what|where;when;why||名词]] is your name?[{12312313}][(5)]</complete_title><questions><question correct_type='0' error_percent='0' id='17' repeat_num='1' score='7.1'><answer>what</answer><analysis>12312313</analysis><questionattrs>what;-;where;-;when;-;why</questionattrs><tags>名词</tags><user_answer/></question></questions></problem><problem id='54' score='7.1' types='0'><title>sdfasfsafsfsf</title><category>3</category><questions><question correct_type='0' error_percent='0' id='61' repeat_num='1' score='7.1'><answer>657576</answer><analysis/><questionattrs>657576;-;786;-;324242;-;4566</questionattrs><tags/><user_answer/></question></questions></problem><problem id='56' score='7.1' types='0'><title>sfasfasfsafasfsafdsafsfdsfsaf</title><category>3</category><questions><question correct_type='0' error_percent='0' id='63' repeat_num='1' score='7.1'><answer>etetet</answer><analysis>sfsf</analysis><questionattrs>etetet;-;ert456;-;4655464;-;6786</questionattrs><tags/><user_answer/></question></questions></problem><problem id='9' score='5.0' types='0'><title>我撒的飞洒 &lt;mp3&gt;/media/music.mp3&lt;mp3&gt;</title><category>3</category><questions><question correct_type='0' error_percent='0' id='14' repeat_num='1' score='5.0'><answer>sfs</answer><analysis>sfafwerwr2r2</analysis><questionattrs>sfs;-;sfss;-;sdds;-;sd</questionattrs><tags>wrwr 我的关注</tags><user_answer>sfs</user_answer></question></questions></problem><problem id='30' score='0.0' types='5'><title>Universities Branch Out&lt;br&gt;&lt;br&gt;
+        <problem id='46' score='25' types='4'>
+            <title>啊谁发上发生法萨芬萨菲</title>
+            <category>2</category>
+            <questions>
+                <question correct_type='6' error_percent='0' id='49' repeat_num='2' score='5'>
+                    <answer>说的</answer>
+                    <analysis>手动阀</analysis>
+                    <questionattrs>说的</questionattrs>
+                    <tags> 我的关注</tags>
+                    <user_answer/>
+                    <user_answer>sdfsfsfsf</user_answer>
+                </question>
+            </questions>
+        </problem>
+        <problem id='10' score='5.0' types='0'>
+            <title>fsdafafsfsaf &lt;mp3&gt;/media/music.mp3&lt;mp3&gt;</title>
+            <category>3</category>
+            <questions>
+                <question correct_type='0' error_percent='0' id='15' repeat_num='7' score='5.0'>
+                    <answer>789</answer>
+                    <analysis>sdfsfasf</analysis>
+                    <questionattrs>23;-;wer;-;65;-;789</questionattrs>
+                    <tags>ew 我的关注</tags>
+                    <user_answer>23</user_answer>
+                    <user_answer/>
+                    <user_answer>23</user_answer>
+                    <user_answer/>
+                    <user_answer>23</user_answer>
+                    <user_answer>wer</user_answer>
+                    <user_answer>23</user_answer>
+                </question>
+            </questions>
+        </problem>
+        <problem id='33' score='44' types='3'>
+            <title>sdfasfasfasfasfsafdsaf&lt;div&gt;sdfafsafsf&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;sfdasfsaf&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;sfd&lt;/div&gt;&lt;div&gt;asfd&lt;/div&gt;&lt;div&gt;asf&lt;/div&gt;&lt;div&gt;saf&lt;/div&gt;&lt;div&gt;asf&lt;/div&gt;&lt;div&gt;asfasf&lt;/div&gt;</title>
+            <category>3</category>
+            <questions>
+                <question correct_type='3' error_percent='0' id='36' repeat_num='2' score='44'>
+                    <answer>fsafdasfsaf
+                    </answer>
+                    <analysis>444ererte</analysis>
+                    <questionattrs/>
+                    <tags> 我的关注</tags>
+                    <user_answer/>
+                    <user_answer>sdfsfsfsf</user_answer>
+                </question>
+            </questions>
+        </problem>
+        <problem id='49' score='7.1' types='0'>
+            <title>上的发法上发生的</title>
+            <category>3</category>
+            <questions>
+                <question correct_type='0' error_percent='0' id='56' repeat_num='1' score='7.1'>
+                    <answer>地方</answer>
+                    <analysis/>
+                    <questionattrs>地方;-;353;-;2323;-;768</questionattrs>
+                    <tags/>
+                    <user_answer/>
+                </question>
+            </questions>
+        </problem>
+        <problem id='50' score='7.1' types='0'>
+            <title>啊谁发达撒发生法</title>
+            <category>3</category>
+            <questions>
+                <question correct_type='0' error_percent='0' id='57' repeat_num='1' score='7.1'>
+                    <answer>4545</answer>
+                    <analysis>沙发发发</analysis>
+                    <questionattrs>4545;-;56;-;34345;-;123</questionattrs>
+                    <tags/>
+                    <user_answer/>
+                </question>
+            </questions>
+        </problem>
+        <problem id='51' score='7.1' types='0'>
+            <title>上大发送方的</title>
+            <category>3</category>
+            <questions>
+                <question correct_type='0' error_percent='0' id='58' repeat_num='1' score='7.1'>
+                    <answer>32424</answer>
+                    <analysis>是发达撒发生法</analysis>
+                    <questionattrs>32424;-;454;-;89869;-;4545</questionattrs>
+                    <tags/>
+                    <user_answer/>
+                </question>
+            </questions>
+        </problem>
+        <problem id='52' score='7.1' types='0'>
+            <title>额外人听闻特温特</title>
+            <category>3</category>
+            <questions>
+                <question correct_type='0' error_percent='0' id='59' repeat_num='1' score='7.1'>
+                    <answer>2323</answer>
+                    <analysis/>
+                    <questionattrs>2323;-;3434;-;687;-;789980</questionattrs>
+                    <tags/>
+                    <user_answer/>
+                </question>
+            </questions>
+        </problem>
+        <problem id='53' score='7.1' types='0'>
+            <title>阿飞撒发生法</title>
+            <category>3</category>
+            <questions>
+                <question correct_type='0' error_percent='0' id='60' repeat_num='1' score='7.1'>
+                    <answer>454</answer>
+                    <analysis/>
+                    <questionattrs>454;-;232;-;1455;-;678568</questionattrs>
+                    <tags/>
+                    <user_answer/>
+                </question>
+            </questions>
+        </problem>
+        <problem id='12' score='7.1' types='0'>
+            <title>______ is your name?</title>
+            <category>3</category>
+            <complete_title>[[what|where;when;why||名词]] is your name?[{12312313}][(5)]</complete_title>
+            <questions>
+                <question correct_type='0' error_percent='0' id='17' repeat_num='1' score='7.1'>
+                    <answer>what</answer>
+                    <analysis>12312313</analysis>
+                    <questionattrs>what;-;where;-;when;-;why</questionattrs>
+                    <tags>名词</tags>
+                    <user_answer/>
+                </question>
+            </questions>
+        </problem>
+        <problem id='54' score='7.1' types='0'>
+            <title>sdfasfsafsfsf</title>
+            <category>3</category>
+            <questions>
+                <question correct_type='0' error_percent='0' id='61' repeat_num='1' score='7.1'>
+                    <answer>657576</answer>
+                    <analysis/>
+                    <questionattrs>657576;-;786;-;324242;-;4566</questionattrs>
+                    <tags/>
+                    <user_answer/>
+                </question>
+            </questions>
+        </problem>
+        <problem id='56' score='7.1' types='0'>
+            <title>sfasfasfsafasfsafdsafsfdsfsaf</title>
+            <category>3</category>
+            <questions>
+                <question correct_type='0' error_percent='0' id='63' repeat_num='1' score='7.1'>
+                    <answer>etetet</answer>
+                    <analysis>sfsf</analysis>
+                    <questionattrs>etetet;-;ert456;-;4655464;-;6786</questionattrs>
+                    <tags/>
+                    <user_answer/>
+                </question>
+            </questions>
+        </problem>
+        <problem id='9' score='5.0' types='0'>
+            <title>我撒的飞洒 &lt;mp3&gt;/media/music.mp3&lt;mp3&gt;</title>
+            <category>3</category>
+            <questions>
+                <question correct_type='0' error_percent='0' id='14' repeat_num='1' score='5.0'>
+                    <answer>sfs</answer>
+                    <analysis>sfafwerwr2r2</analysis>
+                    <questionattrs>sfs;-;sfss;-;sdds;-;sd</questionattrs>
+                    <tags>wrwr 我的关注</tags>
+                    <user_answer>sfs</user_answer>
+                </question>
+            </questions>
+        </problem>
+        <problem id='30' score='0.0' types='5'>
+            <title>Universities Branch Out&lt;br&gt;&lt;br&gt;
 	As never before in their long history, universities have become instruments of national competition as well as instruments of peace. They are the place of the scientific discoveries that move economies forward, and the primary means of educating the talent required to obtain and maintain competitive advantage. But at the same time, the opening of national borders to the flow of goods, services, information and especially people has made universities a powerful force for global integration, mutual understanding and geopolitical stability. &lt;br&gt;
 	In response to the same forces that have driven the world economy, universities have become more self-consciously global: seeking students from around the world who represent the entire range of cultures and values, sending their own students abroad to prepare them for global careers, offering courses of study that address the challenges of an interconnected world and collaborative (合作的) research programs to advance science for the benefit of all humanity. &lt;br&gt;
 	Of the forces shaping higher education none is more sweeping than the movement across borders. Over the past three decades the number of students leaving home each year to study abroad has grown at an annual rate of 3.9 percent, from 800,000 in 1975 to 2.5 million in 2004. Most travel from one developed nation to another, but the flow from developing to developed countries is growing rapidly. The reverse flow, from developed to developing countries, is on the rise, too. Today foreign students earn 30 percent of the doctoral degrees awarded in the United States and 38 percent of those in the United Kingdom. And the number crossing borders for undergraduate study is growing as well, to 8 percent of the undergraduates at America’s best institutions and 10 percent of all undergraduates in the U.K. In the United States, 20 percent of the newly hired professors in science and engineering are foreign-born, and in China many newly hired faculty members at the top research universities received their graduate education abroad. &lt;br&gt;
@@ -28,9 +177,191 @@ asf
 	As a result of its strength in science, the United States has consistently led the world in the commercialization of major new technologies, from the mainframe computer and the integrated circuit of the 1960s to the Internet infrastructure (基础设施) and applications software of the 1990s. The link between university-based science and industrial application is often indirect but sometimes highly visible: Silicon Valley was intentionally created by Stanford University, and Route 128 outside Boston has long housed companies spun off from MIT and Harvard. Around the world, governments have encouraged copying of this model, perhaps most successfully in Cambridge, England, where Microsoft and scores of other leading software and biotechnology companies have set up shop around the university. &lt;br&gt;
 	For all its success, the United States remains deeply hesitant about sustaining the research-university model. Most politicians recognize the link between investment in science and national economic strength, but support for research funding has been unsteady. The budget of the National Institutes of Health doubled between 1998 and 2003, but has risen more slowly than inflation since then. Support for the physical sciences and engineering barely kept pace with inflation during that same period. The attempt to make up lost ground is welcome, but the nation would be better served by steady, predictable increases in science funding at the rate of long-term GDP growth, which is on the order of inflation plus 3 percent per year. &lt;br&gt;
 	American politicians have great difficulty recognizing that admitting more foreign students can greatly promote the national interest by increasing international understanding. Adjusted for inflation, public funding for international exchanges and foreign-language study is well below the levels of 40 years ago. In the wake of September 11, changes in the visa process caused a dramatic decline in the number of foreign students seeking admission to U.S. universities, and a corresponding surge in enrollments in Australia, Singapore and the U.K. Objections from American university and business leaders led to improvements in the process and a reversal of the decline, but the United States is still seen by many as unwelcoming to international students. &lt;br&gt;
-	Most Americans recognize that universities contribute to the nation’s well-being through their scientific research, but many fear that foreign students threaten American competitiveness by taking their knowledge and skills back home. They fail to grasp that welcoming foreign students to the United States has two important positive effects: first, the very best of them stay in the States and—like immigrants throughout history—strengthen the nation; and second, foreign students who study in the United States become ambassadors for many of its most cherished (珍视) values when they return home. Or at least they understand them better. In America as elsewhere, few instruments of foreign policy are as effective in promoting peace and stability as welcoming international university students.</title><category>3</category><questions><question correct_type='5' error_percent='0' id='33' repeat_num='1' score='0.0'><answer> &lt;p&gt;     afsfsfdsfdsf&lt;/p&gt;
+	Most Americans recognize that universities contribute to the nation’s well-being through their scientific research, but many fear that foreign students threaten American competitiveness by taking their knowledge and skills back home. They fail to grasp that welcoming foreign students to the United States has two important positive effects: first, the very best of them stay in the States and—like immigrants throughout history—strengthen the nation; and second, foreign students who study in the United States become ambassadors for many of its most cherished (珍视) values when they return home. Or at least they understand them better. In America as elsewhere, few instruments of foreign policy are as effective in promoting peace and stability as welcoming international university students.
+            </title>
+            <category>3</category>
+            <questions>
+                <question correct_type='5' error_percent='0' id='33' repeat_num='1' score='0.0'>
+                    <answer> &lt;p&gt;     afsfsfdsfdsf&lt;/p&gt;
  &lt;p&gt;     afsfsfdsfdsf&lt;/p&gt;
  &lt;p&gt;     afsfsfdsfdsf&lt;/p&gt;
-                            </answer><analysis/><questionattrs/><tags> 我的关注</tags><user_answer>上发上发生法萨芬萨菲</user_answer></question></questions></problem><problem id='67' score='0.0' types='4'><title>测试综合题</title><category>2</category><questions><question correct_type='2' error_percent='0' id='110' repeat_num='1' score='0.0'><description/><answer>1</answer><analysis/><questionattrs/><tags/><user_answer/></question><question correct_type='2' error_percent='0' id='76' repeat_num='1'><description>综合题--判断题小题</description><answer>1</answer><questionattrs/><tags/><user_answer>0</user_answer></question><question correct_type='0' error_percent='0' id='81' repeat_num='1'><answer>regerg;|;thrthtr</answer><analysis/><questionattrs>22343242;-;regerg;-;thrthtr;-;fweefwfger</questionattrs><tags/><user_answer>regerg</user_answer></question><question correct_type='0' error_percent='0' id='86' repeat_num='1'><answer>1</answer><analysis/><questionattrs/><tags/><user_answer/></question><question correct_type='0' error_percent='0' id='106' repeat_num='1'><description>111111111</description><answer>111</answer><analysis>1</analysis><questionattrs>11;-;111;-;1111;-;11111</questionattrs><tags/><user_answer>11111</user_answer></question><question correct_type='0' error_percent='0' id='107' repeat_num='1'><description/><answer>111</answer><analysis>2</analysis><questionattrs>11;-;111;-;1111;-;11111</questionattrs><tags/><user_answer>11</user_answer></question><question correct_type='3' error_percent='0' id='74' repeat_num='1' score='3.0' user_answer=''><description>综合题--填空题小题</description><answer>综合题--填空题小题</answer><questionattrs/><tags/><user_answer/></question></questions></problem><problem id='74' score='4.0' types='4'><title>grgergerhgrthefwegergre</title><category>2</category><questions><question correct_type='1' error_percent='0' id='96' repeat_num='1' score='4.0'><description>333</description><answer>44333;|;222</answer><analysis>14323423</analysis><questionattrs>44333;-;65645645;-;222;-;3423423;-;ggggg</questionattrs><tags/><user_answer/></question></questions></problem><problem id='75' score='6.0' types='4'><title>wqeretyuytrewqrwerewgfergerfrefwefwef</title><category>2</category><questions><question correct_type='6' error_percent='0' id='102' repeat_num='1' score='6.0'><description>6666666666666666666666666</description><answer>66;|;6666</answer><analysis>6</analysis><questionattrs>6;-;66;-;6666;-;666</questionattrs><tags/><user_answer/></question></questions></problem><problem id='95' score='15.0' types='4'><title>wefwgergergfwefwfwgegergfwefew</title><category>2</category><questions><question correct_type='2' error_percent='0' id='172' repeat_num='1' score='4'><description>ewfwefregerger</description><answer>1</answer><questionattrs/><tags/><user_answer>0</user_answer></question><question correct_type='1' error_percent='0' id='176' repeat_num='1' score='4'><description>fewfreger</description><answer>reg;|;fwegre</answer><analysis/><questionattrs>fweg;-;reg;-;fwegre;-;fwefwr</questionattrs><tags/><user_answer>fweg;|;reg;|;fwegre</user_answer></question></questions></problem><problem id='99' score='1.0' types='1'><title>222222222222222222222222222222222</title><category>2</category><questions><question correct_type='1' error_percent='0' id='178' repeat_num='1' score='1.0'><answer>222;|;2;|;22222</answer><analysis/><questionattrs>22;-;222;-;2;-;22222</questionattrs><tags/><user_answer>22;|;222;|;2</user_answer></question></questions></problem><problem id='100' score='3.0' types='2'><title>3333333333333333333333333</title><category>2</category><questions><question correct_type='2' error_percent='0' id='179' repeat_num='1' score='3.0'><answer>1</answer><analysis/><questionattrs/><tags/><user_answer>0</user_answer></question></questions></problem><problem id='102' score='36.0' types='4'><title>55555555555555555555555555555555555555555555555</title><category>2</category><questions><question correct_type='0' error_percent='0' id='181' repeat_num='1' score='5'><description>55</description><answer>555</answer><questionattrs>55;-;555;-;5555;-;55555</questionattrs><tags/><user_answer>55</user_answer></question><question correct_type='1' error_percent='0' id='182' repeat_num='1' score='6'><description>6666666666666666666666666666666666</description><answer>6;|;666</answer><questionattrs>6;-;66;-;666;-;6666</questionattrs><tags/><user_answer>6;|;66;|;666</user_answer></question><question correct_type='2' error_percent='0' id='183' repeat_num='1' score='7'><description>777777777777777777777777777777777777777777777777777</description><answer>1</answer><questionattrs/><tags/><user_answer>0</user_answer></question><question correct_type='2' error_percent='0' id='189' repeat_num='1' score='1.0'><description>1111111111111111111111</description><answer>1</answer><analysis/><questionattrs/><tags/><user_answer>0</user_answer></question><question correct_type='3' error_percent='0' id='184' repeat_num='1' score='8' user_answer='111111111'><description>888888888888888888888888888888888888888888888888888</description><answer>8888888888888888888888888888888888888</answer><questionattrs/><tags></tags><user_answer>111111111</user_answer></question><question correct_type='5' error_percent='0' id='185' repeat_num='1' score='9' user_answer='11111111111111'><description>99999999999999999999999999999999999999999999999999</description><answer>999999999999999999999999999999999</answer><questionattrs/><tags></tags><user_answer>11111111111111</user_answer></question></questions></problem><problem id='104' score='5.0' types='0'><title>单选题</title><category>2</category><questions><question correct_type='0' error_percent='0' id='190' repeat_num='2' score='5.0'><answer>选项4</answer><analysis>单选题</analysis><questionattrs>选项1;-;选项2;-;选项3;-;选项4;-;选项5;-;选项6</questionattrs><tags> 我的关注</tags><user_answer>选项3</user_answer><user_answer/></question></questions></problem><problem id='111' score='5.0' types='2'><title>判断题</title><category>2</category><questions><question correct_type='2' error_percent='0' id='203' repeat_num='2' score='5.0'><answer>1</answer><analysis>判断题判断题判断题判断题判断题判断题判断题判断题判断题判断题判断题判断题判断题判断题</analysis><questionattrs/><tags/><user_answer>0</user_answer><user_answer/></question></questions></problem><problem id='110' score='55.0' types='4'><title>综合题</title><category>2</category><questions><question correct_type='0' error_percent='0' id='196' repeat_num='2' score='5'><description>单选题</description><answer>选项3</answer><questionattrs>选项1;-;选项2;-;选项3;-;选项4</questionattrs><tags/><user_answer>选项1</user_answer><user_answer/></question><question correct_type='1' error_percent='0' id='197' repeat_num='2' score='5'><description>多选题</description><answer>选项1;|;选项2;|;选项3</answer><analysis>多选题小题</analysis><questionattrs>选项1;-;选项2;-;选项3;-;选项4</questionattrs><tags/><user_answer>选项3</user_answer><user_answer/></question><question correct_type='2' error_percent='0' id='198' repeat_num='2' score='5'><description>判断题</description><answer>1</answer><questionattrs/><tags/><user_answer>0</user_answer><user_answer/></question><question correct_type='6' error_percent='0' id='202' repeat_num='2' score='5'><description>完形填空题</description><answer>1;|;2;|;3</answer><analysis/><questionattrs>1;-;2;-;3;-;4</questionattrs><tags/><user_answer>fwegerfewfwe</user_answer><user_answer/></question><question correct_type='1' error_percent='0' id='205' repeat_num='2' score='5'><description>添加222222</description><answer>1;|;2;|;3</answer><analysis>添加222222添加222222添加222222添加222222添加222222</analysis><questionattrs>1;-;2;-;3;-;4</questionattrs><tags/><user_answer>2</user_answer><user_answer/></question><question correct_type='0' error_percent='0' id='206' repeat_num='2' score='5'><description>添加333333333</description><answer>3</answer><analysis>添加333333333添加333333333添加333333333</analysis><questionattrs>1;-;2;-;3;-;4</questionattrs><tags/><user_answer>2</user_answer><user_answer/></question><question correct_type='2' error_percent='0' id='207' repeat_num='2' score='5'><description>判断题</description><answer>1</answer><analysis>判断题判断题判断题判断题判断题判断题判断题判断题判断题判断题判断题判断题</analysis><questionattrs/><tags/><user_answer>0</user_answer><user_answer/></question><question correct_type='6' error_percent='0' id='209' repeat_num='2' score='5.0'><description>判断题判断题判断题判断题555555555555555555555判断题判断题判断题判断题555555555555555555555</description><answer>1;|;2;|;3</answer><analysis>判断题判断题判断题判断题555555555555555555555判断题判断题判断题判断题555555555555555555555</analysis><questionattrs>1;-;2;-;3;-;4</questionattrs><tags/><user_answer>gerfwef</user_answer><user_answer/></question></questions></problem><problem id='105' score='5.0' types='1'><title>多选题</title><category>2</category><questions><question correct_type='1' error_percent='0' id='191' repeat_num='1' score='5.0'><answer>选项1;|;选项2;|;选项3</answer><analysis/><questionattrs>选项1;-;选项2;-;选项3;-;选项4</questionattrs><tags> 我的关注</tags><user_answer/></question></questions></problem><problem id='107' score='5.0' types='3'><title>填空题</title><category>2</category><questions><question correct_type='3' error_percent='0' id='193' repeat_num='1' score='5.0'><answer>填空题</answer><analysis>填空题</analysis><questionattrs/><tags> 我的关注</tags><user_answer/></question></questions></problem><problem id='108' score='5.0' types='5'><title>简答题</title><category>2</category><questions><question correct_type='5' error_percent='0' id='194' repeat_num='1' score='5.0'><answer>简答题</answer><analysis>简答题</analysis><questionattrs/><tags> 我的关注</tags><user_answer/></question></questions></problem><problem id='101' score='4.0' types='3'><title>44444444444444444444444444444444444444</title><category>2</category><questions><question correct_type='3' error_percent='0' id='180' repeat_num='1' score='4.0' user_answer='efwefwe'><answer>444444444444444444</answer><analysis/><questionattrs/><tags></tags><user_answer>efwefwe</user_answer></question></questions></problem><problem id='103' score='1.0' types='5'><title>000000000000000000000000000000000000000</title><category>2</category><questions><question correct_type='5' error_percent='0' id='186' repeat_num='1' score='1.0' user_answer='wfefewfger'><answer>000000000000000000000000</answer><analysis/><questionattrs/><tags></tags><user_answer>wfefewfger</user_answer></question></questions></problem></problems>
+                    </answer>
+                    <analysis/>
+                    <questionattrs/>
+                    <tags> 我的关注</tags>
+                    <user_answer>上发上发生法萨芬萨菲</user_answer>
+                </question>
+            </questions>
+        </problem>
+        <problem id='87' score='0.0' types='1'>
+            <title>多选题</title>
+            <category>2</category>
+            <questions>
+                <question correct_type='1' error_percent='0' id='99' repeat_num='2' score='0.0'>
+                    <answer>a;|;b;|;c;|;d</answer>
+                    <analysis/>
+                    <questionattrs>a;-;b;-;c;-;d</questionattrs>
+                    <tags/>
+                    <user_answer>a;|;b;|;c</user_answer>
+                    <user_answer>a;|;b;|;c</user_answer>
+                </question>
+            </questions>
+        </problem>
+        <problem id='90' score='147.0' types='4'>
+            <title>最强大的军队</title>
+            <category>2</category>
+            <questions>
+                <question correct_type='1' error_percent='0' id='105' repeat_num='2' score='12.0'>
+                    <description>茫茫大漠</description>
+                    <answer>是</answer>
+                    <analysis/>
+                    <questionattrs>是;-;的;-;地方;-;个</questionattrs>
+                    <tags/>
+                    <user_answer>个</user_answer>
+                    <user_answer>个</user_answer>
+                </question>
+                <question correct_type='3' error_percent='0' id='104' repeat_num='1' score='12.0' user_answer='wolf'>
+                    <description>填空题</description>
+                    <answer>试卷</answer>
+                    <questionattrs/>
+                    <tags/>
+                    <user_answer>wolf</user_answer>
+                </question>
+            </questions>
+        </problem>
+        <problem id='89' score='10.0' types='5'>
+            <title>呵呵，这是简单题</title>
+            <category>2</category>
+            <questions>
+                <question correct_type='5' error_percent='0' id='101' repeat_num='1' score='10.0' user_answer='wolf'>
+                    <answer>wolf</answer>
+                    <analysis/>
+                    <questionattrs/>
+                    <tags/>
+                    <user_answer>wolf</user_answer>
+                </question>
+            </questions>
+        </problem>
+        <problem id='91' score='14.0' types='5'>
+            <title>军户不能出人命啊</title>
+            <category>2</category>
+            <questions>
+                <question correct_type='5' error_percent='0' id='106' repeat_num='2' score='14.0' user_answer='wolf'>
+                    <answer>wolf</answer>
+                    <analysis/>
+                    <questionattrs/>
+                    <tags/>
+                    <user_answer>wolf</user_answer>
+                    <user_answer>1</user_answer>
+                </question>
+            </questions>
+        </problem>
+        <problem id='77' score='20.0' types='4'>
+            <title>sfsafsafsfsf</title>
+            <category>2</category>
+            <questions>
+                <question correct_type='0' delete_status='1' error_percent='0' id='93' repeat_num='1' score='7'>
+                    <description>asfdsfsafsaf</description>
+                    <answer>ewrwr</answer>
+                    <analysis>sfasfsafsafsfa</analysis>
+                    <questionattrs>ewrwr;-;werw;-;4546;-;2342</questionattrs>
+                    <tags/>
+                    <user_answer>werw</user_answer>
+                </question>
+                <question correct_type='1' error_percent='0' id='94' repeat_num='1' score='4'>
+                    <description>sfdsfasfadfsafsfsaf</description>
+                    <answer>5646;|;456788</answer>
+                    <analysis>dfsfsfsfsdfsf</analysis>
+                    <questionattrs>5646;-;456788;-;5775757;-;43353</questionattrs>
+                    <tags/>
+                    <user_answer/>
+                </question>
+                <question correct_type='5' error_percent='0' id='97' repeat_num='1' score='4.0' user_answer='sfdsafsafsafsfsfsfsfsafsfsfdsdf'>
+                    <description>ertewtetewt</description>
+                    <answer>we3454654twetewtet</answer>
+                    <analysis>eertwetewtwetet</analysis>
+                    <questionattrs/>
+                    <tags/>
+                    <user_answer>sfdsafsafsafsfsfsfsfsafsfsfdsdf</user_answer>
+                </question>
+                <question correct_type='2' error_percent='0' id='95' repeat_num='1' score='5'>
+                    <description>87uyuyiuyiyiyioyiyiyiu</description>
+                    <answer>1</answer>
+                    <analysis>sdfsfsdfsfdsfsfd</analysis>
+                    <questionattrs/>
+                    <tags> 我的关注</tags>
+                    <user_answer>1</user_answer>
+                </question>
+            </questions>
+        </problem>
+        <problem id='79' score='4.0' types='3'>
+            <title>tttttttttttttttttttttttttttttttttttttttttttttttt</title>
+            <category>2</category>
+            <questions>
+                <question correct_type='3' error_percent='0' id='100' repeat_num='1' score='4.0' user_answer='sfsafsafsaf'>
+                    <answer>tttttttttttttttttt</answer>
+                    <analysis>ttttttttttttt</analysis>
+                    <questionattrs/>
+                    <tags/>
+                    <user_answer>sfsafsafsaf</user_answer>
+                </question>
+            </questions>
+        </problem>
+        <problem id='80' score='5.0' types='5'>
+            <title>jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj</title>
+            <category>2</category>
+            <questions>
+                <question correct_type='5' error_percent='0' id='101' repeat_num='1' score='5.0' user_answer='asfasfsadfasfsafd'>
+                    <answer>jjjjjjjjjjjjjjjjjjjjjjjj</answer>
+                    <analysis/>
+                    <questionattrs/>
+                    <tags/>
+                    <user_answer>asfasfsadfasfsafd</user_answer>
+                </question>
+            </questions>
+        </problem>
+        <problem id='75' score='7.0' types='4'>
+            <title>asfasfsafdsdfsafd</title>
+            <category>3</category>
+            <questions>
+                <question correct_type='0' error_percent='0' id='89' repeat_num='2' score='4.0'>
+                    <description>asfdasfsafd</description>
+                    <answer>345345</answer>
+                    <analysis>sdfasfsaf</analysis>
+                    <questionattrs>34535;-;2342;-;345345;-;42</questionattrs>
+                    <tags/>
+                    <user_answer>34535</user_answer>
+                    <user_answer>34535</user_answer>
+                </question>
+            </questions>
+        </problem>
+        <problem id='76' score='3.0' types='0'>
+            <title>asdfasfsdfwetretetr</title>
+            <category>3</category>
+            <questions>
+                <question correct_type='0' error_percent='0' id='92' repeat_num='2' score='3.0'>
+                    <answer>ert</answer>
+                    <analysis>fsafsafsafdsafd</analysis>
+                    <questionattrs>ert;-;5678;-;68;-;21313</questionattrs>
+                    <tags/>
+                    <user_answer/>
+                    <user_answer/>
+                </question>
+            </questions>
+        </problem>
+        <problem id='10' score='5.0' types='0'>
+            <title>fsdafafsfsaf &lt;mp3&gt;/media/music.mp3&lt;mp3&gt;</title>
+            <category>3</category>
+            <questions>
+                <question correct_type='0' error_percent='0' id='15' repeat_num='1' score='5.0'>
+                    <answer>789</answer>
+                    <analysis>sdfsfasf</analysis>
+                    <questionattrs>23;-;wer;-;65;-;789</questionattrs>
+                    <tags>ew 我的关注</tags>
+                    <user_answer>23</user_answer>
+                </question>
+            </questions>
+        </problem>
+    </problems>
 </collection>
 
