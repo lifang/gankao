@@ -190,8 +190,8 @@ img { border: none;}
 .testPaper_foot { height: 100px;}
 
 /*操作提示弹出层---*/
-.tishi_tab { width: 250px; padding: 10px; background: url(/images/paper/mk_b_zz_bg.png) repeat; border: 1px #ffffff solid; position: absolute; display: none;z-index: 9999;}
-.tishi_tab p { text-align: center; line-height: 24px; font-size: 14px; font-family:"微软雅黑"; color: #FFF;}
+.tishi_tab {width: 288px; height: 82px; padding:30px 10px 10px 10px; background: url(/images/paper/tishi_tab_bg.png) no-repeat; position: absolute; display: none;z-index: 9999;}
+.tishi_tab p  { text-align: center; line-height: 24px; font-size: 14px; font-family:"微软雅黑"; color: #ffffff;}
 
 /*提交错误弹出层-----*/
 .upErrorTo_tab { width: 91px; height: 82px; padding: 14px 10px 0 5px; background: url(/images/paper/upErrorTo_bg.png) no-repeat; display: none; position: absolute; z-index:100;}
