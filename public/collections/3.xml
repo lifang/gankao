@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <collection id='3'>
     <problems>
-        <problem delete_status='1' id='113' score='0' types='5'>
+        <problem id='113' score='0' types='5'>
             <title>Directions： For this part， you are allowed 30 minutes to write a short essay on the topic of Due Attention Should Be Given To Spelling. You should write at least 120 words following the outline given below：
 　&lt;div&gt;　1. 如今不少学生在英语学习中不重视拼写
 　&lt;/div&gt;&lt;div&gt;　2. 出现这种情况的原因
@@ -9,7 +9,7 @@
             </title>
             <category>2</category>
             <questions>
-                <question correct_type='5' delete_status='1' error_percent='0' id='713' repeat_num='2' score='0'>
+                <question correct_type='5' error_percent='0' id='713' repeat_num='2' score='0'>
                     <answer>范文：Correct spelling is a basic skill in English study. However， nowadays many students do not pay much attention to it. They have their own reasons for misspelling. First of all， they like an easy way of studying， which causes some omissions and changes in spelling. Second， the teachers might not be very strict in students&apos; spelling. In China， teachers seem to be more concerned with grammar and vocabulary but not spelling. To change this situation， in my opinion， the teachers and the students should work together. On one hand， the teachers should give more attention to students&apos; spelling， asking the students to be conscious of the importance of correct spelling from the very beginning of their English study. On the other hand， the students themselves are supposed to be aware that correct spelling is a must in English study. To sum up， correct spelling is so important that both students and the teachers should spare no efforts to achieve correct spelling.</answer>
                     <analysis/>
                     <questionattrs/>
