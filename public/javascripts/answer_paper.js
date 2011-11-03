@@ -65,7 +65,6 @@ function create_paper() {
         if (tof(blocks) == "array") {
             for (var i=0; i<blocks.size();i++) {
                 create_block(bocks_div, blocks[i]);
-
             }
         } else {
             create_block(bocks_div, blocks);
@@ -548,8 +547,7 @@ function create_single_question(que_div, question, drag_li_arr) {
         for (var i=0; i<que_attrs.length; i++) {
             if (que_attrs[i] != null && que_attrs[i] != "") {
                 if (question.correct_type == "6") {
-                    drag_li_arr.push(que_attrs[i]);
-                    
+                    drag_li_arr.push(que_attrs[i]);               
                 } else {
                     var attr = create_element("li", null, null, null, null, "innerHTML");
                     ul.appendChild(attr);
@@ -563,7 +561,7 @@ function create_single_question(que_div, question, drag_li_arr) {
                         var has_answer = false;
                         if (answer_hash != null &&  answer_hash[question.id] != null) {
                             var all_attr = answer_hash[question.id][0].split(";|;");
-                            if (all_attr != null && all_attr.size > 0) {
+                            if (all_attr != null && all_attr.length > 0) {
                                 for (var a = 0; a<all_attr.length; a ++) {
                                     if (all_attr[a].strip() == que_attrs[i].strip()) {
                                         has_answer = true;
