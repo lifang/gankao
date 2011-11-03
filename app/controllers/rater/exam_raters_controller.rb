@@ -138,14 +138,19 @@ class Rater::ExamRatersController < ApplicationController
     @exam_rater=ExamRater.find(params[:id])
   end
   
-  def edit_value #编辑考分
+  def edit_value #编辑姓名
     @exam_rater=ExamRater.find(params[:id])
     @exam_rater.update_attributes(:name=>params[:value])
     render :inline=>"姓&nbsp;&nbsp;&nbsp;&nbsp;名:#{ @exam_rater.name}"
   end
   
   def index #参加的阅卷列表
-    @exam_rater=ExamRater.find(cookies[:rater_id])
-    @exam_list=ExamRater.find_all_by_email(@exam_rater.email)
+    if cookies[:rater_id].nil?
+      render :inline=>"您访问的页面不存在。"
+    else
+      @exam_rater=ExamRater.find(cookies[:rater_id])
+      @exam_list=ExamRater.find_all_by_email(@exam_rater.email)
+    end
+   
   end
 end
