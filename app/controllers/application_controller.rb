@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     deny_access unless signed_in?
   end
 
-   def write_xml(url,doc)
+  def write_xml(url,doc)
     file = File.new(url, File::CREAT|File::TRUNC|File::RDWR, 0777)
     file.write(doc)
     file.close
@@ -57,10 +57,5 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
-
-  def rater_access?
-   redirect_to "/rater/exam_raters/#{cookies[:examination_id]}/reader_papers?rater_id=#{cookies[:rater_id]}"  unless params[:id]==cookies[:examination_id]
-  end
 
 end
