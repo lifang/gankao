@@ -2,9 +2,9 @@
 class Rater::ExamRatersController < ApplicationController
   layout "rater"
   def rater_session #阅卷老师登陆页面
-    @rater=ExamRater.find(:first,:conditions =>["id = #{params[:id].to_i} and examination_id = #{params[:examination]}"])  
+    @rater=ExamRater.find(:first,:conditions =>["id = #{params[:id].to_i} and examination_id = #{params[:examination].to_i}"])
     if @rater.nil?
-      render :inline=>"页面不存在"
+      render :inline=>"您访问的页面不存在。"
     else
       @examination=Examination.find(params[:examination])
       render "/rater/exam_raters/session"
@@ -25,7 +25,7 @@ class Rater::ExamRatersController < ApplicationController
   end
   
   def reader_papers  #答卷批阅状态显示
-    auth_rater=ExamRater.find(:first,:conditions =>["id = #{cookies[:rater_id].to_i} and examination_id = #{params[:id]}"])
+    auth_rater=ExamRater.find(:first,:conditions =>["id = #{cookies[:rater_id].to_i} and examination_id = #{params[:id].to_i}"])
     if auth_rater.nil?
       redirect_to "/rater/exam_raters/#{params[:rater_id]}/rater_session?examination=#{params[:id]}"
     else
