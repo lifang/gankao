@@ -8,8 +8,7 @@ class Rater::ExamRatersController < ApplicationController
     else
       @examination=Examination.find(params[:examination])
       render "/rater/exam_raters/session"
-    end
-    
+    end    
   end
   
   def rater_login  #阅卷老师登陆
