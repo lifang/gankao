@@ -42,7 +42,7 @@ img { border: none;}
 .test_over_btn { width: 69px; height: 28px; margin-left: 5px; float: right; margin-top: 5px; background: url(/images/paper/test_over_btn.png) 0 0 no-repeat; border: none; cursor: pointer;}
 .test_out_btn { width: 69px; height: 28px; margin-left: 5px; float: right; margin-top: 5px; background: url(/images/paper/test_out_btn.png) 0 0 no-repeat; border: none; cursor: pointer;}
 .chak_over_btn { width: 102px; height: 28px; margin-left: 5px; float: right; margin-top: 5px; background: url(/images/paper/chak_over_btn.png) 0 0 no-repeat; border: none; cursor: pointer;}
-.test_fq_btn { width: 69px; height: 28px; margin-left: 5px; float: right; margin-top: 5px; background: url(/images/paper/test_fq_btn.png) 0 0 no-repeat; border: none; cursor: pointer;}
+.test_fq_btn { width: 102px; height: 28px; margin-left: 5px; float: right; margin-top: 5px; background: url(/images/paper/test_fq_btn.png) 0 0 no-repeat; border: none; cursor: pointer;}
 
 /*testPaper-----main*/
 .testPaper_main { width: 960px; background: #FFF; margin: 0 auto; padding: 50px 0; overflow: hidden;}
