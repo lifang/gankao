@@ -13,6 +13,7 @@ class Rater::ExamRatersController < ApplicationController
   
   def rater_login  #阅卷老师登陆
     @rater=ExamRater.find(params[:id])
+    @examination=Examination.find(params[:examination_id])
     if @rater.author_code==params[:author_code]
       cookies[:rater_id]={:value =>@rater.id, :path => "/", :secure  => false}
       flash[:success]="登陆成功"
@@ -64,25 +65,30 @@ class Rater::ExamRatersController < ApplicationController
   
   def answer_paper #批阅答卷
     @exam_user=ExamUser.find(params[:id])
-    doc=ExamRater.open_file(Constant::PUBLIC_PATH + @exam_user.answer_sheet_url)
-    xml=ExamRater.open_file(Constant::BACK_PUBLIC_PATH + "/papers/#{doc.elements[1].attributes["id"]}.xml")
-    @xml=ExamUser.answer_questions(xml,doc)
-    @reading= RaterUserRelation.find(:first, :conditions => ["exam_rater_id=#{cookies[:rater_id]} and is_marked=0"])
-    if @xml.attributes["ids"].to_s == "-1"
-      flash[:notice] = "感谢您的参与，当前试卷没有需要批改的试卷。"
+    if @exam_user.nil?
+      render :inline=>"您访问的页面不存在。"
     else
-      if @reading.nil?
-        @reading=RaterUserRelation.create(:exam_rater_id => cookies[:rater_id],
-          :exam_user_id => @exam_user.id, :started_at => Time.now,:is_marked=>0)
+      doc=ExamRater.open_file(Constant::PUBLIC_PATH + @exam_user.answer_sheet_url)
+      xml=ExamRater.open_file(Constant::BACK_PUBLIC_PATH + "/papers/#{doc.elements[1].attributes["id"]}.xml")
+      @xml=ExamUser.answer_questions(xml,doc)
+      @reading= RaterUserRelation.find(:first, :conditions => ["exam_rater_id=#{cookies[:rater_id]} and is_marked=0"])
+      if @xml.attributes["ids"].to_s == "-1"
+        flash[:notice] = "感谢您的参与，当前试卷没有需要批改的试卷。"
+      else
+        if @reading.nil?
+          @reading=RaterUserRelation.create(:exam_rater_id => cookies[:rater_id],
+            :exam_user_id => @exam_user.id, :started_at =>Time.now,:is_marked=>0)
+        end
       end
     end
+  
   end
 
   def over_answer #批阅完成，给答卷添加成绩
-    @exam_relation=RaterUserRelation.find(cookies[:rater_id])
+    @exam_relation=RaterUserRelation.find(params[:id])
     @exam_relation.toggle!(:is_marked)
     @exam_relation.update_attributes(:rate_time=>((Time.now-@exam_relation.started_at)/60+1).to_i)
-    @exam_user=ExamUser.find(params[:id])
+    @exam_user=ExamUser.find(@exam_relation.exam_user_id)
     url="#{Rails.root}/public/#{@exam_user.answer_sheet_url}"
     doc=ExamRater.open_file(url)
     collection = Collection.find_or_create_by_user_id(@exam_user.user_id)
