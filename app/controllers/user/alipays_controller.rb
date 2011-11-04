@@ -41,9 +41,8 @@ class User::AlipaysController < ApplicationController
       if File.exists? file_path
         file = File.open( file_path,"a")
       else
-        file = File.new( file_path,"w")
+        file = File.new( file_path,"w+")
       end
-      file.chmod(0644)
       file.puts "#{Time.now.strftime('%Y%m%d %H:%M:%S')}   #{request.parameters.to_s}\r\n"
       file.close
       if mysign==params[:sign] and response_txt=="true"
