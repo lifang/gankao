@@ -216,6 +216,7 @@ img { border: none;}
 .tooltip_p { height: 24px; line-height: 24px;}
 
 /*白色弹出层---------*/
-.white_tab_box { width: 300px; border: 1px #005eac solid; background: url(/images/paper/White_tab_bg.png) repeat 0 0; position: absolute;}
-.white_box_x { float: right; margin: 5px;}
+.white_tab_box { width: 308px; height: 122px; background: url(/images/paper/tishi_tab_bg.png) repeat 0 0; position: absolute;}
+.white_box_x { float: right; margin: 7px 10px 5px 5px;}
+.white_tab_box p { text-align: center; line-height: 24px; font-size: 14px; font-family:"微软雅黑"; color: #ffffff;}
 .white_box_text { line-height: 24px; padding: 0 5px;}
