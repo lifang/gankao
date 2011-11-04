@@ -8,8 +8,9 @@ class User::AlipaysController < ApplicationController
     is_vip_user=Order.find_by_user_id(cookies[:user_id])
     if is_vip_user.nil?
       out_trade_no="#{cookies[:user_id]}_#{Time.now.strftime("%Y%m%d%H%M%S")}#{Time.now.to_i}"
-      OPTIONS.merge!(:seller_email =>User::AlipaysHelper::SELLER_EMAIL, :partner =>User::AlipaysHelper::PARTNER, :_input_charset => 'utf-8',:out_trade_no=>out_trade_no)
-      OPTIONS.merge!(:sign_type => 'MD5', :sign =>Digest::MD5.hexdigest(OPTIONS.sort.map{|k,v|"#{k}=#{v}"}.join("&")+User::AlipaysHelper::PARTNER_KEY))
+      OPTIONS.merge!(:seller_email =>User::AlipaysHelper::SELLER_EMAIL, :partner =>User::AlipaysHelper::PARTNER, :_input_charset =>"gbk2312",:out_trade_no=>out_trade_no)
+      puts OPTIONS.sort.map{|k,v|"#{k}=#{v}"}.join("&")+User::AlipaysHelper::PARTNER_KEY
+      OPTIONS.merge!(:sign_type => "MD5", :sign =>Digest::MD5.hexdigest(OPTIONS.sort.map{|k,v|"#{k}=#{v}"}.join("&")+User::AlipaysHelper::PARTNER_KEY))
       redirect_to "#{User::AlipaysHelper::PAGE_WAY}?#{OPTIONS.sort.map{|k, v| "#{CGI::escape(k.to_s)}=#{CGI::escape(v.to_s)}"}.join('&')}"
     else
       flash[:warn]="您已经是vip用户"
@@ -35,7 +36,7 @@ class User::AlipaysController < ApplicationController
       my_params.delete("sign")
       my_params.delete("sign_type")
       mysign = Digest::MD5.hexdigest(my_params.sort.map{|k,v|"#{k}=#{v}"}.join("&")+User::AlipaysHelper::PARTNER_KEY)
-      dir = "#{Rails.root}/public/apliay" 
+      dir = "#{Rails.root}/public/apliay"
       Dir.mkdir(dir)  unless File.directory?(dir)
       file_path = dir+"/#{Time.now.strftime("%Y%m%d")}.log"
       if File.exists? file_path
@@ -49,7 +50,7 @@ class User::AlipaysController < ApplicationController
       if mysign==params[:sign] and response_txt=="true"
         if params[:trade_status]=="WAIT_BUYER_PAY"
           render :text=>"success"
-        elsif params[:trade_status]=="TRADE_FINISHED" or params[:trade_status]=="TRADE_SUCCESS"     
+        elsif params[:trade_status]=="TRADE_FINISHED" or params[:trade_status]=="TRADE_SUCCESS"
           @@m.synchronize {
             trade_nu =out_trade_no.to_s.split("_")
             begin
