@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   end
 
   def write_xml(url,doc)
-    file = File.new(url, File::CREAT|File::TRUNC|File::RDWR, 0777)
+    file = File.new(url, File::CREAT|File::TRUNC|File::RDWR, 0644)
     file.write(doc)
     file.close
   end
