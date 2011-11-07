@@ -24,7 +24,7 @@ Gankao::Application.routes.draw do
   resources :exam_lists do
     collection do
       post :show_problem,:next_problem,:compare_answer
-      post :feedback,:feedback_list
+      post :feedback,:feedback_list,:ajax_hide_exercise
       get :honoured_guest
     end
     member do
