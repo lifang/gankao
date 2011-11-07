@@ -13,6 +13,14 @@ Gankao::Application.routes.draw do
       get "renren_index","follow_me","login_from_qq","qq_index"
     end
   end
+  resources :competions do
+    collection do
+
+    end
+    member do
+      
+    end
+  end
   resources :exam_lists do
     collection do
       post :show_problem,:next_problem,:compare_answer
