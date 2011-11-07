@@ -5,13 +5,20 @@ class User::AlipaysController < ApplicationController
   @@m = Mutex.new
   
   def alipay_request
+    options ={
+      :service=>"create_direct_pay_by_user",
+      :notify_url=>"http://www.gankao.co/user/alipays/take_over_return",
+      :return_url=>"http://www.gankao.co/user/alipays/over_pay",
+      :subject=>"CET4vip",
+      :payment_type=>Constant::VIP_TYPE[:good],
+      :total_fee=>Constant::VIP_FEE
+    }
     is_vip_user=Order.find_by_user_id(cookies[:user_id])
     if is_vip_user.nil?
       out_trade_no="#{cookies[:user_id]}_#{Time.now.strftime("%Y%m%d%H%M%S")}#{Time.now.to_i}"
-      OPTIONS.merge!(:seller_email =>User::AlipaysHelper::SELLER_EMAIL, :partner =>User::AlipaysHelper::PARTNER, :_input_charset =>"gbk2312",:out_trade_no=>out_trade_no)
-      puts OPTIONS.sort.map{|k,v|"#{k}=#{v}"}.join("&")+User::AlipaysHelper::PARTNER_KEY
-      OPTIONS.merge!(:sign_type => "MD5", :sign =>Digest::MD5.hexdigest(OPTIONS.sort.map{|k,v|"#{k}=#{v}"}.join("&")+User::AlipaysHelper::PARTNER_KEY))
-      redirect_to "#{User::AlipaysHelper::PAGE_WAY}?#{OPTIONS.sort.map{|k, v| "#{CGI::escape(k.to_s)}=#{CGI::escape(v.to_s)}"}.join('&')}"
+      options.merge!(:seller_email =>User::AlipaysHelper::SELLER_EMAIL, :partner =>User::AlipaysHelper::PARTNER, :_input_charset=>"utf-8", :out_trade_no=>out_trade_no)
+      options.merge!(:sign_type => "MD5", :sign =>Digest::MD5.hexdigest(options.sort.map{|k,v|"#{k}=#{v}"}.join("&")+User::AlipaysHelper::PARTNER_KEY))
+      redirect_to "#{User::AlipaysHelper::PAGE_WAY}?#{options.sort.map{|k, v| "#{CGI::escape(k.to_s)}=#{CGI::escape(v.to_s)}"}.join('&')}"
     else
       flash[:warn]="您已经是vip用户"
       render :inline => " <link href='/stylesheets/style.css' rel='stylesheet' type='text/css' />
@@ -36,13 +43,13 @@ class User::AlipaysController < ApplicationController
       my_params.delete("sign")
       my_params.delete("sign_type")
       mysign = Digest::MD5.hexdigest(my_params.sort.map{|k,v|"#{k}=#{v}"}.join("&")+User::AlipaysHelper::PARTNER_KEY)
-      dir = "#{Rails.root}/public/apliay"
+      dir = "#{Rails.root}/public/alipay"
       Dir.mkdir(dir)  unless File.directory?(dir)
       file_path = dir+"/#{Time.now.strftime("%Y%m%d")}.log"
       if File.exists? file_path
         file = File.open( file_path,"a")
       else
-        file = File.new( file_path,"w+")
+        file = File.new(file_path, "w")
       end
       file.puts "#{Time.now.strftime('%Y%m%d %H:%M:%S')}   #{request.parameters.to_s}\r\n"
       file.close
@@ -75,13 +82,7 @@ class User::AlipaysController < ApplicationController
   end
 
   def over_pay
-    out_trade_no=params[:out_trade_no]
-    order=Order.find(:first, :conditions => ["out_trade_no=?",out_trade_no])
-    if order.nil?
-      flash[:warn]="充值不成功"
-    else
-      flash[:warn]="充值成功，恭喜您成为vip"
-    end
+    flash[:warn]="您已经完成充值，请稍等片刻等待系统处理"
     render :inline => " <link href='/stylesheets/style.css' rel='stylesheet' type='text/css' />
     <script type='text/javascript' src='/javascripts/jquery-1.5.2.js'></script>
     <script type='text/javascript' src='/javascripts/TestPaper.js'></script><div id='flash_notice' class='tishi_tab'><p><%= flash[:warn] %></p></div>
