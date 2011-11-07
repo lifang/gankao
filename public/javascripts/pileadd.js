@@ -541,4 +541,13 @@ jQuery(function() {
     } 
 })
 
-
+function ajax_hide_exercise(params){
+        new Ajax.Updater("ajax_div", "/exam_lists/ajax_hide_exercise",
+    {
+        asynchronous:true,
+        evalScripts:true,
+        method:"post",
+        parameters:'control='+params+'&authenticity_token=' + encodeURIComponent('kfCK9k5+iRMgBOGm6vykZ4ekez8CB77n9iApbq0omBs=')
+    });
+    return false;
+}

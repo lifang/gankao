@@ -189,4 +189,14 @@ class ExamListsController < ApplicationController
     render "/exam_lists/incorrect_list"
   end
 
+  #模拟考试宣传框，点击“不再显示”复选框触发
+  def ajax_hide_exercise    
+    if params['control']=="hide"
+      cookies[:hide_exercise]="hide"
+    else
+      cookies[:hide_exercise]="show"
+    end
+    render :inline=>""
+  end
+
 end
