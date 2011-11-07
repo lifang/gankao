@@ -8,7 +8,7 @@ class User::AlipaysController < ApplicationController
     is_vip_user=Order.find_by_user_id(cookies[:user_id])
     if is_vip_user.nil?
       out_trade_no="#{cookies[:user_id]}_#{Time.now.strftime("%Y%m%d%H%M%S")}#{Time.now.to_i}"
-      OPTIONS.merge!(:seller_email =>User::AlipaysHelper::SELLER_EMAIL, :partner =>User::AlipaysHelper::PARTNER, :_input_charset =>"gbk2312",:out_trade_no=>out_trade_no)
+      OPTIONS.merge!(:seller_email =>User::AlipaysHelper::SELLER_EMAIL, :partner =>User::AlipaysHelper::PARTNER, :_input_charset =>"utf8",:out_trade_no=>out_trade_no)
       puts OPTIONS.sort.map{|k,v|"#{k}=#{v}"}.join("&")+User::AlipaysHelper::PARTNER_KEY
       OPTIONS.merge!(:sign_type => "MD5", :sign =>Digest::MD5.hexdigest(OPTIONS.sort.map{|k,v|"#{k}=#{v}"}.join("&")+User::AlipaysHelper::PARTNER_KEY))
       redirect_to "#{User::AlipaysHelper::PAGE_WAY}?#{OPTIONS.sort.map{|k, v| "#{CGI::escape(k.to_s)}=#{CGI::escape(v.to_s)}"}.join('&')}"

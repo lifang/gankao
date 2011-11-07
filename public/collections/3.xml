@@ -78,13 +78,13 @@
             <title>得得得得</title>
             <category>1</category>
             <questions>
-                <question correct_type='0' error_percent='0' id='84' repeat_num='1' score='15'>
+                <question correct_type='0' error_percent='0' id='84' repeat_num='2' score='15'>
                     <answer>讲讲价</answer>
                     <analysis/>
                     <questionattrs>等待;-;凤飞飞;-;呵呵;-;讲讲价</questionattrs>
                     <tags> 我的关注</tags>
                     <user_answer/>
-                </question>
+                <user_answer>等待</user_answer></question>
             </questions>
         </problem>
         <problem id='71' score='16' types='2'>
@@ -100,5 +100,5 @@
                 </question>
             </questions>
         </problem>
-    </problems>
+    <problem id='73' score='0' types='4'><title>ddddd</title><category>1</category><questions><question correct_type='1' error_percent='0' id='86' repeat_num='2' score='0'><description>但事实上</description><answer>凤飞飞;|;古古怪怪规划和</answer><questionattrs>凤飞飞dddd;-;共发放日;-;凤飞飞;-;古古怪怪规划和</questionattrs><tags>23 的地方改过 改过</tags><user_answer>凤飞飞dddd</user_answer><user_answer>凤飞飞dddd</user_answer></question></questions></problem><problem id='72' score='12.0' types='4'><title>ddddssssss让我测试吧</title><category>1</category><questions><question correct_type='5' error_percent='0' id='108' repeat_num='1' score='12.0' user_answer='fffff'><description>鹅鹅鹅饿</description><answer>得得得得</answer><analysis/><questionattrs/><tags></tags><user_answer>fffff</user_answer></question></questions></problem><problem id='92' score='13.0' types='5'><title>得得得算得上是</title><category>1</category><questions><question correct_type='5' error_percent='0' id='107' repeat_num='1' score='13.0' user_answer='ddddd'><answer>得得得得</answer><analysis/><questionattrs/><tags></tags><user_answer>ddddd</user_answer></question></questions></problem></problems>
 </collection>
