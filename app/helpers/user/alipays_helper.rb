@@ -9,14 +9,6 @@ module User::AlipaysHelper
   SELLER_EMAIL="yesen@yahoo.cn"
   CALLBACK_URL="http://www.gankao.co/user/alipays/take_over_return"
   NONSYNCH_URL="http://www.gankao.co/user/alipays/over_pay"
-  OPTIONS={
-    :service=>"create_direct_pay_by_user",
-    :notify_url=>CALLBACK_URL,
-    :return_url=>NONSYNCH_URL,
-    :subject=>"CET4vip",
-    :payment_type=>Constant::VIP_TYPE[:good],
-    :total_fee=>Constant::VIP_FEE
-  }
 
 
 

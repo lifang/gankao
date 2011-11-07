@@ -1,0 +1,22 @@
+@charset "utf-8";
+
+/*备考弹出层--------------------*/
+.beikao_box { width: 600px; height: 600px; top:50px; display: block;  position: absolute; z-index: 1000; background: url(/images/exercise/beikao.jpg) no-repeat;}
+.beikao_x { width: 21px; height: 21px; position: absolute; right: 10px; top: 10px;}
+.beikao_btn { width: 200px; height: 50px; position: absolute; top: 456px; left: 213px;}
+.beikao_btn a { width: 200px; height: 50px; display: block; overflow: hidden; text-indent: -999px;}
+.no_ts { width: 70px; position: absolute; top: 13px; right: 30px; color: #666;}
+
+
+/*大赛引导页*/
+
+.member_info a { color: #333; margin: 0 5px; display: inline-block; line-height: 44px;}
+.member_info a:hover {color: #A10000; text-decoration: underline;}
+.member_info a.signColor { color: #A10000;}
+
+.banner { width: 960px; margin: 0 auto;}
+.buzhou {width: 960px; height: 93px; margin: 0 auto; position: relative;}
+.blackboard { width: 282px; height: 161px; background: url(/images/exercise/Blackboard.png) no-repeat; position: absolute; top: -36px;}
+.timer { width: 200px; position: absolute; top: 58px; left: 10px; font-size: 18px; text-align: center; color: #FFF;}
+.timer span { color: #FC0;}
+.bz_li { width: 533px; height: 66px; position: absolute; top: 11px; right: 82px;}

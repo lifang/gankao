@@ -17,11 +17,10 @@ class PagesController < ApplicationController
       oauth = Weibo::OAuth.new(Weibo::Config.api_key, Weibo::Config.api_secret)
       oauth.authorize_from_request(session[:rtoken],session[:rsecret], params[:oauth_verifier])
       session[:rtoken], session[:rsecret] = nil, nil
-      session[:atoken], session[:asecret] = oauth.access_token.token, oauth.access_token.secret
       user_info = Weibo::Base.new(oauth).verify_credentials
-      @user=User.where("code_id=#{user_info[:id].to_s} and code_type='sina'").first
+      @user=User.where("code_id='#{user_info[:id]}' and code_type='sina'").first
       if @user.nil?
-        @user=User.create(:code_id=>user_info[:id],:code_type=>'sina',:name=>user_info[:name],:username=>user_info[:name])
+        @user=User.create(:code_id=>"#{user_info[:id]}",:code_type=>'sina',:name=>user_info[:name],:username=>user_info[:name])
       end
       cookies[:user_name] ={:value =>user_info[:name], :path => "/", :secure  => false}
       cookies[:user_id]={:value =>@user.id, :path => "/", :secure  => false}
