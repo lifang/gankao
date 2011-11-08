@@ -16,7 +16,7 @@ class CompetesController < ApplicationController
     #    begin
     session_key = return_session_key(return_access_token(params[:code]))
     user_info = return_user(session_key)[0]
-    @user=Compete.where("code_id=#{user_info["uid"].to_s} and code_type='renren'").first
+    @user=User.where("code_id=#{user_info["uid"].to_s} and code_type='renren'").first
     if @user.nil?
       @user=User.create(:code_id=>user_info["uid"],:code_type=>'renren',:name=>user_info["name"],:username=>user_info["name"])
     end
