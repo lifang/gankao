@@ -23,8 +23,8 @@ class SessionsController < ApplicationController
       delete_cookies
       cookies[:user_id] ={:value =>@user.id, :path => "/", :secure  => false}
       cookies[:user_name] ={:value =>@user.name, :path => "/", :secure  => false}
-      cookie_role(cookies[:user_id])
-      is_vip?   
+      is_vip?
+      cookie_role(cookies[:user_id]) 
     end
     if flash[:error]
       redirect_to request.referer
@@ -33,7 +33,7 @@ class SessionsController < ApplicationController
         cookies[:is_auto_login] = {:value => @user.id, :expires => Time.now+30.days, :path => "/", :secure => false}
       end
       if params[:last_url] == "" or params[:last_url] == "/"
-      redirect_to "/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}"
+        redirect_to "/user/homes/#{Category::TYPE_IDS[:english_fourth_level]}"
       else
         redirect_to params[:last_url]
       end

@@ -1,0 +1,47 @@
+<div class="left">
+  <% if cookies[:user_id].nil? %>
+    <div class="left_box">
+      <div class="lb_icon"><img src="images/exercise/paper-clip.png" /></div>
+      <div class="rr_login"><div class="rr_login_a">   <a href="#" onclick ="javascript:window.open('/competes/renren_exercise', '_blank', 'height=500,width=800,left=200,top=100');">登录人人网</a></div></div>
+      <div class="cz_text">
+        <h2>想了解自己能否425分？只需要10元，彻底打消您的备考迷茫。</h2>
+        <h3>参加本场考试，您会得到：</h3>
+        <p>1.大学四级标准的专业评分；</p>
+        <p>2.你本场考试的排名；</p>
+        <p>3.专业的试卷批阅、点评和复习重点推荐。</p>
+      </div>
+    </div>
+  <% else %>
+    <% compete=Compete.find_by_user_id(cookies[:user_id]) %>
+    <% unless compete.nil? %>
+      <div class="left_box">
+        <div class="lb_icon"><img src="images/paper-clip.png" /></div>
+        <div class="jies_box">
+          <h2>大赛介绍</h2>
+          <p>面向2011年12月大学英语四级的考生，赶考网准备了这次CET4过关挑战赛。权威专家命题，要求参赛者在规定时间内同时在线答题，考试时间结束后将统一公布参赛者成绩和排名！</p>
+          <div class="js_time">
+            <p><span>大赛时间：</span> 2011年11月14日 8:00 — 2011年11月21日 23:00;</p>
+            <p><span>答卷时间：</span> 在大赛时间内任意时间进入，2小时零5分时间完成答卷；</p>
+            <p><span>成绩公布时间：</span> 2011年11月24日 09:00公布</p>
+          </div>
+          <h2>比赛模式</h2>
+          <p>采用"真实模拟"竞赛模式，题目以整卷方式呈现，考试规则完全模拟大学英语四级考试，比赛时间：2小时零5分。</p>
+          <div class="addTo_btn"><a href="#">进入考场</a></div>
+        </div>
+      </div>
+    <% else %>
+      <div class="left_box">
+        <div class="lb_icon"><img src="images/exercise/paper-clip.png" /></div>
+        <div class="cz_img"><div class="cz_a"><a href="/competes/alipay_exercise" target="_blank">现在就去充值</a></div></div>
+        <div class="cz_text">
+          <h2>想了解自己能否425分？只需要10元，彻底打消您的备考迷茫。</h2>
+          <h3>参加本场考试，您会得到：</h3>
+          <p>1.大学四级标准的专业评分；</p>
+          <p>2.你本场考试的排名；</p>
+          <p>3.专业的试卷批阅、点评和复习重点推荐。</p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
