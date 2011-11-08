@@ -8,13 +8,12 @@ class CompetesController < ApplicationController
 
 
   def renren_exercise
-    consumer=OAuth2::Client.new(api_key, api_secret,:site => {:url => RenrenHelper::TOTAL_GRAPH_URL,:response_type => 'code'})
-    redirect_to consumer.web_server.authorize_url(:redirect_uri =>"http://demo.gankao.co/competes/renren_compete", :response_type=>'code')
+    redirect_to client.web_server.authorize_url(:redirect_uri =>RenrenHelper::CALLBACK_URL, :response_type=>'code')
   end
 
   def renren_compete
     #    begin
-    session_key = return_session_key(return_access_token(params[:code]))
+    session_key = return_session_key(get_access_token(params[:code]))
     user_info = return_user(session_key)[0]
     @user=User.where("code_id=#{user_info["uid"].to_s} and code_type='renren'").first
     if @user.nil?
