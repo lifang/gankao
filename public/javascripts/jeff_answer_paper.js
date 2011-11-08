@@ -360,7 +360,7 @@ function create_single_question(problem_title,problem_id, que_div_conlist, quest
                     if (question.correct_type == "0") {
                         attr.innerHTML += "<input type='hidden' id='question_"+question.id+"_type' value='0' />";
                         if (answer_hash != null && answer_hash[question.id] != null && answer_hash[question.id][0] == que_attrs[i]) {
-                            attr.innerHTML += "<input type='radio'  name='question_attr_"+ question.id +"' id='question_attr_"+ i +"' value='"+ que_attrs[i] +"' checked='true' onclick='javascript:show_que_save_button(\""+question.id+"\")' />";
+                            attr.innerHTML += "<input type='radio'  name='question_attr_"+ question.id +"' id='question_attr_"+ i +"' value=\""+ que_attrs[i] +"\" checked='true' onclick='javascript:show_que_save_button(\""+question.id+"\")' />";
                             if(check_answer==1){
                                 if(answer!=null&&answer.length>0&&answer[question_num-1]==que_attrs[i]){
                                     attr.style.background="#96AE89";
@@ -370,7 +370,7 @@ function create_single_question(problem_title,problem_id, que_div_conlist, quest
                                 }
                             }
                         } else {
-                            attr.innerHTML += "<input type='radio' name='question_attr_"+ question.id +"' id='question_attr_"+ i +"' value='"+ que_attrs[i] +"' onclick='javascript:show_que_save_button(\""+question.id+"\")'/>";
+                            attr.innerHTML += "<input type='radio' name='question_attr_"+ question.id +"' id='question_attr_"+ i +"' value=\""+ que_attrs[i] +"\" onclick='javascript:show_que_save_button(\""+question.id+"\")'/>";
                         }
                         attr.innerHTML += "<label> &nbsp;"+ que_attrs[i] +"</label>";
                     } else if (question.correct_type == "1") {
@@ -391,7 +391,7 @@ function create_single_question(problem_title,problem_id, que_div_conlist, quest
                             }
                         }
                         if (answer_hash != null &&  answer_hash[question.id] != null && answer_hash[question.id][0].split(";|;").include(que_attrs[i])) {
-                            attr.innerHTML += "<input type='checkbox' name='question_attr_"+ question.id +"' id='question_attr_"+ i +"' value='"+ que_attrs[i] +"' checked='true' onclick='javascript:show_que_save_button(\""+question.id+"\")'/>";
+                            attr.innerHTML += "<input type='checkbox' name='question_attr_"+ question.id +"' id='question_attr_"+ i +"' value=\""+ que_attrs[i] +"\" checked='true' onclick='javascript:show_que_save_button(\""+question.id+"\")'/>";
                             if(check_answer==1){
                                 if(true_false){
                                     attr.style.background="#96AE89";
@@ -400,7 +400,7 @@ function create_single_question(problem_title,problem_id, que_div_conlist, quest
                                 }
                             }
                         } else {
-                            attr.innerHTML += "<input type='checkbox' name='question_attr_"+ question.id +"' id='question_attr_"+ i +"' value='"+ que_attrs[i] +"' onclick='javascript:show_que_save_button(\""+question.id+"\")'/>";
+                            attr.innerHTML += "<input type='checkbox' name='question_attr_"+ question.id +"' id='question_attr_"+ i +"' value=\""+ que_attrs[i] +"\" onclick='javascript:show_que_save_button(\""+question.id+"\")'/>";
                             if(check_answer==1){
                                 if(true_false){
                                     attr.style.background="#D1A39B";
@@ -456,7 +456,7 @@ function create_single_question(problem_title,problem_id, que_div_conlist, quest
                     task_area_div.innerHTML += "<textarea  id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")'  onblur='if(this.value.length==0){this.value=\"提示： "+tishi+"\";}' >"+ answer_hash[question.id][0] +"</textarea>";
                 }else{
                     if (question.correct_type == "3") {
-                        attr1.innerHTML += "<input type='text' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' value='"+ answer_hash[question.id][0] +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")' ></input>";
+                        attr1.innerHTML += "<input type='text' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' value=\""+ answer_hash[question.id][0] +"\" onfocus='javascript:show_que_save_button(\""+question.id+"\")' ></input>";
                     }else{
                         attr1.innerHTML += "<textarea style='width: 99%; height: 100px; margin: 2px 2px;' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")' >"+ answer_hash[question.id][0] +"</textarea>";
                     }
