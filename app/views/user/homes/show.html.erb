@@ -104,7 +104,7 @@
   </div>
 </div>
 
-<% if cookies[:hide_exercise].nil?||cookies[:hide_exercise]=="show" %>
+<% if cookies["hide_exercise#{cookies[:user_id]}"].nil?||cookies["hide_exercise#{cookies[:user_id]}"]=="show" %>
 <link href="/stylesheets/exercise.css" rel="stylesheet" type="text/css" />
 <div class="zhezhao" id="zhezhao" style="display: block; height: 100%;position:fixed; "></div>
 <div class="beikao_box">

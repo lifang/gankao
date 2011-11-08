@@ -192,9 +192,9 @@ class ExamListsController < ApplicationController
   #模拟考试宣传框，点击“不再显示”复选框触发
   def ajax_hide_exercise    
     if params['control']=="hide"
-      cookies[:hide_exercise]="hide"
+      cookies["hide_exercise#{cookies[:user_id]}"]={:value => "hide", :expires => Time.now+7.days, :path => "/", :secure => false}
     else
-      cookies[:hide_exercise]="show"
+      cookies["hide_exercise#{cookies[:user_id]}"]="show"
     end
     render :inline=>""
   end
