@@ -7,8 +7,8 @@ class User::AlipaysController < ApplicationController
   def alipay_request
     options ={
       :service=>"create_direct_pay_by_user",
-      :notify_url=>"http://www.gankao.co/user/alipays/take_over_return",
-      :return_url=>"http://www.gankao.co/user/alipays/over_pay",
+      :notify_url=>"http://demo.gankao.co/user/alipays/take_over_return",
+      :return_url=>"http://demo.gankao.co/user/alipays/over_pay",
       :subject=>"CET4vip",
       :payment_type=>Constant::VIP_TYPE[:good],
       :total_fee=>Constant::VIP_FEE
