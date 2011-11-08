@@ -23,7 +23,6 @@ class SessionsController < ApplicationController
       delete_cookies
       cookies[:user_id] ={:value =>@user.id, :path => "/", :secure  => false}
       cookies[:user_name] ={:value =>@user.name, :path => "/", :secure  => false}
-      is_vip?
       cookie_role(cookies[:user_id]) 
     end
     if flash[:error]
