@@ -456,7 +456,7 @@ function create_single_question(problem_title,problem_id, que_div_conlist, quest
                     task_area_div.innerHTML += "<textarea  id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")'  onblur='if(this.value.length==0){this.value=\"提示： "+tishi+"\";}' >"+ answer_hash[question.id][0] +"</textarea>";
                 }else{
                     if (question.correct_type == "3") {
-                        attr1.innerHTML += "<input type='text' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' value='"+ answer_hash[question.id][0] +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")' ></input>";
+                        attr1.innerHTML += "<input type='text' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' value=\""+ answer_hash[question.id][0] +"\" onfocus='javascript:show_que_save_button(\""+question.id+"\")' ></input>";
                     }else{
                         attr1.innerHTML += "<textarea style='width: 99%; height: 100px; margin: 2px 2px;' id='question_answer_"+ question.id +"' name='question_answer_"+ question.id +"' onfocus='javascript:show_que_save_button(\""+question.id+"\")' >"+ answer_hash[question.id][0] +"</textarea>";
                     }
