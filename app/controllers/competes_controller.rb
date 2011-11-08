@@ -13,19 +13,19 @@ class CompetesController < ApplicationController
   end
 
   def renren_compete
-    begin
-      session_key = return_session_key(return_access_token(params[:code]))
-      user_info = return_user(session_key)[0]
-      @user=Compete.where("code_id=#{user_info["uid"].to_s} and code_type='renren'").first
-      if @user.nil?
-        @user=User.create(:code_id=>user_info["uid"],:code_type=>'renren',:name=>user_info["name"],:username=>user_info["name"])
-      end
-      cookies[:user_name] ={:value =>@user.name, :path => "/", :secure  => false}
-      cookies[:user_id] ={:value =>@user.id, :path => "/", :secure  => false}
-      render :inline => "<script>window.opener.location.reload();window.close();</script>"
-    rescue
-      render :inline => "<script>window.opener.location.reload();window.close();</script>"
-    end  
+    #    begin
+    session_key = return_session_key(return_access_token(params[:code]))
+    user_info = return_user(session_key)[0]
+    @user=Compete.where("code_id=#{user_info["uid"].to_s} and code_type='renren'").first
+    if @user.nil?
+      @user=User.create(:code_id=>user_info["uid"],:code_type=>'renren',:name=>user_info["name"],:username=>user_info["name"])
+    end
+    cookies[:user_name] ={:value =>@user.name, :path => "/", :secure  => false}
+    cookies[:user_id] ={:value =>@user.id, :path => "/", :secure  => false}
+    render :inline => "<script>window.opener.location.reload();window.close();</script>"
+    #    rescue
+    #      render :inline => "<script>window.opener.location.reload();window.close();</script>"
+    #    end
   end
 
   def alipay_exercise
