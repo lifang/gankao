@@ -28,14 +28,15 @@
   <body>
     <div class="wrap">
       <div class="head">
-        <div class="logo"><a href="#"><img src="images/exercise/logo.png" /></a></div>
+        <div class="logo"><a href="/"><img src="images/exercise/logo.png" /></a></div>
         <div class="top_loginArea">
           <div class="top_qq"><span>在线客服</span><a href="tencent://message/?uin=2568830556&amp;Site=赶考网&amp;Menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=1:2568830556:7" alt="有事点这里"></a></div>
           <div class="member_info">
             <% if cookies[:user_id] %>
               <div>
                 你好<a href="/user/homes/<%= Category::TYPE_IDS[:english_fourth_level] %>" class="signColor"><%= current_user.name if current_user %></a>
-                <a href="#"><img src="images/v0.png" /></a>|<a href="/users/<%= cookies[:user_id] %>/edit" class="signColor"> 个人中心</a>|<a href="/signout" class="signColor">退出</a>
+                <% if (is_vip?).to_s == "true" %><img src="/images/paper/V.png" /><% else %><a href="/users/goto_vip" target="_blank"><img src="/images/paper/v0.png" /></a><% end %>
+                |<a href="/users/<%= cookies[:user_id] %>/edit" class="signColor"> 个人中心</a>|<a href="/signout" class="signColor">退出</a>
               </div><% end %>
           </div>
         </div>

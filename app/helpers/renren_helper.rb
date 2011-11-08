@@ -106,4 +106,27 @@ module RenrenHelper
     return SESSION_KEY_URL + "?oauth_token=" + access_token
   end
 
+
+  #excise变量
+  CALLBACK_URL="http://demo.gankao.co/competes/renren_compete"
+
+  #获取access_token
+   def get_access_token(code)
+    http = Net::HTTP.new(GRAPH_RENREN_URL, 443)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    res = http.get(authorize_url(code))
+    res_json = JSON res.body
+    return res_json["access_token"]
+  end
+
+   def authorize_url(code)
+    grant_type = "grant_type=authorization_code"
+    access_code = "code=#{code}"
+    client_id = "client_id=" + api_key
+    client_secret = "client_secret=" + api_secret
+    redirect_uri = "redirect_uri=" + CALLBACK_URL
+    return ACCESS_TOKEN_URL + "?" + grant_type + "&"+ access_code +"&" + client_id + "&"+ client_secret + "&" + redirect_uri
+  end
+
 end
