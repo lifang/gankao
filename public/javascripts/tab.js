@@ -11,9 +11,14 @@ jQuery(function() {
 })
 
 function tishi_hide(){
-    jQuery('.cz_tishi').hide();
-    jQuery('.zhezhao').hide();
-    return false;
+    if(confirm("支付是否成功")) {
+        window.location.href='/competes';
+    }else{
+        jQuery('.cz_tishi').hide();
+        jQuery('.zhezhao').hide();
+        return false;
+    }
+   
 }
 
 
