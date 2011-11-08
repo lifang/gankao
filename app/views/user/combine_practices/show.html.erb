@@ -52,11 +52,11 @@
          value="<%= Constant::ANSWER_CLIENT_PATH %>/<%= @exam_user.answer_sheet_url %>"/>
   <div class="tb_content_btn">
     <% if @practice_type==3 %>
-      <%= f.submit "",:id=>"practice_submit",:class=>"explain_btn_next" ,:onclick=>"document.getElementById('practice_submit').style.display='none';document.getElementById('ajax_gif').style.display='block';"%>
+      <%= f.submit "",:id=>"practice_submit",:class=>"explain_btn_next"%>
     <% elsif @practice_type==6 %>
-      <%= f.submit "",:id=>"practice_submit", :class=>"explain_btn_finish" ,:onclick=>"document.getElementById('practice_submit').style.display='none';document.getElementById('ajax_gif').style.display='block';"%>
+      <%= f.submit "",:id=>"practice_submit", :class=>"explain_btn_finish"%>
     <% else %>
-      <%= f.submit "",:id=>"practice_submit", :class=>"explain_btn_checknext" ,:onclick=>"document.getElementById('practice_submit').style.display='none';document.getElementById('ajax_gif').style.display='block';"%>
+      <%= f.submit "",:id=>"practice_submit", :class=>"explain_btn_checknext"%>
     <% end %>
     <%= image_tag "ajax-loader.gif", :id => "ajax_gif", :style => "display:none;float:right;" %>
   </div>
