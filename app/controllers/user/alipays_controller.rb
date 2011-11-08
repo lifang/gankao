@@ -89,8 +89,4 @@ class User::AlipaysController < ApplicationController
     <script type='text/javascript'>show_flash_div();</script><script> setTimeout(function(){
       window.close();}, 1000)</script><% flash[:warn]=nil %>"
   end
-
-
-
-
 end

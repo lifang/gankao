@@ -68,7 +68,7 @@ module Constant
 
   #vip价格
   VIP_FEE=0.01
- 
+  SIMULATION_FEE=0.01
   VIP_TYPE={:good=>1,:donate=>4}   #vip支付类型
 
   #非vip能做综合训练的次数

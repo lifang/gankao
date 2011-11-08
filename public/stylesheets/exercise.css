@@ -1,15 +1,35 @@
 @charset "utf-8";
+* { padding: 0; margin: 0;}
+body { background:  #fffbec; font-family: "微软雅黑","宋体", Arial; font-size: 12px;}
+a { text-decoration: none;}
+ul { list-style: none;}
+img { border: none;}
+
+.clear { clear: both;}
 
 /*备考弹出层--------------------*/
-.beikao_box { width: 600px; height: 600px; top:50px; display: block;  position: absolute; z-index: 1000; background: url(/images/exercise/beikao.jpg) no-repeat;}
+.beikao_box { width: 600px; height: 600px; background: url(/images/exercise/beikao.jpg) no-repeat; position: absolute;  z-index: 1000;}
 .beikao_x { width: 21px; height: 21px; position: absolute; right: 10px; top: 10px;}
-.beikao_btn { width: 200px; height: 50px; position: absolute; top: 456px; left: 213px;}
+.beikao_btn { width: 200px; height: 50px; background: url(/images/exercise/nowAdd.jpg) no-repeat; position: absolute; top: 459px; left: 213px;}
 .beikao_btn a { width: 200px; height: 50px; display: block; overflow: hidden; text-indent: -999px;}
+
+.beikao_btn0 { width: 200px; height: 50px; background: url(/images/exercise/moveTo.jpg) no-repeat; position: absolute; top: 459px; left: 213px;}
+.beikao_btn0 a { width: 200px; height: 50px; display: block; overflow: hidden; text-indent: -999px;}
+
 .no_ts { width: 70px; position: absolute; top: 13px; right: 30px; color: #666;}
 
 
 /*大赛引导页*/
 
+/*.wrap { background: url(/images/exercise/_bg.gif) repeat-x;}
+.head {width: 960px; margin: 0 auto; height: 42px; line-height: 42px;}
+
+.logo { width: 128px; height:40px; padding-top: 1px; float: left; display: inline;}
+.top_loginArea { width: 325px; height: 42px; overflow: hidden; float: left; margin-left: 495px; _margin-left: 310px;}
+
+.top_qq { float: right; height: 42px;}*/
+
+.member_info {}
 .member_info a { color: #333; margin: 0 5px; display: inline-block; line-height: 44px;}
 .member_info a:hover {color: #A10000; text-decoration: underline;}
 .member_info a.signColor { color: #A10000;}
@@ -20,3 +40,45 @@
 .timer { width: 200px; position: absolute; top: 58px; left: 10px; font-size: 18px; text-align: center; color: #FFF;}
 .timer span { color: #FC0;}
 .bz_li { width: 533px; height: 66px; position: absolute; top: 11px; right: 82px;}
+
+.main { width: 960px; margin: 0 auto; padding-top: 40px;}
+.left { width: 662px; padding-bottom: 10px; border: 1px solid  #f1f1f1; border-right: none; background: #FFF; float: left;}
+.right { width: 297px; float: left; position: relative;}
+
+.left_box { width: 630px; margin: 10px auto; border: 1px #ece3bf solid; background: #fef6d6; position: relative;}
+.lb_icon { position: absolute; top: -17px; right: 20px;}
+
+.cz_img { width: 396px; height: 224px; background: url(/images/exercise/cz_img.png) no-repeat; margin: 10px auto;}
+.cz_a { width: 165px; height: 45px; position: absolute; top: 146px; right: 131px;}
+.cz_a a {width: 165px; height: 45px; display: block; text-indent: -999px;}
+
+.cz_text { width: 600px; margin: 10px auto; padding: 10px; border: 1px solid #bf8e1f; background: #ffdb8a;}
+.cz_text h2 { font-size: 16px; color: #333; height: 32px; line-height: 32px; padding-left: 50px;}
+.cz_text h3 { font-size: 14px; color: #333; height: 32px; font-weight:100; line-height: 32px; padding-left: 50px;}
+.cz_text p { font-size: 14px; color: #F00; height: 24px; line-height: 24px; padding-left: 70px;}
+
+.rr_login { width: 396px; height: 70px; margin: 10px auto; background: url(/images/exercise/renren_bg.jpg) no-repeat; }
+.rr_login_a { width: 127px; height: 37px; position: absolute; top: 28px; left: 377px;}
+.rr_login_a a { width: 127px; height: 37px; display: block; overflow: hidden; text-indent: -999px;}
+
+
+.r_top { width: 297px; height: 172px; background: url(/images/exercise/r_top.png) no-repeat; position: absolute; top: -37px;}
+.r_middle { width: 295px; height: 300px; padding-top: 30px; border:1px solid #e2e2e2; border-top: none; margin-top: 135px; background: #FFF;}
+.r_middle h2 { font-size: 16px; color: #b73128; height: 32px; line-height: 32px; padding-left: 30px; margin: 10px 0;}
+.r_middle div { padding-left: 50px; margin: 10px 0;}
+.r_middle div p { line-height: 24px;}
+
+.foot { width: 960px; margin: 10px auto;}
+.foot p { text-align: center; line-height: 32px; height: 32px; color: #999;}
+.foot p a { padding: 0 5px; color: #999; font-weight: 100;}
+
+
+.jies_box { padding: 10px;}
+.jies_box h2 { font-size: 16px; color: #b73128; line-height: 32px;}
+.jies_box p { font-size: 14px; color: #333; line-height: 24px;}
+.js_time { width: 580px; margin: 20px auto; border: 1px solid #bf8e1f; background: #ffdb8a; padding: 10px;}
+.js_time p { line-height: 24px;}
+.js_time p span {color: #b73128;}
+
+.addTo_btn { width: 184px; height: 55px; margin: 30px auto 10px auto;}
+.addTo_btn a { width: 184px; height: 55px; display: block; overflow: hidden; background: url(/images/exercise/addTo_btn.jpg) no-repeat; text-indent: -999px;}
