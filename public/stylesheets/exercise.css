@@ -82,3 +82,15 @@ img { border: none;}
 
 .addTo_btn { width: 184px; height: 55px; margin: 30px auto 10px auto;}
 .addTo_btn a { width: 184px; height: 55px; display: block; overflow: hidden; background: url(/images/exercise/addTo_btn.jpg) no-repeat; text-indent: -999px;}
+
+
+.zhezhao { width:100%; left:0; position:absolute; top:0; background: #666; opacity:0.5; filter:alpha(opacity=50); z-index:888;}
+
+.cz_tishi { width: 400px; height: 180px; border: 1px #CCC solid; background: url(../images/exercise/cz_tishi_bg.png) no-repeat; position: absolute; z-index: 900;}
+.cz_tishi_h { height: 32px; line-height: 32px; font-size: 14px; padding-left: 10px; color: #FFF;}
+.cz_tishi_h a { float: right; margin: 5px 5px 0 0;}
+.cz_tishi_text { width: 400px; padding: 10px; line-height: 24px; padding-left: 30px; color: #333;}
+.cz_tishi_btn { width: 220px; margin: 10px auto;}
+.wanc_btn { width: 88px; height: 31px; background: url(../images/exercise/wanc_btn.png) no-repeat; border: none; cursor: pointer; margin: 0 5px;}
+.chongx_btn { width: 88px; height: 31px; background: url(../images/exercise/chongx_btn.png) no-repeat; border: none; cursor: pointer; margin: 0 5px;}
+
