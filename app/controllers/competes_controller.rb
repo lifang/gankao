@@ -9,23 +9,23 @@ class CompetesController < ApplicationController
 
   def renren_exercise
     consumer=OAuth2::Client.new(api_key, api_secret,:site => {:url => RenrenHelper::TOTAL_GRAPH_URL,:response_type => 'code'})
-    redirect_to consumer.web_server.authorize_url(:redirect_uri =>"http://demo.gankao.co/competes", :response_type=>'code')
+    redirect_to consumer.web_server.authorize_url(:redirect_uri =>"http://demo.gankao.co/competes/renren_compete", :response_type=>'code')
   end
 
   def renren_compete
-    begin
-      session_key = return_session_key(return_access_token(params[:code]))
-      user_info = return_user(session_key)[0]
-      @user=Compete.where("code_id=#{user_info["uid"].to_s} and code_type='renren'").first
-      if @user.nil?
-        @user=User.create(:code_id=>user_info["uid"],:code_type=>'renren',:name=>user_info["name"],:username=>user_info["name"])
-      end
-      cookies[:user_name] ={:value =>@user.name, :path => "/", :secure  => false}
-      cookies[:user_id] ={:value =>@user.id, :path => "/", :secure  => false}
-      render :inline => "<script>window.opener.location.reload();window.close();</script>"
-    rescue
-      render :inline => "<script>window.opener.location.reload();window.close();</script>"
-    end  
+    #    begin
+    session_key = return_session_key(return_access_token(params[:code]))
+    user_info = return_user(session_key)[0]
+    @user=Compete.where("code_id=#{user_info["uid"].to_s} and code_type='renren'").first
+    if @user.nil?
+      @user=User.create(:code_id=>user_info["uid"],:code_type=>'renren',:name=>user_info["name"],:username=>user_info["name"])
+    end
+    cookies[:user_name] ={:value =>@user.name, :path => "/", :secure  => false}
+    cookies[:user_id] ={:value =>@user.id, :path => "/", :secure  => false}
+    render :inline => "<script>window.opener.location.reload();window.close();</script>"
+    #    rescue
+    #      render :inline => "<script>window.opener.location.reload();window.close();</script>"
+    #    end
   end
 
   def alipay_exercise
