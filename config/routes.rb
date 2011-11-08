@@ -13,9 +13,10 @@ Gankao::Application.routes.draw do
       get "renren_index","follow_me","login_from_qq","qq_index"
     end
   end
-  resources :competions do
+  resources :competes do
     collection do
-
+      get :renren_exercise,:renren_compete,:alipay_exercise
+      post :alipay_compete
     end
     member do
       

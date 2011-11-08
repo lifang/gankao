@@ -29,7 +29,7 @@ img { border: none;}
 
 .top_qq { float: right; height: 42px;}*/
 
-.member_info { width: 200px;}
+.member_info {}
 .member_info a { color: #333; margin: 0 5px; display: inline-block; line-height: 44px;}
 .member_info a:hover {color: #A10000; text-decoration: underline;}
 .member_info a.signColor { color: #A10000;}

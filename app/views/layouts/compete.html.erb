@@ -1,72 +1,64 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>付费</title>
-<link href="style/style.css" rel="stylesheet" type="text/css" />
- <link href="/stylesheets/exercise.css" rel="stylesheet" />
-<script type="text/javascript" src="js/jquery-1.5.2.js"></script>
-<!--[if IE 6]>
-<script src="js/DD_belatedPNG_0.0.8a-min.js"></script>
-<script>
-  /* EXAMPLE */
-  DD_belatedPNG.fix('*');
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>付费</title>
+    <link href="/stylesheets/exercise.css" rel="stylesheet" />
+    <link href="/stylesheets/exercise_head.css" rel="stylesheet" />
+    <!--[if IE 6]>
+    <script src="js/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>
+      /* EXAMPLE */
+      DD_belatedPNG.fix('*');
 
-  /* string argument can be any CSS selector */
-  /* .png_bg example is unnecessary */
-  /* change it to what suits you! */
-</script>
-<![endif]-->
-</head>
+      /* string argument can be any CSS selector */
+      /* .png_bg example is unnecessary */
+      /* change it to what suits you! */
+    </script>
+    <![endif]-->
+  </head>
 
-<body>
-<div class="wrap">
-     <div class="head">
-     <div class="logo"><a href="#"><img src="images/exercise/logo.png" /></a></div>
-  <div class="top_loginArea">
-    <div class="top_qq"><span>在线客服</span><a href="tencent://message/?uin=2568830556&amp;Site=赶考网&amp;Menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=1:2568830556:7" alt="有事点这里"></a></div>
-    <div class="member_info">
-      <% if cookies[:user_id] %>
-        你好,<a href="/user/homes/<%= Category::TYPE_IDS[:english_fourth_level] %>" class="signColor">
-                <%= current_user.name if current_user %></a>
-               <a href="/users/goto_vip" target="_blank"><img src="/images/paper/v0.png" /></a>
-              |
-        <a href="/users/<%= cookies[:user_id] %>/edit" class="signColor"> 个人中心</a>
-        |<a href="/signout" class="signColor">退出</a>   
-      <% end %>
-    </div>
-  </div>
-     </div>
-     <div class="clear"></div>
-     <div class="banner"><img src="images/exercise/banner.gif" /></div>
-     <div class="buzhou">
-          <div class="blackboard"><div class="timer"><span>5</span> 天 <span>6</span> 时 <span>54</span> 分 <span>53</span> 秒</div></div>
-          <div class="bz_li"><img src="images/exercise/bz_li.png" /></div>
-     </div>
-     <div class="main">
-       
-          <div class="right">
-               <div class="r_top"></div>
-               <div class="r_middle">
-                    <h2>主办方</h2>
-                    <div><img src="images/exercise/logo.png" /></div>
-                    <h2>联系方式</h2>
-                    <div>
-                        <p>大赛客服QQ：2568830556</p>
-                        <p>答疑时间(周一到周日08;00-23;00)</p>
-                    </div>
-               </div>
+  <body>
+    <div class="wrap">
+      <div class="head">
+        <div class="logo"><a href="#"><img src="images/exercise/logo.png" /></a></div>
+        <div class="top_loginArea">
+          <div class="top_qq"><span>在线客服</span><a href="tencent://message/?uin=2568830556&amp;Site=赶考网&amp;Menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=1:2568830556:7" alt="有事点这里"></a></div>
+          <div class="member_info">
+            <% if cookies[:user_id] %>
+              <div>
+                你好<a href="/user/homes/<%= Category::TYPE_IDS[:english_fourth_level] %>" class="signColor"><%= current_user.name if current_user %></a>
+                <a href="#"><img src="images/v0.png" /></a>|<a href="/users/<%= cookies[:user_id] %>/edit" class="signColor"> 个人中心</a>|<a href="/signout" class="signColor">退出</a>|
+              </div><% end %>
           </div>
-          <div class="clear"></div>
-     </div>
-     <div class="clear"></div>
-     <div class="foot">
-          <p><a href="http://www.comdosoft.com/" target="_blank">公司信息</a> |   <a href="#">官方微博</a>   |   <a href="http://www.comdosoft.com/pages/aboutcon.html" target="_blank">联系我们</a>    |   <a href="#">用户协议</a></p>
-          <p>Copyright © 2011-2012 &nbsp;&nbsp;苏州协创软件有限公司&nbsp;&nbsp;版权所有&nbsp;&nbsp;苏ICP备11024201</p>
-
-     </div>
-<div class="clear"></div>
-</div>
-</body>
+        </div>
+      </div>
+      <div class="clear"></div>
+      <div class="banner"><img src="images/exercise/banner.gif" /></div>
+      <div class="buzhou">
+        <div class="blackboard"><div class="timer"><span>5</span> 天 <span>6</span> 时 <span>54</span> 分 <span>53</span> 秒</div></div>
+        <div class="bz_li"><img src="images/exercise/bz_li.png" /></div>
+      </div>
+      <div class="main">
+        <%= yield %>
+        <div class="right">
+          <div class="r_top"></div>
+          <div class="r_middle">
+            <h2>主办方</h2>
+            <div><img src="images/exercise/logo.png" /></div>
+            <h2>联系方式</h2>
+            <div>
+              <p>大赛客服QQ：2568830556</p>
+              <p>答疑时间(周一到周日08;00-23;00)</p>
+            </div>
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="clear"></div>
+      <%=  render :partial => "/common/footer" %>
+      <div class="clear"></div>
+    </div>
+  </body>
 </html>
