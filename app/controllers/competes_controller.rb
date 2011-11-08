@@ -9,7 +9,7 @@ class CompetesController < ApplicationController
 
   def renren_exercise
     consumer=OAuth2::Client.new(api_key, api_secret,:site => {:url => RenrenHelper::TOTAL_GRAPH_URL,:response_type => 'code'})
-    redirect_to consumer.web_server.authorize_url(:redirect_uri =>"http://demo.gankao.co/renren_compete", :response_type=>'code')
+    redirect_to consumer.web_server.authorize_url(:redirect_uri =>"http://demo.gankao.co/competes/renren_compete", :response_type=>'code')
   end
 
   def renren_compete
