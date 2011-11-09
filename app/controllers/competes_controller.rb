@@ -31,7 +31,7 @@ class CompetesController < ApplicationController
     options ={
       :service=>"create_direct_pay_by_user",
       :notify_url=>"http://#{Constant::IP}/competes/alipay_compete",
-      :subject=>"2011大学英语四级模拟考试",
+      :subject=>"2011大学英语四级全国联合大摸底",
       :payment_type=>Constant::VIP_TYPE[:good],
       :total_fee=>Constant::SIMULATION_FEE
     }

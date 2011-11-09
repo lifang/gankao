@@ -51,14 +51,15 @@ img { border: none;}
 .cz_a { width: 165px; height: 45px; position: absolute; top: 146px; right: 131px;}
 .cz_a a {width: 165px; height: 45px; display: block; text-indent: -999px;}
 
-.cz_text { width: 600px; margin: 20px auto; padding: 10px; border: 1px solid #bf8e1f; background: #ffdb8a;}
-.cz_text h2 { font-size: 16px; color: #333; width: 560px; height: 65px; margin: 0 auto;}
-.cz_text h3 { font-size: 14px; color: #333; height: 32px; font-weight:100; line-height: 32px; padding-left: 50px;}
-.cz_text p { font-size: 14px; color: #F00; height: 24px; line-height: 24px; padding-left: 70px;}
+.cz_text { width: 600px; margin: 40px auto; padding: 10px; border: 1px solid #bf8e1f; background: #fffcee;}
+.cz_text h2 { font-size: 16px; color: #333; width: 560px; height: 35px; margin: 10px auto;}
+.cz_text li { list-style: inside disc; font-size: 30px; color: #333; line-height: 50px; padding-left: 70px;}
+
+
 
 .renren_box h1 { font-size: 18px; padding-left: 20px; color: #900; line-height: 32px;}
-.rr_login { width: 396px; height: 70px; margin: 10px auto; background: url(/images/exercise/renren_bg.jpg) no-repeat; }
-.rr_login_a { width: 127px; height: 37px; background: url(../images/exercise/rr_login_a.gif) no-repeat; position: absolute; top:55px; left: 377px;}
+.rr_login { width: 396px; height: 70px; margin: 10px auto; background: url(../images/exercise/renren_bg.jpg) no-repeat; position: relative;}
+.rr_login_a { width: 127px; height: 37px; background: url(../images/exercise/rr_login_a.gif) no-repeat; position: absolute; top:20px; left: 280px;}
 .rr_login_a a { width: 127px; height: 37px; display: block; overflow: hidden; text-indent: -999px;}
 
 
