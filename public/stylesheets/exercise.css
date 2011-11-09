@@ -47,8 +47,8 @@ img { border: none;}
 .left_box { width: 630px; margin: 10px auto; border: 1px #ece3bf solid; background: #fef6d6; position: relative;}
 .lb_icon { position: absolute; top: -17px; right: 20px;}
 
-.cz_img { width: 396px; height: 224px; background: url(/images/exercise/cz_img.png) no-repeat; margin: 10px auto;}
-.cz_a { width: 165px; height: 45px; position: absolute; top: 146px; right: 131px;}
+.cz_img { width: 396px; height: 224px; background: url(../images/exercise/cz_img.png) no-repeat; margin: 10px auto; position: relative;}
+.cz_a { width: 165px; height: 45px; position: absolute; top: 136px; right: 14px;}
 .cz_a a {width: 165px; height: 45px; display: block; text-indent: -999px;}
 
 .cz_text { width: 600px; margin: 40px auto; padding: 10px; border: 1px solid #bf8e1f; background: #fffcee;}
