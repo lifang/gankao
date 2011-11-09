@@ -106,15 +106,33 @@ module ApplicationHelper
           html += "<a href='#{request.path}?page=#{i}'>#{i}</a>"
         end
       end
-    end
-    
-    
+    end 
     if page.to_i < total_page
       html += "<a href='#{request.path}?page=#{current_page + 1}'>&gt;</a>"
     else
       html += "<span class='disabled'> &gt; </span>"
     end
     return html.html_safe
+  end
+
+  def compete_result
+    exam_user = ExamUser.find(:first, 
+      :conditions => ["user_id = ? and examination_id = ? and is_submited = ? and total_score is not null",
+        cookies[:user_id], Constant::EXAMINATION.to_i, ExamUser::IS_SUBMITED[:YES]])
+    unless exam_user.nil?
+      xml = exam_user.open_xml
+      scores = xml.get_elements("/result/blocks/block")
+      if scores[2].nil? or scores[2].attributes["score"].nil? or scores[2].attributes["score"].to_i == 0
+        tingli = "0"
+      elsif scores[2].attributes["score"].to_f*10%10 == 0
+        tingli = "#{scores[2].attributes["score"].to_i}"
+      elsif scores[2].attributes["score"].to_f*10%10 <= 5
+        tingli = "#{(scores[2].attributes["score"].to_f*10/10).to_i}" + ".5"
+      else
+        (scores[2].attributes["score"].to_f*10/10).round
+      end
+
+    end
   end
 
 end

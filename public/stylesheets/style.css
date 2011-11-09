@@ -113,9 +113,9 @@ img { border: none;}
 
 
 /*个人首页------------------*/
-.person_box { overflow: hidden; height: 400px; }
+.person_box { overflow: hidden;}
 .m_box_one { width: 193px; height: 398px; overflow: hidden; float: left; margin: 0 5px; display: inline;}
-.m_box_two { width: 260px; height: 350px; overflow: hidden; float: left; background: url(/images/paper/m_box_two.png) no-repeat; margin: 0 5px;}
+.m_box_two { width: 258px; overflow: hidden; float: left; background: #FFF; border: 1px #e1e1e1 solid; margin: 0 5px;}
 .per_ex_p { margin-top: 40px; line-height: 24px; padding: 2px;}
 
 .mnks { background: url(/images/paper/mnks.png) no-repeat;}

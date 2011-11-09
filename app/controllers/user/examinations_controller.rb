@@ -34,11 +34,11 @@ class User::ExaminationsController < ApplicationController
           @examination.exam_time) if @exam_user.started_at.nil? or @exam_user.started_at == ""
       else
         flash[:warn] = "试卷加载错误，请您重新尝试。"
-        redirect_to "/user/examinations"
+        redirect_to "/exam_lists/#{Category::TYPE_IDS[:english_fourth_level]}/simulate_list"
       end
     else
       flash[:warn] = "试卷加载错误，请您重新尝试。"
-      redirect_to "/user/examinations"
+      redirect_to "/exam_lists/#{Category::TYPE_IDS[:english_fourth_level]}/simulate_list"
     end
   end
 
