@@ -52,11 +52,12 @@ img { border: none;}
 .cz_a { width: 165px; height: 45px; position: absolute; top: 146px; right: 131px;}
 .cz_a a {width: 165px; height: 45px; display: block; text-indent: -999px;}
 
-.cz_text { width: 600px; margin: 10px auto; padding: 10px; border: 1px solid #bf8e1f; background: #ffdb8a;}
-.cz_text h2 { font-size: 16px; color: #333; height: 32px; line-height: 32px; padding-left: 50px;}
+.cz_text { width: 600px; margin: 20px auto; padding: 10px; border: 1px solid #bf8e1f; background: #ffdb8a;}
+.cz_text h2 { font-size: 16px; color: #333; width: 560px; height: 65px; margin: 0 auto;}
 .cz_text h3 { font-size: 14px; color: #333; height: 32px; font-weight:100; line-height: 32px; padding-left: 50px;}
 .cz_text p { font-size: 14px; color: #F00; height: 24px; line-height: 24px; padding-left: 70px;}
 
+.renren_box h1 { font-size: 18px; padding-left: 20px; color: #900; line-height: 32px;}
 .rr_login { width: 396px; height: 70px; margin: 10px auto; background: url(/images/exercise/renren_bg.jpg) no-repeat; }
 .rr_login_a { width: 127px; height: 37px; position: absolute; top: 28px; left: 377px;}
 .rr_login_a a { width: 127px; height: 37px; display: block; overflow: hidden; text-indent: -999px;}
@@ -90,7 +91,7 @@ img { border: none;}
 .cz_tishi_h { height: 32px; line-height: 32px; font-size: 14px; padding-left: 10px; color: #FFF;}
 .cz_tishi_h a { float: right; margin: 5px 5px 0 0;}
 .cz_tishi_text { width: 400px; padding: 10px; line-height: 24px; padding-left: 30px; color: #333;}
-.cz_tishi_btn { width: 220px; margin: 10px auto;}
+.cz_tishi_btn { width: 300px; margin: 10px 100px;}
 .wanc_btn { width: 88px; height: 31px; background: url(../images/exercise/wanc_btn.png) no-repeat; border: none; cursor: pointer; margin: 0 5px;}
 .chongx_btn { width: 88px; height: 31px; background: url(../images/exercise/chongx_btn.png) no-repeat; border: none; cursor: pointer; margin: 0 5px;}
 

@@ -12,25 +12,25 @@ class CompetesController < ApplicationController
   end
 
   def renren_compete
-    #    begin
-    session_key = return_session_key(get_access_token(params[:code]))
-    user_info = return_user(session_key)[0]
-    @user=User.where("code_id=#{user_info["uid"].to_s} and code_type='renren'").first
-    if @user.nil?
-      @user=User.create(:code_id=>user_info["uid"],:code_type=>'renren',:name=>user_info["name"],:username=>user_info["name"])
+    begin
+      session_key = return_session_key(get_access_token(params[:code]))
+      user_info = return_user(session_key)[0]
+      @user=User.where("code_id=#{user_info["uid"].to_s} and code_type='renren'").first
+      if @user.nil?
+        @user=User.create(:code_id=>user_info["uid"],:code_type=>'renren',:name=>user_info["name"],:username=>user_info["name"])
+      end
+      cookies[:user_name] ={:value =>@user.name, :path => "/", :secure  => false}
+      cookies[:user_id] ={:value =>@user.id, :path => "/", :secure  => false}
+      render :inline => "<script>window.opener.location.reload();window.close();</script>"
+    rescue
+      render :inline => "<script>window.opener.location.reload();window.close();</script>"
     end
-    cookies[:user_name] ={:value =>@user.name, :path => "/", :secure  => false}
-    cookies[:user_id] ={:value =>@user.id, :path => "/", :secure  => false}
-    render :inline => "<script>window.opener.location.reload();window.close();</script>"
-    #    rescue
-    #      render :inline => "<script>window.opener.location.reload();window.close();</script>"
-    #    end
   end
 
   def alipay_exercise
     options ={
       :service=>"create_direct_pay_by_user",
-      :notify_url=>"http://demo.gankao.co/competes/alipay_compete",
+      :notify_url=>"http://#{Constant::IP}/competes/alipay_compete",
       :subject=>"2011大学英语四级模拟考试",
       :payment_type=>Constant::VIP_TYPE[:good],
       :total_fee=>Constant::SIMULATION_FEE
