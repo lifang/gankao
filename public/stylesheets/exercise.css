@@ -95,3 +95,5 @@ img { border: none;}
 .wanc_btn { width: 88px; height: 31px; background: url(../images/exercise/wanc_btn.png) no-repeat; border: none; cursor: pointer; margin: 0 5px;}
 .chongx_btn { width: 88px; height: 31px; background: url(../images/exercise/chongx_btn.png) no-repeat; border: none; cursor: pointer; margin: 0 5px;}
 
+.tishi_tab {width: 288px; height: 82px; padding:30px 10px 10px 10px; background: url(/images/paper/tishi_tab_bg.png) no-repeat; position: absolute; display: none;z-index: 9999;}
+.tishi_tab p  { text-align: center; line-height: 24px; font-size: 14px; font-family:"微软雅黑"; color: #ffffff;}
