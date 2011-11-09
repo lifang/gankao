@@ -48,9 +48,16 @@ class Rater::ExamRatersController < ApplicationController
     @exam_user=RaterUserRelation.find_by_sql("select * from rater_user_relations
       where exam_rater_id=#{cookies[:rater_id].to_i} and is_marked=0")
     if @exam_user.blank?||@exam_user==[]
-      @exam_user= ExamUser.find_by_sql("select eu.id from exam_users eu left join rater_user_relations r 
+      examination=params[:examination_id].to_i
+      if examination==Constant::EXAMINATION.to_i
+        @exam_user= ExamUser.find_by_sql("select eu.id from exam_users eu left join rater_user_relations r
+        on r.exam_user_id = eu.id where eu.answer_sheet_url is not null and
+        eu.is_submited=1 and eu.examination_id = #{examination} and r.exam_user_id is null order by rand() limit 1")
+      else
+        @exam_user= ExamUser.find_by_sql("select eu.id from exam_users eu left join rater_user_relations r
         on r.exam_user_id = eu.id inner join orders o on o.user_id = eu.user_id where eu.answer_sheet_url is not null and
-        eu.is_submited=1 and eu.examination_id = #{params[:examination_id].to_i} and r.exam_user_id is null order by rand() limit 1")
+        eu.is_submited=1 and eu.examination_id = #{examination} and r.exam_user_id is null order by rand() limit 1")
+      end    
       id=@exam_user[0].id
     else
       id=@exam_user[0].exam_user_id
