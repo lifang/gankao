@@ -110,7 +110,7 @@ function create_block(bocks_div, block) {
     var part_message = create_element("div", null, null, "part_passage", null, "innerHTML");
     var block_str = block_title;
     if (block.time != null && block.time != "" && block.time != "0") {
-        block_str += " ("+ block.time +" minutes)";
+        block_str += " (<span id='b_timer_"+ block.id +"'>"+ block.time +"</span> minutes)";
     }
     part_message.innerHTML = "<div class='part_title' id='block_show'> " + block_str + " </div>";
     if (block.base_info.description != null && block.base_info.description != "") {
@@ -278,8 +278,13 @@ function hand_open_nav(block_id) {
         if (block_start_hash.get(block_id) != null && block_start_hash.get(block_id) != "") {
             var ss = return_giving_time(block_start_hash.get(block_id));
             if (ss < fs) {
+                var total_m = fs -  ss;
+                var s = Math.floor((total_m%3600)%60);
+                var m = Math.floor((total_m%3600)/60);
+                var ms = s < 10 ? ("0" + s) : s;
+                var sm = m < 10 ? ("0" + m) : m;
                 flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
-                flash_div.innerHTML = "<p>当前部分还未可以开始答题。</p>";
+                flash_div.innerHTML = "<p>当前部分的开始答题时间为"+block_start_hash.get(block_id)+"，还有"+sm+"分"+ms+"秒才能进入该部分进行答题。</p>";
                 document.body.appendChild(flash_div);
                 show_flash_div();
             }
