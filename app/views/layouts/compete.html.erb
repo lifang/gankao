@@ -44,7 +44,9 @@
       <div class="clear"></div>
       <div class="banner"><img src="images/exercise/banner.gif" /></div>
       <div class="buzhou">
-        <div class="blackboard"><div class="timer"><span>5</span> 天 <span>6</span> 时 <span>54</span> 分 <span>53</span> 秒</div></div>
+        <div class="blackboard"><div class="timer" id="exercise_timer"></div></div>
+        <input type="hidden" value="" id="test"/>
+        <script type="text/javascript">show_exam_time()</script>
         <div class="bz_li"><img src="images/exercise/bz_li.png" /></div>
       </div>
       <div class="main">
@@ -70,7 +72,7 @@
     <div class="zhezhao" style="display: none"></div>
     <div class="cz_tishi" style="display: none;">
       <div class="cz_tishi_h"><a onclick="javascript:tishi_hide()"><img src="images/exercise/x.gif" /></a>充值提示</div>
-      <div class="cz_tishi_text"><p>*支付完成后，系统需要3-5分钟处理您的请求，请耐心等待</p>
+      <div class="cz_tishi_text"><p>*支付完成后，系统需要1-5分钟处理您的请求，请耐心等待</p>
         <p>付款完成前请不要关闭此窗口，完成付款后请根据你的情况点击
         </p><h4>下面的按钮：请在完成付款后再选择</h4></div>
       <div class="cz_tishi_btn">

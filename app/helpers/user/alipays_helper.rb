@@ -7,7 +7,7 @@ module User::AlipaysHelper
   PARTNER_KEY="y8wpddg38lpu0ks66uluaj8506sw7tks"
   PARTNER="2088002153002681"
   SELLER_EMAIL="yesen@yahoo.cn"
-  CALLBACK_URL="http://#{Constant::IP}/alipays/take_over_return"
+  CALLBACK_URL="http://#{Constant::IP}/user/alipays/take_over_return"
   NONSYNCH_URL="http://#{Constant::IP}/user/alipays/over_pay"
 
 

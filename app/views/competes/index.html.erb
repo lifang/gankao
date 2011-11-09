@@ -1,23 +1,23 @@
+
 <div class="left">
-  <% if cookies[:user_id].nil? %>
-    <div class="left_box">
+  <div class="left_box">
+    <% if cookies[:user_id].nil? %>
       <div class="lb_icon"><img src="images/exercise/paper-clip.png" /></div>
+      <div class="cz_text">
+        <ul>
+          <li>专业命题，贴近四级难度；</li>
+          <li>真人批改，评分全面公正；</li>
+          <li>参与人数超越线下模考规模；</li>
+          <li>模拟标准分算法，结果更真实。</li>
+        </ul>
+      </div>
       <div class="renren_box">
         <h1>无需注册，试用人人网帐号直接登录；</h1>
         <div class="rr_login"><div class="rr_login_a"><a href="#" onclick ="javascript:window.open('/competes/renren_exercise', '_blank', 'height=500,width=800,left=200,top=100');">登录人人网</a></div></div>
       </div>
-      <div class="cz_text">
-        <h2><img src="images/exercise/cz_text_h.jpg" /></h2>
-        <h3>参加本场大学英语四级模拟大赛，您将得到：</h3>
-        <p>1.你的考试分数（大学四级标准的专业评分）；</p>
-        <p>2.你在本场大赛中的排名；</p>
-        <p>3.专业的试卷批阅、点评和复习重点推荐。</p>
-      </div>
-    </div>
-  <% else %>
-    <% compete=Compete.find_by_user_id(cookies[:user_id]) %>
-    <% unless compete.nil? %>
-      <div class="left_box">
+    <% else %>
+      <% compete=Compete.find_by_user_id(cookies[:user_id]) %>
+      <% unless compete.nil? %>
         <div class="lb_icon"><img src="images/paper-clip.png" /></div>
         <div class="jies_box">
           <h2>大赛介绍</h2>
@@ -33,20 +33,19 @@
           <p>3、考试结束请点击交卷完成本场考试，若考试中异常退出，则下次进入考场将重新开始考试；</p>
           <div class="addTo_btn"><a href="/user/examinations/<%= Constant::EXAMINATION %>/do_exam">进入考场</a></div>
         </div>
-      </div>
-    <% else %>
-      <div class="left_box">
+      <% else %>
         <div class="lb_icon"><img src="images/exercise/paper-clip.png" /></div>
-        <div class="cz_img"><div class="cz_a"><a onclick="javascript:tishi();">现在就去充值</a></div></div>
         <div class="cz_text">
-          <h2><img src="images/exercise/cz_text_h.jpg" /></h2>
-          <h3>参加本场大学英语四级模拟大赛，您将得到：</h3>
-          <p>1.你的考试分数（大学四级标准的专业评分）；</p>
-          <p>2.你在本场大赛中的排名；</p>
-          <p>3.专业的试卷批阅、点评和复习重点推荐。</p>
+          <ul>
+            <li>专业命题，贴近四级难度；</li>
+            <li>真人批改，评分全面公正；</li>
+            <li>参与人数超越线下模考规模；</li>
+            <li>模拟标准分算法，结果更真实。</li>
+          </ul>
         </div>
-      </div>
+        <div class="cz_img"><div class="cz_a"><a onclick="javascript:tishi();">现在就去充值</a></div></div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
 
