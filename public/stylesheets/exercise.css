@@ -59,7 +59,7 @@ img { border: none;}
 
 .renren_box h1 { font-size: 18px; padding-left: 20px; color: #900; line-height: 32px;}
 .rr_login { width: 396px; height: 70px; margin: 10px auto; background: url(/images/exercise/renren_bg.jpg) no-repeat; }
-.rr_login_a { width: 127px; height: 37px; position: absolute; top: 28px; left: 377px;}
+.rr_login_a { width: 127px; height: 37px; background: url(../images/exercise/rr_login_a.gif) no-repeat; position: absolute; top:55px; left: 377px;}
 .rr_login_a a { width: 127px; height: 37px; display: block; overflow: hidden; text-indent: -999px;}
 
 
