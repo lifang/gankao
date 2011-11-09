@@ -13,7 +13,7 @@ jQuery(function() {
 function tishi_hide(){
     jQuery('.cz_tishi').hide();
     jQuery('.zhezhao').hide();
-    window.location.href="/comptes";
+    window.location.href="/competes";
 }
 
 

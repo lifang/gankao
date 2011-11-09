@@ -55,7 +55,7 @@ module Constant
   IP="116.255.179.206:3001"
 
   #大赛考试
-  EXAMINATION="32"
+  EXAMINATION="81"
 
 
 
