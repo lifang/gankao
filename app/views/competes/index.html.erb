@@ -2,12 +2,15 @@
   <% if cookies[:user_id].nil? %>
     <div class="left_box">
       <div class="lb_icon"><img src="images/exercise/paper-clip.png" /></div>
-      <div class="rr_login"><div class="rr_login_a">   <a href="#" onclick ="javascript:window.open('/competes/renren_exercise', '_blank', 'height=500,width=800,left=200,top=100');">登录人人网</a></div></div>
+      <div class="renren_box">
+        <h1>无需注册，试用人人网帐号直接登录；</h1>
+        <div class="rr_login"><div class="rr_login_a"><a href="#" onclick ="javascript:window.open('/competes/renren_exercise', '_blank', 'height=500,width=800,left=200,top=100');">登录人人网</a></div></div>
+      </div>
       <div class="cz_text">
-        <h2>想了解自己能否425分？只需要10元，彻底打消您的备考迷茫。</h2>
-        <h3>参加本场考试，您会得到：</h3>
-        <p>1.大学四级标准的专业评分；</p>
-        <p>2.你本场考试的排名；</p>
+        <h2><img src="images/exercise/cz_text_h.jpg" /></h2>
+        <h3>参加本场大学英语四级模拟大赛，您将得到：</h3>
+        <p>1.你的考试分数（大学四级标准的专业评分）；</p>
+        <p>2.你在本场大赛中的排名；</p>
         <p>3.专业的试卷批阅、点评和复习重点推荐。</p>
       </div>
     </div>
@@ -26,7 +29,7 @@
           </div>
           <h2>比赛模式</h2>
           <p>采用"真实模拟"竞赛模式，题目以整卷方式呈现，考试规则完全模拟大学英语四级考试，比赛时间：2小时零5分。</p>
-          <div class="addTo_btn"><a href="#">进入考场</a></div>
+          <div class="addTo_btn"><a href="/user/examinations/<%= Constant::EXAMINATION %>/do_exam">进入考场</a></div>
         </div>
       </div>
     <% else %>

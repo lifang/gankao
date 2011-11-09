@@ -28,7 +28,7 @@ module Constant
   BACK_SERVER_PATH = "http://localhost:3000"
   #项目文件目录
   PUBLIC_PATH = "#{Rails.root}/public"
-  BACK_PUBLIC_PATH = "e:/exam_app/public"
+  BACK_PUBLIC_PATH = "f:/exam_app/public"
   #试卷生成路径
   PAPER_PATH = BACK_SERVER_PATH+"/papers"
   #试卷服务器访问路径
@@ -51,7 +51,14 @@ module Constant
   #免费名额数量
   FREE_NUM=1000
 
-  
+  #请求服务器ip
+  IP="116.255.179.206:3001"
+
+  #大赛考试
+  EXAMINATION="32"
+
+
+
   #优惠价格
   FAVOURABLE=50
   #代理支付
