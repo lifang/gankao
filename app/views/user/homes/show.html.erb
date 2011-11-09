@@ -102,20 +102,24 @@
         <% end %>
       </div>
     </div>
-    <% if is_compete? %>
+    <% if is_compete? and !is_join_compete.nil? %>
       <div class="per_two_box">
         <div class="per_tb_title">全国联合大摸底</div>
         <div class="per_t_text">
-          <a href="#">查看分数</a>
-          <a href="#">查看答卷</a>
+          <% if compete_result.nil? %>
+            全国联合大摸底试卷批阅中...
+          <% else %>
+            <a href="#">查看分数</a>
+            <a href="/user/exam_users/<%= is_join_compete.id %>" target="_blank">查看答卷</a>
+          <% end %>
         </div>
       </div>
     <% end %>
   </div>
 </div>
 
-<% if cookies["hide_exercise#{cookies[:user_id]}"].nil? || cookies["hide_exercise#{cookies[:user_id]}"]=="show" ||
-    Time.now >= "2011-11-22".to_date %>
+<% if (cookies["hide_exercise#{cookies[:user_id]}"].nil? || cookies["hide_exercise#{cookies[:user_id]}"]=="show") and
+    (is_join_compete.nil? and Time.now < "2011-11-22".to_date) %>
   <link href="/stylesheets/exercise.css" rel="stylesheet" type="text/css" />
   <div class="zhezhao" id="zhezhao" style="display: block; height: 100%;position:fixed; "></div>
   <div class="beikao_box">
