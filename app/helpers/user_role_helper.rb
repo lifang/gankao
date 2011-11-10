@@ -6,6 +6,11 @@ module UserRoleHelper
     return !order.nil?
   end
 
+  def is_compete?
+    compete = Compete.find_by_user_id(cookies[:user_id])
+    return !compete.nil?
+  end
+
   
   def is_student?
     cookie_role cookies[:user_id] unless cookies[:user_roles]

@@ -1,3 +1,6 @@
+@charset "utf-8";
+* { padding: 0; margin: 0;}
+body { background:  #fffbec; font-family: "微软雅黑","宋体", Arial; font-size: 12px;}
 .wrap { background: url(/images/exercise/_bg.gif) repeat-x;}
 .head {width: 960px; margin: 0 auto; height: 42px; line-height: 42px;}
 

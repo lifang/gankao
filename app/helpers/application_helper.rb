@@ -106,15 +106,68 @@ module ApplicationHelper
           html += "<a href='#{request.path}?page=#{i}'>#{i}</a>"
         end
       end
-    end
-    
-    
+    end 
     if page.to_i < total_page
       html += "<a href='#{request.path}?page=#{current_page + 1}'>&gt;</a>"
     else
       html += "<span class='disabled'> &gt; </span>"
     end
     return html.html_safe
+  end
+
+  #返回是否已经参加
+  def is_join_compete
+     return ExamUser.find(:first,
+      :conditions => ["user_id = ? and examination_id = ? and is_submited = #{ExamUser::IS_SUBMITED[:YES]}",
+        cookies[:user_id].to_i, Constant::EXAMINATION.to_i])
+  end
+
+  #返回大赛的成绩和排名
+  def compete_result
+    exam_user = is_join_compete
+    unless exam_user.nil? or is_join_compete.total_score.nil?
+      xml = exam_user.open_xml
+      scores = xml.get_elements("/result/blocks/block")
+      tingli, yuedu, zonghe, zuowen = "0", "0", "0", "0"
+      if scores[2].attributes["score"].to_f*10%10 == 0
+        tingli = "#{scores[2].attributes["score"].to_i}"
+      elsif scores[2].attributes["score"].to_f*10%10 <= 5
+        tingli = "#{(scores[2].attributes["score"].to_f*10/10).to_i}" + ".5"
+      else
+        tingli = "#{(scores[2].attributes["score"].to_f*10/10).round}"
+      end unless scores[2].nil? or scores[2].attributes["score"].nil? or scores[2].attributes["score"].to_i == 0
+
+      second_score = (scores[1].nil? ? 0 :scores[1].attributes["score"].to_f) +
+        (scores[3].nil? ? 0 :scores[3].attributes["score"].to_f) 
+      if second_score.to_f*10%10 == 0
+        yuedu = "#{second_score.to_i}"
+      elsif second_score.to_f*10%10 <= 5
+        yuedu = "#{(second_score.to_f*10/10).to_i}" + ".5"
+      else
+        yuedu = "#{(second_score.to_f*10/10).round}"
+      end
+
+      if scores[4].attributes["score"].to_f*10%10 == 0
+        zonghe = "#{scores[4].attributes["score"].to_i}"
+      elsif scores[4].attributes["score"].to_f*10%10 <= 5
+        zonghe = "#{(scores[4].attributes["score"].to_f*10/10).to_i}" + ".5"
+      else
+        zonghe = "#{(scores[4].attributes["score"].to_f*10/10).round}"
+      end unless scores[4].nil? or scores[4].attributes["score"].nil? or scores[4].attributes["score"].to_i == 0
+
+      forth_score = (scores[0].nil? ? 0 :scores[0].attributes["score"].to_f) +
+        (scores[5].nil? ? 0 :scores[5].attributes["score"].to_f)
+      if forth_score.to_f*10%10 == 0
+        zuowen = "#{forth_score.to_i}"
+      elsif forth_score.to_f*10%10 <= 5
+        zuowen = "#{(forth_score.to_f*10/10).to_i}" ".5"
+      else
+        zuowen = "#{(forth_score.to_f*10/10).round}"
+      end
+      return [tingli, yuedu, zonghe, zuowen, exam_user.id, exam_user.total_score, exam_user.rank]
+    else
+      return nil
+    end
   end
 
 end
