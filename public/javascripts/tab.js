@@ -62,7 +62,7 @@ var exercise_time_start = null;
 var start_time=null;
 var exercise_timer=null;
 function show_exam_time() {
-    start_time =Math.floor((new Date("2011-11-21")-new Date())/1000);
+    start_time =Math.floor((new Date("2011-11-22")-new Date())/1000);
     // 注意setInterval函数: 时间逝去100(毫秒)后, onTimer才开始执行
     if (start_time != 0) {
         exercise_time_start = new Date();
