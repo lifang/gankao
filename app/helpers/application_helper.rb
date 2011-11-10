@@ -127,7 +127,7 @@ module ApplicationHelper
     exam_user = is_join_compete
     unless exam_user.nil? or is_join_compete.total_score.nil?
       xml = exam_user.open_xml
-      scores = xml.get_elements("/result/blocks/block")
+      scores = xml.get_elements("/exam/paper/blocks/block")
       tingli, yuedu, zonghe, zuowen = "0", "0", "0", "0"
       if scores[2].attributes["score"].to_f*10%10 == 0
         tingli = "#{scores[2].attributes["score"].to_i}"
@@ -136,7 +136,6 @@ module ApplicationHelper
       else
         tingli = "#{(scores[2].attributes["score"].to_f*10/10).round}"
       end unless scores[2].nil? or scores[2].attributes["score"].nil? or scores[2].attributes["score"].to_i == 0
-
       second_score = (scores[1].nil? ? 0 :scores[1].attributes["score"].to_f) +
         (scores[3].nil? ? 0 :scores[3].attributes["score"].to_f) 
       if second_score.to_f*10%10 == 0
@@ -146,7 +145,6 @@ module ApplicationHelper
       else
         yuedu = "#{(second_score.to_f*10/10).round}"
       end
-
       if scores[4].attributes["score"].to_f*10%10 == 0
         zonghe = "#{scores[4].attributes["score"].to_i}"
       elsif scores[4].attributes["score"].to_f*10%10 <= 5
@@ -154,7 +152,6 @@ module ApplicationHelper
       else
         zonghe = "#{(scores[4].attributes["score"].to_f*10/10).round}"
       end unless scores[4].nil? or scores[4].attributes["score"].nil? or scores[4].attributes["score"].to_i == 0
-
       forth_score = (scores[0].nil? ? 0 :scores[0].attributes["score"].to_f) +
         (scores[5].nil? ? 0 :scores[5].attributes["score"].to_f)
       if forth_score.to_f*10%10 == 0
@@ -164,7 +161,7 @@ module ApplicationHelper
       else
         zuowen = "#{(forth_score.to_f*10/10).round}"
       end
-      return [tingli, yuedu, zonghe, zuowen, exam_user.id, exam_user.total_score, exam_user.rank]
+      return [tingli, yuedu, zonghe, zuowen, exam_user]
     else
       return nil
     end

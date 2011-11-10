@@ -1,0 +1,43 @@
+<% if (cookies["hide_exercise#{cookies[:user_id]}"].nil? || cookies["hide_exercise#{cookies[:user_id]}"]=="show") and
+    (is_join_compete.nil? and Time.now < "2011-11-22".to_date) %>
+  <link href="/stylesheets/exercise.css" rel="stylesheet" type="text/css" />
+  <div class="zhezhao" id="zhezhao" style="display: block; height: 100%;position:fixed; "></div>
+  <div class="beikao_box">
+    <div class="beikao_x">
+      <a href="javascript:void(0);" onclick="javascript:close_beikao();">
+        <img alt="gankao" src="/images/exercise/x.gif" /></a>
+    </div>
+    <div class="no_ts">
+      <input name="" type="checkbox" value=""
+             onclick="javascript:if(this.checked==true){ajax_hide_exercise('hide');}else{ajax_hide_exercise('show');}"/> 不再提示
+    </div>
+    <% if is_compete? %>
+      <div class="beikao_btn0"><a href="/user/examinations/<%= Constant::EXAMINATION %>/do_exam" target="_blank">开始考试</a></div>
+    <% else %>
+      <div class="beikao_btn"><a href="/competes">现在参加</a></div>
+    <% end %>
+  </div>
+  <div id="ajax_div"></div>
+  <script type="text/javascript" >
+    jQuery(function(){
+      if (jQuery('.beikao_box') != null) {
+        var win_height = jQuery(window).height();
+        var win_width = jQuery(window).width();
+        var z_layer_height = jQuery('.beikao_box').height();
+        var z_layer_width = jQuery('.beikao_box').width();
+        if (win_height-z_layer_height > 0) {
+          jQuery('.beikao_box').css('top',(win_height-z_layer_height)/2);
+        } else {
+          jQuery('.beikao_box').css('top',0);
+        }
+        jQuery('.beikao_box').css('left',(win_width-z_layer_width)/2);
+        return false;
+      }
+    })
+    function close_beikao(){
+      jQuery('.beikao_box').css('display','none');
+      jQuery('.zhezhao').css('display','none');
+      return false;
+    }
+  </script>
+<% end %>
