@@ -9,7 +9,7 @@
 
 <%= form_for :paper , :url =>url,
   :html => {:name => "paper_form", :id => "paper_form",
-  :onsubmit => "return generate_result_paper('#{@examination.paper_id}', '#{@examination.id}',#{@practice_type});"} do |f| %>
+  :onsubmit => "return generate_result_paper('#{@examination.paper_id}', '#{@examination.id}',#{@practice_type},'');"} do |f| %>
   <%
   loading_length = 8
   if @practice_type == 3
