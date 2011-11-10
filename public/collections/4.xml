@@ -3,12 +3,12 @@
                     <title>得得得得</title>
                     <category>1</category>
                     <questions>
-                        <question correct_type='0' error_percent='0' id='84' repeat_num='1' score='15'>
+                        <question correct_type='0' error_percent='0' id='84' repeat_num='2' score='15'>
                             <answer>讲讲价</answer>
                             <analysis/>
                             <questionattrs>等待;-;凤飞飞;-;呵呵;-;讲讲价</questionattrs>
-                            <tags></tags>
-                        <user_answer>呵呵</user_answer></question>
+                            <tags/>
+                        <user_answer>呵呵</user_answer><user_answer>呵呵</user_answer></question>
                     </questions>
                 </problem><problem id='73' score='0' types='4'><title>ddddd</title><category>1</category><questions><question correct_type='1' error_percent='0' id='86' repeat_num='1' score='0'><description>但事实上</description><answer>凤飞飞;|;古古怪怪规划和</answer><questionattrs>凤飞飞dddd;-;共发放日;-;凤飞飞;-;古古怪怪规划和</questionattrs><tags>23 的地方改过 改过</tags><user_answer>共发放日;|;凤飞飞</user_answer></question></questions></problem></problems>
       </collection>

@@ -25,7 +25,7 @@
         <% if @examination.types == Examination::TYPES[:OLD_EXAM] %>
           <button class="test_out_btn" type="button" onclick="javascript:out_exam();"></button>
         <% elsif (@examination.types == Examination::TYPES[:SIMULATION] and @examination.id != 32) %>
-          <button class="test_fq_btn" title="下次重做，即重新开始做题，不保存本次的完成题目的内容。" type="button"
+          <button class="test_fq_btn" title="不保存本次的完成题目的内容，下次重新开始答卷。" type="button"
                   onclick="javascript:to_next();"></button>
         <% end %>
         <button type="submit" class="test_over_btn"></button>

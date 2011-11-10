@@ -1,0 +1,41 @@
+<% result_arr = compete_result %>
+<div class="zhezhao" id="zhezhao_score" style="display: none; height: 100%;position:fixed; "></div>
+<div class="w_tab_box" id="score_div" style="display: none;">
+  <a href="javascript:void(0);" class="w_box_x" onclick="javascript:close_score();"><img src="/images/paper/x0.gif"/></a>
+  <div class="clear"></div>
+  <div class="w_tab_div">
+    <h2>总分：<span class="red"><%= result_arr[4].total_score %></span>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      排名：<span class="red"><%= result_arr[4].rank.nil? ? "等待排名中" : result_arr[4].rank + "%" %></span></h2>
+    <div class="w_tab_table">
+      <table width="300" border="0" cellspacing="1" cellpadding="0">
+        <tbody><tr>
+            <td><strong>听力</strong>(20%)</td>
+            <td><strong>阅读</strong>(40%)</td>
+            <td><strong>综合</strong>(25%)</td>
+            <td><strong>作文</strong>(15%)</td>
+          </tr>
+          <tr>
+            <td class="red"><%= result_arr[0] %></td>
+            <td class="red"><%= result_arr[1] %></td>
+            <td class="red"><%= result_arr[2] %></td>
+            <td class="red"><%= result_arr[3] %></td>
+          </tr>
+        </tbody></table>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  function show_score() {
+    (function(){
+      $("zhezhao_score").style.display = "block";
+      $("score_div").style.display = "block";
+      generate_flash_div(".w_tab_box");
+    })(jQuery)
+  }
+
+  function close_score() {
+    $("zhezhao_score").style.display = "none";
+    $("score_div").style.display = "none";
+  }
+</script>
