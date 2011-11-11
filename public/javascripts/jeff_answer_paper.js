@@ -505,11 +505,11 @@ function create_single_question(problem_title,problem_id, que_div_conlist, quest
                 }
             }else{
                 var this_answer_array = answer[question_num-1].split(";|;");
-                if(this_answer_array.join(",")==question_array.join(",")){
+                if(this_answer_array.join(",").gsub(" ","")==question_array.join(",").gsub(" ","")){
                     correct_sum++;
                 }
                 for(var i=0;i<question_array.length;i++){
-                    if(question_array[i]==this_answer_array[i]){
+                    if(question_array[i].gsub(" ","")==this_answer_array[i].gsub(" ","")){
                         $("problem_"+problem_id+"_dropplace_"+(i+1)).innerHTML=question_array[i];
                         $("problem_"+problem_id+"_dropplace_"+(i+1)).setAttribute("class", "task_span correctRight_bg");
                     }else{
