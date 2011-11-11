@@ -136,7 +136,7 @@ class Rater::ExamRatersController < ApplicationController
     end
     collection.generate_collection_url(collection_xml.to_s)
     doc.elements["paper"].elements["rate_score"].text = score
-    @xml=ExamRater.rater(doc,params[:id],score)
+    @xml=ExamRater.rater(doc,@exam_user.id,score)
     self.write_xml(url, doc)
     redirect_to "/rater/exam_raters/#{ @exam_user.examination_id}/reader_papers?rater_id=#{@exam_relation.exam_rater_id}"
   end

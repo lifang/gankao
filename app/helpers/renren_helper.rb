@@ -108,7 +108,7 @@ module RenrenHelper
 
 
   #excise变量
-  CALLBACK_URL="http://demo.gankao.co/competes/renren_compete"
+  CALLBACK_URL="http://www.gankao.co/competes/renren_compete"
 
   #获取access_token
    def get_access_token(code)

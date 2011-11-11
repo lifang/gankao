@@ -281,10 +281,13 @@ function hand_open_nav(block_id) {
                 var total_m = fs -  ss;
                 var s = Math.floor((total_m%3600)%60);
                 var m = Math.floor((total_m%3600)/60);
+                var h = Math.floor(total_m/3600);
                 var ms = s < 10 ? ("0" + s) : s;
                 var sm = m < 10 ? ("0" + m) : m;
+                var sh = h < 10 ? ("0" + h) : h;
                 flash_div = create_element("div", null, "flash_notice", "tishi_tab", null, "innerHTML");
-                flash_div.innerHTML = "<p>当前部分的开始答题时间为"+block_start_hash.get(block_id)+"，还有"+sm+"分"+ms+"秒才能进入该部分进行答题。</p>";
+                flash_div.innerHTML = "<p>当前部分的开始答题时间为"+block_start_hash.get(block_id)+"，还有"
+                    +sh+"时"+sm+"分"+ms+"秒才能进入该部分进行答题。</p>";
                 document.body.appendChild(flash_div);
                 show_flash_div();
             }
