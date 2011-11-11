@@ -92,52 +92,55 @@ class Rater::ExamRatersController < ApplicationController
   end
 
   def over_answer #批阅完成，给答卷添加成绩
-    @exam_relation=RaterUserRelation.find(params[:id])
-    @exam_relation.toggle!(:is_marked)
-    @exam_relation.update_attributes(:rate_time=>((Time.now-@exam_relation.started_at)/60+1).to_i)
-    @exam_user=ExamUser.find(@exam_relation.exam_user_id)
-    url="#{Rails.root}/public/#{@exam_user.answer_sheet_url}"
-    doc=ExamRater.open_file(url)
-    collection = Collection.find_or_create_by_user_id(@exam_user.user_id)
-    collection.set_collection_url
-    collection_xml = collection.open_xml
-    xml=ExamRater.open_file(Constant::BACK_PUBLIC_PATH + "/papers/#{doc.elements[1].attributes["id"]}.xml")
-    score=0.0
-    only_xml=ExamUser.answer_questions(xml,doc)
-    only_xml.elements["blocks"].each_element do  |block|
-      block_score = 0.0
-      original_score = 0.0
-      block.elements["problems"].each_element do |problem|
-        problem.elements["questions"].each_element do |question|
-          single_score = params["single_value_#{question.attributes["id"]}"].to_f
-          reason = params["reason_for_#{question.attributes["id"]}"]
-          result_question = doc.elements["/exam/paper/questions/question[@id=#{question.attributes["id"]}]"]
-          answer = (result_question.elements["answer"].nil? or result_question.elements["answer"].text.nil?) ? ""
-          : result_question.elements["answer"].text
-          if question.attributes["score"].to_f == single_score
-            problem.delete_element(question.xpath)
-          else
-            collection_xml = @exam_user.add_collection(collection, xml, collection_xml, problem,
-              question, answer) unless problem.elements["questions"].elements[1].nil?
-          end
-          original_score += result_question.attributes["score"].to_f
-          result_question.attributes["score"] = single_score
-          score += single_score
-          block_score += single_score
-          question.add_attribute("user_answer","#{answer}")
-          result_question.add_attribute("score_reason","#{reason}")
-        end unless problem.elements["questions"].nil?
+    begin
+      @exam_relation=RaterUserRelation.find(params[:id])
+      @exam_relation.update_attributes(:rate_time=>((Time.now-@exam_relation.started_at)/60+1).to_i)
+      @exam_user=ExamUser.find(@exam_relation.exam_user_id)
+      url="#{Rails.root}/public/#{@exam_user.answer_sheet_url}"
+      doc=ExamRater.open_file(url)
+      collection = Collection.find_or_create_by_user_id(@exam_user.user_id)
+      collection.set_collection_url
+      collection_xml = collection.open_xml
+      xml=ExamRater.open_file(Constant::BACK_PUBLIC_PATH + "/papers/#{doc.elements[1].attributes["id"]}.xml")
+      score=0.0
+      only_xml=ExamUser.answer_questions(xml,doc)
+      only_xml.elements["blocks"].each_element do  |block|
+        block_score = 0.0
+        original_score = 0.0
+        block.elements["problems"].each_element do |problem|
+          problem.elements["questions"].each_element do |question|
+            single_score = params["single_value_#{question.attributes["id"]}"].to_f
+            reason = params["reason_for_#{question.attributes["id"]}"]
+            result_question = doc.elements["/exam/paper/questions/question[@id=#{question.attributes["id"]}]"]
+            answer = (result_question.elements["answer"].nil? or result_question.elements["answer"].text.nil?) ? ""
+            : result_question.elements["answer"].text
+            if question.attributes["score"].to_f == single_score
+              problem.delete_element(question.xpath)
+            else
+              collection_xml = @exam_user.add_collection(collection, xml, collection_xml, problem,
+                question, answer) unless problem.elements["questions"].elements[1].nil?
+            end
+            original_score += result_question.attributes["score"].to_f
+            result_question.attributes["score"] = single_score
+            score += single_score
+            block_score += single_score
+            question.add_attribute("user_answer","#{answer}")
+            result_question.add_attribute("score_reason","#{reason}")
+          end unless problem.elements["questions"].nil?
+        end
+        unless doc.elements["/exam/paper/blocks"].nil?
+          answer_block = doc.elements["/exam/paper/blocks/block[@id=#{block.attributes["id"]}]"]
+          block_score = answer_block.attributes["score"].to_f - original_score + block_score
+          answer_block.attributes["score"] = block_score
+        end
       end
-      unless doc.elements["/exam/paper/blocks"].nil?
-        answer_block = doc.elements["/exam/paper/blocks/block[@id=#{block.attributes["id"]}]"]
-        block_score = answer_block.attributes["score"].to_f - original_score + block_score
-        answer_block.attributes["score"] = block_score
-      end
+      collection.generate_collection_url(collection_xml.to_s)
+      doc.elements["paper"].elements["rate_score"].text = score
+      @xml=ExamRater.rater(doc,@exam_user.id,score)
+      self.write_xml(url, doc)
+      @exam_relation.toggle!(:is_marked)
+    rescue
     end
-    collection.generate_collection_url(collection_xml.to_s)
-    doc.elements["paper"].elements["rate_score"].text = score
-    @xml=ExamRater.rater(doc,params[:id],score)
-    self.write_xml(url, doc)
     redirect_to "/rater/exam_raters/#{ @exam_user.examination_id}/reader_papers?rater_id=#{@exam_relation.exam_rater_id}"
   end
 
