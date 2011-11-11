@@ -21,10 +21,9 @@ class CompetesController < ApplicationController
       end
       cookies[:user_name] ={:value =>@user.name, :path => "/", :secure  => false}
       cookies[:user_id] ={:value =>@user.id, :path => "/", :secure  => false}
-      render :inline => "<script>window.opener.location.reload();window.close();</script>"
     rescue
-      render :inline => "<script>window.opener.location.reload();window.close();</script>"
     end
+    render :inline => "<script>window.opener.location.reload();window.close();</script>"
   end
 
   def alipay_exercise
