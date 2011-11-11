@@ -24,7 +24,7 @@
       <div class="paper_info">
         <% if @examination.types == Examination::TYPES[:OLD_EXAM] %>
           <button class="test_out_btn" type="button" onclick="javascript:out_exam();"></button>
-        <% elsif (@examination.types == Examination::TYPES[:SIMULATION] and @examination.id != 32) %>
+        <% elsif (@examination.types == Examination::TYPES[:SIMULATION] and @examination.id != Constant::EXAMINATION.to_i) %>
           <button class="test_fq_btn" title="不保存本次的完成题目的内容，下次重新开始答卷。" type="button"
                   onclick="javascript:to_next();"></button>
         <% end %>
