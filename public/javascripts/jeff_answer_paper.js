@@ -128,11 +128,11 @@ function create_question_navigation(block_nav_div, question, innerHTML, problem_
                 attr.appendChild(drag_span);
                 var location=(Math.random()*(block_nav_div.childNodes.length)).round();
                 if(location<block_nav_div.childNodes.length){
-                    draggable_array.splice(location,0,que_attrs[i]);
+                    draggable_array.splice(location,0,que_attrs[i].gsub(" ",""));
                     block_nav_div.insertBefore(question_nav_div,block_nav_div.childNodes[location]);
                 }else{
                     block_nav_div.insertBefore(question_nav_div,null);
-                    draggable_array.push(que_attrs[i]);
+                    draggable_array.push(que_attrs[i].gsub(" ",""));
                 }
                 new Draggable(store_id,{
                     revert:true
@@ -546,11 +546,11 @@ function change_navigation_color(element,store_id){
     if(element.innerHTML==$(store_id).innerHTML){
         return 0;
     }
-    var add_n=draggable_array.indexOf(element.innerHTML);
+    var add_n=draggable_array.indexOf(element.innerHTML.gsub(" ",""));
     drag_sum_array[add_n]+=1;
     element.parentNode.parentNode.style.background="#FF5252";
 
-    var cut_n=draggable_array.indexOf($(store_id).innerHTML);
+    var cut_n=draggable_array.indexOf($(store_id).innerHTML.gsub(" ",""));
     if(cut_n>-1){
         drag_sum_array[cut_n]-=1;
         if(drag_sum_array[cut_n]<=0){
@@ -575,8 +575,8 @@ function load_navigation_color(){
     var dropplaces = getElements("font","dropplace_name");
     //     var right_answer_array=answer.join(";|;").split(";|;");
     for(var i=0;i<dropplaces.length;i++){
-        if(draggable_array.indexOf(dropplaces[i].innerHTML)>-1){
-            var change_index=draggable_array.indexOf(dropplaces[i].innerHTML);
+        if(draggable_array.indexOf(dropplaces[i].innerHTML.gsub(" ",""))>-1){
+            var change_index=draggable_array.indexOf(dropplaces[i].innerHTML.gsub(" ",""));
             var span_div=$("paper_navigation").childNodes[0].childNodes[change_index];
             //            alert(span_div.childNodes[0].childNodes[0].innerHTML+"    "+right_answer_array[i]);
             //            if(answer!=null && span_div.childNodes[0].childNodes[0].innerHTML==right_answer_array[i]){
