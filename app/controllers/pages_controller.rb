@@ -35,7 +35,6 @@ class PagesController < ApplicationController
     begin
       session_key = return_session_key(return_access_token(params[:code]))
       user_info = return_user(session_key)[0]
-   
       @user=User.where("code_id=#{user_info["uid"].to_s} and code_type='renren'").first
       if @user.nil?
         @user=User.create(:code_id=>user_info["uid"],:code_type=>'renren',:name=>user_info["name"],:username=>user_info["name"])
@@ -84,6 +83,11 @@ class PagesController < ApplicationController
     end
   end
 
+
+
+  def  renren_like
+    redirect_to "http://widget.renren.com/dialog/friends?target_id=600942099&app_id=163813&redirect_uri=http%3A%2F%2Fwww.gankao.co"
+  end
 
 
 end

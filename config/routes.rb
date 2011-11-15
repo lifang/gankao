@@ -11,6 +11,7 @@ Gankao::Application.routes.draw do
     collection do
       get "sina_index","add_user"
       get "renren_index","follow_me","login_from_qq","qq_index"
+      get "renren_like"
     end
   end
   resources :competes do

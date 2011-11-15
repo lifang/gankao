@@ -84,13 +84,13 @@ module RenrenHelper
   end
 
   def api_key
-   "05983c17a2fd4b81a2f8032b4cd8d4f2"             #  赶考网
- #   "5c499242c95f4d79b5e2ba1a36a808c8"            # localhost测试
+    "05983c17a2fd4b81a2f8032b4cd8d4f2"             #  赶考网
+    #   "5c499242c95f4d79b5e2ba1a36a808c8"            # localhost测试
   end
 
   def api_secret
-   "106a4639bd1e4288ad90cd3d27235623"             #  赶考网
- #   "bb52103339444300bd4d4bc2af84ec9e"            # localhost测试
+    "106a4639bd1e4288ad90cd3d27235623"             #  赶考网
+    #   "bb52103339444300bd4d4bc2af84ec9e"            # localhost测试
   end
 
   def access_token_url(code)
@@ -111,7 +111,7 @@ module RenrenHelper
   CALLBACK_URL="http://www.gankao.co/competes/renren_compete"
 
   #获取access_token
-   def get_access_token(code)
+  def get_access_token(code)
     http = Net::HTTP.new(GRAPH_RENREN_URL, 443)
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -120,7 +120,7 @@ module RenrenHelper
     return res_json["access_token"]
   end
 
-   def authorize_url(code)
+  def authorize_url(code)
     grant_type = "grant_type=authorization_code"
     access_code = "code=#{code}"
     client_id = "client_id=" + api_key
